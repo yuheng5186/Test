@@ -20,7 +20,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     self.view.backgroundColor  = [UIColor blueColor];
-    
+    NSLog(@"99999");
     __weak typeof (self)weakSelf = self;
 
     
