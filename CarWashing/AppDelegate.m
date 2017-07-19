@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "MenuTabBarController.h"
+
 
 @interface AppDelegate ()
 
@@ -17,6 +19,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    application.statusBarHidden                     = NO;
+    [[UITabBar appearance] setBarTintColor: [UIColor whiteColor]];
+    [[UITabBar appearance] setTintColor: [UIColor colorWithHex: 0xFFB700]];
+    
+    application.statusBarStyle                      = UIStatusBarStyleLightContent;
+    application.applicationIconBadgeNumber          = 0;
+    
+    
+    MenuTabBarController *menuTabBarController	= [[MenuTabBarController alloc] init];
+    self.window									= [[UIWindow alloc] initWithFrame: UIScreen.mainScreen.bounds];
+    self.window.rootViewController				= menuTabBarController;
+    
     return YES;
 }
 

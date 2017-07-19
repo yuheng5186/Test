@@ -7,9 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92B71F1F364A0006511E /* MenuTabBarController.m */; };
+		181E92BB1F1F36710006511E /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BA1F1F36710006511E /* BaseController.m */; };
+		181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BF1F1F39CC0006511E /* BlackLoadingView.m */; };
+		181E92CB1F1F39CC0006511E /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92C11F1F39CC0006511E /* UIColor+Additions.m */; };
+		181E92CC1F1F39CC0006511E /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92C31F1F39CC0006511E /* UIColor+HexColor.m */; };
+		181E92CD1F1F39CC0006511E /* UIImage+BFS.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92C51F1F39CC0006511E /* UIImage+BFS.m */; };
+		181E92CE1F1F39CC0006511E /* UIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92C71F1F39CC0006511E /* UIUtil.m */; };
+		181E92CF1F1F39CC0006511E /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92C91F1F39CC0006511E /* UIView+Frame.m */; };
+		181E92D21F1F3B180006511E /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92D11F1F3B180006511E /* HomeViewController.m */; };
+		181E92D51F1F3B900006511E /* BusinessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92D41F1F3B900006511E /* BusinessViewController.m */; };
+		181E92D81F1F3BAE0006511E /* FindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92D71F1F3BAE0006511E /* FindViewController.m */; };
+		181E92DB1F1F3BC60006511E /* PurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92DA1F1F3BC60006511E /* PurchaseViewController.m */; };
+		181E92DE1F1F3BE40006511E /* MySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92DD1F1F3BE40006511E /* MySettingViewController.m */; };
 		18B803771F1DA2A300B52432 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B803761F1DA2A300B52432 /* main.m */; };
 		18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B803791F1DA2A300B52432 /* AppDelegate.m */; };
-		18B8037D1F1DA2A300B52432 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B8037C1F1DA2A300B52432 /* ViewController.m */; };
 		18B803801F1DA2A300B52432 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18B8037E1F1DA2A300B52432 /* Main.storyboard */; };
 		18B803821F1DA2A300B52432 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18B803811F1DA2A300B52432 /* Assets.xcassets */; };
 		18B803851F1DA2A300B52432 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18B803831F1DA2A300B52432 /* LaunchScreen.storyboard */; };
@@ -37,12 +49,38 @@
 
 /* Begin PBXFileReference section */
 		06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CarWashing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		181E92B61F1F364A0006511E /* MenuTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTabBarController.h; sourceTree = "<group>"; };
+		181E92B71F1F364A0006511E /* MenuTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTabBarController.m; sourceTree = "<group>"; };
+		181E92B91F1F36710006511E /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
+		181E92BA1F1F36710006511E /* BaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseController.m; sourceTree = "<group>"; };
+		181E92BC1F1F36FE0006511E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		181E92BD1F1F38BE0006511E /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		181E92BE1F1F39CC0006511E /* BlackLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlackLoadingView.h; path = Tool/BlackLoadingView.h; sourceTree = "<group>"; };
+		181E92BF1F1F39CC0006511E /* BlackLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlackLoadingView.m; path = Tool/BlackLoadingView.m; sourceTree = "<group>"; };
+		181E92C01F1F39CC0006511E /* UIColor+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Additions.h"; path = "Tool/UIColor+Additions.h"; sourceTree = "<group>"; };
+		181E92C11F1F39CC0006511E /* UIColor+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Additions.m"; path = "Tool/UIColor+Additions.m"; sourceTree = "<group>"; };
+		181E92C21F1F39CC0006511E /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+HexColor.h"; path = "Tool/UIColor+HexColor.h"; sourceTree = "<group>"; };
+		181E92C31F1F39CC0006511E /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+HexColor.m"; path = "Tool/UIColor+HexColor.m"; sourceTree = "<group>"; };
+		181E92C41F1F39CC0006511E /* UIImage+BFS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+BFS.h"; path = "Tool/UIImage+BFS.h"; sourceTree = "<group>"; };
+		181E92C51F1F39CC0006511E /* UIImage+BFS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+BFS.m"; path = "Tool/UIImage+BFS.m"; sourceTree = "<group>"; };
+		181E92C61F1F39CC0006511E /* UIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIUtil.h; path = Tool/UIUtil.h; sourceTree = "<group>"; };
+		181E92C71F1F39CC0006511E /* UIUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIUtil.m; path = Tool/UIUtil.m; sourceTree = "<group>"; };
+		181E92C81F1F39CC0006511E /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Frame.h"; path = "Tool/UIView+Frame.h"; sourceTree = "<group>"; };
+		181E92C91F1F39CC0006511E /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Frame.m"; path = "Tool/UIView+Frame.m"; sourceTree = "<group>"; };
+		181E92D01F1F3B180006511E /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = Controllers/HomeViewController.h; sourceTree = "<group>"; };
+		181E92D11F1F3B180006511E /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = Controllers/HomeViewController.m; sourceTree = "<group>"; };
+		181E92D31F1F3B900006511E /* BusinessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessViewController.h; path = Controllers/BusinessViewController.h; sourceTree = "<group>"; };
+		181E92D41F1F3B900006511E /* BusinessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessViewController.m; path = Controllers/BusinessViewController.m; sourceTree = "<group>"; };
+		181E92D61F1F3BAE0006511E /* FindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FindViewController.h; path = Controllers/FindViewController.h; sourceTree = "<group>"; };
+		181E92D71F1F3BAE0006511E /* FindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FindViewController.m; path = Controllers/FindViewController.m; sourceTree = "<group>"; };
+		181E92D91F1F3BC60006511E /* PurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PurchaseViewController.h; path = Controllers/PurchaseViewController.h; sourceTree = "<group>"; };
+		181E92DA1F1F3BC60006511E /* PurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PurchaseViewController.m; path = Controllers/PurchaseViewController.m; sourceTree = "<group>"; };
+		181E92DC1F1F3BE40006511E /* MySettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MySettingViewController.h; path = Controllers/MySettingViewController.h; sourceTree = "<group>"; };
+		181E92DD1F1F3BE40006511E /* MySettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MySettingViewController.m; path = Controllers/MySettingViewController.m; sourceTree = "<group>"; };
 		18B803721F1DA2A300B52432 /* CarWashing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarWashing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B803761F1DA2A300B52432 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18B803781F1DA2A300B52432 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		18B803791F1DA2A300B52432 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		18B8037B1F1DA2A300B52432 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		18B8037C1F1DA2A300B52432 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		18B8037F1F1DA2A300B52432 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18B803811F1DA2A300B52432 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18B803841F1DA2A300B52432 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -86,9 +124,38 @@
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				181E92BE1F1F39CC0006511E /* BlackLoadingView.h */,
+				181E92BF1F1F39CC0006511E /* BlackLoadingView.m */,
+				181E92C01F1F39CC0006511E /* UIColor+Additions.h */,
+				181E92C11F1F39CC0006511E /* UIColor+Additions.m */,
+				181E92C21F1F39CC0006511E /* UIColor+HexColor.h */,
+				181E92C31F1F39CC0006511E /* UIColor+HexColor.m */,
+				181E92C41F1F39CC0006511E /* UIImage+BFS.h */,
+				181E92C51F1F39CC0006511E /* UIImage+BFS.m */,
+				181E92C61F1F39CC0006511E /* UIUtil.h */,
+				181E92C71F1F39CC0006511E /* UIUtil.m */,
+				181E92C81F1F39CC0006511E /* UIView+Frame.h */,
+				181E92C91F1F39CC0006511E /* UIView+Frame.m */,
 			);
 			name = Tool;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		181E92DF1F1F3CC90006511E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				181E92D01F1F3B180006511E /* HomeViewController.h */,
+				181E92D11F1F3B180006511E /* HomeViewController.m */,
+				181E92D31F1F3B900006511E /* BusinessViewController.h */,
+				181E92D41F1F3B900006511E /* BusinessViewController.m */,
+				181E92D61F1F3BAE0006511E /* FindViewController.h */,
+				181E92D71F1F3BAE0006511E /* FindViewController.m */,
+				181E92D91F1F3BC60006511E /* PurchaseViewController.h */,
+				181E92DA1F1F3BC60006511E /* PurchaseViewController.m */,
+				181E92DC1F1F3BE40006511E /* MySettingViewController.h */,
+				181E92DD1F1F3BE40006511E /* MySettingViewController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		18B803691F1DA2A300B52432 = {
@@ -116,10 +183,13 @@
 		18B803741F1DA2A300B52432 /* CarWashing */ = {
 			isa = PBXGroup;
 			children = (
+				181E92DF1F1F3CC90006511E /* Controllers */,
 				18B803781F1DA2A300B52432 /* AppDelegate.h */,
 				18B803791F1DA2A300B52432 /* AppDelegate.m */,
-				18B8037B1F1DA2A300B52432 /* ViewController.h */,
-				18B8037C1F1DA2A300B52432 /* ViewController.m */,
+				181E92B61F1F364A0006511E /* MenuTabBarController.h */,
+				181E92B71F1F364A0006511E /* MenuTabBarController.m */,
+				181E92B91F1F36710006511E /* BaseController.h */,
+				181E92BA1F1F36710006511E /* BaseController.m */,
 				18B8037E1F1DA2A300B52432 /* Main.storyboard */,
 				18B803811F1DA2A300B52432 /* Assets.xcassets */,
 				18B803831F1DA2A300B52432 /* LaunchScreen.storyboard */,
@@ -134,6 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				18B803761F1DA2A300B52432 /* main.m */,
+				181E92BC1F1F36FE0006511E /* PrefixHeader.pch */,
+				181E92BD1F1F38BE0006511E /* Macros.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -357,9 +429,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18B8037D1F1DA2A300B52432 /* ViewController.m in Sources */,
+				181E92CC1F1F39CC0006511E /* UIColor+HexColor.m in Sources */,
+				181E92CB1F1F39CC0006511E /* UIColor+Additions.m in Sources */,
+				181E92BB1F1F36710006511E /* BaseController.m in Sources */,
 				18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */,
+				181E92CE1F1F39CC0006511E /* UIUtil.m in Sources */,
+				181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */,
+				181E92DE1F1F3BE40006511E /* MySettingViewController.m in Sources */,
+				181E92CD1F1F39CC0006511E /* UIImage+BFS.m in Sources */,
+				181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */,
 				18B803771F1DA2A300B52432 /* main.m in Sources */,
+				181E92CF1F1F39CC0006511E /* UIView+Frame.m in Sources */,
+				181E92D51F1F3B900006511E /* BusinessViewController.m in Sources */,
+				181E92DB1F1F3BC60006511E /* PurchaseViewController.m in Sources */,
+				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
+				181E92D81F1F3BAE0006511E /* FindViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,10 +595,11 @@
 			baseConfigurationReference = 786364A9A4C81732835898A5 /* Pods-CarWashing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CarWashing;
 			};
 			name = Debug;
 		};
@@ -523,10 +608,11 @@
 			baseConfigurationReference = 1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CarWashing;
 			};
 			name = Release;
 		};
