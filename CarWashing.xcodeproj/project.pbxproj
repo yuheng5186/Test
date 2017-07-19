@@ -15,6 +15,7 @@
 		18B803851F1DA2A300B52432 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18B803831F1DA2A300B52432 /* LaunchScreen.storyboard */; };
 		18B803901F1DA2A300B52432 /* CarWashingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B8038F1F1DA2A300B52432 /* CarWashingTests.m */; };
 		18B8039B1F1DA2A300B52432 /* CarWashingUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B8039A1F1DA2A300B52432 /* CarWashingUITests.m */; };
+		374B966A10F9B5E6D74241BF /* libPods-CarWashing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CarWashing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B803721F1DA2A300B52432 /* CarWashing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarWashing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B803761F1DA2A300B52432 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18B803781F1DA2A300B52432 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +53,8 @@
 		18B803961F1DA2A300B52432 /* CarWashingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarWashingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B8039A1F1DA2A300B52432 /* CarWashingUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarWashingUITests.m; sourceTree = "<group>"; };
 		18B8039C1F1DA2A300B52432 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarWashing.release.xcconfig"; path = "Pods/Target Support Files/Pods-CarWashing/Pods-CarWashing.release.xcconfig"; sourceTree = "<group>"; };
+		786364A9A4C81732835898A5 /* Pods-CarWashing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarWashing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CarWashing/Pods-CarWashing.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				374B966A10F9B5E6D74241BF /* libPods-CarWashing.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		181E91D71F1DDD830006511E /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Tool;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		18B803691F1DA2A300B52432 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +98,8 @@
 				18B8038E1F1DA2A300B52432 /* CarWashingTests */,
 				18B803991F1DA2A300B52432 /* CarWashingUITests */,
 				18B803731F1DA2A300B52432 /* Products */,
+				D04F9D1102A0601519AE845F /* Pods */,
+				39EAED5D8DBADAE8DF2E358D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,6 +124,7 @@
 				18B803811F1DA2A300B52432 /* Assets.xcassets */,
 				18B803831F1DA2A300B52432 /* LaunchScreen.storyboard */,
 				18B803861F1DA2A300B52432 /* Info.plist */,
+				181E91D71F1DDD830006511E /* Tool */,
 				18B803751F1DA2A300B52432 /* Supporting Files */,
 			);
 			path = CarWashing;
@@ -140,6 +156,23 @@
 			path = CarWashingUITests;
 			sourceTree = "<group>";
 		};
+		39EAED5D8DBADAE8DF2E358D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D04F9D1102A0601519AE845F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				786364A9A4C81732835898A5 /* Pods-CarWashing.debug.xcconfig */,
+				1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -147,9 +180,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18B8039F1F1DA2A300B52432 /* Build configuration list for PBXNativeTarget "CarWashing" */;
 			buildPhases = (
+				578D44550968A8874A969EFE /* [CP] Check Pods Manifest.lock */,
 				18B8036E1F1DA2A300B52432 /* Sources */,
 				18B8036F1F1DA2A300B52432 /* Frameworks */,
 				18B803701F1DA2A300B52432 /* Resources */,
+				D0829C3A5D43AD6BB1B48444 /* [CP] Embed Pods Frameworks */,
+				32335AFD561006CC11D455D1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -267,6 +303,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		32335AFD561006CC11D455D1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CarWashing/Pods-CarWashing-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		578D44550968A8874A969EFE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D0829C3A5D43AD6BB1B48444 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CarWashing/Pods-CarWashing-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		18B8036E1F1DA2A300B52432 /* Sources */ = {
@@ -424,6 +508,7 @@
 		};
 		18B803A01F1DA2A300B52432 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 786364A9A4C81732835898A5 /* Pods-CarWashing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CarWashing/Info.plist;
@@ -435,6 +520,7 @@
 		};
 		18B803A11F1DA2A300B52432 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CarWashing/Info.plist;
@@ -509,6 +595,7 @@
 				18B803A11F1DA2A300B52432 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		18B803A21F1DA2A300B52432 /* Build configuration list for PBXNativeTarget "CarWashingTests" */ = {
 			isa = XCConfigurationList;
@@ -517,6 +604,7 @@
 				18B803A41F1DA2A300B52432 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		18B803A51F1DA2A300B52432 /* Build configuration list for PBXNativeTarget "CarWashingUITests" */ = {
 			isa = XCConfigurationList;
@@ -525,6 +613,7 @@
 				18B803A71F1DA2A300B52432 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
