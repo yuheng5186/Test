@@ -14,10 +14,15 @@
 
 @implementation HomeViewController
 
+- (void)drawNavigation
+{
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"首页";
+//    self.title = @"首页";
 }
 
 - (void)didReceiveMemoryWarning {
