@@ -1,28 +1,36 @@
 //
-//  HomeViewController.m
+//  DSMembershipController.m
 //  CarWashing
 //
-//  Created by Wuxinglin on 2017/7/19.
+//  Created by Wuxinglin on 2017/7/20.
 //  Copyright © 2017年 DS. All rights reserved.
 //
 
-#import "HomeViewController.h"
+#import "DSMembershipController.h"
 
-@interface HomeViewController ()
+@interface DSMembershipController ()
 
 @end
 
-@implementation HomeViewController
+@implementation DSMembershipController
 
-- (void)drawNavigation
-{
+- (void)drawNavigation {
+    
+    [self drawTitle:@"金顶会员" Color:[UIColor blackColor]];
     
 }
+
+- (void) drawContent
+{
+    self.statusView.backgroundColor     = [UIColor grayColor];
+    self.navigationView.backgroundColor = [UIColor grayColor];
+    
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"首页";
 }
 
 - (void)didReceiveMemoryWarning {

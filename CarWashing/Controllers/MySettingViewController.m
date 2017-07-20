@@ -7,8 +7,21 @@
 //
 
 #import "MySettingViewController.h"
+#import "DSUserInfoController.h"
+#import "DSSettingController.h"
+#import "DSMembershipController.h"
+#import "DSOrderController.h"
+#import "DSFavoritesController.h"
+#import "DSExchangeController.h"
+#import "DSServiceController.h"
+#import "DSMyCarController.h"
+#import "DSMemberRightsController.h"
+#import "DSMyCardController.h"
+#import "DSRecommendController.h"
 
-@interface MySettingViewController ()
+@interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -80,47 +93,120 @@
     backgroudView.left                  = upView.left;
     
     
-    UIView *orderView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    orderView.left                      = Main_Screen_Width*40/375;
+    UIView *orderView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    orderView.left                      = Main_Screen_Width*20/375;
     orderView.top                       = 0;
     
     UITapGestureRecognizer  *tapOrderGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapOrderButtonClick:)];
     [orderView addGestureRecognizer:tapOrderGesture];
     
     
+//    UIImage *orderImage              = [UIImage imageNamed:@"btnImage"];
+    UIImageView *orderImageView      = [UIUtil drawCustomImgViewInView:orderView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
+    orderImageView.left              = Main_Screen_Width*10/375;
+    orderImageView.top               = Main_Screen_Height*10/667;
     
-    UIView *favoritesView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) color:[UIColor blueColor]];
-    favoritesView.left                      = orderView.right +Main_Screen_Width*40/375;
+    NSString *orderName              = @"订单";
+    UIFont *orderNameFont            = [UIFont systemFontOfSize:16];
+    UILabel *orderNameLabel          = [UIUtil drawLabelInView:orderView frame:[UIUtil textRect:orderName font:orderNameFont] font:orderNameFont text:orderName isCenter:NO];
+    orderNameLabel.textColor         = [UIColor blackColor];
+    orderNameLabel.centerX           = orderImageView.centerX;
+    orderNameLabel.top               = orderImageView.bottom +Main_Screen_Height*10/667;
+    
+    
+    
+    
+    UIView *favoritesView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    favoritesView.left                      = orderView.right +Main_Screen_Width*25/375;
     favoritesView.top                       = 0;
     
     UITapGestureRecognizer  *favoritesTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapFavoritesButtonClick:)];
     [favoritesView addGestureRecognizer:favoritesTapGesture];
     
+    UIImageView *favoritesImageView      = [UIUtil drawCustomImgViewInView:favoritesView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
+    favoritesImageView.left              = Main_Screen_Width*10/375;
+    favoritesImageView.top               = Main_Screen_Height*10/667;
+    
+    NSString *favoritesName              = @"收藏";
+    UIFont *favoritesNameFont            = [UIFont systemFontOfSize:16];
+    UILabel *favoritesNameLabel          = [UIUtil drawLabelInView:favoritesView frame:[UIUtil textRect:favoritesName font:favoritesNameFont] font:favoritesNameFont text:favoritesName isCenter:NO];
+    favoritesNameLabel.textColor         = [UIColor blackColor];
+    favoritesNameLabel.centerX           = favoritesImageView.centerX;
+    favoritesNameLabel.top               = favoritesImageView.bottom +Main_Screen_Height*10/667;
     
     
-    UIView *exchangeView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) color:[UIColor blueColor]];
-    exchangeView.left                      = orderView.right +Main_Screen_Width*40/375;
+    UIView *exchangeView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    exchangeView.left                      = favoritesView.right +Main_Screen_Width*25/375;
     exchangeView.top                       = 0;
     
     UITapGestureRecognizer  *exchangeTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapExchangeButtonClick:)];
     [exchangeView addGestureRecognizer:exchangeTapGesture];
     
+    UIImageView *exchangeImageView      = [UIUtil drawCustomImgViewInView:exchangeView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
+    exchangeImageView.left              = Main_Screen_Width*10/375;
+    exchangeImageView.top               = Main_Screen_Height*10/667;
+    
+    NSString *exchangeName              = @"兑换";
+    UIFont *exchangeNameFont            = [UIFont systemFontOfSize:16];
+    UILabel *exchangeNameLabel          = [UIUtil drawLabelInView:exchangeView frame:[UIUtil textRect:exchangeName font:exchangeNameFont] font:exchangeNameFont text:exchangeName isCenter:NO];
+    exchangeNameLabel.textColor         = [UIColor blackColor];
+    exchangeNameLabel.centerX           = exchangeImageView.centerX;
+    exchangeNameLabel.top               = exchangeImageView.bottom +Main_Screen_Height*10/667;
+    
+    
+    UIView *serviceView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    serviceView.left                      = exchangeView.right +Main_Screen_Width*25/375;
+    serviceView.top                       = 0;
+    
+    UITapGestureRecognizer  *serviceTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapServiceButtonClick:)];
+    [serviceView addGestureRecognizer:serviceTapGesture];
+    
+    UIImageView *serviceImageView      = [UIUtil drawCustomImgViewInView:serviceView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
+    serviceImageView.left              = Main_Screen_Width*10/375;
+    serviceImageView.top               = Main_Screen_Height*10/667;
+    
+    NSString *serviceName              = @"客服";
+    UIFont *serviceNameFont            = [UIFont systemFontOfSize:16];
+    UILabel *serviceNameLabel          = [UIUtil drawLabelInView:serviceView frame:[UIUtil textRect:serviceName font:serviceNameFont] font:serviceNameFont text:serviceName isCenter:NO];
+    serviceNameLabel.textColor         = [UIColor blackColor];
+    serviceNameLabel.centerX           = serviceImageView.centerX;
+    serviceNameLabel.top               = serviceImageView.bottom +Main_Screen_Height*10/667;
+    
+    
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*220/667) style:UITableViewStylePlain];
+    self.tableView.top              = upView.bottom +Main_Screen_Height*10/667;
+    self.tableView.delegate         = self;
+    self.tableView.dataSource       = self;
+//    self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor  = [UIColor whiteColor];
+    self.tableView.scrollEnabled    = NO;
+//    self.tableView.tableFooterView  = [UIView new];
+    self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 60, 0);
+    [self.contentView addSubview:self.tableView];
     
 }
+
+#pragma mark -------button click------
 - (void) editButtonClick:(id)sender {
     
-    
+    DSUserInfoController *userInfoController    = [[DSUserInfoController alloc]init];
+    userInfoController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:userInfoController animated:YES];
 
 }
 
 - (void) settingButtonClick:(id)sender {
     
-    
+    DSSettingController *settingVC              = [[DSSettingController alloc]init];
+    settingVC.hidesBottomBarWhenPushed          = YES;
+    [self.navigationController pushViewController:settingVC animated:YES];
 
 }
 - (void) menbershipButtonClick:(id)sender {
     
-    
+    DSMemberRightsController *memberRightsVC    = [[DSMemberRightsController alloc]init];
+    memberRightsVC.hidesBottomBarWhenPushed     = YES;
+    [self.navigationController pushViewController:memberRightsVC animated:YES];
     
 }
 
@@ -130,21 +216,124 @@
     
 }
 
+#pragma mark -------tapGesture click------
 - (void) tapOrderButtonClick:(id)sender {
     
-    
+    DSOrderController *orderVC              = [[DSOrderController alloc]init];
+    orderVC.hidesBottomBarWhenPushed        = YES;
+    [self.navigationController pushViewController:orderVC animated:YES];
 }
 
 - (void) tapFavoritesButtonClick:(id)sender {
     
-    
+    DSFavoritesController *favoritesVC      = [[DSFavoritesController alloc]init];
+    favoritesVC.hidesBottomBarWhenPushed    = YES;
+    [self.navigationController pushViewController:favoritesVC animated:YES];
 }
 
 - (void) tapExchangeButtonClick:(id)sender {
     
-    
+    DSExchangeController *exchangeVC        = [[DSExchangeController alloc]init];
+    exchangeVC.hidesBottomBarWhenPushed     = YES;
+    [self.navigationController pushViewController:exchangeVC animated:YES];
 }
 
+- (void) tapServiceButtonClick:(id)sender {
+    
+    DSServiceController *serviceVC          = [[DSServiceController alloc]init];
+    serviceVC.hidesBottomBarWhenPushed      = YES;
+    [self.navigationController pushViewController:serviceVC animated:YES];
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+
+    
+    return 4;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    static NSString *cellStatic = @"cellStatic";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStatic];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+    }
+    cell.backgroundColor    = [UIColor whiteColor];
+    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+    
+    
+    if (indexPath.row == 0) {
+        cell.imageView.image    = [UIImage imageNamed:@"btnImage"];
+        cell.textLabel.text     = @"金顶会员";
+        cell.detailTextLabel.text = @"2600积分";
+
+    }else if (indexPath.row == 1)
+    {
+        cell.imageView.image    = [UIImage imageNamed:@"shopL"];
+        cell.textLabel.text     = @"我的爱车";
+    }else if (indexPath.row == 2)
+    {
+        cell.imageView.image    = [UIImage imageNamed:@"icon_defaultavatar"];
+        cell.textLabel.text     = @"我的卡券";
+        cell.detailTextLabel.text = @"3张优惠券";
+
+    }else if (indexPath.row == 3)
+    {
+        cell.imageView.image    = [UIImage imageNamed:@"btnImage"];
+        cell.textLabel.text     = @"推荐金顶APP";
+        cell.detailTextLabel.text = @"奖励300元";
+
+    }
+    
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+   
+    if (indexPath.row == 0) {
+        
+        DSMembershipController *membershipController        = [[DSMembershipController alloc]init];
+        membershipController.hidesBottomBarWhenPushed     = YES;
+        [self.navigationController pushViewController: membershipController animated: YES];
+        
+        
+    }else if (indexPath.row == 1){
+        
+        DSMyCarController *myCarController              = [[DSMyCarController alloc]init];
+        myCarController.hidesBottomBarWhenPushed        = YES;
+        [self.navigationController pushViewController:myCarController animated:YES];
+        
+    }else if (indexPath.row == 2){
+        
+        DSMyCardController *myCardController            = [[DSMyCardController alloc]init];
+        myCardController.hidesBottomBarWhenPushed       = YES;
+        [self.navigationController pushViewController:myCardController animated:YES];
+        
+    }else{
+    
+        DSRecommendController *recommendController      = [[DSRecommendController alloc]init];
+        recommendController.hidesBottomBarWhenPushed    = YES;
+        [self.navigationController pushViewController:recommendController animated:YES];
+    }
+
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

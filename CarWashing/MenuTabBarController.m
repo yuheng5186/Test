@@ -31,21 +31,21 @@
 {
     HomeViewController *homeVC      = [[HomeViewController alloc]init];
     UINavigationController *homeNav = [[UINavigationController alloc]initWithRootViewController:homeVC];
-//    homeNav.navigationController.navigationBarHidden = YES;
+    homeNav.navigationController.navigationBarHidden = YES;
     UITabBarItem *homeTabItem       = [[UITabBarItem alloc]initWithTitle:@"首页" image:[UIImage imageNamed:@"homeA"] selectedImage:[UIImage imageNamed:@"homeL"]];
     homeTabItem.tag     = 1;
     homeVC.tabBarItem   = homeTabItem;
     
     BusinessViewController *businessVC      = [[BusinessViewController alloc]init];
     UINavigationController *businessNav = [[UINavigationController alloc]initWithRootViewController:businessVC];
-//    businessNav.navigationController.navigationBarHidden = YES;
+    businessNav.navigationController.navigationBarHidden = YES;
     UITabBarItem *businessTabItem       = [[UITabBarItem alloc]initWithTitle:@"商家" image:[UIImage imageNamed:@"shopA"] selectedImage:[UIImage imageNamed:@"shopL"]];
     businessTabItem.tag     = 2;
     businessVC.tabBarItem   = businessTabItem;
     
     FindViewController *activityVC      = [[FindViewController alloc]init];
     UINavigationController *activityNav = [[UINavigationController alloc]initWithRootViewController:activityVC];
-//    activityNav.navigationController.navigationBarHidden = YES;
+    activityNav.navigationController.navigationBarHidden = YES;
     UITabBarItem *activityTabItem       = [[UITabBarItem alloc]initWithTitle:@"发现" image:[UIImage imageNamed:@"reportA"] selectedImage:[UIImage imageNamed:@"reportL"]];
     activityTabItem.tag     = 3;
     activityVC.tabBarItem   = activityTabItem;
@@ -59,7 +59,7 @@
     
     MySettingViewController *mySettingVC      = [[MySettingViewController alloc]init];
     UINavigationController *mySettingNav = [[UINavigationController alloc]initWithRootViewController:mySettingVC];
-//    mySettingNav.navigationController.navigationBarHidden = YES;
+    mySettingNav.navigationController.navigationBarHidden = YES;
 //    mySettingNav.navigationBar.hidden    = YES;
     UITabBarItem *mySettingTabItem       = [[UITabBarItem alloc]initWithTitle:@"我的" image:[UIImage imageNamed:@"BarItemNormal1"] selectedImage:[UIImage imageNamed:@"BarItemSelected1"]];
     mySettingTabItem.tag     = 5;
