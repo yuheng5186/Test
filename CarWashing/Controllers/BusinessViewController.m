@@ -13,6 +13,7 @@
 #import "YZMoreMenuViewController.h"
 #import "YZSortViewController.h"
 #import "YZAllCourseViewController.h"
+#import "BusinessDetailViewController.h"
 
 @interface BusinessViewController ()<UITableViewDelegate, UITableViewDataSource,YZPullDownMenuDataSource>
 
@@ -61,6 +62,8 @@ static NSString *salerListCell = @"salerListViewCell";
 }
 
 
+#pragma mark - 代理方法
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -75,6 +78,15 @@ static NSString *salerListCell = @"salerListViewCell";
     
     
     return salerListViewCell;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //跳转商家详情
+    BusinessDetailViewController *detailController = [[BusinessDetailViewController alloc] init];
+    detailController.hidesBottomBarWhenPushed       = YES;
+    [self.navigationController pushViewController:detailController animated:YES];
 }
 
 
