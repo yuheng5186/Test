@@ -31,6 +31,16 @@
 		181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E93001F208AF20006511E /* DSMemberRightsController.m */; };
 		181E93041F208C520006511E /* DSMyCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E93031F208C520006511E /* DSMyCardController.m */; };
 		181E93071F208D560006511E /* DSRecommendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E93061F208D560006511E /* DSRecommendController.m */; };
+		181E930B1F2094C10006511E /* DSMessagesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E930A1F2094C10006511E /* DSMessagesController.m */; };
+		181E93291F20B0510006511E /* SXScrPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E93281F20B0510006511E /* SXScrPageView.m */; };
+		181E932C1F20B0EB0006511E /* DSAdDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E932B1F20B0EB0006511E /* DSAdDetailController.m */; };
+		18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A11F21A44F009FF73A /* DSMessageDetailController.m */; };
+		18B697A51F21A87F009FF73A /* DSScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A41F21A87F009FF73A /* DSScanController.m */; };
+		18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A71F21D420009FF73A /* DSCardGroupController.m */; };
+		18B697AC1F21DAB3009FF73A /* DSSaleActivityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697AB1F21DAB3009FF73A /* DSSaleActivityController.m */; };
+		18B697AF1F21DAE7009FF73A /* DSCarClubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697AE1F21DAE7009FF73A /* DSCarClubController.m */; };
+		18B697B21F21DB3F009FF73A /* DSCarTravellingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697B11F21DB3F009FF73A /* DSCarTravellingController.m */; };
+		18B697B51F21DBCE009FF73A /* DSWheelGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697B41F21DBCE009FF73A /* DSWheelGroupController.m */; };
 		18B803771F1DA2A300B52432 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B803761F1DA2A300B52432 /* main.m */; };
 		18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B803791F1DA2A300B52432 /* AppDelegate.m */; };
 		18B803801F1DA2A300B52432 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18B8037E1F1DA2A300B52432 /* Main.storyboard */; };
@@ -124,6 +134,26 @@
 		181E93031F208C520006511E /* DSMyCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMyCardController.m; path = UserInfo/DSMyCardController.m; sourceTree = "<group>"; };
 		181E93051F208D560006511E /* DSRecommendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSRecommendController.h; path = UserInfo/DSRecommendController.h; sourceTree = "<group>"; };
 		181E93061F208D560006511E /* DSRecommendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSRecommendController.m; path = UserInfo/DSRecommendController.m; sourceTree = "<group>"; };
+		181E93091F2094C10006511E /* DSMessagesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMessagesController.h; path = Home/DSMessagesController.h; sourceTree = "<group>"; };
+		181E930A1F2094C10006511E /* DSMessagesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMessagesController.m; path = Home/DSMessagesController.m; sourceTree = "<group>"; };
+		181E93271F20B0510006511E /* SXScrPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SXScrPageView.h; path = Tool/SXScrPageView.h; sourceTree = "<group>"; };
+		181E93281F20B0510006511E /* SXScrPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SXScrPageView.m; path = Tool/SXScrPageView.m; sourceTree = "<group>"; };
+		181E932A1F20B0EB0006511E /* DSAdDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAdDetailController.h; path = Home/DSAdDetailController.h; sourceTree = "<group>"; };
+		181E932B1F20B0EB0006511E /* DSAdDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAdDetailController.m; path = Home/DSAdDetailController.m; sourceTree = "<group>"; };
+		18B697A01F21A44F009FF73A /* DSMessageDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMessageDetailController.h; path = Home/DSMessageDetailController.h; sourceTree = "<group>"; };
+		18B697A11F21A44F009FF73A /* DSMessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMessageDetailController.m; path = Home/DSMessageDetailController.m; sourceTree = "<group>"; };
+		18B697A31F21A87F009FF73A /* DSScanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSScanController.h; path = Home/DSScanController.h; sourceTree = "<group>"; };
+		18B697A41F21A87F009FF73A /* DSScanController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSScanController.m; path = Home/DSScanController.m; sourceTree = "<group>"; };
+		18B697A61F21D420009FF73A /* DSCardGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSCardGroupController.h; path = Home/DSCardGroupController.h; sourceTree = "<group>"; };
+		18B697A71F21D420009FF73A /* DSCardGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSCardGroupController.m; path = Home/DSCardGroupController.m; sourceTree = "<group>"; };
+		18B697AA1F21DAB3009FF73A /* DSSaleActivityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSaleActivityController.h; path = Find/DSSaleActivityController.h; sourceTree = "<group>"; };
+		18B697AB1F21DAB3009FF73A /* DSSaleActivityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSaleActivityController.m; path = Find/DSSaleActivityController.m; sourceTree = "<group>"; };
+		18B697AD1F21DAE7009FF73A /* DSCarClubController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSCarClubController.h; path = Find/DSCarClubController.h; sourceTree = "<group>"; };
+		18B697AE1F21DAE7009FF73A /* DSCarClubController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSCarClubController.m; path = Find/DSCarClubController.m; sourceTree = "<group>"; };
+		18B697B01F21DB3F009FF73A /* DSCarTravellingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSCarTravellingController.h; path = Find/DSCarTravellingController.h; sourceTree = "<group>"; };
+		18B697B11F21DB3F009FF73A /* DSCarTravellingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSCarTravellingController.m; path = Find/DSCarTravellingController.m; sourceTree = "<group>"; };
+		18B697B31F21DBCE009FF73A /* DSWheelGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSWheelGroupController.h; path = Find/DSWheelGroupController.h; sourceTree = "<group>"; };
+		18B697B41F21DBCE009FF73A /* DSWheelGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSWheelGroupController.m; path = Find/DSWheelGroupController.m; sourceTree = "<group>"; };
 		18B803721F1DA2A300B52432 /* CarWashing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarWashing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B803761F1DA2A300B52432 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18B803781F1DA2A300B52432 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -195,6 +225,8 @@
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				181E93271F20B0510006511E /* SXScrPageView.h */,
+				181E93281F20B0510006511E /* SXScrPageView.m */,
 				181E92BE1F1F39CC0006511E /* BlackLoadingView.h */,
 				181E92BF1F1F39CC0006511E /* BlackLoadingView.m */,
 				181E92C01F1F39CC0006511E /* UIColor+Additions.h */,
@@ -215,6 +247,8 @@
 		181E92DF1F1F3CC90006511E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				18B697A91F21DA60009FF73A /* Find */,
+				181E93081F2094420006511E /* Home */,
 				181E92E01F20532B0006511E /* UserInfo */,
 				181E92D01F1F3B180006511E /* HomeViewController.h */,
 				181E92D11F1F3B180006511E /* HomeViewController.m */,
@@ -260,6 +294,38 @@
 				181E93061F208D560006511E /* DSRecommendController.m */,
 			);
 			name = UserInfo;
+			sourceTree = "<group>";
+		};
+		181E93081F2094420006511E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				181E93091F2094C10006511E /* DSMessagesController.h */,
+				181E930A1F2094C10006511E /* DSMessagesController.m */,
+				181E932A1F20B0EB0006511E /* DSAdDetailController.h */,
+				181E932B1F20B0EB0006511E /* DSAdDetailController.m */,
+				18B697A01F21A44F009FF73A /* DSMessageDetailController.h */,
+				18B697A11F21A44F009FF73A /* DSMessageDetailController.m */,
+				18B697A31F21A87F009FF73A /* DSScanController.h */,
+				18B697A41F21A87F009FF73A /* DSScanController.m */,
+				18B697A61F21D420009FF73A /* DSCardGroupController.h */,
+				18B697A71F21D420009FF73A /* DSCardGroupController.m */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		18B697A91F21DA60009FF73A /* Find */ = {
+			isa = PBXGroup;
+			children = (
+				18B697AA1F21DAB3009FF73A /* DSSaleActivityController.h */,
+				18B697AB1F21DAB3009FF73A /* DSSaleActivityController.m */,
+				18B697AD1F21DAE7009FF73A /* DSCarClubController.h */,
+				18B697AE1F21DAE7009FF73A /* DSCarClubController.m */,
+				18B697B01F21DB3F009FF73A /* DSCarTravellingController.h */,
+				18B697B11F21DB3F009FF73A /* DSCarTravellingController.m */,
+				18B697B31F21DBCE009FF73A /* DSWheelGroupController.h */,
+				18B697B41F21DBCE009FF73A /* DSWheelGroupController.m */,
+			);
+			name = Find;
 			sourceTree = "<group>";
 		};
 		18B803691F1DA2A300B52432 = {
@@ -658,16 +724,23 @@
 				181E92FE1F2088E80006511E /* DSMyCarController.m in Sources */,
 				181E92CC1F1F39CC0006511E /* UIColor+HexColor.m in Sources */,
 				181E92EF1F2081840006511E /* DSMembershipController.m in Sources */,
+				18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */,
 				181E92F21F20848D0006511E /* DSOrderController.m in Sources */,
+				18B697B51F21DBCE009FF73A /* DSWheelGroupController.m in Sources */,
 				181E92CB1F1F39CC0006511E /* UIColor+Additions.m in Sources */,
 				50E2EE851F1F4D3C00FAF130 /* YZSortViewController.m in Sources */,
+				18B697A51F21A87F009FF73A /* DSScanController.m in Sources */,
 				50E2EE841F1F4D3C00FAF130 /* YZMenuButton.m in Sources */,
 				181E93041F208C520006511E /* DSMyCardController.m in Sources */,
+				18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */,
 				50E2EE621F1F4D2D00FAF130 /* YZPullDownMenu.m in Sources */,
 				181E92BB1F1F36710006511E /* BaseController.m in Sources */,
+				181E932C1F20B0EB0006511E /* DSAdDetailController.m in Sources */,
 				18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */,
 				181E92CE1F1F39CC0006511E /* UIUtil.m in Sources */,
+				181E930B1F2094C10006511E /* DSMessagesController.m in Sources */,
 				181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */,
+				18B697AF1F21DAE7009FF73A /* DSCarClubController.m in Sources */,
 				181E92DE1F1F3BE40006511E /* MySettingViewController.m in Sources */,
 				181E92E31F2054C50006511E /* DSUserInfoController.m in Sources */,
 				181E92CD1F1F39CC0006511E /* UIImage+BFS.m in Sources */,
@@ -677,6 +750,7 @@
 				50E2EE861F1F4D3C00FAF130 /* YZSortCell.m in Sources */,
 				18B803771F1DA2A300B52432 /* main.m in Sources */,
 				181E92CF1F1F39CC0006511E /* UIView+Frame.m in Sources */,
+				18B697B21F21DB3F009FF73A /* DSCarTravellingController.m in Sources */,
 				181E92D51F1F3B900006511E /* BusinessViewController.m in Sources */,
 				50E2EE831F1F4D3C00FAF130 /* UIView+YZCategory.m in Sources */,
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
@@ -684,10 +758,12 @@
 				181E93071F208D560006511E /* DSRecommendController.m in Sources */,
 				181E92DB1F1F3BC60006511E /* PurchaseViewController.m in Sources */,
 				181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */,
+				18B697AC1F21DAB3009FF73A /* DSSaleActivityController.m in Sources */,
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
 				50E2EE7E1F1F4D3C00FAF130 /* YZAllCourseViewController.m in Sources */,
 				181E92FB1F2086ED0006511E /* DSServiceController.m in Sources */,
 				181E92D81F1F3BAE0006511E /* FindViewController.m in Sources */,
+				181E93291F20B0510006511E /* SXScrPageView.m in Sources */,
 				181E92E91F207FF60006511E /* DSSettingController.m in Sources */,
 				181E92F81F2086620006511E /* DSExchangeController.m in Sources */,
 			);

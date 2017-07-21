@@ -19,6 +19,9 @@
 #import "DSMyCardController.h"
 #import "DSRecommendController.h"
 
+#import "UIImageView+WebCache.h"
+
+
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -101,7 +104,6 @@
     [orderView addGestureRecognizer:tapOrderGesture];
     
     
-//    UIImage *orderImage              = [UIImage imageNamed:@"btnImage"];
     UIImageView *orderImageView      = [UIUtil drawCustomImgViewInView:orderView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
     orderImageView.left              = Main_Screen_Width*10/375;
     orderImageView.top               = Main_Screen_Height*10/667;
