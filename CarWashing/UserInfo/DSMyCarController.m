@@ -1,28 +1,35 @@
 //
-//  HomeViewController.m
+//  DSMyCarController.m
 //  CarWashing
 //
-//  Created by Wuxinglin on 2017/7/19.
+//  Created by Wuxinglin on 2017/7/20.
 //  Copyright © 2017年 DS. All rights reserved.
 //
 
-#import "HomeViewController.h"
+#import "DSMyCarController.h"
 
-@interface HomeViewController ()
+@interface DSMyCarController ()
 
 @end
 
-@implementation HomeViewController
+@implementation DSMyCarController
 
-- (void)drawNavigation
+- (void)drawNavigation {
+    
+    [self drawTitle:@"我的爱车" Color:[UIColor blackColor]];
+    
+}
+
+- (void) drawContent
 {
+    self.statusView.backgroundColor     = [UIColor grayColor];
+    self.navigationView.backgroundColor = [UIColor grayColor];
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"首页";
 }
 
 - (void)didReceiveMemoryWarning {

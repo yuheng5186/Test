@@ -20,6 +20,17 @@
 		181E92D81F1F3BAE0006511E /* FindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92D71F1F3BAE0006511E /* FindViewController.m */; };
 		181E92DB1F1F3BC60006511E /* PurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92DA1F1F3BC60006511E /* PurchaseViewController.m */; };
 		181E92DE1F1F3BE40006511E /* MySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92DD1F1F3BE40006511E /* MySettingViewController.m */; };
+		181E92E31F2054C50006511E /* DSUserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92E21F2054C50006511E /* DSUserInfoController.m */; };
+		181E92E91F207FF60006511E /* DSSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92E81F207FF60006511E /* DSSettingController.m */; };
+		181E92EF1F2081840006511E /* DSMembershipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92EE1F2081840006511E /* DSMembershipController.m */; };
+		181E92F21F20848D0006511E /* DSOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92F11F20848D0006511E /* DSOrderController.m */; };
+		181E92F51F2085B60006511E /* DSFavoritesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92F41F2085B60006511E /* DSFavoritesController.m */; };
+		181E92F81F2086620006511E /* DSExchangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92F71F2086620006511E /* DSExchangeController.m */; };
+		181E92FB1F2086ED0006511E /* DSServiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92FA1F2086ED0006511E /* DSServiceController.m */; };
+		181E92FE1F2088E80006511E /* DSMyCarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92FD1F2088E80006511E /* DSMyCarController.m */; };
+		181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E93001F208AF20006511E /* DSMemberRightsController.m */; };
+		181E93041F208C520006511E /* DSMyCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E93031F208C520006511E /* DSMyCardController.m */; };
+		181E93071F208D560006511E /* DSRecommendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E93061F208D560006511E /* DSRecommendController.m */; };
 		18B803771F1DA2A300B52432 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B803761F1DA2A300B52432 /* main.m */; };
 		18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B803791F1DA2A300B52432 /* AppDelegate.m */; };
 		18B803801F1DA2A300B52432 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18B8037E1F1DA2A300B52432 /* Main.storyboard */; };
@@ -97,6 +108,28 @@
 		181E92DA1F1F3BC60006511E /* PurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PurchaseViewController.m; path = Controllers/PurchaseViewController.m; sourceTree = "<group>"; };
 		181E92DC1F1F3BE40006511E /* MySettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MySettingViewController.h; path = Controllers/MySettingViewController.h; sourceTree = "<group>"; };
 		181E92DD1F1F3BE40006511E /* MySettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MySettingViewController.m; path = Controllers/MySettingViewController.m; sourceTree = "<group>"; };
+		181E92E11F2054C50006511E /* DSUserInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSUserInfoController.h; path = UserInfo/DSUserInfoController.h; sourceTree = "<group>"; };
+		181E92E21F2054C50006511E /* DSUserInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSUserInfoController.m; path = UserInfo/DSUserInfoController.m; sourceTree = "<group>"; };
+		181E92E71F207FF60006511E /* DSSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSettingController.h; path = UserInfo/DSSettingController.h; sourceTree = "<group>"; };
+		181E92E81F207FF60006511E /* DSSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSettingController.m; path = UserInfo/DSSettingController.m; sourceTree = "<group>"; };
+		181E92ED1F2081840006511E /* DSMembershipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMembershipController.h; path = UserInfo/DSMembershipController.h; sourceTree = "<group>"; };
+		181E92EE1F2081840006511E /* DSMembershipController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMembershipController.m; path = UserInfo/DSMembershipController.m; sourceTree = "<group>"; };
+		181E92F01F20848D0006511E /* DSOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSOrderController.h; path = UserInfo/DSOrderController.h; sourceTree = "<group>"; };
+		181E92F11F20848D0006511E /* DSOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSOrderController.m; path = UserInfo/DSOrderController.m; sourceTree = "<group>"; };
+		181E92F31F2085B60006511E /* DSFavoritesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSFavoritesController.h; path = UserInfo/DSFavoritesController.h; sourceTree = "<group>"; };
+		181E92F41F2085B60006511E /* DSFavoritesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSFavoritesController.m; path = UserInfo/DSFavoritesController.m; sourceTree = "<group>"; };
+		181E92F61F2086620006511E /* DSExchangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSExchangeController.h; path = UserInfo/DSExchangeController.h; sourceTree = "<group>"; };
+		181E92F71F2086620006511E /* DSExchangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSExchangeController.m; path = UserInfo/DSExchangeController.m; sourceTree = "<group>"; };
+		181E92F91F2086ED0006511E /* DSServiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSServiceController.h; path = UserInfo/DSServiceController.h; sourceTree = "<group>"; };
+		181E92FA1F2086ED0006511E /* DSServiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSServiceController.m; path = UserInfo/DSServiceController.m; sourceTree = "<group>"; };
+		181E92FC1F2088E80006511E /* DSMyCarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMyCarController.h; path = UserInfo/DSMyCarController.h; sourceTree = "<group>"; };
+		181E92FD1F2088E80006511E /* DSMyCarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMyCarController.m; path = UserInfo/DSMyCarController.m; sourceTree = "<group>"; };
+		181E92FF1F208AF20006511E /* DSMemberRightsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMemberRightsController.h; path = UserInfo/DSMemberRightsController.h; sourceTree = "<group>"; };
+		181E93001F208AF20006511E /* DSMemberRightsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMemberRightsController.m; path = UserInfo/DSMemberRightsController.m; sourceTree = "<group>"; };
+		181E93021F208C520006511E /* DSMyCardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMyCardController.h; path = UserInfo/DSMyCardController.h; sourceTree = "<group>"; };
+		181E93031F208C520006511E /* DSMyCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMyCardController.m; path = UserInfo/DSMyCardController.m; sourceTree = "<group>"; };
+		181E93051F208D560006511E /* DSRecommendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSRecommendController.h; path = UserInfo/DSRecommendController.h; sourceTree = "<group>"; };
+		181E93061F208D560006511E /* DSRecommendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSRecommendController.m; path = UserInfo/DSRecommendController.m; sourceTree = "<group>"; };
 		18B803721F1DA2A300B52432 /* CarWashing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarWashing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B803761F1DA2A300B52432 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18B803781F1DA2A300B52432 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -198,6 +231,7 @@
 		181E92DF1F1F3CC90006511E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				181E92E01F20532B0006511E /* UserInfo */,
 				181E92D01F1F3B180006511E /* HomeViewController.h */,
 				181E92D11F1F3B180006511E /* HomeViewController.m */,
 				181E92D31F1F3B900006511E /* BusinessViewController.h */,
@@ -223,6 +257,35 @@
 				181E92DD1F1F3BE40006511E /* MySettingViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		181E92E01F20532B0006511E /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				181E92E11F2054C50006511E /* DSUserInfoController.h */,
+				181E92E21F2054C50006511E /* DSUserInfoController.m */,
+				181E92E71F207FF60006511E /* DSSettingController.h */,
+				181E92E81F207FF60006511E /* DSSettingController.m */,
+				181E92ED1F2081840006511E /* DSMembershipController.h */,
+				181E92EE1F2081840006511E /* DSMembershipController.m */,
+				181E92F01F20848D0006511E /* DSOrderController.h */,
+				181E92F11F20848D0006511E /* DSOrderController.m */,
+				181E92F31F2085B60006511E /* DSFavoritesController.h */,
+				181E92F41F2085B60006511E /* DSFavoritesController.m */,
+				181E92F61F2086620006511E /* DSExchangeController.h */,
+				181E92F71F2086620006511E /* DSExchangeController.m */,
+				181E92F91F2086ED0006511E /* DSServiceController.h */,
+				181E92FA1F2086ED0006511E /* DSServiceController.m */,
+				181E92FC1F2088E80006511E /* DSMyCarController.h */,
+				181E92FD1F2088E80006511E /* DSMyCarController.m */,
+				181E92FF1F208AF20006511E /* DSMemberRightsController.h */,
+				181E93001F208AF20006511E /* DSMemberRightsController.m */,
+				181E93021F208C520006511E /* DSMyCardController.h */,
+				181E93031F208C520006511E /* DSMyCardController.m */,
+				181E93051F208D560006511E /* DSRecommendController.h */,
+				181E93061F208D560006511E /* DSRecommendController.m */,
+			);
+			name = UserInfo;
 			sourceTree = "<group>";
 		};
 		18B803691F1DA2A300B52432 = {
@@ -621,19 +684,25 @@
 			files = (
 				50E2EE821F1F4D3C00FAF130 /* YZMoreMenuCell.m in Sources */,
 				50E2EE8A1F1F647A00FAF130 /* BusinessDetailViewController.m in Sources */,
+				181E92FE1F2088E80006511E /* DSMyCarController.m in Sources */,
 				181E92CC1F1F39CC0006511E /* UIColor+HexColor.m in Sources */,
+				181E92EF1F2081840006511E /* DSMembershipController.m in Sources */,
+				181E92F21F20848D0006511E /* DSOrderController.m in Sources */,
 				181E92CB1F1F39CC0006511E /* UIColor+Additions.m in Sources */,
 				50E2EE851F1F4D3C00FAF130 /* YZSortViewController.m in Sources */,
 				50E2EE841F1F4D3C00FAF130 /* YZMenuButton.m in Sources */,
+				181E93041F208C520006511E /* DSMyCardController.m in Sources */,
 				50E2EE621F1F4D2D00FAF130 /* YZPullDownMenu.m in Sources */,
 				181E92BB1F1F36710006511E /* BaseController.m in Sources */,
 				18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */,
 				181E92CE1F1F39CC0006511E /* UIUtil.m in Sources */,
 				181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */,
 				181E92DE1F1F3BE40006511E /* MySettingViewController.m in Sources */,
+				181E92E31F2054C50006511E /* DSUserInfoController.m in Sources */,
 				181E92CD1F1F39CC0006511E /* UIImage+BFS.m in Sources */,
 				181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */,
 				50D30E861F21AF6B0086D3ED /* BusinessPayController.m in Sources */,
+				181E92F51F2085B60006511E /* DSFavoritesController.m in Sources */,
 				50E2EE611F1F4D2D00FAF130 /* YZCover.m in Sources */,
 				50E2EE861F1F4D3C00FAF130 /* YZSortCell.m in Sources */,
 				18B803771F1DA2A300B52432 /* main.m in Sources */,
@@ -643,11 +712,16 @@
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
 				50E2EE801F1F4D3C00FAF130 /* YZMoreMenuViewController.m in Sources */,
 				50D30E811F20988A0086D3ED /* BusinessDetailCell.m in Sources */,
+				181E93071F208D560006511E /* DSRecommendController.m in Sources */,
 				181E92DB1F1F3BC60006511E /* PurchaseViewController.m in Sources */,
+				181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */,
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
 				50E2EE7E1F1F4D3C00FAF130 /* YZAllCourseViewController.m in Sources */,
 				50D30E791F20442A0086D3ED /* BusinessDetailHeaderView.m in Sources */,
+				181E92FB1F2086ED0006511E /* DSServiceController.m in Sources */,
 				181E92D81F1F3BAE0006511E /* FindViewController.m in Sources */,
+				181E92E91F207FF60006511E /* DSSettingController.m in Sources */,
+				181E92F81F2086620006511E /* DSExchangeController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -743,7 +817,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -786,7 +860,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -801,6 +875,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing;
 				PRODUCT_NAME = CarWashing;
@@ -814,6 +889,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing;
 				PRODUCT_NAME = CarWashing;

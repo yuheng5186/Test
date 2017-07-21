@@ -1,28 +1,35 @@
 //
-//  HomeViewController.m
+//  DSMemberRightsController.m
 //  CarWashing
 //
-//  Created by Wuxinglin on 2017/7/19.
+//  Created by Wuxinglin on 2017/7/20.
 //  Copyright © 2017年 DS. All rights reserved.
 //
 
-#import "HomeViewController.h"
+#import "DSMemberRightsController.h"
 
-@interface HomeViewController ()
+@interface DSMemberRightsController ()
 
 @end
 
-@implementation HomeViewController
+@implementation DSMemberRightsController
 
-- (void)drawNavigation
+- (void)drawNavigation {
+    
+    [self drawTitle:@"会员特权" Color:[UIColor blackColor]];
+    
+}
+
+- (void) drawContent
 {
+    self.statusView.backgroundColor     = [UIColor grayColor];
+    self.navigationView.backgroundColor = [UIColor grayColor];
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"首页";
 }
 
 - (void)didReceiveMemoryWarning {

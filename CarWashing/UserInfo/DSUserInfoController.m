@@ -1,28 +1,39 @@
 //
-//  HomeViewController.m
+//  DSUserInfoController.m
 //  CarWashing
 //
-//  Created by Wuxinglin on 2017/7/19.
+//  Created by Wuxinglin on 2017/7/20.
 //  Copyright © 2017年 DS. All rights reserved.
 //
 
-#import "HomeViewController.h"
+#import "DSUserInfoController.h"
 
-@interface HomeViewController ()
+@interface DSUserInfoController ()
 
 @end
 
-@implementation HomeViewController
+@implementation DSUserInfoController
 
-- (void)drawNavigation
+- (void)drawNavigation {
+    
+    [self drawTitle:@"个人信息" Color:[UIColor blackColor]];
+    
+}
+
+- (void) drawContent
 {
+    self.statusView.backgroundColor     = [UIColor grayColor];
+    self.navigationView.backgroundColor = [UIColor grayColor];
+//    self.contentView.top                = 0;
+//    self.contentView.height             = self.view.height;
+//    self.contentView.backgroundColor    = [UIColor colorFromHex:@"#111112"];
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"首页";
+
 }
 
 - (void)didReceiveMemoryWarning {

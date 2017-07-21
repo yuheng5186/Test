@@ -27,9 +27,9 @@
     application.statusBarStyle                      = UIStatusBarStyleLightContent;
     application.applicationIconBadgeNumber          = 0;
     
-    
-    MenuTabBarController *menuTabBarController	= [[MenuTabBarController alloc] init];
     self.window									= [[UIWindow alloc] initWithFrame: UIScreen.mainScreen.bounds];
+
+    MenuTabBarController *menuTabBarController	= [[MenuTabBarController alloc] init];
     self.window.rootViewController				= menuTabBarController;
     
     return YES;

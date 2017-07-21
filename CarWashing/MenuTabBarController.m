@@ -60,6 +60,7 @@
     MySettingViewController *mySettingVC      = [[MySettingViewController alloc]init];
     UINavigationController *mySettingNav = [[UINavigationController alloc]initWithRootViewController:mySettingVC];
     mySettingNav.navigationController.navigationBarHidden = YES;
+//    mySettingNav.navigationBar.hidden    = YES;
     UITabBarItem *mySettingTabItem       = [[UITabBarItem alloc]initWithTitle:@"我的" image:[UIImage imageNamed:@"BarItemNormal1"] selectedImage:[UIImage imageNamed:@"BarItemSelected1"]];
     mySettingTabItem.tag     = 5;
     mySettingVC.tabBarItem   = mySettingTabItem;

@@ -1,28 +1,35 @@
 //
-//  HomeViewController.m
+//  DSSettingController.m
 //  CarWashing
 //
-//  Created by Wuxinglin on 2017/7/19.
+//  Created by Wuxinglin on 2017/7/20.
 //  Copyright © 2017年 DS. All rights reserved.
 //
 
-#import "HomeViewController.h"
+#import "DSSettingController.h"
 
-@interface HomeViewController ()
+@interface DSSettingController ()
 
 @end
 
-@implementation HomeViewController
+@implementation DSSettingController
 
-- (void)drawNavigation
+- (void)drawNavigation {
+    
+    [self drawTitle:@"设置" Color:[UIColor blackColor]];
+    
+}
+
+- (void) drawContent
 {
+    self.statusView.backgroundColor     = [UIColor grayColor];
+    self.navigationView.backgroundColor = [UIColor grayColor];
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"首页";
 }
 
 - (void)didReceiveMemoryWarning {
