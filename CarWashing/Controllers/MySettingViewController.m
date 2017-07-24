@@ -42,7 +42,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    self.title = @"我的";
     self.navigationController.navigationBar.hidden = YES;
 
     [self createSubView];
@@ -175,15 +174,12 @@
     serviceNameLabel.top               = serviceImageView.bottom +Main_Screen_Height*10/667;
     
     
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*220/667) style:UITableViewStylePlain];
-    self.tableView.top              = upView.bottom +Main_Screen_Height*10/667;
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStyleGrouped];
+    self.tableView.top              = upView.bottom;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
-//    self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor  = [UIColor whiteColor];
     self.tableView.scrollEnabled    = NO;
-//    self.tableView.tableFooterView  = [UIView new];
-    self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 60, 0);
+    self.tableView.tableFooterView  = [UIView new];
     [self.contentView addSubview:self.tableView];
     
 }
@@ -248,16 +244,40 @@
 }
 
 #pragma mark - UITableViewDataSource
+-(CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 10.f;
+}
+
+-(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section
+
+{
+    return 0.01f;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
     
-    return 4;
+    switch (section) {
+        case 0:
+            return 1;
+            break;
+        case 1:
+            return 2;
+            break;
+        case 2:
+            return 1;
+            break;
+        default:
+            break;
+    }
+    return 0;
+    
 }
 
 
@@ -275,30 +295,27 @@
     cell.backgroundColor    = [UIColor whiteColor];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     
+    if (indexPath.section == 0) {
+        cell.imageView.image            = [UIImage imageNamed:@"btnImage"];
+        cell.textLabel.text             = @"金顶会员";
+        cell.detailTextLabel.text       = @"2600积分";
+        
+    }else if (indexPath.section == 1){
     
-    if (indexPath.row == 0) {
-        cell.imageView.image    = [UIImage imageNamed:@"btnImage"];
-        cell.textLabel.text     = @"金顶会员";
-        cell.detailTextLabel.text = @"2600积分";
-
-    }else if (indexPath.row == 1)
-    {
-        cell.imageView.image    = [UIImage imageNamed:@"shopL"];
-        cell.textLabel.text     = @"我的爱车";
-    }else if (indexPath.row == 2)
-    {
-        cell.imageView.image    = [UIImage imageNamed:@"icon_defaultavatar"];
-        cell.textLabel.text     = @"我的卡券";
-        cell.detailTextLabel.text = @"3张优惠券";
-
-    }else if (indexPath.row == 3)
-    {
-        cell.imageView.image    = [UIImage imageNamed:@"btnImage"];
-        cell.textLabel.text     = @"推荐金顶APP";
-        cell.detailTextLabel.text = @"奖励300元";
-
+        if (indexPath.row == 0) {
+            cell.imageView.image        = [UIImage imageNamed:@"shopL"];
+            cell.textLabel.text         = @"我的爱车";
+        }else{
+            cell.imageView.image        = [UIImage imageNamed:@"icon_defaultavatar"];
+            cell.textLabel.text         = @"我的卡券";
+            cell.detailTextLabel.text   = @"3张优惠券";
+        
+        }
+    }else{
+        cell.imageView.image            = [UIImage imageNamed:@"btnImage"];
+        cell.textLabel.text             = @"推荐金顶APP";
+        cell.detailTextLabel.text       = @"奖励300元";
     }
-    
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -308,30 +325,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-   
-    if (indexPath.row == 0) {
-        
-        DSMembershipController *membershipController        = [[DSMembershipController alloc]init];
-        membershipController.hidesBottomBarWhenPushed     = YES;
-        [self.navigationController pushViewController: membershipController animated: YES];
-        
-        
-    }else if (indexPath.row == 1){
-        
-        DSMyCarController *myCarController              = [[DSMyCarController alloc]init];
-        myCarController.hidesBottomBarWhenPushed        = YES;
-        [self.navigationController pushViewController:myCarController animated:YES];
-        
-    }else if (indexPath.row == 2){
-        
-        DSMyCardController *myCardController            = [[DSMyCardController alloc]init];
-        myCardController.hidesBottomBarWhenPushed       = YES;
-        [self.navigationController pushViewController:myCardController animated:YES];
-        
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            DSMembershipController *membershipController        = [[DSMembershipController alloc]init];
+            membershipController.hidesBottomBarWhenPushed       = YES;
+            [self.navigationController pushViewController: membershipController animated: YES];
+        }
+    }else if (indexPath.section == 1){
+        if (indexPath.row == 0) {
+            DSMyCarController *myCarController                  = [[DSMyCarController alloc]init];
+            myCarController.hidesBottomBarWhenPushed            = YES;
+            [self.navigationController pushViewController:myCarController animated:YES];
+        }else{
+            DSMyCardController *myCardController                = [[DSMyCardController alloc]init];
+            myCardController.hidesBottomBarWhenPushed           = YES;
+            [self.navigationController pushViewController:myCardController animated:YES];
+        }
     }else{
-    
-        DSRecommendController *recommendController      = [[DSRecommendController alloc]init];
-        recommendController.hidesBottomBarWhenPushed    = YES;
+        DSRecommendController *recommendController              = [[DSRecommendController alloc]init];
+        recommendController.hidesBottomBarWhenPushed            = YES;
         [self.navigationController pushViewController:recommendController animated:YES];
     }
 

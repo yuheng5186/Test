@@ -11,8 +11,11 @@
 #import "DSCarClubController.h"
 #import "DSCarTravellingController.h"
 #import "DSWheelGroupController.h"
+#import "ActivityListCell.h"
 
-@interface FindViewController ()
+@interface FindViewController ()<UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic,strong) UITableView *tableView;
 
 @end
 
@@ -130,6 +133,17 @@
     wheelNameLabel.textColor         = [UIColor blackColor];
     wheelNameLabel.centerX           = wheelImageView.centerX;
     wheelNameLabel.top               = wheelImageView.bottom +Main_Screen_Height*10/667;
+    
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStylePlain];
+    self.tableView.delegate         = self;
+    self.tableView.dataSource       = self;
+    self.tableView.top              = upView.bottom;
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"ActivityListCell" bundle:nil] forCellReuseIdentifier:@"ActivityListCell"];
+
+    self.tableView.rowHeight        = 200;
+    
+    [self.contentView addSubview:self.tableView];
 }
 
 
@@ -162,6 +176,30 @@
     wheelController.hidesBottomBarWhenPushed    = YES;
     [self.navigationController pushViewController:wheelController animated:YES];
 }
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 3;
+}
+
+#pragma mark --
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ActivityListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ActivityListCell" forIndexPath:indexPath];
+    
+    
+    
+    
+    return cell;
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -1,24 +1,22 @@
 //
-//  DSSaleActivityController.m
+//  DSPasswordController.m
 //  CarWashing
 //
-//  Created by Wuxinglin on 2017/7/21.
+//  Created by Wuxinglin on 2017/7/24.
 //  Copyright © 2017年 DS. All rights reserved.
 //
 
-#import "DSSaleActivityController.h"
+#import "DSPasswordController.h"
 
-
-
-@interface DSSaleActivityController ()
+@interface DSPasswordController ()
 
 @end
 
-@implementation DSSaleActivityController
+@implementation DSPasswordController
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"优惠活动" Color:[UIColor blackColor]];
+    [self drawTitle:@"密码管理" Color:[UIColor blackColor]];
     
 }
 
@@ -28,6 +26,7 @@
     self.navigationView.backgroundColor = [UIColor grayColor];
     
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
