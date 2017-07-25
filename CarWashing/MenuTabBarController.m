@@ -53,7 +53,7 @@
     PurchaseViewController *purchaseVC      = [[PurchaseViewController alloc]init];
     UINavigationController *purchaseNav = [[UINavigationController alloc]initWithRootViewController:purchaseVC];
     purchaseNav.navigationController.navigationBarHidden = YES;
-    UITabBarItem *purchaseTabItem       = [[UITabBarItem alloc]initWithTitle:@"社区" image:[UIImage imageNamed:@"messageA"] selectedImage:[UIImage imageNamed:@"messageL"]];
+    UITabBarItem *purchaseTabItem       = [[UITabBarItem alloc]initWithTitle:@"购卡" image:[UIImage imageNamed:@"messageA"] selectedImage:[UIImage imageNamed:@"messageL"]];
     purchaseTabItem.tag     = 4;
     purchaseVC.tabBarItem   = purchaseTabItem;
     

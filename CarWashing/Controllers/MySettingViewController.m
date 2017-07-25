@@ -303,10 +303,10 @@
     }else if (indexPath.section == 1){
     
         if (indexPath.row == 0) {
-            cell.imageView.image        = [UIImage imageNamed:@"shopL"];
+            cell.imageView.image        = [UIImage imageNamed:@"btnImage"];
             cell.textLabel.text         = @"我的爱车";
         }else{
-            cell.imageView.image        = [UIImage imageNamed:@"icon_defaultavatar"];
+            cell.imageView.image        = [UIImage imageNamed:@"btnImage"];
             cell.textLabel.text         = @"我的卡券";
             cell.detailTextLabel.text   = @"3张优惠券";
         

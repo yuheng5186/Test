@@ -35,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"社区";
+    self.title = @"发现";
     self.navigationController.navigationBar.hidden = YES;
 
     [self createSubView];
@@ -46,7 +46,7 @@
     UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*58/667) color:[UIColor whiteColor]];
     titleView.top                      = 0;
     
-    NSString *titleName              = @"社区";
+    NSString *titleName              = @"发现";
     UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor blackColor];

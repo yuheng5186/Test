@@ -38,6 +38,7 @@
 		183997661F2586D300702071 /* ActivityListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183997641F2586D300702071 /* ActivityListCell.xib */; };
 		1839979F1F25E69100702071 /* DSPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1839979E1F25E69100702071 /* DSPasswordController.m */; };
 		183997A21F25F00700702071 /* DSAboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183997A11F25F00700702071 /* DSAboutController.m */; };
+		188907121F2730F4009E20B0 /* DSUpdateRuleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188907111F2730F4009E20B0 /* DSUpdateRuleController.m */; };
 		18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A11F21A44F009FF73A /* DSMessageDetailController.m */; };
 		18B697A51F21A87F009FF73A /* DSScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A41F21A87F009FF73A /* DSScanController.m */; };
 		18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A71F21D420009FF73A /* DSCardGroupController.m */; };
@@ -157,6 +158,8 @@
 		1839979E1F25E69100702071 /* DSPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSPasswordController.m; path = UserInfo/DSPasswordController.m; sourceTree = "<group>"; };
 		183997A01F25F00700702071 /* DSAboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAboutController.h; path = UserInfo/DSAboutController.h; sourceTree = "<group>"; };
 		183997A11F25F00700702071 /* DSAboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAboutController.m; path = UserInfo/DSAboutController.m; sourceTree = "<group>"; };
+		188907101F2730F4009E20B0 /* DSUpdateRuleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSUpdateRuleController.h; path = UserInfo/DSUpdateRuleController.h; sourceTree = "<group>"; };
+		188907111F2730F4009E20B0 /* DSUpdateRuleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSUpdateRuleController.m; path = UserInfo/DSUpdateRuleController.m; sourceTree = "<group>"; };
 		18B697A01F21A44F009FF73A /* DSMessageDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMessageDetailController.h; path = Home/DSMessageDetailController.h; sourceTree = "<group>"; };
 		18B697A11F21A44F009FF73A /* DSMessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMessageDetailController.m; path = Home/DSMessageDetailController.m; sourceTree = "<group>"; };
 		18B697A31F21A87F009FF73A /* DSScanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSScanController.h; path = Home/DSScanController.h; sourceTree = "<group>"; };
@@ -333,6 +336,8 @@
 				181E93031F208C520006511E /* DSMyCardController.m */,
 				181E93051F208D560006511E /* DSRecommendController.h */,
 				181E93061F208D560006511E /* DSRecommendController.m */,
+				188907101F2730F4009E20B0 /* DSUpdateRuleController.h */,
+				188907111F2730F4009E20B0 /* DSUpdateRuleController.m */,
 			);
 			name = UserInfo;
 			sourceTree = "<group>";
@@ -784,6 +789,7 @@
 				18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */,
 				181E92F21F20848D0006511E /* DSOrderController.m in Sources */,
 				18B697B51F21DBCE009FF73A /* DSWheelGroupController.m in Sources */,
+				188907121F2730F4009E20B0 /* DSUpdateRuleController.m in Sources */,
 				181E92CB1F1F39CC0006511E /* UIColor+Additions.m in Sources */,
 				50E2EE851F1F4D3C00FAF130 /* YZSortViewController.m in Sources */,
 				18B697A51F21A87F009FF73A /* DSScanController.m in Sources */,
