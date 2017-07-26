@@ -38,7 +38,14 @@
 		183997661F2586D300702071 /* ActivityListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183997641F2586D300702071 /* ActivityListCell.xib */; };
 		1839979F1F25E69100702071 /* DSPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1839979E1F25E69100702071 /* DSPasswordController.m */; };
 		183997A21F25F00700702071 /* DSAboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183997A11F25F00700702071 /* DSAboutController.m */; };
+		1853BA031F28444000B98C7F /* DSFeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA021F28444000B98C7F /* DSFeedbackController.m */; };
+		1853BA061F28475500B98C7F /* DSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA051F28475500B98C7F /* DSTextView.m */; };
+		1853BA091F28674F00B98C7F /* LKAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA081F28674F00B98C7F /* LKAlertView.m */; };
+		1853BA0C1F28774400B98C7F /* LKActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA0B1F28774400B98C7F /* LKActionSheet.m */; };
+		1853BA0F1F28854D00B98C7F /* DSChangePhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA0E1F28854D00B98C7F /* DSChangePhoneController.m */; };
+		1853BA121F288D9800B98C7F /* DSChangeNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA111F288D9800B98C7F /* DSChangeNameController.m */; };
 		188907121F2730F4009E20B0 /* DSUpdateRuleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188907111F2730F4009E20B0 /* DSUpdateRuleController.m */; };
+		188907161F283184009E20B0 /* DSGetScoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188907151F283184009E20B0 /* DSGetScoreController.m */; };
 		18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A11F21A44F009FF73A /* DSMessageDetailController.m */; };
 		18B697A51F21A87F009FF73A /* DSScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A41F21A87F009FF73A /* DSScanController.m */; };
 		18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A71F21D420009FF73A /* DSCardGroupController.m */; };
@@ -158,8 +165,22 @@
 		1839979E1F25E69100702071 /* DSPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSPasswordController.m; path = UserInfo/DSPasswordController.m; sourceTree = "<group>"; };
 		183997A01F25F00700702071 /* DSAboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAboutController.h; path = UserInfo/DSAboutController.h; sourceTree = "<group>"; };
 		183997A11F25F00700702071 /* DSAboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAboutController.m; path = UserInfo/DSAboutController.m; sourceTree = "<group>"; };
+		1853BA011F28444000B98C7F /* DSFeedbackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSFeedbackController.h; path = UserInfo/DSFeedbackController.h; sourceTree = "<group>"; };
+		1853BA021F28444000B98C7F /* DSFeedbackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSFeedbackController.m; path = UserInfo/DSFeedbackController.m; sourceTree = "<group>"; };
+		1853BA041F28475500B98C7F /* DSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSTextView.h; path = Tool/DSTextView.h; sourceTree = "<group>"; };
+		1853BA051F28475500B98C7F /* DSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSTextView.m; path = Tool/DSTextView.m; sourceTree = "<group>"; };
+		1853BA071F28674F00B98C7F /* LKAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LKAlertView.h; path = Tool/LKAlertView.h; sourceTree = "<group>"; };
+		1853BA081F28674F00B98C7F /* LKAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LKAlertView.m; path = Tool/LKAlertView.m; sourceTree = "<group>"; };
+		1853BA0A1F28774400B98C7F /* LKActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LKActionSheet.h; path = Tool/LKActionSheet.h; sourceTree = "<group>"; };
+		1853BA0B1F28774400B98C7F /* LKActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LKActionSheet.m; path = Tool/LKActionSheet.m; sourceTree = "<group>"; };
+		1853BA0D1F28854D00B98C7F /* DSChangePhoneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSChangePhoneController.h; path = UserInfo/DSChangePhoneController.h; sourceTree = "<group>"; };
+		1853BA0E1F28854D00B98C7F /* DSChangePhoneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSChangePhoneController.m; path = UserInfo/DSChangePhoneController.m; sourceTree = "<group>"; };
+		1853BA101F288D9800B98C7F /* DSChangeNameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSChangeNameController.h; path = UserInfo/DSChangeNameController.h; sourceTree = "<group>"; };
+		1853BA111F288D9800B98C7F /* DSChangeNameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSChangeNameController.m; path = UserInfo/DSChangeNameController.m; sourceTree = "<group>"; };
 		188907101F2730F4009E20B0 /* DSUpdateRuleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSUpdateRuleController.h; path = UserInfo/DSUpdateRuleController.h; sourceTree = "<group>"; };
 		188907111F2730F4009E20B0 /* DSUpdateRuleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSUpdateRuleController.m; path = UserInfo/DSUpdateRuleController.m; sourceTree = "<group>"; };
+		188907141F283184009E20B0 /* DSGetScoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSGetScoreController.h; path = UserInfo/DSGetScoreController.h; sourceTree = "<group>"; };
+		188907151F283184009E20B0 /* DSGetScoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSGetScoreController.m; path = UserInfo/DSGetScoreController.m; sourceTree = "<group>"; };
 		18B697A01F21A44F009FF73A /* DSMessageDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMessageDetailController.h; path = Home/DSMessageDetailController.h; sourceTree = "<group>"; };
 		18B697A11F21A44F009FF73A /* DSMessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMessageDetailController.m; path = Home/DSMessageDetailController.m; sourceTree = "<group>"; };
 		18B697A31F21A87F009FF73A /* DSScanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSScanController.h; path = Home/DSScanController.h; sourceTree = "<group>"; };
@@ -255,6 +276,10 @@
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				1853BA0A1F28774400B98C7F /* LKActionSheet.h */,
+				1853BA0B1F28774400B98C7F /* LKActionSheet.m */,
+				1853BA071F28674F00B98C7F /* LKAlertView.h */,
+				1853BA081F28674F00B98C7F /* LKAlertView.m */,
 				181E93271F20B0510006511E /* SXScrPageView.h */,
 				181E93281F20B0510006511E /* SXScrPageView.m */,
 				181E92BE1F1F39CC0006511E /* BlackLoadingView.h */,
@@ -269,6 +294,8 @@
 				181E92C71F1F39CC0006511E /* UIUtil.m */,
 				181E92C81F1F39CC0006511E /* UIView+Frame.h */,
 				181E92C91F1F39CC0006511E /* UIView+Frame.m */,
+				1853BA041F28475500B98C7F /* DSTextView.h */,
+				1853BA051F28475500B98C7F /* DSTextView.m */,
 			);
 			name = Tool;
 			path = ..;
@@ -312,12 +339,20 @@
 			children = (
 				181E92E11F2054C50006511E /* DSUserInfoController.h */,
 				181E92E21F2054C50006511E /* DSUserInfoController.m */,
+				1853BA101F288D9800B98C7F /* DSChangeNameController.h */,
+				1853BA111F288D9800B98C7F /* DSChangeNameController.m */,
+				1853BA0D1F28854D00B98C7F /* DSChangePhoneController.h */,
+				1853BA0E1F28854D00B98C7F /* DSChangePhoneController.m */,
 				181E92E71F207FF60006511E /* DSSettingController.h */,
 				181E92E81F207FF60006511E /* DSSettingController.m */,
 				1839979D1F25E69100702071 /* DSPasswordController.h */,
 				1839979E1F25E69100702071 /* DSPasswordController.m */,
 				183997A01F25F00700702071 /* DSAboutController.h */,
 				183997A11F25F00700702071 /* DSAboutController.m */,
+				1853BA011F28444000B98C7F /* DSFeedbackController.h */,
+				1853BA021F28444000B98C7F /* DSFeedbackController.m */,
+				188907141F283184009E20B0 /* DSGetScoreController.h */,
+				188907151F283184009E20B0 /* DSGetScoreController.m */,
 				181E92ED1F2081840006511E /* DSMembershipController.h */,
 				181E92EE1F2081840006511E /* DSMembershipController.m */,
 				181E92F01F20848D0006511E /* DSOrderController.h */,
@@ -781,6 +816,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50E2EE821F1F4D3C00FAF130 /* YZMoreMenuCell.m in Sources */,
+				1853BA031F28444000B98C7F /* DSFeedbackController.m in Sources */,
 				50E2EE8A1F1F647A00FAF130 /* BusinessDetailViewController.m in Sources */,
 				183997651F2586D300702071 /* ActivityListCell.m in Sources */,
 				181E92FE1F2088E80006511E /* DSMyCarController.m in Sources */,
@@ -793,10 +829,12 @@
 				181E92CB1F1F39CC0006511E /* UIColor+Additions.m in Sources */,
 				50E2EE851F1F4D3C00FAF130 /* YZSortViewController.m in Sources */,
 				18B697A51F21A87F009FF73A /* DSScanController.m in Sources */,
+				1853BA091F28674F00B98C7F /* LKAlertView.m in Sources */,
 				50E2EE841F1F4D3C00FAF130 /* YZMenuButton.m in Sources */,
 				181E93041F208C520006511E /* DSMyCardController.m in Sources */,
 				18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */,
 				50E2EE621F1F4D2D00FAF130 /* YZPullDownMenu.m in Sources */,
+				1853BA121F288D9800B98C7F /* DSChangeNameController.m in Sources */,
 				181E92BB1F1F36710006511E /* BaseController.m in Sources */,
 				181E932C1F20B0EB0006511E /* DSAdDetailController.m in Sources */,
 				18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */,
@@ -809,9 +847,11 @@
 				181E92CD1F1F39CC0006511E /* UIImage+BFS.m in Sources */,
 				181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */,
 				1839979F1F25E69100702071 /* DSPasswordController.m in Sources */,
+				1853BA061F28475500B98C7F /* DSTextView.m in Sources */,
 				50D30E861F21AF6B0086D3ED /* BusinessPayController.m in Sources */,
 				181E92F51F2085B60006511E /* DSFavoritesController.m in Sources */,
 				50E2EE611F1F4D2D00FAF130 /* YZCover.m in Sources */,
+				1853BA0F1F28854D00B98C7F /* DSChangePhoneController.m in Sources */,
 				50E2EE861F1F4D3C00FAF130 /* YZSortCell.m in Sources */,
 				18B803771F1DA2A300B52432 /* main.m in Sources */,
 				181E92CF1F1F39CC0006511E /* UIView+Frame.m in Sources */,
@@ -823,6 +863,8 @@
 				50D30E811F20988A0086D3ED /* BusinessDetailCell.m in Sources */,
 				181E93071F208D560006511E /* DSRecommendController.m in Sources */,
 				181E92DB1F1F3BC60006511E /* PurchaseViewController.m in Sources */,
+				1853BA0C1F28774400B98C7F /* LKActionSheet.m in Sources */,
+				188907161F283184009E20B0 /* DSGetScoreController.m in Sources */,
 				181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */,
 				18B697AC1F21DAB3009FF73A /* DSSaleActivityController.m in Sources */,
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,

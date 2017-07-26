@@ -53,12 +53,12 @@
 //    self.tableView.tableHeaderView  = [UIView new];
     [self.contentView addSubview:self.tableView];
     
-    UIButton *logoutButton      = [UIUtil drawDefaultButton:self.contentView title:@"提交" target:self action:@selector(logoutButtonClick:)];
-    logoutButton.top           = self.tableView.bottom +Main_Screen_Height*30/667;
-    logoutButton.centerX       = Main_Screen_Width/2;
+    UIButton *submitButton      = [UIUtil drawDefaultButton:self.contentView title:@"提交" target:self action:@selector(submitButtonClick:)];
+    submitButton.top           = self.tableView.bottom +Main_Screen_Height*30/667;
+    submitButton.centerX       = Main_Screen_Width/2;
     
 }
-- (void) logoutButtonClick:(id)sender {
+- (void) submitButtonClick:(id)sender {
 
     
 }
@@ -108,7 +108,7 @@
         NSString *getVeriifyString      = @"获取验证码";
         UIFont *getVeriifyStringFont          = [UIFont systemFontOfSize:16];
         UIButton *getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, 110, 40) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyButtonClick:)];
-        getVeriifyStringButton.backgroundColor= [UIColor redColor];
+        getVeriifyStringButton.backgroundColor=  [UIColor colorWithHex:0xFFB500 alpha:1.0];
         getVeriifyStringButton.layer.cornerRadius = 20;
         getVeriifyStringButton.left           = self.verifyFieldText.right +Main_Screen_Width*10/375;
         getVeriifyStringButton.centerY        = self.verifyFieldText.centerY;

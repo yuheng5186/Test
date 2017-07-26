@@ -7,10 +7,13 @@
 //
 
 #import "DSUserInfoController.h"
-
-@interface DSUserInfoController ()<UITableViewDelegate,UITableViewDataSource>
+#import "AppDelegate.h"
+#import "DSChangePhoneController.h"
+#import "DSChangeNameController.h"
+@interface DSUserInfoController ()<UITableViewDelegate,UITableViewDataSource,LKActionSheetDelegate,LKAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSString *sexString;
 
 @end
 
@@ -37,6 +40,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.sexString = @"未填写";
     [self createSubView];
 
 }
@@ -51,6 +55,7 @@
     self.tableView.tableHeaderView  = [UIView new];
     [self.contentView addSubview:self.tableView];
 }
+
 #pragma mark - UITableViewDataSource
 
 -(CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section
@@ -81,9 +86,6 @@
             return 3;
             break;
         case 2:
-            return 2;
-            break;
-        case 3:
             return 1;
             break;
         default:
@@ -129,23 +131,13 @@
         }
         else {
             cell.textLabel.text         = @"性别";
-            cell.detailTextLabel.text   = @"未填写";
+            cell.detailTextLabel.text   = self.sexString;
         }
         
-    }else if (indexPath.section == 2){
-        if (indexPath.row == 0){
-            cell.textLabel.text         = @"微信绑定";
-            cell.detailTextLabel.text   = @"去绑定";
-        }
-        else {
-            cell.textLabel.text         = @"QQ绑定";
-            cell.detailTextLabel.text   = @"去绑定";
-        }
-    
     }
     else{
-        cell.textLabel.text     = @"收货地址";
-        
+        cell.textLabel.text         = @"微信绑定";
+        cell.detailTextLabel.text   = @"去绑定";
     }
     
     
@@ -159,9 +151,117 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-
+    if (indexPath.section == 0) {
+        
+        LKActionSheet *avatarSheet  = [[LKActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册中选择", nil];
+        avatarSheet.tag             = 1001;
+        [avatarSheet showInView:[AppDelegate sharedInstance].window.rootViewController.view];
+        
+    }else if (indexPath.section == 1){
+        if (indexPath.row == 0) {
+            DSChangeNameController  *changeNameController   = [[DSChangeNameController alloc]init];
+            changeNameController.hidesBottomBarWhenPushed   = YES;
+            [self.navigationController pushViewController:changeNameController animated:YES];
+            
+        }else if (indexPath.row == 1){
+        
+            DSChangePhoneController *changePhone    = [[DSChangePhoneController alloc]init];
+            changePhone.hidesBottomBarWhenPushed    = YES;
+            [self.navigationController pushViewController:changePhone animated:YES];
+            
+        }else {
+            LKActionSheet *actionSheet = [[LKActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"男",@"女",nil];
+            
+            
+            [actionSheet showInView:[AppDelegate sharedInstance].window.rootViewController.view];
+        }
+    }else {
+    
+        LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:nil message:@"”金顶洗车“想要打开“微信”" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认"];
+        [alartView show];
+    }
 }
 
+#pragma mark - LKActionSheetDelegate
+- (void)actionSheet:(LKActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (actionSheet.tag == 1001) {
+        
+        switch (buttonIndex) {
+            case 0:
+            {
+                UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+                if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
+                    UIImagePickerController *picker     = [[UIImagePickerController alloc] init];
+                    picker.sourceType                   = sourceType;
+                    picker.delegate                     = self;
+                    picker.allowsEditing                = YES;
+                    [self presentViewController:picker animated:YES completion:nil];
+                }
+            }
+                break;
+            case 1:
+            {
+                UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
+                    UIImagePickerController *picker     = [[UIImagePickerController alloc] init];
+                    picker.sourceType                   = sourceType;
+                    picker.delegate                     = self;
+                    picker.allowsEditing                = YES;
+                    [self presentViewController:picker animated:YES completion:nil];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+
+    }
+    else {
+        UITableViewCell *cell   = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:1]];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        
+        switch (buttonIndex) {
+            case 0:
+            {
+                self.sexString = @"男";
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+            }
+                break;
+            case 1:
+            {
+                self.sexString = @"女";
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+            }
+                break;
+            default:
+                break;
+        }
+    }
+
+}
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *imagePick = [info objectForKey:UIImagePickerControllerEditedImage];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self processImage:imagePick];
+}
+
+- (void)processImage:(UIImage *)image
+{
+    
+}
+
+
+#pragma mark ---LKAlertViewDelegate---
+- (void)alertView:(LKAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+        if (buttonIndex == 0) {
+            
+        }else{
+            
+            
+        }
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

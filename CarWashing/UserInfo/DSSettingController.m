@@ -9,8 +9,10 @@
 #import "DSSettingController.h"
 #import "DSPasswordController.h"
 #import "DSAboutController.h"
+#import "DSFeedbackController.h"
+#import "DSGetScoreController.h"
 
-@interface DSSettingController ()<UITableViewDelegate,UITableViewDataSource>
+@interface DSSettingController ()<UITableViewDelegate,UITableViewDataSource,LKAlertViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -64,13 +66,18 @@
     self.tableView.tableFooterView  = [UIView new];
     [self.contentView addSubview:self.tableView];
     
-    UIButton *logoutButton      = [UIUtil drawDefaultButton:upView title:@"退出当前帐号" target:self action:@selector(logoutButtonClick:)];
+    UIButton *logoutButton      = [UIUtil drawDefaultButton:self.contentView title:@"退出当前帐号" target:self action:@selector(logoutButtonClick:)];
     logoutButton.top           = self.tableView.bottom +Main_Screen_Height*30/667;
     logoutButton.centerX       = upView.centerX;
     
+    
+    
 }
 - (void) logoutButtonClick:(id)sender {
-
+    
+    LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:nil message:@"确定退出当前账户么？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定"];
+    alartView.tag               = 110;
+    [alartView show];
 
 }
 
@@ -165,7 +172,9 @@
             [self.navigationController pushViewController:passwordController animated:YES];
             
         }else{
-            
+            LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:@"提示框" message:@"目前缓存8M，您确定清空缓存么" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定"];
+            alartView.tag               = 111;
+            [alartView show];
         }
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
@@ -176,13 +185,40 @@
             
         }else {
             
-            
+            DSFeedbackController *feedbackController        = [[DSFeedbackController alloc]init];
+            feedbackController.hidesBottomBarWhenPushed     = YES;
+            [self.navigationController pushViewController:feedbackController animated:YES];
         }
         
     }else{
-        
-        
+//        
+//        DSGetScoreController *getScore                      = [[DSGetScoreController alloc]init];
+//        getScore.hidesBottomBarWhenPushed                   = YES;
+//        [self.navigationController pushViewController:getScore animated:YES];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/qq/id451108668?mt=12"]];
+
     }
+}
+
+#pragma mark ---LKAlertViewDelegate---
+- (void)alertView:(LKAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 110) {
+        if (buttonIndex == 0) {
+            
+        }else{
+            
+            
+        }
+    }else{
+    
+        if (buttonIndex == 0) {
+            
+        }else{
+            
+            
+        }
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {
