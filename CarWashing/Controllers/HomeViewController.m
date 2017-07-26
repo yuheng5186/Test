@@ -12,7 +12,20 @@
 #import "DSAdDetailController.h"
 #import "DSCardGroupController.h"
 
-@interface HomeViewController ()
+#import "JFLocation.h"
+#import "JFAreaDataManager.h"
+#import "JFCityViewController.h"
+
+#define KCURRENTCITYINFODEFAULTS [NSUserDefaults standardUserDefaults]
+
+@interface HomeViewController ()<JFLocationDelegate>
+
+@property (strong, nonatomic) UILabel *resultLabel;
+@property (nonatomic, strong) UIButton  *locationButton;
+/** 城市定位管理器*/
+@property (nonatomic, strong) JFLocation *locationManager;
+/** 城市数据管理器*/
+@property (nonatomic, strong) JFAreaDataManager *manager;
 
 @end
 
@@ -198,8 +211,57 @@
 
 - (void) locationButtonClick:(id)sender {
     
+    JFCityViewController *cityViewController = [[JFCityViewController alloc] init];
+    cityViewController.title = @"城市";
+    __weak typeof(self) weakSelf = self;
+    [cityViewController choseCityBlock:^(NSString *cityName) {
+        
+        [weakSelf.locationButton setTitle:cityName forState:UIControlStateNormal];
+        weakSelf.resultLabel.text = cityName;
+
+    }];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:cityViewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
     
 }
+#pragma mark --- JFLocationDelegate
+
+//定位中...
+- (void)locating {
+    NSLog(@"定位中...");
+}
+
+//定位成功
+- (void)currentLocation:(NSDictionary *)locationDictionary {
+    NSString *city = [locationDictionary valueForKey:@"City"];
+    if (![_resultLabel.text isEqualToString:city]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"您定位到%@，确定切换城市吗？",city] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            _resultLabel.text = city;
+            [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"locationCity"];
+            [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"currentCity"];
+            [self.manager cityNumberWithCity:city cityNumber:^(NSString *cityNumber) {
+                [KCURRENTCITYINFODEFAULTS setObject:cityNumber forKey:@"cityNumber"];
+            }];
+        }];
+        [alertController addAction:cancelAction];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+}
+
+/// 拒绝定位
+- (void)refuseToUsePositioningSystem:(NSString *)message {
+    NSLog(@"%@",message);
+}
+
+/// 定位失败
+- (void)locateFailure:(NSString *)message {
+    NSLog(@"%@",message);
+}
+
 - (void) tapPayButtonClick:(id)sender {
     
     
