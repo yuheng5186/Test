@@ -20,6 +20,7 @@
 
 @interface HomeViewController ()<JFLocationDelegate>
 
+/** 选择的结果*/
 @property (strong, nonatomic) UILabel *resultLabel;
 @property (nonatomic, strong) UIButton  *locationButton;
 /** 城市定位管理器*/
@@ -52,8 +53,19 @@
     self.navigationController.navigationBar.hidden = YES;
     
     [self createSubView];
-
+    
+    self.locationManager = [[JFLocation alloc] init];
+    _locationManager.delegate = self;
+    
 }
+- (JFAreaDataManager *)manager {
+    if (!_manager) {
+        _manager = [JFAreaDataManager shareManager];
+        [_manager areaSqliteDBData];
+    }
+    return _manager;
+}
+
 - (void) createSubView {
     UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*58/667) color:[UIColor whiteColor]];
     upView.top                      = 0;
@@ -88,20 +100,20 @@
     messagesButton.centerY           = titleNameLabel.centerY;
     
     
-    UIButton  *locationButton        = [UIButton buttonWithType:UIButtonTypeCustom];
-    locationButton.frame             = CGRectMake(0, 0, 100, 30);
-    locationButton.backgroundColor   = [UIColor whiteColor];
-    [locationButton setTitle:@"上海市" forState:UIControlStateNormal];
-    [locationButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    locationButton.titleLabel.font   = [UIFont systemFontOfSize:16];
-    locationButton.left              = 10;
-    locationButton.centerY           = titleNameLabel.centerY;
-    [locationButton addTarget:self action:@selector(locationButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [locationButton setImage:[UIImage imageNamed:@"icon_arrow_down"] forState:UIControlStateNormal];
-    locationButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -80);
-    [locationButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -60, 0, 0)];
+    self.locationButton        = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.locationButton.frame             = CGRectMake(0, 0, 100, 30);
+    self.locationButton.backgroundColor   = [UIColor whiteColor];
+    [self.locationButton setTitle:@"上海市" forState:UIControlStateNormal];
+    [self.locationButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.locationButton.titleLabel.font   = [UIFont systemFontOfSize:16];
+    self.locationButton.left              = 10;
+    self.locationButton.centerY           = titleNameLabel.centerY;
+    [self.locationButton addTarget:self action:@selector(locationButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.locationButton setImage:[UIImage imageNamed:@"icon_arrow_down"] forState:UIControlStateNormal];
+    self.locationButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -80);
+    [self.locationButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -60, 0, 0)];
     
-    [upView addSubview:locationButton];
+    [upView addSubview:self.locationButton];
     
     UIView *payView                   = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     payView.left                      = Main_Screen_Width*20/375;
@@ -217,8 +229,8 @@
     [cityViewController choseCityBlock:^(NSString *cityName) {
         
         [weakSelf.locationButton setTitle:cityName forState:UIControlStateNormal];
+        
         weakSelf.resultLabel.text = cityName;
-
     }];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:cityViewController];
@@ -284,13 +296,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
