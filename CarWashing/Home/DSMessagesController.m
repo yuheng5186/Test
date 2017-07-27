@@ -38,7 +38,7 @@
 }
 - (void) createSubView {
 
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*180/667) style:UITableViewStylePlain];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStylePlain];
     self.tableView.top              = 0;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
@@ -98,9 +98,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell *cell           = [self.tableView cellForRowAtIndexPath:indexPath];
     
-    DSMessageDetailController *messageDetailController = [[DSMessageDetailController alloc]init];
+    DSMessageDetailController *messageDetailController  = [[DSMessageDetailController alloc]init];
     messageDetailController.hidesBottomBarWhenPushed    = YES;
+    messageDetailController.navTitle                    = cell.textLabel.text;
     [self.navigationController pushViewController:messageDetailController animated:YES];
     
 }
