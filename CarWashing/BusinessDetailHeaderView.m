@@ -2,7 +2,7 @@
 //  BusinessDetailHeaderView.m
 //  CarWashing
 //
-//  Created by 时建鹏 on 2017/7/20.
+//  Created by 时建鹏 on 2017/7/27.
 //  Copyright © 2017年 DS. All rights reserved.
 //
 
@@ -17,8 +17,6 @@
     // Drawing code
 }
 */
-
-
 
 + (instancetype)businessDetailHeaderView {
     

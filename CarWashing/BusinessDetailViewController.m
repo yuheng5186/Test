@@ -2,7 +2,7 @@
 //  BusinessDetailViewController.m
 //  CarWashing
 //
-//  Created by 时建鹏 on 2017/7/19.
+//  Created by 时建鹏 on 2017/7/27.
 //  Copyright © 2017年 DS. All rights reserved.
 //
 
@@ -11,6 +11,7 @@
 #import <Masonry.h>
 #import "BusinessDetailCell.h"
 #import "BusinessPayController.h"
+#import "ShopViewController.h"
 
 @interface BusinessDetailViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -24,11 +25,26 @@ static NSString *detailTableViewCell = @"detailTableViewCell";
 
 @implementation BusinessDetailViewController
 
+- (void)drawNavigation {
+    
+    [self drawTitle:@"商家详情" Color:[UIColor blackColor]];
+    
+}
+
+- (void) drawContent
+{
+    self.statusView.backgroundColor     = [UIColor grayColor];
+    self.navigationView.backgroundColor = [UIColor grayColor];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     //[self.navigationController setNavigationBarHidden:YES];
-    self.title = @"商家详情";
+    //self.title = @"商家详情";
+    
+    //self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     [self setupUI];
 }
@@ -50,6 +66,8 @@ static NSString *detailTableViewCell = @"detailTableViewCell";
     self.headerView = headerView;
     
     [self.view addSubview:headerView];
+    
+    [headerView addTarget:self action:@selector(clickDetailView) forControlEvents:UIControlEventTouchUpInside];
     
     
     UITableView *detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 264, Main_Screen_Width, Main_Screen_Height - 344) style:UITableViewStyleGrouped];
@@ -112,12 +130,20 @@ static NSString *detailTableViewCell = @"detailTableViewCell";
     }];
     
     /*[payBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(120);
-        make.height.mas_equalTo(80);
-        make.right.top.equalTo(payToolBar);
-    }];
-    */
+     make.width.mas_equalTo(120);
+     make.height.mas_equalTo(80);
+     make.right.top.equalTo(payToolBar);
+     }];
+     */
     
+}
+
+#pragma mark - 点击商家详情
+- (void)clickDetailView{
+    
+    ShopViewController *shopController = [[ShopViewController alloc] init];
+    
+    [self.navigationController pushViewController:shopController animated:YES];
 }
 
 #pragma mark - 支付界面
@@ -188,7 +214,6 @@ static NSString *detailTableViewCell = @"detailTableViewCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 1;
 }
-
 
 /*
 #pragma mark - Navigation

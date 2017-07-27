@@ -38,10 +38,23 @@ static NSString *salerListCell = @"salerListViewCell";
     return _salerListView;
 }
 
+- (void) drawContent {
+    
+    self.statusView.hidden      = YES;
+    
+    self.navigationView.hidden  = YES;
+    self.contentView.top        = 0;
+    self.contentView.height     = self.view.height;
+    
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"商家";
+    //self.title = @"商家";
+    
+    self.navigationController.navigationBar.hidden = YES;
     
     [self setupUI];
     
@@ -51,6 +64,17 @@ static NSString *salerListCell = @"salerListViewCell";
 
 - (void)setupUI {
     
+    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*58/667) color:[UIColor whiteColor]];
+    titleView.top                      = 0;
+    
+    NSString *titleName              = @"商家";
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
+    UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
+    titleNameLabel.textColor         = [UIColor blackColor];
+    titleNameLabel.centerX           = titleView.centerX;
+    titleNameLabel.centerY           = titleView.centerY +Main_Screen_Height*10/667;
+    
+    //
     self.salerListView.delegate = self;
     self.salerListView.dataSource = self;
     
@@ -162,6 +186,7 @@ static NSString *salerListCell = @"salerListViewCell";
     // 第3列 高度
     return 240;
 }
+
 
 
 
