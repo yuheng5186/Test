@@ -26,9 +26,27 @@
     self.navigationView.backgroundColor = [UIColor grayColor];
     
 }
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self setupUI];
+}
+
+
+- (void)setupUI {
+    
+    UITextField *exchangeTF = [[UITextField alloc] initWithFrame:CGRectMake(50, 64 + 60, Main_Screen_Width - 100, 60)];
+    exchangeTF.placeholder = @"请输入兑换码";
+    exchangeTF.keyboardType = UIKeyboardTypeNumberPad;
+    exchangeTF.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:exchangeTF];
+    
+    UIButton *exchangeBtn = [[UIButton alloc] initWithFrame:CGRectMake(50, 64 + 180, Main_Screen_Width - 100, 40)];
+    [exchangeBtn setTitle:@"兑换" forState:UIControlStateNormal];
+    exchangeBtn.backgroundColor = [UIColor orangeColor];
+    [self.view addSubview:exchangeBtn];
 }
 
 - (void)didReceiveMemoryWarning {

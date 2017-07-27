@@ -8,11 +8,27 @@
 
 #import "DSFavoritesController.h"
 
-@interface DSFavoritesController ()
+#import "SalerListViewCell.h"
+
+@interface DSFavoritesController ()<UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, weak) UITableView *favoriteListView;
 
 @end
 
+static NSString *id_favoriteCell = @"id_favoriteCell";
+
 @implementation DSFavoritesController
+
+- (UITableView *)favoriteListView{
+    if (nil == _favoriteListView) {
+        UITableView *favoriteListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 64)];
+        [self.view addSubview:favoriteListView];
+        _favoriteListView = favoriteListView;
+    }
+    
+    return _favoriteListView;
+}
 
 - (void)drawNavigation {
     
@@ -29,7 +45,32 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self setupUI];
+}
+
+- (void)setupUI {
+    
+    self.favoriteListView.delegate = self;
+    self.favoriteListView.dataSource = self;
+    
+    UINib *nib = [UINib nibWithNibName:@"SalerListViewCell" bundle:nil];
+    
+    [self.favoriteListView registerNib:nib forCellReuseIdentifier:id_favoriteCell];
+    
+    self.favoriteListView.rowHeight = 96;
+    
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    SalerListViewCell *favoriCell = [tableView dequeueReusableCellWithIdentifier:id_favoriteCell forIndexPath:indexPath];
+    
+    return favoriCell;
 }
 
 - (void)didReceiveMemoryWarning {

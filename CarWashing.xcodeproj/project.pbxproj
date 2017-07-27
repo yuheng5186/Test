@@ -78,6 +78,18 @@
 		5016720F1F297A3500384186 /* ShopIntroController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 501672091F297A3500384186 /* ShopIntroController.xib */; };
 		501672101F297A3500384186 /* ShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5016720B1F297A3500384186 /* ShopViewController.m */; };
 		501672131F297AD000384186 /* BusinessDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672121F297AD000384186 /* BusinessDetailHeaderView.m */; };
+		501672161F297D8200384186 /* PurchaseCardViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672151F297D8200384186 /* PurchaseCardViewCell.m */; };
+		5016721B1F297DA500384186 /* payCardDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672181F297DA500384186 /* payCardDetailCell.m */; };
+		5016721C1F297DA500384186 /* PayPurchaseCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5016721A1F297DA500384186 /* PayPurchaseCardController.m */; };
+		501672201F297F3100384186 /* HQSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5016721F1F297F3100384186 /* HQSliderView.m */; };
+		501672281F297FDD00384186 /* AnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672241F297FDD00384186 /* AnswerCell.m */; };
+		501672291F297FDD00384186 /* AnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 501672251F297FDD00384186 /* AnswerCell.xib */; };
+		5016722A1F297FDD00384186 /* HeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672271F297FDD00384186 /* HeadView.m */; };
+		501672311F297FF000384186 /* AnswerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5016722D1F297FF000384186 /* AnswerModel.m */; };
+		501672321F297FF000384186 /* problemCenter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5016722E1F297FF000384186 /* problemCenter.plist */; };
+		501672331F297FF000384186 /* ProblemTitleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672301F297FF000384186 /* ProblemTitleModel.m */; };
+		501672371F29808600384186 /* HQTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672361F29808600384186 /* HQTableViewCell.m */; };
+		5016723B1F29809200384186 /* UIView+HQCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5016723A1F29809200384186 /* UIView+HQCategory.m */; };
 		50D30E7D1F2044C20086D3ED /* BusinessDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D30E7C1F2044C20086D3ED /* BusinessDetailHeaderView.xib */; };
 		50D30E811F20988A0086D3ED /* BusinessDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D30E7F1F20988A0086D3ED /* BusinessDetailCell.m */; };
 		50D30E821F20988A0086D3ED /* BusinessDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D30E801F20988A0086D3ED /* BusinessDetailCell.xib */; };
@@ -257,6 +269,28 @@
 		5016720B1F297A3500384186 /* ShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopViewController.m; sourceTree = "<group>"; };
 		501672111F297AD000384186 /* BusinessDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessDetailHeaderView.h; sourceTree = "<group>"; };
 		501672121F297AD000384186 /* BusinessDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessDetailHeaderView.m; sourceTree = "<group>"; };
+		501672141F297D8200384186 /* PurchaseCardViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseCardViewCell.h; sourceTree = "<group>"; };
+		501672151F297D8200384186 /* PurchaseCardViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseCardViewCell.m; sourceTree = "<group>"; };
+		501672171F297DA500384186 /* payCardDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = payCardDetailCell.h; sourceTree = "<group>"; };
+		501672181F297DA500384186 /* payCardDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = payCardDetailCell.m; sourceTree = "<group>"; };
+		501672191F297DA500384186 /* PayPurchaseCardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPurchaseCardController.h; sourceTree = "<group>"; };
+		5016721A1F297DA500384186 /* PayPurchaseCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayPurchaseCardController.m; sourceTree = "<group>"; };
+		5016721E1F297F3100384186 /* HQSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQSliderView.h; sourceTree = "<group>"; };
+		5016721F1F297F3100384186 /* HQSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQSliderView.m; sourceTree = "<group>"; };
+		501672231F297FDD00384186 /* AnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerCell.h; sourceTree = "<group>"; };
+		501672241F297FDD00384186 /* AnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerCell.m; sourceTree = "<group>"; };
+		501672251F297FDD00384186 /* AnswerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnswerCell.xib; sourceTree = "<group>"; };
+		501672261F297FDD00384186 /* HeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadView.h; sourceTree = "<group>"; };
+		501672271F297FDD00384186 /* HeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadView.m; sourceTree = "<group>"; };
+		5016722C1F297FF000384186 /* AnswerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerModel.h; sourceTree = "<group>"; };
+		5016722D1F297FF000384186 /* AnswerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerModel.m; sourceTree = "<group>"; };
+		5016722E1F297FF000384186 /* problemCenter.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = problemCenter.plist; sourceTree = "<group>"; };
+		5016722F1F297FF000384186 /* ProblemTitleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProblemTitleModel.h; sourceTree = "<group>"; };
+		501672301F297FF000384186 /* ProblemTitleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProblemTitleModel.m; sourceTree = "<group>"; };
+		501672351F29808600384186 /* HQTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQTableViewCell.h; sourceTree = "<group>"; };
+		501672361F29808600384186 /* HQTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQTableViewCell.m; sourceTree = "<group>"; };
+		501672391F29809200384186 /* UIView+HQCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HQCategory.h"; sourceTree = "<group>"; };
+		5016723A1F29809200384186 /* UIView+HQCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HQCategory.m"; sourceTree = "<group>"; };
 		50D30E7C1F2044C20086D3ED /* BusinessDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BusinessDetailHeaderView.xib; sourceTree = "<group>"; };
 		50D30E7E1F20988A0086D3ED /* BusinessDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessDetailCell.h; sourceTree = "<group>"; };
 		50D30E7F1F20988A0086D3ED /* BusinessDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessDetailCell.m; sourceTree = "<group>"; };
@@ -511,6 +545,8 @@
 				18B803811F1DA2A300B52432 /* Assets.xcassets */,
 				18B803831F1DA2A300B52432 /* LaunchScreen.storyboard */,
 				18B803861F1DA2A300B52432 /* Info.plist */,
+				501672211F297FB100384186 /* ClickExpande */,
+				5016721D1F297F3100384186 /* HQSliderView */,
 				50E2EE5B1F1F4BF700FAF130 /* Search Menu */,
 				181E91D71F1DDD830006511E /* Tool */,
 				18B803751F1DA2A300B52432 /* Supporting Files */,
@@ -590,8 +626,76 @@
 			children = (
 				181E92D91F1F3BC60006511E /* PurchaseViewController.h */,
 				181E92DA1F1F3BC60006511E /* PurchaseViewController.m */,
+				501672141F297D8200384186 /* PurchaseCardViewCell.h */,
+				501672151F297D8200384186 /* PurchaseCardViewCell.m */,
+				501672191F297DA500384186 /* PayPurchaseCardController.h */,
+				5016721A1F297DA500384186 /* PayPurchaseCardController.m */,
+				501672171F297DA500384186 /* payCardDetailCell.h */,
+				501672181F297DA500384186 /* payCardDetailCell.m */,
 			);
 			name = Purchase;
+			sourceTree = "<group>";
+		};
+		5016721D1F297F3100384186 /* HQSliderView */ = {
+			isa = PBXGroup;
+			children = (
+				501672381F29809200384186 /* UIView+HQCategory */,
+				501672341F29808600384186 /* Views */,
+				5016721E1F297F3100384186 /* HQSliderView.h */,
+				5016721F1F297F3100384186 /* HQSliderView.m */,
+			);
+			path = HQSliderView;
+			sourceTree = "<group>";
+		};
+		501672211F297FB100384186 /* ClickExpande */ = {
+			isa = PBXGroup;
+			children = (
+				5016722B1F297FF000384186 /* M */,
+				501672221F297FDD00384186 /* V */,
+			);
+			name = ClickExpande;
+			sourceTree = "<group>";
+		};
+		501672221F297FDD00384186 /* V */ = {
+			isa = PBXGroup;
+			children = (
+				501672231F297FDD00384186 /* AnswerCell.h */,
+				501672241F297FDD00384186 /* AnswerCell.m */,
+				501672251F297FDD00384186 /* AnswerCell.xib */,
+				501672261F297FDD00384186 /* HeadView.h */,
+				501672271F297FDD00384186 /* HeadView.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		5016722B1F297FF000384186 /* M */ = {
+			isa = PBXGroup;
+			children = (
+				5016722C1F297FF000384186 /* AnswerModel.h */,
+				5016722D1F297FF000384186 /* AnswerModel.m */,
+				5016722E1F297FF000384186 /* problemCenter.plist */,
+				5016722F1F297FF000384186 /* ProblemTitleModel.h */,
+				501672301F297FF000384186 /* ProblemTitleModel.m */,
+			);
+			path = M;
+			sourceTree = "<group>";
+		};
+		501672341F29808600384186 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				501672351F29808600384186 /* HQTableViewCell.h */,
+				501672361F29808600384186 /* HQTableViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		501672381F29809200384186 /* UIView+HQCategory */ = {
+			isa = PBXGroup;
+			children = (
+				501672391F29809200384186 /* UIView+HQCategory.h */,
+				5016723A1F29809200384186 /* UIView+HQCategory.m */,
+			);
+			path = "UIView+HQCategory";
 			sourceTree = "<group>";
 		};
 		50E2EE5B1F1F4BF700FAF130 /* Search Menu */ = {
@@ -835,10 +939,12 @@
 				50E2EE7F1F1F4D3C00FAF130 /* YZAllCourseViewController.xib in Resources */,
 				18B803851F1DA2A300B52432 /* LaunchScreen.storyboard in Resources */,
 				18B803821F1DA2A300B52432 /* Assets.xcassets in Resources */,
+				501672321F297FF000384186 /* problemCenter.plist in Resources */,
 				18B803801F1DA2A300B52432 /* Main.storyboard in Resources */,
 				183997661F2586D300702071 /* ActivityListCell.xib in Resources */,
 				50E2EE811F1F4D3C00FAF130 /* YZMoreMenuViewController.xib in Resources */,
 				5016720F1F297A3500384186 /* ShopIntroController.xib in Resources */,
+				501672291F297FDD00384186 /* AnswerCell.xib in Resources */,
 				1853BA361F28A03500B98C7F /* shop_area.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -914,6 +1020,7 @@
 			files = (
 				50E2EE821F1F4D3C00FAF130 /* YZMoreMenuCell.m in Sources */,
 				1853BA031F28444000B98C7F /* DSFeedbackController.m in Sources */,
+				501672201F297F3100384186 /* HQSliderView.m in Sources */,
 				1853BA461F28A04100B98C7F /* JFCityCollectionFlowLayout.m in Sources */,
 				5016720D1F297A3500384186 /* ShopCommentController.m in Sources */,
 				183997651F2586D300702071 /* ActivityListCell.m in Sources */,
@@ -941,6 +1048,7 @@
 				501672131F297AD000384186 /* BusinessDetailHeaderView.m in Sources */,
 				18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */,
 				181E92CE1F1F39CC0006511E /* UIUtil.m in Sources */,
+				501672161F297D8200384186 /* PurchaseCardViewCell.m in Sources */,
 				181E930B1F2094C10006511E /* DSMessagesController.m in Sources */,
 				181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */,
 				18B697AF1F21DAE7009FF73A /* DSCarClubController.m in Sources */,
@@ -953,26 +1061,34 @@
 				1853BA061F28475500B98C7F /* DSTextView.m in Sources */,
 				50D30E861F21AF6B0086D3ED /* BusinessPayController.m in Sources */,
 				181E92F51F2085B60006511E /* DSFavoritesController.m in Sources */,
+				501672311F297FF000384186 /* AnswerModel.m in Sources */,
+				501672281F297FDD00384186 /* AnswerCell.m in Sources */,
 				50E2EE611F1F4D2D00FAF130 /* YZCover.m in Sources */,
+				501672371F29808600384186 /* HQTableViewCell.m in Sources */,
 				1853BA0F1F28854D00B98C7F /* DSChangePhoneController.m in Sources */,
 				50E2EE861F1F4D3C00FAF130 /* YZSortCell.m in Sources */,
+				501672331F297FF000384186 /* ProblemTitleModel.m in Sources */,
 				18B803771F1DA2A300B52432 /* main.m in Sources */,
 				181E92CF1F1F39CC0006511E /* UIView+Frame.m in Sources */,
 				18B697B21F21DB3F009FF73A /* DSCarTravellingController.m in Sources */,
+				5016723B1F29809200384186 /* UIView+HQCategory.m in Sources */,
 				181E92D51F1F3B900006511E /* BusinessViewController.m in Sources */,
 				5016720C1F297A3500384186 /* ShopCategoryView.m in Sources */,
 				50E2EE831F1F4D3C00FAF130 /* UIView+YZCategory.m in Sources */,
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
+				5016721C1F297DA500384186 /* PayPurchaseCardController.m in Sources */,
 				1853BA481F28A04100B98C7F /* JFCityHeaderView.m in Sources */,
 				50E2EE801F1F4D3C00FAF130 /* YZMoreMenuViewController.m in Sources */,
 				50D30E811F20988A0086D3ED /* BusinessDetailCell.m in Sources */,
 				181E93071F208D560006511E /* DSRecommendController.m in Sources */,
 				181E92DB1F1F3BC60006511E /* PurchaseViewController.m in Sources */,
+				5016721B1F297DA500384186 /* payCardDetailCell.m in Sources */,
 				1853BA0C1F28774400B98C7F /* LKActionSheet.m in Sources */,
 				188907161F283184009E20B0 /* DSGetScoreController.m in Sources */,
 				1853BA471F28A04100B98C7F /* JFCityCollectionViewCell.m in Sources */,
 				501672021F29797600384186 /* BusinessDetailViewController.m in Sources */,
 				181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */,
+				5016722A1F297FDD00384186 /* HeadView.m in Sources */,
 				5016720E1F297A3500384186 /* ShopIntroController.m in Sources */,
 				18B697AC1F21DAB3009FF73A /* DSSaleActivityController.m in Sources */,
 				1853BA451F28A04100B98C7F /* JFButton.m in Sources */,
