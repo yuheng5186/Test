@@ -10,4 +10,6 @@
 
 @interface DSMessageDetailController : BaseController
 
+@property (nonatomic,strong) NSString *navTitle;
+
 @end
