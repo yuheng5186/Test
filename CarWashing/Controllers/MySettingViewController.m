@@ -19,6 +19,7 @@
 #import "DSMyCardController.h"
 #import "DSRecommendController.h"
 
+
 #import "UIImageView+WebCache.h"
 
 
@@ -330,6 +331,7 @@
             DSMembershipController *membershipController        = [[DSMembershipController alloc]init];
             membershipController.hidesBottomBarWhenPushed       = YES;
             [self.navigationController pushViewController: membershipController animated: YES];
+            
         }
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {

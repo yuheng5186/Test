@@ -13,6 +13,7 @@
 #import "BusinessPayController.h"
 #import "ShopViewController.h"
 
+
 @interface BusinessDetailViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) BusinessDetailHeaderView *headerView;
@@ -93,6 +94,9 @@ static NSString *detailTableViewCell = @"detailTableViewCell";
     commentBtn.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:commentBtn];
     
+    //添加点击事件
+    [commentBtn addTarget:self action:@selector(clickCommentButton) forControlEvents:UIControlEventTouchUpInside];
+    
     detailTableView.tableFooterView = commentBtn;
     
     //底部支付栏
@@ -136,6 +140,14 @@ static NSString *detailTableViewCell = @"detailTableViewCell";
      }];
      */
     
+}
+
+#pragma mark - 点击查看全部评价
+- (void)clickCommentButton {
+    
+    ShopViewController *commentVC = [[ShopViewController alloc] init];
+    
+    [self.navigationController pushViewController:commentVC animated:YES];
 }
 
 #pragma mark - 点击商家详情

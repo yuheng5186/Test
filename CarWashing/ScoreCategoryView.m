@@ -1,15 +1,16 @@
 //
-//  ShopCategoryView.m
+//  ScoreCategoryView.m
 //  CarWashing
 //
-//  Created by 时建鹏 on 2017/7/26.
+//  Created by 时建鹏 on 2017/7/27.
 //  Copyright © 2017年 DS. All rights reserved.
 //
 
-#import "ShopCategoryView.h"
+#import "ScoreCategoryView.h"
+
 #import <Masonry.h>
 
-@interface ShopCategoryView ()
+@interface ScoreCategoryView ()
 
 @property (nonatomic, strong) NSMutableArray <UIButton *> *buttonArray;
 
@@ -24,7 +25,7 @@
 
 @end
 
-@implementation ShopCategoryView
+@implementation ScoreCategoryView
 
 - (NSMutableArray<UIButton *> *)buttonArray{
     if (nil == _buttonArray) {
@@ -76,7 +77,7 @@
     
     
     
-    NSArray *titleArray = @[@"门店简介",@"门店评价"];
+    NSArray *titleArray = @[@"积分说明",@"如何获得"];
     
     
     int index = 0;
@@ -180,11 +181,6 @@
     _preButton = self.buttonArray[index];
     
 }
-
-
-
-
-
 
 
 @end

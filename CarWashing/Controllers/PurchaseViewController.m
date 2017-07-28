@@ -70,6 +70,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     PurchaseCardViewCell *purchaseCardCell = [tableView dequeueReusableCellWithIdentifier:id_puchaseCard forIndexPath:indexPath];
     //purchaseCardCell.layer.backgroundColor = (__bridge CGColorRef _Nullable)([UIColor lightGrayColor]);
     purchaseCardCell.backgroundColor = [UIColor lightGrayColor];
+    purchaseCardCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return purchaseCardCell;
 }

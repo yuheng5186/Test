@@ -90,6 +90,13 @@
 		501672331F297FF000384186 /* ProblemTitleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672301F297FF000384186 /* ProblemTitleModel.m */; };
 		501672371F29808600384186 /* HQTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672361F29808600384186 /* HQTableViewCell.m */; };
 		5016723B1F29809200384186 /* UIView+HQCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5016723A1F29809200384186 /* UIView+HQCategory.m */; };
+		501672411F29D16C00384186 /* MemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672401F29D16C00384186 /* MemberView.m */; };
+		501672431F29D26C00384186 /* MemberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 501672421F29D26B00384186 /* MemberView.xib */; };
+		501672461F29DA6C00384186 /* MemberRegualrController.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672451F29DA6C00384186 /* MemberRegualrController.m */; };
+		501672491F29DEB500384186 /* ScoreDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672481F29DEB500384186 /* ScoreDetailController.m */; };
+		5016724C1F2A020600384186 /* ScoreIntroController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5016724B1F2A020600384186 /* ScoreIntroController.m */; };
+		5016724F1F2A023600384186 /* ScoreGetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5016724E1F2A023600384186 /* ScoreGetController.m */; };
+		501672521F2A091000384186 /* ScoreCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672511F2A091000384186 /* ScoreCategoryView.m */; };
 		50D30E7D1F2044C20086D3ED /* BusinessDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D30E7C1F2044C20086D3ED /* BusinessDetailHeaderView.xib */; };
 		50D30E811F20988A0086D3ED /* BusinessDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D30E7F1F20988A0086D3ED /* BusinessDetailCell.m */; };
 		50D30E821F20988A0086D3ED /* BusinessDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D30E801F20988A0086D3ED /* BusinessDetailCell.xib */; };
@@ -291,6 +298,19 @@
 		501672361F29808600384186 /* HQTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQTableViewCell.m; sourceTree = "<group>"; };
 		501672391F29809200384186 /* UIView+HQCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HQCategory.h"; sourceTree = "<group>"; };
 		5016723A1F29809200384186 /* UIView+HQCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HQCategory.m"; sourceTree = "<group>"; };
+		5016723F1F29D16C00384186 /* MemberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberView.h; sourceTree = "<group>"; };
+		501672401F29D16C00384186 /* MemberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberView.m; sourceTree = "<group>"; };
+		501672421F29D26B00384186 /* MemberView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemberView.xib; sourceTree = "<group>"; };
+		501672441F29DA6C00384186 /* MemberRegualrController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberRegualrController.h; sourceTree = "<group>"; };
+		501672451F29DA6C00384186 /* MemberRegualrController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberRegualrController.m; sourceTree = "<group>"; };
+		501672471F29DEB500384186 /* ScoreDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreDetailController.h; sourceTree = "<group>"; };
+		501672481F29DEB500384186 /* ScoreDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreDetailController.m; sourceTree = "<group>"; };
+		5016724A1F2A020600384186 /* ScoreIntroController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreIntroController.h; sourceTree = "<group>"; };
+		5016724B1F2A020600384186 /* ScoreIntroController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreIntroController.m; sourceTree = "<group>"; };
+		5016724D1F2A023600384186 /* ScoreGetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreGetController.h; sourceTree = "<group>"; };
+		5016724E1F2A023600384186 /* ScoreGetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreGetController.m; sourceTree = "<group>"; };
+		501672501F2A091000384186 /* ScoreCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCategoryView.h; sourceTree = "<group>"; };
+		501672511F2A091000384186 /* ScoreCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCategoryView.m; sourceTree = "<group>"; };
 		50D30E7C1F2044C20086D3ED /* BusinessDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BusinessDetailHeaderView.xib; sourceTree = "<group>"; };
 		50D30E7E1F20988A0086D3ED /* BusinessDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessDetailCell.h; sourceTree = "<group>"; };
 		50D30E7F1F20988A0086D3ED /* BusinessDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessDetailCell.m; sourceTree = "<group>"; };
@@ -418,6 +438,19 @@
 				188907151F283184009E20B0 /* DSGetScoreController.m */,
 				181E92ED1F2081840006511E /* DSMembershipController.h */,
 				181E92EE1F2081840006511E /* DSMembershipController.m */,
+				501672441F29DA6C00384186 /* MemberRegualrController.h */,
+				501672451F29DA6C00384186 /* MemberRegualrController.m */,
+				5016724A1F2A020600384186 /* ScoreIntroController.h */,
+				5016724B1F2A020600384186 /* ScoreIntroController.m */,
+				5016724D1F2A023600384186 /* ScoreGetController.h */,
+				5016724E1F2A023600384186 /* ScoreGetController.m */,
+				501672501F2A091000384186 /* ScoreCategoryView.h */,
+				501672511F2A091000384186 /* ScoreCategoryView.m */,
+				501672471F29DEB500384186 /* ScoreDetailController.h */,
+				501672481F29DEB500384186 /* ScoreDetailController.m */,
+				5016723F1F29D16C00384186 /* MemberView.h */,
+				501672401F29D16C00384186 /* MemberView.m */,
+				501672421F29D26B00384186 /* MemberView.xib */,
 				181E92F01F20848D0006511E /* DSOrderController.h */,
 				181E92F11F20848D0006511E /* DSOrderController.m */,
 				181E92F31F2085B60006511E /* DSFavoritesController.h */,
@@ -940,6 +973,7 @@
 				18B803851F1DA2A300B52432 /* LaunchScreen.storyboard in Resources */,
 				18B803821F1DA2A300B52432 /* Assets.xcassets in Resources */,
 				501672321F297FF000384186 /* problemCenter.plist in Resources */,
+				501672431F29D26C00384186 /* MemberView.xib in Resources */,
 				18B803801F1DA2A300B52432 /* Main.storyboard in Resources */,
 				183997661F2586D300702071 /* ActivityListCell.xib in Resources */,
 				50E2EE811F1F4D3C00FAF130 /* YZMoreMenuViewController.xib in Resources */,
@@ -1036,6 +1070,7 @@
 				18B697A51F21A87F009FF73A /* DSScanController.m in Sources */,
 				1853BA091F28674F00B98C7F /* LKAlertView.m in Sources */,
 				50E2EE841F1F4D3C00FAF130 /* YZMenuButton.m in Sources */,
+				501672491F29DEB500384186 /* ScoreDetailController.m in Sources */,
 				1853BA341F28A02B00B98C7F /* JFAreaDataManager.m in Sources */,
 				501672101F297A3500384186 /* ShopViewController.m in Sources */,
 				181E93041F208C520006511E /* DSMyCardController.m in Sources */,
@@ -1069,12 +1104,14 @@
 				50E2EE861F1F4D3C00FAF130 /* YZSortCell.m in Sources */,
 				501672331F297FF000384186 /* ProblemTitleModel.m in Sources */,
 				18B803771F1DA2A300B52432 /* main.m in Sources */,
+				5016724F1F2A023600384186 /* ScoreGetController.m in Sources */,
 				181E92CF1F1F39CC0006511E /* UIView+Frame.m in Sources */,
 				18B697B21F21DB3F009FF73A /* DSCarTravellingController.m in Sources */,
 				5016723B1F29809200384186 /* UIView+HQCategory.m in Sources */,
 				181E92D51F1F3B900006511E /* BusinessViewController.m in Sources */,
 				5016720C1F297A3500384186 /* ShopCategoryView.m in Sources */,
 				50E2EE831F1F4D3C00FAF130 /* UIView+YZCategory.m in Sources */,
+				501672521F2A091000384186 /* ScoreCategoryView.m in Sources */,
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
 				5016721C1F297DA500384186 /* PayPurchaseCardController.m in Sources */,
 				1853BA481F28A04100B98C7F /* JFCityHeaderView.m in Sources */,
@@ -1093,13 +1130,16 @@
 				18B697AC1F21DAB3009FF73A /* DSSaleActivityController.m in Sources */,
 				1853BA451F28A04100B98C7F /* JFButton.m in Sources */,
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
+				501672411F29D16C00384186 /* MemberView.m in Sources */,
 				50E2EE7E1F1F4D3C00FAF130 /* YZAllCourseViewController.m in Sources */,
 				181E92FB1F2086ED0006511E /* DSServiceController.m in Sources */,
 				1853BA4B1F28A04100B98C7F /* JFSearchView.m in Sources */,
 				183997A21F25F00700702071 /* DSAboutController.m in Sources */,
 				1853BA491F28A04100B98C7F /* JFCityTableViewCell.m in Sources */,
 				181E92D81F1F3BAE0006511E /* FindViewController.m in Sources */,
+				501672461F29DA6C00384186 /* MemberRegualrController.m in Sources */,
 				181E93291F20B0510006511E /* SXScrPageView.m in Sources */,
+				5016724C1F2A020600384186 /* ScoreIntroController.m in Sources */,
 				181E92E91F207FF60006511E /* DSSettingController.m in Sources */,
 				181E92F81F2086620006511E /* DSExchangeController.m in Sources */,
 			);

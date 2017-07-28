@@ -7,6 +7,10 @@
 //
 
 #import "DSMembershipController.h"
+#import "MemberView.h"
+#import "MemberRegualrController.h"
+#import "DSMemberRightsController.h"
+#import "ScoreDetailController.h"
 
 @interface DSMembershipController ()
 
@@ -17,6 +21,9 @@
 - (void)drawNavigation {
     
     [self drawTitle:@"金顶会员" Color:[UIColor blackColor]];
+    [self drawRightTextButton:@"积分规则" action:@selector(clickRegularButton)];
+    
+    
     
 }
 
@@ -30,7 +37,44 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    [self setupUI];
+}
+
+
+- (void)setupUI {
+    
+    MemberView *memberShipView = [MemberView memberView];
+    memberShipView.frame = CGRectMake(0, 64, Main_Screen_Width, 200);
+    [self.view addSubview:memberShipView];
+    
+    
+}
+
+- (void)clickRegularButton{
+    
+    MemberRegualrController *regularController = [[MemberRegualrController alloc] init];
+    
+    [self.navigationController pushViewController:regularController animated:YES];
+    
+}
+
+
+#pragma mark - 点击赚积分
+- (IBAction)clickEarnScoreBtn:(UIButton *)sender {
+    
+    ScoreDetailController *scoreDetailVC = [[ScoreDetailController alloc] init];
+    
+    [self.navigationController pushViewController:scoreDetailVC animated:YES];
+}
+
+#pragma mark - 点击升级
+- (IBAction)clickUpgradeBtn:(UIButton *)sender {
+    
+    DSMemberRightsController *rightsController = [[DSMemberRightsController alloc] init];
+    
+    [self.navigationController pushViewController:rightsController animated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {

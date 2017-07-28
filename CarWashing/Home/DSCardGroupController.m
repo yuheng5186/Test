@@ -7,8 +7,16 @@
 //
 
 #import "DSCardGroupController.h"
+#import "HQSliderView.h"
+#import "HQTableViewCell.h"
 
-@interface DSCardGroupController ()
+@interface DSCardGroupController ()<UITableViewDelegate, UITableViewDataSource, HQSliderViewDelegate>
+
+
+@property (nonatomic, weak) UITableView *cardListView;
+
+/** 记录点击的是第几个Button */
+@property (nonatomic, assign) NSInteger myCardTag;
 
 @end
 
@@ -29,8 +37,68 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self setupUI];
 }
+
+- (void)setupUI {
+    
+    [self setupTopSliderView];
+    
+    UITableView *cardListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 108, Main_Screen_Width, Main_Screen_Height - 64)];
+    cardListView.delegate = self;
+    cardListView.dataSource = self;
+    [self.view addSubview:cardListView];
+    self.cardListView = cardListView;
+    
+}
+
+
+#pragma mark - 创建上部的SliderView
+- (void)setupTopSliderView {
+    
+    HQSliderView *cardSliderView = [[HQSliderView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 44)];
+    cardSliderView.titleArr = @[@"优惠券",@"充值卡"];
+    cardSliderView.delegate = self;
+    [self.view addSubview:cardSliderView];
+}
+
+
+
+#pragma mark - tableview代理
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    if (self.myCardTag == 0) {
+        return 3;
+    } else {
+        return 2;
+    }
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    HQTableViewCell *cardListCell = [HQTableViewCell tableViewCellWithTableView:tableView];
+    cardListCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    if (self.myCardTag == 0) {
+        cardListCell.textLabel.text = [NSString stringWithFormat:@"全部 --- 第%ld行", indexPath.row];
+    } else {
+        cardListCell.textLabel.text = [NSString stringWithFormat:@"待付款 --- 第%ld行", indexPath.row];
+    }
+    
+    return cardListCell;
+}
+
+
+
+#pragma mark - HQlisderView的代理
+- (void)sliderView:(HQSliderView *)sliderView didClickMenuButton:(UIButton *)button{
+    
+    self.myCardTag = button.tag;
+    [self.cardListView reloadData];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
