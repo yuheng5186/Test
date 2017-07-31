@@ -71,8 +71,9 @@
 #pragma mark - 点击升级
 - (IBAction)clickUpgradeBtn:(UIButton *)sender {
     
-    DSMemberRightsController *rightsController  = [[DSMemberRightsController alloc] init];
-    rightsController.hidesBottomBarWhenPushed   = YES;
+    DSMemberRightsController *rightsController = [[DSMemberRightsController alloc] init];
+    rightsController.hidesBottomBarWhenPushed = YES;
+    
     [self.navigationController pushViewController:rightsController animated:YES];
     
 }
