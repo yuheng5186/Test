@@ -83,7 +83,7 @@
 - (void)setupCategoryView {
     
     ShopCategoryView *categoryView = [[ShopCategoryView alloc] init];
-    
+
     _categoryView = categoryView;
     
     [self.view addSubview:categoryView];

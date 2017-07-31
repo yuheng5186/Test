@@ -58,7 +58,7 @@
     showNameLabel.top               = appImageView.bottom +Main_Screen_Height*20/667;
     showNameLabel.centerX           = appImageView.centerX;
     
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*300/667) style:UITableViewStyleGrouped];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*280/667) style:UITableViewStyleGrouped];
     self.tableView.top              = upView.bottom;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
@@ -105,7 +105,7 @@
     
     switch (section) {
         case 0:
-            return 2;
+            return 1;
             break;
         case 1:
             return 2;
@@ -139,7 +139,7 @@
         if (indexPath.row == 0) {
             cell.textLabel.text     = @"密码管理";
         }else{
-            cell.textLabel.text     = @"清除缓存";
+//            cell.textLabel.text     = @"清除缓存";
         }
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {

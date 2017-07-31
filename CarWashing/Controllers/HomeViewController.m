@@ -390,6 +390,7 @@
     MenuTabBarController *menuTabBarController	= [[MenuTabBarController alloc] init];
     [menuTabBarController setSelectedIndex:3];
     menuTabBarController.tabBarItem.tag = 3;
+//    [menuTabBarController didSelectRouterAction];
     
     PurchaseViewController *purchaseController  = [[PurchaseViewController alloc]init];
     purchaseController.hidesBottomBarWhenPushed = YES;

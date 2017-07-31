@@ -20,6 +20,19 @@
 
 @implementation MenuTabBarController
 
+
+- (void) viewWillAppear: (BOOL) animated
+{
+    [super viewWillAppear:animated];
+    
+    UIImage *centerImage = [UIImage imageNamed:@"icon_defaultavatar"];
+    
+    [self addCenterButtonWithImage:centerImage highlightImage: nil];
+    
+    
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -75,6 +88,21 @@
     
 }
 
+-(void) addCenterButtonWithImage:(UIImage*)buttonImage highlightImage:(UIImage*)highlightImage
+{
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
+    button.frame = CGRectMake(0.0, 0.0, 60, 60);
+    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    [button setBackgroundImage:buttonImage forState:UIControlStateHighlighted];
+    [button addTarget:self action:@selector(didSelectRouterAction) forControlEvents:UIControlEventTouchUpInside];
+    button.centerX = Main_Screen_Width/2;
+    button.centerY = 0;
+    [self.tabBar addSubview:button];
+}
+- (void)didSelectRouterAction {
+    self.selectedViewController = self.viewControllers[2];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

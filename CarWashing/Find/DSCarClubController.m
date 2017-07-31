@@ -7,29 +7,70 @@
 //
 
 #import "DSCarClubController.h"
+#import "ActivityListCell.h"
+#import "DSCarClubDetailController.h"
 
-@interface DSCarClubController ()
+@interface DSCarClubController ()<UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic,strong) UITableView *tableView;
 
 @end
 
 @implementation DSCarClubController
 
-- (void)drawNavigation {
-    
-    [self drawTitle:@"车友会" Color:[UIColor blackColor]];
-    
-}
 
 - (void) drawContent
 {
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
-    
+    self.statusView.hidden      = YES;
+    self.navigationView.hidden  = YES;
+    self.contentView.top        = 0;
+    self.contentView.height     = self.view.height;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStylePlain];
+    self.tableView.delegate         = self;
+    self.tableView.dataSource       = self;
+    self.tableView.top              = 0;
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"ActivityListCell" bundle:nil] forCellReuseIdentifier:@"ActivityListCell"];
+    
+    self.tableView.rowHeight        = 200;
+    
+    [self.contentView addSubview:self.tableView];
 }
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 5;
+}
+
+#pragma mark --
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ActivityListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ActivityListCell" forIndexPath:indexPath];
+    
+    cell.activityImageView.image    = [UIImage imageNamed:@"02"];
+    cell.activityTitleLabel.text    = @"开车一看就知道是老司机";
+    cell.activityTimeLabel.text     = @"2017-7-28 14:01";
+    
+    return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
+    detailController.hidesBottomBarWhenPushed       = YES;
+    [self.navigationController pushViewController:detailController animated:YES];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

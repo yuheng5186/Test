@@ -34,6 +34,8 @@
 		181E930B1F2094C10006511E /* DSMessagesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E930A1F2094C10006511E /* DSMessagesController.m */; };
 		181E93291F20B0510006511E /* SXScrPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E93281F20B0510006511E /* SXScrPageView.m */; };
 		181E932C1F20B0EB0006511E /* DSAdDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E932B1F20B0EB0006511E /* DSAdDetailController.m */; };
+		18218FE81F2ADA8A00F7207F /* DSSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18218FE71F2ADA8A00F7207F /* DSSegmentView.m */; };
+		18218FEB1F2B0C3C00F7207F /* DSCarClubDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18218FEA1F2B0C3C00F7207F /* DSCarClubDetailController.m */; };
 		183997651F2586D300702071 /* ActivityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183997631F2586D300702071 /* ActivityListCell.m */; };
 		183997661F2586D300702071 /* ActivityListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183997641F2586D300702071 /* ActivityListCell.xib */; };
 		1839979F1F25E69100702071 /* DSPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1839979E1F25E69100702071 /* DSPasswordController.m */; };
@@ -192,6 +194,10 @@
 		181E93281F20B0510006511E /* SXScrPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SXScrPageView.m; path = Tool/SXScrPageView.m; sourceTree = "<group>"; };
 		181E932A1F20B0EB0006511E /* DSAdDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAdDetailController.h; path = Home/DSAdDetailController.h; sourceTree = "<group>"; };
 		181E932B1F20B0EB0006511E /* DSAdDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAdDetailController.m; path = Home/DSAdDetailController.m; sourceTree = "<group>"; };
+		18218FE61F2ADA8A00F7207F /* DSSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSegmentView.h; path = Tool/DSSegmentView.h; sourceTree = "<group>"; };
+		18218FE71F2ADA8A00F7207F /* DSSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSegmentView.m; path = Tool/DSSegmentView.m; sourceTree = "<group>"; };
+		18218FE91F2B0C3C00F7207F /* DSCarClubDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSCarClubDetailController.h; path = Find/DSCarClubDetailController.h; sourceTree = "<group>"; };
+		18218FEA1F2B0C3C00F7207F /* DSCarClubDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSCarClubDetailController.m; path = Find/DSCarClubDetailController.m; sourceTree = "<group>"; };
 		183997621F2586D300702071 /* ActivityListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityListCell.h; path = Find/CustomCell/ActivityListCell.h; sourceTree = "<group>"; };
 		183997631F2586D300702071 /* ActivityListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityListCell.m; path = Find/CustomCell/ActivityListCell.m; sourceTree = "<group>"; };
 		183997641F2586D300702071 /* ActivityListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActivityListCell.xib; path = Find/CustomCell/ActivityListCell.xib; sourceTree = "<group>"; };
@@ -394,6 +400,8 @@
 				181E92C91F1F39CC0006511E /* UIView+Frame.m */,
 				1853BA041F28475500B98C7F /* DSTextView.h */,
 				1853BA051F28475500B98C7F /* DSTextView.m */,
+				18218FE61F2ADA8A00F7207F /* DSSegmentView.h */,
+				18218FE71F2ADA8A00F7207F /* DSSegmentView.m */,
 			);
 			name = Tool;
 			path = ..;
@@ -534,6 +542,8 @@
 				18B697AB1F21DAB3009FF73A /* DSSaleActivityController.m */,
 				18B697AD1F21DAE7009FF73A /* DSCarClubController.h */,
 				18B697AE1F21DAE7009FF73A /* DSCarClubController.m */,
+				18218FE91F2B0C3C00F7207F /* DSCarClubDetailController.h */,
+				18218FEA1F2B0C3C00F7207F /* DSCarClubDetailController.m */,
 				18B697B01F21DB3F009FF73A /* DSCarTravellingController.h */,
 				18B697B11F21DB3F009FF73A /* DSCarTravellingController.m */,
 				18B697B31F21DBCE009FF73A /* DSWheelGroupController.h */,
@@ -1111,6 +1121,7 @@
 				181E92D51F1F3B900006511E /* BusinessViewController.m in Sources */,
 				5016720C1F297A3500384186 /* ShopCategoryView.m in Sources */,
 				50E2EE831F1F4D3C00FAF130 /* UIView+YZCategory.m in Sources */,
+				18218FE81F2ADA8A00F7207F /* DSSegmentView.m in Sources */,
 				501672521F2A091000384186 /* ScoreCategoryView.m in Sources */,
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
 				5016721C1F297DA500384186 /* PayPurchaseCardController.m in Sources */,
@@ -1127,6 +1138,7 @@
 				181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */,
 				5016722A1F297FDD00384186 /* HeadView.m in Sources */,
 				5016720E1F297A3500384186 /* ShopIntroController.m in Sources */,
+				18218FEB1F2B0C3C00F7207F /* DSCarClubDetailController.m in Sources */,
 				18B697AC1F21DAB3009FF73A /* DSSaleActivityController.m in Sources */,
 				1853BA451F28A04100B98C7F /* JFButton.m in Sources */,
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,

@@ -63,16 +63,16 @@
 #pragma mark - 点击赚积分
 - (IBAction)clickEarnScoreBtn:(UIButton *)sender {
     
-    ScoreDetailController *scoreDetailVC = [[ScoreDetailController alloc] init];
-    
+    ScoreDetailController *scoreDetailVC    = [[ScoreDetailController alloc] init];
+    scoreDetailVC.hidesBottomBarWhenPushed  = YES;
     [self.navigationController pushViewController:scoreDetailVC animated:YES];
 }
 
 #pragma mark - 点击升级
 - (IBAction)clickUpgradeBtn:(UIButton *)sender {
     
-    DSMemberRightsController *rightsController = [[DSMemberRightsController alloc] init];
-    
+    DSMemberRightsController *rightsController  = [[DSMemberRightsController alloc] init];
+    rightsController.hidesBottomBarWhenPushed   = YES;
     [self.navigationController pushViewController:rightsController animated:YES];
     
 }

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface MenuTabBarController : UITabBarController
-
+- (void)didSelectRouterAction;
 @end

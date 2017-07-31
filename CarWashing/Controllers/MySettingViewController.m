@@ -18,12 +18,12 @@
 #import "DSMemberRightsController.h"
 #import "DSMyCardController.h"
 #import "DSRecommendController.h"
-
+#import "DSCardGroupController.h"
 
 #import "UIImageView+WebCache.h"
 
 
-@interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,LKAlertViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -211,7 +211,8 @@
 
 - (void) signButtonClick:(id)sender {
     
-    
+    LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:nil message:@"签到成功！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    [alartView show];
     
 }
 
@@ -339,15 +340,26 @@
             myCarController.hidesBottomBarWhenPushed            = YES;
             [self.navigationController pushViewController:myCarController animated:YES];
         }else{
-            DSMyCardController *myCardController                = [[DSMyCardController alloc]init];
-            myCardController.hidesBottomBarWhenPushed           = YES;
-            [self.navigationController pushViewController:myCardController animated:YES];
+            
+            DSCardGroupController *cardGroupController      = [[DSCardGroupController alloc]init];
+            cardGroupController.hidesBottomBarWhenPushed    = YES;
+            [self.navigationController pushViewController:cardGroupController animated:YES];
+            
+//            DSMyCardController *myCardController                = [[DSMyCardController alloc]init];
+//            myCardController.hidesBottomBarWhenPushed           = YES;
+//            [self.navigationController pushViewController:myCardController animated:YES];
         }
     }else{
         DSRecommendController *recommendController              = [[DSRecommendController alloc]init];
         recommendController.hidesBottomBarWhenPushed            = YES;
         [self.navigationController pushViewController:recommendController animated:YES];
     }
+
+}
+
+#pragma mark ---LKAlertViewDelegate---
+- (void)alertView:(LKAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
 
 }
 
