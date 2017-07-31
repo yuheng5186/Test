@@ -2,16 +2,18 @@
 //  BusinessPayController.m
 //  CarWashing
 //
-//  Created by 时建鹏 on 2017/7/21.
+//  Created by 时建鹏 on 2017/7/28.
 //  Copyright © 2017年 DS. All rights reserved.
 //
 
 #import "BusinessPayController.h"
 #import <Masonry.h>
+#import "CashViewController.h"
 
 @interface BusinessPayController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) UITableView *payTableView;
+
 
 @end
 
@@ -19,20 +21,33 @@ static NSString *payViewCell = @"payTableViewCell";
 
 @implementation BusinessPayController
 
+- (void)drawNavigation {
+    
+    [self drawTitle:@"支付" Color:[UIColor blackColor]];
+    
+}
+
+- (void) drawContent
+{
+    self.statusView.backgroundColor     = [UIColor grayColor];
+    self.navigationView.backgroundColor = [UIColor grayColor];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor lightGrayColor];
     
     self.title = @"支付";
-
+    
     [self setupUI];
 }
 
 
 - (void)setupUI {
     
-    UITableView *payTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 360) style:UITableViewStylePlain];
+    UITableView *payTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 360) style:UITableViewStylePlain];
     
     self.payTableView = payTableView;
     payTableView.delegate = self;
@@ -45,7 +60,7 @@ static NSString *payViewCell = @"payTableViewCell";
     
     //选择支付方式
     UILabel *payLab = [[UILabel alloc] init];
-    payLab.text = @"选择支付个方式";
+    payLab.text = @"选择支付方式";
     [self.view addSubview:payLab];
     
     //支付宝
@@ -148,6 +163,8 @@ static NSString *payViewCell = @"payTableViewCell";
     [bottomPayButton addTarget:self action:@selector(showAlertWithTitle:message:) forControlEvents:UIControlEventTouchUpInside];
     
     [payBottomView addSubview:bottomPayButton];
+    
+    
 }
 
 
@@ -187,7 +204,7 @@ static NSString *payViewCell = @"payTableViewCell";
     UITableViewCell *payCell = [tableView dequeueReusableCellWithIdentifier:payViewCell];
     
     payCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
-
+    
     payCell.textLabel.text = @"服务商家";
     payCell.detailTextLabel.text = @"上海金雷洗车";
     
@@ -201,6 +218,19 @@ static NSString *payViewCell = @"payTableViewCell";
     }
 }
 
+
+#pragma mark - 点击cell
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.row == 3) {
+        
+        CashViewController *cashVC = [[CashViewController alloc] init];
+        //cashVC.providesPresentationContextTransitionStyle = YES;
+        //cashVC.definesPresentationContext = YES;
+        cashVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [self presentViewController:cashVC animated:NO completion:nil];
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

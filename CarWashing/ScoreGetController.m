@@ -7,6 +7,7 @@
 //
 
 #import "ScoreGetController.h"
+#import <Masonry.h>
 
 @interface ScoreGetController ()
 
@@ -16,7 +17,103 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self setupUI];
+}
+
+- (void)setupUI {
+    
+    UILabel *signLab = [[UILabel alloc] init];
+    signLab.text = @"APP签到";
+    [self.view addSubview:signLab];
+    
+    UILabel *signIntroLab = [[UILabel alloc] init];
+    signIntroLab.numberOfLines = 0;
+    signIntroLab.text = @"1、金顶会员在: '我的-每日签到'中签到获得积分,每人每天仅可签到一次";
+    [self.view addSubview:signIntroLab];
+    
+    UILabel *shareLab = [[UILabel alloc] init];
+    shareLab.text = @"分享";
+    [self.view addSubview:shareLab];
+    
+    UILabel *shareOneLab = [[UILabel alloc] init];
+    shareLab.numberOfLines = 0;
+    shareOneLab.text = @"1、分享商品好友点击您分享的链接下单成功,并完成该订单将获得丰厚的积分奖励";
+    [self.view addSubview:shareOneLab];
+    
+    UILabel *shareTwoLab = [[UILabel alloc] init];
+    shareTwoLab.text = @"2、分享活动内容即可获得积分奖励";
+    [self.view addSubview:shareTwoLab];
+    
+    UILabel *recommendLab = [[UILabel alloc] init];
+    recommendLab.text = @"推荐APP";
+    [self.view addSubview:recommendLab];
+    
+    UILabel *recommendOneLab = [[UILabel alloc] init];
+    recommendOneLab.numberOfLines = 0;
+    recommendOneLab.text = @"1、推荐好友下载金顶APP,每注册完成一个好友即可获得积分奖励";
+    [self.view addSubview:recommendOneLab];
+    
+    UILabel *scoreBackLab = [[UILabel alloc] init];
+    scoreBackLab.text = @"评论返积分";
+    [self.view addSubview:scoreBackLab];
+    
+    UILabel *scoreOneLab = [[UILabel alloc] init];
+    scoreOneLab.numberOfLines = 0;
+    scoreOneLab.text = @"1、使用商品评论功能,我们将在您评论后,给予丰厚的积分奖励";
+    [self.view addSubview:scoreOneLab];
+    
+    
+    //约束
+    [signLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).mas_offset(20);
+        make.top.equalTo(self.view).mas_offset(30);
+    }];
+    
+    [signIntroLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(signLab);
+        make.top.equalTo(signLab.mas_bottom).mas_offset(10);
+        make.right.equalTo(self.view).mas_offset(-20);
+    }];
+    
+    [shareLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(signLab);
+        make.top.equalTo(signIntroLab.mas_bottom).mas_offset(20);
+    }];
+    
+    [shareOneLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(signLab);
+        make.top.equalTo(shareLab.mas_bottom).mas_offset(10);
+        make.right.equalTo(self.view).mas_offset(-20);
+    }];
+    
+    [shareTwoLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(signLab);
+        make.top.equalTo(shareOneLab.mas_bottom).mas_offset(10);
+    }];
+    
+    [recommendLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(signLab);
+        make.top.equalTo(shareTwoLab.mas_bottom).mas_offset(20);
+    }];
+    
+    [recommendOneLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(signLab);
+        make.top.equalTo(recommendLab.mas_bottom).mas_offset(10);
+        make.right.equalTo(self.view).mas_offset(-20);
+    }];
+    
+    [scoreBackLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(signLab);
+        make.top.equalTo(recommendOneLab.mas_bottom).mas_offset(20);
+    }];
+    
+    [scoreOneLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(signLab);
+        make.top.equalTo(scoreBackLab.mas_bottom).mas_offset(10);
+        make.right.equalTo(self.view).mas_offset(-20);
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

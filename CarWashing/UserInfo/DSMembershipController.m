@@ -72,6 +72,7 @@
 - (IBAction)clickUpgradeBtn:(UIButton *)sender {
     
     DSMemberRightsController *rightsController = [[DSMemberRightsController alloc] init];
+    rightsController.hidesBottomBarWhenPushed = YES;
     
     [self.navigationController pushViewController:rightsController animated:YES];
     

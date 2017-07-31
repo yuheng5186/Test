@@ -97,10 +97,13 @@
 		5016724C1F2A020600384186 /* ScoreIntroController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5016724B1F2A020600384186 /* ScoreIntroController.m */; };
 		5016724F1F2A023600384186 /* ScoreGetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5016724E1F2A023600384186 /* ScoreGetController.m */; };
 		501672521F2A091000384186 /* ScoreCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672511F2A091000384186 /* ScoreCategoryView.m */; };
+		507FECF71F2AC8D7009CC505 /* BusinessPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FECF61F2AC8D7009CC505 /* BusinessPayController.m */; };
+		507FED011F2B3111009CC505 /* CashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FED001F2B3111009CC505 /* CashViewController.m */; };
+		5097FDFC1F2ECE0B002EF8F8 /* TicketCashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097FDFB1F2ECE0B002EF8F8 /* TicketCashView.m */; };
+		5097FDFE1F2ECE2F002EF8F8 /* TicketCashView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5097FDFD1F2ECE2F002EF8F8 /* TicketCashView.xib */; };
 		50D30E7D1F2044C20086D3ED /* BusinessDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D30E7C1F2044C20086D3ED /* BusinessDetailHeaderView.xib */; };
 		50D30E811F20988A0086D3ED /* BusinessDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D30E7F1F20988A0086D3ED /* BusinessDetailCell.m */; };
 		50D30E821F20988A0086D3ED /* BusinessDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D30E801F20988A0086D3ED /* BusinessDetailCell.xib */; };
-		50D30E861F21AF6B0086D3ED /* BusinessPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D30E841F21AF6B0086D3ED /* BusinessPayController.m */; };
 		50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E2EE571F1F4A9000FAF130 /* SalerListViewCell.m */; };
 		50E2EE5A1F1F4A9000FAF130 /* SalerListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50E2EE581F1F4A9000FAF130 /* SalerListViewCell.xib */; };
 		50E2EE611F1F4D2D00FAF130 /* YZCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E2EE5E1F1F4D2D00FAF130 /* YZCover.m */; };
@@ -311,12 +314,17 @@
 		5016724E1F2A023600384186 /* ScoreGetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreGetController.m; sourceTree = "<group>"; };
 		501672501F2A091000384186 /* ScoreCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCategoryView.h; sourceTree = "<group>"; };
 		501672511F2A091000384186 /* ScoreCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCategoryView.m; sourceTree = "<group>"; };
+		507FECF51F2AC8D7009CC505 /* BusinessPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessPayController.h; sourceTree = "<group>"; };
+		507FECF61F2AC8D7009CC505 /* BusinessPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessPayController.m; sourceTree = "<group>"; };
+		507FECFF1F2B3111009CC505 /* CashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashViewController.h; sourceTree = "<group>"; };
+		507FED001F2B3111009CC505 /* CashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashViewController.m; sourceTree = "<group>"; };
+		5097FDFA1F2ECE0B002EF8F8 /* TicketCashView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketCashView.h; sourceTree = "<group>"; };
+		5097FDFB1F2ECE0B002EF8F8 /* TicketCashView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketCashView.m; sourceTree = "<group>"; };
+		5097FDFD1F2ECE2F002EF8F8 /* TicketCashView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketCashView.xib; sourceTree = "<group>"; };
 		50D30E7C1F2044C20086D3ED /* BusinessDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BusinessDetailHeaderView.xib; sourceTree = "<group>"; };
 		50D30E7E1F20988A0086D3ED /* BusinessDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessDetailCell.h; sourceTree = "<group>"; };
 		50D30E7F1F20988A0086D3ED /* BusinessDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessDetailCell.m; sourceTree = "<group>"; };
 		50D30E801F20988A0086D3ED /* BusinessDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BusinessDetailCell.xib; sourceTree = "<group>"; };
-		50D30E831F21AF6B0086D3ED /* BusinessPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessPayController.h; sourceTree = "<group>"; };
-		50D30E841F21AF6B0086D3ED /* BusinessPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessPayController.m; sourceTree = "<group>"; };
 		50E2EE561F1F4A9000FAF130 /* SalerListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SalerListViewCell.h; path = Controllers/SalerListViewCell.h; sourceTree = "<group>"; };
 		50E2EE571F1F4A9000FAF130 /* SalerListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SalerListViewCell.m; path = Controllers/SalerListViewCell.m; sourceTree = "<group>"; };
 		50E2EE581F1F4A9000FAF130 /* SalerListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SalerListViewCell.xib; path = Controllers/SalerListViewCell.xib; sourceTree = "<group>"; };
@@ -630,6 +638,13 @@
 				181E92D41F1F3B900006511E /* BusinessViewController.m */,
 				501672001F29797600384186 /* BusinessDetailViewController.h */,
 				501672011F29797600384186 /* BusinessDetailViewController.m */,
+				507FECF51F2AC8D7009CC505 /* BusinessPayController.h */,
+				507FECF61F2AC8D7009CC505 /* BusinessPayController.m */,
+				507FECFF1F2B3111009CC505 /* CashViewController.h */,
+				507FED001F2B3111009CC505 /* CashViewController.m */,
+				5097FDFA1F2ECE0B002EF8F8 /* TicketCashView.h */,
+				5097FDFB1F2ECE0B002EF8F8 /* TicketCashView.m */,
+				5097FDFD1F2ECE2F002EF8F8 /* TicketCashView.xib */,
 				5016720A1F297A3500384186 /* ShopViewController.h */,
 				5016720B1F297A3500384186 /* ShopViewController.m */,
 				501672031F297A3500384186 /* ShopCategoryView.h */,
@@ -639,8 +654,6 @@
 				501672071F297A3500384186 /* ShopIntroController.h */,
 				501672081F297A3500384186 /* ShopIntroController.m */,
 				501672091F297A3500384186 /* ShopIntroController.xib */,
-				50D30E831F21AF6B0086D3ED /* BusinessPayController.h */,
-				50D30E841F21AF6B0086D3ED /* BusinessPayController.m */,
 				50D30E7E1F20988A0086D3ED /* BusinessDetailCell.h */,
 				50D30E7F1F20988A0086D3ED /* BusinessDetailCell.m */,
 				50D30E801F20988A0086D3ED /* BusinessDetailCell.xib */,
@@ -966,6 +979,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50D30E7D1F2044C20086D3ED /* BusinessDetailHeaderView.xib in Resources */,
+				5097FDFE1F2ECE2F002EF8F8 /* TicketCashView.xib in Resources */,
 				50E2EE5A1F1F4A9000FAF130 /* SalerListViewCell.xib in Resources */,
 				50D30E821F20988A0086D3ED /* BusinessDetailCell.xib in Resources */,
 				50E2EE871F1F4D3C00FAF130 /* YZSortCell.xib in Resources */,
@@ -1094,7 +1108,6 @@
 				181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */,
 				1839979F1F25E69100702071 /* DSPasswordController.m in Sources */,
 				1853BA061F28475500B98C7F /* DSTextView.m in Sources */,
-				50D30E861F21AF6B0086D3ED /* BusinessPayController.m in Sources */,
 				181E92F51F2085B60006511E /* DSFavoritesController.m in Sources */,
 				501672311F297FF000384186 /* AnswerModel.m in Sources */,
 				501672281F297FDD00384186 /* AnswerCell.m in Sources */,
@@ -1106,6 +1119,7 @@
 				18B803771F1DA2A300B52432 /* main.m in Sources */,
 				5016724F1F2A023600384186 /* ScoreGetController.m in Sources */,
 				181E92CF1F1F39CC0006511E /* UIView+Frame.m in Sources */,
+				507FED011F2B3111009CC505 /* CashViewController.m in Sources */,
 				18B697B21F21DB3F009FF73A /* DSCarTravellingController.m in Sources */,
 				5016723B1F29809200384186 /* UIView+HQCategory.m in Sources */,
 				181E92D51F1F3B900006511E /* BusinessViewController.m in Sources */,
@@ -1125,9 +1139,11 @@
 				1853BA471F28A04100B98C7F /* JFCityCollectionViewCell.m in Sources */,
 				501672021F29797600384186 /* BusinessDetailViewController.m in Sources */,
 				181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */,
+				507FECF71F2AC8D7009CC505 /* BusinessPayController.m in Sources */,
 				5016722A1F297FDD00384186 /* HeadView.m in Sources */,
 				5016720E1F297A3500384186 /* ShopIntroController.m in Sources */,
 				18B697AC1F21DAB3009FF73A /* DSSaleActivityController.m in Sources */,
+				5097FDFC1F2ECE0B002EF8F8 /* TicketCashView.m in Sources */,
 				1853BA451F28A04100B98C7F /* JFButton.m in Sources */,
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
 				501672411F29D16C00384186 /* MemberView.m in Sources */,
