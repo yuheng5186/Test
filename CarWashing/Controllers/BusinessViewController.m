@@ -13,6 +13,7 @@
 #import "YZMoreMenuViewController.h"
 #import "YZSortViewController.h"
 #import "YZAllCourseViewController.h"
+#import "JPCityViewController.h"
 #import "BusinessDetailViewController.h"
 
 @interface BusinessViewController ()<UITableViewDelegate, UITableViewDataSource,YZPullDownMenuDataSource>
@@ -126,7 +127,7 @@ static NSString *salerListCell = @"salerListViewCell";
     menu.dataSource = self;
     
     // 初始化标题
-    _titles = @[@"全部门店",@"默认排序",@"筛选"];
+    _titles = @[@"上海市",@"全部门店",@"默认排序",@"筛选"];
     
     // 添加子控制器
     [self setupAllChildViewController];
@@ -136,9 +137,11 @@ static NSString *salerListCell = @"salerListViewCell";
 #pragma mark - 添加子控制器
 - (void)setupAllChildViewController
 {
+    JPCityViewController *cityVC = [[JPCityViewController alloc] init];
     YZAllCourseViewController *allCourse = [[YZAllCourseViewController alloc] init];
     YZSortViewController *sort = [[YZSortViewController alloc] init];
     YZMoreMenuViewController *moreMenu = [[YZMoreMenuViewController alloc] init];
+    [self addChildViewController:cityVC];
     [self addChildViewController:allCourse];
     [self addChildViewController:sort];
     [self addChildViewController:moreMenu];
@@ -148,7 +151,7 @@ static NSString *salerListCell = @"salerListViewCell";
 // 返回下拉菜单多少列
 - (NSInteger)numberOfColsInMenu:(YZPullDownMenu *)pullDownMenu
 {
-    return 3;
+    return 4;
 }
 
 // 返回下拉菜单每列按钮

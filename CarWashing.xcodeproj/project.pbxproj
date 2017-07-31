@@ -103,6 +103,10 @@
 		507FED011F2B3111009CC505 /* CashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FED001F2B3111009CC505 /* CashViewController.m */; };
 		5097FDFC1F2ECE0B002EF8F8 /* TicketCashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097FDFB1F2ECE0B002EF8F8 /* TicketCashView.m */; };
 		5097FDFE1F2ECE2F002EF8F8 /* TicketCashView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5097FDFD1F2ECE2F002EF8F8 /* TicketCashView.xib */; };
+		5097FE131F2F4173002EF8F8 /* JPCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097FE121F2F4173002EF8F8 /* JPCityViewController.m */; };
+		5097FE161F2F42F0002EF8F8 /* MyCarPortController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097FE151F2F42F0002EF8F8 /* MyCarPortController.m */; };
+		5097FE1A1F2F4335002EF8F8 /* MyCarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097FE181F2F4335002EF8F8 /* MyCarViewCell.m */; };
+		5097FE1B1F2F4335002EF8F8 /* MyCarViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5097FE191F2F4335002EF8F8 /* MyCarViewCell.xib */; };
 		50D30E7D1F2044C20086D3ED /* BusinessDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D30E7C1F2044C20086D3ED /* BusinessDetailHeaderView.xib */; };
 		50D30E811F20988A0086D3ED /* BusinessDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D30E7F1F20988A0086D3ED /* BusinessDetailCell.m */; };
 		50D30E821F20988A0086D3ED /* BusinessDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D30E801F20988A0086D3ED /* BusinessDetailCell.xib */; };
@@ -327,6 +331,13 @@
 		5097FDFA1F2ECE0B002EF8F8 /* TicketCashView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketCashView.h; sourceTree = "<group>"; };
 		5097FDFB1F2ECE0B002EF8F8 /* TicketCashView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketCashView.m; sourceTree = "<group>"; };
 		5097FDFD1F2ECE2F002EF8F8 /* TicketCashView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketCashView.xib; sourceTree = "<group>"; };
+		5097FE111F2F4173002EF8F8 /* JPCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPCityViewController.h; sourceTree = "<group>"; };
+		5097FE121F2F4173002EF8F8 /* JPCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPCityViewController.m; sourceTree = "<group>"; };
+		5097FE141F2F42F0002EF8F8 /* MyCarPortController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCarPortController.h; sourceTree = "<group>"; };
+		5097FE151F2F42F0002EF8F8 /* MyCarPortController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCarPortController.m; sourceTree = "<group>"; };
+		5097FE171F2F4335002EF8F8 /* MyCarViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCarViewCell.h; sourceTree = "<group>"; };
+		5097FE181F2F4335002EF8F8 /* MyCarViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCarViewCell.m; sourceTree = "<group>"; };
+		5097FE191F2F4335002EF8F8 /* MyCarViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCarViewCell.xib; sourceTree = "<group>"; };
 		50D30E7C1F2044C20086D3ED /* BusinessDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BusinessDetailHeaderView.xib; sourceTree = "<group>"; };
 		50D30E7E1F20988A0086D3ED /* BusinessDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessDetailCell.h; sourceTree = "<group>"; };
 		50D30E7F1F20988A0086D3ED /* BusinessDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessDetailCell.m; sourceTree = "<group>"; };
@@ -477,6 +488,11 @@
 				181E92FA1F2086ED0006511E /* DSServiceController.m */,
 				181E92FC1F2088E80006511E /* DSMyCarController.h */,
 				181E92FD1F2088E80006511E /* DSMyCarController.m */,
+				5097FE141F2F42F0002EF8F8 /* MyCarPortController.h */,
+				5097FE151F2F42F0002EF8F8 /* MyCarPortController.m */,
+				5097FE171F2F4335002EF8F8 /* MyCarViewCell.h */,
+				5097FE181F2F4335002EF8F8 /* MyCarViewCell.m */,
+				5097FE191F2F4335002EF8F8 /* MyCarViewCell.xib */,
 				181E92FF1F208AF20006511E /* DSMemberRightsController.h */,
 				181E93001F208AF20006511E /* DSMemberRightsController.m */,
 				181E93021F208C520006511E /* DSMyCardController.h */,
@@ -759,6 +775,8 @@
 			children = (
 				50E2EE5C1F1F4D2D00FAF130 /* YZPullDownMenu */,
 				50E2EE631F1F4D3C00FAF130 /* Classes */,
+				5097FE111F2F4173002EF8F8 /* JPCityViewController.h */,
+				5097FE121F2F4173002EF8F8 /* JPCityViewController.m */,
 			);
 			name = "Search Menu";
 			sourceTree = "<group>";
@@ -1002,6 +1020,7 @@
 				183997661F2586D300702071 /* ActivityListCell.xib in Resources */,
 				50E2EE811F1F4D3C00FAF130 /* YZMoreMenuViewController.xib in Resources */,
 				5016720F1F297A3500384186 /* ShopIntroController.xib in Resources */,
+				5097FE1B1F2F4335002EF8F8 /* MyCarViewCell.xib in Resources */,
 				501672291F297FDD00384186 /* AnswerCell.xib in Resources */,
 				1853BA361F28A03500B98C7F /* shop_area.sqlite in Resources */,
 			);
@@ -1084,10 +1103,12 @@
 				183997651F2586D300702071 /* ActivityListCell.m in Sources */,
 				181E92FE1F2088E80006511E /* DSMyCarController.m in Sources */,
 				181E92CC1F1F39CC0006511E /* UIColor+HexColor.m in Sources */,
+				5097FE131F2F4173002EF8F8 /* JPCityViewController.m in Sources */,
 				181E92EF1F2081840006511E /* DSMembershipController.m in Sources */,
 				18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */,
 				181E92F21F20848D0006511E /* DSOrderController.m in Sources */,
 				18B697B51F21DBCE009FF73A /* DSWheelGroupController.m in Sources */,
+				5097FE1A1F2F4335002EF8F8 /* MyCarViewCell.m in Sources */,
 				188907121F2730F4009E20B0 /* DSUpdateRuleController.m in Sources */,
 				181E92CB1F1F39CC0006511E /* UIColor+Additions.m in Sources */,
 				50E2EE851F1F4D3C00FAF130 /* YZSortViewController.m in Sources */,
@@ -1160,6 +1181,7 @@
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
 				501672411F29D16C00384186 /* MemberView.m in Sources */,
 				50E2EE7E1F1F4D3C00FAF130 /* YZAllCourseViewController.m in Sources */,
+				5097FE161F2F42F0002EF8F8 /* MyCarPortController.m in Sources */,
 				181E92FB1F2086ED0006511E /* DSServiceController.m in Sources */,
 				1853BA4B1F28A04100B98C7F /* JFSearchView.m in Sources */,
 				183997A21F25F00700702071 /* DSAboutController.m in Sources */,
