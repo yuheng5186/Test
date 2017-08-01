@@ -82,7 +82,6 @@
 		501672131F297AD000384186 /* BusinessDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672121F297AD000384186 /* BusinessDetailHeaderView.m */; };
 		501672161F297D8200384186 /* PurchaseCardViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672151F297D8200384186 /* PurchaseCardViewCell.m */; };
 		5016721B1F297DA500384186 /* payCardDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672181F297DA500384186 /* payCardDetailCell.m */; };
-		5016721C1F297DA500384186 /* PayPurchaseCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5016721A1F297DA500384186 /* PayPurchaseCardController.m */; };
 		501672201F297F3100384186 /* HQSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5016721F1F297F3100384186 /* HQSliderView.m */; };
 		501672281F297FDD00384186 /* AnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672241F297FDD00384186 /* AnswerCell.m */; };
 		501672291F297FDD00384186 /* AnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 501672251F297FDD00384186 /* AnswerCell.xib */; };
@@ -107,6 +106,7 @@
 		5097FE161F2F42F0002EF8F8 /* MyCarPortController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097FE151F2F42F0002EF8F8 /* MyCarPortController.m */; };
 		5097FE1A1F2F4335002EF8F8 /* MyCarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097FE181F2F4335002EF8F8 /* MyCarViewCell.m */; };
 		5097FE1B1F2F4335002EF8F8 /* MyCarViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5097FE191F2F4335002EF8F8 /* MyCarViewCell.xib */; };
+		50B26E641F300D60009B3B9F /* PayPurchaseCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B26E631F300D60009B3B9F /* PayPurchaseCardController.m */; };
 		50D30E7D1F2044C20086D3ED /* BusinessDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D30E7C1F2044C20086D3ED /* BusinessDetailHeaderView.xib */; };
 		50D30E811F20988A0086D3ED /* BusinessDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D30E7F1F20988A0086D3ED /* BusinessDetailCell.m */; };
 		50D30E821F20988A0086D3ED /* BusinessDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D30E801F20988A0086D3ED /* BusinessDetailCell.xib */; };
@@ -293,8 +293,6 @@
 		501672151F297D8200384186 /* PurchaseCardViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseCardViewCell.m; sourceTree = "<group>"; };
 		501672171F297DA500384186 /* payCardDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = payCardDetailCell.h; sourceTree = "<group>"; };
 		501672181F297DA500384186 /* payCardDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = payCardDetailCell.m; sourceTree = "<group>"; };
-		501672191F297DA500384186 /* PayPurchaseCardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPurchaseCardController.h; sourceTree = "<group>"; };
-		5016721A1F297DA500384186 /* PayPurchaseCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayPurchaseCardController.m; sourceTree = "<group>"; };
 		5016721E1F297F3100384186 /* HQSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQSliderView.h; sourceTree = "<group>"; };
 		5016721F1F297F3100384186 /* HQSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQSliderView.m; sourceTree = "<group>"; };
 		501672231F297FDD00384186 /* AnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerCell.h; sourceTree = "<group>"; };
@@ -338,6 +336,8 @@
 		5097FE171F2F4335002EF8F8 /* MyCarViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCarViewCell.h; sourceTree = "<group>"; };
 		5097FE181F2F4335002EF8F8 /* MyCarViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCarViewCell.m; sourceTree = "<group>"; };
 		5097FE191F2F4335002EF8F8 /* MyCarViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCarViewCell.xib; sourceTree = "<group>"; };
+		50B26E621F300D60009B3B9F /* PayPurchaseCardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPurchaseCardController.h; sourceTree = "<group>"; };
+		50B26E631F300D60009B3B9F /* PayPurchaseCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayPurchaseCardController.m; sourceTree = "<group>"; };
 		50D30E7C1F2044C20086D3ED /* BusinessDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BusinessDetailHeaderView.xib; sourceTree = "<group>"; };
 		50D30E7E1F20988A0086D3ED /* BusinessDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessDetailCell.h; sourceTree = "<group>"; };
 		50D30E7F1F20988A0086D3ED /* BusinessDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessDetailCell.m; sourceTree = "<group>"; };
@@ -700,8 +700,8 @@
 				181E92DA1F1F3BC60006511E /* PurchaseViewController.m */,
 				501672141F297D8200384186 /* PurchaseCardViewCell.h */,
 				501672151F297D8200384186 /* PurchaseCardViewCell.m */,
-				501672191F297DA500384186 /* PayPurchaseCardController.h */,
-				5016721A1F297DA500384186 /* PayPurchaseCardController.m */,
+				50B26E621F300D60009B3B9F /* PayPurchaseCardController.h */,
+				50B26E631F300D60009B3B9F /* PayPurchaseCardController.m */,
 				501672171F297DA500384186 /* payCardDetailCell.h */,
 				501672181F297DA500384186 /* payCardDetailCell.m */,
 			);
@@ -1099,6 +1099,7 @@
 				1853BA031F28444000B98C7F /* DSFeedbackController.m in Sources */,
 				501672201F297F3100384186 /* HQSliderView.m in Sources */,
 				1853BA461F28A04100B98C7F /* JFCityCollectionFlowLayout.m in Sources */,
+				50B26E641F300D60009B3B9F /* PayPurchaseCardController.m in Sources */,
 				5016720D1F297A3500384186 /* ShopCommentController.m in Sources */,
 				183997651F2586D300702071 /* ActivityListCell.m in Sources */,
 				181E92FE1F2088E80006511E /* DSMyCarController.m in Sources */,
@@ -1159,7 +1160,6 @@
 				18218FE81F2ADA8A00F7207F /* DSSegmentView.m in Sources */,
 				501672521F2A091000384186 /* ScoreCategoryView.m in Sources */,
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
-				5016721C1F297DA500384186 /* PayPurchaseCardController.m in Sources */,
 				1853BA481F28A04100B98C7F /* JFCityHeaderView.m in Sources */,
 				50E2EE801F1F4D3C00FAF130 /* YZMoreMenuViewController.m in Sources */,
 				50D30E811F20988A0086D3ED /* BusinessDetailCell.m in Sources */,

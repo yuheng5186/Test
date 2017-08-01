@@ -2,7 +2,7 @@
 //  PayPurchaseCardController.m
 //  CarWashing
 //
-//  Created by 时建鹏 on 2017/7/24.
+//  Created by 时建鹏 on 2017/8/1.
 //  Copyright © 2017年 DS. All rights reserved.
 //
 
@@ -24,11 +24,25 @@ static NSString *id_payDetailCell = @"id_payDetailCell";
 
 - (UITableView *)payCardView {
     if (!_payCardView) {
-        UITableView *payCardView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 360) style:UITableViewStylePlain];
+        UITableView *payCardView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 360) style:UITableViewStylePlain];
         self.payCardView = payCardView;
         [self.view addSubview:payCardView];
     }
     return _payCardView;
+}
+
+
+- (void)drawNavigation {
+    
+    [self drawTitle:@"购卡支付" Color:[UIColor blackColor]];
+    
+}
+
+- (void) drawContent
+{
+    self.statusView.backgroundColor     = [UIColor grayColor];
+    self.navigationView.backgroundColor = [UIColor grayColor];
+    self.contentView.top                = self.navigationView.bottom;
 }
 
 
@@ -48,10 +62,10 @@ static NSString *id_payDetailCell = @"id_payDetailCell";
 
 - (void)setupUI {
     
-//    UITableView *tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 300) style:UITableViewStylePlain];
-//    
-//    tableview.delegate = self;
-//    tableview.dataSource = self;
+    //    UITableView *tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 300) style:UITableViewStylePlain];
+    //
+    //    tableview.delegate = self;
+    //    tableview.dataSource = self;
     //[self.view addSubview:self];
     
     self.payCardView.delegate = self;
@@ -186,7 +200,7 @@ static NSString *id_payDetailCell = @"id_payDetailCell";
     [self presentViewController:alertController animated:YES completion:nil];
     
 }
-    
+
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -223,11 +237,10 @@ static NSString *id_payDetailCell = @"id_payDetailCell";
     
     cell.textLabel.text  = @"eeeeee";
     cell.detailTextLabel.text = @"sdcdscwfr";
-
+    
     
     return cell;
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

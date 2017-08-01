@@ -2,12 +2,12 @@
 //  PayPurchaseCardController.h
 //  CarWashing
 //
-//  Created by 时建鹏 on 2017/7/24.
+//  Created by 时建鹏 on 2017/8/1.
 //  Copyright © 2017年 DS. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseController.h"
 
-@interface PayPurchaseCardController : UIViewController
+@interface PayPurchaseCardController : BaseController
 
 @end
