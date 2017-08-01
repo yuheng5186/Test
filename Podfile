@@ -5,4 +5,6 @@ target 'CarWashing' do
   pod 'SDWebImage', '~> 4.0.0'
   pod 'JSONModel', '~> 1.7.0'
   pod 'FMDB', '~> 2.7.2'
+  pod 'SDAutoLayout'
+
 end
