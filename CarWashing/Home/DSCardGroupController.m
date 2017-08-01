@@ -7,18 +7,22 @@
 //
 
 #import "DSCardGroupController.h"
-#import "HQSliderView.h"
-#import "HQTableViewCell.h"
+#import <Masonry.h>
+#import "DiscountCategoryView.h"
+#import "DiscountController.h"
+#import "RechargeController.h"
 
-@interface DSCardGroupController ()<UITableViewDelegate, UITableViewDataSource, HQSliderViewDelegate>
 
+@interface DSCardGroupController ()<UIScrollViewDelegate>
 
-@property (nonatomic, weak) UITableView *cardListView;
+@property (nonatomic, weak) UIView *containerView;
 
-/** 记录点击的是第几个Button */
-@property (nonatomic, assign) NSInteger myCardTag;
+@property (nonatomic, weak) UIScrollView *cardScrollView;
+
+@property (nonatomic, weak) DiscountCategoryView *categoryView;
 
 @end
+
 
 @implementation DSCardGroupController
 
@@ -43,60 +47,102 @@
 
 - (void)setupUI {
     
-    [self setupTopSliderView];
+    [self setupCategoryView];
+    [self setupScrollView];
     
-    UITableView *cardListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 108, Main_Screen_Width, Main_Screen_Height - 64)];
-    cardListView.delegate = self;
-    cardListView.dataSource = self;
-    [self.view addSubview:cardListView];
-    self.cardListView = cardListView;
+    [self addCardChildViewControllers];
     
 }
 
 
-#pragma mark - 创建上部的SliderView
-- (void)setupTopSliderView {
+- (void)addCardChildViewControllers{
     
-    HQSliderView *cardSliderView = [[HQSliderView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 44)];
-    cardSliderView.titleArr = @[@"优惠券",@"充值卡"];
-    cardSliderView.delegate = self;
-    [self.view addSubview:cardSliderView];
+    DiscountController *discountVC = [[DiscountController alloc] init] ;
+    RechargeController *rechargeVC = [[RechargeController alloc] init];
+    
+    [self addChildViewController:discountVC];
+    [self addChildViewController:rechargeVC];
+    
+    [_containerView addSubview:discountVC.view];
+    [_containerView addSubview:rechargeVC.view];
+    
+    [discountVC didMoveToParentViewController:self];
+    [rechargeVC didMoveToParentViewController:self];
+    
+    [discountVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.leading.equalTo(_containerView);
+        make.size.equalTo(_cardScrollView);
+    }];
+    
+    [rechargeVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_containerView);
+        make.leading.equalTo(discountVC.view.mas_trailing);
+        make.size.equalTo(_cardScrollView);
+    }];
+    
+}
+
+
+#pragma mark - 设置分类视图
+- (void)setupCategoryView{
+    
+    DiscountCategoryView *categoryView = [[DiscountCategoryView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 44)];
+    
+    _categoryView = categoryView;
+    
+    [self.view addSubview:categoryView];
+    
+    categoryView.categoryBlock = ^(NSInteger index){
+        
+        //修改scrollView的contentOffset
+        [self.cardScrollView setContentOffset:CGPointMake(index * self.cardScrollView.width, 0) animated:YES];
+    };
 }
 
 
 
-#pragma mark - tableview代理
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+#pragma mark - 布局scrollView
+- (void)setupScrollView {
     
-    if (self.myCardTag == 0) {
-        return 3;
-    } else {
-        return 2;
+    
+    
+    UIScrollView *cardScrollView =  [[UIScrollView alloc] init];
+    _cardScrollView = cardScrollView;
+    
+    cardScrollView.delegate = self;
+    cardScrollView.bounces = NO;
+    cardScrollView.pagingEnabled = YES;
+    
+    [self.view addSubview:cardScrollView];
+    
+    [cardScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_categoryView.mas_bottom);
+        make.leading.trailing.bottom.equalTo(self.view);
+    }];
+    
+    
+    //容器视图
+    UIView *containerView = [[UIView alloc] init];
+    _containerView = containerView;
+    containerView.backgroundColor = [UIColor lightGrayColor];
+    
+    [cardScrollView addSubview:containerView];
+    
+    [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(cardScrollView);
+        make.width.equalTo(cardScrollView).multipliedBy(2);
+        make.height.equalTo(cardScrollView);
+    }];
+    
+}
+
+#pragma mark - scrollView的代理方法
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    if (scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating) {
+        CGFloat offsetX = scrollView.contentOffset.x / 2;
+        _categoryView.offsetX = offsetX;
     }
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    HQTableViewCell *cardListCell = [HQTableViewCell tableViewCellWithTableView:tableView];
-    cardListCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    if (self.myCardTag == 0) {
-        cardListCell.textLabel.text = [NSString stringWithFormat:@"全部 --- 第%ld行", indexPath.row];
-    } else {
-        cardListCell.textLabel.text = [NSString stringWithFormat:@"待付款 --- 第%ld行", indexPath.row];
-    }
-    
-    return cardListCell;
-}
-
-
-
-#pragma mark - HQlisderView的代理
-- (void)sliderView:(HQSliderView *)sliderView didClickMenuButton:(UIButton *)button{
-    
-    self.myCardTag = button.tag;
-    [self.cardListView reloadData];
 }
 
 

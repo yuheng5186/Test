@@ -8,7 +8,7 @@
 
 #import "MemberRegualrController.h"
 #import <Masonry.h>
-#import "ShopCategoryView.h"
+#import "ScoreCategoryView.h"
 #import "ScoreIntroController.h"
 #import "ScoreGetController.h"
 
@@ -18,7 +18,7 @@
 
 @property (nonatomic, weak) UIScrollView *scoreScrollView;
 
-@property (nonatomic, weak) ShopCategoryView *categoryView;
+@property (nonatomic, weak) ScoreCategoryView *categoryView;
 
 @end
 
@@ -82,7 +82,7 @@
 #pragma mark - 设置分类视图
 - (void)setupCategoryView{
     
-    ShopCategoryView *categoryView = [[ShopCategoryView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 44)];
+    ScoreCategoryView *categoryView = [[ScoreCategoryView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 44)];
     
     _categoryView = categoryView;
     

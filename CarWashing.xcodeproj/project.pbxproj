@@ -107,6 +107,13 @@
 		5097FE1A1F2F4335002EF8F8 /* MyCarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097FE181F2F4335002EF8F8 /* MyCarViewCell.m */; };
 		5097FE1B1F2F4335002EF8F8 /* MyCarViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5097FE191F2F4335002EF8F8 /* MyCarViewCell.xib */; };
 		50B26E641F300D60009B3B9F /* PayPurchaseCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B26E631F300D60009B3B9F /* PayPurchaseCardController.m */; };
+		50B26E681F301B29009B3B9F /* DiscountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B26E661F301B29009B3B9F /* DiscountCell.m */; };
+		50B26E691F301B29009B3B9F /* DiscountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50B26E671F301B29009B3B9F /* DiscountCell.xib */; };
+		50B26E6D1F301B60009B3B9F /* RechargeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B26E6B1F301B60009B3B9F /* RechargeCell.m */; };
+		50B26E6E1F301B60009B3B9F /* RechargeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50B26E6C1F301B60009B3B9F /* RechargeCell.xib */; };
+		50B26E711F302E17009B3B9F /* DiscountCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B26E701F302E17009B3B9F /* DiscountCategoryView.m */; };
+		50B26E741F3031D8009B3B9F /* DiscountController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B26E731F3031D8009B3B9F /* DiscountController.m */; };
+		50B26E771F3031EF009B3B9F /* RechargeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B26E761F3031EF009B3B9F /* RechargeController.m */; };
 		50D30E7D1F2044C20086D3ED /* BusinessDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D30E7C1F2044C20086D3ED /* BusinessDetailHeaderView.xib */; };
 		50D30E811F20988A0086D3ED /* BusinessDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D30E7F1F20988A0086D3ED /* BusinessDetailCell.m */; };
 		50D30E821F20988A0086D3ED /* BusinessDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D30E801F20988A0086D3ED /* BusinessDetailCell.xib */; };
@@ -338,6 +345,18 @@
 		5097FE191F2F4335002EF8F8 /* MyCarViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCarViewCell.xib; sourceTree = "<group>"; };
 		50B26E621F300D60009B3B9F /* PayPurchaseCardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPurchaseCardController.h; sourceTree = "<group>"; };
 		50B26E631F300D60009B3B9F /* PayPurchaseCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayPurchaseCardController.m; sourceTree = "<group>"; };
+		50B26E651F301B29009B3B9F /* DiscountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscountCell.h; sourceTree = "<group>"; };
+		50B26E661F301B29009B3B9F /* DiscountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscountCell.m; sourceTree = "<group>"; };
+		50B26E671F301B29009B3B9F /* DiscountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscountCell.xib; sourceTree = "<group>"; };
+		50B26E6A1F301B60009B3B9F /* RechargeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeCell.h; sourceTree = "<group>"; };
+		50B26E6B1F301B60009B3B9F /* RechargeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeCell.m; sourceTree = "<group>"; };
+		50B26E6C1F301B60009B3B9F /* RechargeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RechargeCell.xib; sourceTree = "<group>"; };
+		50B26E6F1F302E17009B3B9F /* DiscountCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscountCategoryView.h; sourceTree = "<group>"; };
+		50B26E701F302E17009B3B9F /* DiscountCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscountCategoryView.m; sourceTree = "<group>"; };
+		50B26E721F3031D8009B3B9F /* DiscountController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscountController.h; sourceTree = "<group>"; };
+		50B26E731F3031D8009B3B9F /* DiscountController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscountController.m; sourceTree = "<group>"; };
+		50B26E751F3031EF009B3B9F /* RechargeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeController.h; sourceTree = "<group>"; };
+		50B26E761F3031EF009B3B9F /* RechargeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeController.m; sourceTree = "<group>"; };
 		50D30E7C1F2044C20086D3ED /* BusinessDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BusinessDetailHeaderView.xib; sourceTree = "<group>"; };
 		50D30E7E1F20988A0086D3ED /* BusinessDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessDetailCell.h; sourceTree = "<group>"; };
 		50D30E7F1F20988A0086D3ED /* BusinessDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessDetailCell.m; sourceTree = "<group>"; };
@@ -518,6 +537,18 @@
 				18B697A41F21A87F009FF73A /* DSScanController.m */,
 				18B697A61F21D420009FF73A /* DSCardGroupController.h */,
 				18B697A71F21D420009FF73A /* DSCardGroupController.m */,
+				50B26E6F1F302E17009B3B9F /* DiscountCategoryView.h */,
+				50B26E701F302E17009B3B9F /* DiscountCategoryView.m */,
+				50B26E721F3031D8009B3B9F /* DiscountController.h */,
+				50B26E731F3031D8009B3B9F /* DiscountController.m */,
+				50B26E751F3031EF009B3B9F /* RechargeController.h */,
+				50B26E761F3031EF009B3B9F /* RechargeController.m */,
+				50B26E651F301B29009B3B9F /* DiscountCell.h */,
+				50B26E661F301B29009B3B9F /* DiscountCell.m */,
+				50B26E671F301B29009B3B9F /* DiscountCell.xib */,
+				50B26E6A1F301B60009B3B9F /* RechargeCell.h */,
+				50B26E6B1F301B60009B3B9F /* RechargeCell.m */,
+				50B26E6C1F301B60009B3B9F /* RechargeCell.xib */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1007,6 +1038,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50D30E7D1F2044C20086D3ED /* BusinessDetailHeaderView.xib in Resources */,
+				50B26E6E1F301B60009B3B9F /* RechargeCell.xib in Resources */,
 				5097FDFE1F2ECE2F002EF8F8 /* TicketCashView.xib in Resources */,
 				50E2EE5A1F1F4A9000FAF130 /* SalerListViewCell.xib in Resources */,
 				50D30E821F20988A0086D3ED /* BusinessDetailCell.xib in Resources */,
@@ -1022,6 +1054,7 @@
 				5016720F1F297A3500384186 /* ShopIntroController.xib in Resources */,
 				5097FE1B1F2F4335002EF8F8 /* MyCarViewCell.xib in Resources */,
 				501672291F297FDD00384186 /* AnswerCell.xib in Resources */,
+				50B26E691F301B29009B3B9F /* DiscountCell.xib in Resources */,
 				1853BA361F28A03500B98C7F /* shop_area.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1127,6 +1160,7 @@
 				181E92BB1F1F36710006511E /* BaseController.m in Sources */,
 				181E932C1F20B0EB0006511E /* DSAdDetailController.m in Sources */,
 				501672131F297AD000384186 /* BusinessDetailHeaderView.m in Sources */,
+				50B26E681F301B29009B3B9F /* DiscountCell.m in Sources */,
 				18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */,
 				181E92CE1F1F39CC0006511E /* UIUtil.m in Sources */,
 				501672161F297D8200384186 /* PurchaseCardViewCell.m in Sources */,
@@ -1137,6 +1171,7 @@
 				181E92DE1F1F3BE40006511E /* MySettingViewController.m in Sources */,
 				181E92E31F2054C50006511E /* DSUserInfoController.m in Sources */,
 				181E92CD1F1F39CC0006511E /* UIImage+BFS.m in Sources */,
+				50B26E711F302E17009B3B9F /* DiscountCategoryView.m in Sources */,
 				181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */,
 				1839979F1F25E69100702071 /* DSPasswordController.m in Sources */,
 				1853BA061F28475500B98C7F /* DSTextView.m in Sources */,
@@ -1169,8 +1204,10 @@
 				1853BA0C1F28774400B98C7F /* LKActionSheet.m in Sources */,
 				188907161F283184009E20B0 /* DSGetScoreController.m in Sources */,
 				1853BA471F28A04100B98C7F /* JFCityCollectionViewCell.m in Sources */,
+				50B26E771F3031EF009B3B9F /* RechargeController.m in Sources */,
 				501672021F29797600384186 /* BusinessDetailViewController.m in Sources */,
 				181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */,
+				50B26E6D1F301B60009B3B9F /* RechargeCell.m in Sources */,
 				507FECF71F2AC8D7009CC505 /* BusinessPayController.m in Sources */,
 				5016722A1F297FDD00384186 /* HeadView.m in Sources */,
 				5016720E1F297A3500384186 /* ShopIntroController.m in Sources */,
@@ -1191,6 +1228,7 @@
 				181E93291F20B0510006511E /* SXScrPageView.m in Sources */,
 				5016724C1F2A020600384186 /* ScoreIntroController.m in Sources */,
 				181E92E91F207FF60006511E /* DSSettingController.m in Sources */,
+				50B26E741F3031D8009B3B9F /* DiscountController.m in Sources */,
 				181E92F81F2086620006511E /* DSExchangeController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
