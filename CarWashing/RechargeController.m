@@ -8,6 +8,7 @@
 
 #import "RechargeController.h"
 #import "RechargeCell.h"
+#import "RechargeDetailController.h"
 
 @interface RechargeController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -18,6 +19,15 @@
 static NSString *id_rechargeCell = @"id_rechargeCell";
 
 @implementation RechargeController
+
+- (void) drawContent
+{
+    self.statusView.hidden      = YES;
+    self.navigationView.hidden  = YES;
+    self.contentView.top        = 0;
+    self.contentView.height     = self.view.height;
+    self.contentView.backgroundColor = [UIColor lightGrayColor];
+}
 
 - (UITableView *)rechargeView {
     
@@ -57,11 +67,17 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     return cell;
 }
 
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPat{
+    
+    RechargeDetailController *rechargeDetailVC = [[RechargeDetailController alloc] init];
+    rechargeDetailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:rechargeDetailVC animated:YES];
+    
 }
 
 /*

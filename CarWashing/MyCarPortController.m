@@ -9,6 +9,7 @@
 #import "MyCarPortController.h"
 #import <Masonry.h>
 #import "MyCarViewCell.h"
+#import "IcreaseCarController.h"
 
 @interface MyCarPortController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -76,6 +77,7 @@ static NSString *id_carListCell = @"id_carListCell";
     UIButton *increaseBtn = [[UIButton alloc] init];
     [increaseBtn setTitle:@"新增车辆" forState:UIControlStateNormal];
     increaseBtn.backgroundColor = [UIColor orangeColor];
+    [increaseBtn addTarget:self action:@selector(didClickIncreaseButton) forControlEvents:UIControlEventTouchUpInside];
     [self.increaseView addSubview:increaseBtn];
     
     [increaseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,6 +98,16 @@ static NSString *id_carListCell = @"id_carListCell";
     MyCarViewCell *carCell = [tableView dequeueReusableCellWithIdentifier:id_carListCell];
     
     return carCell;
+}
+
+
+#pragma mark - 新增车辆
+- (void)didClickIncreaseButton {
+    
+    IcreaseCarController *increaseVC = [[IcreaseCarController alloc] init];
+    increaseVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:increaseVC animated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {

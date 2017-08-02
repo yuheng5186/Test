@@ -65,11 +65,15 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    if (section == 0) {
+        return 2;
+    }
+    
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -85,6 +89,29 @@
     carCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return carCell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    return 50;
+    
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UILabel *infoLabel = [[UILabel alloc] init];
+    
+    if (section == 0) {
+        
+        infoLabel.text = @"  基本信息";
+        
+    }else{
+        
+        infoLabel.text = @"  其他信息";
+    }
+    
+    
+    return infoLabel;
 }
 
 

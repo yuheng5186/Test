@@ -90,6 +90,10 @@
     if (self.scoreTag == 0) {
         
         scoreCell.textLabel.text = [NSString stringWithFormat:@"全部 --- 第%ld行", indexPath.row];
+        scoreCell.detailTextLabel.text = @"2010";
+        UILabel *scoreLbl = [[UILabel alloc] init];
+        scoreLbl.text = @"+4";
+        scoreCell.accessoryView = scoreLbl;
     } else if (self.scoreTag == 1) {
         
         scoreCell.textLabel.text = [NSString stringWithFormat:@"待付款 --- 第%ld行", indexPath.row];

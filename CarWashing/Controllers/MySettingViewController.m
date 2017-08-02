@@ -38,13 +38,13 @@
     self.navigationView.hidden  = YES;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
-    
+                                                                                                                
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.hidden = YES;
-
+    
     [self createSubView];
 }
 

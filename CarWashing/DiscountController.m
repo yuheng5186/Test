@@ -8,6 +8,7 @@
 
 #import "DiscountController.h"
 #import "DiscountCell.h"
+#import "DiscountDetailController.h"
 
 @interface DiscountController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -18,6 +19,16 @@
 static NSString *id_discountCell = @"id_discountCell";
 
 @implementation DiscountController
+
+
+- (void) drawContent
+{
+    self.statusView.hidden      = YES;
+    self.navigationView.hidden  = YES;
+    self.contentView.top        = 0;
+    self.contentView.height     = self.view.height;
+    self.contentView.backgroundColor = [UIColor lightGrayColor];
+}
 
 
 - (UITableView *)discountView {
@@ -55,12 +66,18 @@ static NSString *id_discountCell = @"id_discountCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     DiscountCell *cell = [tableView dequeueReusableCellWithIdentifier:id_discountCell forIndexPath:indexPath];
-
+    
     return cell;
 }
 
 
-
+#pragma mark - 点击cell
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    DiscountDetailController *detailVC = [[DiscountDetailController alloc] init];
+    detailVC.hidesBottomBarWhenPushed = YES;
+    [super.navigationController pushViewController:detailVC animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

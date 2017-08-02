@@ -6,8 +6,8 @@
 //  Copyright © 2017年 DS. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseController.h"
 
-@interface DiscountController : UIViewController
+@interface DiscountController : BaseController
 
 @end

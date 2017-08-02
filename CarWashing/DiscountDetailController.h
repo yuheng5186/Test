@@ -1,5 +1,5 @@
 //
-//  RechargeController.h
+//  DiscountDetailController.h
 //  CarWashing
 //
 //  Created by 时建鹏 on 2017/8/1.
@@ -8,6 +8,6 @@
 
 #import "BaseController.h"
 
-@interface RechargeController : BaseController
+@interface DiscountDetailController : BaseController
 
 @end

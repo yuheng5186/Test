@@ -7,15 +7,21 @@
 //
 
 #import "DSOrderController.h"
-#import "HQSliderView.h"
-#import "HQTableViewCell.h"
+#import "OrderCategoryView.h"
+#import "AllOrderController.h"
+#import "PayOrderController.h"
+#import "CommentOrderController.h"
+#import <Masonry.h>
 
-@interface DSOrderController ()<UITableViewDelegate, UITableViewDataSource, HQSliderViewDelegate>
 
-@property (nonatomic, weak) UITableView *orderListView;
+@interface DSOrderController ()<UIScrollViewDelegate>
 
-/** 记录点击的是第几个Button */
-@property (nonatomic, assign) NSInteger menuTag;
+@property (nonatomic, weak) UIView *containerView;
+
+@property (nonatomic, weak) UIScrollView *orderScrollView;
+
+@property (nonatomic, weak) OrderCategoryView *categoryView;
+
 
 @end
 
@@ -43,67 +49,119 @@
 
 - (void)setupUI {
     
-    [self setupTopSliderView];
+    [self setupCategoryView];
+    [self setupScrollView];
     
-    UITableView *orderListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 108, Main_Screen_Width, Main_Screen_Height - 64)];
-    orderListView.delegate = self;
-    orderListView.dataSource = self;
-    [self.view addSubview:orderListView];
-    self.orderListView = orderListView;
+    [self addOrderChildViewControllers];
+    
+    
 }
 
-#pragma mark - 创建上部的SliderView
-- (void)setupTopSliderView {
+- (void)addOrderChildViewControllers {
     
-    HQSliderView *sliderView = [[HQSliderView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 44)];
-    sliderView.titleArr = @[@"全部订单",@"待付款",@"待发货",@"待安装",@"待评价"];
-    sliderView.delegate = self;
-    [self.view addSubview:sliderView];
+    AllOrderController *allVC = [[AllOrderController alloc] init];
+    PayOrderController *payVC = [[PayOrderController alloc] init];
+    CommentOrderController *commentVC = [[CommentOrderController alloc] init];
+    
+    [self addChildViewController:allVC];
+    [self addChildViewController:payVC];
+    [self addChildViewController:commentVC];
+    
+    [_containerView addSubview:allVC.view];
+    [_containerView addSubview:payVC.view];
+    [_containerView addSubview:commentVC.view];
+    
+    [allVC didMoveToParentViewController:self];
+    [payVC didMoveToParentViewController:self];
+    [commentVC didMoveToParentViewController:self];
+    
+    
+    [allVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.leading.equalTo(_containerView);
+        make.size.equalTo(_orderScrollView);
+    }];
+    
+    [payVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(_containerView);
+        make.leading.equalTo(allVC.view.mas_trailing);
+        make.size.equalTo(_orderScrollView);
+    }];
+    
+    [commentVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(_containerView);
+        make.leading.equalTo(payVC.view.mas_trailing);
+        make.size.equalTo(_orderScrollView);
+    }];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+
+#pragma mark - 设置分类视图
+- (void)setupCategoryView{
     
-    if (self.menuTag == 0) {
-        return 3;
-    }else if (self.menuTag == 1){
-        return 6;
-    }else if (self.menuTag == 2){
-        return 9;
-    }else if (self.menuTag == 3){
-        return 12;
-    }else{
-        return 5;
+    OrderCategoryView *categoryView = [[OrderCategoryView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 44)];
+    
+    _categoryView = categoryView;
+    
+    [self.view addSubview:categoryView];
+    
+    categoryView.categoryBlock = ^(NSInteger index){
+        
+        //修改scrollView的contentOffset
+        [self.orderScrollView setContentOffset:CGPointMake(index * self.orderScrollView.width, 0) animated:YES];
+    };
+}
+
+
+
+#pragma mark - 布局scrollView
+- (void)setupScrollView {
+    
+    
+    
+    UIScrollView *orderScrollView =  [[UIScrollView alloc] init];
+    _orderScrollView = orderScrollView;
+    
+    orderScrollView.delegate = self;
+    orderScrollView.bounces = NO;
+    orderScrollView.pagingEnabled = YES;
+    
+    [self.view addSubview:orderScrollView];
+    
+    [orderScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_categoryView.mas_bottom);
+        make.leading.trailing.bottom.equalTo(self.view);
+    }];
+    
+    
+    //容器视图
+    UIView *containerView = [[UIView alloc] init];
+    _containerView = containerView;
+    containerView.backgroundColor = [UIColor lightGrayColor];
+    
+    [orderScrollView addSubview:containerView];
+    
+    [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(orderScrollView);
+        make.width.equalTo(orderScrollView).multipliedBy(3);
+        make.height.equalTo(orderScrollView);
+    }];
+    
+}
+
+#pragma mark - scrollView的代理方法
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    if (scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating) {
+        CGFloat offsetX = scrollView.contentOffset.x / 3;
+        _categoryView.offsetX = offsetX;
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    HQTableViewCell *listCell = [HQTableViewCell tableViewCellWithTableView:tableView];
-    
-    if (self.menuTag == 0) {
-        listCell.textLabel.text = [NSString stringWithFormat:@"全部 --- 第%ld行", indexPath.row];
-    } else if (self.menuTag == 1) {
-        listCell.textLabel.text = [NSString stringWithFormat:@"待付款 --- 第%ld行", indexPath.row];
-    } else if (self.menuTag == 2) {
-        listCell.textLabel.text = [NSString stringWithFormat:@"待发货 --- 第%ld行", indexPath.row];
-    } else if (self.menuTag == 3) {
-        listCell.textLabel.text = [NSString stringWithFormat:@"待安装 --- 第%ld行", indexPath.row];
-    } else{
-        listCell.textLabel.text = [NSString stringWithFormat:@"待评价 --- 第%ld行", indexPath.row];
-    }
-    
-    
-    return listCell;
-}
 
-
-
-#pragma mark - HQlisderView的代理
-- (void)sliderView:(HQSliderView *)sliderView didClickMenuButton:(UIButton *)button{
-    
-    self.menuTag = button.tag;
-    [self.orderListView reloadData];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
