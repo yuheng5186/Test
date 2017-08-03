@@ -65,13 +65,13 @@ static NSString *salerListCell = @"salerListViewCell";
 
 - (void)setupUI {
     
-    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*58/667) color:[UIColor whiteColor]];
+    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*64/667) color:[UIColor colorFromHex:@"#293754"]];
     titleView.top                      = 0;
     
     NSString *titleName              = @"商家";
     UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
-    titleNameLabel.textColor         = [UIColor blackColor];
+    titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = titleView.centerX;
     titleNameLabel.centerY           = titleView.centerY +Main_Screen_Height*10/667;
     
@@ -120,7 +120,7 @@ static NSString *salerListCell = @"salerListViewCell";
     
     // 创建下拉菜单
     YZPullDownMenu *menu = [[YZPullDownMenu alloc] init];
-    menu.frame = CGRectMake(0, 0, Main_Screen_Width, 44);
+    menu.frame = CGRectMake(0, Main_Screen_Height*64/667, Main_Screen_Width, 44);
     [self.view addSubview:menu];
     
     // 设置下拉菜单代理
