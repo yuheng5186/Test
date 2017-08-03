@@ -45,14 +45,14 @@
     HomeViewController *homeVC      = [[HomeViewController alloc]init];
     UINavigationController *homeNav = [[UINavigationController alloc]initWithRootViewController:homeVC];
     homeNav.navigationController.navigationBarHidden = YES;
-    UITabBarItem *homeTabItem       = [[UITabBarItem alloc]initWithTitle:@"首页" image:[UIImage imageNamed:@"shangjia"] selectedImage:[UIImage imageNamed:@"shouyeL"]];
+    UITabBarItem *homeTabItem       = [[UITabBarItem alloc]initWithTitle:@"首页" image:[UIImage imageNamed:@"shouye"] selectedImage:[UIImage imageNamed:@"shouye1"]];
     homeTabItem.tag     = 1;
     homeVC.tabBarItem   = homeTabItem;
     
     BusinessViewController *businessVC      = [[BusinessViewController alloc]init];
     UINavigationController *businessNav = [[UINavigationController alloc]initWithRootViewController:businessVC];
     businessNav.navigationController.navigationBarHidden = YES;
-    UITabBarItem *businessTabItem       = [[UITabBarItem alloc]initWithTitle:@"商家" image:[UIImage imageNamed:@"shangjia"] selectedImage:[UIImage imageNamed:@"shangjiaL"]];
+    UITabBarItem *businessTabItem       = [[UITabBarItem alloc]initWithTitle:@"商家" image:[UIImage imageNamed:@"shangjia"] selectedImage:[UIImage imageNamed:@"shangjia1"]];
     businessTabItem.tag     = 2;
     businessVC.tabBarItem   = businessTabItem;
     
@@ -66,7 +66,7 @@
     PurchaseViewController *purchaseVC      = [[PurchaseViewController alloc]init];
     UINavigationController *purchaseNav = [[UINavigationController alloc]initWithRootViewController:purchaseVC];
     purchaseNav.navigationController.navigationBarHidden = YES;
-    UITabBarItem *purchaseTabItem       = [[UITabBarItem alloc]initWithTitle:@"购卡" image:[UIImage imageNamed:@"gouka"] selectedImage:[UIImage imageNamed:@"goukaL"]];
+    UITabBarItem *purchaseTabItem       = [[UITabBarItem alloc]initWithTitle:@"购卡" image:[UIImage imageNamed:@"gouka"] selectedImage:[UIImage imageNamed:@"gouka1"]];
     purchaseTabItem.tag     = 4;
     purchaseVC.tabBarItem   = purchaseTabItem;
     
@@ -74,7 +74,7 @@
     UINavigationController *mySettingNav = [[UINavigationController alloc]initWithRootViewController:mySettingVC];
     mySettingNav.navigationController.navigationBarHidden = YES;
 //    mySettingNav.navigationBar.hidden    = YES;
-    UITabBarItem *mySettingTabItem       = [[UITabBarItem alloc]initWithTitle:@"我的" image:[UIImage imageNamed:@"wode"] selectedImage:[UIImage imageNamed:@"wodeL"]];
+    UITabBarItem *mySettingTabItem       = [[UITabBarItem alloc]initWithTitle:@"我的" image:[UIImage imageNamed:@"wode"] selectedImage:[UIImage imageNamed:@"wode1"]];
     mySettingTabItem.tag     = 5;
     mySettingVC.tabBarItem   = mySettingTabItem;
     

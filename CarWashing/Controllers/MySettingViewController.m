@@ -34,7 +34,6 @@
 - (void) drawContent {
 
     self.statusView.hidden      = YES;
-    
     self.navigationView.hidden  = YES;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
@@ -50,63 +49,73 @@
 
 - (void) createSubView {
 
-    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*250/667) color:[UIColor yellowColor]];
+    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*320/667) color:[UIColor colorFromHex:@"#293754"]];
     upView.top                      = 0;
     
-    UIImage *userImage              = [UIImage imageNamed:@"icon_defaultavatar"];
-    UIImageView *userImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(0, 0, userImage.size.width/2, userImage.size.height/2) imageName:@"icon_defaultavatar"];
-    userImageView.top               = Main_Screen_Height*50/667;
-    userImageView.left              = Main_Screen_Width*30/375;
+//    UIImage *userImage              = [UIImage imageNamed:@"icon_defaultavatar"];
+//    UIImageView *userImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(0, 0, userImage.size.width/2, userImage.size.height/2) imageName:@"icon_defaultavatar"];
+//    userImageView.top               = Main_Screen_Height*50/667;
+//    userImageView.left              = Main_Screen_Width*30/375;
+    
+    NSString *titleName              = @"我的";
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:16];
+    UILabel *titleNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
+    titleNameLabel.textColor         = [UIColor whiteColor];
+    titleNameLabel.top               = Main_Screen_Height*30/667;
+    titleNameLabel.centerX           = upView.centerX;
+    
+    
+//    UIImage *editImage              = [UIImage imageNamed:@"icon_defaultavatar"];
+    UIButton  *editButton           = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, 80, 80) iconName:@"touxiang" target:self action:@selector(editButtonClick:)];
+    editButton.top                  = titleNameLabel.bottom +Main_Screen_Height*15/667;
+    editButton.centerX              = titleNameLabel.centerX;
+
+    UIImage *settingImage           = [UIImage imageNamed:@"shezhi"];
+    UIButton  *settingButton        = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, settingImage.size.width, settingImage.size.height) iconName:@"shezhi" target:self action:@selector(settingButtonClick:)];
+    settingButton.centerY           = titleNameLabel.centerY;
+    settingButton.right             = Main_Screen_Width -Main_Screen_Width*10/375;
+    
     
     NSString *userName              = @"15800781856";
-    UIFont *userNameFont            = [UIFont systemFontOfSize:16];
+    UIFont *userNameFont            = [UIFont boldSystemFontOfSize:16];
     UILabel *userNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:userName font:userNameFont] font:userNameFont text:userName isCenter:NO];
-    userNameLabel.textColor         = [UIColor colorFromHex:@"#8B8B8B"];
-    userNameLabel.left              = userImageView.right +Main_Screen_Width*20/667;
-    userNameLabel.centerY           = userImageView.centerY - Main_Screen_Height*10/375;
+    userNameLabel.textColor         = [UIColor whiteColor];
+    userNameLabel.top               = editButton.bottom +Main_Screen_Height*13/667;
+    userNameLabel.centerX           = upView.centerX;
     
-    UIImage *editImage              = [UIImage imageNamed:@"icon_edit"];
-    UIButton  *editButton           = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, editImage.size.width, editImage.size.height) iconName:@"icon_edit" target:self action:@selector(editButtonClick:)];
-    editButton.left                 = userNameLabel.right +Main_Screen_Width*10/667;
-    editButton.centerY              = userNameLabel.centerY;
-
-    UIImage *settingImage           = [UIImage imageNamed:@"icon_setting"];
-    UIButton  *settingButton        = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, settingImage.size.width, settingImage.size.height) iconName:@"icon_setting" target:self action:@selector(settingButtonClick:)];
-    settingButton.top               = Main_Screen_Height*40/667;
-    settingButton.right             = Main_Screen_Width -Main_Screen_Width*20/375;
+    
     
     NSString *membershipString      = @"会员特权";
-    UIFont *membershipFont          = [UIFont systemFontOfSize:16];
-    UIButton *membershipButton      = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, 110, 30) text:membershipString font:membershipFont color:[UIColor whiteColor] target:self action:@selector(menbershipButtonClick:)];
-    membershipButton.backgroundColor= [UIColor redColor];
-    membershipButton.layer.cornerRadius = 15;
-    membershipButton.left           = userNameLabel.left;
-    membershipButton.top            = userNameLabel.bottom +Main_Screen_Height*20/667;
+    UIFont *membershipFont          = [UIFont systemFontOfSize:15];
+    UIButton *membershipButton      = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, 80, 20) text:membershipString font:membershipFont color:[UIColor whiteColor] target:self action:@selector(menbershipButtonClick:)];
+    membershipButton.backgroundColor= [UIColor colorFromHex:@"#FDBB2C"];
+    membershipButton.layer.cornerRadius = 10;
+    membershipButton.centerX        = editButton.centerX-Main_Screen_Width*50/375;
+    membershipButton.top            = userNameLabel.bottom +Main_Screen_Height*10/667;
     
-    NSString *signString      = @"每日签到";
-    UIFont *signFont          = [UIFont systemFontOfSize:16];
-    UIButton *signButton      = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, 110, 30) text:signString font:signFont color:[UIColor whiteColor] target:self action:@selector(signButtonClick:)];
-    signButton.backgroundColor= [UIColor redColor];
-    signButton.layer.cornerRadius = 15;
-    signButton.left           = membershipButton.right +Main_Screen_Width*15/375;
-    signButton.centerY        = membershipButton.centerY;
+    NSString *signString      = @"会员签到";
+    UIFont *signFont          = [UIFont systemFontOfSize:15];
+    UIButton *signButton      = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, 80, 20) text:signString font:signFont color:[UIColor whiteColor] target:self action:@selector(signButtonClick:)];
+    signButton.backgroundColor= [UIColor colorFromHex:@"#5AB2F1"];
+    signButton.layer.cornerRadius = 10;
+    signButton.centerX        = editButton.centerX +Main_Screen_Width*50/375;
+    signButton.top            = userNameLabel.bottom +Main_Screen_Height*10/667;
     
-    UIView *backgroudView                  = [UIUtil drawLineInView:upView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*80/667) color:[UIColor whiteColor]];
+    UIView *backgroudView                  = [UIUtil drawLineInView:upView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*100/667) color:[UIColor whiteColor]];
     backgroudView.bottom                = upView.bottom;
     backgroudView.left                  = upView.left;
     
-    
     UIView *orderView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    orderView.left                      = Main_Screen_Width*20/375;
+    orderView.centerX                   = Main_Screen_Width/4 -20;
     orderView.top                       = 0;
     
     UITapGestureRecognizer  *tapOrderGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapOrderButtonClick:)];
     [orderView addGestureRecognizer:tapOrderGesture];
     
-    
-    UIImageView *orderImageView      = [UIUtil drawCustomImgViewInView:orderView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
-    orderImageView.left              = Main_Screen_Width*10/375;
-    orderImageView.top               = Main_Screen_Height*10/667;
+    UIImage     *orderImage          = [UIImage imageNamed:@"dingdan"];
+    UIImageView *orderImageView      = [UIUtil drawCustomImgViewInView:orderView frame:CGRectMake(0, 0, orderImage.size.width,orderImage.size.height) imageName:@"dingdan"];
+    orderImageView.centerX           = orderView.width/2;
+    orderImageView.top               = Main_Screen_Height*30/667;
     
     NSString *orderName              = @"订单";
     UIFont *orderNameFont            = [UIFont systemFontOfSize:16];
@@ -119,15 +128,16 @@
     
     
     UIView *favoritesView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    favoritesView.left                      = orderView.right +Main_Screen_Width*25/375;
+    favoritesView.centerX                   = Main_Screen_Width/2;
     favoritesView.top                       = 0;
     
     UITapGestureRecognizer  *favoritesTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapFavoritesButtonClick:)];
     [favoritesView addGestureRecognizer:favoritesTapGesture];
     
-    UIImageView *favoritesImageView      = [UIUtil drawCustomImgViewInView:favoritesView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
-    favoritesImageView.left              = Main_Screen_Width*10/375;
-    favoritesImageView.top               = Main_Screen_Height*10/667;
+    UIImage     *favoritesImage          = [UIImage imageNamed:@"shoucang"];
+    UIImageView *favoritesImageView      = [UIUtil drawCustomImgViewInView:favoritesView frame:CGRectMake(0, 0, favoritesImage.size.width,favoritesImage.size.height) imageName:@"shoucang"];
+    favoritesImageView.centerX           = favoritesView.width/2;
+    favoritesImageView.top               = Main_Screen_Height*30/667;
     
     NSString *favoritesName              = @"收藏";
     UIFont *favoritesNameFont            = [UIFont systemFontOfSize:16];
@@ -138,15 +148,16 @@
     
     
     UIView *exchangeView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    exchangeView.left                      = favoritesView.right +Main_Screen_Width*25/375;
+    exchangeView.centerX                   = Main_Screen_Width*3/4 +20;
     exchangeView.top                       = 0;
     
     UITapGestureRecognizer  *exchangeTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapExchangeButtonClick:)];
     [exchangeView addGestureRecognizer:exchangeTapGesture];
     
-    UIImageView *exchangeImageView      = [UIUtil drawCustomImgViewInView:exchangeView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
-    exchangeImageView.left              = Main_Screen_Width*10/375;
-    exchangeImageView.top               = Main_Screen_Height*10/667;
+    UIImage     *exchangeImage          = [UIImage imageNamed:@"duihuanliwu"];
+    UIImageView *exchangeImageView      = [UIUtil drawCustomImgViewInView:exchangeView frame:CGRectMake(0, 0, exchangeImage.size.width,exchangeImage.size.height) imageName:@"duihuanliwu"];
+    exchangeImageView.centerX           = exchangeView.width/2;
+    exchangeImageView.top               = Main_Screen_Height*30/667;
     
     NSString *exchangeName              = @"兑换";
     UIFont *exchangeNameFont            = [UIFont systemFontOfSize:16];
@@ -155,24 +166,6 @@
     exchangeNameLabel.centerX           = exchangeImageView.centerX;
     exchangeNameLabel.top               = exchangeImageView.bottom +Main_Screen_Height*10/667;
     
-    
-    UIView *serviceView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    serviceView.left                      = exchangeView.right +Main_Screen_Width*25/375;
-    serviceView.top                       = 0;
-    
-    UITapGestureRecognizer  *serviceTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapServiceButtonClick:)];
-    [serviceView addGestureRecognizer:serviceTapGesture];
-    
-    UIImageView *serviceImageView      = [UIUtil drawCustomImgViewInView:serviceView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
-    serviceImageView.left              = Main_Screen_Width*10/375;
-    serviceImageView.top               = Main_Screen_Height*10/667;
-    
-    NSString *serviceName              = @"客服";
-    UIFont *serviceNameFont            = [UIFont systemFontOfSize:16];
-    UILabel *serviceNameLabel          = [UIUtil drawLabelInView:serviceView frame:[UIUtil textRect:serviceName font:serviceNameFont] font:serviceNameFont text:serviceName isCenter:NO];
-    serviceNameLabel.textColor         = [UIColor blackColor];
-    serviceNameLabel.centerX           = serviceImageView.centerX;
-    serviceNameLabel.top               = serviceImageView.bottom +Main_Screen_Height*10/667;
     
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStyleGrouped];
@@ -298,23 +291,24 @@
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     
     if (indexPath.section == 0) {
-        cell.imageView.image            = [UIImage imageNamed:@"btnImage"];
+        cell.imageView.image            = [UIImage imageNamed:@"jindinghuiyuan"];
         cell.textLabel.text             = @"金顶会员";
         cell.detailTextLabel.text       = @"2600积分";
+        cell.detailTextLabel.textColor  = [UIColor colorFromHex:@"#ffd55e"];
         
     }else if (indexPath.section == 1){
     
         if (indexPath.row == 0) {
-            cell.imageView.image        = [UIImage imageNamed:@"btnImage"];
+            cell.imageView.image        = [UIImage imageNamed:@"wodeaiche"];
             cell.textLabel.text         = @"我的爱车";
         }else{
-            cell.imageView.image        = [UIImage imageNamed:@"btnImage"];
+            cell.imageView.image        = [UIImage imageNamed:@"wwodekaquan"];
             cell.textLabel.text         = @"我的卡券";
             cell.detailTextLabel.text   = @"3张优惠券";
         
         }
     }else{
-        cell.imageView.image            = [UIImage imageNamed:@"btnImage"];
+        cell.imageView.image            = [UIImage imageNamed:@"tuijianjinding"];
         cell.textLabel.text             = @"推荐金顶APP";
         cell.detailTextLabel.text       = @"奖励300元";
     }
