@@ -22,7 +22,7 @@
     
     application.statusBarHidden                     = NO;
     [[UITabBar appearance] setBarTintColor: [UIColor whiteColor]];
-    [[UITabBar appearance] setTintColor: [UIColor colorWithHex: 0xFFB700]];
+    [[UITabBar appearance] setTintColor: [UIColor colorFromHex:@"#293754"]];
     
     application.statusBarStyle                      = UIStatusBarStyleLightContent;
     application.applicationIconBadgeNumber          = 0;

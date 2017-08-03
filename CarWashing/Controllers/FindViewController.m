@@ -27,11 +27,15 @@
 
 @implementation FindViewController
 
+- (void) drawNavigation {
+
+    
+}
 - (void) drawContent {
     
-    self.statusView.hidden      = YES;
-    
-    self.navigationView.hidden  = YES;
+//    self.statusView.hidden      = YES;
+//    
+//    self.navigationView.hidden  = YES;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
     
@@ -41,8 +45,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"发现";
-    self.navigationController.navigationBar.hidden = YES;
+//    self.title = @"发现";
+//    self.navigationController.navigationBar.hidden = YES;
 
     [self createSubView];
     
@@ -54,23 +58,23 @@
 
 - (void) createSubView {
 
-    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*58/667) color:[UIColor whiteColor]];
-    titleView.top                      = 0;
+//    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*58/667) color:[UIColor whiteColor]];
+//    titleView.top                      = 0;
+//    
+//    NSString *titleName              = @"发现";
+//    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
+//    UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
+//    titleNameLabel.textColor         = [UIColor blackColor];
+//    titleNameLabel.centerX           = titleView.centerX;
+//    titleNameLabel.centerY           = titleView.centerY +Main_Screen_Height*10/667;
     
-    NSString *titleName              = @"发现";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
-    UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
-    titleNameLabel.textColor         = [UIColor blackColor];
-    titleNameLabel.centerX           = titleView.centerX;
-    titleNameLabel.centerY           = titleView.centerY +Main_Screen_Height*10/667;
-    
-    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*90/667) color:[UIColor whiteColor]];
-    upView.top                      = titleView.bottom+1;
+//    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*90/667) color:[UIColor whiteColor]];
+//    upView.top                      = titleView.bottom+1;
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStylePlain];
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
-    self.tableView.top              = upView.bottom;
+    self.tableView.top              = self.contentView.bottom;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ActivityListCell" bundle:nil] forCellReuseIdentifier:@"ActivityListCell"];
     

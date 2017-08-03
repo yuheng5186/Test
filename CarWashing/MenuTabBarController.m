@@ -25,7 +25,7 @@
 {
     [super viewWillAppear:animated];
     
-    UIImage *centerImage = [UIImage imageNamed:@"icon_defaultavatar"];
+    UIImage *centerImage = [UIImage imageNamed:@"xiche"];
     
     [self addCenterButtonWithImage:centerImage highlightImage: nil];
     
@@ -45,28 +45,28 @@
     HomeViewController *homeVC      = [[HomeViewController alloc]init];
     UINavigationController *homeNav = [[UINavigationController alloc]initWithRootViewController:homeVC];
     homeNav.navigationController.navigationBarHidden = YES;
-    UITabBarItem *homeTabItem       = [[UITabBarItem alloc]initWithTitle:@"首页" image:[UIImage imageNamed:@"homeA"] selectedImage:[UIImage imageNamed:@"homeL"]];
+    UITabBarItem *homeTabItem       = [[UITabBarItem alloc]initWithTitle:@"首页" image:[UIImage imageNamed:@"shangjia"] selectedImage:[UIImage imageNamed:@"shouyeL"]];
     homeTabItem.tag     = 1;
     homeVC.tabBarItem   = homeTabItem;
     
     BusinessViewController *businessVC      = [[BusinessViewController alloc]init];
     UINavigationController *businessNav = [[UINavigationController alloc]initWithRootViewController:businessVC];
     businessNav.navigationController.navigationBarHidden = YES;
-    UITabBarItem *businessTabItem       = [[UITabBarItem alloc]initWithTitle:@"商家" image:[UIImage imageNamed:@"shopA"] selectedImage:[UIImage imageNamed:@"shopL"]];
+    UITabBarItem *businessTabItem       = [[UITabBarItem alloc]initWithTitle:@"商家" image:[UIImage imageNamed:@"shangjia"] selectedImage:[UIImage imageNamed:@"shangjiaL"]];
     businessTabItem.tag     = 2;
     businessVC.tabBarItem   = businessTabItem;
     
     FindViewController *activityVC      = [[FindViewController alloc]init];
     UINavigationController *activityNav = [[UINavigationController alloc]initWithRootViewController:activityVC];
     activityNav.navigationController.navigationBarHidden = YES;
-    UITabBarItem *activityTabItem       = [[UITabBarItem alloc]initWithTitle:@"发现" image:[UIImage imageNamed:@"reportA"] selectedImage:[UIImage imageNamed:@"reportL"]];
+    UITabBarItem *activityTabItem       = [[UITabBarItem alloc]initWithTitle:@"洗车" image:[UIImage imageNamed:@"wode"] selectedImage:[UIImage imageNamed:@"wode"]];
     activityTabItem.tag     = 3;
     activityVC.tabBarItem   = activityTabItem;
     
     PurchaseViewController *purchaseVC      = [[PurchaseViewController alloc]init];
     UINavigationController *purchaseNav = [[UINavigationController alloc]initWithRootViewController:purchaseVC];
     purchaseNav.navigationController.navigationBarHidden = YES;
-    UITabBarItem *purchaseTabItem       = [[UITabBarItem alloc]initWithTitle:@"购卡" image:[UIImage imageNamed:@"messageA"] selectedImage:[UIImage imageNamed:@"messageL"]];
+    UITabBarItem *purchaseTabItem       = [[UITabBarItem alloc]initWithTitle:@"购卡" image:[UIImage imageNamed:@"gouka"] selectedImage:[UIImage imageNamed:@"goukaL"]];
     purchaseTabItem.tag     = 4;
     purchaseVC.tabBarItem   = purchaseTabItem;
     
@@ -74,7 +74,7 @@
     UINavigationController *mySettingNav = [[UINavigationController alloc]initWithRootViewController:mySettingVC];
     mySettingNav.navigationController.navigationBarHidden = YES;
 //    mySettingNav.navigationBar.hidden    = YES;
-    UITabBarItem *mySettingTabItem       = [[UITabBarItem alloc]initWithTitle:@"我的" image:[UIImage imageNamed:@"BarItemNormal1"] selectedImage:[UIImage imageNamed:@"BarItemSelected1"]];
+    UITabBarItem *mySettingTabItem       = [[UITabBarItem alloc]initWithTitle:@"我的" image:[UIImage imageNamed:@"wode"] selectedImage:[UIImage imageNamed:@"wodeL"]];
     mySettingTabItem.tag     = 5;
     mySettingVC.tabBarItem   = mySettingTabItem;
     
@@ -97,7 +97,7 @@
     [button setBackgroundImage:buttonImage forState:UIControlStateHighlighted];
     [button addTarget:self action:@selector(didSelectRouterAction) forControlEvents:UIControlEventTouchUpInside];
     button.centerX = Main_Screen_Width/2;
-    button.centerY = 0;
+    button.centerY = 5;
     [self.tabBar addSubview:button];
 }
 - (void)didSelectRouterAction {

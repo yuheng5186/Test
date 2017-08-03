@@ -67,6 +67,11 @@
 		18B697AF1F21DAE7009FF73A /* DSCarClubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697AE1F21DAE7009FF73A /* DSCarClubController.m */; };
 		18B697B21F21DB3F009FF73A /* DSCarTravellingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697B11F21DB3F009FF73A /* DSCarTravellingController.m */; };
 		18B697B51F21DBCE009FF73A /* DSWheelGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697B41F21DBCE009FF73A /* DSWheelGroupController.m */; };
+		18B69E9C1F32CA71007DA0E4 /* ScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B69E9B1F32CA71007DA0E4 /* ScanController.m */; };
+		18B69EA21F32CB48007DA0E4 /* UIColor+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B69E9F1F32CB48007DA0E4 /* UIColor+Zirkfied.m */; };
+		18B69EA31F32CB48007DA0E4 /* UIImage+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B69EA11F32CB48007DA0E4 /* UIImage+Zirkfied.m */; };
+		18B69EA61F32CB52007DA0E4 /* ZFMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B69EA51F32CB52007DA0E4 /* ZFMaskView.m */; };
+		18B69EAA1F32CB5B007DA0E4 /* ZFConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B69EA91F32CB5B007DA0E4 /* ZFConst.m */; };
 		18B803771F1DA2A300B52432 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B803761F1DA2A300B52432 /* main.m */; };
 		18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B803791F1DA2A300B52432 /* AppDelegate.m */; };
 		18B803801F1DA2A300B52432 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18B8037E1F1DA2A300B52432 /* Main.storyboard */; };
@@ -292,6 +297,17 @@
 		18B697B11F21DB3F009FF73A /* DSCarTravellingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSCarTravellingController.m; path = Find/DSCarTravellingController.m; sourceTree = "<group>"; };
 		18B697B31F21DBCE009FF73A /* DSWheelGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSWheelGroupController.h; path = Find/DSWheelGroupController.h; sourceTree = "<group>"; };
 		18B697B41F21DBCE009FF73A /* DSWheelGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSWheelGroupController.m; path = Find/DSWheelGroupController.m; sourceTree = "<group>"; };
+		18B69E9A1F32CA71007DA0E4 /* ScanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScanController.h; path = Home/ScanController.h; sourceTree = "<group>"; };
+		18B69E9B1F32CA71007DA0E4 /* ScanController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScanController.m; path = Home/ScanController.m; sourceTree = "<group>"; };
+		18B69E9E1F32CB48007DA0E4 /* UIColor+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Zirkfied.h"; path = "ZFScan/Category/UIColor+Zirkfied.h"; sourceTree = "<group>"; };
+		18B69E9F1F32CB48007DA0E4 /* UIColor+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Zirkfied.m"; path = "ZFScan/Category/UIColor+Zirkfied.m"; sourceTree = "<group>"; };
+		18B69EA01F32CB48007DA0E4 /* UIImage+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Zirkfied.h"; path = "ZFScan/Category/UIImage+Zirkfied.h"; sourceTree = "<group>"; };
+		18B69EA11F32CB48007DA0E4 /* UIImage+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Zirkfied.m"; path = "ZFScan/Category/UIImage+Zirkfied.m"; sourceTree = "<group>"; };
+		18B69EA41F32CB52007DA0E4 /* ZFMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZFMaskView.h; path = ZFScan/CustomView/ZFMaskView.h; sourceTree = "<group>"; };
+		18B69EA51F32CB52007DA0E4 /* ZFMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZFMaskView.m; path = ZFScan/CustomView/ZFMaskView.m; sourceTree = "<group>"; };
+		18B69EA71F32CB5B007DA0E4 /* ZFColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZFColor.h; path = ZFScan/Other/ZFColor.h; sourceTree = "<group>"; };
+		18B69EA81F32CB5B007DA0E4 /* ZFConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZFConst.h; path = ZFScan/Other/ZFConst.h; sourceTree = "<group>"; };
+		18B69EA91F32CB5B007DA0E4 /* ZFConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZFConst.m; path = ZFScan/Other/ZFConst.m; sourceTree = "<group>"; };
 		18B803721F1DA2A300B52432 /* CarWashing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarWashing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B803761F1DA2A300B52432 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18B803781F1DA2A300B52432 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -473,6 +489,7 @@
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				18B69E9D1F32CAFF007DA0E4 /* ScanQRCode */,
 				1853BA311F28A01600B98C7F /* JFCityViewController */,
 				1853BA0A1F28774400B98C7F /* LKActionSheet.h */,
 				1853BA0B1F28774400B98C7F /* LKActionSheet.m */,
@@ -608,6 +625,8 @@
 		181E93081F2094420006511E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				18B69E9A1F32CA71007DA0E4 /* ScanController.h */,
+				18B69E9B1F32CA71007DA0E4 /* ScanController.m */,
 				181E93091F2094C10006511E /* DSMessagesController.h */,
 				181E930A1F2094C10006511E /* DSMessagesController.m */,
 				181E932A1F20B0EB0006511E /* DSAdDetailController.h */,
@@ -697,6 +716,22 @@
 				18B697B41F21DBCE009FF73A /* DSWheelGroupController.m */,
 			);
 			name = Find;
+			sourceTree = "<group>";
+		};
+		18B69E9D1F32CAFF007DA0E4 /* ScanQRCode */ = {
+			isa = PBXGroup;
+			children = (
+				18B69EA71F32CB5B007DA0E4 /* ZFColor.h */,
+				18B69EA81F32CB5B007DA0E4 /* ZFConst.h */,
+				18B69EA91F32CB5B007DA0E4 /* ZFConst.m */,
+				18B69EA41F32CB52007DA0E4 /* ZFMaskView.h */,
+				18B69EA51F32CB52007DA0E4 /* ZFMaskView.m */,
+				18B69E9E1F32CB48007DA0E4 /* UIColor+Zirkfied.h */,
+				18B69E9F1F32CB48007DA0E4 /* UIColor+Zirkfied.m */,
+				18B69EA01F32CB48007DA0E4 /* UIImage+Zirkfied.h */,
+				18B69EA11F32CB48007DA0E4 /* UIImage+Zirkfied.m */,
+			);
+			name = ScanQRCode;
 			sourceTree = "<group>";
 		};
 		18B803691F1DA2A300B52432 = {
@@ -1090,6 +1125,7 @@
 				TargetAttributes = {
 					18B803711F1DA2A300B52432 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 6AWGM9A2YP;
 						ProvisioningStyle = Automatic;
 					};
 					18B8038A1F1DA2A300B52432 = {
@@ -1230,6 +1266,7 @@
 				501672201F297F3100384186 /* HQSliderView.m in Sources */,
 				1853BA461F28A04100B98C7F /* JFCityCollectionFlowLayout.m in Sources */,
 				50B26E641F300D60009B3B9F /* PayPurchaseCardController.m in Sources */,
+				18B69EAA1F32CB5B007DA0E4 /* ZFConst.m in Sources */,
 				5016720D1F297A3500384186 /* ShopCommentController.m in Sources */,
 				183997651F2586D300702071 /* ActivityListCell.m in Sources */,
 				181E92FE1F2088E80006511E /* DSMyCarController.m in Sources */,
@@ -1252,6 +1289,7 @@
 				501672101F297A3500384186 /* ShopViewController.m in Sources */,
 				50B26EBB1F3182CF009B3B9F /* GoodsViewLayout.m in Sources */,
 				181E93041F208C520006511E /* DSMyCardController.m in Sources */,
+				18B69EA61F32CB52007DA0E4 /* ZFMaskView.m in Sources */,
 				50B26E961F307B76009B3B9F /* RechargeController.m in Sources */,
 				18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */,
 				1853BA4E1F28A04C00B98C7F /* JFLocation.m in Sources */,
@@ -1288,6 +1326,7 @@
 				50E2EE861F1F4D3C00FAF130 /* YZSortCell.m in Sources */,
 				501672331F297FF000384186 /* ProblemTitleModel.m in Sources */,
 				18B803771F1DA2A300B52432 /* main.m in Sources */,
+				18B69E9C1F32CA71007DA0E4 /* ScanController.m in Sources */,
 				5016724F1F2A023600384186 /* ScoreGetController.m in Sources */,
 				181E92CF1F1F39CC0006511E /* UIView+Frame.m in Sources */,
 				507FED011F2B3111009CC505 /* CashViewController.m in Sources */,
@@ -1326,6 +1365,7 @@
 				50B26EB01F316672009B3B9F /* PayOrderViewCell.m in Sources */,
 				1853BA451F28A04100B98C7F /* JFButton.m in Sources */,
 				50B26EC91F31AFA7009B3B9F /* IcreaseCarController.m in Sources */,
+				18B69EA31F32CB48007DA0E4 /* UIImage+Zirkfied.m in Sources */,
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
 				501672411F29D16C00384186 /* MemberView.m in Sources */,
 				50E2EE7E1F1F4D3C00FAF130 /* YZAllCourseViewController.m in Sources */,
@@ -1340,6 +1380,7 @@
 				501672461F29DA6C00384186 /* MemberRegualrController.m in Sources */,
 				181E93291F20B0510006511E /* SXScrPageView.m in Sources */,
 				5016724C1F2A020600384186 /* ScoreIntroController.m in Sources */,
+				18B69EA21F32CB48007DA0E4 /* UIColor+Zirkfied.m in Sources */,
 				181E92E91F207FF60006511E /* DSSettingController.m in Sources */,
 				181E92F81F2086620006511E /* DSExchangeController.m in Sources */,
 			);
@@ -1493,7 +1534,7 @@
 			baseConfigurationReference = 786364A9A4C81732835898A5 /* Pods-CarWashing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6AWGM9A2YP;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1508,7 +1549,7 @@
 			baseConfigurationReference = 1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6AWGM9A2YP;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

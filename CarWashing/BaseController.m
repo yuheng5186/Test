@@ -95,7 +95,7 @@
     [self.view addSubview:self.contentView];
     [self.view addSubview:self.statusView];
     [self.view addSubview:self.navigationView];
-    
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     [self drawNavigation];
     [self drawContent];
 }

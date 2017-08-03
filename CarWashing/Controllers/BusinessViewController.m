@@ -120,7 +120,7 @@ static NSString *salerListCell = @"salerListViewCell";
     
     // 创建下拉菜单
     YZPullDownMenu *menu = [[YZPullDownMenu alloc] init];
-    menu.frame = CGRectMake(0, 64, Main_Screen_Width, 44);
+    menu.frame = CGRectMake(0, 0, Main_Screen_Width, 44);
     [self.view addSubview:menu];
     
     // 设置下拉菜单代理
