@@ -29,14 +29,7 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"全部订单" Color:[UIColor blackColor]];
-    
-}
-
-- (void) drawContent
-{
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
+    [self drawTitle:@"全部订单"];
     
 }
 

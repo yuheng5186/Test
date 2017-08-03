@@ -16,16 +16,11 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"推荐金顶APP" Color:[UIColor blackColor]];
+    [self drawTitle:@"推荐金顶APP"];
     
 }
 
-- (void) drawContent
-{
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
-    
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

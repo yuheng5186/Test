@@ -32,16 +32,10 @@ static NSString *id_favoriteCell = @"id_favoriteCell";
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"收藏" Color:[UIColor blackColor]];
+    [self drawTitle:@"收藏"];
     
 }
 
-- (void) drawContent
-{
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
-    
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

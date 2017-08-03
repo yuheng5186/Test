@@ -174,8 +174,12 @@
     self.tableView.dataSource       = self;
     self.tableView.scrollEnabled    = NO;
     self.tableView.tableFooterView  = [UIView new];
+    
     [self.contentView addSubview:self.tableView];
     
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
 }
 
 #pragma mark -------button click------
@@ -277,7 +281,7 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
+    return 45;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

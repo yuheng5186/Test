@@ -21,17 +21,14 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"个人信息" Color:[UIColor blackColor]];
+    [self drawTitle:@"个人信息"];
     
 }
 
 
 - (void) drawContent
 {
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
     self.contentView.top                = self.statusView.bottom;
-//    self.contentView.height             = self.view.height;
     self.contentView.backgroundColor    = [UIColor colorFromHex:@"#111112"];
     
 }
@@ -54,7 +51,14 @@
     self.tableView.tableFooterView  = [UIView new];
     self.tableView.tableHeaderView  = [UIView new];
     [self.contentView addSubview:self.tableView];
+    
+    
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
 }
+
+
 
 #pragma mark - UITableViewDataSource
 
@@ -113,7 +117,7 @@
     }
     cell.backgroundColor    = [UIColor whiteColor];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    
+
     if (indexPath.section == 0) {
         cell.textLabel.text     = @"头像";
         UIImageView *userImageView  = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, cell.contentView.centerY+Main_Screen_Height*10/667, 50, 50) imageName:@"icon_defaultavatar"];
