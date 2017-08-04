@@ -24,6 +24,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+    self.clearLabel.textColor = [UIColor colorFromHex:@"#999999"];
+    
+    self.priceLabel.textColor = [UIColor colorFromHex:@"#ff525a"];
+    
+    self.originPriceLabel.textColor = [UIColor colorFromHex:@"#868686"];
     
 }
 

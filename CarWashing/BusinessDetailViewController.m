@@ -10,6 +10,7 @@
 #import "BusinessDetailHeaderView.h"
 #import <Masonry.h>
 #import "BusinessDetailCell.h"
+#import "BusinessEstimateCell.h"
 #import "BusinessPayController.h"
 #import "ShopViewController.h"
 
@@ -23,6 +24,7 @@
 @end
 
 static NSString *detailTableViewCell = @"detailTableViewCell";
+static NSString *businessCommentCell = @"businessCommentCell";
 
 @implementation BusinessDetailViewController
 
@@ -53,27 +55,29 @@ static NSString *detailTableViewCell = @"detailTableViewCell";
 
 - (void)setupUI {
     
-    UIImageView *detaiImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 200)];
+    UIView *containHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 375/2 + 196)];
+    [self.view addSubview:containHeadView];
     
-    detaiImgView.image = [UIImage imageNamed:@"WX20170712-160117"];
+    UIImageView *detaiImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 375/2)];
     
-    [self.view addSubview:detaiImgView];
+    detaiImgView.image = [UIImage imageNamed:@"hangdiantu"];
+    
+    [containHeadView addSubview:detaiImgView];
     
     
     BusinessDetailHeaderView *headerView = [BusinessDetailHeaderView businessDetailHeaderView];
     
-    headerView.frame = CGRectMake(0, 264, Main_Screen_Width, 180);
+    headerView.frame = CGRectMake(0, 375/2, Main_Screen_Width, 196);
     
     self.headerView = headerView;
-    
-    [self.view addSubview:headerView];
-    
+    [containHeadView addSubview:headerView];
+    //detaiImgView.bottom  = headerView.top;
+
     [headerView addTarget:self action:@selector(clickDetailView) forControlEvents:UIControlEventTouchUpInside];
     
     
-    UITableView *detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 264, Main_Screen_Width, Main_Screen_Height - 344) style:UITableViewStyleGrouped];
+    UITableView *detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 124) style:UITableViewStyleGrouped];
     self.detailTableView = detailTableView;
-    
     
     detailTableView.delegate = self;
     detailTableView.dataSource = self;
@@ -81,16 +85,19 @@ static NSString *detailTableViewCell = @"detailTableViewCell";
     UINib *nib = [UINib nibWithNibName:@"BusinessDetailCell" bundle:nil];
     [detailTableView registerNib:nib forCellReuseIdentifier:detailTableViewCell];
     
-    detailTableView.rowHeight = 100;
+    [detailTableView registerNib:[UINib nibWithNibName:@"BusinessEstimateCell" bundle:nil] forCellReuseIdentifier:businessCommentCell];
     
-    detailTableView.tableHeaderView = self.headerView;
+    //detailTableView.rowHeight = 100;
+    
+    detailTableView.tableHeaderView = containHeadView;
     
     [self.view addSubview:detailTableView];
     
     //表尾
     UIButton *commentBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
     [commentBtn setTitle:@"查看全部评价" forState:UIControlStateNormal];
-    [commentBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [commentBtn setTitleColor:[UIColor colorFromHex:@"#3a3a3a"] forState:UIControlStateNormal];
+    commentBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     commentBtn.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:commentBtn];
     
@@ -100,24 +107,36 @@ static NSString *detailTableViewCell = @"detailTableViewCell";
     detailTableView.tableFooterView = commentBtn;
     
     //底部支付栏
-    UIView *payToolBar = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 80, Main_Screen_Width, 80)];
+    UIView *payToolBar = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 60, Main_Screen_Width, 60)];
     payToolBar.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:payToolBar];
     
     UILabel *lblPrice = [[UILabel alloc] init];
     lblPrice.text = @"¥24.00";
+    lblPrice.font = [UIFont systemFontOfSize:18];
+    lblPrice.textColor = [UIColor colorFromHex:@"#ff525a"];
     [payToolBar addSubview:lblPrice];
+    
+    UILabel *formerPriceLab = [[UILabel alloc] init];
+    formerPriceLab.text = @"¥38.00";
+    formerPriceLab.textColor = [UIColor colorFromHex:@"#999999"];
+    formerPriceLab.font = [UIFont systemFontOfSize:13];
+    [payToolBar addSubview:formerPriceLab];
     
     UILabel *lblCarType = [[UILabel alloc] init];
     lblCarType.text = @"标准洗车-五座轿车";
+    lblCarType.font = [UIFont systemFontOfSize:13];
+    lblCarType.textColor = [UIColor colorFromHex:@"#999999"];
     [payToolBar addSubview:lblCarType];
     
     UIButton *payBtn = [[UIButton alloc] init];
-    payBtn.frame     = CGRectMake(Main_Screen_Width - 120, 0, 120, 80);
+    payBtn.frame     = CGRectMake(Main_Screen_Width - 92, 0, 92, 60);
     [payBtn setTitle:@"去结算" forState:UIControlStateNormal];
+    [payBtn setTintColor:[UIColor colorFromHex:@"#ffffff"]];
+    payBtn.titleLabel.font = [UIFont systemFontOfSize:18];
     //payBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    payBtn.backgroundColor = [UIColor orangeColor];
+    payBtn.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     [payToolBar addSubview:payBtn];
     
     //跳转支付页面
@@ -125,12 +144,18 @@ static NSString *detailTableViewCell = @"detailTableViewCell";
     
     //约束
     [lblPrice mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.mas_equalTo(payToolBar).mas_offset(15);
+        make.top.mas_equalTo(payToolBar).mas_offset(12);
+        make.left.equalTo(payToolBar).mas_offset(20);
+    }];
+    
+    [formerPriceLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(lblPrice.mas_trailing).mas_offset(10);
+        make.bottom.equalTo(lblPrice);
     }];
     
     [lblCarType mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(lblPrice);
-        make.top.mas_equalTo(lblPrice).mas_offset(30);
+        make.top.mas_equalTo(lblPrice.mas_bottom).mas_offset(6);
     }];
     
     /*[payBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -139,6 +164,26 @@ static NSString *detailTableViewCell = @"detailTableViewCell";
      make.right.top.equalTo(payToolBar);
      }];
      */
+    
+    UIImageView *serviceImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"kefuzixun"]];
+    [payToolBar addSubview:serviceImageView];
+    
+    UILabel *serviceLabel = [[UILabel alloc] init];
+    serviceLabel.text = @"客服咨询";
+    serviceLabel.font = [UIFont systemFontOfSize:13];
+    serviceLabel.textColor = [UIColor colorFromHex:@"#999999"];
+    [payToolBar addSubview:serviceLabel];
+    
+    
+    [serviceImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(payToolBar).mas_offset(12);
+        make.trailing.equalTo(payBtn.mas_leading).mas_equalTo(-37);
+    }];
+    
+    [serviceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(serviceImageView);
+        make.top.equalTo(serviceImageView.mas_bottom).mas_offset(7);
+    }];
     
 }
 
@@ -177,22 +222,35 @@ static NSString *detailTableViewCell = @"detailTableViewCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    BusinessDetailCell *businessDetailCell = [tableView dequeueReusableCellWithIdentifier:detailTableViewCell forIndexPath:indexPath];
-    
-    if (businessDetailCell == nil) {
-        businessDetailCell = [BusinessDetailCell businessDetailCell];
+
+//    if (businessDetailCell == nil) {
+//        businessDetailCell = [BusinessDetailCell businessDetailCell];
+//    }
+    if (indexPath.section == 0) {
+        BusinessDetailCell *businessDetailCell = [tableView dequeueReusableCellWithIdentifier:detailTableViewCell forIndexPath:indexPath];
+        
+        businessDetailCell.selectImageView.image = [UIImage imageNamed:@"xaunzhong"];
+        businessDetailCell.carLabel.text = @"标准洗车-五座轿车";
+        businessDetailCell.clearLabel.text = @"整车泡沫冲洗擦干、轮胎轮轴冲洗清洁、车内吸尘、内饰脚垫等简单除尘";
+        businessDetailCell.priceLabel.text = @"¥24.00";
+        
+        return businessDetailCell;
     }
     
-    businessDetailCell.selectImageView.image = [UIImage imageNamed:@"搜索-更多-已选中"];
-    businessDetailCell.carLabel.text = @"标准洗车-五座轿车";
-    businessDetailCell.clearLabel.text = @"整车泡沫冲洗擦干、轮胎轮轴冲洗清洁、车内吸尘、内饰脚垫等简单除尘";
-    businessDetailCell.priceLabel.text = @"¥24.00";
+    BusinessEstimateCell *estimateCell = [tableView dequeueReusableCellWithIdentifier:businessCommentCell forIndexPath:indexPath];
     
-    return businessDetailCell;
+    return estimateCell;
+    
 }
 
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == 0) {
+        return 100;
+    }
+    
+    return 110;
+}
 
 
 - (void)didReceiveMemoryWarning {
@@ -202,7 +260,7 @@ static NSString *detailTableViewCell = @"detailTableViewCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 50;
+    return 40;
     
 }
 
@@ -212,7 +270,9 @@ static NSString *detailTableViewCell = @"detailTableViewCell";
     
     UILabel *textLab = [[UILabel alloc] init];
     
-    textLab.backgroundColor = [UIColor lightGrayColor];
+    textLab.backgroundColor = [UIColor colorFromHex:@"#dfdfdf"];
+    textLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+    textLab.font = [UIFont systemFontOfSize:14];
     
     if (section == 0) {
         textLab.text = @"  服务活动";
@@ -224,7 +284,7 @@ static NSString *detailTableViewCell = @"detailTableViewCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 1;
+    return 0.1;
 }
 
 /*
