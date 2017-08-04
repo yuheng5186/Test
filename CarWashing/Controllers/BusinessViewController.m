@@ -83,7 +83,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     [self.salerListView registerNib:nib forCellReuseIdentifier:id_salerListCell];
     
     
-    
+    self.salerListView.contentInset = UIEdgeInsetsMake(0, 0, 180, 0);
     self.salerListView.rowHeight = 110;
 }
 

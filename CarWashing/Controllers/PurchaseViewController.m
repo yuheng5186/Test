@@ -104,7 +104,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     NSString *titleName              = @"购卡";
     UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
-    titleNameLabel.textColor         = [UIColor blackColor];
+    titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = upView.centerX;
     titleNameLabel.centerY           = upView.centerY +Main_Screen_Height*10/667;
     
@@ -144,7 +144,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     pageControl.numberOfPages = self.imageArray.count;
     pageControl.userInteractionEnabled = NO;
     [pageControl setValue:[UIImage imageNamed:@"xuanzhong"] forKey:@"currentPageImage"];
-    [pageControl setValue:[UIImage imageNamed:@"weixuanzhong"] forKey:@"pageImage"];
+    [pageControl setValue:[UIImage imageNamed:@"wei_xuanzhong"] forKey:@"pageImage"];
     self.pageControl = pageControl;
     [self.view addSubview:pageControl];
     
