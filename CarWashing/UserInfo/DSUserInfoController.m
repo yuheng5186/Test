@@ -10,10 +10,16 @@
 #import "AppDelegate.h"
 #import "DSChangePhoneController.h"
 #import "DSChangeNameController.h"
+#import<AVFoundation/AVMediaFormat.h>
+#import <AVFoundation/AVCaptureDevice.h>
+
+
+
 @interface DSUserInfoController ()<UITableViewDelegate,UITableViewDataSource,LKActionSheetDelegate,LKAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSString *sexString;
+@property (nonatomic, strong) UIImageView *userImageView;
 
 @end
 
@@ -120,8 +126,8 @@
 
     if (indexPath.section == 0) {
         cell.textLabel.text     = @"头像";
-        UIImageView *userImageView  = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, cell.contentView.centerY-11, 60, 60) imageName:@"gerenxinxitou"];
-        userImageView.left          = Main_Screen_Width*280/375;
+        self.userImageView  = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, cell.contentView.centerY-11, 60, 60) imageName:@"gerenxinxitou"];
+        self.userImageView.left          = Main_Screen_Width*280/375;
         
         
     }else if (indexPath.section == 1){
@@ -157,9 +163,20 @@
     
     if (indexPath.section == 0) {
         
-        LKActionSheet *avatarSheet  = [[LKActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册中选择", nil];
-        avatarSheet.tag             = 1001;
-        [avatarSheet showInView:[AppDelegate sharedInstance].window.rootViewController.view];
+        
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        if (authStatus == AVAuthorizationStatusRestricted || authStatus ==AVAuthorizationStatusDenied){
+            //无权限 做一个友好的提示
+            UIAlertView * alart = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"请您设置允许APP访问您的相机->设置->隐私->相机" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil]; [alart show]; return ;
+        } else {
+            LKActionSheet *avatarSheet  = [[LKActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册中选择", nil];
+            avatarSheet.tag             = 1001;
+            [avatarSheet showInView:[AppDelegate sharedInstance].window.rootViewController.view];
+        }
+        
+        
+        
+
         
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
@@ -252,7 +269,7 @@
 
 - (void)processImage:(UIImage *)image
 {
-    
+    self.userImageView.image = image;
 }
 
 

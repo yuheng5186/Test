@@ -60,6 +60,10 @@
     self.tableView.tableFooterView  = [UIView new];
     [self.contentView addSubview:self.tableView];
     
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
     UIButton *logoutButton      = [UIUtil drawDefaultButton:self.contentView title:@"退出当前帐号" target:self action:@selector(logoutButtonClick:)];
     logoutButton.top           = self.tableView.bottom +Main_Screen_Height*30/667;
     logoutButton.centerX       = upView.centerX;
