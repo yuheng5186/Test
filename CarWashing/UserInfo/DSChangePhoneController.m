@@ -107,7 +107,7 @@
         self.verifyNumberFieldText.textAlignment  = NSTextAlignmentLeft;
         self.verifyNumberFieldText.font           = [UIFont systemFontOfSize:16];
         self.verifyNumberFieldText.backgroundColor= [UIColor whiteColor];
-        self.verifyNumberFieldText.centerY        = cell.centerY +Main_Screen_Height*8/667;
+        self.verifyNumberFieldText.centerY        = cell.centerY;
         self.verifyNumberFieldText.left           = Main_Screen_Width*10/375;
         
         [self.verifyNumberFieldText addTarget:self action:@selector(verifyNumberFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];

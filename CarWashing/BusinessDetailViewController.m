@@ -30,16 +30,10 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"商家详情" Color:[UIColor blackColor]];
+    [self drawTitle:@"商家详情"];
     
 }
 
-- (void) drawContent
-{
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
-    
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
