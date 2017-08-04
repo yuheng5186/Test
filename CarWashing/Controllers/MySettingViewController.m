@@ -52,10 +52,6 @@
     UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*320/667) color:[UIColor colorFromHex:@"#293754"]];
     upView.top                      = 0;
     
-//    UIImage *userImage              = [UIImage imageNamed:@"icon_defaultavatar"];
-//    UIImageView *userImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(0, 0, userImage.size.width/2, userImage.size.height/2) imageName:@"icon_defaultavatar"];
-//    userImageView.top               = Main_Screen_Height*50/667;
-//    userImageView.left              = Main_Screen_Width*30/375;
     
     NSString *titleName              = @"我的";
     UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:16];
@@ -66,7 +62,7 @@
     
     
 //    UIImage *editImage              = [UIImage imageNamed:@"icon_defaultavatar"];
-    UIButton  *editButton           = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, 80, 80) iconName:@"touxiang" target:self action:@selector(editButtonClick:)];
+    UIButton  *editButton           = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) iconName:@"touxiang" target:self action:@selector(editButtonClick:)];
     editButton.top                  = titleNameLabel.bottom +Main_Screen_Height*15/667;
     editButton.centerX              = titleNameLabel.centerX;
 
@@ -87,7 +83,7 @@
     
     NSString *membershipString      = @"会员特权";
     UIFont *membershipFont          = [UIFont systemFontOfSize:15];
-    UIButton *membershipButton      = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, 80, 20) text:membershipString font:membershipFont color:[UIColor whiteColor] target:self action:@selector(menbershipButtonClick:)];
+    UIButton *membershipButton      = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) text:membershipString font:membershipFont color:[UIColor whiteColor] target:self action:@selector(menbershipButtonClick:)];
     membershipButton.backgroundColor= [UIColor colorFromHex:@"#FDBB2C"];
     membershipButton.layer.cornerRadius = 10;
     membershipButton.centerX        = editButton.centerX-Main_Screen_Width*50/375;
@@ -95,7 +91,7 @@
     
     NSString *signString      = @"会员签到";
     UIFont *signFont          = [UIFont systemFontOfSize:15];
-    UIButton *signButton      = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, 80, 20) text:signString font:signFont color:[UIColor whiteColor] target:self action:@selector(signButtonClick:)];
+    UIButton *signButton      = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) text:signString font:signFont color:[UIColor whiteColor] target:self action:@selector(signButtonClick:)];
     signButton.backgroundColor= [UIColor colorFromHex:@"#5AB2F1"];
     signButton.layer.cornerRadius = 10;
     signButton.centerX        = editButton.centerX +Main_Screen_Width*50/375;
@@ -106,7 +102,7 @@
     backgroudView.left                  = upView.left;
     
     UIView *orderView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    orderView.centerX                   = Main_Screen_Width/4 -20;
+    orderView.centerX                   = Main_Screen_Width/4 -Main_Screen_Width*20/375;
     orderView.top                       = 0;
     
     UITapGestureRecognizer  *tapOrderGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapOrderButtonClick:)];
@@ -148,7 +144,7 @@
     
     
     UIView *exchangeView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    exchangeView.centerX                   = Main_Screen_Width*3/4 +20;
+    exchangeView.centerX                   = Main_Screen_Width*3/4 +Main_Screen_Width*20/375;
     exchangeView.top                       = 0;
     
     UITapGestureRecognizer  *exchangeTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapExchangeButtonClick:)];
