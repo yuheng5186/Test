@@ -39,14 +39,7 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"扫码洗车" Color:[UIColor blackColor]];
-    
-}
-
-- (void) drawContent
-{
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
+    [self drawTitle:@"扫码洗车"];
     
 }
 
@@ -80,35 +73,36 @@
  *  添加遮罩层
  */
 - (void)addUI{
-    self.maskView = [[ZFMaskView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    
+    self.maskView = [[ZFMaskView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [self.view addSubview:self.maskView];
     
-    UIView *upView                  = [UIUtil drawLineInView:self.view frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*44/667) color:[UIColor clearColor]];
-    upView.top                      = 20;
-    
-    //返回按钮
-    CGFloat back_width = 50;
-    CGFloat back_height = self.navigationView.size.height;
-    
-    self.backButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    self.backButton.frame = CGRectMake(0, 0, back_width, back_height);
-    [self.backButton setImage:[[UIImage imageNamed:@"icon_titlebar_arrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
-    [self.backButton addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
-    self.backButton.left        = 10;
-    self.backButton.top         = 10;
-    [upView addSubview:self.backButton];
+//    UIView *upView                  = [UIUtil drawLineInView:self.view frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*44/667) color:[UIColor clearColor]];
+//    upView.top                      = 20;
+//    
+//    //返回按钮
+//    CGFloat back_width = 50;
+//    CGFloat back_height = self.navigationView.size.height;
+//    
+//    self.backButton = [UIButton buttonWithType:UIButtonTypeSystem];
+//    self.backButton.frame = CGRectMake(0, 0, back_width, back_height);
+//    [self.backButton setImage:[[UIImage imageNamed:@"icon_titlebar_arrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+//    [self.backButton addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
+//    self.backButton.left        = 10;
+//    self.backButton.top         = 10;
+//    [upView addSubview:self.backButton];
     
     //返回提示Label
-    CGFloat backHint_width = 120;
-    CGFloat backHint_height = 30;
-    
-    self.backHintLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, backHint_width, backHint_height)];
-    self.backHintLabel.text = @"扫码洗车";
-    self.backHintLabel.textAlignment = NSTextAlignmentCenter;
-    self.backHintLabel.textColor = ZFWhite;
-    self.backHintLabel.centerX  = upView.centerX;
-    self.backHintLabel.centerY  = self.backButton.centerY;
-    [upView addSubview:self.backHintLabel];
+//    CGFloat backHint_width = 120;
+//    CGFloat backHint_height = 30;
+//    
+//    self.backHintLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, backHint_width, backHint_height)];
+//    self.backHintLabel.text = @"扫码洗车";
+//    self.backHintLabel.textAlignment = NSTextAlignmentCenter;
+//    self.backHintLabel.textColor = ZFWhite;
+//    self.backHintLabel.centerX  = upView.centerX;
+//    self.backHintLabel.centerY  = self.backButton.centerY;
+//    [upView addSubview:self.backHintLabel];
     
     //手电筒
     CGFloat flashlight_width = 40;
@@ -158,7 +152,7 @@
     [self.session addOutput:metadataOutput];
     
     self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
-    self.previewLayer.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    self.previewLayer.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT);
     self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     self.previewLayer.backgroundColor = [UIColor yellowColor].CGColor;
     

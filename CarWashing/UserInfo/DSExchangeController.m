@@ -16,14 +16,7 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"兑换" Color:[UIColor blackColor]];
-    
-}
-
-- (void) drawContent
-{
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
+    [self drawTitle:@"兑换"];
     
 }
 

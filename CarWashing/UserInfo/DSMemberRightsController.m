@@ -16,16 +16,10 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"会员特权" Color:[UIColor blackColor]];
+    [self drawTitle:@"会员特权"];
     
 }
 
-- (void) drawContent
-{
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
-    
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

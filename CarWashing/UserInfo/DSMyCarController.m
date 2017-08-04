@@ -43,17 +43,11 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"我的爱车" Color:[UIColor blackColor]];
+    [self drawTitle:@"我的爱车"];
     [self drawRightTextButton:@"我的车库" action:@selector(clickMycarPort)];
     
 }
 
-- (void) drawContent
-{
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
-    
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

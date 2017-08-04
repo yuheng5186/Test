@@ -28,14 +28,7 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"我的卡券" Color:[UIColor blackColor]];
-    
-}
-
-- (void) drawContent
-{
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
+    [self drawTitle:@"我的卡券"];
     
 }
 

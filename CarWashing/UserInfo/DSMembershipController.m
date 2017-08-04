@@ -26,20 +26,12 @@ static NSString *id_goodsCell = @"id_goodsCell";
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"金顶会员" Color:[UIColor blackColor]];
+    [self drawTitle:@"金顶会员"];
     [self drawRightTextButton:@"积分规则" action:@selector(clickRegularButton)];
     
     
     
 }
-
-- (void) drawContent
-{
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
-    
-}
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];

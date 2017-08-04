@@ -56,7 +56,7 @@
     
     //提示框
     self.hintLabel = [[UILabel alloc] init];
-    self.hintLabel.text = @"将 二维码/条形码 放入框内中央，即可自动扫描";
+    self.hintLabel.text = @"请对准机器上的二维码";
     self.hintLabel.textColor = ZFFicelle;
     self.hintLabel.numberOfLines = 0;
     self.hintLabel.textAlignment = NSTextAlignmentCenter;
@@ -154,8 +154,8 @@
             
         //竖屏
         }else{
-            animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.center.x, (self.center.y - self.frame.size.width * ZFScanRatio * 0.5 + self.scanLineImg.image.size.height * 0.5))];
-            animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.center.x, self.center.y + self.frame.size.width * ZFScanRatio * 0.5 - self.scanLineImg.image.size.height * 0.5)];
+            animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.center.x, (self.center.y - self.frame.size.width * ZFScanRatio * 0.5 + self.scanLineImg.image.size.height * 0.1))];
+            animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.center.x, self.center.y + self.frame.size.width * ZFScanRatio * 0.5 - self.scanLineImg.image.size.height * 0.1)];
         }
         
         _isFirstTransition = NO;
