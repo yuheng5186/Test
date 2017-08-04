@@ -10,7 +10,6 @@
 #import "SalerListViewCell.h"
 #import "YZPullDownMenu.h"
 #import "YZMenuButton.h"
-#import "YZMoreMenuViewController.h"
 #import "YZSortViewController.h"
 #import "YZAllCourseViewController.h"
 #import "JPCityViewController.h"
@@ -24,7 +23,7 @@
 
 @end
 
-static NSString *salerListCell = @"salerListViewCell";
+static NSString *id_salerListCell = @"salerListViewCell";
 
 @implementation BusinessViewController
 
@@ -81,9 +80,11 @@ static NSString *salerListCell = @"salerListViewCell";
     
     UINib *nib = [UINib nibWithNibName:@"SalerListViewCell" bundle:nil];
     
-    [self.salerListView registerNib:nib forCellReuseIdentifier:salerListCell];
+    [self.salerListView registerNib:nib forCellReuseIdentifier:id_salerListCell];
     
-    self.salerListView.rowHeight = 96;
+    
+    
+    self.salerListView.rowHeight = 110;
 }
 
 
@@ -99,7 +100,7 @@ static NSString *salerListCell = @"salerListViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    SalerListViewCell *salerListViewCell = [tableView dequeueReusableCellWithIdentifier:salerListCell forIndexPath:indexPath];
+    SalerListViewCell *salerListViewCell = [tableView dequeueReusableCellWithIdentifier:id_salerListCell forIndexPath:indexPath];
     
     
     return salerListViewCell;
@@ -127,7 +128,7 @@ static NSString *salerListCell = @"salerListViewCell";
     menu.dataSource = self;
     
     // 初始化标题
-    _titles = @[@"上海市",@"全部门店",@"默认排序",@"筛选"];
+    _titles = @[@"上海市",@"全部门店",@"默认排序"];
     
     // 添加子控制器
     [self setupAllChildViewController];
@@ -140,18 +141,18 @@ static NSString *salerListCell = @"salerListViewCell";
     JPCityViewController *cityVC = [[JPCityViewController alloc] init];
     YZAllCourseViewController *allCourse = [[YZAllCourseViewController alloc] init];
     YZSortViewController *sort = [[YZSortViewController alloc] init];
-    YZMoreMenuViewController *moreMenu = [[YZMoreMenuViewController alloc] init];
+    
     [self addChildViewController:cityVC];
     [self addChildViewController:allCourse];
     [self addChildViewController:sort];
-    [self addChildViewController:moreMenu];
+    
 }
 
 #pragma mark - YZPullDownMenuDataSource
 // 返回下拉菜单多少列
 - (NSInteger)numberOfColsInMenu:(YZPullDownMenu *)pullDownMenu
 {
-    return 4;
+    return 3;
 }
 
 // 返回下拉菜单每列按钮
@@ -159,10 +160,10 @@ static NSString *salerListCell = @"salerListViewCell";
 {
     YZMenuButton *button = [YZMenuButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:_titles[index] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor colorWithRed:25 /255.0 green:143/255.0 blue:238/255.0 alpha:1] forState:UIControlStateSelected];
-    [button setImage:[UIImage imageNamed:@"标签-向下箭头"] forState:UIControlStateNormal];
-    [button setImage:[UIImage imageNamed:@"标签-向上箭头"] forState:UIControlStateSelected];
+    [button setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateSelected];
+    [button setImage:[UIImage imageNamed:@"xiala"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"shangla"] forState:UIControlStateSelected];
     
     return button;
 }
