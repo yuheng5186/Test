@@ -546,15 +546,15 @@
 
 + (UIButton *)drawDefaultButton:(UIView *)view title:(NSString *)title target:(id)target action:(SEL)action {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake((Main_Screen_Width-300)/2, 0, Main_Screen_Width-80, 40);
-    btn.layer.cornerRadius = 20;
+    btn.frame = CGRectMake((Main_Screen_Width-300)/2, 0, Main_Screen_Width-20, 40);
+    btn.layer.cornerRadius = 5;
     btn.layer.masksToBounds = YES;
 //    UIImage *normalImage = [UIImage createImageWithColor:[UIColor brkBtnNormal]];
 //    UIImage *disableImage = [UIImage createImageWithColor:[UIColor brkBtnDisable]];
     [btn setBackgroundImage:[UIImage createImageWithColor:[UIColor colorWithHex:0xFFB500 alpha:1.0]] forState:UIControlStateNormal];
 //    [btn setBackgroundImage:disableImage forState:UIControlStateDisabled];
     [btn setTitle:title forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor colorWithHex:0x754300 alpha:1.0] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:17];
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:btn];
