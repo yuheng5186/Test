@@ -105,6 +105,8 @@
 		5016724C1F2A020600384186 /* ScoreIntroController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5016724B1F2A020600384186 /* ScoreIntroController.m */; };
 		5016724F1F2A023600384186 /* ScoreGetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5016724E1F2A023600384186 /* ScoreGetController.m */; };
 		501672521F2A091000384186 /* ScoreCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672511F2A091000384186 /* ScoreCategoryView.m */; };
+		5042E3521F33165600CD140F /* PGIndexBannerSubiew.m in Sources */ = {isa = PBXBuildFile; fileRef = 5042E3511F33165600CD140F /* PGIndexBannerSubiew.m */; };
+		5042E3561F33165C00CD140F /* NewPagedFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5042E3551F33165C00CD140F /* NewPagedFlowView.m */; };
 		507FECF71F2AC8D7009CC505 /* BusinessPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FECF61F2AC8D7009CC505 /* BusinessPayController.m */; };
 		507FED011F2B3111009CC505 /* CashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FED001F2B3111009CC505 /* CashViewController.m */; };
 		5097FDFC1F2ECE0B002EF8F8 /* TicketCashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097FDFB1F2ECE0B002EF8F8 /* TicketCashView.m */; };
@@ -369,6 +371,10 @@
 		5016724E1F2A023600384186 /* ScoreGetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreGetController.m; sourceTree = "<group>"; };
 		501672501F2A091000384186 /* ScoreCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCategoryView.h; sourceTree = "<group>"; };
 		501672511F2A091000384186 /* ScoreCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCategoryView.m; sourceTree = "<group>"; };
+		5042E3501F33165600CD140F /* PGIndexBannerSubiew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGIndexBannerSubiew.h; sourceTree = "<group>"; };
+		5042E3511F33165600CD140F /* PGIndexBannerSubiew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGIndexBannerSubiew.m; sourceTree = "<group>"; };
+		5042E3541F33165C00CD140F /* NewPagedFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPagedFlowView.h; sourceTree = "<group>"; };
+		5042E3551F33165C00CD140F /* NewPagedFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPagedFlowView.m; sourceTree = "<group>"; };
 		507FECF51F2AC8D7009CC505 /* BusinessPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessPayController.h; sourceTree = "<group>"; };
 		507FECF61F2AC8D7009CC505 /* BusinessPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessPayController.m; sourceTree = "<group>"; };
 		507FECFF1F2B3111009CC505 /* CashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashViewController.h; sourceTree = "<group>"; };
@@ -770,6 +776,7 @@
 				18B803811F1DA2A300B52432 /* Assets.xcassets */,
 				18B803831F1DA2A300B52432 /* LaunchScreen.storyboard */,
 				18B803861F1DA2A300B52432 /* Info.plist */,
+				5042E34E1F33162200CD140F /* CyclePageView */,
 				501672211F297FB100384186 /* ClickExpande */,
 				5016721D1F297F3100384186 /* HQSliderView */,
 				50E2EE5B1F1F4BF700FAF130 /* Search Menu */,
@@ -926,6 +933,33 @@
 				5016723A1F29809200384186 /* UIView+HQCategory.m */,
 			);
 			path = "UIView+HQCategory";
+			sourceTree = "<group>";
+		};
+		5042E34E1F33162200CD140F /* CyclePageView */ = {
+			isa = PBXGroup;
+			children = (
+				5042E34F1F33165600CD140F /* CustomeView */,
+				5042E3531F33165C00CD140F /* NewPagedFlowView */,
+			);
+			name = CyclePageView;
+			sourceTree = "<group>";
+		};
+		5042E34F1F33165600CD140F /* CustomeView */ = {
+			isa = PBXGroup;
+			children = (
+				5042E3501F33165600CD140F /* PGIndexBannerSubiew.h */,
+				5042E3511F33165600CD140F /* PGIndexBannerSubiew.m */,
+			);
+			path = CustomeView;
+			sourceTree = "<group>";
+		};
+		5042E3531F33165C00CD140F /* NewPagedFlowView */ = {
+			isa = PBXGroup;
+			children = (
+				5042E3541F33165C00CD140F /* NewPagedFlowView.h */,
+				5042E3551F33165C00CD140F /* NewPagedFlowView.m */,
+			);
+			path = NewPagedFlowView;
 			sourceTree = "<group>";
 		};
 		50E2EE5B1F1F4BF700FAF130 /* Search Menu */ = {
@@ -1356,11 +1390,13 @@
 				181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */,
 				50B26E6D1F301B60009B3B9F /* RechargeCell.m in Sources */,
 				50B26EC41F31A048009B3B9F /* CarTicketView.m in Sources */,
+				5042E3521F33165600CD140F /* PGIndexBannerSubiew.m in Sources */,
 				507FECF71F2AC8D7009CC505 /* BusinessPayController.m in Sources */,
 				5016722A1F297FDD00384186 /* HeadView.m in Sources */,
 				5016720E1F297A3500384186 /* ShopIntroController.m in Sources */,
 				18218FEB1F2B0C3C00F7207F /* DSCarClubDetailController.m in Sources */,
 				18B697AC1F21DAB3009FF73A /* DSSaleActivityController.m in Sources */,
+				5042E3561F33165C00CD140F /* NewPagedFlowView.m in Sources */,
 				5097FDFC1F2ECE0B002EF8F8 /* TicketCashView.m in Sources */,
 				50B26EB01F316672009B3B9F /* PayOrderViewCell.m in Sources */,
 				1853BA451F28A04100B98C7F /* JFButton.m in Sources */,
