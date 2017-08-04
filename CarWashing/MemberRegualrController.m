@@ -26,14 +26,9 @@
 
 - (void)drawNavigation{
     
-    [self drawTitle:@"积分规则" Color:[UIColor blackColor]];
+    [self drawTitle:@"积分规则"];
 }
 
-- (void)drawContent
-{
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

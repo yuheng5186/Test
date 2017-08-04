@@ -64,19 +64,19 @@
 
 -(CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 10.f;
+    return 0.01f;
 }
 
 -(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section
 
 {
-    return 0.01f;
+    return 10.0f;
 }
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -102,9 +102,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        return 120;
+        return 80;
     }else{
-        return 60;
+        return 50;
     }
 }
 
@@ -120,7 +120,7 @@
 
     if (indexPath.section == 0) {
         cell.textLabel.text     = @"头像";
-        UIImageView *userImageView  = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, cell.contentView.centerY+Main_Screen_Height*10/667, 50, 50) imageName:@"icon_defaultavatar"];
+        UIImageView *userImageView  = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, cell.contentView.centerY-11, 60, 60) imageName:@"gerenxinxitou"];
         userImageView.left          = Main_Screen_Width*280/375;
         
         

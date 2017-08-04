@@ -29,64 +29,66 @@
 
 }
 - (void) createSubView {
-    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*200/667) color:[UIColor yellowColor]];
+    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*130/667) color:[UIColor colorFromHex:@"#293754"]];
     upView.top                      = 0;
     
     
-    UIImage *membershipImage              = [UIImage imageNamed:@"btnImage"];
-    UIImageView *membershipImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(0, 0, membershipImage.size.width/4, membershipImage.size.height/4) imageName:@"btnImage"];
-    membershipImageView.top               = Main_Screen_Height*20/667;
+    UIImage *membershipImage              = [UIImage imageNamed:@"huiyuantou"];
+    UIImageView *membershipImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(0, 0, membershipImage.size.width, membershipImage.size.height) imageName:@"huiyuantou"];
+    membershipImageView.top               = Main_Screen_Height*15/667;
     membershipImageView.centerX           = upView.centerX;
     
     NSString *membershipName              = @"白银会员";
     UIFont *membershipNameFont            = [UIFont systemFontOfSize:16];
     UILabel *membershipNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:membershipName font:membershipNameFont] font:membershipNameFont text:membershipName isCenter:NO];
     membershipNameLabel.textColor         = [UIColor colorFromHex:@"#8B8B8B"];
-    membershipNameLabel.top               = membershipImageView.bottom +Main_Screen_Height*20/667;
+    membershipNameLabel.top               = membershipImageView.bottom +Main_Screen_Height*10/667;
     membershipNameLabel.centerX           = membershipImageView.centerX;
 
-    UIView *middleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*180/667) color:[UIColor whiteColor]];
+    UIView *middleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*130/667) color:[UIColor whiteColor]];
     middleView.top                      = upView.bottom;
     
-    
-    UIProgressView *progressView          = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
-    progressView.frame                    = CGRectMake(0, 0, Main_Screen_Width -Main_Screen_Width*40/375, 40);
-    progressView.top                      = Main_Screen_Height*60/667;
-    progressView.centerX                  = Main_Screen_Width/2;
-    progressView.progress                 = 0.5;
-    progressView.trackTintColor           = [UIColor grayColor];
-    progressView.progressTintColor        = [UIColor yellowColor];
-    progressView.transform                = CGAffineTransformMakeScale(1.0f, 5.0f);
-    [progressView setProgress:0.5 animated:YES];
-    
-    [middleView addSubview:progressView];
     
     NSString *membershipScoreName              = @"1600";
     UIFont *membershipScoreNameFont            = [UIFont systemFontOfSize:16];
     UILabel *membershipScoreNameLabel          = [UIUtil drawLabelInView:middleView frame:[UIUtil textRect:membershipScoreName font:membershipScoreNameFont] font:membershipScoreNameFont text:membershipScoreName isCenter:NO];
     membershipScoreNameLabel.textColor         = [UIColor colorFromHex:@"#8B8B8B"];
-    membershipScoreNameLabel.top               = Main_Screen_Height*20/667;
+    membershipScoreNameLabel.top               = Main_Screen_Height*10/667;
     membershipScoreNameLabel.centerX           = membershipImageView.centerX;
+    
+    UIProgressView *progressView          = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
+    progressView.frame                    = CGRectMake(0, 0, Main_Screen_Width -Main_Screen_Width*40/375, 40);
+    progressView.top                      = membershipScoreNameLabel.bottom +Main_Screen_Height*10/667;
+    progressView.centerX                  = Main_Screen_Width/2;
+    progressView.progress                 = 0.5;
+    progressView.trackTintColor           = [UIColor colorFromHex:@"#e6e6e6"];
+    progressView.progressTintColor        = [UIColor colorFromHex:@"#febb02"];
+    progressView.transform                = CGAffineTransformMakeScale(1.0f, 5.0f);
+    progressView.layer.cornerRadius       = 20;
+    [progressView setProgress:0.5 animated:YES];
+    
+    [middleView addSubview:progressView];
+    
+
     
     NSString *allScoreName              = @"3000";
     UIFont *allScoreNameFont            = [UIFont systemFontOfSize:16];
     UILabel *allScoreNameLabel          = [UIUtil drawLabelInView:middleView frame:[UIUtil textRect:allScoreName font:allScoreNameFont] font:allScoreNameFont text:allScoreName isCenter:NO];
     allScoreNameLabel.textColor         = [UIColor colorFromHex:@"#8B8B8B"];
-    allScoreNameLabel.top               = progressView.bottom +Main_Screen_Height*10/667;
+    allScoreNameLabel.top               = progressView.bottom +Main_Screen_Height*5/667;
     allScoreNameLabel.right             = progressView.right;
     
     NSString *scoreRemindName              = @"在获得800积分升级为黄金会员";
     UIFont *scoreRemindNameFont            = [UIFont systemFontOfSize:16];
     UILabel *scoreRemindNameLabel          = [UIUtil drawLabelInView:middleView frame:[UIUtil textRect:scoreRemindName font:scoreRemindNameFont] font:scoreRemindNameFont text:scoreRemindName isCenter:NO];
-    scoreRemindNameLabel.textColor         = [UIColor blackColor];
-    scoreRemindNameLabel.top               = allScoreNameLabel.bottom +Main_Screen_Height*10/667;
+    scoreRemindNameLabel.textColor         = [UIColor colorFromHex:@"#868686"];
+    scoreRemindNameLabel.top               = allScoreNameLabel.bottom +Main_Screen_Height*5/667;
     scoreRemindNameLabel.centerX           = progressView.centerX;
     
-    UIButton *updateMemberButton        = [UIUtil drawButtonInView:middleView frame:CGRectMake(0, 0, 50, 30) text:@"升级" font:[UIFont systemFontOfSize:16] color:[UIColor whiteColor] target:self action:@selector(updateMemberClick:)];
-    updateMemberButton.layer.cornerRadius   = 5;
-    updateMemberButton.backgroundColor  = [UIColor redColor];
-    updateMemberButton.top              = allScoreNameLabel.top +Main_Screen_Height*20/667;
-    updateMemberButton.right            = scoreRemindNameLabel.left -Main_Screen_Width*10/375;
+    UIImageView *updateMemberButton        = [UIUtil drawCustomImgViewInView:middleView frame:CGRectMake(0, 0, Main_Screen_Width*20/375, Main_Screen_Height*20/667) imageName:@"shengji"];
+    updateMemberButton.layer.cornerRadius  = 5;
+    updateMemberButton.centerY             = scoreRemindNameLabel.centerY;
+    updateMemberButton.right               = scoreRemindNameLabel.left -Main_Screen_Width*5/375;
     
     
     UIButton *updateRuleButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
@@ -103,98 +105,92 @@
     [middleView addSubview:updateRuleButton];
     
     
-    UIView *downView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*150/667) color:[UIColor whiteColor]];
+    UIView *downView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*120/667) color:[UIColor whiteColor]];
     downView.top                      = middleView.bottom +Main_Screen_Height*10/667;
     
-    NSString *memberString              = @"会员特权";
+    NSString *memberString              = @"我的特权";
     UIFont *menberStringFont            = [UIFont systemFontOfSize:16];
     UILabel *memberStringLabel          = [UIUtil drawLabelInView:downView frame:[UIUtil textRect:memberString font:menberStringFont] font:menberStringFont text:memberString isCenter:NO];
-    memberStringLabel.textColor         = [UIColor blackColor];
+    memberStringLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
     memberStringLabel.top               = Main_Screen_Height*15/667;
     memberStringLabel.left              = Main_Screen_Width*15/375;
     
     UIView  *lineView           = [UIUtil drawLineInView:downView frame:CGRectMake(0, 0, Main_Screen_Width, 1)];
-    lineView.backgroundColor    = [UIColor grayColor];
+    lineView.backgroundColor    = [UIColor colorFromHex:@"#e6e6e6"];
     lineView.top                = memberStringLabel.bottom +Main_Screen_Height*15/667;
     lineView.left               = 0;
     
     
-    UIView *symbolView                   = [UIUtil drawLineInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    symbolView.left                      = Main_Screen_Width*30/375;
-    symbolView.top                       = lineView.bottom +Main_Screen_Height*10/667;
+    UIImage *cardImage          = [UIImage imageNamed:@"shengjihoukaquan"];
+    UIImageView *cardImageView  = [UIUtil drawCustomImgViewInView:downView frame:CGRectMake(0, 0, cardImage.size.width, cardImage.size.height) imageName:@"shengjihoukaquan"];
+    cardImageView.left          = Main_Screen_Width*10/375;
+    cardImageView.top           = lineView.bottom +Main_Screen_Height*20/667;
     
-    UITapGestureRecognizer  *tapSymbolGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapSymbolButtonClick:)];
-    [symbolView addGestureRecognizer:tapSymbolGesture];
+    NSString *cardString        = @"10元洗车券";
+    UIFont  *cardFont           = [UIFont systemFontOfSize:14];
+    UILabel *cardLabel          = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*200/375, Main_Screen_Height*20/667) font:cardFont text:cardString isCenter:NO];
+    cardLabel.textColor         = [UIColor colorFromHex:@"#3a3a3a"];
+    cardLabel.left              = cardImageView.right +Main_Screen_Width*14/375;
+    cardLabel.top               = lineView.bottom +Main_Screen_Height*15/667;
     
-    
-    UIImageView *symbolImageView      = [UIUtil drawCustomImgViewInView:symbolView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
-    symbolImageView.left              = Main_Screen_Width*10/375;
-    symbolImageView.top               = Main_Screen_Height*10/667;
-    
-    NSString *symbolString              = @"身份象征";
-    UIFont *symbolStringFont            = [UIFont systemFontOfSize:16];
-    UILabel *symbolStringLabel          = [UIUtil drawLabelInView:symbolView frame:[UIUtil textRect:symbolString font:symbolStringFont] font:symbolStringFont text:symbolString isCenter:NO];
-    symbolStringLabel.textColor         = [UIColor blackColor];
-    symbolStringLabel.centerX           = symbolImageView.centerX;
-    symbolStringLabel.top               = symbolImageView.bottom +Main_Screen_Height*10/667;
-    
-    UIView *discountView                   = [UIUtil drawLineInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    discountView.left                      = symbolView.right +Main_Screen_Width*20/375;
-    discountView.top                       = lineView.bottom +Main_Screen_Height*10/667;
-    
-    UITapGestureRecognizer  *tapdiscountGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDiscountButtonClick:)];
-    [discountView addGestureRecognizer:tapdiscountGesture];
+    NSString *cardShowString        = @"门店洗车时可抵扣相应金额，每月领取一次";
+    UIFont  *carShowdFont           = [UIFont systemFontOfSize:12];
+    UILabel *cardShowLabel          = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*280/375, Main_Screen_Height*20/667) font:carShowdFont text:cardShowString isCenter:NO];
+    cardShowLabel.textColor         = [UIColor colorFromHex:@"#999999"];
+    cardShowLabel.left              = cardImageView.right +Main_Screen_Width*14/375;
+    cardShowLabel.top               = cardLabel.bottom;
     
     
-    UIImageView *discountImageView      = [UIUtil drawCustomImgViewInView:discountView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
-    discountImageView.left              = Main_Screen_Width*10/375;
-    discountImageView.top               = Main_Screen_Height*10/667;
     
-    NSString *discountString              = @"洗车折扣";
-    UIFont *discountStringFont            = [UIFont systemFontOfSize:16];
-    UILabel *discountStringLabel          = [UIUtil drawLabelInView:discountView frame:[UIUtil textRect:discountString font:discountStringFont] font:discountStringFont text:discountString isCenter:NO];
-    discountStringLabel.textColor         = [UIColor blackColor];
-    discountStringLabel.centerX           = discountImageView.centerX;
-    discountStringLabel.top               = discountImageView.bottom +Main_Screen_Height*10/667;
+    UIView *nextView                         = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*120/667) color:[UIColor whiteColor]];
+    nextView.top                             = downView.bottom +Main_Screen_Height*10/667;
     
-    UIView *maintainView                   = [UIUtil drawLineInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    maintainView.left                      = discountView.right +Main_Screen_Width*20/375;
-    maintainView.top                       = lineView.bottom +Main_Screen_Height*10/667;
+    NSString *memberRightString              = @"升级后可获得特权";
+    UIFont *menberRightStringFont            = [UIFont systemFontOfSize:16];
+    UILabel *memberRightStringLabel          = [UIUtil drawLabelInView:nextView frame:[UIUtil textRect:memberRightString font:menberRightStringFont] font:menberRightStringFont text:memberRightString isCenter:NO];
+    memberRightStringLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
+    memberRightStringLabel.top               = Main_Screen_Height*15/667;
+    memberRightStringLabel.left              = Main_Screen_Width*15/375;
     
-    UITapGestureRecognizer  *tapMaintainGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapMaintainButtonClick:)];
-    [maintainView addGestureRecognizer:tapMaintainGesture];
+    UIView  *lineView2                       = [UIUtil drawLineInView:nextView frame:CGRectMake(0, 0, Main_Screen_Width, 1)];
+    lineView2.backgroundColor                = [UIColor colorFromHex:@"#e6e6e6"];
+    lineView2.top                            = memberStringLabel.bottom +Main_Screen_Height*15/667;
+    lineView2.left                           = 0;
     
     
-    UIImageView *maintainImageView      = [UIUtil drawCustomImgViewInView:maintainView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
-    maintainImageView.left              = Main_Screen_Width*10/375;
-    maintainImageView.top               = Main_Screen_Height*10/667;
+    UIImage *cardImage15          = [UIImage imageNamed:@"shengjihoukaquan"];
+    UIImageView *cardImageView15  = [UIUtil drawCustomImgViewInView:nextView frame:CGRectMake(0, 0, cardImage15.size.width, cardImage15.size.height) imageName:@"shengjihoukaquan"];
+    cardImageView15.left          = Main_Screen_Width*10/375;
+    cardImageView15.top           = lineView.bottom +Main_Screen_Height*20/667;
     
-    NSString *maintainString              = @"保养优惠";
-    UIFont *maintainStringFont            = [UIFont systemFontOfSize:16];
-    UILabel *maintainStringLabel          = [UIUtil drawLabelInView:maintainView frame:[UIUtil textRect:maintainString font:maintainStringFont] font:maintainStringFont text:maintainString isCenter:NO];
-    maintainStringLabel.textColor         = [UIColor blackColor];
-    maintainStringLabel.centerX           = maintainImageView.centerX;
-    maintainStringLabel.top               = maintainImageView.bottom +Main_Screen_Height*10/667;
+    NSString *cardString15        = @"15元洗车券";
+    UIFont  *cardFont15           = [UIFont systemFontOfSize:14];
+    UILabel *cardLabel15          = [UIUtil drawLabelInView:nextView frame:CGRectMake(0, 0, Main_Screen_Width*200/375, Main_Screen_Height*20/667) font:cardFont15 text:cardString15 isCenter:NO];
+    cardLabel15.textColor         = [UIColor colorFromHex:@"#3a3a3a"];
+    cardLabel15.left              = cardImageView15.right +Main_Screen_Width*14/375;
+    cardLabel15.top               = lineView2.bottom +Main_Screen_Height*15/667;
+    
+    NSString *cardShowString15        = @"门店洗车时可抵扣相应金额，每月领取一次";
+    UIFont  *carShowdFont15           = [UIFont systemFontOfSize:12];
+    UILabel *cardShowLabel15          = [UIUtil drawLabelInView:nextView frame:CGRectMake(0, 0, Main_Screen_Width*280/375, Main_Screen_Height*20/667) font:carShowdFont15 text:cardShowString15 isCenter:NO];
+    cardShowLabel15.textColor         = [UIColor colorFromHex:@"#999999"];
+    cardShowLabel15.left              = cardImageView15.right +Main_Screen_Width*14/375;
+    cardShowLabel15.top               = cardLabel15.bottom;
+
     
     
-    UIView *goodsView                   = [UIUtil drawLineInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    goodsView.left                      = maintainView.right +Main_Screen_Width*20/375;
-    goodsView.top                       = lineView.bottom +Main_Screen_Height*10/667;
-    
-    UITapGestureRecognizer  *tapGoodsGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGoodsButtonClick:)];
-    [goodsView addGestureRecognizer:tapGoodsGesture];
     
     
-    UIImageView *goodsImageView      = [UIUtil drawCustomImgViewInView:goodsView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
-    goodsImageView.left              = Main_Screen_Width*10/375;
-    goodsImageView.top               = Main_Screen_Height*10/667;
     
-    NSString *goodsString              = @"会员商品";
-    UIFont *goodsStringFont            = [UIFont systemFontOfSize:16];
-    UILabel *goodsStringLabel          = [UIUtil drawLabelInView:goodsView frame:[UIUtil textRect:goodsString font:goodsStringFont] font:goodsStringFont text:goodsString isCenter:NO];
-    goodsStringLabel.textColor         = [UIColor blackColor];
-    goodsStringLabel.centerX           = goodsImageView.centerX;
-    goodsStringLabel.top               = goodsImageView.bottom +Main_Screen_Height*10/667;
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
 

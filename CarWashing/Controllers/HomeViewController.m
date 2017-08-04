@@ -382,8 +382,8 @@
     UITapGestureRecognizer  *tapShareGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapShareButtonClick:)];
     [shareView addGestureRecognizer:tapShareGesture];
     
-    UIImage *shareImage              = [UIImage imageNamed:@"fenxiang"];
-    UIImageView *shareImageView      = [UIUtil drawCustomImgViewInView:shareView frame:CGRectMake(0, 0, shareImage.size.width,shareImage.size.height) imageName:@"fenxiang"];
+    UIImage *shareImage              = [UIImage imageNamed:@"shouyefenxiang"];
+    UIImageView *shareImageView      = [UIUtil drawCustomImgViewInView:shareView frame:CGRectMake(0, 0, shareImage.size.width,shareImage.size.height) imageName:@"shouyefenxiang"];
     shareImageView.left              = Main_Screen_Width*20/375;
     shareImageView.top               = Main_Screen_Height*10/667;
     

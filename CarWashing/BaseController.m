@@ -173,7 +173,7 @@
     float textWidth = [UIUtil textWidth:text font:[UIFont systemFontOfSize:16]];
     UIButton *button = [UIUtil drawButtonInView:self.navigationView frame:CGRectMake(self.navigationView.frame.size.width-9-textWidth-9, 0, textWidth+18, self.navigationView.frame.size.height) text:text font:[UIFont systemFontOfSize:16] color:[UIColor blackColor] target:self action:action];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [button setTitleColor:[UIColor colorFromHex:@"#FFB700"] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     button.tag = DefaultNavRightBtnTag;
     return button;
 }

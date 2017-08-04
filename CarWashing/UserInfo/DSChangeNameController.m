@@ -18,7 +18,7 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"修改姓名" Color:[UIColor blackColor]];
+    [self drawTitle:@"修改姓名"];
     [self drawRightTextButton:@"确定" action:@selector(buttonClick:)];
     
 }
@@ -28,8 +28,6 @@
 
 - (void) drawContent
 {
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
     self.contentView.top                = self.navigationView.bottom;
     self.contentView.height             = self.view.height;}
 
@@ -45,7 +43,8 @@
     
     self.userNameText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-240, 40)];
     //        self.phoneNumberText.placeholder    = @"输入验证码";
-    self.userNameText.text           = @"15800781856";
+    self.userNameText.placeholder    = @"15800781856";
+//    self.userNameText.text           = @"15800781856";
     self.userNameText.delegate       = self;
     self.userNameText.returnKeyType  = UIReturnKeyDone;
     self.userNameText.textAlignment  = NSTextAlignmentLeft;
