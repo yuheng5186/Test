@@ -16,7 +16,7 @@
 
 @end
 
-static NSString *id_favoriteCell = @"id_favoriteCell";
+static NSString *id_salerListCell = @"salerListCell";
 
 @implementation DSFavoritesController
 
@@ -50,9 +50,9 @@ static NSString *id_favoriteCell = @"id_favoriteCell";
     
     UINib *nib = [UINib nibWithNibName:@"SalerListViewCell" bundle:nil];
     
-    [self.favoriteListView registerNib:nib forCellReuseIdentifier:id_favoriteCell];
+    [self.favoriteListView registerNib:nib forCellReuseIdentifier:id_salerListCell];
     
-    self.favoriteListView.rowHeight = 96;
+    self.favoriteListView.rowHeight = 110;
     
 }
 
@@ -62,7 +62,7 @@ static NSString *id_favoriteCell = @"id_favoriteCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    SalerListViewCell *favoriCell = [tableView dequeueReusableCellWithIdentifier:id_favoriteCell forIndexPath:indexPath];
+    SalerListViewCell *favoriCell = [tableView dequeueReusableCellWithIdentifier:id_salerListCell forIndexPath:indexPath];
     
     return favoriCell;
 }
