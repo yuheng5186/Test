@@ -344,9 +344,11 @@
 //            [self.navigationController pushViewController:myCardController animated:YES];
         }
     }else{
-        DSRecommendController *recommendController              = [[DSRecommendController alloc]init];
-        recommendController.hidesBottomBarWhenPushed            = YES;
-        [self.navigationController pushViewController:recommendController animated:YES];
+//        DSRecommendController *recommendController              = [[DSRecommendController alloc]init];
+//        recommendController.hidesBottomBarWhenPushed            = YES;
+//        [self.navigationController pushViewController:recommendController animated:YES];
+        
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.baidu.com"]];
     }
 
 }

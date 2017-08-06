@@ -53,6 +53,10 @@
 //    self.tableView.tableHeaderView  = [UIView new];
     [self.contentView addSubview:self.tableView];
     
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
     UIButton *submitButton      = [UIUtil drawDefaultButton:self.contentView title:@"提交" target:self action:@selector(submitButtonClick:)];
     submitButton.top           = self.tableView.bottom +Main_Screen_Height*30/667;
     submitButton.centerX       = Main_Screen_Width/2;

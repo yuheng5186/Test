@@ -72,6 +72,7 @@
 		18B69EA31F32CB48007DA0E4 /* UIImage+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B69EA11F32CB48007DA0E4 /* UIImage+Zirkfied.m */; };
 		18B69EA61F32CB52007DA0E4 /* ZFMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B69EA51F32CB52007DA0E4 /* ZFMaskView.m */; };
 		18B69EAA1F32CB5B007DA0E4 /* ZFConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B69EA91F32CB5B007DA0E4 /* ZFConst.m */; };
+		18B69EC01F346A3F007DA0E4 /* DSScanQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B69EBF1F346A3F007DA0E4 /* DSScanQRCodeController.m */; };
 		18B803771F1DA2A300B52432 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B803761F1DA2A300B52432 /* main.m */; };
 		18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B803791F1DA2A300B52432 /* AppDelegate.m */; };
 		18B803801F1DA2A300B52432 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18B8037E1F1DA2A300B52432 /* Main.storyboard */; };
@@ -315,6 +316,8 @@
 		18B69EA71F32CB5B007DA0E4 /* ZFColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZFColor.h; path = ZFScan/Other/ZFColor.h; sourceTree = "<group>"; };
 		18B69EA81F32CB5B007DA0E4 /* ZFConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZFConst.h; path = ZFScan/Other/ZFConst.h; sourceTree = "<group>"; };
 		18B69EA91F32CB5B007DA0E4 /* ZFConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZFConst.m; path = ZFScan/Other/ZFConst.m; sourceTree = "<group>"; };
+		18B69EBE1F346A3F007DA0E4 /* DSScanQRCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSScanQRCodeController.h; sourceTree = "<group>"; };
+		18B69EBF1F346A3F007DA0E4 /* DSScanQRCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSScanQRCodeController.m; sourceTree = "<group>"; };
 		18B803721F1DA2A300B52432 /* CarWashing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarWashing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B803761F1DA2A300B52432 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18B803781F1DA2A300B52432 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -875,6 +878,8 @@
 				50E2EE561F1F4A9000FAF130 /* SalerListViewCell.h */,
 				50E2EE571F1F4A9000FAF130 /* SalerListViewCell.m */,
 				50E2EE581F1F4A9000FAF130 /* SalerListViewCell.xib */,
+				18B69EBE1F346A3F007DA0E4 /* DSScanQRCodeController.h */,
+				18B69EBF1F346A3F007DA0E4 /* DSScanQRCodeController.m */,
 			);
 			name = Business;
 			sourceTree = "<group>";
@@ -1327,6 +1332,7 @@
 				183997651F2586D300702071 /* ActivityListCell.m in Sources */,
 				181E92FE1F2088E80006511E /* DSMyCarController.m in Sources */,
 				181E92CC1F1F39CC0006511E /* UIColor+HexColor.m in Sources */,
+				18B69EC01F346A3F007DA0E4 /* DSScanQRCodeController.m in Sources */,
 				5097FE131F2F4173002EF8F8 /* JPCityViewController.m in Sources */,
 				181E92EF1F2081840006511E /* DSMembershipController.m in Sources */,
 				5094A6251F3447CD00407808 /* BusinessEstimateCell.m in Sources */,

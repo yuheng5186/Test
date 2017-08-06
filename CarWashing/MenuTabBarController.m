@@ -13,7 +13,7 @@
 #import "FindViewController.h"
 #import "PurchaseViewController.h"
 #import "MySettingViewController.h"
-
+#import "DSScanQRCodeController.h"
 @interface MenuTabBarController ()
 
 @end
@@ -56,7 +56,7 @@
     businessTabItem.tag     = 2;
     businessVC.tabBarItem   = businessTabItem;
     
-    FindViewController *activityVC      = [[FindViewController alloc]init];
+    DSScanQRCodeController *activityVC      = [[DSScanQRCodeController alloc]init];
     UINavigationController *activityNav = [[UINavigationController alloc]initWithRootViewController:activityVC];
     activityNav.navigationController.navigationBarHidden = YES;
     UITabBarItem *activityTabItem       = [[UITabBarItem alloc]initWithTitle:@"洗车" image:[UIImage imageNamed:@"wode"] selectedImage:[UIImage imageNamed:@"wode"]];

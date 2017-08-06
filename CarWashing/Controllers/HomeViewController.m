@@ -25,6 +25,7 @@
 #import "DSMyCarController.h"
 #import "FindViewController.h"
 #import "ScanController.h"
+#import "DSScanQRCodeController.h"
 
 #define KCURRENTCITYINFODEFAULTS [NSUserDefaults standardUserDefaults]
 
@@ -697,13 +698,17 @@
 }
 - (void) tapScanButtonClick:(id)sender {
     
-    ScanController * vc = [[ScanController alloc] init];
-    vc.returnScanBarCodeValue = ^(NSString * barCodeString){
-        self.resultLabel.text = [NSString stringWithFormat:@"扫描结果:\n%@",barCodeString];
-        NSLog(@"扫描结果的字符串======%@",barCodeString);
-    };
-    //    [self presentViewController:vc animated:YES completion:nil];
-    [self.navigationController pushViewController:vc animated:YES];
+    DSScanQRCodeController *scanController      = [[DSScanQRCodeController alloc]init];
+    scanController.hidesBottomBarWhenPushed     = YES;
+    [self.navigationController pushViewController:scanController animated:YES];
+    
+//    ScanController * vc = [[ScanController alloc] init];
+//    vc.returnScanBarCodeValue = ^(NSString * barCodeString){
+//        self.resultLabel.text = [NSString stringWithFormat:@"扫描结果:\n%@",barCodeString];
+//        NSLog(@"扫描结果的字符串======%@",barCodeString);
+//    };
+//    //    [self presentViewController:vc animated:YES completion:nil];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void) tapCardBagButtonClick:(id)sender {
     
