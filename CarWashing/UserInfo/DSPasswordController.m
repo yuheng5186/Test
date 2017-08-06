@@ -11,6 +11,7 @@
 @interface DSPasswordController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UITextField *userMobileFieldText;
 @property (nonatomic, strong) UITextField *verifyFieldText;
 @property (nonatomic, strong) UITextField *passwordNewFieldText;
 @property (nonatomic, strong) UITextField *passwordAgainFieldText;
@@ -23,14 +24,12 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"密码管理" Color:[UIColor blackColor]];
+    [self drawTitle:@"密码管理"];
     
 }
 
 - (void) drawContent
 {
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
     self.contentView.top                = self.statusView.bottom;
     self.contentView.height             = self.view.height;
     
@@ -58,7 +57,7 @@
     }
     
     UIButton *submitButton      = [UIUtil drawDefaultButton:self.contentView title:@"提交" target:self action:@selector(submitButtonClick:)];
-    submitButton.top           = self.tableView.bottom +Main_Screen_Height*30/667;
+    submitButton.top           = self.tableView.bottom +Main_Screen_Height*40/667;
     submitButton.centerX       = Main_Screen_Width/2;
     
 }
@@ -91,20 +90,35 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     }
     cell.backgroundColor    = [UIColor whiteColor];
-    cell.imageView.image    = [UIImage imageNamed:@"btnImage"];
+//    cell.imageView.image    = [UIImage imageNamed:@"btnImage"];
     if (indexPath.row == 0) {
-        cell.textLabel.text = @"15800781856";
+        cell.imageView.image                = [UIImage imageNamed:@"yonghushouji"];
+        
+        self.userMobileFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(10, 45, Main_Screen_Width-150, 40)];
+        self.userMobileFieldText.placeholder    = @"15800781856";
+        self.userMobileFieldText.delegate       = self;
+        self.userMobileFieldText.returnKeyType  = UIReturnKeyDone;
+        self.userMobileFieldText.textAlignment  = NSTextAlignmentLeft;
+        self.userMobileFieldText.font           = [UIFont systemFontOfSize:16];
+        self.userMobileFieldText.backgroundColor= [UIColor whiteColor];
+        self.userMobileFieldText.centerY        = cell.centerY +Main_Screen_Height*8/667;
+        self.userMobileFieldText.left           = Main_Screen_Width*70/375 ;
+        
+        [self.userMobileFieldText addTarget:self action:@selector(userMobileFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
+        [cell.contentView addSubview:self.userMobileFieldText];
+        
     }else if (indexPath.row == 1){
-    
+        cell.imageView.image                = [UIImage imageNamed:@"mimayanzheng"];
+
         self.verifyFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(10, 45, Main_Screen_Width-240, 40)];
         self.verifyFieldText.placeholder    = @"输入验证码";
         self.verifyFieldText.delegate       = self;
         self.verifyFieldText.returnKeyType  = UIReturnKeyDone;
         self.verifyFieldText.textAlignment  = NSTextAlignmentLeft;
         self.verifyFieldText.font           = [UIFont systemFontOfSize:16];
-        self.verifyFieldText.backgroundColor= [UIColor grayColor];
+//        self.verifyFieldText.backgroundColor= [UIColor grayColor];
         self.verifyFieldText.centerY        = cell.centerY+Main_Screen_Height*8/667;
-        self.verifyFieldText.left           = Main_Screen_Width*90/375 ;
+        self.verifyFieldText.left           = Main_Screen_Width*70/375 ;
         
         [self.verifyFieldText addTarget:self action:@selector(verifyFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
         [cell.contentView addSubview:self.verifyFieldText];
@@ -114,10 +128,13 @@
         UIButton *getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, 110, 40) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyButtonClick:)];
         getVeriifyStringButton.backgroundColor=  [UIColor colorWithHex:0xFFB500 alpha:1.0];
         getVeriifyStringButton.layer.cornerRadius = 20;
-        getVeriifyStringButton.left           = self.verifyFieldText.right +Main_Screen_Width*10/375;
+        getVeriifyStringButton.right          = Main_Screen_Width -Main_Screen_Width*10/375;
         getVeriifyStringButton.centerY        = self.verifyFieldText.centerY;
         
     }else if (indexPath.row == 2){
+        
+        cell.imageView.image                = [UIImage imageNamed:@"mimasuo"];
+        
         self.passwordNewFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(10, 45, Main_Screen_Width-150, 40)];
         self.passwordNewFieldText.placeholder    = @"请输入新密码";
         self.passwordNewFieldText.delegate       = self;
@@ -126,11 +143,14 @@
         self.passwordNewFieldText.font           = [UIFont systemFontOfSize:16];
         self.passwordNewFieldText.backgroundColor= [UIColor whiteColor];
         self.passwordNewFieldText.centerY        = cell.centerY +Main_Screen_Height*8/667;
-        self.passwordNewFieldText.left           = Main_Screen_Width*90/375 ;
+        self.passwordNewFieldText.left           = Main_Screen_Width*70/375 ;
         
         [self.verifyFieldText addTarget:self action:@selector(passwordNewFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
         [cell.contentView addSubview:self.passwordNewFieldText];
     }else {
+        
+        cell.imageView.image                = [UIImage imageNamed:@"mimasuo"];
+
         self.passwordAgainFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(10, 45, Main_Screen_Width-150, 40)];
         self.passwordAgainFieldText.placeholder    = @"再次输入密码";
         self.passwordAgainFieldText.delegate       = self;
@@ -139,7 +159,7 @@
         self.passwordAgainFieldText.font           = [UIFont systemFontOfSize:16];
         self.passwordAgainFieldText.backgroundColor= [UIColor whiteColor];
         self.passwordAgainFieldText.centerY        = cell.centerY +Main_Screen_Height*8/667;
-        self.passwordAgainFieldText.left           = Main_Screen_Width*90/375 ;
+        self.passwordAgainFieldText.left           = Main_Screen_Width*70/375 ;
         
         [self.passwordAgainFieldText addTarget:self action:@selector(passwordAgainFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
         [cell.contentView addSubview:self.passwordAgainFieldText];
@@ -167,6 +187,10 @@
 }
 
 
+- (void) userMobileFieldTextChanged:(UITextField *)sender {
+
+
+}
 - (void) verifyFieldTextChanged: (UITextField *) sender
 {
 
