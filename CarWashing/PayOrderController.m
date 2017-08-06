@@ -7,7 +7,8 @@
 //
 
 #import "PayOrderController.h"
-#import "PayOrderViewCell.h"
+#import "DelayPayCell.h"
+
 
 @interface PayOrderController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -15,7 +16,7 @@
 
 @end
 
-static NSString *id_payoOrderCell = @"id_payoOrderCell";
+static NSString *id_delayPayCell = @"id_delayPayCell";
 
 @implementation PayOrderController
 
@@ -45,8 +46,8 @@ static NSString *id_payoOrderCell = @"id_payoOrderCell";
     self.payOrderView.delegate = self;
     self.payOrderView.dataSource = self;
     
-    [self.payOrderView registerNib:[UINib nibWithNibName:@"PayOrderViewCell" bundle:nil] forCellReuseIdentifier:id_payoOrderCell];
-    self.payOrderView.rowHeight = 180;
+    [self.payOrderView registerNib:[UINib nibWithNibName:@"DelayPayCell" bundle:nil] forCellReuseIdentifier:id_delayPayCell];
+    self.payOrderView.rowHeight = 150;
 }
 
 
@@ -60,9 +61,17 @@ static NSString *id_payoOrderCell = @"id_payoOrderCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    PayOrderViewCell *payCell = [tableView dequeueReusableCellWithIdentifier:id_payoOrderCell forIndexPath:indexPath];
+    DelayPayCell *delayCell = [tableView dequeueReusableCellWithIdentifier:id_delayPayCell forIndexPath:indexPath];
     
-    return payCell;
+    return delayCell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.1;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -7,7 +7,7 @@
 //
 
 #import "CommentOrderController.h"
-#import "CommentOrderViewCell.h"
+#import "SuccessPayCell.h"
 
 @interface CommentOrderController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -15,7 +15,7 @@
 
 @end
 
-static NSString *id_commentOrderCell = @"id_commentOrderCell";
+static NSString *id_successPayCell = @"id_successPayCell";
 
 @implementation CommentOrderController
 
@@ -45,8 +45,8 @@ static NSString *id_commentOrderCell = @"id_commentOrderCell";
     self.commentOrderView.delegate = self;
     self.commentOrderView.dataSource = self;
     
-    [self.commentOrderView registerNib:[UINib nibWithNibName:@"CommentOrderViewCell" bundle:nil] forCellReuseIdentifier:id_commentOrderCell];
-    self.commentOrderView.rowHeight = 180;
+    [self.commentOrderView registerNib:[UINib nibWithNibName:@"SuccessPayCell" bundle:nil] forCellReuseIdentifier:id_successPayCell];
+    self.commentOrderView.rowHeight = 150;
 }
 
 
@@ -60,11 +60,21 @@ static NSString *id_commentOrderCell = @"id_commentOrderCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    CommentOrderViewCell *commentCell = [tableView dequeueReusableCellWithIdentifier:id_commentOrderCell forIndexPath:indexPath];
+    SuccessPayCell *commentCell = [tableView dequeueReusableCellWithIdentifier:id_successPayCell forIndexPath:indexPath];
     
     
     return commentCell;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.1;
+}
+
+
 
 
 - (void)didReceiveMemoryWarning {

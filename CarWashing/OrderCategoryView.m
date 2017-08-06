@@ -42,6 +42,7 @@
     
     if (self = [super initWithFrame:frame]) {
         
+        self.backgroundColor = [UIColor whiteColor];
         [self setupUI];
     }
     
@@ -73,7 +74,7 @@
     
     _singleLine = singleLine;
     
-    singleLine.backgroundColor = [UIColor orangeColor];
+    singleLine.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     
     [self addSubview:singleLine];
     
@@ -83,9 +84,9 @@
         
         make.bottom.centerX.equalTo(_firstButton);
         
-        make.width.mas_equalTo(60);
+        make.width.mas_equalTo(40);
         
-        make.height.mas_equalTo(5);
+        make.height.mas_equalTo(2);
     }];
 }
 
@@ -185,11 +186,11 @@
     [button setTitle:title forState:UIControlStateNormal];
     
     //设置文字的颜色
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+    //[button setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
     
-    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
     
-    button.titleLabel.font = [UIFont systemFontOfSize:15];
+    button.titleLabel.font = [UIFont systemFontOfSize:12];
     
     
     

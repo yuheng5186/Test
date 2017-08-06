@@ -7,12 +7,32 @@
 //
 
 #import "AllOrderController.h"
+#import "SuccessPayCell.h"
+#import "DelayPayCell.h"
+#import "CancelPayCell.h"
 
-@interface AllOrderController ()
+
+@interface AllOrderController ()<UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, weak) UITableView *allOrderListView;
 
 @end
 
+static NSString *id_successPayCell = @"id_successPayCell";
+static NSString *id_delayPayCell = @"id_delayPayCell";
+static NSString *id_cancelCell = @"id_cancelCell";
+
 @implementation AllOrderController
+
+- (UITableView *)allOrderListView {
+    
+    if (!_allOrderListView) {
+        UITableView *allOrderListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height) style:UITableViewStyleGrouped];
+        _allOrderListView = allOrderListView;
+        [self.view addSubview:_allOrderListView];
+    }
+    return _allOrderListView;
+}
 
 
 - (void) drawContent
@@ -26,22 +46,65 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.allOrderListView.delegate = self;
+    self.allOrderListView.dataSource = self;
+    
+    [self.allOrderListView registerNib:[UINib nibWithNibName:@"SuccessPayCell" bundle:nil] forCellReuseIdentifier:id_successPayCell];
+    [self.allOrderListView registerNib:[UINib nibWithNibName:@"DelayPayCell" bundle:nil] forCellReuseIdentifier:id_delayPayCell];
+    [self.allOrderListView registerNib:[UINib nibWithNibName:@"CancelPayCell" bundle:nil] forCellReuseIdentifier:id_cancelCell];
+     
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 3;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == 0) {
+        SuccessPayCell *successCell = [tableView dequeueReusableCellWithIdentifier:id_successPayCell forIndexPath:indexPath];
+        
+        return successCell;
+    }else if (indexPath.section == 1){
+        
+        DelayPayCell *delayCell = [tableView dequeueReusableCellWithIdentifier:id_delayPayCell forIndexPath:indexPath];
+        return delayCell;
+    }
+    
+    CancelPayCell *cancelCell = [tableView dequeueReusableCellWithIdentifier:id_cancelCell forIndexPath:indexPath];
+    
+    return cancelCell;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == 2) {
+        return 100;
+    }
+    
+    return 150;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.1;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
