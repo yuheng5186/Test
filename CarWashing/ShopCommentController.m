@@ -7,18 +7,21 @@
 //
 
 #import "ShopCommentController.h"
+#import "BusinessEstimateCell.h"
 
-@interface ShopCommentController ()
+@interface ShopCommentController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) UITableView *commentListView;
 
 @end
 
+static NSString *id_commentShopCell = @"id_commentShopCell";
+
 @implementation ShopCommentController
 
 - (UITableView *)commentListView{
     if (_commentListView == nil) {
-        UITableView *commenListView = [[UITableView alloc] initWithFrame:self.view.bounds];
+        UITableView *commenListView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
         _commentListView = commenListView;
         [self.view addSubview:commenListView];
     }
@@ -28,6 +31,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.commentListView.delegate = self;
+    self.commentListView.dataSource = self;
+    
+    [self.commentListView registerNib:[UINib nibWithNibName:@"BusinessEstimateCell" bundle:nil] forCellReuseIdentifier:id_commentShopCell];
+    self.commentListView.rowHeight = 110;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 3;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BusinessEstimateCell *commentCell = [tableView dequeueReusableCellWithIdentifier:id_commentShopCell forIndexPath:indexPath];
+    
+    return commentCell;
+    
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UILabel *commentTitleLabel = [[UILabel alloc] init];
+    commentTitleLabel.text = @"  评价(58)";
+    commentTitleLabel.backgroundColor = [UIColor colorFromHex:@"#dfdfdf"];
+    commentTitleLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+    commentTitleLabel.font = [UIFont systemFontOfSize:14];
+    
+    return commentTitleLabel;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    return 40;
     
 }
 
