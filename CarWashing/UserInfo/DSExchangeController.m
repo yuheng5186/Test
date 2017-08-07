@@ -7,6 +7,7 @@
 //
 
 #import "DSExchangeController.h"
+#import <Masonry.h>
 
 @interface DSExchangeController ()
 
@@ -30,16 +31,34 @@
 
 - (void)setupUI {
     
-    UITextField *exchangeTF = [[UITextField alloc] initWithFrame:CGRectMake(50, 64 + 60, Main_Screen_Width - 100, 60)];
+    UITextField *exchangeTF = [[UITextField alloc] init];
     exchangeTF.placeholder = @"请输入兑换码";
+    exchangeTF.textAlignment = NSTextAlignmentCenter;
+    exchangeTF.layer.cornerRadius = 24;
     exchangeTF.keyboardType = UIKeyboardTypeNumberPad;
     exchangeTF.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:exchangeTF];
     
-    UIButton *exchangeBtn = [[UIButton alloc] initWithFrame:CGRectMake(50, 64 + 180, Main_Screen_Width - 100, 40)];
-    [exchangeBtn setTitle:@"兑换" forState:UIControlStateNormal];
-    exchangeBtn.backgroundColor = [UIColor orangeColor];
-    [self.view addSubview:exchangeBtn];
+    UIButton *exchangeBtn = [UIUtil drawDefaultButton:self.view title:@"兑换" target:self action:@selector(didClickExchangeScoreBtn:)];
+    
+    [exchangeTF mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).mas_offset(64 + 23);
+        make.centerX.equalTo(self.view);
+        make.width.mas_equalTo(351);
+        make.height.mas_equalTo(48);
+    }];
+    
+    [exchangeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(exchangeTF.mas_bottom).mas_offset(60);
+        make.centerX.equalTo(self.view);
+        make.width.mas_equalTo(351);
+        make.height.mas_equalTo(48);
+    }];
+
+ }
+                             
+- (void)didClickExchangeScoreBtn:(UIButton *)button {
+    
 }
 
 - (void)didReceiveMemoryWarning {

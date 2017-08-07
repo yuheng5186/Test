@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface MemberView : UIView
+@property (weak, nonatomic) IBOutlet UIView *topContainView;
+
+@property (weak, nonatomic) IBOutlet UIView *bottomContainView;
+
+@property (weak, nonatomic) IBOutlet UIButton *increaseButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *ernScoreButton;
+
 
 
 + (instancetype)memberView;

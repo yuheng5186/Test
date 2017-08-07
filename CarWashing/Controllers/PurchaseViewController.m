@@ -183,6 +183,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     buyButton.backgroundColor = [UIColor colorFromHex:@"#293754"];
     buyButton.titleLabel.font = [UIFont systemFontOfSize:18];
     buyButton.layer.cornerRadius = 15;
+    [buyButton addTarget:self action:@selector(didSelectCell:withSubViewIndex:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:buyButton];
     
     
@@ -220,6 +221,15 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     
 }
 
+#pragma mark - 点击购买
+//- (void)didCickBuyButton {
+//    
+//    PayPurchaseCardController *payCardVC = [[PayPurchaseCardController alloc] init];
+//    payCardVC.hidesBottomBarWhenPushed = YES;
+//    
+//    [self.navigationController pushViewController:payCardVC animated:YES];
+//}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
@@ -234,6 +244,10 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 
 - (void)didSelectCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex {
     
+    PayPurchaseCardController *payCardVC = [[PayPurchaseCardController alloc] init];
+    payCardVC.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:payCardVC animated:YES];
 }
 
 

@@ -85,6 +85,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     self.salerListView.contentInset = UIEdgeInsetsMake(0, 0, 180, 0);
     self.salerListView.rowHeight = 110;
+    
 }
 
 
@@ -101,7 +102,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     SalerListViewCell *salerListViewCell = [tableView dequeueReusableCellWithIdentifier:id_salerListCell forIndexPath:indexPath];
-    
+    salerListViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return salerListViewCell;
 }
@@ -114,6 +115,8 @@ static NSString *id_salerListCell = @"salerListViewCell";
     detailController.hidesBottomBarWhenPushed       = YES;
     [self.navigationController pushViewController:detailController animated:YES];
 }
+
+
 
 
 #pragma mark - 搜索下拉

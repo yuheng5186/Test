@@ -185,13 +185,13 @@ static NSString *payViewCell = @"payTableViewCell";
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     if (section == 0) {
-        return 5;
+        return 3;
     }
     
     return 2;
@@ -204,7 +204,7 @@ static NSString *payViewCell = @"payTableViewCell";
     
     payCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == 0 || indexPath.section == 1) {
         payCell.textLabel.text = @"服务商家";
         payCell.detailTextLabel.text = @"上海金雷洗车";
     }else {
@@ -221,14 +221,14 @@ static NSString *payViewCell = @"payTableViewCell";
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 0 && indexPath.row == 3 ) {
+    if (indexPath.section == 0 && indexPath.row == 2 ) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    if (section == 0) {
+    if (section == 0 || section == 1) {
         return nil;
     }
     
@@ -243,15 +243,23 @@ static NSString *payViewCell = @"payTableViewCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 40;
+    if (section == 2) {
+        return 30;
+    }
     
+    return 10;
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 10;
 }
 
 
 #pragma mark - 点击cell
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.row == 3) {
+    if (indexPath.section == 0 && indexPath.row == 3) {
         
         CashViewController *cashVC = [[CashViewController alloc] init];
         //cashVC.providesPresentationContextTransitionStyle = YES;
