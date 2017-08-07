@@ -20,9 +20,9 @@
     
     self.timesLabel.textColor = [UIColor colorFromHex:@"#999999"];
     
-    self.stateLabel.textColor = [UIColor colorFromHex:@"#ff525a"];
+    self.stateLabel.textColor = [UIColor colorFromHex:@"#868686"];
     
-    self.priceLabel.textColor = [UIColor colorFromHex:@"#ff525a"];
+    self.priceLabel.textColor = [UIColor colorFromHex:@"#868686"];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -26,15 +26,15 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"充值卡详情" Color:[UIColor blackColor]];
+    [self drawTitle:@"充值卡详情"];
 }
 
 
 - (void) drawContent
 {
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
-    self.contentView.backgroundColor = [UIColor lightGrayColor];
+//    self.statusView.backgroundColor     = [UIColor grayColor];
+//    self.navigationView.backgroundColor = [UIColor grayColor];
+    self.contentView.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)viewDidLoad {
@@ -71,33 +71,34 @@
 //    [self.view addSubview:noticeLabelTwo];
     
     [self.washCarLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(self.containView).mas_offset(10);
+        make.top.equalTo(self.containView).mas_offset(20);
+        make.left.equalTo(self.containView).mas_offset(10);
     }];
     
     [self.validityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.washCarLabel);
-        make.top.equalTo(self.washCarLabel.mas_bottom).mas_offset(20);
+        make.top.equalTo(self.washCarLabel.mas_bottom).mas_offset(15);
     }];
     
     [self.timesLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.washCarLabel);
-        make.top.equalTo(self.validityLabel.mas_bottom).mas_offset(10);
+        make.top.equalTo(self.validityLabel.mas_bottom).mas_offset(15);
     }];
     
     [self.noticeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.washCarLabel);
-        make.top.equalTo(self.timesLabel.mas_bottom).mas_offset(30);
+        make.top.equalTo(self.timesLabel.mas_bottom).mas_offset(35);
     }];
     
     [self.noticeLabelOne mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.washCarLabel);
-        make.top.equalTo(self.noticeLabel.mas_bottom).mas_offset(10);
+        make.top.equalTo(self.noticeLabel.mas_bottom).mas_offset(15);
         make.right.equalTo(self.containView).mas_offset(-10);
     }];
     
     [self.noticeLabeTwo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.washCarLabel);
-        make.top.equalTo(self.noticeLabelOne.mas_bottom).mas_offset(10);
+        make.top.equalTo(self.noticeLabelOne.mas_bottom).mas_offset(15);
     }];
     
 }
@@ -118,6 +119,8 @@
     if (!_washCarLabel) {
         UILabel *washCarLabel = [[UILabel alloc] init];
         washCarLabel.text = @"洗车月卡";
+        washCarLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+        washCarLabel.font = [UIFont systemFontOfSize:16];
         _washCarLabel = washCarLabel;
         [self.containView addSubview:_washCarLabel];
     }
@@ -130,6 +133,8 @@
         
         UILabel *validityLabel = [[UILabel alloc] init];
         validityLabel.text = @"有效期至: 2017-8-1";
+        validityLabel.textColor = [UIColor colorFromHex:@"#999999"];
+        validityLabel.font = [UIFont systemFontOfSize:13];
         _validityLabel = validityLabel;
         [self.containView addSubview:_validityLabel];
     }
@@ -142,6 +147,8 @@
     if (!_timesLabel) {
         UILabel *timesLabel = [[UILabel alloc] init];
         timesLabel.text = @"免费洗车次数6次";
+        timesLabel.textColor = [UIColor colorFromHex:@"#999999"];
+        timesLabel.font = [UIFont systemFontOfSize:13];
         _timesLabel = timesLabel;
         [self.containView addSubview:_timesLabel];
     }
@@ -153,6 +160,8 @@
     if (!_noticeLabel) {
         UILabel *noticeLabel = [[UILabel alloc] init];
         noticeLabel.text = @"使用须知";
+        noticeLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+        noticeLabel.font = [UIFont systemFontOfSize:16];
         _noticeLabel = noticeLabel;
         [self.containView addSubview:_noticeLabel];
     }
@@ -166,6 +175,8 @@
         UILabel *noticeLabelOne = [[UILabel alloc] init];
         noticeLabelOne.text = @"1、本洗车卡由金顶洗车APP发放,仅限金顶洗车店和与金顶合作商家使用";
         noticeLabelOne.numberOfLines = 0;
+        noticeLabelOne.textColor = [UIColor colorFromHex:@"#999999"];
+        noticeLabelOne.font = [UIFont systemFontOfSize:13];
         _noticeLabelOne = noticeLabelOne;
         [self.containView addSubview:_noticeLabelOne];
     }
@@ -177,6 +188,8 @@
     if (!_noticeLabeTwo) {
         UILabel *noticeLabelTwo = [[UILabel alloc] init];
         noticeLabelTwo.text = @"2、有任何问题,可咨询金顶客服";
+        noticeLabelTwo.textColor = [UIColor colorFromHex:@"#999999"];
+        noticeLabelTwo.font = [UIFont systemFontOfSize:13];
         _noticeLabeTwo = noticeLabelTwo;
         [self.containView addSubview:_noticeLabeTwo];
     }

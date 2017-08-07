@@ -7,6 +7,7 @@
 //
 
 #import "SuccessPayCell.h"
+#import "OrderCommentController.h"
 
 @implementation SuccessPayCell
 
@@ -23,13 +24,26 @@
     
     self.priceLabel.textColor = [UIColor colorFromHex:@"#ff525a"];
     
-    [self.stateButton setTintColor:[UIColor colorFromHex:@"#ff525a"]];
+    [self.stateButton setTitleColor:[UIColor colorFromHex:@"#afafaf"] forState:UIControlStateNormal];
     self.stateButton.layer.cornerRadius = 12.5;
     self.stateButton.layer.borderWidth = 1;
-    self.stateButton.layer.borderColor = [UIColor colorFromHex:@"#ff525a"].CGColor;
-    
+    self.stateButton.layer.borderColor = [UIColor colorFromHex:@"#afafaf"].CGColor;
+    [self.stateButton addTarget:self action:@selector(clickCommentButton:) forControlEvents:UIControlEventTouchUpInside];
     
 }
+
+
+- (void)clickCommentButton:(UIButton *)button {
+    
+    if ([self.delegate respondsToSelector:@selector(pushController:animated:)]) {
+        
+        OrderCommentController *starCommentVC = [[OrderCommentController alloc] init];
+        starCommentVC.hidesBottomBarWhenPushed = YES;
+        
+        [self.delegate pushController:starCommentVC animated:YES];
+    }
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

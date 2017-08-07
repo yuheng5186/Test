@@ -26,7 +26,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     self.navigationView.hidden  = YES;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
-    self.contentView.backgroundColor = [UIColor lightGrayColor];
+    self.contentView.backgroundColor = [UIColor whiteColor];
 }
 
 - (UITableView *)rechargeView {
@@ -46,8 +46,8 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     self.rechargeView.dataSource = self;
     
     [self.rechargeView registerNib:[UINib nibWithNibName:@"RechargeCell" bundle:nil] forCellReuseIdentifier:id_rechargeCell];
-    self.rechargeView.rowHeight = 180;
-    self.rechargeView.backgroundColor = [UIColor lightGrayColor];
+    self.rechargeView.rowHeight = 100;
+    self.rechargeView.backgroundColor = [UIColor whiteColor];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

@@ -10,9 +10,10 @@
 #import "SuccessPayCell.h"
 #import "DelayPayCell.h"
 #import "CancelPayCell.h"
+#import "OrderDetailController.h"
 
 
-@interface AllOrderController ()<UITableViewDelegate, UITableViewDataSource>
+@interface AllOrderController ()<UITableViewDelegate, UITableViewDataSource, PushVCDelegate>
 
 @property (nonatomic, weak) UITableView *allOrderListView;
 
@@ -68,7 +69,7 @@ static NSString *id_cancelCell = @"id_cancelCell";
     
     if (indexPath.section == 0) {
         SuccessPayCell *successCell = [tableView dequeueReusableCellWithIdentifier:id_successPayCell forIndexPath:indexPath];
-        
+        successCell.delegate = self;
         return successCell;
     }else if (indexPath.section == 1){
         
@@ -79,6 +80,18 @@ static NSString *id_cancelCell = @"id_cancelCell";
     CancelPayCell *cancelCell = [tableView dequeueReusableCellWithIdentifier:id_cancelCell forIndexPath:indexPath];
     
     return cancelCell;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == 2) {
+        
+        OrderDetailController *orderDetailVC = [[OrderDetailController alloc] init];
+        orderDetailVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:orderDetailVC animated:YES];
+        
+    }
 }
 
 
@@ -97,6 +110,14 @@ static NSString *id_cancelCell = @"id_cancelCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.1;
+}
+
+
+
+#pragma mark - 实现success的代理方法
+- (void)pushController:(UIViewController *)viewController animated:(BOOL)animated {
+    
+    [self.navigationController pushViewController:viewController animated:animated];
 }
 
 

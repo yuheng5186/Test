@@ -31,15 +31,15 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"优惠券详情" Color:[UIColor blackColor]];
+    [self drawTitle:@"优惠券详情"];
 }
 
 
 - (void) drawContent
 {
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
-    self.contentView.backgroundColor = [UIColor lightGrayColor];
+//    self.statusView.backgroundColor     = [UIColor grayColor];
+//    self.navigationView.backgroundColor = [UIColor grayColor];
+    self.contentView.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)viewDidLoad {

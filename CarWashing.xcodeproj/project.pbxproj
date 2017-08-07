@@ -107,6 +107,10 @@
 		501672521F2A091000384186 /* ScoreCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672511F2A091000384186 /* ScoreCategoryView.m */; };
 		5042E3521F33165600CD140F /* PGIndexBannerSubiew.m in Sources */ = {isa = PBXBuildFile; fileRef = 5042E3511F33165600CD140F /* PGIndexBannerSubiew.m */; };
 		5042E3561F33165C00CD140F /* NewPagedFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5042E3551F33165C00CD140F /* NewPagedFlowView.m */; };
+		5071B4771F37F702009FFF67 /* OrderDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5071B4761F37F702009FFF67 /* OrderDetailController.m */; };
+		5071B47C1F380987009FFF67 /* OrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5071B47B1F380987009FFF67 /* OrderDetailView.m */; };
+		5071B47E1F38099C009FFF67 /* OrderDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5071B47D1F38099C009FFF67 /* OrderDetailView.xib */; };
+		5071B4811F381366009FFF67 /* OrderCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5071B4801F381366009FFF67 /* OrderCommentController.m */; };
 		507FECF71F2AC8D7009CC505 /* BusinessPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FECF61F2AC8D7009CC505 /* BusinessPayController.m */; };
 		507FED011F2B3111009CC505 /* CashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FED001F2B3111009CC505 /* CashViewController.m */; };
 		5094A6251F3447CD00407808 /* BusinessEstimateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5094A6231F3447CD00407808 /* BusinessEstimateCell.m */; };
@@ -382,6 +386,13 @@
 		5042E3511F33165600CD140F /* PGIndexBannerSubiew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGIndexBannerSubiew.m; sourceTree = "<group>"; };
 		5042E3541F33165C00CD140F /* NewPagedFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPagedFlowView.h; sourceTree = "<group>"; };
 		5042E3551F33165C00CD140F /* NewPagedFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPagedFlowView.m; sourceTree = "<group>"; };
+		5071B4751F37F702009FFF67 /* OrderDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailController.h; sourceTree = "<group>"; };
+		5071B4761F37F702009FFF67 /* OrderDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailController.m; sourceTree = "<group>"; };
+		5071B47A1F380987009FFF67 /* OrderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailView.h; sourceTree = "<group>"; };
+		5071B47B1F380987009FFF67 /* OrderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailView.m; sourceTree = "<group>"; };
+		5071B47D1F38099C009FFF67 /* OrderDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailView.xib; sourceTree = "<group>"; };
+		5071B47F1F381366009FFF67 /* OrderCommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCommentController.h; sourceTree = "<group>"; };
+		5071B4801F381366009FFF67 /* OrderCommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCommentController.m; sourceTree = "<group>"; };
 		507FECF51F2AC8D7009CC505 /* BusinessPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessPayController.h; sourceTree = "<group>"; };
 		507FECF61F2AC8D7009CC505 /* BusinessPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessPayController.m; sourceTree = "<group>"; };
 		507FECFF1F2B3111009CC505 /* CashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashViewController.h; sourceTree = "<group>"; };
@@ -620,6 +631,13 @@
 				50B26EA81F315EB8009B3B9F /* PayOrderController.m */,
 				50B26EAA1F315EF0009B3B9F /* CommentOrderController.h */,
 				50B26EAB1F315EF0009B3B9F /* CommentOrderController.m */,
+				5071B4751F37F702009FFF67 /* OrderDetailController.h */,
+				5071B4761F37F702009FFF67 /* OrderDetailController.m */,
+				5071B47A1F380987009FFF67 /* OrderDetailView.h */,
+				5071B47B1F380987009FFF67 /* OrderDetailView.m */,
+				5071B47D1F38099C009FFF67 /* OrderDetailView.xib */,
+				5071B47F1F381366009FFF67 /* OrderCommentController.h */,
+				5071B4801F381366009FFF67 /* OrderCommentController.m */,
 				181E92F31F2085B60006511E /* DSFavoritesController.h */,
 				181E92F41F2085B60006511E /* DSFavoritesController.m */,
 				181E92F61F2086620006511E /* DSExchangeController.h */,
@@ -1225,6 +1243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5071B47E1F38099C009FFF67 /* OrderDetailView.xib in Resources */,
 				50D30E7D1F2044C20086D3ED /* BusinessDetailHeaderView.xib in Resources */,
 				50B26E6E1F301B60009B3B9F /* RechargeCell.xib in Resources */,
 				5097FDFE1F2ECE2F002EF8F8 /* TicketCashView.xib in Resources */,
@@ -1429,12 +1448,14 @@
 				5016720E1F297A3500384186 /* ShopIntroController.m in Sources */,
 				18218FEB1F2B0C3C00F7207F /* DSCarClubDetailController.m in Sources */,
 				18B697AC1F21DAB3009FF73A /* DSSaleActivityController.m in Sources */,
+				5071B4771F37F702009FFF67 /* OrderDetailController.m in Sources */,
 				5042E3561F33165C00CD140F /* NewPagedFlowView.m in Sources */,
 				5097FDFC1F2ECE0B002EF8F8 /* TicketCashView.m in Sources */,
 				1853BA451F28A04100B98C7F /* JFButton.m in Sources */,
 				50B26EC91F31AFA7009B3B9F /* IcreaseCarController.m in Sources */,
 				18B69EA31F32CB48007DA0E4 /* UIImage+Zirkfied.m in Sources */,
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
+				5071B47C1F380987009FFF67 /* OrderDetailView.m in Sources */,
 				501672411F29D16C00384186 /* MemberView.m in Sources */,
 				50E2EE7E1F1F4D3C00FAF130 /* YZAllCourseViewController.m in Sources */,
 				50B26E931F307AE5009B3B9F /* DiscountController.m in Sources */,
@@ -1446,6 +1467,7 @@
 				1853BA491F28A04100B98C7F /* JFCityTableViewCell.m in Sources */,
 				181E92D81F1F3BAE0006511E /* FindViewController.m in Sources */,
 				501672461F29DA6C00384186 /* MemberRegualrController.m in Sources */,
+				5071B4811F381366009FFF67 /* OrderCommentController.m in Sources */,
 				181E93291F20B0510006511E /* SXScrPageView.m in Sources */,
 				5016724C1F2A020600384186 /* ScoreIntroController.m in Sources */,
 				18B69EA21F32CB48007DA0E4 /* UIColor+Zirkfied.m in Sources */,
