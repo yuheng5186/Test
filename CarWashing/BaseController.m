@@ -13,7 +13,7 @@
 #define DefaultNavLeftBtnTag 9002
 #define DefaultNavRightBtnTag 9003
 #define DefaultNavTitleLblTag 9004
-
+#import "LoginViewController.h"
 @interface BaseController ()
 
 @property (nonatomic,strong) UIView *blackLoadingView;
@@ -96,6 +96,17 @@
     [self.view addSubview:self.statusView];
     [self.view addSubview:self.navigationView];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    
+    for (UIViewController *viewController in self.navigationController.viewControllers)
+    {
+        if ([viewController isKindOfClass: LoginViewController.class])
+        {
+            self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+
+        }
+    }
+    
+    
     [self drawNavigation];
     [self drawContent];
 }

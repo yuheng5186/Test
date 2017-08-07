@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1805AC831F38090D00FD0844 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC821F38090D00FD0844 /* LoginViewController.m */; };
+		1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC851F385C8600FD0844 /* DSAgreementController.m */; };
 		181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92B71F1F364A0006511E /* MenuTabBarController.m */; };
 		181E92BB1F1F36710006511E /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BA1F1F36710006511E /* BaseController.m */; };
 		181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BF1F1F39CC0006511E /* BlackLoadingView.m */; };
@@ -185,6 +187,10 @@
 
 /* Begin PBXFileReference section */
 		06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CarWashing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1805AC811F38090D00FD0844 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = UserInfo/LoginViewController.h; sourceTree = "<group>"; };
+		1805AC821F38090D00FD0844 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = UserInfo/LoginViewController.m; sourceTree = "<group>"; };
+		1805AC841F385C8600FD0844 /* DSAgreementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAgreementController.h; path = UserInfo/DSAgreementController.h; sourceTree = "<group>"; };
+		1805AC851F385C8600FD0844 /* DSAgreementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAgreementController.m; path = UserInfo/DSAgreementController.m; sourceTree = "<group>"; };
 		181E92B61F1F364A0006511E /* MenuTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTabBarController.h; sourceTree = "<group>"; };
 		181E92B71F1F364A0006511E /* MenuTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTabBarController.m; sourceTree = "<group>"; };
 		181E92B91F1F36710006511E /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
@@ -508,6 +514,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1805AC801F3808DB00FD0844 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1805AC811F38090D00FD0844 /* LoginViewController.h */,
+				1805AC821F38090D00FD0844 /* LoginViewController.m */,
+				1805AC841F385C8600FD0844 /* DSAgreementController.h */,
+				1805AC851F385C8600FD0844 /* DSAgreementController.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
@@ -543,6 +560,7 @@
 		181E92DF1F1F3CC90006511E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1805AC801F3808DB00FD0844 /* Login */,
 				18B697A91F21DA60009FF73A /* Find */,
 				181E93081F2094420006511E /* Home */,
 				181E92E01F20532B0006511E /* UserInfo */,
@@ -1376,6 +1394,7 @@
 				181E92DE1F1F3BE40006511E /* MySettingViewController.m in Sources */,
 				181E92E31F2054C50006511E /* DSUserInfoController.m in Sources */,
 				181E92CD1F1F39CC0006511E /* UIImage+BFS.m in Sources */,
+				1805AC831F38090D00FD0844 /* LoginViewController.m in Sources */,
 				50B26E711F302E17009B3B9F /* DiscountCategoryView.m in Sources */,
 				181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */,
 				1839979F1F25E69100702071 /* DSPasswordController.m in Sources */,
@@ -1402,6 +1421,7 @@
 				18218FE81F2ADA8A00F7207F /* DSSegmentView.m in Sources */,
 				501672521F2A091000384186 /* ScoreCategoryView.m in Sources */,
 				182190091F301BF600F7207F /* DSActivityDetailCell.m in Sources */,
+				1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */,
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
 				50B26EA31F315D76009B3B9F /* OrderCategoryView.m in Sources */,
 				5094A62F1F346E4200407808 /* SuccessPayCell.m in Sources */,

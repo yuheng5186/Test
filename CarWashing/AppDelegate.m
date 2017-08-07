@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MenuTabBarController.h"
-
+#import "LoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -29,8 +29,16 @@
     
     self.window									= [[UIWindow alloc] initWithFrame: UIScreen.mainScreen.bounds];
 
-    MenuTabBarController *menuTabBarController	= [[MenuTabBarController alloc] init];
-    self.window.rootViewController				= menuTabBarController;
+    
+    LoginViewController *loginControl = [[LoginViewController alloc]init];
+    UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:loginControl];
+    nav.navigationBar.hidden      = YES;
+
+    self.window.rootViewController      = nav;
+    
+    
+//    MenuTabBarController *menuTabBarController	= [[MenuTabBarController alloc] init];
+//    self.window.rootViewController				= menuTabBarController;
     
     return YES;
 }
