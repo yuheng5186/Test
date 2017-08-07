@@ -11,12 +11,19 @@
 @implementation MemberView
 
 
-
 + (instancetype)memberView {
     return [[NSBundle mainBundle] loadNibNamed:@"MemberView" owner:nil options:nil].firstObject;
 }
 
 
+- (void)layoutSubviews {
+    
+    self.topContainView.backgroundColor = [UIColor colorFromHex:@"#293754"];
+    
+    self.bottomContainView.backgroundColor = [UIColor colorFromHex:@"#febb02"];
+    
+    
+}
 
 
 @end

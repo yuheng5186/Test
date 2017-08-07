@@ -8,6 +8,7 @@
 
 #import "WashCarTicketController.h"
 #import "CarTicketView.h"
+#import <Masonry.h>
 
 @interface WashCarTicketController ()
 
@@ -18,24 +19,32 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"洗车劵" Color:[UIColor blackColor]];
+    [self drawTitle:@"洗车劵"];
     
 }
 
-- (void) drawContent
-{
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
-    
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     CarTicketView *ticketView = [CarTicketView carTicketView];
-    ticketView.frame = CGRectMake(0, 64, Main_Screen_Width, 250);
+    ticketView.frame = CGRectMake(10, 64 + 10, Main_Screen_Width - 20, 80);
     [self.view addSubview:ticketView];
+    
+    UIButton *exchangeButton = [UIUtil drawDefaultButton:self.view title:@"500积分兑换" target:self action:@selector(didClickExhangeButton:)];
+    
+    [exchangeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(ticketView.mas_bottom).mas_offset(60);
+        make.centerX.equalTo(self.view);
+        make.height.mas_equalTo(48);
+        make.width.mas_equalTo(350);
+    }];
 }
+                                
+- (void)didClickExhangeButton:(UIButton *)button {
+                                    
+}
+                                
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -13,12 +13,14 @@
 - (void)prepareLayout{
     [super prepareLayout];
     
-    CGFloat itemWH = (Main_Screen_Width - 1) / 2;
+    CGFloat itemW = 140;
+    CGFloat itemH = 80;
     
-    self.itemSize = CGSizeMake(itemWH, itemWH);
+    self.itemSize = CGSizeMake(itemW, itemH);
     
-    self.minimumInteritemSpacing = 1;
-    self.minimumLineSpacing = 1;
+//    self.minimumInteritemSpacing = 0;
+//    self.minimumLineSpacing = 0;
 }
+
 
 @end

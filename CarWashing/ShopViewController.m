@@ -27,14 +27,13 @@
 
 - (void)drawNavigation {
     
-    //[self drawTitle:@"设置" Color:[UIColor blackColor]];
+    [self drawTitle:@"门店"];
     
 }
 
 - (void) drawContent
 {
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
+    
     self.contentView.height             = self.view.height;
     
 }

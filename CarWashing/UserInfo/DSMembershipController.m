@@ -16,7 +16,7 @@
 #import "GoodsViewCell.h"
 #import "WashCarTicketController.h"
 
-@interface DSMembershipController ()<UICollectionViewDelegate, UICollectionViewDataSource>
+@interface DSMembershipController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @end
 
@@ -43,7 +43,7 @@ static NSString *id_goodsCell = @"id_goodsCell";
 - (void)setupUI {
     
     MemberView *memberShipView = [MemberView memberView];
-    memberShipView.frame = CGRectMake(0, 64, Main_Screen_Width, 200);
+    memberShipView.frame = CGRectMake(0, 64, Main_Screen_Width, 113);
     [self.view addSubview:memberShipView];
     
     UIView *exchangeView = [[UIView alloc] init];
@@ -51,9 +51,11 @@ static NSString *id_goodsCell = @"id_goodsCell";
     
     UILabel *exchangeLabel = [[UILabel alloc] init];
     exchangeLabel.text = @"精品兑换";
+    exchangeLabel.font = [UIFont systemFontOfSize:14];
+    exchangeLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     [exchangeView addSubview:exchangeLabel];
     
-    GoodsViewLayout *layout = [[GoodsViewLayout alloc] init];
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     UICollectionView *goodsView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     goodsView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:goodsView];
@@ -63,7 +65,7 @@ static NSString *id_goodsCell = @"id_goodsCell";
     [exchangeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(memberShipView.mas_bottom).mas_offset(10);
         make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(50);
+        make.height.mas_equalTo(40);
     }];
     
     [exchangeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -133,6 +135,28 @@ static NSString *id_goodsCell = @"id_goodsCell";
     ticketVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:ticketVC animated:YES];
 }
+
+#pragma mark - item布局设置
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return CGSizeMake(140, 80);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    
+    return 15;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 36;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    
+    return UIEdgeInsetsMake(7.5, 29.5, 7.5, 29.5);
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -45,13 +45,13 @@
     
     [timesCardLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentView.top).mas_offset(30);
-        make.right.equalTo(self.contentView).mas_offset(-20);
+        make.right.equalTo(self.contentView).mas_offset(-10);
         make.width.mas_equalTo(200);
     }];
     
     [brandCardLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.contentView.bottom).mas_offset(-30);
-        make.right.equalTo(self.contentView).mas_offset(-20);
+        make.right.equalTo(self.contentView).mas_offset(-10);
         make.width.mas_equalTo(200);
     }];
 }
