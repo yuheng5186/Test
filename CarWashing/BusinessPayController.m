@@ -259,7 +259,7 @@ static NSString *payViewCell = @"payTableViewCell";
 #pragma mark - 点击cell
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 0 && indexPath.row == 3) {
+    if (indexPath.section == 0 && indexPath.row == 2) {
         
         CashViewController *cashVC = [[CashViewController alloc] init];
         //cashVC.providesPresentationContextTransitionStyle = YES;
