@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PushVCDelegate <NSObject>
+
+- (void)pushController:(UIViewController *)viewController animated:(BOOL)animated;
+
+@end
+
 @interface SuccessPayCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *orderLabel;
@@ -21,5 +27,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *stateButton;
+
+
+//代理
+@property (nonatomic, weak) id<PushVCDelegate> delegate;
 
 @end

@@ -27,7 +27,7 @@ static NSString *id_discountCell = @"id_discountCell";
     self.navigationView.hidden  = YES;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
-    self.contentView.backgroundColor = [UIColor lightGrayColor];
+    self.contentView.backgroundColor = [UIColor whiteColor];
 }
 
 
@@ -51,8 +51,8 @@ static NSString *id_discountCell = @"id_discountCell";
     
     [self.discountView registerNib:[UINib nibWithNibName:@"DiscountCell" bundle:nil] forCellReuseIdentifier:id_discountCell];
     
-    self.discountView.backgroundColor = [UIColor lightGrayColor];
-    self.discountView.rowHeight = 130;
+    self.discountView.backgroundColor = [UIColor whiteColor];
+    self.discountView.rowHeight = 80;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

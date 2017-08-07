@@ -71,7 +71,7 @@ static NSString *id_carListCell = @"id_carListCell";
     
     self.carListView.delegate = self;
     self.carListView.dataSource = self;
-    self.carListView.rowHeight = 184;
+    self.carListView.rowHeight = 140;
     [self.carListView registerNib:[UINib nibWithNibName:@"MyCarViewCell" bundle:nil] forCellReuseIdentifier:id_carListCell];
     
     UIButton *increaseBtn = [[UIButton alloc] init];

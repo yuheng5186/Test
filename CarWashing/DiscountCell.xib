@@ -18,37 +18,53 @@
                 <rect key="frame" x="0.0" y="0.0" width="355" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5元洗车券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TVr-fT-g9u">
-                        <rect key="frame" x="121" y="8" width="85" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xichequanmuban" translatesAutoresizingMaskIntoConstraints="NO" id="Ap1-DX-32U">
+                        <rect key="frame" x="0.0" y="0.0" width="355" height="80"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amO-b5-iAN">
+                        <rect key="frame" x="25" y="24.5" width="30.5" height="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5元洗车劵" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfF-0y-ncJ">
+                        <rect key="frame" x="125.5" y="8" width="75" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="门店洗车可进行抵扣" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jS4-Kb-oDo">
-                        <rect key="frame" x="121" y="29" width="135" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="不可与其他优惠劵叠加使用" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXK-Pd-DD9">
+                        <rect key="frame" x="125" y="34.5" width="159.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="有效期:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rS4-6i-zBl">
-                        <rect key="frame" x="121" y="91" width="61" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2017-8-1~2018-8-1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fgl-SY-ZGT">
-                        <rect key="frame" x="121" y="50" width="158" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <nil key="textColor"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有效期: 2717-8-1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVG-NQ-C88">
+                        <rect key="frame" x="125" y="54.5" width="102" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="lfF-0y-ncJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="8iR-va-whs"/>
+                    <constraint firstItem="amO-b5-iAN" firstAttribute="centerY" secondItem="Ap1-DX-32U" secondAttribute="centerY" id="BM9-6C-t0e"/>
+                    <constraint firstAttribute="trailing" secondItem="Ap1-DX-32U" secondAttribute="trailing" id="BZk-NX-Rb0"/>
+                    <constraint firstItem="lfF-0y-ncJ" firstAttribute="leading" secondItem="amO-b5-iAN" secondAttribute="trailing" constant="70" id="EYx-wR-utv"/>
+                    <constraint firstItem="Ap1-DX-32U" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="H5f-g8-DHQ"/>
+                    <constraint firstItem="xVG-NQ-C88" firstAttribute="leading" secondItem="xXK-Pd-DD9" secondAttribute="leading" id="IZX-ZC-pLs"/>
+                    <constraint firstItem="amO-b5-iAN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="P9r-hY-ifs"/>
+                    <constraint firstItem="Ap1-DX-32U" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Qhk-U2-2ew"/>
+                    <constraint firstItem="xXK-Pd-DD9" firstAttribute="top" secondItem="lfF-0y-ncJ" secondAttribute="bottom" constant="7" id="Xkb-Fi-zUu"/>
+                    <constraint firstItem="xVG-NQ-C88" firstAttribute="top" secondItem="xXK-Pd-DD9" secondAttribute="bottom" constant="4" id="YAr-Tb-FZD"/>
+                    <constraint firstAttribute="bottom" secondItem="Ap1-DX-32U" secondAttribute="bottom" id="j1t-LW-P9H"/>
+                    <constraint firstItem="xXK-Pd-DD9" firstAttribute="leading" secondItem="lfF-0y-ncJ" secondAttribute="leading" id="qJf-qj-p73"/>
+                </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="-47.5" y="-32"/>
+            <point key="canvasLocation" x="-25" y="-36"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="xichequanmuban" width="348" height="79"/>
+    </resources>
 </document>
