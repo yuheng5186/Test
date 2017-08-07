@@ -30,7 +30,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 - (UITableView *)salerListView {
     if (nil == _salerListView) {
-        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 108, Main_Screen_Width, Main_Screen_Height) style:UITableViewStylePlain];
+        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height*108/667, Main_Screen_Width, Main_Screen_Height) style:UITableViewStylePlain];
         _salerListView = salerListView;
         [self.view addSubview:salerListView];
         
@@ -124,7 +124,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     // 创建下拉菜单
     YZPullDownMenu *menu = [[YZPullDownMenu alloc] init];
-    menu.frame = CGRectMake(0, Main_Screen_Height*64/667, Main_Screen_Width, 44);
+    menu.frame = CGRectMake(0, Main_Screen_Height*64/667, Main_Screen_Width, Main_Screen_Height*44/667);
     [self.view addSubview:menu];
     
     // 设置下拉菜单代理
