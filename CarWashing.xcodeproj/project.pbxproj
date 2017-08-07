@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		1805AC831F38090D00FD0844 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC821F38090D00FD0844 /* LoginViewController.m */; };
 		1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC851F385C8600FD0844 /* DSAgreementController.m */; };
+		1805AC901F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC891F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.m */; };
+		1805AC911F386FA800FD0844 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC8B1F386FA800FD0844 /* TPKeyboardAvoidingScrollView.m */; };
+		1805AC921F386FA800FD0844 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC8D1F386FA800FD0844 /* TPKeyboardAvoidingTableView.m */; };
+		1805AC931F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC8F1F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92B71F1F364A0006511E /* MenuTabBarController.m */; };
 		181E92BB1F1F36710006511E /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BA1F1F36710006511E /* BaseController.m */; };
 		181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BF1F1F39CC0006511E /* BlackLoadingView.m */; };
@@ -195,6 +199,14 @@
 		1805AC821F38090D00FD0844 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = UserInfo/LoginViewController.m; sourceTree = "<group>"; };
 		1805AC841F385C8600FD0844 /* DSAgreementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAgreementController.h; path = UserInfo/DSAgreementController.h; sourceTree = "<group>"; };
 		1805AC851F385C8600FD0844 /* DSAgreementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAgreementController.m; path = UserInfo/DSAgreementController.m; sourceTree = "<group>"; };
+		1805AC881F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPKeyboardAvoidingCollectionView.h; path = Tool/TPKeyboardAvoid/TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
+		1805AC891F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPKeyboardAvoidingCollectionView.m; path = Tool/TPKeyboardAvoid/TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
+		1805AC8A1F386FA800FD0844 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPKeyboardAvoidingScrollView.h; path = Tool/TPKeyboardAvoid/TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		1805AC8B1F386FA800FD0844 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPKeyboardAvoidingScrollView.m; path = Tool/TPKeyboardAvoid/TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		1805AC8C1F386FA800FD0844 /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPKeyboardAvoidingTableView.h; path = Tool/TPKeyboardAvoid/TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
+		1805AC8D1F386FA800FD0844 /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPKeyboardAvoidingTableView.m; path = Tool/TPKeyboardAvoid/TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
+		1805AC8E1F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+TPKeyboardAvoidingAdditions.h"; path = "Tool/TPKeyboardAvoid/UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		1805AC8F1F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+TPKeyboardAvoidingAdditions.m"; path = "Tool/TPKeyboardAvoid/UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		181E92B61F1F364A0006511E /* MenuTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTabBarController.h; sourceTree = "<group>"; };
 		181E92B71F1F364A0006511E /* MenuTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTabBarController.m; sourceTree = "<group>"; };
 		181E92B91F1F36710006511E /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
@@ -536,9 +548,25 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
+		1805AC871F386F9900FD0844 /* TPKeyboardAvoid */ = {
+			isa = PBXGroup;
+			children = (
+				1805AC881F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.h */,
+				1805AC891F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.m */,
+				1805AC8A1F386FA800FD0844 /* TPKeyboardAvoidingScrollView.h */,
+				1805AC8B1F386FA800FD0844 /* TPKeyboardAvoidingScrollView.m */,
+				1805AC8C1F386FA800FD0844 /* TPKeyboardAvoidingTableView.h */,
+				1805AC8D1F386FA800FD0844 /* TPKeyboardAvoidingTableView.m */,
+				1805AC8E1F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				1805AC8F1F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+			);
+			name = TPKeyboardAvoid;
+			sourceTree = "<group>";
+		};
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				1805AC871F386F9900FD0844 /* TPKeyboardAvoid */,
 				18B69E9D1F32CAFF007DA0E4 /* ScanQRCode */,
 				1853BA311F28A01600B98C7F /* JFCityViewController */,
 				1853BA0A1F28774400B98C7F /* LKActionSheet.h */,
@@ -1440,6 +1468,7 @@
 				18218FE81F2ADA8A00F7207F /* DSSegmentView.m in Sources */,
 				501672521F2A091000384186 /* ScoreCategoryView.m in Sources */,
 				182190091F301BF600F7207F /* DSActivityDetailCell.m in Sources */,
+				1805AC911F386FA800FD0844 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */,
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
 				50B26EA31F315D76009B3B9F /* OrderCategoryView.m in Sources */,
@@ -1459,6 +1488,7 @@
 				501672021F29797600384186 /* BusinessDetailViewController.m in Sources */,
 				181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */,
 				5094A63D1F34850300407808 /* ShopInfoHeadView.m in Sources */,
+				1805AC901F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				5094A6391F346E7000407808 /* CancelPayCell.m in Sources */,
 				50B26E6D1F301B60009B3B9F /* RechargeCell.m in Sources */,
 				50B26EC41F31A048009B3B9F /* CarTicketView.m in Sources */,
@@ -1469,6 +1499,7 @@
 				18218FEB1F2B0C3C00F7207F /* DSCarClubDetailController.m in Sources */,
 				18B697AC1F21DAB3009FF73A /* DSSaleActivityController.m in Sources */,
 				5071B4771F37F702009FFF67 /* OrderDetailController.m in Sources */,
+				1805AC921F386FA800FD0844 /* TPKeyboardAvoidingTableView.m in Sources */,
 				5042E3561F33165C00CD140F /* NewPagedFlowView.m in Sources */,
 				5097FDFC1F2ECE0B002EF8F8 /* TicketCashView.m in Sources */,
 				1853BA451F28A04100B98C7F /* JFButton.m in Sources */,
@@ -1477,6 +1508,7 @@
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
 				5071B47C1F380987009FFF67 /* OrderDetailView.m in Sources */,
 				501672411F29D16C00384186 /* MemberView.m in Sources */,
+				1805AC931F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				50E2EE7E1F1F4D3C00FAF130 /* YZAllCourseViewController.m in Sources */,
 				50B26E931F307AE5009B3B9F /* DiscountController.m in Sources */,
 				5097FE161F2F42F0002EF8F8 /* MyCarPortController.m in Sources */,
