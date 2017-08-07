@@ -14,6 +14,9 @@
 #import "PurchaseViewController.h"
 #import "MySettingViewController.h"
 #import "DSScanQRCodeController.h"
+
+#import "LoginViewController.h"
+
 @interface MenuTabBarController ()
 
 @end
@@ -39,9 +42,21 @@
     [self createNavigationControllers];
 }
 
-
+//- (void) viewDidAppear:(BOOL)animated
+//{
+//    [super viewDidAppear: animated];
+//    
+//    LoginViewController *loginController    = [[LoginViewController alloc]init];
+//    UINavigationController *navController   = [[UINavigationController alloc]initWithRootViewController:loginController];
+//    navController.navigationBar.hidden      = YES;
+//    
+//    [self presentViewController:navController animated:YES completion:nil];
+//    
+//}
 - (void) createNavigationControllers
 {
+    
+    
     HomeViewController *homeVC      = [[HomeViewController alloc]init];
     UINavigationController *homeNav = [[UINavigationController alloc]initWithRootViewController:homeVC];
     homeNav.navigationController.navigationBarHidden = YES;

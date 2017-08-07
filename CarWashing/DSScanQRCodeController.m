@@ -18,6 +18,9 @@
 @property (nonatomic, strong) UIButton * flashlight;
 @property (nonatomic, strong) UILabel * flashlightSwitch;
 
+@property (nonatomic, strong) UIButton * inputButton;
+@property (nonatomic, strong) UILabel * inputLabel;
+
 @end
 
 @implementation DSScanQRCodeController
@@ -59,13 +62,13 @@
 
 - (void)setupScanWindowView
 {
-    UIImageView *scanImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image_scan"]];
+    UIImageView *scanImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"saomakuang"]];
     scanImageView.width = Main_Screen_Width - 65*2;
     scanImageView.height = Main_Screen_Width - 65*2;
     scanImageView.centerX = Main_Screen_Width/2;
     scanImageView.centerY = self.contentView.height/2 -100;
     
-    _scanNetImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image_scan_line"]];
+    _scanNetImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"saomiaozhong"]];
     
     [self.contentView addSubview:scanImageView];
     self.scanWindow = scanImageView;
@@ -91,14 +94,27 @@
     self.flashlightSwitch.top = self.flashlight.bottom;
     self.flashlightSwitch.left  = self.flashlight.left+10;
     
+    self.inputButton        = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, 100, 50) iconName:@"shurubianhao" target:self action:@selector(inputButtonClcik:)];
+    self.inputButton.top    = lbl.bottom +50;
+    self.inputButton.left   = scanImageView.left;
+    
+    NSString  *inpotString       = @"输入机器编号开锁";
+    UIFont    *inputStringFont   = [UIFont systemFontOfSize:16];
+    self.inputLabel             = [UIUtil drawLabelInView:self.contentView frame:[UIUtil textRect:inpotString font:inputStringFont]font:inputStringFont text:inpotString isCenter:NO];
+    self.inputLabel.textColor   = [UIColor whiteColor];
+    self.inputLabel.top         = self.inputButton.bottom;
+    self.inputLabel.centerX     = self.inputButton.centerX;
 }
+- (void) inputButtonClcik:(UIButton *)sender {
 
+    
+}
 - (void) flashlightButtonClcik:(UIButton *)sender {
     
     sender.selected = !sender.selected;
     if (sender.selected) {
         [sender setImage:[UIImage imageNamed:@"Flashlight_H"] forState:UIControlStateSelected];
-        
+        self.flashlightSwitch.text  = @"关闭手电筒";
         //打开闪光灯
         AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
         NSError *error = nil;
@@ -113,7 +129,7 @@
         
     }else{
         [sender setImage:[UIImage imageNamed:@"Flashlight_N"] forState:UIControlStateSelected];
-        
+        self.flashlightSwitch.text  = @"打开手电筒";
         //关闭闪光灯
         AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
         if ([device hasTorch]) {
