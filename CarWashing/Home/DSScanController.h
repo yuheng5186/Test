@@ -7,6 +7,8 @@
 //
 
 #import "BaseController.h"
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface DSScanController : BaseController
 
