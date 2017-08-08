@@ -16,6 +16,7 @@
 #import "DSScanQRCodeController.h"
 
 #import "LoginViewController.h"
+#import "DSScanController.h"
 
 @interface MenuTabBarController ()
 
@@ -71,7 +72,7 @@
     businessTabItem.tag     = 2;
     businessVC.tabBarItem   = businessTabItem;
     
-    DSScanQRCodeController *activityVC      = [[DSScanQRCodeController alloc]init];
+    DSScanController *activityVC      = [[DSScanController alloc]init];
     UINavigationController *activityNav = [[UINavigationController alloc]initWithRootViewController:activityVC];
     activityNav.navigationController.navigationBarHidden = YES;
     UITabBarItem *activityTabItem       = [[UITabBarItem alloc]initWithTitle:@"洗车" image:[UIImage imageNamed:@"wode"] selectedImage:[UIImage imageNamed:@"wode"]];
