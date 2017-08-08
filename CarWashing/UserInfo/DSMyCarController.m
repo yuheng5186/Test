@@ -227,11 +227,44 @@
                 make.centerY.equalTo(carCell);
             }];
         }
+    }
+    
+    if (indexPath.section == 1) {
+        
+        NSArray *arr = @[@"车架号码",@"生产年份",@"上路时间",@"行驶里程"];
+        carCell.textLabel.text = arr[indexPath.row];
+        carCell.textLabel.textColor = [UIColor colorFromHex:@"#868686"];
+        carCell.textLabel.font = [UIFont systemFontOfSize:14];
+        
+        if (indexPath.row == 0 || indexPath.row == 3) {
+            UITextField *textTF = [[UITextField alloc] init];
+            textTF.placeholder = @"请填写";
+            textTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
+            textTF.font = [UIFont systemFontOfSize:12];
+            [carCell.contentView addSubview:textTF];
+            
+            [textTF mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(carCell.contentView).mas_offset(110);
+                make.centerY.equalTo(carCell);
+            }];
+        }else {
+            
+            carCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+            UILabel *lbl = [[UILabel alloc] init];
+            lbl.text = @"请选择";
+            lbl.textColor = [UIColor colorFromHex:@"#868686"];
+            lbl.font = [UIFont systemFontOfSize:12];
+            [carCell.contentView addSubview:lbl];
+            
+            [lbl mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(carCell.contentView).mas_offset(110);
+                make.centerY.equalTo(carCell);
+            }];
+        }
         
         
     }
-    
-    
     
     return carCell;
 }
@@ -249,6 +282,8 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     UILabel *infoLabel = [[UILabel alloc] init];
+    infoLabel.textColor = [UIColor colorFromHex:@"#868686"];
+    infoLabel.font = [UIFont systemFontOfSize:15];
     
     if (section == 0) {
         

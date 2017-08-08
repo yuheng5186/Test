@@ -32,7 +32,7 @@
     CGFloat w = SCREEN_WIDTH / self.titleArr.count;
     CGFloat h = self.h;
     
-    self.sliderWidth = w;
+    self.sliderWidth = 40;
     
     for (int i = 0; i < self.titleArr.count; i++) {
         
@@ -42,7 +42,7 @@
         
         [button setTitle:self.titleArr[i] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+        //[button setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
         button.titleLabel.font = [UIFont systemFontOfSize:15.f];
         
         button.frame = CGRectMake(x, y, w, h);
@@ -57,28 +57,28 @@
         }
     
         /** 创建分割线 */
-        UIView *carve = [[UIView alloc] init];
-        carve.backgroundColor = [UIColor lightGrayColor];
-        carve.frame = CGRectMake(w * (i + 1), 12, 1, h - (12 * 2));
-        [self addSubview:carve];
+//        UIView *carve = [[UIView alloc] init];
+//        carve.backgroundColor = [UIColor lightGrayColor];
+//        carve.frame = CGRectMake(w * (i + 1), 12, 1, h - (12 * 2));
+//        [self addSubview:carve];
     }
     
     /** 创建滑块 */
     UIView *sliderView = [[UIView alloc] init];
     self.sliderView = sliderView;
-    sliderView.backgroundColor = [UIColor redColor];
+    sliderView.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     
     /** 滑块高度 */
-    CGFloat sliderHeight = 4.f;
+    CGFloat sliderHeight = 2.f;
     
-    sliderView.frame = CGRectMake(0, self.bounds.size.height - sliderHeight, self.sliderWidth, sliderHeight);
+    sliderView.frame = CGRectMake(SCREEN_WIDTH/3/2 - _sliderWidth / 2, self.bounds.size.height - sliderHeight, self.sliderWidth, sliderHeight);
     
     [self addSubview:sliderView];
     
-    UIView *carve = [[UIView alloc] init];
-    carve.backgroundColor = [UIColor lightGrayColor];
-    carve.frame = CGRectMake(0, h - 1, SCREEN_WIDTH, 1);
-    [self addSubview:carve];
+//    UIView *carve = [[UIView alloc] init];
+//    carve.backgroundColor = [UIColor lightGrayColor];
+//    carve.frame = CGRectMake(0, h - 1, SCREEN_WIDTH, 1);
+//    [self addSubview:carve];
 }
 
 - (void)didClickMenuButton:(UIButton *)button
@@ -105,7 +105,7 @@
     
     /** 设置滑块滚动 */
     [UIView animateWithDuration:0.25 animations:^{
-        self.sliderView.x = button.tag * self.sliderWidth;
+        self.sliderView.x = (SCREEN_WIDTH/3/2 - _sliderWidth / 2) + button.tag * SCREEN_WIDTH / self.titleArr.count;
     }];
 }
 

@@ -27,7 +27,7 @@ static NSString *id_carListCell = @"id_carListCell";
     
     if (_carListView == nil) {
         
-        UITableView *carListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 64 - 60)];
+        UITableView *carListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height)];
         _carListView = carListView;
         [self.view addSubview:_carListView];
     }
@@ -35,16 +35,16 @@ static NSString *id_carListCell = @"id_carListCell";
     return _carListView;
 }
 
-- (UIView *)increaseView {
-    
-    if (_increaseView == nil) {
-        
-        UIView *increaseView = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 60, Main_Screen_Width, 60)];
-        _increaseView = increaseView;
-        [self.view addSubview:_increaseView];
-    }
-    return _increaseView;
-}
+//- (UIView *)increaseView {
+//    
+//    if (_increaseView == nil) {
+//        
+//        UIView *increaseView = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 60, Main_Screen_Width, 60)];
+//        _increaseView = increaseView;
+//        [self.view addSubview:_increaseView];
+//    }
+//    return _increaseView;
+//}
 
 
 - (void)drawNavigation {
@@ -68,17 +68,14 @@ static NSString *id_carListCell = @"id_carListCell";
     self.carListView.rowHeight = 140;
     [self.carListView registerNib:[UINib nibWithNibName:@"MyCarViewCell" bundle:nil] forCellReuseIdentifier:id_carListCell];
     
-    UIButton *increaseBtn = [[UIButton alloc] init];
-    [increaseBtn setTitle:@"新增车辆" forState:UIControlStateNormal];
-    increaseBtn.backgroundColor = [UIColor orangeColor];
-    [increaseBtn addTarget:self action:@selector(didClickIncreaseButton) forControlEvents:UIControlEventTouchUpInside];
-    [self.increaseView addSubview:increaseBtn];
+    
+    UIButton *increaseBtn = [UIUtil drawDefaultButton:self.view title:@"新增车辆" target:self action:@selector(didClickIncreaseButton)];
     
     [increaseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(Main_Screen_Width / 3 * 2);
-        make.height.mas_equalTo(44);
-        make.centerX.equalTo(self.increaseView);
-        make.centerY.equalTo(self.increaseView);
+        make.width.mas_equalTo(351);
+        make.height.mas_equalTo(48);
+        make.centerX.equalTo(self.view);
+        make.bottom.equalTo(self.view).mas_offset(-25);
     }];
 }
 

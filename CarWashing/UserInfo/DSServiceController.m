@@ -79,10 +79,34 @@
     
     
     //底部电话客服
-    UIButton *phoneBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 100, Main_Screen_Width, 100)];
-    phoneBtn.backgroundColor = [UIColor orangeColor];
+    UIView *bottomPhoneView = [[UIView alloc] init];
+    bottomPhoneView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:bottomPhoneView];
+
+    
+    UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    phoneBtn.backgroundColor = [UIColor whiteColor];
     [phoneBtn setTitle:@"电话客服" forState:UIControlStateNormal];
-    [self.view addSubview:phoneBtn];
+    //[phoneBtn setTintColor:[UIColor blackColor]];
+    [phoneBtn setTitleColor:[UIColor colorFromHex:@"#4a4a4a"] forState:UIControlStateNormal];
+   
+    phoneBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [phoneBtn setImage:[UIImage imageNamed:@"kefuzixun"] forState:UIControlStateNormal];
+    [bottomPhoneView addSubview:phoneBtn];
+    
+    [bottomPhoneView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.height.mas_equalTo(60);
+    }];
+    
+    [phoneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(bottomPhoneView);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(60);
+    }];
+    
+    phoneBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    [phoneBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     
     [phoneBtn addTarget:self action:@selector(showAlertWithMessage:) forControlEvents:UIControlEventTouchUpInside];
     

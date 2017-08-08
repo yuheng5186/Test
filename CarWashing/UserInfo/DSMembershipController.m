@@ -144,7 +144,7 @@ static NSString *id_goodsCell = @"id_goodsCell";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     
-    return 15;
+    return 36;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
@@ -153,7 +153,7 @@ static NSString *id_goodsCell = @"id_goodsCell";
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     
-    return UIEdgeInsetsMake(7.5, 29.5, 7.5, 29.5);
+    return UIEdgeInsetsMake(18, 23.75, 18, 23.75);
 }
 
 

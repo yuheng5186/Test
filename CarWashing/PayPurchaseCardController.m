@@ -158,26 +158,26 @@ static NSString *id_payDetailCell = @"id_payDetailCell";
     
     
     //底部支付栏
-    UIView *payBottomView = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 80, Main_Screen_Width, 80)];
+    UIView *payBottomView = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 60, Main_Screen_Width, 60)];
     payBottomView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:payBottomView];
     
     UILabel *bottomPriceLab = [[UILabel alloc] init];
     bottomPriceLab.text = @"¥54.00";
-    bottomPriceLab.font = [UIFont systemFontOfSize:25];
-    bottomPriceLab.font = [UIFont boldSystemFontOfSize:20];
+    bottomPriceLab.font = [UIFont systemFontOfSize:18];
+    bottomPriceLab.textColor = [UIColor colorFromHex:@"#ff525a"];
     [payBottomView addSubview:bottomPriceLab];
     
     [bottomPriceLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.mas_equalTo(payBottomView).mas_offset(30);
-        
+        make.centerY.equalTo(payBottomView);
+        make.left.equalTo(payBottomView).mas_offset(30);
     }];
     
-    UIButton *bottomPayButton = [[UIButton alloc] initWithFrame:CGRectMake(Main_Screen_Width - 200, 0, 200, 80)];
-    bottomPayButton.backgroundColor = [UIColor orangeColor];
+    UIButton *bottomPayButton = [[UIButton alloc] initWithFrame:CGRectMake(Main_Screen_Width - 136, 0, 136, 60)];
+    bottomPayButton.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     [bottomPayButton setTitle:@"立即付款" forState:UIControlStateNormal];
-    bottomPayButton.titleLabel.font = [UIFont systemFontOfSize:20];
-    bottomPayButton.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+    bottomPayButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    [bottomPayButton setTintColor:[UIColor whiteColor]];
     
     //方法子
     [bottomPayButton addTarget:self action:@selector(showAlertWithTitle:message:) forControlEvents:UIControlEventTouchUpInside];
