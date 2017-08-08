@@ -16,6 +16,9 @@
 
 @property (nonatomic, weak) UITableView *payCardView;
 
+@property (nonatomic, strong) NSArray *payNameArray;
+@property (nonatomic, strong) NSArray *payImageNameArr;
+
 @end
 
 static NSString *id_payCardViewCell = @"id_payCardViewCell";
@@ -49,6 +52,10 @@ static NSString *id_payDetailCell = @"id_payDetailCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSArray *payNameArray = @[@"微信支付",@"支付宝支付"];
+    NSArray *payImageNameArr = @[@"weixin",@"zhifubao"];
+    self.payNameArray = payNameArray;
+    self.payImageNameArr = payImageNameArr;
     
     [self setupUI];
     
@@ -230,6 +237,9 @@ static NSString *id_payDetailCell = @"id_payDetailCell";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     }
     
+    cell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    
     if (indexPath.section == 0 && indexPath.row == 1) {
         
         payCardDetailCell *payCell = [tableView dequeueReusableCellWithIdentifier:id_payDetailCell];
@@ -239,14 +249,31 @@ static NSString *id_payDetailCell = @"id_payDetailCell";
     
     if (indexPath.section == 2) {
         
-        cell.imageView.image = [UIImage imageNamed:@"weixin"];
-        cell.textLabel.text = @"微信支付";
-        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"xaunzhong"]];
+        cell.imageView.image = [UIImage imageNamed:self.payImageNameArr[indexPath.row]];
+        cell.textLabel.text = self.payNameArray[indexPath.row];
+        cell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+        cell.textLabel.font = [UIFont systemFontOfSize:15];
+        
+        UIButton *payWayBtn = [[UIButton alloc] init];
+        [payWayBtn setImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
+        [payWayBtn setImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateSelected];
+        [cell.contentView addSubview:payWayBtn];
+        
+        [payWayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(cell.contentView);
+            make.right.equalTo(cell.contentView).mas_offset(-12);
+            make.width.mas_equalTo(21);
+            make.height.mas_equalTo(21);
+        }];
+        
         return cell;
     }
     
     cell.textLabel.text  = @"卡名称";
     cell.detailTextLabel.text = @"洗车月卡";
+    
+    cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:13];
     
     
     return cell;
@@ -255,7 +282,7 @@ static NSString *id_payDetailCell = @"id_payDetailCell";
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 0 && indexPath.row == 2 ) {
+    if (indexPath.section == 1 && indexPath.row == 0 ) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 }
@@ -293,7 +320,7 @@ static NSString *id_payDetailCell = @"id_payDetailCell";
 #pragma mark - 点击cell
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 0 && indexPath.row == 2) {
+    if (indexPath.section == 1 && indexPath.row == 0) {
         
         CashViewController *cashVC = [[CashViewController alloc] init];
         

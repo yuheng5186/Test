@@ -49,16 +49,10 @@ static NSString *id_carListCell = @"id_carListCell";
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"我的车库" Color:[UIColor blackColor]];
+    [self drawTitle:@"我的车库"];
     
 }
 
-- (void) drawContent
-{
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
-    
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
