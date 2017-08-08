@@ -18,14 +18,12 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"消息" Color:[UIColor blackColor]];
+    [self drawTitle:@"消息"];
     
 }
 
 - (void) drawContent
 {
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
     self.contentView.top                = Main_Screen_Height*44/667;
     self.contentView.height             = self.view.height;
 }
@@ -38,16 +36,18 @@
 }
 - (void) createSubView {
 
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStylePlain];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStyleGrouped];
     self.tableView.top              = 0;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
-    //    self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor  = [UIColor whiteColor];
     self.tableView.scrollEnabled    = NO;
-    //    self.tableView.tableFooterView  = [UIView new];
-    self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 60, 0);
+    self.tableView.tableFooterView  = [UIView new];
+    self.tableView.tableHeaderView  = [UIView new];
     [self.contentView addSubview:self.tableView];
+    
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
 }
 
 #pragma mark - UITableViewDataSource

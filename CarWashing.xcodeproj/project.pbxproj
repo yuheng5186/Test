@@ -14,6 +14,9 @@
 		1805AC921F386FA800FD0844 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC8D1F386FA800FD0844 /* TPKeyboardAvoidingTableView.m */; };
 		1805AC931F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC8F1F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		180E42D21F39A89000013D2D /* DSAddMerchantController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42D11F39A89000013D2D /* DSAddMerchantController.m */; };
+		180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42D41F39B88900013D2D /* DSConsumerDetailController.m */; };
+		180E42D81F39B8C200013D2D /* DSUserRightDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42D71F39B8C200013D2D /* DSUserRightDetailController.m */; };
+		180E42DB1F39B97A00013D2D /* DSCarWashingActivityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42DA1F39B97A00013D2D /* DSCarWashingActivityController.m */; };
 		181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92B71F1F364A0006511E /* MenuTabBarController.m */; };
 		181E92BB1F1F36710006511E /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BA1F1F36710006511E /* BaseController.m */; };
 		181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BF1F1F39CC0006511E /* BlackLoadingView.m */; };
@@ -210,6 +213,12 @@
 		1805AC8F1F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+TPKeyboardAvoidingAdditions.m"; path = "Tool/TPKeyboardAvoid/UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		180E42D01F39A89000013D2D /* DSAddMerchantController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAddMerchantController.h; path = Home/DSAddMerchantController.h; sourceTree = "<group>"; };
 		180E42D11F39A89000013D2D /* DSAddMerchantController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAddMerchantController.m; path = Home/DSAddMerchantController.m; sourceTree = "<group>"; };
+		180E42D31F39B88900013D2D /* DSConsumerDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSConsumerDetailController.h; path = Home/DSConsumerDetailController.h; sourceTree = "<group>"; };
+		180E42D41F39B88900013D2D /* DSConsumerDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSConsumerDetailController.m; path = Home/DSConsumerDetailController.m; sourceTree = "<group>"; };
+		180E42D61F39B8C200013D2D /* DSUserRightDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSUserRightDetailController.h; path = Home/DSUserRightDetailController.h; sourceTree = "<group>"; };
+		180E42D71F39B8C200013D2D /* DSUserRightDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSUserRightDetailController.m; path = Home/DSUserRightDetailController.m; sourceTree = "<group>"; };
+		180E42D91F39B97A00013D2D /* DSCarWashingActivityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSCarWashingActivityController.h; path = Home/DSCarWashingActivityController.h; sourceTree = "<group>"; };
+		180E42DA1F39B97A00013D2D /* DSCarWashingActivityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSCarWashingActivityController.m; path = Home/DSCarWashingActivityController.m; sourceTree = "<group>"; };
 		181E92B61F1F364A0006511E /* MenuTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTabBarController.h; sourceTree = "<group>"; };
 		181E92B71F1F364A0006511E /* MenuTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTabBarController.m; sourceTree = "<group>"; };
 		181E92B91F1F36710006511E /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
@@ -750,6 +759,12 @@
 				50B26E6C1F301B60009B3B9F /* RechargeCell.xib */,
 				180E42D01F39A89000013D2D /* DSAddMerchantController.h */,
 				180E42D11F39A89000013D2D /* DSAddMerchantController.m */,
+				180E42D31F39B88900013D2D /* DSConsumerDetailController.h */,
+				180E42D41F39B88900013D2D /* DSConsumerDetailController.m */,
+				180E42D61F39B8C200013D2D /* DSUserRightDetailController.h */,
+				180E42D71F39B8C200013D2D /* DSUserRightDetailController.m */,
+				180E42D91F39B97A00013D2D /* DSCarWashingActivityController.h */,
+				180E42DA1F39B97A00013D2D /* DSCarWashingActivityController.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1464,6 +1479,7 @@
 				18B803771F1DA2A300B52432 /* main.m in Sources */,
 				18B69E9C1F32CA71007DA0E4 /* ScanController.m in Sources */,
 				5016724F1F2A023600384186 /* ScoreGetController.m in Sources */,
+				180E42DB1F39B97A00013D2D /* DSCarWashingActivityController.m in Sources */,
 				181E92CF1F1F39CC0006511E /* UIView+Frame.m in Sources */,
 				507FED011F2B3111009CC505 /* CashViewController.m in Sources */,
 				18B697B21F21DB3F009FF73A /* DSCarTravellingController.m in Sources */,
@@ -1523,8 +1539,10 @@
 				50B26EAC1F315EF0009B3B9F /* CommentOrderController.m in Sources */,
 				183997A21F25F00700702071 /* DSAboutController.m in Sources */,
 				1853BA491F28A04100B98C7F /* JFCityTableViewCell.m in Sources */,
+				180E42D81F39B8C200013D2D /* DSUserRightDetailController.m in Sources */,
 				181E92D81F1F3BAE0006511E /* FindViewController.m in Sources */,
 				501672461F29DA6C00384186 /* MemberRegualrController.m in Sources */,
+				180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */,
 				5071B4811F381366009FFF67 /* OrderCommentController.m in Sources */,
 				181E93291F20B0510006511E /* SXScrPageView.m in Sources */,
 				5016724C1F2A020600384186 /* ScoreIntroController.m in Sources */,
