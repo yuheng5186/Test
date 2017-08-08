@@ -26,6 +26,7 @@
 #import "FindViewController.h"
 #import "ScanController.h"
 #import "DSScanQRCodeController.h"
+#import "DSAddMerchantController.h"
 
 #define KCURRENTCITYINFODEFAULTS [NSUserDefaults standardUserDefaults]
 
@@ -759,6 +760,9 @@
 }
 - (void) tapShopButtonClick:(id)sender {
     
+    DSAddMerchantController *addMerchantController      = [[DSAddMerchantController alloc]init];
+    addMerchantController.hidesBottomBarWhenPushed      = YES;
+    [self.navigationController pushViewController:addMerchantController animated:YES];
     
 }
 - (void) tapCarClubButtonClick:(id)sender {

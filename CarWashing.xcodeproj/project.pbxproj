@@ -13,6 +13,7 @@
 		1805AC911F386FA800FD0844 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC8B1F386FA800FD0844 /* TPKeyboardAvoidingScrollView.m */; };
 		1805AC921F386FA800FD0844 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC8D1F386FA800FD0844 /* TPKeyboardAvoidingTableView.m */; };
 		1805AC931F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC8F1F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
+		180E42D21F39A89000013D2D /* DSAddMerchantController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42D11F39A89000013D2D /* DSAddMerchantController.m */; };
 		181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92B71F1F364A0006511E /* MenuTabBarController.m */; };
 		181E92BB1F1F36710006511E /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BA1F1F36710006511E /* BaseController.m */; };
 		181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BF1F1F39CC0006511E /* BlackLoadingView.m */; };
@@ -207,6 +208,8 @@
 		1805AC8D1F386FA800FD0844 /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPKeyboardAvoidingTableView.m; path = Tool/TPKeyboardAvoid/TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
 		1805AC8E1F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+TPKeyboardAvoidingAdditions.h"; path = "Tool/TPKeyboardAvoid/UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		1805AC8F1F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+TPKeyboardAvoidingAdditions.m"; path = "Tool/TPKeyboardAvoid/UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		180E42D01F39A89000013D2D /* DSAddMerchantController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAddMerchantController.h; path = Home/DSAddMerchantController.h; sourceTree = "<group>"; };
+		180E42D11F39A89000013D2D /* DSAddMerchantController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAddMerchantController.m; path = Home/DSAddMerchantController.m; sourceTree = "<group>"; };
 		181E92B61F1F364A0006511E /* MenuTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTabBarController.h; sourceTree = "<group>"; };
 		181E92B71F1F364A0006511E /* MenuTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTabBarController.m; sourceTree = "<group>"; };
 		181E92B91F1F36710006511E /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
@@ -745,6 +748,8 @@
 				50B26E6A1F301B60009B3B9F /* RechargeCell.h */,
 				50B26E6B1F301B60009B3B9F /* RechargeCell.m */,
 				50B26E6C1F301B60009B3B9F /* RechargeCell.xib */,
+				180E42D01F39A89000013D2D /* DSAddMerchantController.h */,
+				180E42D11F39A89000013D2D /* DSAddMerchantController.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1421,6 +1426,7 @@
 				50B26E961F307B76009B3B9F /* RechargeController.m in Sources */,
 				18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */,
 				1853BA4E1F28A04C00B98C7F /* JFLocation.m in Sources */,
+				180E42D21F39A89000013D2D /* DSAddMerchantController.m in Sources */,
 				50B26E991F307D31009B3B9F /* DiscountDetailView.m in Sources */,
 				50E2EE621F1F4D2D00FAF130 /* YZPullDownMenu.m in Sources */,
 				1853BA121F288D9800B98C7F /* DSChangeNameController.m in Sources */,
