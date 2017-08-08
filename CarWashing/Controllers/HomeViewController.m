@@ -26,6 +26,11 @@
 #import "FindViewController.h"
 #import "ScanController.h"
 #import "DSScanQRCodeController.h"
+#import "DSAddMerchantController.h"
+
+#import "DSConsumerDetailController.h"
+#import "DSUserRightDetailController.h"
+#import "DSCarWashingActivityController.h"
 
 #define KCURRENTCITYINFODEFAULTS [NSUserDefaults standardUserDefaults]
 
@@ -115,20 +120,25 @@
     titleNameLabel.centerX           = titleView.centerX;
     titleNameLabel.centerY           = titleView.centerY +Main_Screen_Height*10/667;
     
-    UIImage *messagesImage           = [UIImage imageNamed:@"xiaoxi"];
-    UIButton  *messagesButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, messagesImage.size.width, messagesImage.size.height) iconName:@"xiaoxi" target:self action:@selector(messagesButtonClick:)];
-    messagesButton.right             = Main_Screen_Width -Main_Screen_Width*10/375;
-    messagesButton.centerY           = titleNameLabel.centerY;
+//    UIImage *messagesImage           = [UIImage imageNamed:@"sousuo"];
+//    UIButton  *messagesButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, messagesImage.size.width, messagesImage.size.height) iconName:@"sousuo" target:self action:@selector(messagesButtonClick:)];
+//    messagesButton.right             = Main_Screen_Width -Main_Screen_Width*20/375;
+//    messagesButton.centerY           = titleNameLabel.centerY;
     
-    UIImage *downloadImage           = [UIImage imageNamed:@"xiazai"];
-    UIButton  *downloadButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, downloadImage.size.width, downloadImage.size.height) iconName:@"xiazai" target:self action:@selector(messagesButtonClick:)];
-    downloadButton.right             = messagesButton.left -20;
-    downloadButton.centerY           = titleNameLabel.centerY;
-    
-    UIImage *searchImage           = [UIImage imageNamed:@"sousuo"];
-    UIButton  *searchButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, searchImage.size.width, searchImage.size.height) iconName:@"sousuo" target:self action:@selector(messagesButtonClick:)];
-    searchButton.right             = downloadButton.left -20;
-    searchButton.centerY           = titleNameLabel.centerY;
+//    UIImage *messagesImage           = [UIImage imageNamed:@"xiaoxi"];
+//    UIButton  *messagesButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, messagesImage.size.width, messagesImage.size.height) iconName:@"xiaoxi" target:self action:@selector(messagesButtonClick:)];
+//    messagesButton.right             = Main_Screen_Width -Main_Screen_Width*10/375;
+//    messagesButton.centerY           = titleNameLabel.centerY;
+//    
+//    UIImage *downloadImage           = [UIImage imageNamed:@"xiazai"];
+//    UIButton  *downloadButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, downloadImage.size.width, downloadImage.size.height) iconName:@"xiazai" target:self action:@selector(messagesButtonClick:)];
+//    downloadButton.right             = messagesButton.left -20;
+//    downloadButton.centerY           = titleNameLabel.centerY;
+//    
+//    UIImage *searchImage           = [UIImage imageNamed:@"sousuo"];
+//    UIButton  *searchButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, searchImage.size.width, searchImage.size.height) iconName:@"sousuo" target:self action:@selector(messagesButtonClick:)];
+//    searchButton.right             = downloadButton.left -20;
+//    searchButton.centerY           = titleNameLabel.centerY;
     
 
     
@@ -444,6 +454,8 @@
     activityImageView.centerX           = headerView.centerX;
     activityImageView.top               = newManImageView.bottom+10;
     
+    headerView.height   = activityImageView.bottom;
+
 //    NSMutableArray * images = [NSMutableArray array];
 //
 //    for (NSInteger i = 0; i<4; i++)
@@ -510,7 +522,6 @@
     cell.backgroundColor    = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-
     NSString *imageString               = @"xiaofeijilu";
     
     if (indexPath.section == 1) {
@@ -626,15 +637,32 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
+    if (indexPath.section == 1) {
+        
+        DSUserRightDetailController *rightController    = [[DSUserRightDetailController alloc]init];
+        rightController.hidesBottomBarWhenPushed        = YES;
+        [self.navigationController pushViewController:rightController animated:YES];
+
+    }else if (indexPath.section == 2){
+        
+        DSCarWashingActivityController *activityController  = [[DSCarWashingActivityController alloc]init];
+        activityController.hidesBottomBarWhenPushed         = YES;
+        [self.navigationController pushViewController:activityController animated:YES];
+
+    }else{
+        
+        DSConsumerDetailController *detaleController    = [[DSConsumerDetailController alloc]init];
+        detaleController.hidesBottomBarWhenPushed       = YES;
+        [self.navigationController pushViewController:detaleController animated:YES];
+    }
 }
 
 
 - (void) messagesButtonClick:(id)sender {
     
-    DSMessagesController *messageController     = [[DSMessagesController alloc]init];
-    messageController.hidesBottomBarWhenPushed  = YES;
-    [self.navigationController pushViewController:messageController animated:YES];
+//    DSMessagesController *messageController     = [[DSMessagesController alloc]init];
+//    messageController.hidesBottomBarWhenPushed  = YES;
+//    [self.navigationController pushViewController:messageController animated:YES];
 }
 
 - (void) locationButtonClick:(id)sender {
@@ -759,6 +787,9 @@
 }
 - (void) tapShopButtonClick:(id)sender {
     
+    DSAddMerchantController *addMerchantController      = [[DSAddMerchantController alloc]init];
+    addMerchantController.hidesBottomBarWhenPushed      = YES;
+    [self.navigationController pushViewController:addMerchantController animated:YES];
     
 }
 - (void) tapCarClubButtonClick:(id)sender {
