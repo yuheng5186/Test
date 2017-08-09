@@ -14,6 +14,8 @@
 #import "ActivityListCell.h"
 #import <Masonry.h>
 
+#import "DSActivityModel.h"
+
 @interface FindViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, weak) UIView *containerView;
@@ -22,6 +24,7 @@
 @property (nonatomic,strong) DSSegmentView *segmentView;
 @property (nonatomic, weak) UIScrollView *shopScrollView;
 
+@property(nonatomic,strong)NSMutableArray *dataArray;
 
 @end
 
@@ -39,12 +42,51 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    NSArray * array = @[
+                        @{
+                            @"nickName":@"杨芳学",
+                            @"graide":@"16",
+                            @"content":@"天使天使天使天使天使天使天使天使天使天"
+                            },
+                        @{
+                            @"nickName":@"杨芳学",
+                            @"graide":@"16",
+                            @"content":@"天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天"
+                            },
+                        @{
+                            @"nickName":@"杨芳学",
+                            @"graide":@"16",
+                            @"content":@"天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天"
+                            },
+                        @{
+                            @"nickName":@"杨芳学",
+                            @"graide":@"16",
+                            @"content":@"天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使天使"
+                            },
+                        ];
+    
+    
+    for (NSDictionary * dict in array) {
+        
+        DSActivityModel * model = [DSActivityModel modelWithDict:dict];
+        
+        [self.dataArray addObject:model];
+    }
+    
+    
+    
+    
+    
+    
     [self createSubView];
     
     [self setupCategoryView];
     [self setupScrollView];
     
     [self addChildViewControllers];
+    
+    [self.tableView reloadData];
+
 }
 
 - (void) createSubView {
@@ -209,7 +251,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.dataArray.count;
 }
 
 #pragma mark --
@@ -217,9 +259,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ActivityListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ActivityListCell" forIndexPath:indexPath];
-    
-    
-    
+    if (indexPath.row == 1) {
+        cell.activityImageView.image    = [UIImage imageNamed:@"faxiantu1"];
+
+    }
+    cell.activityImageView.image    = [UIImage imageNamed:@"faxiantu"];
     
     return cell;
 }

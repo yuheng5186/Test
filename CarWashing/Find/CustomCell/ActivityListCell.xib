@@ -67,6 +67,8 @@
                 <outlet property="activityImageView" destination="NBW-rh-ROL" id="sa8-Ko-ZaA"/>
                 <outlet property="activityTimeLabel" destination="9B3-r7-fv5" id="beq-iK-k8H"/>
                 <outlet property="activityTitleLabel" destination="YvE-qm-cy6" id="Bty-gA-k83"/>
+                <outlet property="goodNumberLabel" destination="dv6-oP-QeY" id="9YH-Un-wcJ"/>
+                <outlet property="sayNumberLabel" destination="Bbf-Mw-jnY" id="rPz-SB-jx3"/>
             </connections>
             <point key="canvasLocation" x="24.5" y="52"/>
         </tableViewCell>

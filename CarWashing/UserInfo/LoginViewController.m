@@ -125,10 +125,13 @@
     
     
     UIButton *updateRuleButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*320/375, Main_Screen_Height*30/667)];
+    [updateRuleButton setTitleColor:[UIColor colorFromHex:@"#293754"] forState:UIControlStateNormal];
     NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"注册即为同意《金顶洗车用户服务协议》"];
     NSRange titleRange = {0,[title length]};
     [title addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleNone] range:titleRange];
     [title addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, 6)];
+    [title addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#293754"] range:NSMakeRange(6, 12)];
+
     [updateRuleButton setAttributedTitle:title forState:UIControlStateNormal];
     [updateRuleButton setBackgroundColor:[UIColor clearColor]];
     [updateRuleButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
@@ -151,10 +154,12 @@
 
 - (void) loginButtonClick:(id)sender {
 
-    
+    if (self.userMobileFieldText.text.length == 11) {
+       
         MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
         [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
-    
+    }
+    [self.view showInfo:@"请输入正确的11位手机号码" autoHidden:YES];
 
 }
 
@@ -277,6 +282,7 @@
 }
 - (void) getVeriifyByButtonClick:(id)sender {
     
+    [self.view showInfo:@"验证码发送成功，请在手机上查收！" autoHidden:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
