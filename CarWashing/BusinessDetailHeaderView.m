@@ -40,6 +40,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *shopTypeLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *naviSmallBtn;
 @end
 
 @implementation BusinessDetailHeaderView
@@ -93,5 +94,16 @@
     
     self.shopTypeLabel.textColor = [UIColor colorFromHex:@"#868686"];
 }
+
+
+
+- (IBAction)didClickFavoriteBtn:(UIButton *)sender {
+    
+    
+    
+}
+
+
+
 
 @end

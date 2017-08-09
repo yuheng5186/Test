@@ -260,26 +260,66 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 
 #pragma mark - 设置组头视图
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     UILabel *textLab = [[UILabel alloc] init];
     
-    textLab.backgroundColor = [UIColor colorFromHex:@"#dfdfdf"];
+    //textLab.backgroundColor = [UIColor colorFromHex:@"#dfdfdf"];
     textLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     textLab.font = [UIFont systemFontOfSize:14];
     
     if (section == 0) {
-        textLab.text = @"  服务活动";
+        textLab.text = @"服务活动";
     }else{
-        textLab.text = @"  评论 (58)";
+        textLab.text = @"评论 (58)";
     }
     
-    return textLab;
+    return textLab.text;
 }
+
+//- (NSString *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    
+//    
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.1;
 }
+
+
+#pragma mark - 自定义视图几个button
+- (IBAction)didClickSmallBtn:(UIButton *)sender {
+    
+    
+    
+}
+
+//方法子
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:cancelAction];
+    
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:OKAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+}
+
+
+- (IBAction)didClickShopPhoneBtn:(UIButton *)sender {
+    
+    NSString *message = @"是否拨打商家电话";
+    NSString *title = @"";
+    [self showAlertWithTitle:title message:message];
+}
+
 
 /*
 #pragma mark - Navigation
