@@ -7,6 +7,7 @@
 //
 
 #import "DSUserRightDetailController.h"
+#import "UIWindow+YzdHUD.h"
 
 @interface DSUserRightDetailController ()
 
@@ -96,7 +97,8 @@
 }
 - (void) getButtonClick:(id)sender {
 
-    
+    [self.view.window showHUDWithText:@"恭喜您领取成功，已经放入您的卡券中" Type:ShowPhotoYes Enabled:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {

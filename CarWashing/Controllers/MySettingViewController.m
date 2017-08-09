@@ -22,6 +22,8 @@
 
 #import "UIImageView+WebCache.h"
 
+#import "PopupView.h"
+#import "LewPopupViewAnimationDrop.h"
 
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,LKAlertViewDelegate>
 
@@ -204,8 +206,14 @@
 
 - (void) signButtonClick:(id)sender {
     
-    LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:nil message:@"签到成功！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-    [alartView show];
+    PopupView *view = [PopupView defaultPopupView];
+    view.parentVC = self;
+    
+    [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{
+        
+    }];
+//    LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:nil message:@"签到成功！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//    [alartView show];
     
 }
 

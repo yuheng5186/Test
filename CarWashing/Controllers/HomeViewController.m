@@ -34,6 +34,9 @@
 
 #define KCURRENTCITYINFODEFAULTS [NSUserDefaults standardUserDefaults]
 
+#import "PopupView.h"
+#import "LewPopupViewAnimationDrop.h"
+
 @interface HomeViewController ()<JFLocationDelegate,UITableViewDelegate,UITableViewDataSource>
 
 /** 选择的结果*/
@@ -760,7 +763,12 @@
 
 - (void) tapSignButtonClick:(id)sender {
 
-
+    PopupView *view = [PopupView defaultPopupView];
+    view.parentVC = self;
+    
+    [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{
+        
+    }];
 }
 - (void) tapMemberRightButtonClick:(id)sender {
 
