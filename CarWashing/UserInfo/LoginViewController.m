@@ -76,7 +76,7 @@
     
     NSString   *welcomeString     = @"欢迎登录金顶洗车APP";
     UIFont     *welcomeFont       = [UIFont systemFontOfSize:14];
-    UILabel *welcomeLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*30/667) font:welcomeFont text:welcomeString isCenter:NO];
+    UILabel *welcomeLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*200/375, Main_Screen_Height*30/667) font:welcomeFont text:welcomeString isCenter:NO];
     welcomeLabel.textColor        = [UIColor colorFromHex:@"#febb02"];
     welcomeLabel.textAlignment    = NSTextAlignmentCenter;
     welcomeLabel.centerX          = Main_Screen_Width/2;
@@ -89,7 +89,7 @@
     backgroundImageView.centerX         = Main_Screen_Width/2;
     
     
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width*280/375,Main_Screen_Height*90/667) style:UITableViewStyleGrouped];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width*280/375,Main_Screen_Height*95/667) style:UITableViewStyleGrouped];
     self.tableView.top              = backgroundImageView.top +Main_Screen_Height*100/667;
     self.tableView.centerX          = backgroundImageView.centerX;
     self.tableView.delegate         = self;
@@ -122,7 +122,7 @@
     loginButton.centerX           = Main_Screen_Width/2;
     
     
-    UIButton *updateRuleButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*300/375, Main_Screen_Height*30/667)];
+    UIButton *updateRuleButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*320/375, Main_Screen_Height*30/667)];
     NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"注册即为同意《金顶洗车用户服务协议》"];
     NSRange titleRange = {0,[title length]};
     [title addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleNone] range:titleRange];
@@ -223,9 +223,9 @@
         
         NSString *getVeriifyString      = @"获取验证码";
         UIFont *getVeriifyStringFont          = [UIFont systemFontOfSize:14];
-        UIButton *getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*95/375, Main_Screen_Height*28/667) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyByButtonClick:)];
+        UIButton *getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*30/667) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyByButtonClick:)];
         getVeriifyStringButton.backgroundColor=  [UIColor colorWithHex:0xFFB500 alpha:1.0];
-        getVeriifyStringButton.layer.cornerRadius = 14;
+        getVeriifyStringButton.layer.cornerRadius = 15;
         getVeriifyStringButton.right          = self.tableView.width;
         getVeriifyStringButton.centerY        = self.verifyFieldText.centerY;
         

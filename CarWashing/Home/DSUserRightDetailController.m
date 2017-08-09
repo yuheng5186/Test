@@ -66,6 +66,7 @@
     NSString *useString             = @"使用须知";
     UIFont    *useFont              = [UIFont systemFontOfSize:16];
     UILabel     *uselabel           = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*20/667) font:useFont text:useString isCenter:NO];
+    uselabel.textColor              = [UIColor colorFromHex:@"#4a4a4a"];
     uselabel.left                   = Main_Screen_Width*10/375;
     uselabel.top                    = Main_Screen_Height*10/667;
     
