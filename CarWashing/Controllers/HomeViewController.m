@@ -132,16 +132,16 @@
 //    UIButton  *messagesButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, messagesImage.size.width, messagesImage.size.height) iconName:@"xiaoxi" target:self action:@selector(messagesButtonClick:)];
 //    messagesButton.right             = Main_Screen_Width -Main_Screen_Width*10/375;
 //    messagesButton.centerY           = titleNameLabel.centerY;
-//    
-//    UIImage *downloadImage           = [UIImage imageNamed:@"xiazai"];
-//    UIButton  *downloadButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, downloadImage.size.width, downloadImage.size.height) iconName:@"xiazai" target:self action:@selector(messagesButtonClick:)];
-//    downloadButton.right             = messagesButton.left -20;
-//    downloadButton.centerY           = titleNameLabel.centerY;
-//    
-//    UIImage *searchImage           = [UIImage imageNamed:@"sousuo"];
-//    UIButton  *searchButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, searchImage.size.width, searchImage.size.height) iconName:@"sousuo" target:self action:@selector(messagesButtonClick:)];
-//    searchButton.right             = downloadButton.left -20;
-//    searchButton.centerY           = titleNameLabel.centerY;
+    
+    UIImage *downloadImage           = [UIImage imageNamed:@"xiazai"];
+    UIButton  *downloadButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, downloadImage.size.width, downloadImage.size.height) iconName:@"xiazai" target:self action:@selector(messagesButtonClick:)];
+    downloadButton.right             = Main_Screen_Width -Main_Screen_Width*20/375;
+    downloadButton.centerY           = titleNameLabel.centerY;
+    
+    UIImage *searchImage           = [UIImage imageNamed:@"sousuo"];
+    UIButton  *searchButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, searchImage.size.width, searchImage.size.height) iconName:@"sousuo" target:self action:@selector(messagesButtonClick:)];
+    searchButton.right             = downloadButton.left -20;
+    searchButton.centerY           = titleNameLabel.centerY;
     
 
     
@@ -236,24 +236,47 @@
     cardBagNameLabel.top               = cardBagImageView.bottom +Main_Screen_Height*10/667;
     
     
-    UIView *discountView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    discountView.centerX                   = Main_Screen_Width*5/8;
-    discountView.top                       = Main_Screen_Height*20/375;
+//    UIView *discountView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+//    discountView.centerX                   = Main_Screen_Width*5/8;
+//    discountView.top                       = Main_Screen_Height*20/375;
+//    
+//    UITapGestureRecognizer  *tapDiscountGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDiscountButtonClick:)];
+//    [discountView addGestureRecognizer:tapDiscountGesture];
+//    
+//    UIImage *discountImage              = [UIImage imageNamed:@"youhui"];
+//    UIImageView *discountImageView      = [UIUtil drawCustomImgViewInView:discountView frame:CGRectMake(0, 0, discountImage.size.width,discountImage.size.height) imageName:@"youhui"];
+//    discountImageView.centerX           = discountView.size.width/2;
+//    discountImageView.top               = Main_Screen_Height*10/667;
+//    
+//    NSString *discountName              = @"优惠";
+//    UIFont *discountNameFont            = [UIFont systemFontOfSize:16];
+//    UILabel *discountNameLabel          = [UIUtil drawLabelInView:discountView frame:[UIUtil textRect:discountName font:discountNameFont] font:discountNameFont text:discountName isCenter:NO];
+//    discountNameLabel.textColor         = [UIColor colorFromHex:@"#fefefe"];
+//    discountNameLabel.centerX           = discountImageView.centerX;
+//    discountNameLabel.top               = discountImageView.bottom +Main_Screen_Height*10/667;
     
-    UITapGestureRecognizer  *tapDiscountGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDiscountButtonClick:)];
-    [discountView addGestureRecognizer:tapDiscountGesture];
     
-    UIImage *discountImage              = [UIImage imageNamed:@"youhui"];
-    UIImageView *discountImageView      = [UIUtil drawCustomImgViewInView:discountView frame:CGRectMake(0, 0, discountImage.size.width,discountImage.size.height) imageName:@"youhui"];
-    discountImageView.centerX           = discountView.size.width/2;
-    discountImageView.top               = Main_Screen_Height*10/667;
     
-    NSString *discountName              = @"优惠";
-    UIFont *discountNameFont            = [UIFont systemFontOfSize:16];
-    UILabel *discountNameLabel          = [UIUtil drawLabelInView:discountView frame:[UIUtil textRect:discountName font:discountNameFont] font:discountNameFont text:discountName isCenter:NO];
-    discountNameLabel.textColor         = [UIColor colorFromHex:@"#fefefe"];
-    discountNameLabel.centerX           = discountImageView.centerX;
-    discountNameLabel.top               = discountImageView.bottom +Main_Screen_Height*10/667;
+    UIView *memberRightView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    memberRightView.centerX                   = Main_Screen_Width*5/8;
+    memberRightView.top                       = Main_Screen_Height*20/375;
+    
+    UITapGestureRecognizer  *tapMemberRightGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapMemberRightButtonClick:)];
+    [memberRightView addGestureRecognizer:tapMemberRightGesture];
+    
+    UIImage *memberImage                   = [UIImage imageNamed:@"youhui"];
+    UIImageView *memberRightImageView      = [UIUtil drawCustomImgViewInView:memberRightView frame:CGRectMake(0, 0, memberImage.size.width,memberImage.size.height) imageName:@"youhui"];
+    memberRightImageView.centerX           = memberRightView.size.width/2;
+    memberRightImageView.top               = Main_Screen_Height*10/667;
+    
+    NSString *rightName              = @"会员特权";
+    UIFont *rightNameFont            = [UIFont systemFontOfSize:16];
+    UILabel *rightNameLabel          = [UIUtil drawLabelInView:memberRightView frame:[UIUtil textRect:rightName font:rightNameFont] font:rightNameFont text:rightName isCenter:NO];
+    rightNameLabel.textColor         = [UIColor colorFromHex:@"#fefefe"];
+    rightNameLabel.centerX           = memberRightImageView.centerX;
+    rightNameLabel.top               = memberRightImageView.bottom +Main_Screen_Height*10/667;
+    
+    
     
     
     UIView *scoreView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
@@ -329,24 +352,43 @@
     signNameLabel.centerX           = signImageView.centerX;
     signNameLabel.top               = signImageView.bottom +Main_Screen_Height*10/667;
     
-    UIView *memberRightView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    memberRightView.centerX                   = Main_Screen_Width*5/8;
-    memberRightView.top                       = backgroudView.bottom +Main_Screen_Height*10/375;
+//    UIView *memberRightView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+//    memberRightView.centerX                   = Main_Screen_Width*5/8;
+//    memberRightView.top                       = backgroudView.bottom +Main_Screen_Height*10/375;
+//    
+//    UITapGestureRecognizer  *tapMemberRightGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapMemberRightButtonClick:)];
+//    [memberRightView addGestureRecognizer:tapMemberRightGesture];
+//    
+//    UIImage *memberImage                   = [UIImage imageNamed:@"huiyuan"];
+//    UIImageView *memberRightImageView      = [UIUtil drawCustomImgViewInView:memberRightView frame:CGRectMake(0, 0, memberImage.size.width,memberImage.size.height) imageName:@"huiyuan"];
+//    memberRightImageView.left              = Main_Screen_Width*20/375;
+//    memberRightImageView.top               = Main_Screen_Height*10/667;
+//    
+//    NSString *rightName              = @"会员特权";
+//    UIFont *rightNameFont            = [UIFont systemFontOfSize:16];
+//    UILabel *rightNameLabel          = [UIUtil drawLabelInView:memberRightView frame:[UIUtil textRect:rightName font:rightNameFont] font:rightNameFont text:rightName isCenter:NO];
+//    rightNameLabel.textColor         = [UIColor blackColor];
+//    rightNameLabel.centerX           = memberRightImageView.centerX;
+//    rightNameLabel.top               = memberRightImageView.bottom +Main_Screen_Height*10/667;
     
-    UITapGestureRecognizer  *tapMemberRightGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapMemberRightButtonClick:)];
-    [memberRightView addGestureRecognizer:tapMemberRightGesture];
+    UIView *shopView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    shopView.centerX                   = Main_Screen_Width*5/8;
+    shopView.top                       = backgroudView.bottom +Main_Screen_Height*10/375;
     
-    UIImage *memberImage                   = [UIImage imageNamed:@"huiyuan"];
-    UIImageView *memberRightImageView      = [UIUtil drawCustomImgViewInView:memberRightView frame:CGRectMake(0, 0, memberImage.size.width,memberImage.size.height) imageName:@"huiyuan"];
-    memberRightImageView.left              = Main_Screen_Width*20/375;
-    memberRightImageView.top               = Main_Screen_Height*10/667;
+    UITapGestureRecognizer  *tapShopGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapShopButtonClick:)];
+    [shopView addGestureRecognizer:tapShopGesture];
     
-    NSString *rightName              = @"会员特权";
-    UIFont *rightNameFont            = [UIFont systemFontOfSize:16];
-    UILabel *rightNameLabel          = [UIUtil drawLabelInView:memberRightView frame:[UIUtil textRect:rightName font:rightNameFont] font:rightNameFont text:rightName isCenter:NO];
-    rightNameLabel.textColor         = [UIColor blackColor];
-    rightNameLabel.centerX           = memberRightImageView.centerX;
-    rightNameLabel.top               = memberRightImageView.bottom +Main_Screen_Height*10/667;
+    UIImage *shopImage              = [UIImage imageNamed:@"shangjiaruzhu"];
+    UIImageView *shopImageView      = [UIUtil drawCustomImgViewInView:shopView frame:CGRectMake(0, 0, shopImage.size.width,shopImage.size.height) imageName:@"shangjiaruzhu"];
+    shopImageView.left              = Main_Screen_Width*20/375;
+    shopImageView.top               = Main_Screen_Height*10/667;
+    
+    NSString *shopName              = @"商家入驻";
+    UIFont *shopNameFont            = [UIFont systemFontOfSize:16];
+    UILabel *shopNameLabel          = [UIUtil drawLabelInView:shopView frame:[UIUtil textRect:shopName font:shopNameFont] font:shopNameFont text:shopName isCenter:NO];
+    shopNameLabel.textColor         = [UIColor blackColor];
+    shopNameLabel.centerX           = shopImageView.centerX;
+    shopNameLabel.top               = shopImageView.bottom +Main_Screen_Height*10/667;
     
     
     UIView *serviceView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
@@ -365,8 +407,8 @@
     UIFont *serviceNameFont            = [UIFont systemFontOfSize:16];
     UILabel *serviceNameLabel          = [UIUtil drawLabelInView:serviceView frame:[UIUtil textRect:serviceName font:serviceNameFont] font:serviceNameFont text:serviceName isCenter:NO];
     serviceNameLabel.textColor         = [UIColor blackColor];
-    serviceNameLabel.centerX           = memberRightImageView.centerX;
-    serviceNameLabel.top               = memberRightImageView.bottom +Main_Screen_Height*10/667;
+    serviceNameLabel.centerX           = serviceImageView.centerX;
+    serviceNameLabel.top               = serviceImageView.bottom +Main_Screen_Height*10/667;
     
     
     UIView *myCarView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
@@ -408,28 +450,28 @@
     shareNameLabel.centerX           = shareImageView.centerX;
     shareNameLabel.top               = shareImageView.bottom +Main_Screen_Height*10/667;
     
-    UIView *shopView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    shopView.centerX                   = Main_Screen_Width*5/8;
-    shopView.top                       = payView.bottom +Main_Screen_Height*10/375;
-    
-    UITapGestureRecognizer  *tapShopGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapShopButtonClick:)];
-    [shopView addGestureRecognizer:tapShopGesture];
-    
-    UIImage *shopImage              = [UIImage imageNamed:@"shangjiaruzhu"];
-    UIImageView *shopImageView      = [UIUtil drawCustomImgViewInView:shopView frame:CGRectMake(0, 0, shopImage.size.width,shopImage.size.height) imageName:@"shangjiaruzhu"];
-    shopImageView.left              = Main_Screen_Width*20/375;
-    shopImageView.top               = Main_Screen_Height*10/667;
-    
-    NSString *shopName              = @"商家入驻";
-    UIFont *shopNameFont            = [UIFont systemFontOfSize:16];
-    UILabel *shopNameLabel          = [UIUtil drawLabelInView:shopView frame:[UIUtil textRect:shopName font:shopNameFont] font:shopNameFont text:shopName isCenter:NO];
-    shopNameLabel.textColor         = [UIColor blackColor];
-    shopNameLabel.centerX           = shopImageView.centerX;
-    shopNameLabel.top               = shopImageView.bottom +Main_Screen_Height*10/667;
+//    UIView *shopView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+//    shopView.centerX                   = Main_Screen_Width*5/8;
+//    shopView.top                       = payView.bottom +Main_Screen_Height*10/375;
+//    
+//    UITapGestureRecognizer  *tapShopGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapShopButtonClick:)];
+//    [shopView addGestureRecognizer:tapShopGesture];
+//    
+//    UIImage *shopImage              = [UIImage imageNamed:@"shangjiaruzhu"];
+//    UIImageView *shopImageView      = [UIUtil drawCustomImgViewInView:shopView frame:CGRectMake(0, 0, shopImage.size.width,shopImage.size.height) imageName:@"shangjiaruzhu"];
+//    shopImageView.left              = Main_Screen_Width*20/375;
+//    shopImageView.top               = Main_Screen_Height*10/667;
+//    
+//    NSString *shopName              = @"商家入驻";
+//    UIFont *shopNameFont            = [UIFont systemFontOfSize:16];
+//    UILabel *shopNameLabel          = [UIUtil drawLabelInView:shopView frame:[UIUtil textRect:shopName font:shopNameFont] font:shopNameFont text:shopName isCenter:NO];
+//    shopNameLabel.textColor         = [UIColor blackColor];
+//    shopNameLabel.centerX           = shopImageView.centerX;
+//    shopNameLabel.top               = shopImageView.bottom +Main_Screen_Height*10/667;
     
     
     UIView *carClubView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    carClubView.centerX                   = Main_Screen_Width*7/8;
+    carClubView.centerX                   = Main_Screen_Width*5/8;
     carClubView.top                       = payView.bottom +Main_Screen_Height*10/375;
     
     UITapGestureRecognizer  *tapCarClubGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapCarClubButtonClick:)];
