@@ -29,24 +29,15 @@
 
 - (void) drawNavigation {
 
-    
+    [self drawTitle:@"发现"];
 }
 - (void) drawContent {
-    
-//    self.statusView.hidden      = YES;
-//    
-//    self.navigationView.hidden  = YES;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
-    
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-//    self.title = @"发现";
-//    self.navigationController.navigationBar.hidden = YES;
 
     [self createSubView];
     
@@ -82,86 +73,7 @@
     
     [self.contentView addSubview:self.tableView];
     
-    
-    
-    
-//    UIView *saleView                   = [UIUtil drawLineInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-//    saleView.left                      = Main_Screen_Width*20/375;
-//    saleView.top                       = 0;
-//    
-//    UITapGestureRecognizer  *tapOrderGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapSaleButtonClick:)];
-//    [saleView addGestureRecognizer:tapOrderGesture];
-//    
-//    
-//    UIImageView *saleImageView      = [UIUtil drawCustomImgViewInView:saleView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
-//    saleImageView.left              = Main_Screen_Width*20/375;
-//    saleImageView.top               = Main_Screen_Height*15/667;
-//    
-//    NSString *saleName              = @"优惠活动";
-//    UIFont *saleNameFont            = [UIFont systemFontOfSize:16];
-//    UILabel *saleNameLabel          = [UIUtil drawLabelInView:saleView frame:[UIUtil textRect:saleName font:saleNameFont] font:saleNameFont text:saleName isCenter:NO];
-//    saleNameLabel.textColor         = [UIColor blackColor];
-//    saleNameLabel.centerX           = saleImageView.centerX;
-//    saleNameLabel.top               = saleImageView.bottom +Main_Screen_Height*10/667;
-//    
-//    
-//    
-//    
-//    UIView *carClubView                   = [UIUtil drawLineInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-//    carClubView.left                      = saleView.right +Main_Screen_Width*25/375;
-//    carClubView.top                       = 0;
-//    
-//    UITapGestureRecognizer  *carClubTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapCarClubButtonClick:)];
-//    [carClubView addGestureRecognizer:carClubTapGesture];
-//    
-//    UIImageView *carClubImageView      = [UIUtil drawCustomImgViewInView:carClubView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
-//    carClubImageView.left              = Main_Screen_Width*20/375;
-//    carClubImageView.top               = Main_Screen_Height*15/667;
-//    
-//    NSString *carClubName              = @"车友会";
-//    UIFont *carClubNameFont            = [UIFont systemFontOfSize:16];
-//    UILabel *carClubNameLabel          = [UIUtil drawLabelInView:carClubView frame:[UIUtil textRect:carClubName font:carClubNameFont] font:carClubNameFont text:carClubName isCenter:NO];
-//    carClubNameLabel.textColor         = [UIColor blackColor];
-//    carClubNameLabel.centerX           = carClubImageView.centerX;
-//    carClubNameLabel.top               = carClubImageView.bottom +Main_Screen_Height*10/667;
-//    
-//    
-//    UIView *carTravelView                   = [UIUtil drawLineInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-//    carTravelView.left                      = carClubView.right +Main_Screen_Width*25/375;
-//    carTravelView.top                       = 0;
-//    
-//    UITapGestureRecognizer  *carTravelTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapCarTravelButtonClick:)];
-//    [carTravelView addGestureRecognizer:carTravelTapGesture];
-//    
-//    UIImageView *carTravelImageView      = [UIUtil drawCustomImgViewInView:carTravelView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
-//    carTravelImageView.left              = Main_Screen_Width*20/375;
-//    carTravelImageView.top               = Main_Screen_Height*15/667;
-//    
-//    NSString *carTravelName              = @"自驾游";
-//    UIFont *carTravelNameFont            = [UIFont systemFontOfSize:16];
-//    UILabel *carTravelNameLabel          = [UIUtil drawLabelInView:carTravelView frame:[UIUtil textRect:carTravelName font:carTravelNameFont] font:carTravelNameFont text:carTravelName isCenter:NO];
-//    carTravelNameLabel.textColor         = [UIColor blackColor];
-//    carTravelNameLabel.centerX           = carClubImageView.centerX;
-//    carTravelNameLabel.top               = carClubImageView.bottom +Main_Screen_Height*10/667;
-//    
-//    
-//    UIView *wheelView                   = [UIUtil drawLineInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-//    wheelView.left                      = carTravelView.right +Main_Screen_Width*25/375;
-//    wheelView.top                       = 0;
-//    
-//    UITapGestureRecognizer  *wheelTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapWheelButtonClick:)];
-//    [wheelView addGestureRecognizer:wheelTapGesture];
-//    
-//    UIImageView *wheelImageView      = [UIUtil drawCustomImgViewInView:wheelView frame:CGRectMake(0, 0, 50,40) imageName:@"btnImage"];
-//    wheelImageView.left              = Main_Screen_Width*20/375;
-//    wheelImageView.top               = Main_Screen_Height*15/667;
-//    
-//    NSString *wheelName              = @"车轮会";
-//    UIFont *wheelNameFont            = [UIFont systemFontOfSize:16];
-//    UILabel *wheelNameLabel          = [UIUtil drawLabelInView:wheelView frame:[UIUtil textRect:wheelName font:wheelNameFont] font:wheelNameFont text:wheelName isCenter:NO];
-//    wheelNameLabel.textColor         = [UIColor blackColor];
-//    wheelNameLabel.centerX           = wheelImageView.centerX;
-//    wheelNameLabel.top               = wheelImageView.bottom +Main_Screen_Height*10/667;
+
     
 
 }

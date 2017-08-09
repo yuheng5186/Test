@@ -10,6 +10,7 @@
 #import "MenuTabBarController.h"
 #import "AppDelegate.h"
 #import "DSAgreementController.h"
+#import "TPKeyboardAvoidingScrollView.h"
 
 
 @interface LoginViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UITextField *userMobileFieldText;
 @property (nonatomic, strong) UITextField *verifyFieldText;
+@property (nonatomic, strong) TPKeyboardAvoidingScrollView *scrollView;
 
 @end
 
@@ -135,8 +137,18 @@
     updateRuleButton.centerX          = loginButton.centerX;
     [self.contentView addSubview:updateRuleButton];
     
+    [self.scrollView addSubview:self.contentView];
+    [self.view addSubview:self.scrollView];
+
     
 }
+- (TPKeyboardAvoidingScrollView *)scrollView {
+    if (!_scrollView) {
+        _scrollView = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:self.contentView.bounds];
+    }
+    return _scrollView;
+}
+
 - (void) loginButtonClick:(id)sender {
 
     
@@ -195,6 +207,7 @@
         self.userMobileFieldText.placeholder    = @"请输入手机号码";
         self.userMobileFieldText.delegate       = self;
         self.userMobileFieldText.returnKeyType  = UIReturnKeyDone;
+        self.userMobileFieldText.keyboardType   = UIKeyboardTypeNumberPad;
         self.userMobileFieldText.textAlignment  = NSTextAlignmentLeft;
         self.userMobileFieldText.font           = [UIFont systemFontOfSize:16];
         self.userMobileFieldText.backgroundColor= [UIColor whiteColor];
@@ -212,6 +225,7 @@
         self.verifyFieldText.placeholder    = @"输入验证码";
         self.verifyFieldText.delegate       = self;
         self.verifyFieldText.returnKeyType  = UIReturnKeyDone;
+        self.verifyFieldText.keyboardType   = UIKeyboardTypeNumberPad;
         self.verifyFieldText.textAlignment  = NSTextAlignmentLeft;
         self.verifyFieldText.font           = [UIFont systemFontOfSize:16];
         //        self.verifyFieldText.backgroundColor= [UIColor grayColor];
