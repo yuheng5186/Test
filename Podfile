@@ -6,5 +6,5 @@ target 'CarWashing' do
   pod 'JSONModel', '~> 1.7.0'
   pod 'FMDB', '~> 2.7.2'
   pod 'SDAutoLayout'
-
+  pod 'AMap2DMap', '~> 4.6.0'
 end
