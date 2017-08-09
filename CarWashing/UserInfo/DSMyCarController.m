@@ -11,8 +11,12 @@
 #import "NewPagedFlowView.h"
 #import "PGIndexBannerSubiew.h"
 #import <Masonry.h>
+#import "MyCarInfosHeaderView.h"
+#import "UIView+Uitls.h"
+#import "QFDatePickerView.h"
 
-@interface DSMyCarController ()<UITableViewDelegate, UITableViewDataSource, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource>
+
+@interface DSMyCarController ()<UITableViewDelegate, UITableViewDataSource, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource, UITextFieldDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) UIImageView *carImageView;
 
@@ -22,9 +26,18 @@
 
 @property (nonatomic, weak) UIPageControl *pageControl;
 
+
+
+@property (nonatomic, weak) UILabel *lbl;
+@property (nonatomic, weak) UILabel *lbl2;
+
 @end
 
-@implementation DSMyCarController
+static NSString * HeaderId = @"header";
+
+@implementation DSMyCarController{
+    CGFloat _totalYOffset;
+}
 
 - (NSMutableArray *)imageArray {
     if (_imageArray == nil) {
@@ -47,7 +60,7 @@
     
     if (_carInfoView == nil) {
         
-        UITableView *carInfoView = [[UITableView alloc] initWithFrame:CGRectMake(0, 264, Main_Screen_Width, Main_Screen_Height - 264) style:UITableViewStyleGrouped];
+        UITableView *carInfoView = [[UITableView alloc] initWithFrame:CGRectMake(0, 264 + 5, Main_Screen_Width, Main_Screen_Height - 264) style:UITableViewStyleGrouped];
         _carInfoView = carInfoView;
         [self.view addSubview:_carInfoView];
     }
@@ -76,7 +89,21 @@
     self.carInfoView.delegate = self;
     self.carInfoView.dataSource = self;
     
+    [self.carInfoView registerClass:[MyCarInfosHeaderView class] forHeaderFooterViewReuseIdentifier:HeaderId];
+    
     [self setupUI];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEditing)];
+    tap.delegate = self;
+    [self.view addGestureRecognizer:tap];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {//判断如果点击的是tableView的cell，就把手势给关闭了
+        return NO;//关闭手势
+    }//否则手势存在
+    return YES;
 }
 
 - (void)setupUI {
@@ -200,6 +227,7 @@
             numTF.placeholder = @"请输入车牌号";
             numTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
             numTF.font = [UIFont systemFontOfSize:12];
+            numTF.delegate = self;
             [carCell.contentView addSubview:numTF];
             
             [provinceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -250,17 +278,32 @@
         }else {
             
             carCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            if (indexPath.row == 1) {
+                UILabel *lbl = [[UILabel alloc] init];
+                _lbl = lbl;
+                lbl.text = @"请选择";
+                lbl.textColor = [UIColor colorFromHex:@"#868686"];
+                lbl.font = [UIFont systemFontOfSize:12];
+                [carCell.contentView addSubview:lbl];
+                
+                [lbl mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.equalTo(carCell.contentView).mas_offset(110);
+                    make.centerY.equalTo(carCell);
+                }];
+            }else {
+                UILabel *lbl2 = [[UILabel alloc] init];
+                _lbl2 = lbl2;
+                lbl2.text = @"请选择";
+                lbl2.textColor = [UIColor colorFromHex:@"#868686"];
+                lbl2.font = [UIFont systemFontOfSize:12];
+                [carCell.contentView addSubview:lbl2];
+                
+                [lbl2 mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.equalTo(carCell.contentView).mas_offset(110);
+                    make.centerY.equalTo(carCell);
+                }];
+            }
             
-            UILabel *lbl = [[UILabel alloc] init];
-            lbl.text = @"请选择";
-            lbl.textColor = [UIColor colorFromHex:@"#868686"];
-            lbl.font = [UIFont systemFontOfSize:12];
-            [carCell.contentView addSubview:lbl];
-            
-            [lbl mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(carCell.contentView).mas_offset(110);
-                make.centerY.equalTo(carCell);
-            }];
         }
         
         
@@ -281,24 +324,133 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    UILabel *infoLabel = [[UILabel alloc] init];
-    infoLabel.textColor = [UIColor colorFromHex:@"#868686"];
-    infoLabel.font = [UIFont systemFontOfSize:15];
+    MyCarInfosHeaderView *headView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderId];
+    headView.infosLabel.textColor = [UIColor colorFromHex:@"#868686"];
+    headView.infosLabel.font = [UIFont systemFontOfSize:15];
     
     if (section == 0) {
-        
-        infoLabel.text = @"  基本信息";
-        
-    }else{
-        
-        infoLabel.text = @"  其他信息";
+        headView.infosLabel.text = @"基本信息";
+        headView.imgV.image = [UIImage imageNamed:@"xinxi"];
+    }else {
+        headView.infosLabel.text = @"其他信息";
+        headView.imgV.image = [UIImage imageNamed:@"qitaxinxi"];
     }
     
     
-    return infoLabel;
+    return headView;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 1)
+    {
+        
+        if (indexPath.row == 1) {
+            QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
+                
+                self.lbl.text = str;
+            }];
+            [datePickerView show];
+        }
+        
+        if (indexPath.row == 2) {
+            QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
+                
+                self.lbl2.text = str;
+            }];
+            [datePickerView show];
+        }
+    }
+    
+}
+    
+    
 
+
+
+#pragma mark - 键盘
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
+}
+
+- (void)keyboardWillShow:(NSNotification *)noti
+{
+    CGFloat keyboardHeight = [noti.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;;
+    [self.view.layer removeAllAnimations];
+    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    UIView *firstResponderView = [keyWindow performSelector:@selector(findFirstResponder)];
+    
+    CGRect rect = [[UIApplication sharedApplication].keyWindow convertRect:firstResponderView.frame fromView:firstResponderView.superview];
+    
+    CGFloat bottom = rect.origin.y + rect.size.height;
+    CGFloat keyboardY = self.view.window.size.height - keyboardHeight;
+    if (bottom > keyboardY) {
+        _totalYOffset += bottom - (self.view.window.size.height - keyboardHeight);
+        [UIView animateWithDuration:[noti.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]
+                              delay:0
+                            options:[noti.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]
+                         animations:^{
+                             self.view.y -= _totalYOffset;
+                         }
+                         completion:nil];
+    }
+    
+    
+}
+
+- (void)keyboardWillHide:(NSNotification *)noti
+{
+    [UIView animateWithDuration:[noti.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]
+                          delay:0
+                        options:[noti.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]
+                     animations:^{
+                         self.view.y += _totalYOffset;
+                     }
+                     completion:nil];
+    _totalYOffset = 0;
+}
+
+- (void)keyboardWillChangeFrame:(NSNotification *)noti
+{
+    
+}
+
+- (void)keyboardDidShow:(NSNotification *)noti
+{
+}
+
+- (void)keyboardDidHide:(NSNotification *)noti
+{
+}
+
+- (void)keyboardDidChangeFrame:(NSNotification *)noti
+{
+}
+
+- (void)endEditing
+{
+    [self.view endEditing:YES];
+}
 
 #pragma mark -点击我的车库
 - (void)clickMycarPort {
@@ -315,14 +467,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-*/
+
 
 @end
