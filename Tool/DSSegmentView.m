@@ -151,7 +151,7 @@
     
     [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     
-    button.titleLabel.font = [UIFont systemFontOfSize:20];
+    button.titleLabel.font = [UIFont systemFontOfSize:16];
     
     
     
