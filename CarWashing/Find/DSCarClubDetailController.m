@@ -433,17 +433,24 @@
                                      @"icon4.jpg",
                                      ];
     
-    NSArray *namesArray = @[@"1.GSD_iOS",
-                            @"2.风口上的猪",
-                            @"3.当今世界网名都不好起了",
-                            @"4.我叫郭德纲",
-                            @"5.Hello Kitty"];
+    NSArray *starImageArray      = @[@"5xing.jpg",
+                                     @"4xing.jpg",
+                                     @"3xing.jpg",
+                                     @"2xing.jpg",
+                                     @"1xing.jpg",
+                                     ];
     
-    NSArray *textArray = @[@"1.当你的 app 没有提供 3x 的 LaunchImage 时，系统默认进入兼容模式，大屏幕一切按照 320 宽度渲染，屏幕宽度返回 320；然后等比例拉伸到大屏。这种情况下对界面不会产生任何影响，等于把小屏完全拉伸。",
-                           @"2.然后等比例拉伸到大屏。这种情况下对界面不会产生任何影响，等于把小屏完全拉伸。",
-                           @"3.当你的 app 没有提供 3x 的 LaunchImage 时",
-                           @"4.但是建议不要长期处于这种模式下，否则在大屏上会显得字大，内容少，容易遭到用户投诉。",
-                           @"5.屏幕宽度返回 320；然后等比例拉伸到大屏。这种情况下对界面不会产生任何影响，等于把小屏完全拉伸。但是建议不要长期处于这种模式下。"
+    NSArray *namesArray = @[@"158****1856",
+                            @"风口上的猪",
+                            @"梅超风",
+                            @"我叫郭德纲",
+                            @"Hello Kitty"];
+    
+    NSArray *textArray = @[@"游泳。 最重要的是保持平和安详的心态。正所谓：心静自然凉。我经常用这一招，很有效果。",
+                           @"在饮食方面，一方面体弱人群要适量饮用淡盐水；另一方面，少吃油腻食品。",
+                           @"少吃多餐且清淡",
+                           @"合理的安排休息时间，每天保证8小时足够的睡眠以保持充分的体能，可有效达到防暑目的哦.",
+                           @"尽量不要上午10点至下午16点出门"
                            ];
     
     
@@ -458,7 +465,7 @@
         model.name = namesArray[i];
         model.content = textArray[i];
         model.sayTime   = @"2017-7-31";
-        
+        model.starName  = starImageArray[i];
         
         //        DSUserModel *model = [DSUserModel new];
         //        model.iconName = iconImageNamesArray[i];

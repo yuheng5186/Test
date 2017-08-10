@@ -31,6 +31,7 @@
 		180E43031F3B471100013D2D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E43001F3B471100013D2D /* MBProgressHUD.m */; };
 		180E43041F3B471100013D2D /* UIView+BFSToastInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E43021F3B471100013D2D /* UIView+BFSToastInfo.m */; };
 		180E43071F3C5C2D00013D2D /* DSDownloadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E43061F3C5C2D00013D2D /* DSDownloadController.m */; };
+		180E430A1F3C741100013D2D /* DSShareGetMoneyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E43091F3C741100013D2D /* DSShareGetMoneyController.m */; };
 		181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92B71F1F364A0006511E /* MenuTabBarController.m */; };
 		181E92BB1F1F36710006511E /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BA1F1F36710006511E /* BaseController.m */; };
 		181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BF1F1F39CC0006511E /* BlackLoadingView.m */; };
@@ -265,6 +266,8 @@
 		180E43021F3B471100013D2D /* UIView+BFSToastInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+BFSToastInfo.m"; path = "Tool/BFSToast/UIView+BFSToastInfo.m"; sourceTree = "<group>"; };
 		180E43051F3C5C2D00013D2D /* DSDownloadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSDownloadController.h; path = Home/DSDownloadController.h; sourceTree = "<group>"; };
 		180E43061F3C5C2D00013D2D /* DSDownloadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSDownloadController.m; path = Home/DSDownloadController.m; sourceTree = "<group>"; };
+		180E43081F3C741100013D2D /* DSShareGetMoneyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSShareGetMoneyController.h; path = Home/DSShareGetMoneyController.h; sourceTree = "<group>"; };
+		180E43091F3C741100013D2D /* DSShareGetMoneyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSShareGetMoneyController.m; path = Home/DSShareGetMoneyController.m; sourceTree = "<group>"; };
 		181E92B61F1F364A0006511E /* MenuTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTabBarController.h; sourceTree = "<group>"; };
 		181E92B71F1F364A0006511E /* MenuTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTabBarController.m; sourceTree = "<group>"; };
 		181E92B91F1F36710006511E /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
@@ -872,6 +875,8 @@
 				180E42DA1F39B97A00013D2D /* DSCarWashingActivityController.m */,
 				180E43051F3C5C2D00013D2D /* DSDownloadController.h */,
 				180E43061F3C5C2D00013D2D /* DSDownloadController.m */,
+				180E43081F3C741100013D2D /* DSShareGetMoneyController.h */,
+				180E43091F3C741100013D2D /* DSShareGetMoneyController.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1683,6 +1688,7 @@
 				18B69EA31F32CB48007DA0E4 /* UIImage+Zirkfied.m in Sources */,
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
 				5071B47C1F380987009FFF67 /* OrderDetailView.m in Sources */,
+				180E430A1F3C741100013D2D /* DSShareGetMoneyController.m in Sources */,
 				501672411F29D16C00384186 /* MemberView.m in Sources */,
 				1805AC931F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				50E2EE7E1F1F4D3C00FAF130 /* YZAllCourseViewController.m in Sources */,
