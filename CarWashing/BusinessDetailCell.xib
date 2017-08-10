@@ -18,13 +18,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xaunzhong" translatesAutoresizingMaskIntoConstraints="NO" id="eK7-dN-Qn5">
-                        <rect key="frame" x="12" y="16" width="21" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="21" id="S9W-uy-wH4"/>
-                            <constraint firstAttribute="height" constant="21" id="oSc-x3-SUU"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="suj-xw-ABo">
                         <rect key="frame" x="42" y="51" width="0.0" height="0.0"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -33,7 +26,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="整车泡沫冲洗擦干、轮胎轮轴冲洗清洁、车内吸尘、内饰脚垫等简单除尘" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KCy-QW-Ha2">
-                        <rect key="frame" x="48" y="44.5" width="240" height="31.5"/>
+                        <rect key="frame" x="48" y="45" width="240" height="31.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="240" id="QKs-7s-0Ge"/>
                         </constraints>
@@ -48,7 +41,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标准洗车-五座轿车" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erF-d9-xKl">
-                        <rect key="frame" x="48" y="17" width="138" height="19.5"/>
+                        <rect key="frame" x="48" y="17.5" width="138" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -67,20 +60,31 @@
                             <constraint firstAttribute="width" constant="40" id="GIF-Sy-dM4"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="70O-pf-Ha9">
+                        <rect key="frame" x="12" y="16" width="21" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="5sG-AZ-CSq"/>
+                            <constraint firstAttribute="width" constant="21" id="sdq-Xd-WF2"/>
+                        </constraints>
+                        <state key="normal" image="xaunzhong"/>
+                        <connections>
+                            <action selector="didClickStateButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bEZ-mN-qi0"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="erF-d9-xKl" firstAttribute="leading" secondItem="70O-pf-Ha9" secondAttribute="trailing" constant="15" id="1LM-Jp-tka"/>
+                    <constraint firstItem="70O-pf-Ha9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="4Jr-r5-hO5"/>
                     <constraint firstItem="4ha-62-ho9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="5TC-Fe-9fl"/>
+                    <constraint firstItem="70O-pf-Ha9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="ArU-WM-ABU"/>
                     <constraint firstAttribute="trailing" secondItem="4ha-62-ho9" secondAttribute="trailing" constant="12" id="CCe-6C-TIG"/>
-                    <constraint firstItem="erF-d9-xKl" firstAttribute="centerY" secondItem="eK7-dN-Qn5" secondAttribute="centerY" id="GHC-F1-JeQ"/>
                     <constraint firstItem="aoj-eK-0Qz" firstAttribute="centerX" secondItem="4ha-62-ho9" secondAttribute="centerX" id="Uyd-Wh-y4M"/>
                     <constraint firstItem="KCy-QW-Ha2" firstAttribute="top" secondItem="erF-d9-xKl" secondAttribute="bottom" constant="8" id="XdR-ur-1vi"/>
                     <constraint firstItem="P9t-2t-UM1" firstAttribute="centerY" secondItem="aoj-eK-0Qz" secondAttribute="centerY" id="a4H-mg-kjO"/>
                     <constraint firstItem="P9t-2t-UM1" firstAttribute="centerX" secondItem="aoj-eK-0Qz" secondAttribute="centerX" id="alP-Nh-svo"/>
                     <constraint firstItem="KCy-QW-Ha2" firstAttribute="leading" secondItem="erF-d9-xKl" secondAttribute="leading" id="dUJ-ie-ghh"/>
-                    <constraint firstItem="eK7-dN-Qn5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="ksY-uS-GfC"/>
-                    <constraint firstItem="eK7-dN-Qn5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="mLH-gF-WFJ"/>
+                    <constraint firstItem="erF-d9-xKl" firstAttribute="centerY" secondItem="70O-pf-Ha9" secondAttribute="centerY" id="mNH-3l-8nZ"/>
                     <constraint firstItem="aoj-eK-0Qz" firstAttribute="top" secondItem="4ha-62-ho9" secondAttribute="bottom" constant="8" id="pBj-uX-9Nc"/>
-                    <constraint firstItem="erF-d9-xKl" firstAttribute="leading" secondItem="eK7-dN-Qn5" secondAttribute="trailing" constant="15" id="sxz-r5-3Vq"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -88,9 +92,9 @@
                 <outlet property="clearLabel" destination="KCy-QW-Ha2" id="YUv-tv-m0o"/>
                 <outlet property="originPriceLabel" destination="aoj-eK-0Qz" id="Znm-L7-Urp"/>
                 <outlet property="priceLabel" destination="4ha-62-ho9" id="Bzh-EC-ita"/>
-                <outlet property="selectImageView" destination="eK7-dN-Qn5" id="BDC-Fo-p0b"/>
+                <outlet property="stateButton" destination="70O-pf-Ha9" id="sdN-Nd-4cp"/>
             </connections>
-            <point key="canvasLocation" x="-281" y="-62"/>
+            <point key="canvasLocation" x="-393" y="-65"/>
         </tableViewCell>
     </objects>
     <resources>

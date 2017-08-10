@@ -10,6 +10,7 @@
 #import "MenuTabBarController.h"
 #import "LoginViewController.h"
 
+
 @interface AppDelegate ()
 
 @end
@@ -19,6 +20,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [AMapServices sharedServices].apiKey = @"f6d2c4b2f6bbe466b2d1b1889783445e";
     
     application.statusBarHidden                     = NO;
     [[UITabBar appearance] setBarTintColor: [UIColor whiteColor]];

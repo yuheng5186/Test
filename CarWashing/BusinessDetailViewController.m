@@ -13,6 +13,7 @@
 #import "BusinessEstimateCell.h"
 #import "BusinessPayController.h"
 #import "ShopViewController.h"
+#import "BusinessMapController.h"
 
 
 @interface BusinessDetailViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -223,7 +224,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     if (indexPath.section == 0) {
         BusinessDetailCell *businessDetailCell = [tableView dequeueReusableCellWithIdentifier:detailTableViewCell forIndexPath:indexPath];
         
-        businessDetailCell.selectImageView.image = [UIImage imageNamed:@"xaunzhong"];
+        
         businessDetailCell.carLabel.text = @"标准洗车-五座轿车";
         businessDetailCell.clearLabel.text = @"整车泡沫冲洗擦干、轮胎轮轴冲洗清洁、车内吸尘、内饰脚垫等简单除尘";
         businessDetailCell.priceLabel.text = @"¥24.00";
@@ -286,10 +287,13 @@ static NSString *businessCommentCell = @"businessCommentCell";
 }
 
 
-#pragma mark - 自定义视图几个button
+#pragma mark - 地图导航
 - (IBAction)didClickSmallBtn:(UIButton *)sender {
     
+    BusinessMapController *mapVC = [[BusinessMapController alloc] init];
+    mapVC.hidesBottomBarWhenPushed = YES;
     
+    [self.navigationController pushViewController:mapVC animated:YES];
     
 }
 
