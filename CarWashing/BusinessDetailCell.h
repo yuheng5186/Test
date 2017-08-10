@@ -10,7 +10,8 @@
 
 @interface BusinessDetailCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *selectImageView;
+@property (weak, nonatomic) IBOutlet UIButton *stateButton;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *carLabel;
 

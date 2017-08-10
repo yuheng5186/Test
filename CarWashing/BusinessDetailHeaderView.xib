@@ -177,7 +177,6 @@
                             </constraints>
                             <state key="normal" image="lansedaohang"/>
                             <connections>
-                                <action selector="didClickSmallBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="MOC-gQ-9YP"/>
                                 <action selector="didClickSmallBtn:" destination="-1" eventType="touchUpInside" id="vRM-yo-Zcw"/>
                             </connections>
                         </button>

@@ -51,14 +51,14 @@
     return [[NSBundle mainBundle] loadNibNamed:@"BusinessDetailHeaderView" owner:nil options:nil].firstObject;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame{
-    
-    if (self = [super initWithFrame:frame]) {
-        
-        [self setupUI];
-    }
-    return self;
-}
+//- (instancetype)initWithFrame:(CGRect)frame{
+//    
+//    if (self = [super initWithFrame:frame]) {
+//        
+//        [self setupUI];
+//    }
+//    return self;
+//}
 
 - (void)layoutSubviews{
     [self setupUI];
@@ -93,13 +93,22 @@
     self.distanceLabel.textColor = [UIColor colorFromHex:@"#868686"];
     
     self.shopTypeLabel.textColor = [UIColor colorFromHex:@"#868686"];
+    
+    //收藏按钮
+    [self.favoriteButton setImage:[UIImage imageNamed:@"shoucang1"] forState:UIControlStateNormal];
+    [self.favoriteButton setImage:[UIImage imageNamed:@"shoucang2"] forState:UIControlStateSelected];
 }
 
 
 
 - (IBAction)didClickFavoriteBtn:(UIButton *)sender {
     
+    if (sender.selected) {
+        
+        [sender setImage:[UIImage imageNamed:@"shoucang2"] forState:UIControlStateSelected];
+    }
     
+    sender.selected = !sender.selected;
     
 }
 

@@ -105,6 +105,7 @@
 		18B8039B1F1DA2A300B52432 /* CarWashingUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B8039A1F1DA2A300B52432 /* CarWashingUITests.m */; };
 		374B966A10F9B5E6D74241BF /* libPods-CarWashing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */; };
 		500C6BA41F3AE619007D34A1 /* QFDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 500C6BA31F3AE619007D34A1 /* QFDatePickerView.m */; };
+		500C6BF51F3B5B13007D34A1 /* BusinessMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 500C6BF41F3B5B13007D34A1 /* BusinessMapController.m */; };
 		501672021F29797600384186 /* BusinessDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672011F29797600384186 /* BusinessDetailViewController.m */; };
 		5016720C1F297A3500384186 /* ShopCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672041F297A3500384186 /* ShopCategoryView.m */; };
 		5016720D1F297A3500384186 /* ShopCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 501672061F297A3500384186 /* ShopCommentController.m */; };
@@ -411,6 +412,8 @@
 		1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarWashing.release.xcconfig"; path = "Pods/Target Support Files/Pods-CarWashing/Pods-CarWashing.release.xcconfig"; sourceTree = "<group>"; };
 		500C6BA21F3AE619007D34A1 /* QFDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFDatePickerView.h; sourceTree = "<group>"; };
 		500C6BA31F3AE619007D34A1 /* QFDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFDatePickerView.m; sourceTree = "<group>"; };
+		500C6BF31F3B5B13007D34A1 /* BusinessMapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessMapController.h; sourceTree = "<group>"; };
+		500C6BF41F3B5B13007D34A1 /* BusinessMapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessMapController.m; sourceTree = "<group>"; };
 		501672001F29797600384186 /* BusinessDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessDetailViewController.h; sourceTree = "<group>"; };
 		501672011F29797600384186 /* BusinessDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessDetailViewController.m; sourceTree = "<group>"; };
 		501672031F297A3500384186 /* ShopCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopCategoryView.h; sourceTree = "<group>"; };
@@ -1044,6 +1047,8 @@
 				181E92D41F1F3B900006511E /* BusinessViewController.m */,
 				501672001F29797600384186 /* BusinessDetailViewController.h */,
 				501672011F29797600384186 /* BusinessDetailViewController.m */,
+				500C6BF31F3B5B13007D34A1 /* BusinessMapController.h */,
+				500C6BF41F3B5B13007D34A1 /* BusinessMapController.m */,
 				507FECF51F2AC8D7009CC505 /* BusinessPayController.h */,
 				507FECF61F2AC8D7009CC505 /* BusinessPayController.m */,
 				507FECFF1F2B3111009CC505 /* CashViewController.h */,
@@ -1640,6 +1645,7 @@
 				50B26EA61F315E9B009B3B9F /* AllOrderController.m in Sources */,
 				181E93071F208D560006511E /* DSRecommendController.m in Sources */,
 				180E43041F3B471100013D2D /* UIView+BFSToastInfo.m in Sources */,
+				500C6BF51F3B5B13007D34A1 /* BusinessMapController.m in Sources */,
 				50B26EA01F30819D009B3B9F /* RechargeDetailController.m in Sources */,
 				181E92DB1F1F3BC60006511E /* PurchaseViewController.m in Sources */,
 				5016721B1F297DA500384186 /* payCardDetailCell.m in Sources */,

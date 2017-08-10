@@ -1,3 +1,5 @@
+
+
 //
 //  BusinessDetailCell.m
 //  CarWashing
@@ -30,7 +32,27 @@
     
     self.originPriceLabel.textColor = [UIColor colorFromHex:@"#868686"];
     
+    
+    [self.stateButton setImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
+    [self.stateButton setImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateSelected];
+    
 }
+
+
+- (IBAction)didClickStateButton:(UIButton *)sender {
+    
+    if (sender.selected) {
+        
+        [sender setImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateSelected];
+    }
+    
+    sender.selected = !sender.selected;
+}
+
+
+
+
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
