@@ -53,6 +53,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ActivityListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ActivityListCell" forIndexPath:indexPath];
+    if (indexPath.row == 0) {
+        
+        cell.activityImageView.image    = [UIImage imageNamed:@"faxiantu"];
+        cell.activityTitleLabel.text    = @"法拉利总裁介绍新款V8发动机";
+        cell.activityTimeLabel.text     = @"2017-7-28 14:01";
+    }
+    
     
     return cell;
 }

@@ -20,6 +20,11 @@
 @property (nonatomic, strong) UITextField *verifyFieldText;
 @property (nonatomic, strong) TPKeyboardAvoidingScrollView *scrollView;
 
+@property (nonatomic,strong) NSTimer *timer;
+@property (nonatomic,assign) int second;
+@property (nonatomic, strong) UIButton *getVeriifyStringButton;
+@property (nonatomic, strong) UIButton *resendFakeBtn;
+
 @end
 
 @implementation LoginViewController
@@ -36,7 +41,12 @@
     self.contentView.backgroundColor        = [UIColor whiteColor];
     self.contentView.top                    = self.statusView.bottom;
     self.contentView.height                 = self.view.height;
-    
+    self.view.backgroundColor               = [UIColor whiteColor];
+}
+
+- (void) dealloc
+{
+    [self.timer invalidate];
 }
 
 
@@ -154,12 +164,17 @@
 
 - (void) loginButtonClick:(id)sender {
 
-    if (self.userMobileFieldText.text.length == 11) {
-       
-        MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
-        [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
-    }
-    [self.view showInfo:@"请输入正确的11位手机号码" autoHidden:YES];
+//    if (self.userMobileFieldText.text.length == 11) {
+//        if (self.verifyFieldText.text.length == 4) {
+            MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
+            [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
+//        }else{
+//            [self.view showInfo:@"请输入4位验证码！" autoHidden:YES interval:2];
+//        }
+//
+//    }else {
+//        [self.view showInfo:@"请输入正确的11位手机号码" autoHidden:YES];
+//    }
 
 }
 
@@ -242,11 +257,12 @@
         
         NSString *getVeriifyString      = @"获取验证码";
         UIFont *getVeriifyStringFont          = [UIFont systemFontOfSize:14];
-        UIButton *getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*30/667) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyByButtonClick:)];
-        getVeriifyStringButton.backgroundColor=  [UIColor colorWithHex:0xFFB500 alpha:1.0];
-        getVeriifyStringButton.layer.cornerRadius = 15;
-        getVeriifyStringButton.right          = self.tableView.width;
-        getVeriifyStringButton.centerY        = self.verifyFieldText.centerY;
+         self.getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*30/667) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyByButtonClick:)];
+        self.getVeriifyStringButton.backgroundColor=  [UIColor colorWithHex:0xFFB500 alpha:1.0];
+        self.getVeriifyStringButton.layer.masksToBounds  = YES;
+        self.getVeriifyStringButton.layer.cornerRadius = 15;
+        self.getVeriifyStringButton.right          = self.tableView.width;
+        self.getVeriifyStringButton.centerY        = self.verifyFieldText.centerY;
         
     }
     
@@ -282,8 +298,57 @@
 }
 - (void) getVeriifyByButtonClick:(id)sender {
     
-    [self.view showInfo:@"验证码发送成功，请在手机上查收！" autoHidden:YES];
+    if (self.userMobileFieldText.text.length == 11) {
+        [self startTimer];
+        [self.view showInfo:@"验证码发送成功，请在手机上查收！" autoHidden:YES interval:2];
+    }else
+    {
+        [self.view showInfo:@"请输入正确的11位手机号码" autoHidden:YES];
+
+    }
+    
+
 }
+
+- (void)startTimer
+{
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+    self.second = 10;
+    self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
+    [self.timer fire];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+}
+
+- (void)onTimer
+{
+    if (self.second == 0) {
+        
+        [self.view showInfo:@"未收到验证码，请点击重新发送！" autoHidden:YES interval:2];
+        self.getVeriifyStringButton.hidden = NO;
+        self.resendFakeBtn.hidden = NO;
+        self.getVeriifyStringButton.enabled = YES;
+        self.resendFakeBtn.enabled = YES;
+        [self.getVeriifyStringButton setTitle:@"重新发送" forState:UIControlStateNormal];
+        //                [self.resendBtn setTitle:NSLocalizedString(@"Resend Code", nil) forState:UIControlStateNormal];
+        //        self.secondLbl.text = @"";
+        //        self.secondLbl.hidden = YES;
+        [self.timer invalidate];
+        
+    } else {
+        //        self.resendBtn.hidden = YES;
+        self.getVeriifyStringButton.enabled = NO;
+        self.resendFakeBtn.enabled = NO;
+        //        [self.resendBtn setTitle:NSLocalizedString(@"Waiting", nil) forState:UIControlStateNormal];
+        //        self.secondLbl.hidden = NO;
+        NSString *text = [NSString stringWithFormat:@"%d%@",self.second--,@"s"];
+        [self.getVeriifyStringButton setTitle:text forState:UIControlStateNormal];
+    }
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

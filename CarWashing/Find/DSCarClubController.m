@@ -56,7 +56,7 @@
     
     ActivityListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ActivityListCell" forIndexPath:indexPath];
     
-    cell.activityImageView.image    = [UIImage imageNamed:@"02"];
+    cell.activityImageView.image    = [UIImage imageNamed:@"faxiantu1"];
     cell.activityTitleLabel.text    = @"开车一看就知道是老司机";
     cell.activityTimeLabel.text     = @"2017-7-28 14:01";
     
