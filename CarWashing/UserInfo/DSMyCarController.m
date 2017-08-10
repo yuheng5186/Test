@@ -238,6 +238,7 @@ static NSString * HeaderId = @"header";
             [numTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(provinceLabel);
                 make.leading.equalTo(provinceLabel.mas_trailing).mas_offset(16);
+                make.width.mas_equalTo(200);
             }];
         }else{
             carCell.textLabel.text = @"品牌车系";
@@ -253,6 +254,7 @@ static NSString * HeaderId = @"header";
             [brandTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(carCell.contentView).mas_offset(110);
                 make.centerY.equalTo(carCell);
+                make.right.equalTo(carCell.contentView).mas_offset(-12);
             }];
         }
     }
@@ -274,6 +276,7 @@ static NSString * HeaderId = @"header";
             [textTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(carCell.contentView).mas_offset(110);
                 make.centerY.equalTo(carCell);
+                make.right.equalTo(carCell.contentView).mas_offset(-12);
             }];
         }else {
             

@@ -8,6 +8,7 @@
 
 #import "ShopIntroController.h"
 #import "ShopInfoHeadView.h"
+#import "BusinessMapController.h"
 
 @interface ShopIntroController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -79,6 +80,45 @@ static NSString *id_infoCell = @"id_infoCell";
 
     
     return cell;
+}
+
+- (IBAction)skipToMapView:(id)sender {
+    
+    BusinessMapController *mapVC = [[BusinessMapController alloc] init];
+    mapVC.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:mapVC animated:YES];
+    
+}
+
+
+
+- (IBAction)didClickShopPhone:(id)sender {
+    
+    NSString *message = @"是否拨打商家电话";
+    NSString *title = @"";
+    [self showAlertWithTitle:title message:message];
+    
+}
+
+
+//方法子
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:cancelAction];
+    
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:OKAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
 }
 
 

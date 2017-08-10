@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol DelayPayCellPushVCDelegate <NSObject>
+
+- (void)pushVC:(UIViewController *)viewController animated:(BOOL)animated;
+
+@end
+
 @interface DelayPayCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *orderLabel;
@@ -21,6 +27,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *stateButton;
+
+
+@property (nonatomic, weak) id<DelayPayCellPushVCDelegate> delegate;
 
 
 @end

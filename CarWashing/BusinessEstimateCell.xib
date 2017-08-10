@@ -38,11 +38,8 @@
                             <constraint firstAttribute="height" constant="10" id="VkX-Hm-PUe"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="整车泡沫冲洗擦干、轮胎轮轴冲洗清洁、车内吸尘、内饰脚垫等简单除尘" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOh-fC-Xtp">
-                        <rect key="frame" x="57" y="69" width="240" height="31.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="240" id="2y1-DZ-ZG8"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="整车泡沫冲洗擦干、轮胎轮轴冲洗清洁、车内吸尘、内饰脚垫等简单除尘整车泡沫冲洗擦干" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOh-fC-Xtp">
+                        <rect key="frame" x="57" y="69" width="306" height="32.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -63,6 +60,7 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="vmW-pW-pa3" secondAttribute="trailing" constant="12" id="2uD-4Q-Efp"/>
                     <constraint firstItem="VAg-UZ-bDt" firstAttribute="leading" secondItem="XRR-Vv-PWG" secondAttribute="trailing" constant="10" id="4oR-4f-nd6"/>
+                    <constraint firstAttribute="trailing" secondItem="tOh-fC-Xtp" secondAttribute="trailing" constant="12" id="DTD-s1-h1O"/>
                     <constraint firstItem="lsM-vX-4Vn" firstAttribute="top" secondItem="VAg-UZ-bDt" secondAttribute="bottom" constant="8" id="Ew1-qO-F3f"/>
                     <constraint firstItem="VAg-UZ-bDt" firstAttribute="centerY" secondItem="XRR-Vv-PWG" secondAttribute="centerY" id="JzN-YC-rjs"/>
                     <constraint firstItem="XRR-Vv-PWG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="KoW-pw-Yvp"/>
@@ -71,6 +69,7 @@
                     <constraint firstItem="tOh-fC-Xtp" firstAttribute="top" secondItem="lsM-vX-4Vn" secondAttribute="bottom" constant="8" id="Yn8-1y-G9L"/>
                     <constraint firstItem="vmW-pW-pa3" firstAttribute="leading" secondItem="Fv6-PA-7cb" secondAttribute="trailing" constant="8" id="ZvH-hg-dlt"/>
                     <constraint firstItem="XRR-Vv-PWG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="bJT-0u-z0q"/>
+                    <constraint firstAttribute="bottom" secondItem="tOh-fC-Xtp" secondAttribute="bottom" constant="8" id="uGw-nT-z5b"/>
                     <constraint firstItem="vmW-pW-pa3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="yQP-7p-IDa"/>
                     <constraint firstItem="Fv6-PA-7cb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="yo8-qx-zyl"/>
                 </constraints>

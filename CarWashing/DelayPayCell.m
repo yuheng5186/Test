@@ -7,6 +7,7 @@
 //
 
 #import "DelayPayCell.h"
+#import "BusinessPayController.h"
 
 @implementation DelayPayCell
 
@@ -28,6 +29,18 @@
     self.stateButton.layer.cornerRadius = 12.5;
     self.stateButton.layer.borderWidth = 1;
     self.stateButton.layer.borderColor = [UIColor colorFromHex:@"#ff525a"].CGColor;
+}
+
+
+- (IBAction)skipToPay:(id)sender {
+    
+    if ([self.delegate respondsToSelector:@selector(pushVC:animated:)]) {
+        
+        BusinessPayController *payVC = [[BusinessPayController alloc] init];
+        payVC.hidesBottomBarWhenPushed = YES;
+        
+        [self.delegate pushVC:payVC animated:YES];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

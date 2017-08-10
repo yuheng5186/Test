@@ -27,7 +27,7 @@ static NSString *id_carListCell = @"id_carListCell";
     
     if (_carListView == nil) {
         
-        UITableView *carListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height)];
+        UITableView *carListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height) style:UITableViewStyleGrouped];
         _carListView = carListView;
         [self.view addSubview:_carListView];
     }
@@ -80,6 +80,11 @@ static NSString *id_carListCell = @"id_carListCell";
 }
 
 #pragma mark - 数据源代理
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
@@ -88,8 +93,49 @@ static NSString *id_carListCell = @"id_carListCell";
     
     MyCarViewCell *carCell = [tableView dequeueReusableCellWithIdentifier:id_carListCell];
     
+    
+    
+    
     return carCell;
 }
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    
+    return 0.1f;
+}
+
+
+
+- (IBAction)didClickDefaultButton:(id)sender {
+    
+    
+    
+}
+
+
+- (IBAction)didClickDeleteButton:(id)sender {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"是否删除车辆信息" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:cancelAction];
+    
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:OKAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+}
+
 
 
 #pragma mark - 新增车辆

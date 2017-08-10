@@ -8,9 +8,14 @@
 
 #import "IcreaseCarController.h"
 #import <Masonry.h>
+#import "QFDatePickerView.h"
 
-@interface IcreaseCarController ()<UITableViewDelegate, UITableViewDataSource>
+@interface IcreaseCarController ()<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 
+@property (nonatomic, weak) UITableView *carInfoView;
+
+@property (nonatomic, weak) UILabel *lbl;
+@property (nonatomic, weak) UILabel *lbl2;
 
 @end
 
@@ -34,7 +39,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     self.view.backgroundColor = [UIColor whiteColor];
     
     UITableView *carInfoView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 400) style:UITableViewStyleGrouped];
-    
+    _carInfoView = carInfoView;
     [self.view addSubview:carInfoView];
     
     carInfoView.delegate = self;
@@ -48,6 +53,20 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         make.width.mas_equalTo(351);
         make.height.mas_equalTo(48);
     }];
+    
+    
+    //手势
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEditing)];
+    tap.delegate = self;
+    [self.view addGestureRecognizer:tap];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {//判断如果点击的是tableView的cell，就把手势给关闭了
+        return NO;//关闭手势
+    }//否则手势存在
+    return YES;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -93,6 +112,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             [numTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(provinceLabel);
                 make.leading.equalTo(provinceLabel.mas_trailing).mas_offset(16);
+                make.width.mas_equalTo(200);
             }];
         }else{
             carCell.textLabel.text = @"品牌车系";
@@ -108,6 +128,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             [brandTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(carCell.contentView).mas_offset(110);
                 make.centerY.equalTo(carCell);
+                make.right.equalTo(carCell.contentView).mas_offset(-12);
             }];
         }
     }
@@ -129,22 +150,37 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             [textTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(carCell.contentView).mas_offset(110);
                 make.centerY.equalTo(carCell);
+                make.right.equalTo(carCell.contentView).mas_offset(-12);
             }];
         }else {
             
+            
             carCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            
-            UILabel *lbl = [[UILabel alloc] init];
-            lbl.text = @"请选择";
-            lbl.textColor = [UIColor colorFromHex:@"#868686"];
-            lbl.font = [UIFont systemFontOfSize:12];
-            [carCell.contentView addSubview:lbl];
-            
-            [lbl mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(carCell.contentView).mas_offset(110);
-                make.centerY.equalTo(carCell);
-            }];
-        }
+            if (indexPath.row == 1) {
+                UILabel *lbl = [[UILabel alloc] init];
+                _lbl = lbl;
+                lbl.text = @"请选择";
+                lbl.textColor = [UIColor colorFromHex:@"#868686"];
+                lbl.font = [UIFont systemFontOfSize:12];
+                [carCell.contentView addSubview:lbl];
+                
+                [lbl mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.equalTo(carCell.contentView).mas_offset(110);
+                    make.centerY.equalTo(carCell);
+                }];
+            }else {
+                UILabel *lbl2 = [[UILabel alloc] init];
+                _lbl2 = lbl2;
+                lbl2.text = @"请选择";
+                lbl2.textColor = [UIColor colorFromHex:@"#868686"];
+                lbl2.font = [UIFont systemFontOfSize:12];
+                [carCell.contentView addSubview:lbl2];
+                
+                [lbl2 mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.equalTo(carCell.contentView).mas_offset(110);
+                    make.centerY.equalTo(carCell);
+                }];
+            }        }
         
         
     }
@@ -179,6 +215,38 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     
     
     return infoLabel;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 1)
+    {
+        
+        if (indexPath.row == 1) {
+            QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
+                
+                self.lbl.text = str;
+            }];
+            [datePickerView show];
+        }
+        
+        if (indexPath.row == 2) {
+            QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
+                
+                self.lbl2.text = str;
+            }];
+            [datePickerView show];
+        }
+    }
+    
+}
+
+
+
+- (void)endEditing
+{
+    [self.view endEditing:YES];
 }
 
 

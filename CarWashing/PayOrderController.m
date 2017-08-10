@@ -10,7 +10,7 @@
 #import "DelayPayCell.h"
 
 
-@interface PayOrderController ()<UITableViewDelegate, UITableViewDataSource>
+@interface PayOrderController ()<UITableViewDelegate, UITableViewDataSource, DelayPayCellPushVCDelegate>
 
 @property (nonatomic, weak) UITableView *payOrderView;
 
@@ -62,6 +62,7 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     DelayPayCell *delayCell = [tableView dequeueReusableCellWithIdentifier:id_delayPayCell forIndexPath:indexPath];
+    delayCell.delegate = self;
     
     return delayCell;
 }
@@ -72,6 +73,15 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0.1;
+}
+
+
+
+
+#pragma mark - DelayPay的代理
+- (void)pushVC:(UIViewController *)viewController animated:(BOOL)animated {
+    
+    [self.navigationController pushViewController:viewController animated:animated];
 }
 
 - (void)didReceiveMemoryWarning {

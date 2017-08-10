@@ -167,6 +167,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     [button setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateSelected];
     [button setImage:[UIImage imageNamed:@"xiala"] forState:UIControlStateNormal];
     [button setImage:[UIImage imageNamed:@"shangla"] forState:UIControlStateSelected];
+    button.titleLabel.font = [UIFont systemFontOfSize:12];
     
     return button;
 }
@@ -182,7 +183,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 {
     // 第1列 高度
     if (index == 0) {
-        return 400;
+        return 300;
     }
     
     // 第2列 高度
@@ -202,14 +203,6 @@ static NSString *id_salerListCell = @"salerListViewCell";
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -14,6 +14,10 @@
 
 @property (weak, nonatomic) IBOutlet UIView *separateView;
 
+@property (weak, nonatomic) IBOutlet UILabel *freeCheckLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *qualityProtectedLabel;
+
 
 
 + (instancetype)shopInfoHeadView;

@@ -9,7 +9,7 @@
 #import "CommentOrderController.h"
 #import "SuccessPayCell.h"
 
-@interface CommentOrderController ()<UITableViewDataSource, UITableViewDelegate>
+@interface CommentOrderController ()<UITableViewDataSource, UITableViewDelegate, PushVCDelegate>
 
 @property (nonatomic, weak) UITableView *commentOrderView;
 
@@ -61,7 +61,7 @@ static NSString *id_successPayCell = @"id_successPayCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     SuccessPayCell *commentCell = [tableView dequeueReusableCellWithIdentifier:id_successPayCell forIndexPath:indexPath];
-    
+    commentCell.delegate = self;
     
     return commentCell;
 }
@@ -75,6 +75,12 @@ static NSString *id_successPayCell = @"id_successPayCell";
 }
 
 
+
+#pragma mark - successPaycell 的代理
+- (void)pushController:(UIViewController *)viewController animated:(BOOL)animated {
+    
+    [self.navigationController pushViewController:viewController animated:animated];
+}
 
 
 - (void)didReceiveMemoryWarning {

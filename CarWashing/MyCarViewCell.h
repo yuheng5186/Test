@@ -10,4 +10,12 @@
 
 @interface MyCarViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *brandLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *defaultButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+
+
+
 @end

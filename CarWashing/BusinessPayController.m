@@ -9,6 +9,7 @@
 #import "BusinessPayController.h"
 #import <Masonry.h>
 #import "CashViewController.h"
+#import "BusinessPayCell.h"
 
 @interface BusinessPayController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -17,9 +18,14 @@
 @property (nonatomic, strong) NSArray *payNameArray;
 @property (nonatomic, strong) NSArray *payImageNameArr;
 
+@property (nonatomic, strong) NSIndexPath *lastPath;
+
+@property (nonatomic, weak) BusinessPayCell *seleCell;
+
 @end
 
 static NSString *payViewCell = @"payTableViewCell";
+static NSString *id_paySelectCell = @"id_paySelectCell";
 
 @implementation BusinessPayController
 
@@ -54,6 +60,8 @@ static NSString *payViewCell = @"payTableViewCell";
     payTableView.rowHeight = 50;
     
     [self.view addSubview:payTableView];
+    
+    [self.payTableView registerClass:[BusinessPayCell class] forCellReuseIdentifier:id_paySelectCell];
     
     //[payTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:payViewCell];
 //    
@@ -218,22 +226,38 @@ static NSString *payViewCell = @"payTableViewCell";
         payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#999999"];
         
     }else {
-        payCell.imageView.image = [UIImage imageNamed:self.payImageNameArr[indexPath.row]];
-        payCell.textLabel.text = self.payNameArray[indexPath.row];
-        payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-        payCell.textLabel.font = [UIFont systemFontOfSize:15];
+        BusinessPayCell *cell = [tableView dequeueReusableCellWithIdentifier:id_paySelectCell forIndexPath:indexPath];
+        _seleCell = cell;
+        //cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.imageView.image = [UIImage imageNamed:self.payImageNameArr[indexPath.row]];
+        cell.textLabel.text = self.payNameArray[indexPath.row];
+        cell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+        cell.textLabel.font = [UIFont systemFontOfSize:15];
         
-        UIButton *payWayBtn = [[UIButton alloc] init];
-        [payWayBtn setImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
-        [payWayBtn setImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateSelected];
-        [payCell.contentView addSubview:payWayBtn];
+//        UIButton *payWayBtn = [[UIButton alloc] init];
+//        [payWayBtn setImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
+//        [payWayBtn setImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateSelected];
+//        [payCell.contentView addSubview:payWayBtn];
         
-        [payWayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(payCell.contentView);
-            make.right.equalTo(payCell.contentView).mas_offset(-12);
-            make.width.mas_equalTo(21);
-            make.height.mas_equalTo(21);
-        }];
+//        [payWayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerY.equalTo(payCell.contentView);
+//            make.right.equalTo(payCell.contentView).mas_offset(-12);
+//            make.width.mas_equalTo(21);
+//            make.height.mas_equalTo(21);
+//        }];
+        
+        //单选支付
+        NSInteger row = [indexPath row];
+        NSInteger oldRow = [self.lastPath row];
+        
+        if (row == oldRow && self.lastPath != nil) {
+            [cell.payWayBtn setBackgroundImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateNormal];
+        }else{
+            
+            [cell.payWayBtn setBackgroundImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
+        }
+        
+        return cell;
         
     }
     
@@ -282,6 +306,7 @@ static NSString *payViewCell = @"payTableViewCell";
 #pragma mark - 点击cell
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
     if (indexPath.section == 1 && indexPath.row == 0) {
         
         CashViewController *cashVC = [[CashViewController alloc] init];
@@ -289,6 +314,34 @@ static NSString *payViewCell = @"payTableViewCell";
         //cashVC.definesPresentationContext = YES;
         cashVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         [self presentViewController:cashVC animated:NO completion:nil];
+    }
+    
+    if (indexPath.section == 2) {
+        
+        NSInteger newRow = [indexPath row];
+        NSInteger oldRow = (self.lastPath != nil)?[self.lastPath row]:-1;
+        
+        if (newRow != oldRow) {
+            self.seleCell = [tableView cellForRowAtIndexPath:indexPath];
+            
+            [self.seleCell.payWayBtn setBackgroundImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateNormal];
+            
+            self.seleCell = [tableView cellForRowAtIndexPath:self.lastPath];
+            
+            [self.seleCell.payWayBtn setBackgroundImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
+            
+            self.lastPath = indexPath;
+        
+        }
+    }
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
+    [self.payTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] animated:YES scrollPosition:UITableViewScrollPositionNone];
+    if ([_payTableView.delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
+        [_payTableView.delegate tableView:_payTableView didSelectRowAtIndexPath:indexPath];
     }
 }
 
