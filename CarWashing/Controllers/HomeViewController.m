@@ -646,12 +646,12 @@
     contentShowStringLabel.centerX           = Main_Screen_Width/2;
     contentShowStringLabel.top               = Main_Screen_Height*58/667;
     
-    
-    if (indexPath.section == 3) {
-        UIImageView  *bankaImageView       = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 90) imageName:@"banka"];
-        bankaImageView.left                = 0;
-        bankaImageView.top                 = 0;
-    }
+//    
+//    if (indexPath.section == 3) {
+//        UIImageView  *bankaImageView       = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 90) imageName:@"banka"];
+//        bankaImageView.left                = 0;
+//        bankaImageView.top                 = 0;
+//    }
     
 //    NSString *remindShowString              = @"还剩余8次自动扫码洗车";
 //    UIFont *remindShowStringFont            = [UIFont systemFontOfSize:18];
@@ -845,7 +845,7 @@
 - (void) tapCarClubButtonClick:(id)sender {
     
     FindViewController *findController      = [[FindViewController alloc]init];
-//    findController.hidesBottomBarWhenPushed = YES;
+    findController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:findController animated:YES];
 }
 
