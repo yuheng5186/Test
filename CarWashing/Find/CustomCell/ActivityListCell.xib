@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,11 +18,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="夏天如何防止车温升高" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YvE-qm-cy6">
-                        <rect key="frame" x="15" y="136" width="218.5" height="21"/>
+                        <rect key="frame" x="15" y="131.5" width="352" height="34"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="YvE-qm-cy6" secondAttribute="height" multiplier="52:5" id="oPl-EX-LHY"/>
                         </constraints>
@@ -31,13 +32,12 @@
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="03" translatesAutoresizingMaskIntoConstraints="NO" id="NBW-rh-ROL">
                         <rect key="frame" x="8" y="8" width="359" height="115"/>
-                        <color key="backgroundColor" red="0.17832907070000001" green="0.72008664190000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="NBW-rh-ROL" secondAttribute="height" multiplier="25:8" id="LYB-dX-TaR"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9B3-r7-fv5">
-                        <rect key="frame" x="15" y="171" width="171" height="17"/>
+                        <rect key="frame" x="15" y="166.5" width="192" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="9B3-r7-fv5" secondAttribute="height" multiplier="50:7" constant="49.071428571428569" id="K0P-Gt-BUe"/>
                         </constraints>
@@ -46,7 +46,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="28" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bbf-Mw-jnY">
-                        <rect key="frame" x="264" y="168" width="33" height="17"/>
+                        <rect key="frame" x="252" y="168" width="33" height="17"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Bbf-Mw-jnY" secondAttribute="height" multiplier="40:21" id="bYB-6O-mkt"/>
                         </constraints>
@@ -60,6 +60,9 @@
                             <constraint firstAttribute="width" secondItem="Vg6-VR-1Vh" secondAttribute="height" multiplier="14:13" id="o4J-SM-RId"/>
                         </constraints>
                         <state key="normal" title="点赞" image="faxiandianzan"/>
+                        <connections>
+                            <action selector="goodButtonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="DxR-tI-Ezr"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1288" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dv6-oP-QeY">
                         <rect key="frame" x="334" y="168" width="33" height="17"/>
@@ -71,11 +74,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="syh-NK-GdG">
-                        <rect key="frame" x="238" y="165" width="26" height="28"/>
+                        <rect key="frame" x="226" y="165" width="26" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="26" id="smi-Nz-8C8"/>
                         </constraints>
                         <state key="normal" title="评论" image="faxianxiaoxi"/>
+                        <connections>
+                            <action selector="sayButtonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gZm-7f-CiE"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -83,16 +89,17 @@
                     <constraint firstItem="syh-NK-GdG" firstAttribute="top" secondItem="NBW-rh-ROL" secondAttribute="top" constant="157" id="5jo-u9-Ams"/>
                     <constraint firstItem="9B3-r7-fv5" firstAttribute="top" secondItem="YvE-qm-cy6" secondAttribute="top" constant="35" id="BpF-QG-Ym5"/>
                     <constraint firstItem="dv6-oP-QeY" firstAttribute="top" secondItem="NBW-rh-ROL" secondAttribute="top" constant="160" id="E9h-K4-x1Q"/>
+                    <constraint firstItem="NBW-rh-ROL" firstAttribute="trailing" secondItem="YvE-qm-cy6" secondAttribute="trailing" id="F1f-lp-k2P"/>
                     <constraint firstItem="9B3-r7-fv5" firstAttribute="leading" secondItem="YvE-qm-cy6" secondAttribute="leading" id="L4X-hb-bD9"/>
                     <constraint firstItem="YvE-qm-cy6" firstAttribute="leading" secondItem="NBW-rh-ROL" secondAttribute="leading" constant="7" id="Ll7-iO-H3G"/>
                     <constraint firstItem="NBW-rh-ROL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="W6K-uA-ikP"/>
                     <constraint firstItem="Vg6-VR-1Vh" firstAttribute="top" secondItem="NBW-rh-ROL" secondAttribute="top" constant="143" id="ZZb-gx-9ZM"/>
                     <constraint firstAttribute="trailingMargin" secondItem="NBW-rh-ROL" secondAttribute="trailing" id="bDC-dy-hNi"/>
                     <constraint firstItem="Vg6-VR-1Vh" firstAttribute="trailing" secondItem="dv6-oP-QeY" secondAttribute="trailing" id="dVw-Eh-WVP"/>
-                    <constraint firstItem="YvE-qm-cy6" firstAttribute="top" secondItem="NBW-rh-ROL" secondAttribute="top" constant="128" id="h1Z-f2-sMd"/>
+                    <constraint firstItem="YvE-qm-cy6" firstAttribute="top" secondItem="NBW-rh-ROL" secondAttribute="top" multiplier="0.19" constant="130" id="h1Z-f2-sMd"/>
                     <constraint firstItem="syh-NK-GdG" firstAttribute="centerY" secondItem="9B3-r7-fv5" secondAttribute="centerY" id="hWp-dv-GLo"/>
                     <constraint firstAttribute="topMargin" secondItem="NBW-rh-ROL" secondAttribute="top" id="ik7-88-eDn"/>
-                    <constraint firstItem="Bbf-Mw-jnY" firstAttribute="trailing" secondItem="Vg6-VR-1Vh" secondAttribute="trailing" constant="-70" id="jdP-lR-sCm"/>
+                    <constraint firstItem="Bbf-Mw-jnY" firstAttribute="trailing" secondItem="Vg6-VR-1Vh" secondAttribute="trailing" constant="-82" id="jdP-lR-sCm"/>
                     <constraint firstItem="Bbf-Mw-jnY" firstAttribute="leading" secondItem="syh-NK-GdG" secondAttribute="trailing" id="veZ-JQ-E2V"/>
                     <constraint firstItem="dv6-oP-QeY" firstAttribute="trailing" secondItem="NBW-rh-ROL" secondAttribute="trailing" id="wyC-fX-BBA"/>
                 </constraints>
@@ -101,7 +108,9 @@
                 <outlet property="activityImageView" destination="NBW-rh-ROL" id="sa8-Ko-ZaA"/>
                 <outlet property="activityTimeLabel" destination="9B3-r7-fv5" id="beq-iK-k8H"/>
                 <outlet property="activityTitleLabel" destination="YvE-qm-cy6" id="Bty-gA-k83"/>
+                <outlet property="goodButton" destination="Vg6-VR-1Vh" id="uPG-gj-LpN"/>
                 <outlet property="goodNumberLabel" destination="dv6-oP-QeY" id="9YH-Un-wcJ"/>
+                <outlet property="sayButton" destination="syh-NK-GdG" id="e12-HF-MNd"/>
                 <outlet property="sayNumberLabel" destination="Bbf-Mw-jnY" id="rPz-SB-jx3"/>
             </connections>
             <point key="canvasLocation" x="24.5" y="52"/>

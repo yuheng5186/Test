@@ -99,11 +99,10 @@
     _contentLabel.text      = model.content;
     _sayTimeLabel.text      = model.sayTime;
     
-    CGFloat bottomMargin = 0;
+    CGFloat bottomMargin = 10;
     
     
     [self setupAutoHeightWithBottomView:_contentLabel bottomMargin:bottomMargin];
-    
     
 }
 

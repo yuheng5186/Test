@@ -36,6 +36,7 @@
 
 #import "PopupView.h"
 #import "LewPopupViewAnimationDrop.h"
+#import "DSDownloadController.h"
 
 @interface HomeViewController ()<JFLocationDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -134,14 +135,14 @@
 //    messagesButton.centerY           = titleNameLabel.centerY;
     
     UIImage *downloadImage           = [UIImage imageNamed:@"xiazai"];
-    UIButton  *downloadButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, downloadImage.size.width, downloadImage.size.height) iconName:@"xiazai" target:self action:@selector(messagesButtonClick:)];
+    UIButton  *downloadButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, downloadImage.size.width, downloadImage.size.height) iconName:@"xiazai" target:self action:@selector(downloadButtonClick:)];
     downloadButton.right             = Main_Screen_Width -Main_Screen_Width*20/375;
     downloadButton.centerY           = titleNameLabel.centerY;
     
-    UIImage *searchImage           = [UIImage imageNamed:@"sousuo"];
-    UIButton  *searchButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, searchImage.size.width, searchImage.size.height) iconName:@"sousuo" target:self action:@selector(messagesButtonClick:)];
-    searchButton.right             = downloadButton.left -20;
-    searchButton.centerY           = titleNameLabel.centerY;
+//    UIImage *searchImage           = [UIImage imageNamed:@"sousuo"];
+//    UIButton  *searchButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, searchImage.size.width, searchImage.size.height) iconName:@"sousuo" target:self action:@selector(messagesButtonClick:)];
+//    searchButton.right             = downloadButton.left -20;
+//    searchButton.centerY           = titleNameLabel.centerY;
     
 
     
@@ -646,12 +647,12 @@
     contentShowStringLabel.centerX           = Main_Screen_Width/2;
     contentShowStringLabel.top               = Main_Screen_Height*58/667;
     
-    
-    if (indexPath.section == 3) {
-        UIImageView  *bankaImageView       = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 90) imageName:@"banka"];
-        bankaImageView.left                = 0;
-        bankaImageView.top                 = 0;
-    }
+//    
+//    if (indexPath.section == 3) {
+//        UIImageView  *bankaImageView       = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 90) imageName:@"banka"];
+//        bankaImageView.left                = 0;
+//        bankaImageView.top                 = 0;
+//    }
     
 //    NSString *remindShowString              = @"还剩余8次自动扫码洗车";
 //    UIFont *remindShowStringFont            = [UIFont systemFontOfSize:18];
@@ -703,11 +704,11 @@
 }
 
 
-- (void) messagesButtonClick:(id)sender {
+- (void) downloadButtonClick:(id)sender {
     
-//    DSMessagesController *messageController     = [[DSMessagesController alloc]init];
-//    messageController.hidesBottomBarWhenPushed  = YES;
-//    [self.navigationController pushViewController:messageController animated:YES];
+    DSDownloadController *downController     = [[DSDownloadController alloc]init];
+    downController.hidesBottomBarWhenPushed  = YES;
+    [self.navigationController pushViewController:downController animated:YES];
 }
 
 - (void) locationButtonClick:(id)sender {
@@ -845,7 +846,7 @@
 - (void) tapCarClubButtonClick:(id)sender {
     
     FindViewController *findController      = [[FindViewController alloc]init];
-//    findController.hidesBottomBarWhenPushed = YES;
+    findController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:findController animated:YES];
 }
 

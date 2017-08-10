@@ -33,33 +33,51 @@
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     self.tableView.top              = 0;
-    
+//    self.tableView.tableFooterView  = [UIView new];
     [self.tableView registerNib:[UINib nibWithNibName:@"ActivityListCell" bundle:nil] forCellReuseIdentifier:@"ActivityListCell"];
     
     self.tableView.rowHeight        = 200;
-    
+    self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 180, 0);
     [self.contentView addSubview:self.tableView];
+    
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
 }
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+//- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//
+//    return 10.0f;
+//}
 #pragma mark --
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ActivityListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ActivityListCell" forIndexPath:indexPath];
     
-    cell.activityImageView.image    = [UIImage imageNamed:@"faxiantu1"];
-    cell.activityTitleLabel.text    = @"开车一看就知道是老司机";
-    cell.activityTimeLabel.text     = @"2017-7-28 14:01";
+    if (indexPath.row == 0) {
+        
+        cell.activityImageView.image    = [UIImage imageNamed:@"faxiantu"];
+        cell.activityTitleLabel.text    = @"法拉利总裁介绍新款V8发动机";
+        cell.activityTimeLabel.text     = @"2017-7-28 14:01";
+    }else {
     
+        cell.activityImageView.image    = [UIImage imageNamed:@"faxiantu1"];
+        cell.activityTitleLabel.text    = @"开车一看就知道是老司机";
+        cell.activityTimeLabel.text     = @"2017-7-28 14:01";
+    }
+    
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
