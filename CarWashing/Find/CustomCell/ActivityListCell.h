@@ -18,5 +18,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *sayNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *goodNumberLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *goodButton;
+@property (weak, nonatomic) IBOutlet UIButton *sayButton;
+
+
+- (IBAction)goodButtonClick:(id)sender;
+- (IBAction)sayButtonClick:(id)sender;
+
 
 @end

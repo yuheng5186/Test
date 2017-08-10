@@ -10,6 +10,7 @@
 
 #import "DSActivityDetailCell.h"
 #import "UITableView+SDAutoTableViewCellHeight.h"
+#import "TPKeyboardAvoidingScrollView.h"
 
 
 @interface DSCarClubDetailController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
@@ -37,6 +38,8 @@
 @property (nonatomic, strong) UIButton          *downGoodButton;
 @property (nonatomic, strong) UILabel           *sayShowLabel;
 @property (nonatomic, strong) UILabel           *goodShowLabel;
+
+@property (nonatomic, strong) TPKeyboardAvoidingScrollView *scrollView;
 
 @end
 
@@ -357,9 +360,19 @@
 
     [self.contentView addSubview:downView];
     
-    
+//    [self.scrollView addSubview:self.contentView];
+//    [self.view addSubview:self.scrollView];
 
 }
+
+- (TPKeyboardAvoidingScrollView *)scrollView {
+    if (!_scrollView) {
+        _scrollView = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:self.contentView.bounds];
+    }
+    return _scrollView;
+}
+
+
 - (void) userSayTextFieldChanged:(UITextField *)sender {
 
 
@@ -371,13 +384,13 @@
 }
 - (void) sayButtonClick:(id)sender {
 
-
+    [self.userSayTextField resignFirstResponder];
     
 }
 - (void) downGoodButtonClick:(UIButton *)sender {
 
     if (sender.selected == NO) {
-        [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
+        [self.downGoodButton setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
         self.sayShowLabel.text                     = @"170";
         [self.view showInfo:@"点赞成功!" autoHidden:YES];
     }else {
@@ -478,69 +491,6 @@
     }
     cell.model  = self.modelsArray[indexPath.row];
     
-
-    
-
-    
-//    if (indexPath.row == 0) {
-//        cell.backgroundColor    = [UIColor lightGrayColor];
-//        UIView  *upView     = [UIUtil drawLineInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*80/667) color:[UIColor whiteColor]];
-//        upView.top          = 0;
-//        
-//        UIImageView  *userImageView       = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(0, 0, 50, 50) imageName:@"icon_defaultavatar"];
-//        userImageView.left                = Main_Screen_Width*10/375;
-//        userImageView.top                 = Main_Screen_Height*10/667;
-//        
-//        NSString *userString              = @"15800781856";
-//        UIFont *userStringFont            = [UIFont systemFontOfSize:14];
-//        UILabel *uesrStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:userString font:userStringFont] font:userStringFont text:userString isCenter:NO];
-//        uesrStringLabel.textColor         = [UIColor blackColor];
-//        uesrStringLabel.left              = userImageView.right +Main_Screen_Width*10/375;
-//        uesrStringLabel.top               = Main_Screen_Height*15/667;
-//        
-//        NSString *timeString              = @"2017-7-27 15:30";
-//        UIFont *timeStringFont            = [UIFont systemFontOfSize:14];
-//        UILabel *timeStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:timeString font:timeStringFont] font:timeStringFont text:timeString isCenter:NO];
-//        timeStringLabel.textColor         = [UIColor blackColor];
-//        timeStringLabel.left              = userImageView.right +Main_Screen_Width*10/375;
-//        timeStringLabel.top               = uesrStringLabel.bottom +Main_Screen_Height*5/667;
-//    }if (indexPath.row == 1) {
-//
-//        UIView  *upView     = [UIUtil drawLineInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*80/667) color:[UIColor whiteColor]];
-//        upView.top          = 0;
-//        
-//        UIImageView  *userImageView       = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(0, 0, 50, 50) imageName:@"icon_defaultavatar"];
-//        userImageView.left                = Main_Screen_Width*10/375;
-//        userImageView.top                 = Main_Screen_Height*10/667;
-//        
-//        NSString *userString              = @"15800781856";
-//        UIFont *userStringFont            = [UIFont systemFontOfSize:14];
-//        UILabel *uesrStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:userString font:userStringFont] font:userStringFont text:userString isCenter:NO];
-//        uesrStringLabel.textColor         = [UIColor blackColor];
-//        uesrStringLabel.left              = userImageView.right +Main_Screen_Width*10/375;
-//        uesrStringLabel.top               = Main_Screen_Height*15/667;
-//        
-//        NSString *timeString              = @"2017-7-27 15:30";
-//        UIFont *timeStringFont            = [UIFont systemFontOfSize:14];
-//        UILabel *timeStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:timeString font:timeStringFont] font:timeStringFont text:timeString isCenter:NO];
-//        timeStringLabel.textColor         = [UIColor blackColor];
-//        timeStringLabel.left              = uesrStringLabel.right +Main_Screen_Width*80/375;
-//        timeStringLabel.centerY           = uesrStringLabel.centerY;
-//        
-//        NSString *userSayString              = @"我也要去看看";
-//        UIFont *userSayStringFont            = [UIFont systemFontOfSize:14];
-//        UILabel *uesrSayStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:userSayString font:userSayStringFont] font:userSayStringFont text:userSayString isCenter:NO];
-//        uesrSayStringLabel.textColor         = [UIColor blackColor];
-//        uesrSayStringLabel.left              = userImageView.right +Main_Screen_Width*10/375;
-//        uesrSayStringLabel.top               = uesrStringLabel.bottom +Main_Screen_Height*15/667;
-//        
-//        NSString *numberString              = @"68";
-//        UIFont *numberStringFont            = [UIFont systemFontOfSize:14];
-//        UILabel *numberSayStringLabel       = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:numberString font:numberStringFont] font:numberStringFont text:numberString isCenter:NO];
-//        numberSayStringLabel.textColor         = [UIColor blackColor];
-//        numberSayStringLabel.right             = timeStringLabel.right;
-//        numberSayStringLabel.top               = timeStringLabel.bottom +Main_Screen_Height*15/667;
-//    }
     
     return cell;
 }
@@ -549,7 +499,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
+    [self.userSayTextField resignFirstResponder];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

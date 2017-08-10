@@ -60,6 +60,9 @@
                             <constraint firstAttribute="width" secondItem="Vg6-VR-1Vh" secondAttribute="height" multiplier="14:13" id="o4J-SM-RId"/>
                         </constraints>
                         <state key="normal" title="点赞" image="faxiandianzan"/>
+                        <connections>
+                            <action selector="goodButtonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="DxR-tI-Ezr"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1288" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dv6-oP-QeY">
                         <rect key="frame" x="334" y="168" width="33" height="17"/>
@@ -76,6 +79,9 @@
                             <constraint firstAttribute="width" constant="26" id="smi-Nz-8C8"/>
                         </constraints>
                         <state key="normal" title="评论" image="faxianxiaoxi"/>
+                        <connections>
+                            <action selector="sayButtonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gZm-7f-CiE"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -102,7 +108,9 @@
                 <outlet property="activityImageView" destination="NBW-rh-ROL" id="sa8-Ko-ZaA"/>
                 <outlet property="activityTimeLabel" destination="9B3-r7-fv5" id="beq-iK-k8H"/>
                 <outlet property="activityTitleLabel" destination="YvE-qm-cy6" id="Bty-gA-k83"/>
+                <outlet property="goodButton" destination="Vg6-VR-1Vh" id="uPG-gj-LpN"/>
                 <outlet property="goodNumberLabel" destination="dv6-oP-QeY" id="9YH-Un-wcJ"/>
+                <outlet property="sayButton" destination="syh-NK-GdG" id="e12-HF-MNd"/>
                 <outlet property="sayNumberLabel" destination="Bbf-Mw-jnY" id="rPz-SB-jx3"/>
             </connections>
             <point key="canvasLocation" x="24.5" y="52"/>

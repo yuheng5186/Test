@@ -36,6 +36,7 @@
 
 #import "PopupView.h"
 #import "LewPopupViewAnimationDrop.h"
+#import "DSDownloadController.h"
 
 @interface HomeViewController ()<JFLocationDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -134,14 +135,14 @@
 //    messagesButton.centerY           = titleNameLabel.centerY;
     
     UIImage *downloadImage           = [UIImage imageNamed:@"xiazai"];
-    UIButton  *downloadButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, downloadImage.size.width, downloadImage.size.height) iconName:@"xiazai" target:self action:@selector(messagesButtonClick:)];
+    UIButton  *downloadButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, downloadImage.size.width, downloadImage.size.height) iconName:@"xiazai" target:self action:@selector(downloadButtonClick:)];
     downloadButton.right             = Main_Screen_Width -Main_Screen_Width*20/375;
     downloadButton.centerY           = titleNameLabel.centerY;
     
-    UIImage *searchImage           = [UIImage imageNamed:@"sousuo"];
-    UIButton  *searchButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, searchImage.size.width, searchImage.size.height) iconName:@"sousuo" target:self action:@selector(messagesButtonClick:)];
-    searchButton.right             = downloadButton.left -20;
-    searchButton.centerY           = titleNameLabel.centerY;
+//    UIImage *searchImage           = [UIImage imageNamed:@"sousuo"];
+//    UIButton  *searchButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, searchImage.size.width, searchImage.size.height) iconName:@"sousuo" target:self action:@selector(messagesButtonClick:)];
+//    searchButton.right             = downloadButton.left -20;
+//    searchButton.centerY           = titleNameLabel.centerY;
     
 
     
@@ -703,11 +704,11 @@
 }
 
 
-- (void) messagesButtonClick:(id)sender {
+- (void) downloadButtonClick:(id)sender {
     
-//    DSMessagesController *messageController     = [[DSMessagesController alloc]init];
-//    messageController.hidesBottomBarWhenPushed  = YES;
-//    [self.navigationController pushViewController:messageController animated:YES];
+    DSDownloadController *downController     = [[DSDownloadController alloc]init];
+    downController.hidesBottomBarWhenPushed  = YES;
+    [self.navigationController pushViewController:downController animated:YES];
 }
 
 - (void) locationButtonClick:(id)sender {
