@@ -63,6 +63,8 @@ static NSString * const ID_cell = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID_cell];
     
     cell.textLabel.text = self.titleArray[indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:12];
+    cell.textLabel.textColor = [UIColor colorFromHex:@"#999999"];
     
     return cell;
 }

@@ -17,6 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *ernScoreButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
 
 
 + (instancetype)memberView;

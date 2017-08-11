@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShopIntroController"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ShopInfoHeadView">
             <rect key="frame" x="0.0" y="0.0" width="375" height="281"/>
@@ -68,29 +68,37 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="免费检测" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j4H-U7-Fwm">
-                    <rect key="frame" x="12" y="199" width="45" height="14"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="免费检测" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j4H-U7-Fwm">
+                    <rect key="frame" x="12" y="199" width="60" height="15"/>
                     <color key="backgroundColor" red="0.23046836700000001" green="0.49688547750000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="Czv-u8-qeR"/>
+                        <constraint firstAttribute="width" constant="60" id="Dg2-4N-w8W"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="质量保障" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOr-A7-USv">
-                    <rect key="frame" x="65" y="199" width="45" height="14"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="质量保障" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOr-A7-USv">
+                    <rect key="frame" x="80" y="199" width="60" height="15"/>
                     <color key="backgroundColor" red="0.91246356870000001" green="0.1665160175" blue="0.18796944800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="eCs-sH-aaX"/>
+                        <constraint firstAttribute="height" constant="15" id="kQQ-n9-Ll4"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5xU-yW-evG">
-                    <rect key="frame" x="0.0" y="229" width="375" height="10"/>
+                    <rect key="frame" x="0.0" y="230" width="375" height="10"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="5zM-dw-wSU"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vWd-Pq-kHX">
-                    <rect key="frame" x="0.0" y="280" width="375" height="1"/>
+                    <rect key="frame" x="0.0" y="281" width="375" height="1"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="pn1-qq-hKb"/>
@@ -110,25 +118,37 @@
                         <constraint firstAttribute="width" constant="20" id="xd7-hO-5bB"/>
                     </constraints>
                     <state key="normal" image="lansedaohang"/>
+                    <connections>
+                        <action selector="skipToMapView:" destination="-1" eventType="touchUpInside" id="F2u-h7-VLI"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCO-xr-Odo">
                     <rect key="frame" x="100" y="89" width="31" height="30"/>
                     <state key="normal" title="导航">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="skipToMapView:" destination="-1" eventType="touchUpInside" id="4jw-Q2-lPD"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZzW-7n-MwT">
                     <rect key="frame" x="274" y="89" width="31" height="30"/>
                     <state key="normal" title="电话">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="didClickShopPhone:" destination="-1" eventType="touchUpInside" id="sAd-Ib-GIH"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnI-hl-S6i">
                     <rect key="frame" x="244" y="93" width="20" height="22"/>
                     <state key="normal" image="kefuzixun"/>
+                    <connections>
+                        <action selector="didClickShopPhone:" destination="-1" eventType="touchUpInside" id="WlT-24-tWG"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="门店特色" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gp0-rS-Ejr">
-                    <rect key="frame" x="12" y="251" width="58" height="17"/>
+                    <rect key="frame" x="12" y="252" width="58" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -181,6 +201,8 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="freeCheckLabel" destination="j4H-U7-Fwm" id="kZ9-8O-tXg"/>
+                <outlet property="qualityProtectedLabel" destination="VOr-A7-USv" id="Fbl-I3-qDY"/>
                 <outlet property="separateLine" destination="rLV-g1-hnC" id="t94-Z4-54T"/>
                 <outlet property="separateView" destination="Lia-kb-okI" id="Ca7-In-DWR"/>
             </connections>

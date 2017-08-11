@@ -138,9 +138,10 @@
                 <outlet property="bottomContainView" destination="y35-Kq-iGF" id="Ycj-SH-Ap2"/>
                 <outlet property="ernScoreButton" destination="AHq-GZ-f5e" id="ckr-7I-hXS"/>
                 <outlet property="increaseButton" destination="Wh5-Zu-ZL8" id="nA4-D2-Vxq"/>
+                <outlet property="phoneLabel" destination="P9q-e0-z0S" id="Urm-Yg-N3a"/>
                 <outlet property="topContainView" destination="FcW-dK-4NL" id="0vD-0k-zII"/>
             </connections>
-            <point key="canvasLocation" x="-284" y="-293"/>
+            <point key="canvasLocation" x="-223" y="-296"/>
         </view>
     </objects>
     <resources>

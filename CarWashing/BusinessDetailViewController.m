@@ -22,6 +22,10 @@
 
 @property (nonatomic, weak) UITableView *detailTableView;
 
+@property (nonatomic, strong) NSIndexPath *lastPath;
+
+@property (nonatomic, weak) BusinessDetailCell *detailCell;
+
 @end
 
 static NSString *detailTableViewCell = @"detailTableViewCell";
@@ -32,6 +36,8 @@ static NSString *businessCommentCell = @"businessCommentCell";
 - (void)drawNavigation {
     
     [self drawTitle:@"商家详情"];
+    
+    [self drawRightImageButton:@"fenxiang" action:@selector(didClickShareButton:)];
     
 }
 
@@ -160,8 +166,10 @@ static NSString *businessCommentCell = @"businessCommentCell";
      }];
      */
     
-    UIImageView *serviceImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"kefuzixun"]];
-    [payToolBar addSubview:serviceImageView];
+    UIButton *serviceBtn = [[UIButton alloc] init];
+    [serviceBtn setImage:[UIImage imageNamed:@"kefuzixun"] forState:UIControlStateNormal];
+    [serviceBtn addTarget:self action:@selector(didClickServiceBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [payToolBar addSubview:serviceBtn];
     
     UILabel *serviceLabel = [[UILabel alloc] init];
     serviceLabel.text = @"客服咨询";
@@ -170,16 +178,27 @@ static NSString *businessCommentCell = @"businessCommentCell";
     [payToolBar addSubview:serviceLabel];
     
     
-    [serviceImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [serviceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(payToolBar).mas_offset(12);
         make.trailing.equalTo(payBtn.mas_leading).mas_equalTo(-37);
+        make.width.height.mas_equalTo(20);
     }];
     
     [serviceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(serviceImageView);
-        make.top.equalTo(serviceImageView.mas_bottom).mas_offset(7);
+        make.centerX.equalTo(serviceBtn);
+        make.top.equalTo(serviceBtn.mas_bottom).mas_offset(7);
     }];
     
+}
+
+#pragma mark - 点击拨打客服
+- (void)didClickServiceBtn:(UIButton *)button {
+    
+    NSString *title = @"";
+    
+    NSString *message = @"是否拨打客服电话";
+    
+    [self showAlertWithTitle:title message:message];
 }
 
 #pragma mark - 点击查看全部评价
@@ -223,11 +242,22 @@ static NSString *businessCommentCell = @"businessCommentCell";
 //    }
     if (indexPath.section == 0) {
         BusinessDetailCell *businessDetailCell = [tableView dequeueReusableCellWithIdentifier:detailTableViewCell forIndexPath:indexPath];
-        
+        _detailCell = businessDetailCell;
         
         businessDetailCell.carLabel.text = @"标准洗车-五座轿车";
         businessDetailCell.clearLabel.text = @"整车泡沫冲洗擦干、轮胎轮轴冲洗清洁、车内吸尘、内饰脚垫等简单除尘";
         businessDetailCell.priceLabel.text = @"¥24.00";
+        
+        //单选状态
+        NSInteger row = [indexPath row];
+        NSInteger oldRow = [self.lastPath row];
+        
+        if (row == oldRow && self.lastPath != nil) {
+            [businessDetailCell.stateButton setBackgroundImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateNormal];
+        }else{
+            
+            [businessDetailCell.stateButton setBackgroundImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
+        }
         
         return businessDetailCell;
     }
@@ -259,6 +289,28 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == 0) {
+        
+        NSInteger newRow = [indexPath row];
+        NSInteger oldRow = (self.lastPath != nil)?[self.lastPath row]:-1;
+        
+        if (newRow != oldRow) {
+            self.detailCell = [tableView cellForRowAtIndexPath:indexPath];
+            
+            [self.detailCell.stateButton setBackgroundImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateNormal];
+            
+            self.detailCell = [tableView cellForRowAtIndexPath:self.lastPath];
+            
+            [self.detailCell.stateButton setBackgroundImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
+            
+            self.lastPath = indexPath;
+            
+        }
+    }
+}
+
 
 #pragma mark - 设置组头视图
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
@@ -284,6 +336,13 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.1;
+}
+
+
+#pragma mark - 点击分享按钮
+- (void)didClickShareButton:(UIButton *)button {
+    
+    
 }
 
 
@@ -322,6 +381,15 @@ static NSString *businessCommentCell = @"businessCommentCell";
     NSString *message = @"是否拨打商家电话";
     NSString *title = @"";
     [self showAlertWithTitle:title message:message];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.detailTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+    if ([_detailTableView.delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
+        [_detailTableView.delegate tableView:_detailTableView didSelectRowAtIndexPath:indexPath];
+    }
 }
 
 

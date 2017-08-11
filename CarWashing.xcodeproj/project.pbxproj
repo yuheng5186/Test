@@ -141,6 +141,7 @@
 		5071B47E1F38099C009FFF67 /* OrderDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5071B47D1F38099C009FFF67 /* OrderDetailView.xib */; };
 		5071B4811F381366009FFF67 /* OrderCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5071B4801F381366009FFF67 /* OrderCommentController.m */; };
 		5071B4841F39D3CC009FFF67 /* MyCarInfosHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5071B4831F39D3CC009FFF67 /* MyCarInfosHeaderView.m */; };
+		50769F4F1F3C549300DDFCC7 /* BusinessPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50769F4E1F3C549300DDFCC7 /* BusinessPayCell.m */; };
 		507FECF71F2AC8D7009CC505 /* BusinessPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FECF61F2AC8D7009CC505 /* BusinessPayController.m */; };
 		507FED011F2B3111009CC505 /* CashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FED001F2B3111009CC505 /* CashViewController.m */; };
 		5094A6251F3447CD00407808 /* BusinessEstimateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5094A6231F3447CD00407808 /* BusinessEstimateCell.m */; };
@@ -482,6 +483,8 @@
 		5071B4801F381366009FFF67 /* OrderCommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCommentController.m; sourceTree = "<group>"; };
 		5071B4821F39D3CC009FFF67 /* MyCarInfosHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCarInfosHeaderView.h; sourceTree = "<group>"; };
 		5071B4831F39D3CC009FFF67 /* MyCarInfosHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCarInfosHeaderView.m; sourceTree = "<group>"; };
+		50769F4D1F3C549300DDFCC7 /* BusinessPayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessPayCell.h; sourceTree = "<group>"; };
+		50769F4E1F3C549300DDFCC7 /* BusinessPayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessPayCell.m; sourceTree = "<group>"; };
 		507FECF51F2AC8D7009CC505 /* BusinessPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessPayController.h; sourceTree = "<group>"; };
 		507FECF61F2AC8D7009CC505 /* BusinessPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessPayController.m; sourceTree = "<group>"; };
 		507FECFF1F2B3111009CC505 /* CashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashViewController.h; sourceTree = "<group>"; };
@@ -1061,6 +1064,8 @@
 				500C6BF41F3B5B13007D34A1 /* BusinessMapController.m */,
 				507FECF51F2AC8D7009CC505 /* BusinessPayController.h */,
 				507FECF61F2AC8D7009CC505 /* BusinessPayController.m */,
+				50769F4D1F3C549300DDFCC7 /* BusinessPayCell.h */,
+				50769F4E1F3C549300DDFCC7 /* BusinessPayCell.m */,
 				507FECFF1F2B3111009CC505 /* CashViewController.h */,
 				507FED001F2B3111009CC505 /* CashViewController.m */,
 				5097FDFA1F2ECE0B002EF8F8 /* TicketCashView.h */,
@@ -1650,6 +1655,7 @@
 				50B26EA31F315D76009B3B9F /* OrderCategoryView.m in Sources */,
 				5094A62F1F346E4200407808 /* SuccessPayCell.m in Sources */,
 				1853BA481F28A04100B98C7F /* JFCityHeaderView.m in Sources */,
+				50769F4F1F3C549300DDFCC7 /* BusinessPayCell.m in Sources */,
 				50E2EE801F1F4D3C00FAF130 /* YZMoreMenuViewController.m in Sources */,
 				50D30E811F20988A0086D3ED /* BusinessDetailCell.m in Sources */,
 				5071B4841F39D3CC009FFF67 /* MyCarInfosHeaderView.m in Sources */,

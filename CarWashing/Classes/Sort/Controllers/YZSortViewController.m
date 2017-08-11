@@ -45,6 +45,8 @@ static NSString * const ID = @"cell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     YZSortCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    cell.textLabel.font = [UIFont systemFontOfSize:12];
+    cell.textLabel.textColor = [UIColor colorFromHex:@"#999999"];
     cell.textLabel.text = _titleArray[indexPath.row];
     if (indexPath.row == 0) {
         [cell setSelected:YES animated:NO];

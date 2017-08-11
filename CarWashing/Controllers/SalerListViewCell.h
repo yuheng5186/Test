@@ -10,4 +10,23 @@
 
 @interface SalerListViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *shopImageView;
+
+@property (weak, nonatomic) IBOutlet UILabel *shopNameLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *shopAdressLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *freeTestLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *qualityLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *typeShopLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+
+@property (weak, nonatomic) IBOutlet UIView *separateLine;
+
+@property (weak, nonatomic) IBOutlet UIImageView *starView;
+
+
 @end

@@ -10,6 +10,7 @@
 #import "payCardDetailCell.h"
 #import <Masonry.h>
 #import "CashViewController.h"
+#import "BusinessPayCell.h"
 
 
 @interface PayPurchaseCardController ()<UITableViewDelegate, UITableViewDataSource>
@@ -23,6 +24,7 @@
 
 static NSString *id_payCardViewCell = @"id_payCardViewCell";
 static NSString *id_payDetailCell = @"id_payDetailCell";
+static NSString *id_businessPaycell = @"id_businessPaycell";
 
 @implementation PayPurchaseCardController
 
@@ -248,6 +250,8 @@ static NSString *id_payDetailCell = @"id_payDetailCell";
     }
     
     if (indexPath.section == 2) {
+        
+        BusinessPayCell *paycell = [tableView dequeueReusableCellWithIdentifier:id_businessPaycell forIndexPath:indexPath];
         
         cell.imageView.image = [UIImage imageNamed:self.payImageNameArr[indexPath.row]];
         cell.textLabel.text = self.payNameArray[indexPath.row];

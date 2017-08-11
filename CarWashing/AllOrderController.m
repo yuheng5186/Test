@@ -13,7 +13,7 @@
 #import "OrderDetailController.h"
 
 
-@interface AllOrderController ()<UITableViewDelegate, UITableViewDataSource, PushVCDelegate>
+@interface AllOrderController ()<UITableViewDelegate, UITableViewDataSource, PushVCDelegate,DelayPayCellPushVCDelegate>
 
 @property (nonatomic, weak) UITableView *allOrderListView;
 
@@ -74,6 +74,7 @@ static NSString *id_cancelCell = @"id_cancelCell";
     }else if (indexPath.section == 1){
         
         DelayPayCell *delayCell = [tableView dequeueReusableCellWithIdentifier:id_delayPayCell forIndexPath:indexPath];
+        delayCell.delegate = self;
         return delayCell;
     }
     
@@ -116,6 +117,12 @@ static NSString *id_cancelCell = @"id_cancelCell";
 
 #pragma mark - 实现success的代理方法
 - (void)pushController:(UIViewController *)viewController animated:(BOOL)animated {
+    
+    [self.navigationController pushViewController:viewController animated:animated];
+}
+
+
+- (void)pushVC:(UIViewController *)viewController animated:(BOOL)animated {
     
     [self.navigationController pushViewController:viewController animated:animated];
 }

@@ -62,11 +62,15 @@ static NSString * const categoryDetailID = @"categoryDetailID";
         // 左边的类别表格 👈
         UITableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:categoryID];
         cell.textLabel.text = [NSString stringWithFormat:@"小学%ld",indexPath.row];
+        cell.textLabel.font = [UIFont systemFontOfSize:12];
+        cell.textLabel.textColor = [UIColor colorFromHex:@"#999999"];
         return cell;
     }
     
     // 右边的类别详情表格 👉
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:categoryDetailID];
+    cell.textLabel.font = [UIFont systemFontOfSize:12];
+    cell.textLabel.textColor = [UIColor colorFromHex:@"#999999"];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ : 详%ld",_selectedCategory,indexPath.row];
     
     return cell;

@@ -25,6 +25,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+//    self.backgroundColor = [UIColor clearColor];
+//    self.contentView.backgroundColor = [UIColor whiteColor];
+    self.stateButton.userInteractionEnabled = NO;
     
     self.clearLabel.textColor = [UIColor colorFromHex:@"#999999"];
     
@@ -33,8 +36,8 @@
     self.originPriceLabel.textColor = [UIColor colorFromHex:@"#868686"];
     
     
-    [self.stateButton setImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
-    [self.stateButton setImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateSelected];
+//    [self.stateButton setImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
+//    [self.stateButton setImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateSelected];
     
 }
 

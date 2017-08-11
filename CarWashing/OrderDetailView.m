@@ -15,15 +15,11 @@
     return [[NSBundle mainBundle] loadNibNamed:@"OrderDetailView" owner:nil options:nil].lastObject;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (void)awakeFromNib {
+    [super awakeFromNib];
     
-    if (self = [super initWithFrame:frame]) {
-        [self setupUI];
-    }
-    
-    return self;
+    [self setupUI];
 }
-
 
 - (void)setupUI {
     
