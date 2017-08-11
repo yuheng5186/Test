@@ -18,6 +18,8 @@
 
 @property (nonatomic, weak) UITableView *carListView;
 
+@property (nonatomic, strong) NSIndexPath *nowPath;
+
 @end
 
 static NSString *id_carListCell = @"id_carListCell";
@@ -94,7 +96,17 @@ static NSString *id_carListCell = @"id_carListCell";
     
     MyCarViewCell *carCell = [tableView dequeueReusableCellWithIdentifier:id_carListCell];
     
-    
+    if (indexPath.section == self.nowPath.section) {
+        
+        carCell.defaultButton.selected = YES;
+        [carCell.defaultButton setTitle:@"已默认" forState:UIControlStateNormal];
+        
+    }else {
+        
+        carCell.defaultButton.selected = NO;
+        [carCell.defaultButton setTitle:@"设置默认" forState:UIControlStateNormal];
+        
+    }
     
     
     return carCell;
@@ -120,8 +132,16 @@ static NSString *id_carListCell = @"id_carListCell";
 
 
 
-- (IBAction)didClickDefaultButton:(id)sender {
+- (IBAction)didClickDefaultButton:(id)button {
     
+    UITableViewCell *cell = (UITableViewCell *) [[button superview] superview];
+    
+    NSIndexPath *path = [self.carListView indexPathForCell:cell];
+    
+    //记录当下的indexpath
+    self.nowPath = path;
+    
+    [self.carListView reloadData];
     
     
 }
