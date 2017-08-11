@@ -37,6 +37,8 @@
 #import "PopupView.h"
 #import "LewPopupViewAnimationDrop.h"
 #import "DSDownloadController.h"
+#import "DSShareGetMoneyController.h"
+
 
 @interface HomeViewController ()<JFLocationDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -834,6 +836,9 @@
 }
 - (void) tapShareButtonClick:(id)sender {
     
+    DSShareGetMoneyController  *shareController     = [[DSShareGetMoneyController alloc]init];
+    shareController.hidesBottomBarWhenPushed        = YES;
+    [self.navigationController pushViewController:shareController animated:YES];
     
 }
 - (void) tapShopButtonClick:(id)sender {
