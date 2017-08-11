@@ -179,7 +179,14 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 //方法子
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"金顶洗车想要打开支付宝" preferredStyle:UIAlertControllerStyleAlert];
+    if (self.lastPath.row == 0) {
+        message = @"金顶洗车想要打开微信";
+    }else {
+        message = @"金顶洗车想要打开支付宝";
+    }
+    
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         

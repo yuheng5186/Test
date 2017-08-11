@@ -242,6 +242,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
 //    }
     if (indexPath.section == 0) {
         BusinessDetailCell *businessDetailCell = [tableView dequeueReusableCellWithIdentifier:detailTableViewCell forIndexPath:indexPath];
+        businessDetailCell.selectionStyle = UITableViewCellSelectionStyleNone;
         _detailCell = businessDetailCell;
         
         businessDetailCell.carLabel.text = @"标准洗车-五座轿车";
@@ -263,6 +264,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     }
     
     BusinessEstimateCell *estimateCell = [tableView dequeueReusableCellWithIdentifier:businessCommentCell forIndexPath:indexPath];
+    estimateCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return estimateCell;
     

@@ -14,6 +14,7 @@
 #import "MyCarInfosHeaderView.h"
 #import "UIView+Uitls.h"
 #import "QFDatePickerView.h"
+#import "ProvinceShortController.h"
 
 
 @interface DSMyCarController ()<UITableViewDelegate, UITableViewDataSource, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource, UITextFieldDelegate,UIGestureRecognizerDelegate>
@@ -25,6 +26,8 @@
 @property (nonatomic, strong) NSMutableArray *imageArray;
 
 @property (nonatomic, weak) UIPageControl *pageControl;
+
+@property (nonatomic, weak) UIButton *provinceBtn;
 
 
 
@@ -217,11 +220,18 @@ static NSString * HeaderId = @"header";
             carCell.textLabel.text = @"车牌号";
             carCell.textLabel.textColor = [UIColor colorFromHex:@"#868686"];
             carCell.textLabel.font = [UIFont systemFontOfSize:14];
-            UILabel *provinceLabel = [[UILabel alloc] init];
-            provinceLabel.text = @"沪";
-            provinceLabel.textColor = [UIColor colorFromHex:@"#868686"];
-            provinceLabel.font = [UIFont systemFontOfSize:14];
-            [carCell.contentView addSubview:provinceLabel];
+            
+//            UILabel *provinceLabel = [[UILabel alloc] init];
+//            provinceLabel.text = @"沪";
+//            provinceLabel.textColor = [UIColor colorFromHex:@"#868686"];
+//            provinceLabel.font = [UIFont systemFontOfSize:14];
+            UIButton *provinceBtn = [[UIButton alloc] init];
+            _provinceBtn = provinceBtn;
+            [provinceBtn setTitle:@"沪" forState:UIControlStateNormal];
+            [provinceBtn setTitleColor:[UIColor colorFromHex:@"#868686"] forState:UIControlStateNormal];
+            provinceBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+            [provinceBtn addTarget:self action:@selector(didClickProvinceBtn) forControlEvents:UIControlEventTouchUpInside];
+            [carCell.contentView addSubview:provinceBtn];
             
             UITextField *numTF = [[UITextField alloc] init];
             numTF.placeholder = @"请输入车牌号";
@@ -230,14 +240,14 @@ static NSString * HeaderId = @"header";
             numTF.delegate = self;
             [carCell.contentView addSubview:numTF];
             
-            [provinceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            [provinceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(carCell.textLabel);
                 make.left.equalTo(carCell.contentView).mas_offset(110);
             }];
             
             [numTF mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerY.equalTo(provinceLabel);
-                make.leading.equalTo(provinceLabel.mas_trailing).mas_offset(16);
+                make.centerY.equalTo(provinceBtn);
+                make.leading.equalTo(provinceBtn.mas_trailing).mas_offset(16);
                 make.width.mas_equalTo(200);
             }];
         }else{
@@ -366,9 +376,23 @@ static NSString * HeaderId = @"header";
     }
     
 }
-    
-    
 
+
+#pragma mark - 弹出省份简称
+- (void)didClickProvinceBtn {
+    
+    ProvinceShortController *provinceVC = [[ProvinceShortController alloc] init];
+    
+    typeof(self) weakSelf = self;
+    
+    provinceVC.provinceBlock = ^(NSString *nameText) {
+        
+        [weakSelf.provinceBtn setTitle:nameText forState:UIControlStateNormal];
+    };
+    
+    provinceVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:provinceVC animated:NO completion:nil];
+}
 
 
 #pragma mark - 键盘

@@ -18,6 +18,7 @@
         
         self.backgroundColor = [UIColor clearColor];
         self.contentView.backgroundColor = [UIColor whiteColor];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self setupUI];
     }
     

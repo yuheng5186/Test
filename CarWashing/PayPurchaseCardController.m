@@ -20,6 +20,9 @@
 @property (nonatomic, strong) NSArray *payNameArray;
 @property (nonatomic, strong) NSArray *payImageNameArr;
 
+@property (nonatomic, strong) NSIndexPath *lastPath;
+@property (nonatomic, weak) BusinessPayCell *seleCell;
+
 @end
 
 static NSString *id_payCardViewCell = @"id_payCardViewCell";
@@ -79,6 +82,8 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     
     //[tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:id_payCardViewCell];
     [self.payCardView registerClass:[payCardDetailCell class] forCellReuseIdentifier:id_payDetailCell];
+    
+    [self.payCardView registerClass:[BusinessPayCell class] forCellReuseIdentifier:id_businessPaycell];
     
 //    //选择支付方式
 //    UILabel *payLab = [[UILabel alloc] init];
@@ -191,7 +196,13 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
 //方法子
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"金顶洗车想要打开支付宝" preferredStyle:UIAlertControllerStyleAlert];
+    if (self.lastPath.row == 0) {
+        message = @"金顶洗车想要打开微信";
+    }else {
+        message = @"金顶洗车想要打开支付宝";
+    }
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -252,25 +263,38 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     if (indexPath.section == 2) {
         
         BusinessPayCell *paycell = [tableView dequeueReusableCellWithIdentifier:id_businessPaycell forIndexPath:indexPath];
+        _seleCell = paycell;
         
-        cell.imageView.image = [UIImage imageNamed:self.payImageNameArr[indexPath.row]];
-        cell.textLabel.text = self.payNameArray[indexPath.row];
-        cell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-        cell.textLabel.font = [UIFont systemFontOfSize:15];
+        paycell.imageView.image = [UIImage imageNamed:self.payImageNameArr[indexPath.row]];
+        paycell.textLabel.text = self.payNameArray[indexPath.row];
+        paycell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+        paycell.textLabel.font = [UIFont systemFontOfSize:15];
         
-        UIButton *payWayBtn = [[UIButton alloc] init];
-        [payWayBtn setImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
-        [payWayBtn setImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateSelected];
-        [cell.contentView addSubview:payWayBtn];
+        NSInteger row = [indexPath row];
+        NSInteger oldRow = [self.lastPath row];
         
-        [payWayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(cell.contentView);
-            make.right.equalTo(cell.contentView).mas_offset(-12);
-            make.width.mas_equalTo(21);
-            make.height.mas_equalTo(21);
-        }];
+        if (row == oldRow && self.lastPath != nil) {
+            [paycell.payWayBtn setBackgroundImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateNormal];
+        }else{
+            
+            [paycell.payWayBtn setBackgroundImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
+        }
         
-        return cell;
+        
+        
+//        UIButton *payWayBtn = [[UIButton alloc] init];
+//        [payWayBtn setImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
+//        [payWayBtn setImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateSelected];
+//        [paycell.contentView addSubview:payWayBtn];
+//        
+//        [payWayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerY.equalTo(cell.contentView);
+//            make.right.equalTo(cell.contentView).mas_offset(-12);
+//            make.width.mas_equalTo(21);
+//            make.height.mas_equalTo(21);
+//        }];
+        
+        return paycell;
     }
     
     cell.textLabel.text  = @"卡名称";
@@ -330,6 +354,35 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         
         cashVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         [self presentViewController:cashVC animated:NO completion:nil];
+    }
+    
+    
+    if (indexPath.section == 2) {
+        
+        NSInteger newRow = [indexPath row];
+        NSInteger oldRow = (self.lastPath != nil)?[self.lastPath row]:-1;
+        
+        if (newRow != oldRow) {
+            self.seleCell = [tableView cellForRowAtIndexPath:indexPath];
+            
+            [self.seleCell.payWayBtn setBackgroundImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateNormal];
+            
+            self.seleCell = [tableView cellForRowAtIndexPath:self.lastPath];
+            
+            [self.seleCell.payWayBtn setBackgroundImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
+            
+            self.lastPath = indexPath;
+            
+        }
+    }
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
+    [self.payCardView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] animated:YES scrollPosition:UITableViewScrollPositionNone];
+    if ([_payCardView.delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
+        [_payCardView.delegate tableView:_payCardView didSelectRowAtIndexPath:indexPath];
     }
 }
 

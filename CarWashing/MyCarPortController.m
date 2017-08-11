@@ -11,6 +11,7 @@
 #import "MyCarViewCell.h"
 #import "IcreaseCarController.h"
 
+
 @interface MyCarPortController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) UIView *increaseView;
@@ -97,6 +98,14 @@ static NSString *id_carListCell = @"id_carListCell";
     
     
     return carCell;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

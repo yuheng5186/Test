@@ -141,6 +141,7 @@
 		5071B4811F381366009FFF67 /* OrderCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5071B4801F381366009FFF67 /* OrderCommentController.m */; };
 		5071B4841F39D3CC009FFF67 /* MyCarInfosHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5071B4831F39D3CC009FFF67 /* MyCarInfosHeaderView.m */; };
 		50769F4F1F3C549300DDFCC7 /* BusinessPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50769F4E1F3C549300DDFCC7 /* BusinessPayCell.m */; };
+		50769F521F3D52C500DDFCC7 /* ProvinceShortController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50769F511F3D52C500DDFCC7 /* ProvinceShortController.m */; };
 		507FECF71F2AC8D7009CC505 /* BusinessPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FECF61F2AC8D7009CC505 /* BusinessPayController.m */; };
 		507FED011F2B3111009CC505 /* CashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FED001F2B3111009CC505 /* CashViewController.m */; };
 		5094A6251F3447CD00407808 /* BusinessEstimateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5094A6231F3447CD00407808 /* BusinessEstimateCell.m */; };
@@ -482,6 +483,8 @@
 		5071B4831F39D3CC009FFF67 /* MyCarInfosHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCarInfosHeaderView.m; sourceTree = "<group>"; };
 		50769F4D1F3C549300DDFCC7 /* BusinessPayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessPayCell.h; sourceTree = "<group>"; };
 		50769F4E1F3C549300DDFCC7 /* BusinessPayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessPayCell.m; sourceTree = "<group>"; };
+		50769F501F3D52C500DDFCC7 /* ProvinceShortController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvinceShortController.h; sourceTree = "<group>"; };
+		50769F511F3D52C500DDFCC7 /* ProvinceShortController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvinceShortController.m; sourceTree = "<group>"; };
 		507FECF51F2AC8D7009CC505 /* BusinessPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessPayController.h; sourceTree = "<group>"; };
 		507FECF61F2AC8D7009CC505 /* BusinessPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessPayController.m; sourceTree = "<group>"; };
 		507FECFF1F2B3111009CC505 /* CashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashViewController.h; sourceTree = "<group>"; };
@@ -810,6 +813,8 @@
 				181E92FA1F2086ED0006511E /* DSServiceController.m */,
 				181E92FC1F2088E80006511E /* DSMyCarController.h */,
 				181E92FD1F2088E80006511E /* DSMyCarController.m */,
+				50769F501F3D52C500DDFCC7 /* ProvinceShortController.h */,
+				50769F511F3D52C500DDFCC7 /* ProvinceShortController.m */,
 				5071B4821F39D3CC009FFF67 /* MyCarInfosHeaderView.h */,
 				5071B4831F39D3CC009FFF67 /* MyCarInfosHeaderView.m */,
 				5097FE141F2F42F0002EF8F8 /* MyCarPortController.h */,
@@ -1695,6 +1700,7 @@
 				50B26E931F307AE5009B3B9F /* DiscountController.m in Sources */,
 				5097FE161F2F42F0002EF8F8 /* MyCarPortController.m in Sources */,
 				181E92FB1F2086ED0006511E /* DSServiceController.m in Sources */,
+				50769F521F3D52C500DDFCC7 /* ProvinceShortController.m in Sources */,
 				1853BA4B1F28A04100B98C7F /* JFSearchView.m in Sources */,
 				180E42EA1F3AB37D00013D2D /* YzdHUDIndicator.m in Sources */,
 				50B26EAC1F315EF0009B3B9F /* CommentOrderController.m in Sources */,
