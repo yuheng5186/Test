@@ -26,6 +26,7 @@ PODS:
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
+  - WechatOpenSDK (1.7.8)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - Masonry (~> 1.0.2)
   - SDAutoLayout
   - SDWebImage (~> 4.0.0)
+  - WechatOpenSDK (~> 1.7.8)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -45,7 +47,8 @@ SPEC CHECKSUMS:
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   SDAutoLayout: c5509e77ae75735d9a39f7bc83dba6d3f75d49d8
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  WechatOpenSDK: ad1e7be1b66416df847ac50830c798b70c9e365e
 
-PODFILE CHECKSUM: a86bdcd9dc40d44f3e18bc30028440abef934155
+PODFILE CHECKSUM: 065c50c9c8bbbffa57c298624deab61bc3667b12
 
 COCOAPODS: 1.2.1

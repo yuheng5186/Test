@@ -7,4 +7,5 @@ target 'CarWashing' do
   pod 'FMDB', '~> 2.7.2'
   pod 'SDAutoLayout'
   pod 'AMap2DMap', '~> 4.6.0'
+  pod 'WechatOpenSDK', '~> 1.7.8'
 end
