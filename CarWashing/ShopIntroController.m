@@ -44,7 +44,7 @@ static NSString *id_infoCell = @"id_infoCell";
     
     self.infoHeadView.frame = CGRectMake(0, 0, Main_Screen_Width, 280);
     
-    UITableView *infoTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height) style:UITableViewStylePlain];
+    UITableView *infoTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height - 108) style:UITableViewStylePlain];
     _infoTableView = infoTableView;
     [self.view addSubview:_infoTableView];
     
