@@ -22,7 +22,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+    self.defaultButton.backgroundColor = [UIColor whiteColor];
+    
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
