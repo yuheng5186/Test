@@ -32,6 +32,10 @@
 		180E43041F3B471100013D2D /* UIView+BFSToastInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E43021F3B471100013D2D /* UIView+BFSToastInfo.m */; };
 		180E43071F3C5C2D00013D2D /* DSDownloadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E43061F3C5C2D00013D2D /* DSDownloadController.m */; };
 		180E430A1F3C741100013D2D /* DSShareGetMoneyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E43091F3C741100013D2D /* DSShareGetMoneyController.m */; };
+		180E43211F3D836F00013D2D /* HYActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E431A1F3D836F00013D2D /* HYActivityView.m */; };
+		180E43221F3D836F00013D2D /* WeixinActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E431C1F3D836F00013D2D /* WeixinActivity.m */; };
+		180E43231F3D836F00013D2D /* WeixinSessionActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E431E1F3D836F00013D2D /* WeixinSessionActivity.m */; };
+		180E43241F3D836F00013D2D /* WeixinTimelineActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E43201F3D836F00013D2D /* WeixinTimelineActivity.m */; };
 		181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92B71F1F364A0006511E /* MenuTabBarController.m */; };
 		181E92BB1F1F36710006511E /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BA1F1F36710006511E /* BaseController.m */; };
 		181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BF1F1F39CC0006511E /* BlackLoadingView.m */; };
@@ -270,6 +274,14 @@
 		180E43061F3C5C2D00013D2D /* DSDownloadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSDownloadController.m; path = Home/DSDownloadController.m; sourceTree = "<group>"; };
 		180E43081F3C741100013D2D /* DSShareGetMoneyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSShareGetMoneyController.h; path = Home/DSShareGetMoneyController.h; sourceTree = "<group>"; };
 		180E43091F3C741100013D2D /* DSShareGetMoneyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSShareGetMoneyController.m; path = Home/DSShareGetMoneyController.m; sourceTree = "<group>"; };
+		180E43191F3D836F00013D2D /* HYActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYActivityView.h; path = Tool/weixinshare/HYActivityView.h; sourceTree = "<group>"; };
+		180E431A1F3D836F00013D2D /* HYActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HYActivityView.m; path = Tool/weixinshare/HYActivityView.m; sourceTree = "<group>"; };
+		180E431B1F3D836F00013D2D /* WeixinActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeixinActivity.h; path = Tool/weixinshare/WeixinActivity.h; sourceTree = "<group>"; };
+		180E431C1F3D836F00013D2D /* WeixinActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeixinActivity.m; path = Tool/weixinshare/WeixinActivity.m; sourceTree = "<group>"; };
+		180E431D1F3D836F00013D2D /* WeixinSessionActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeixinSessionActivity.h; path = Tool/weixinshare/WeixinSessionActivity.h; sourceTree = "<group>"; };
+		180E431E1F3D836F00013D2D /* WeixinSessionActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeixinSessionActivity.m; path = Tool/weixinshare/WeixinSessionActivity.m; sourceTree = "<group>"; };
+		180E431F1F3D836F00013D2D /* WeixinTimelineActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeixinTimelineActivity.h; path = Tool/weixinshare/WeixinTimelineActivity.h; sourceTree = "<group>"; };
+		180E43201F3D836F00013D2D /* WeixinTimelineActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeixinTimelineActivity.m; path = Tool/weixinshare/WeixinTimelineActivity.m; sourceTree = "<group>"; };
 		181E92B61F1F364A0006511E /* MenuTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTabBarController.h; sourceTree = "<group>"; };
 		181E92B71F1F364A0006511E /* MenuTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTabBarController.m; sourceTree = "<group>"; };
 		181E92B91F1F36710006511E /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
@@ -684,9 +696,25 @@
 			name = BFSToast;
 			sourceTree = "<group>";
 		};
+		180E43181F3D835600013D2D /* weixinshare */ = {
+			isa = PBXGroup;
+			children = (
+				180E43191F3D836F00013D2D /* HYActivityView.h */,
+				180E431A1F3D836F00013D2D /* HYActivityView.m */,
+				180E431B1F3D836F00013D2D /* WeixinActivity.h */,
+				180E431C1F3D836F00013D2D /* WeixinActivity.m */,
+				180E431D1F3D836F00013D2D /* WeixinSessionActivity.h */,
+				180E431E1F3D836F00013D2D /* WeixinSessionActivity.m */,
+				180E431F1F3D836F00013D2D /* WeixinTimelineActivity.h */,
+				180E43201F3D836F00013D2D /* WeixinTimelineActivity.m */,
+			);
+			name = weixinshare;
+			sourceTree = "<group>";
+		};
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				180E43181F3D835600013D2D /* weixinshare */,
 				180E42FE1F3B46F300013D2D /* BFSToast */,
 				180E42EC1F3AC1BD00013D2D /* PopView */,
 				180E42DC1F3AB36A00013D2D /* Toast */,
@@ -1654,6 +1682,7 @@
 				501672521F2A091000384186 /* ScoreCategoryView.m in Sources */,
 				500C6BA41F3AE619007D34A1 /* QFDatePickerView.m in Sources */,
 				182190091F301BF600F7207F /* DSActivityDetailCell.m in Sources */,
+				180E43221F3D836F00013D2D /* WeixinActivity.m in Sources */,
 				1805AC911F386FA800FD0844 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */,
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
@@ -1701,10 +1730,12 @@
 				5071B47C1F380987009FFF67 /* OrderDetailView.m in Sources */,
 				180E430A1F3C741100013D2D /* DSShareGetMoneyController.m in Sources */,
 				501672411F29D16C00384186 /* MemberView.m in Sources */,
+				180E43231F3D836F00013D2D /* WeixinSessionActivity.m in Sources */,
 				1805AC931F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				50E2EE7E1F1F4D3C00FAF130 /* YZAllCourseViewController.m in Sources */,
 				50B26E931F307AE5009B3B9F /* DiscountController.m in Sources */,
 				5097FE161F2F42F0002EF8F8 /* MyCarPortController.m in Sources */,
+				180E43211F3D836F00013D2D /* HYActivityView.m in Sources */,
 				181E92FB1F2086ED0006511E /* DSServiceController.m in Sources */,
 				50769F521F3D52C500DDFCC7 /* ProvinceShortController.m in Sources */,
 				1853BA4B1F28A04100B98C7F /* JFSearchView.m in Sources */,
@@ -1715,6 +1746,7 @@
 				180E42D81F39B8C200013D2D /* DSUserRightDetailController.m in Sources */,
 				181E92D81F1F3BAE0006511E /* FindViewController.m in Sources */,
 				180E42E71F3AB37D00013D2D /* UIWindow+YzdHUD.m in Sources */,
+				180E43241F3D836F00013D2D /* WeixinTimelineActivity.m in Sources */,
 				501672461F29DA6C00384186 /* MemberRegualrController.m in Sources */,
 				180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */,
 				5071B4811F381366009FFF67 /* OrderCommentController.m in Sources */,
