@@ -38,7 +38,7 @@
 #import "LewPopupViewAnimationDrop.h"
 #import "DSDownloadController.h"
 #import "DSShareGetMoneyController.h"
-
+#import "DSAddShopController.h"
 
 @interface HomeViewController ()<JFLocationDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -841,8 +841,8 @@
 }
 - (void) tapShopButtonClick:(id)sender {
     
-    DSAddMerchantController *addMerchantController      = [[DSAddMerchantController alloc]init];
-    addMerchantController.hidesBottomBarWhenPushed      = YES;
+    DSAddShopController *addMerchantController      = [[DSAddShopController alloc]init];
+    addMerchantController.hidesBottomBarWhenPushed  = YES;
     [self.navigationController pushViewController:addMerchantController animated:YES];
     
 }

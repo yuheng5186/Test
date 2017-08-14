@@ -38,6 +38,7 @@
 		180E43241F3D836F00013D2D /* WeixinTimelineActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E43201F3D836F00013D2D /* WeixinTimelineActivity.m */; };
 		180E43271F414A5E00013D2D /* PopHelpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E43261F414A5E00013D2D /* PopHelpView.m */; };
 		180E43291F414A7900013D2D /* PopHelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180E43281F414A7900013D2D /* PopHelpView.xib */; };
+		180E432C1F417E3500013D2D /* DSAddShopController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E432B1F417E3500013D2D /* DSAddShopController.m */; };
 		181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92B71F1F364A0006511E /* MenuTabBarController.m */; };
 		181E92BB1F1F36710006511E /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BA1F1F36710006511E /* BaseController.m */; };
 		181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BF1F1F39CC0006511E /* BlackLoadingView.m */; };
@@ -287,6 +288,8 @@
 		180E43251F414A5E00013D2D /* PopHelpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopHelpView.h; path = Tool/PopView/PopHelpView.h; sourceTree = "<group>"; };
 		180E43261F414A5E00013D2D /* PopHelpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PopHelpView.m; path = Tool/PopView/PopHelpView.m; sourceTree = "<group>"; };
 		180E43281F414A7900013D2D /* PopHelpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PopHelpView.xib; path = Tool/PopView/PopHelpView.xib; sourceTree = "<group>"; };
+		180E432A1F417E3500013D2D /* DSAddShopController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAddShopController.h; path = Home/DSAddShopController.h; sourceTree = "<group>"; };
+		180E432B1F417E3500013D2D /* DSAddShopController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAddShopController.m; path = Home/DSAddShopController.m; sourceTree = "<group>"; };
 		181E92B61F1F364A0006511E /* MenuTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTabBarController.h; sourceTree = "<group>"; };
 		181E92B71F1F364A0006511E /* MenuTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTabBarController.m; sourceTree = "<group>"; };
 		181E92B91F1F36710006511E /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
@@ -921,6 +924,8 @@
 				180E43061F3C5C2D00013D2D /* DSDownloadController.m */,
 				180E43081F3C741100013D2D /* DSShareGetMoneyController.h */,
 				180E43091F3C741100013D2D /* DSShareGetMoneyController.m */,
+				180E432A1F417E3500013D2D /* DSAddShopController.h */,
+				180E432B1F417E3500013D2D /* DSAddShopController.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1714,6 +1719,7 @@
 				1853BA0C1F28774400B98C7F /* LKActionSheet.m in Sources */,
 				188907161F283184009E20B0 /* DSGetScoreController.m in Sources */,
 				1853BA471F28A04100B98C7F /* JFCityCollectionViewCell.m in Sources */,
+				180E432C1F417E3500013D2D /* DSAddShopController.m in Sources */,
 				501672021F29797600384186 /* BusinessDetailViewController.m in Sources */,
 				181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */,
 				5094A63D1F34850300407808 /* ShopInfoHeadView.m in Sources */,
