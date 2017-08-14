@@ -36,6 +36,8 @@
 		180E43221F3D836F00013D2D /* WeixinActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E431C1F3D836F00013D2D /* WeixinActivity.m */; };
 		180E43231F3D836F00013D2D /* WeixinSessionActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E431E1F3D836F00013D2D /* WeixinSessionActivity.m */; };
 		180E43241F3D836F00013D2D /* WeixinTimelineActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E43201F3D836F00013D2D /* WeixinTimelineActivity.m */; };
+		180E43271F414A5E00013D2D /* PopHelpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E43261F414A5E00013D2D /* PopHelpView.m */; };
+		180E43291F414A7900013D2D /* PopHelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180E43281F414A7900013D2D /* PopHelpView.xib */; };
 		181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92B71F1F364A0006511E /* MenuTabBarController.m */; };
 		181E92BB1F1F36710006511E /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BA1F1F36710006511E /* BaseController.m */; };
 		181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BF1F1F39CC0006511E /* BlackLoadingView.m */; };
@@ -282,6 +284,9 @@
 		180E431E1F3D836F00013D2D /* WeixinSessionActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeixinSessionActivity.m; path = Tool/weixinshare/WeixinSessionActivity.m; sourceTree = "<group>"; };
 		180E431F1F3D836F00013D2D /* WeixinTimelineActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeixinTimelineActivity.h; path = Tool/weixinshare/WeixinTimelineActivity.h; sourceTree = "<group>"; };
 		180E43201F3D836F00013D2D /* WeixinTimelineActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeixinTimelineActivity.m; path = Tool/weixinshare/WeixinTimelineActivity.m; sourceTree = "<group>"; };
+		180E43251F414A5E00013D2D /* PopHelpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopHelpView.h; path = Tool/PopView/PopHelpView.h; sourceTree = "<group>"; };
+		180E43261F414A5E00013D2D /* PopHelpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PopHelpView.m; path = Tool/PopView/PopHelpView.m; sourceTree = "<group>"; };
+		180E43281F414A7900013D2D /* PopHelpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PopHelpView.xib; path = Tool/PopView/PopHelpView.xib; sourceTree = "<group>"; };
 		181E92B61F1F364A0006511E /* MenuTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTabBarController.h; sourceTree = "<group>"; };
 		181E92B71F1F364A0006511E /* MenuTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTabBarController.m; sourceTree = "<group>"; };
 		181E92B91F1F36710006511E /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
@@ -681,6 +686,9 @@
 				180E42F61F3AD4E600013D2D /* PopupView.xib */,
 				180E42F81F3AD7EB00013D2D /* LewPopupBackgroundView.h */,
 				180E42F91F3AD7EB00013D2D /* LewPopupBackgroundView.m */,
+				180E43251F414A5E00013D2D /* PopHelpView.h */,
+				180E43261F414A5E00013D2D /* PopHelpView.m */,
+				180E43281F414A7900013D2D /* PopHelpView.xib */,
 			);
 			name = PopView;
 			sourceTree = "<group>";
@@ -1445,7 +1453,6 @@
 				TargetAttributes = {
 					18B803711F1DA2A300B52432 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 6AWGM9A2YP;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -1497,6 +1504,7 @@
 				5094A63A1F346E7000407808 /* CancelPayCell.xib in Resources */,
 				50E2EE5A1F1F4A9000FAF130 /* SalerListViewCell.xib in Resources */,
 				50D30E821F20988A0086D3ED /* BusinessDetailCell.xib in Resources */,
+				180E43291F414A7900013D2D /* PopHelpView.xib in Resources */,
 				50E2EE871F1F4D3C00FAF130 /* YZSortCell.xib in Resources */,
 				50E2EE7F1F1F4D3C00FAF130 /* YZAllCourseViewController.xib in Resources */,
 				50B26EC61F31A0A7009B3B9F /* CarTicketView.xib in Resources */,
@@ -1624,6 +1632,7 @@
 				18B69EA61F32CB52007DA0E4 /* ZFMaskView.m in Sources */,
 				50B26E961F307B76009B3B9F /* RechargeController.m in Sources */,
 				18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */,
+				180E43271F414A5E00013D2D /* PopHelpView.m in Sources */,
 				1853BA4E1F28A04C00B98C7F /* JFLocation.m in Sources */,
 				180E43071F3C5C2D00013D2D /* DSDownloadController.m in Sources */,
 				180E42D21F39A89000013D2D /* DSAddMerchantController.m in Sources */,
@@ -1907,10 +1916,10 @@
 			baseConfigurationReference = 786364A9A4C81732835898A5 /* Pods-CarWashing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6AWGM9A2YP;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing;
 				PRODUCT_NAME = CarWashing;
@@ -1922,10 +1931,10 @@
 			baseConfigurationReference = 1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6AWGM9A2YP;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing;
 				PRODUCT_NAME = CarWashing;

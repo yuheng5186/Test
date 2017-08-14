@@ -27,6 +27,7 @@
 
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,LKAlertViewDelegate>
 
+
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
