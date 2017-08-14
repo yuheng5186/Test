@@ -63,7 +63,7 @@ static NSString * HeaderId = @"header";
     
     if (_carInfoView == nil) {
         
-        UITableView *carInfoView = [[UITableView alloc] initWithFrame:CGRectMake(0, 264 + 5, Main_Screen_Width, Main_Screen_Height - 264) style:UITableViewStyleGrouped];
+        UITableView *carInfoView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height) style:UITableViewStyleGrouped];
         _carInfoView = carInfoView;
         [self.view addSubview:_carInfoView];
     }
@@ -89,10 +89,7 @@ static NSString * HeaderId = @"header";
         [self.imageArray addObject:image];
     }
     
-    self.carInfoView.delegate = self;
-    self.carInfoView.dataSource = self;
     
-    [self.carInfoView registerClass:[MyCarInfosHeaderView class] forHeaderFooterViewReuseIdentifier:HeaderId];
     
     [self setupUI];
     
@@ -135,6 +132,13 @@ static NSString * HeaderId = @"header";
 //        make.centerX.equalTo(pageFlowView);
 //        make.bottom.equalTo(pageFlowView).mas_offset(-1);
 //    }];
+    
+    self.carInfoView.delegate = self;
+    self.carInfoView.dataSource = self;
+    
+    [self.carInfoView registerClass:[MyCarInfosHeaderView class] forHeaderFooterViewReuseIdentifier:HeaderId];
+    
+    self.carInfoView.tableHeaderView = pageFlowView;
 }
 
 #pragma mark NewPagedFlowView Delegate
@@ -288,6 +292,8 @@ static NSString * HeaderId = @"header";
         
         if (indexPath.row == 0 || indexPath.row == 3) {
             UITextField *textTF = [[UITextField alloc] init];
+            textTF.delegate = self;
+            textTF.tag = indexPath.row;
             textTF.placeholder = @"请填写";
             textTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
             textTF.font = [UIFont systemFontOfSize:12];
@@ -406,87 +412,116 @@ static NSString * HeaderId = @"header";
 
 
 #pragma mark - 键盘
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
-}
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
-}
-
-- (void)keyboardWillShow:(NSNotification *)noti
-{
-    CGFloat keyboardHeight = [noti.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;;
-    [self.view.layer removeAllAnimations];
-    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
-    UIView *firstResponderView = [keyWindow performSelector:@selector(findFirstResponder)];
-    
-    CGRect rect = [[UIApplication sharedApplication].keyWindow convertRect:firstResponderView.frame fromView:firstResponderView.superview];
-    
-    CGFloat bottom = rect.origin.y + rect.size.height;
-    CGFloat keyboardY = self.view.window.size.height - keyboardHeight;
-    if (bottom > keyboardY) {
-        _totalYOffset += bottom - (self.view.window.size.height - keyboardHeight);
-        [UIView animateWithDuration:[noti.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]
-                              delay:0
-                            options:[noti.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]
-                         animations:^{
-                             self.view.y -= _totalYOffset;
-                         }
-                         completion:nil];
+//点击输入框触发
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    //键盘高度
+    CGFloat keyboardHeight = 216.0f;
+    //获取tag
+    //NSLog(@"hhhhh === %d",textField.tag);
+    //判断键盘高度是否遮住输入框，具体超过多少距离，移动多少距离（自己算好就可以，不一定和这里一样）
+    if ((self.carInfoView.bounds.size.height - 264) - keyboardHeight - 60 * (textField.tag + 1) < 0 &&(self.carInfoView.bounds.size.height - 264) - keyboardHeight - 60 * (textField.tag + 1) > -60) {
+        
+        [self.carInfoView setContentOffset:CGPointMake(0, 216) animated:YES];
     }
-    
-    
+    else if (self.carInfoView.bounds.size.height - 264 - keyboardHeight - 60 * (textField.tag + 1) < 180 &&self.carInfoView.bounds.size.height - 264 - keyboardHeight - 60 * (textField.tag + 1) > -120)
+    {
+        [self.carInfoView setContentOffset:CGPointMake(0, 80) animated:YES];
+    }
+    else if (self.carInfoView.bounds.size.height - keyboardHeight - 60 * (textField.tag + 1) < -120 &&self.carInfoView.bounds.size.height - keyboardHeight - 60 * (textField.tag + 1) > -180)
+    {
+        [self.carInfoView setContentOffset:CGPointMake(0, 170) animated:YES];
+    }
 }
 
-- (void)keyboardWillHide:(NSNotification *)noti
-{
-    [UIView animateWithDuration:[noti.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]
-                          delay:0
-                        options:[noti.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]
-                     animations:^{
-                         self.view.y += _totalYOffset;
-                     }
-                     completion:nil];
-    _totalYOffset = 0;
-}
-
-- (void)keyboardWillChangeFrame:(NSNotification *)noti
-{
+//键盘收回触发
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    //回归原处
+    [self.carInfoView setContentOffset:CGPointMake(0, 0) animated:YES];
     
 }
 
-- (void)keyboardDidShow:(NSNotification *)noti
-{
-}
-
-- (void)keyboardDidHide:(NSNotification *)noti
-{
-}
-
-- (void)keyboardDidChangeFrame:(NSNotification *)noti
-{
-}
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//    [super viewDidAppear:animated];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
+//}
+//
+//- (void)viewWillDisappear:(BOOL)animated
+//{
+//    [super viewWillDisappear:animated];
+//    
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
+//}
+//
+//- (void)keyboardWillShow:(NSNotification *)noti
+//{
+//    CGFloat keyboardHeight = [noti.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;;
+//    [self.view.layer removeAllAnimations];
+//    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+//    UIView *firstResponderView = [keyWindow performSelector:@selector(findFirstResponder)];
+//    
+//    CGRect rect = [[UIApplication sharedApplication].keyWindow convertRect:firstResponderView.frame fromView:firstResponderView.superview];
+//    
+//    CGFloat bottom = rect.origin.y + rect.size.height;
+//    CGFloat keyboardY = self.view.window.size.height - keyboardHeight;
+//    if (bottom > keyboardY) {
+//        _totalYOffset += bottom - (self.view.window.size.height - keyboardHeight);
+//        [UIView animateWithDuration:[noti.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]
+//                              delay:0
+//                            options:[noti.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]
+//                         animations:^{
+//                             self.view.y -= _totalYOffset;
+//                         }
+//                         completion:nil];
+//    }
+//    
+//    
+//}
+//
+//- (void)keyboardWillHide:(NSNotification *)noti
+//{
+//    [UIView animateWithDuration:[noti.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]
+//                          delay:0
+//                        options:[noti.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]
+//                     animations:^{
+//                         self.view.y += _totalYOffset;
+//                     }
+//                     completion:nil];
+//    _totalYOffset = 0;
+//}
+//
+//- (void)keyboardWillChangeFrame:(NSNotification *)noti
+//{
+//    
+//}
+//
+//- (void)keyboardDidShow:(NSNotification *)noti
+//{
+//}
+//
+//- (void)keyboardDidHide:(NSNotification *)noti
+//{
+//}
+//
+//- (void)keyboardDidChangeFrame:(NSNotification *)noti
+//{
+//}
 
 - (void)endEditing
 {
-    [self.view endEditing:YES];
+    [self.carInfoView endEditing:YES];
 }
 
 #pragma mark -点击我的车库

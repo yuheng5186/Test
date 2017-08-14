@@ -164,17 +164,17 @@
 
 - (void) loginButtonClick:(id)sender {
 
-//    if (self.userMobileFieldText.text.length == 11) {
-//        if (self.verifyFieldText.text.length == 4) {
+    if (self.userMobileFieldText.text.length == 11) {
+        if (self.verifyFieldText.text.length == 4) {
             MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
             [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
-//        }else{
-//            [self.view showInfo:@"请输入4位验证码！" autoHidden:YES interval:2];
-//        }
-//
-//    }else {
-//        [self.view showInfo:@"请输入正确的11位手机号码" autoHidden:YES];
-//    }
+        }else{
+            [self.view showInfo:@"请输入4位验证码！" autoHidden:YES interval:2];
+        }
+
+    }else {
+        [self.view showInfo:@"请输入正确的11位手机号码" autoHidden:YES];
+    }
 
 }
 

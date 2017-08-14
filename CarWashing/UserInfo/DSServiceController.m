@@ -70,7 +70,7 @@
     
     [self setupTopServiceSliderView];
     
-    UITableView *serviceListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 108, Main_Screen_Width, Main_Screen_Height - 300)];
+    UITableView *serviceListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 108, Main_Screen_Width, Main_Screen_Height)];
     serviceListView.delegate = self;
     serviceListView.dataSource = self;
     [self.view addSubview:serviceListView];
