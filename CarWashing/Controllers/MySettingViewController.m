@@ -56,7 +56,7 @@
     upView.top                      = 0;
     
     
-    NSString *titleName              = @"我的";
+    NSString *titleName              = @"";
     UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:16];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
@@ -66,7 +66,7 @@
     
 //    UIImage *editImage              = [UIImage imageNamed:@"icon_defaultavatar"];
     UIButton  *editButton           = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) iconName:@"touxiang" target:self action:@selector(editButtonClick:)];
-    editButton.top                  = titleNameLabel.bottom +Main_Screen_Height*15/667;
+    editButton.top                  = titleNameLabel.bottom +Main_Screen_Height*5/667;
     editButton.centerX              = titleNameLabel.centerX;
 
     UIImage *settingImage           = [UIImage imageNamed:@"shezhi"];
@@ -114,12 +114,12 @@
     UIImage     *orderImage          = [UIImage imageNamed:@"dingdan"];
     UIImageView *orderImageView      = [UIUtil drawCustomImgViewInView:orderView frame:CGRectMake(0, 0, orderImage.size.width,orderImage.size.height) imageName:@"dingdan"];
     orderImageView.centerX           = orderView.width/2;
-    orderImageView.top               = Main_Screen_Height*30/667;
+    orderImageView.top               = Main_Screen_Height*24/667;
     
     NSString *orderName              = @"订单";
-    UIFont *orderNameFont            = [UIFont systemFontOfSize:16];
+    UIFont *orderNameFont            = [UIFont systemFontOfSize:15];
     UILabel *orderNameLabel          = [UIUtil drawLabelInView:orderView frame:[UIUtil textRect:orderName font:orderNameFont] font:orderNameFont text:orderName isCenter:NO];
-    orderNameLabel.textColor         = [UIColor blackColor];
+    orderNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
     orderNameLabel.centerX           = orderImageView.centerX;
     orderNameLabel.top               = orderImageView.bottom +Main_Screen_Height*10/667;
     
@@ -136,12 +136,12 @@
     UIImage     *favoritesImage          = [UIImage imageNamed:@"shoucang"];
     UIImageView *favoritesImageView      = [UIUtil drawCustomImgViewInView:favoritesView frame:CGRectMake(0, 0, favoritesImage.size.width,favoritesImage.size.height) imageName:@"shoucang"];
     favoritesImageView.centerX           = favoritesView.width/2;
-    favoritesImageView.top               = Main_Screen_Height*30/667;
+    favoritesImageView.top               = Main_Screen_Height*24/667;
     
     NSString *favoritesName              = @"收藏";
-    UIFont *favoritesNameFont            = [UIFont systemFontOfSize:16];
+    UIFont *favoritesNameFont            = [UIFont systemFontOfSize:15];
     UILabel *favoritesNameLabel          = [UIUtil drawLabelInView:favoritesView frame:[UIUtil textRect:favoritesName font:favoritesNameFont] font:favoritesNameFont text:favoritesName isCenter:NO];
-    favoritesNameLabel.textColor         = [UIColor blackColor];
+    favoritesNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
     favoritesNameLabel.centerX           = favoritesImageView.centerX;
     favoritesNameLabel.top               = favoritesImageView.bottom +Main_Screen_Height*10/667;
     
@@ -156,19 +156,19 @@
     UIImage     *exchangeImage          = [UIImage imageNamed:@"duihuanliwu"];
     UIImageView *exchangeImageView      = [UIUtil drawCustomImgViewInView:exchangeView frame:CGRectMake(0, 0, exchangeImage.size.width,exchangeImage.size.height) imageName:@"duihuanliwu"];
     exchangeImageView.centerX           = exchangeView.width/2;
-    exchangeImageView.top               = Main_Screen_Height*30/667;
+    exchangeImageView.top               = Main_Screen_Height*24/667;
     
     NSString *exchangeName              = @"激活";
-    UIFont *exchangeNameFont            = [UIFont systemFontOfSize:16];
+    UIFont *exchangeNameFont            = [UIFont systemFontOfSize:15];
     UILabel *exchangeNameLabel          = [UIUtil drawLabelInView:exchangeView frame:[UIUtil textRect:exchangeName font:exchangeNameFont] font:exchangeNameFont text:exchangeName isCenter:NO];
-    exchangeNameLabel.textColor         = [UIColor blackColor];
+    exchangeNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
     exchangeNameLabel.centerX           = exchangeImageView.centerX;
     exchangeNameLabel.top               = exchangeImageView.bottom +Main_Screen_Height*10/667;
     
-    
+    backgroudView.height                = exchangeView.bottom +Main_Screen_Height*10/667;
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStyleGrouped];
-    self.tableView.top              = upView.bottom;
+    self.tableView.top              = backgroudView.bottom;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     self.tableView.scrollEnabled    = NO;
@@ -286,7 +286,7 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 45;
+    return 46;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -298,7 +298,10 @@
     }
     cell.backgroundColor    = [UIColor whiteColor];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    
+    cell.textLabel.textColor    = [UIColor colorFromHex:@"#868686"];
+    cell.textLabel.font         = [UIFont systemFontOfSize:15];
+    cell.detailTextLabel.font   = [UIFont systemFontOfSize:14];
+
     if (indexPath.section == 0) {
         cell.imageView.image            = [UIImage imageNamed:@"jindinghuiyuan"];
         cell.textLabel.text             = @"金顶会员";
@@ -313,13 +316,13 @@
         }else{
             cell.imageView.image        = [UIImage imageNamed:@"wwodekaquan"];
             cell.textLabel.text         = @"我的卡券";
-            cell.detailTextLabel.text   = @"3张优惠券";
+//            cell.detailTextLabel.text   = @"3张优惠券";
         
         }
     }else{
         cell.imageView.image            = [UIImage imageNamed:@"tuijianjinding"];
         cell.textLabel.text             = @"推荐金顶APP";
-        cell.detailTextLabel.text       = @"奖励300元";
+//        cell.detailTextLabel.text       = @"奖励300元";
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

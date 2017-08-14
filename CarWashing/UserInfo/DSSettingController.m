@@ -45,10 +45,10 @@
     appImageView.centerX           = upView.centerX;
     
     NSString *showName              = @"分享金顶洗车，让您的好友可以下载金顶客户端";
-    UIFont *showNameFont            = [UIFont systemFontOfSize:16];
+    UIFont *showNameFont            = [UIFont systemFontOfSize:13];
     UILabel *showNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:showName font:showNameFont] font:showNameFont text:showName isCenter:NO];
-    showNameLabel.textColor         = [UIColor colorFromHex:@"#8B8B8B"];
-    showNameLabel.top               = appImageView.bottom +Main_Screen_Height*20/667;
+    showNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
+    showNameLabel.top               = appImageView.bottom +Main_Screen_Height*25/667;
     showNameLabel.centerX           = appImageView.centerX;
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*200/667) style:UITableViewStyleGrouped];
@@ -131,6 +131,8 @@
     }
     cell.backgroundColor    = [UIColor whiteColor];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.textColor    = [UIColor colorFromHex:@"#999999"];
+    cell.textLabel.font         = [UIFont systemFontOfSize:13];
     
     if (indexPath.row == 0) {
         cell.textLabel.text     = @"密码管理";
