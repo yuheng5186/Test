@@ -137,7 +137,10 @@
             
         }else if (indexPath.row == 1){
             cell.textLabel.text         = @"手机号";
-            cell.detailTextLabel.text   = @"15800781856";
+            NSString  *number = @"15800781856";
+            NSString *userName              = [number stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+
+            cell.detailTextLabel.text   = userName;
         }
         else {
             cell.textLabel.text         = @"性别";
