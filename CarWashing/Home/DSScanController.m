@@ -8,6 +8,8 @@
 
 #import "DSScanController.h"
 #import "DSExchangeController.h"
+#import "PopHelpView.h"
+#import "LewPopupViewAnimationDrop.h"
 
 @interface DSScanController ()<AVCaptureMetadataOutputObjectsDelegate>
 
@@ -29,6 +31,12 @@
 
 - (void) helpButtonClick:(id)sender {
     
+    PopHelpView *view = [PopHelpView defaultPopHelpView];
+    view.parentVC = self;
+    
+    [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{
+        
+    }];
 }
 - (void) drawContent {
 

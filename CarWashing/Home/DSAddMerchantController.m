@@ -70,13 +70,22 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    return 1;
+    switch (section) {
+        case 0:
+            return 1;
+            break;
+        case 1:
+            return 2;
+            break;
+        default:
+            break;
+    }
+    return 0;
 }
 
 
@@ -94,53 +103,59 @@
     }
     cell.backgroundColor    = [UIColor whiteColor];
     cell.textLabel.textColor    = [UIColor colorFromHex:@"#999999"];
-    if (indexPath.section == 0) {
-        cell.textLabel.text                   = @"商家名称";
-        self.merchantFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*150/375, Main_Screen_Height*40/667)];
-        self.merchantFieldText.placeholder    = @"请填写商家名称";
-        self.merchantFieldText.delegate       = self;
-        self.merchantFieldText.returnKeyType  = UIReturnKeyDone;
-        self.merchantFieldText.textAlignment  = NSTextAlignmentLeft;
-        self.merchantFieldText.font           = [UIFont systemFontOfSize:14];
-        self.merchantFieldText.backgroundColor= [UIColor whiteColor];
-        self.merchantFieldText.centerY        = cell.centerY +Main_Screen_Height*5/667;
-        self.merchantFieldText.left           = Main_Screen_Width*120/375 ;
-        
-        [self.merchantFieldText addTarget:self action:@selector(merchantFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
-        [cell.contentView addSubview:self.merchantFieldText];
-        
-    }else if (indexPath.section == 1){
-        
-        cell.textLabel.text                = @"联系电话";
-        self.phoneFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*150/375, Main_Screen_Height*40/667)];
-        self.phoneFieldText.placeholder    = @"请填写联系电话";
-        self.phoneFieldText.delegate       = self;
-        self.phoneFieldText.returnKeyType  = UIReturnKeyDone;
-        self.phoneFieldText.textAlignment  = NSTextAlignmentLeft;
-        self.phoneFieldText.font           = [UIFont systemFontOfSize:14];
-        self.phoneFieldText.backgroundColor= [UIColor whiteColor];
-        self.phoneFieldText.centerY        = cell.centerY +Main_Screen_Height*5/667;
-        self.phoneFieldText.left           = Main_Screen_Width*120/375 ;
-        
-        [self.phoneFieldText addTarget:self action:@selector(phoneFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
-        [cell.contentView addSubview:self.phoneFieldText];
-    }
-    else{
-        cell.textLabel.text                  = @"联系地址";
-        self.addressFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*150/375, Main_Screen_Height*40/667)];
-        self.addressFieldText.placeholder    = @"请填写联系地址";
-        self.addressFieldText.delegate       = self;
-        self.addressFieldText.returnKeyType  = UIReturnKeyDone;
-        self.addressFieldText.textAlignment  = NSTextAlignmentLeft;
-        self.addressFieldText.font           = [UIFont systemFontOfSize:14];
-        self.addressFieldText.backgroundColor= [UIColor whiteColor];
-        self.addressFieldText.centerY        = cell.centerY +Main_Screen_Height*5/667;
-        self.addressFieldText.left           = Main_Screen_Width*120/375 ;
-        
-        [self.addressFieldText addTarget:self action:@selector(addressFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
-        [cell.contentView addSubview:self.addressFieldText];
-    }
     
+    if (indexPath.section == 0) {
+        
+        if (indexPath.row == 0) {
+            cell.textLabel.text                   = @"商家名称";
+            self.merchantFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*150/375, Main_Screen_Height*40/667)];
+            self.merchantFieldText.placeholder    = @"请填写商家名称";
+            self.merchantFieldText.delegate       = self;
+            self.merchantFieldText.returnKeyType  = UIReturnKeyDone;
+            self.merchantFieldText.textAlignment  = NSTextAlignmentLeft;
+            self.merchantFieldText.font           = [UIFont systemFontOfSize:14];
+            self.merchantFieldText.backgroundColor= [UIColor whiteColor];
+            self.merchantFieldText.centerY        = cell.centerY +Main_Screen_Height*5/667;
+            self.merchantFieldText.left           = Main_Screen_Width*120/375 ;
+            
+            [self.merchantFieldText addTarget:self action:@selector(merchantFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
+            [cell.contentView addSubview:self.merchantFieldText];
+        }
+    }else {
+    
+        if (indexPath.row == 0) {
+            cell.textLabel.text                = @"联系电话";
+            self.phoneFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*150/375, Main_Screen_Height*40/667)];
+            self.phoneFieldText.placeholder    = @"请填写联系电话";
+            self.phoneFieldText.delegate       = self;
+            self.phoneFieldText.returnKeyType  = UIReturnKeyDone;
+            self.phoneFieldText.keyboardType   = UIKeyboardTypeNumberPad;
+            self.phoneFieldText.textAlignment  = NSTextAlignmentLeft;
+            self.phoneFieldText.font           = [UIFont systemFontOfSize:14];
+            self.phoneFieldText.backgroundColor= [UIColor whiteColor];
+            self.phoneFieldText.centerY        = cell.centerY +Main_Screen_Height*5/667;
+            self.phoneFieldText.left           = Main_Screen_Width*120/375 ;
+            
+            [self.phoneFieldText addTarget:self action:@selector(phoneFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
+            [cell.contentView addSubview:self.phoneFieldText];
+        }else {
+            cell.textLabel.text                  = @"联系地址";
+            self.addressFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*150/375, Main_Screen_Height*40/667)];
+            self.addressFieldText.placeholder    = @"请填写联系地址";
+            self.addressFieldText.delegate       = self;
+            self.addressFieldText.returnKeyType  = UIReturnKeyDone;
+            self.addressFieldText.textAlignment  = NSTextAlignmentLeft;
+            self.addressFieldText.font           = [UIFont systemFontOfSize:14];
+            self.addressFieldText.backgroundColor= [UIColor whiteColor];
+            self.addressFieldText.centerY        = cell.centerY +Main_Screen_Height*5/667;
+            self.addressFieldText.left           = Main_Screen_Width*120/375 ;
+            
+            [self.addressFieldText addTarget:self action:@selector(addressFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
+            [cell.contentView addSubview:self.addressFieldText];
+        }
+    
+    }
+        
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;

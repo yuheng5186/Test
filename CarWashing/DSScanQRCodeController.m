@@ -8,7 +8,8 @@
 
 #import "DSScanQRCodeController.h"
 #import "DSExchangeController.h"
-
+#import "PopHelpView.h"
+#import "LewPopupViewAnimationDrop.h"
 @interface DSScanQRCodeController ()<AVCaptureMetadataOutputObjectsDelegate>
 
 @property (nonatomic, strong) AVCaptureSession *session;
@@ -34,6 +35,12 @@
 
 - (void) helpButtonClick:(id)sender {
     
+    PopHelpView *view = [PopHelpView defaultPopHelpView];
+    view.parentVC = self;
+    
+    [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{
+        
+    }];
 }
 
 - (void)viewDidLoad {
