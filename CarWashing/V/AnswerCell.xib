@@ -15,11 +15,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="99.666666666666671"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hfB-wX-0Pw">
-                        <rect key="frame" x="8" y="0.0" width="304" height="92"/>
+                        <rect key="frame" x="8" y="7" width="304" height="85"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -35,11 +35,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="K2b-0e-rtP" secondAttribute="bottom" id="1SK-Yh-oD8"/>
-                    <constraint firstItem="hfB-wX-0Pw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Cdt-SR-6yQ"/>
                     <constraint firstAttribute="trailing" secondItem="K2b-0e-rtP" secondAttribute="trailing" id="PL4-cH-hDL"/>
                     <constraint firstItem="hfB-wX-0Pw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="QRb-ZM-YdJ"/>
                     <constraint firstAttribute="bottom" secondItem="hfB-wX-0Pw" secondAttribute="bottom" constant="8" id="Ycl-ra-xGG"/>
                     <constraint firstAttribute="trailing" secondItem="hfB-wX-0Pw" secondAttribute="trailing" constant="8" id="eob-HG-8yi"/>
+                    <constraint firstItem="hfB-wX-0Pw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="h2G-PI-1qm"/>
                     <constraint firstItem="K2b-0e-rtP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="hTk-s6-ppP"/>
                 </constraints>
             </tableViewCellContentView>

@@ -14,9 +14,10 @@
 #import "BusinessPayController.h"
 #import "ShopViewController.h"
 #import "BusinessMapController.h"
+#import <MapKit/MapKit.h>
 
 
-@interface BusinessDetailViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface BusinessDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, weak) BusinessDetailHeaderView *headerView;
 
@@ -25,6 +26,17 @@
 @property (nonatomic, strong) NSIndexPath *lastPath;
 
 @property (nonatomic, weak) BusinessDetailCell *detailCell;
+
+
+#pragma mark - map
+@property (nonatomic, assign) double currentLatitude;
+@property (nonatomic, assign) double currentLongitute;
+@property (nonatomic, assign) double targetLatitude;
+@property (nonatomic, assign) double targetLongitute;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) CLLocationManager *manager;
+@property (nonatomic, copy) CLLocation *newcllocation;
+
 
 @end
 
@@ -351,11 +363,16 @@ static NSString *businessCommentCell = @"businessCommentCell";
 #pragma mark - 地图导航
 - (IBAction)didClickSmallBtn:(UIButton *)sender {
     
-    BusinessMapController *mapVC = [[BusinessMapController alloc] init];
-    mapVC.hidesBottomBarWhenPushed = YES;
+//    BusinessMapController *mapVC = [[BusinessMapController alloc] init];
+//    mapVC.hidesBottomBarWhenPushed = YES;
+//    
+//    [self.navigationController pushViewController:mapVC animated:YES];
     
-    [self.navigationController pushViewController:mapVC animated:YES];
     
+    
+    //[self gothereWithAddress:@"外滩" andLat:@"121.24" andLon:@"31.00"];
+    
+    [self showMapNavigationViewWithtargetLatitude:31.00 targetLongitute:121.24 toName:@"松江"];
 }
 
 //方法子
@@ -395,14 +412,232 @@ static NSString *businessCommentCell = @"businessCommentCell";
 }
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSArray *)checkHasOwnApp {
+    NSArray *mapSchemeArr = @[@"iosamap://navi",@"baidumap://map/",@"comgooglemaps://"];
+    
+    NSMutableArray *appListArr = [[NSMutableArray alloc] initWithObjects:@"苹果地图", nil];
+    
+    for (int i = 0; i < mapSchemeArr.count ; i++) {
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@
+"%@",[mapSchemeArr objectAtIndex:i]]]]) {
+            
+            if (i ==0) {
+                [appListArr addObject:@"高德地图"];
+            }else if (i == 1){
+                [appListArr addObject:@"百度地图"];
+            }else if (i == 2){
+                [appListArr addObject:@"谷歌地图"];
+            }else if (i == 3){
+                
+            }
+        }
+    }
+    
+    return appListArr;
 }
-*/
+
+- (void)showMapNavigationViewFormcurrentLatitude:(double)currentLatitude currentLongitute:(double)currentLongitute TotargetLatitude:(double)targetLatitude targetLongitute:(double)targetLongitute toName:(NSString *)name{
+    _currentLatitude = currentLatitude;
+    _currentLongitute = currentLongitute;
+    _targetLatitude = targetLatitude;
+    _targetLongitute = targetLongitute;
+    _name = name;
+    NSArray *appListArr = [self checkHasOwnApp];
+    NSString *sheetTitle = [NSString stringWithFormat:@"导航到 %@",name];
+    UIActionSheet *sheet;
+    if ([appListArr count] == 1) {
+        sheet = [[UIActionSheet alloc] initWithTitle:sheetTitle delegate:self cancelButtonTitle:@"取消"destructiveButtonTitle:nil otherButtonTitles:appListArr[0],nil];
+    }else if ([appListArr count] == 2) {
+        sheet = [[UIActionSheet alloc] initWithTitle:sheetTitle delegate:self cancelButtonTitle:@"取消"destructiveButtonTitle:nil otherButtonTitles:appListArr[0],appListArr[1],nil];
+    }else if ([appListArr count] == 3){
+        sheet = [[UIActionSheet alloc] initWithTitle:sheetTitle delegate:self cancelButtonTitle:@"取消"destructiveButtonTitle:nil otherButtonTitles:appListArr[0],appListArr[1],appListArr[2],nil];
+    }else if ([appListArr count] == 4){
+        sheet = [[UIActionSheet alloc] initWithTitle:sheetTitle delegate:self cancelButtonTitle:@"取消"destructiveButtonTitle:nil otherButtonTitles:appListArr[0],appListArr[1],appListArr[2],appListArr[3],nil];
+    }else if ([appListArr count] == 5){
+        sheet = [[UIActionSheet alloc] initWithTitle:sheetTitle delegate:self cancelButtonTitle:@"取消"destructiveButtonTitle:nil otherButtonTitles:appListArr[0],appListArr[1],appListArr[2],appListArr[3],appListArr[4],nil];
+    }
+    sheet.actionSheetStyle =UIActionSheetStyleBlackOpaque;
+    [sheet showInView:self.view];
+    
+}
+
+
+#pragma mark-UIActionSheetDelegate
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    NSString *name =_name;
+    
+    float ios_version=[[[UIDevice currentDevice] systemVersion]floatValue];
+    NSString *btnTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    
+    
+    if (buttonIndex ==0) {
+        if (ios_version <6.0) {//ios6调用goole网页地图
+            NSString *urlString = [[NSString alloc]
+                                   initWithFormat:@"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f&dirfl=d",
+                                   _currentLatitude,_currentLongitute,_targetLatitude,_targetLongitute];
+            
+            NSURL *aURL = [NSURL URLWithString:urlString];
+            //打开网页google地图
+            [[UIApplication sharedApplication] openURL:aURL];
+        }else{//起点
+            CLLocationCoordinate2D from =CLLocationCoordinate2DMake(_currentLatitude,_currentLongitute);
+            MKMapItem *currentLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:from addressDictionary:nil]];
+            currentLocation.name =@"我的位置";
+            
+            //终点
+            CLLocationCoordinate2D to =CLLocationCoordinate2DMake(_targetLatitude,_targetLongitute);
+            MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:to addressDictionary:nil]];
+            NSLog(@"网页google地图:%f,%f",to.latitude,to.longitude);
+            toLocation.name = name;
+            NSArray *items = [NSArray arrayWithObjects:currentLocation, toLocation,nil];
+            NSDictionary *options =@{
+                                     MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving,
+                                     MKLaunchOptionsMapTypeKey:
+                                         [NSNumber numberWithInteger:MKMapTypeStandard],
+                                     MKLaunchOptionsShowsTrafficKey:@YES
+                                     };
+            
+            //打开苹果自身地图应用
+            [MKMapItem openMapsWithItems:items launchOptions:options];
+        }
+    }
+    if ([btnTitle isEqualToString:@"谷歌地图"]) {
+        NSString *urlStr = [NSString stringWithFormat:@"comgooglemaps://?saddr=%.8f,%.8f&daddr=%.8f,%.8f&directionsmode=transit",_currentLatitude,_currentLongitute,_targetLatitude,_targetLongitute];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+    }
+    else if ([btnTitle isEqualToString:@"高德地图"]){
+        NSString *urlString = [[NSString stringWithFormat:@"iosamap://path?sourceApplication=applicationName&sid=BGVIS1&slat=%f&slon=%f&sname=%@&did=BGVIS2&dlat=%f&dlon=%f&dname=%@&dev=0&m=0&t=0",_currentLatitude,_currentLongitute,@"我的位置",_targetLatitude,_targetLongitute,_name]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL *r = [NSURL URLWithString:urlString];
+        [[UIApplication sharedApplication] openURL:r];
+        //        NSLog(@"%@",_lastAddress);
+        
+    }
+    
+    else if ([btnTitle isEqualToString:@"腾讯地图"]){
+        
+        NSString *urlStr = [NSString stringWithFormat:@"qqmap://map/routeplan?type=drive&fromcoord=%f,%f&tocoord=%f,%f&policy=1",_currentLatitude,_currentLongitute,_targetLatitude,_targetLongitute];
+        NSURL *r = [NSURL URLWithString:urlStr];
+        [[UIApplication sharedApplication] openURL:r];
+    }
+    else if([btnTitle isEqualToString:@"百度地图"])
+    {
+        double AdressLat,AdressLon;
+        double NowLat,NowLon;
+        
+//
+//        bd_encrypt(_targetLatitude,_targetLongitute,&AdressLat,&AdressLon);
+//        bd_encrypt(_currentLatitude,_currentLongitute, &NowLat, &NowLon);
+        
+        NSString *stringURL = [NSString stringWithFormat:@"baidumap://map/direction?origin=%f,%f&destination=%f,%f&&mode=driving",_currentLatitude,_currentLongitute,_targetLatitude,_targetLongitute];
+        NSURL *url = [NSURL URLWithString:stringURL];
+        [[UIApplication sharedApplication] openURL:url];
+    }else if (actionSheet.cancelButtonIndex==buttonIndex){
+        //解决点击取消后重复出现选择框的问题
+        [actionSheet removeFromSuperview];
+        [self stopLocation];
+    }
+    
+    
+    
+}
+- (void)showMapNavigationViewWithtargetLatitude:(double)targetLatitude targetLongitute:(double)targetLongitute toName:(NSString *)name{
+    self.newcllocation=[[CLLocation alloc]init];
+    [self startLocation];
+    _targetLatitude = targetLatitude;
+    _targetLongitute = targetLongitute;
+    _name = name;
+    [self showMapNavigationViewFormcurrentLatitude:self.newcllocation.coordinate.latitude currentLongitute:self.newcllocation.coordinate.longitude TotargetLatitude:_targetLatitude targetLongitute:_targetLongitute toName:_name];
+}
+//获取经纬度
+-(void)startLocation
+{
+    if([CLLocationManager locationServicesEnabled] && [CLLocationManager  authorizationStatus] != kCLAuthorizationStatusDenied)
+    {
+        _manager=[[CLLocationManager alloc]init];
+        _manager.delegate=self;
+        _manager.desiredAccuracy =kCLLocationAccuracyBest;
+        [_manager requestAlwaysAuthorization];
+        _manager.distanceFilter=100;
+        [_manager startUpdatingLocation];
+    }
+    else
+    {
+        UIAlertView *alvertView=[[UIAlertView alloc]initWithTitle:@"提示"message:@"请到设置->隐私,打开定位服务"delegate:nil cancelButtonTitle:@"确定"otherButtonTitles: nil];
+        [alvertView show];
+    }
+    
+}
+#pragma mark CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    self.newcllocation=newLocation;
+    
+    
+}
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error{
+    [self stopLocation];
+    
+}
+-(void)stopLocation
+{
+    _manager =nil;
+}
+
+
+
+
+
+
+//-(BOOL)canOpenUrl:(NSString *)string {
+//    
+//    return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:string]];
+//    
+//}
+//
+//- (void)gothereWithAddress:(NSString *)address andLat:(NSString *)lat andLon:(NSString *)lon {
+//    
+//    if ([self canOpenUrl:@"baidumap://"]) {///跳转百度地图
+//        
+//        NSString *urlString = [[NSString stringWithFormat:@"baidumap://map/direction?origin={{我的位置}}&destination=latlng:%@,%@|name=%@&mode=driving&coord_type=bd09ll",lat, lon,address] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+//        
+//        return;
+//        
+//    }else if ([self canOpenUrl:@"iosamap://"]) {///跳转高德地图
+//        
+//        NSString *urlString = [[NSString stringWithFormat:@"iosamap://navi?sourceApplication=%@&backScheme=%@&lat=%@&lon=%@&dev=0&style=2",@"神骑出行",@"TrunkHelper",lat, lon] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+//        
+//        return;
+//        
+//    }else{////跳转系统地图
+//        
+//        CLLocationCoordinate2D loc = CLLocationCoordinate2DMake([lat doubleValue], [lon doubleValue]);
+//        
+//        MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+//        
+//        MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:loc addressDictionary:nil]];
+//        
+//        [MKMapItem openMapsWithItems:@[currentLocation, toLocation]
+//         
+//                       launchOptions:@{MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,
+//                                       
+//                                       MKLaunchOptionsShowsTrafficKey: [NSNumber numberWithBool:YES]}];
+//        
+//        return;
+//        
+//    }
+//    
+//}
+
+
+
+
+
 
 @end
