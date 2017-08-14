@@ -53,6 +53,10 @@
     self.tableView.tableFooterView  = [UIView new];
     self.tableView.tableHeaderView  = [UIView new];
     [self.contentView addSubview:self.tableView];
+    
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
 }
 #pragma mark - UITableViewDataSource
 

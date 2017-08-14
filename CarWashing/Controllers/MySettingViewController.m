@@ -158,7 +158,7 @@
     exchangeImageView.centerX           = exchangeView.width/2;
     exchangeImageView.top               = Main_Screen_Height*30/667;
     
-    NSString *exchangeName              = @"兑换";
+    NSString *exchangeName              = @"激活";
     UIFont *exchangeNameFont            = [UIFont systemFontOfSize:16];
     UILabel *exchangeNameLabel          = [UIUtil drawLabelInView:exchangeView frame:[UIUtil textRect:exchangeName font:exchangeNameFont] font:exchangeNameFont text:exchangeName isCenter:NO];
     exchangeNameLabel.textColor         = [UIColor blackColor];

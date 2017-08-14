@@ -39,6 +39,7 @@
 		180E43271F414A5E00013D2D /* PopHelpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E43261F414A5E00013D2D /* PopHelpView.m */; };
 		180E43291F414A7900013D2D /* PopHelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180E43281F414A7900013D2D /* PopHelpView.xib */; };
 		180E432C1F417E3500013D2D /* DSAddShopController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E432B1F417E3500013D2D /* DSAddShopController.m */; };
+		180E432F1F41921E00013D2D /* PhoneHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E432E1F41921E00013D2D /* PhoneHelper.m */; };
 		181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92B71F1F364A0006511E /* MenuTabBarController.m */; };
 		181E92BB1F1F36710006511E /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BA1F1F36710006511E /* BaseController.m */; };
 		181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BF1F1F39CC0006511E /* BlackLoadingView.m */; };
@@ -290,6 +291,8 @@
 		180E43281F414A7900013D2D /* PopHelpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PopHelpView.xib; path = Tool/PopView/PopHelpView.xib; sourceTree = "<group>"; };
 		180E432A1F417E3500013D2D /* DSAddShopController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAddShopController.h; path = Home/DSAddShopController.h; sourceTree = "<group>"; };
 		180E432B1F417E3500013D2D /* DSAddShopController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAddShopController.m; path = Home/DSAddShopController.m; sourceTree = "<group>"; };
+		180E432D1F41921E00013D2D /* PhoneHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneHelper.h; path = Tool/PhoneHelper.h; sourceTree = "<group>"; };
+		180E432E1F41921E00013D2D /* PhoneHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneHelper.m; path = Tool/PhoneHelper.m; sourceTree = "<group>"; };
 		181E92B61F1F364A0006511E /* MenuTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTabBarController.h; sourceTree = "<group>"; };
 		181E92B71F1F364A0006511E /* MenuTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTabBarController.m; sourceTree = "<group>"; };
 		181E92B91F1F36710006511E /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
@@ -754,6 +757,8 @@
 				1853BA051F28475500B98C7F /* DSTextView.m */,
 				18218FE61F2ADA8A00F7207F /* DSSegmentView.h */,
 				18218FE71F2ADA8A00F7207F /* DSSegmentView.m */,
+				180E432D1F41921E00013D2D /* PhoneHelper.h */,
+				180E432E1F41921E00013D2D /* PhoneHelper.m */,
 			);
 			name = Tool;
 			path = ..;
@@ -1676,6 +1681,7 @@
 				501672281F297FDD00384186 /* AnswerCell.m in Sources */,
 				50E2EE611F1F4D2D00FAF130 /* YZCover.m in Sources */,
 				501672371F29808600384186 /* HQTableViewCell.m in Sources */,
+				180E432F1F41921E00013D2D /* PhoneHelper.m in Sources */,
 				1853BA0F1F28854D00B98C7F /* DSChangePhoneController.m in Sources */,
 				50E2EE861F1F4D3C00FAF130 /* YZSortCell.m in Sources */,
 				501672331F297FF000384186 /* ProblemTitleModel.m in Sources */,

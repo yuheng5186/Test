@@ -370,6 +370,10 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
+        [PhoneHelper dial: @"1008611"];
+        
+
+        
     }];
     [alertController addAction:OKAction];
     
