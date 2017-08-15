@@ -8,6 +8,7 @@
 
 #import "BusinessDetailHeaderView.h"
 
+
 @interface BusinessDetailHeaderView ()
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -106,6 +107,8 @@
     if (sender.selected) {
         
         [sender setImage:[UIImage imageNamed:@"shoucang2"] forState:UIControlStateSelected];
+        
+        
     }
     
     sender.selected = !sender.selected;

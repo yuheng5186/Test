@@ -53,7 +53,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     [super viewDidLoad];
     
     //self.title = @"商家";
-    
+
     self.navigationController.navigationBar.hidden = YES;
     
     [self setupUI];

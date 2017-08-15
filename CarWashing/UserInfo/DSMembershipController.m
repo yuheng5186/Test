@@ -8,27 +8,40 @@
 
 #import "DSMembershipController.h"
 #import "MemberView.h"
-#import "MemberRegualrController.h"
 #import "DSMemberRightsController.h"
 #import "ScoreDetailController.h"
 #import <Masonry.h>
-#import "GoodsViewLayout.h"
-#import "GoodsViewCell.h"
 #import "WashCarTicketController.h"
+#import "GoodsExchangeCell.h"
+#import "EarnScoreController.h"
 
-@interface DSMembershipController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface DSMembershipController ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic, weak) UITableView *exchangListView;
 
 @end
 
-static NSString *id_goodsCell = @"id_goodsCell";
+static NSString *id_exchangeCell = @"id_exchangeCell";
 
 @implementation DSMembershipController
+
+- (UITableView *)exchangListView {
+    
+    if (!_exchangListView) {
+        
+        UITableView *exchangeListView = [[UITableView alloc] init];
+        _exchangListView = exchangeListView;
+        [self.view addSubview:_exchangListView];
+    }
+    
+    return _exchangListView;
+}
+
+
 
 - (void)drawNavigation {
     
     [self drawTitle:@"金顶会员"];
-    [self drawRightTextButton:@"积分规则" action:@selector(clickRegularButton)];
-    
     
     
 }
@@ -55,11 +68,15 @@ static NSString *id_goodsCell = @"id_goodsCell";
     exchangeLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     [exchangeView addSubview:exchangeLabel];
     
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    UICollectionView *goodsView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-    goodsView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:goodsView];
+//    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+//    UICollectionView *goodsView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+//    goodsView.backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:goodsView];
+//
     
+    self.exchangListView.delegate = self;
+    self.exchangListView.dataSource = self;
+    [self.exchangListView registerClass:[GoodsExchangeCell class] forCellReuseIdentifier:id_exchangeCell];
     
     //约束
     [exchangeView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -72,33 +89,32 @@ static NSString *id_goodsCell = @"id_goodsCell";
         make.center.equalTo(exchangeView);
     }];
     
-    [goodsView mas_makeConstraints:^(MASConstraintMaker *make) {
+//    [goodsView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(exchangeView.mas_bottom);
+//        make.left.right.bottom.equalTo(self.view);
+//    }];
+//    
+//    goodsView.delegate = self;
+//    goodsView.dataSource = self;
+//    
+//    [goodsView registerClass:[GoodsViewCell class] forCellWithReuseIdentifier:id_goodsCell];
+    
+    [_exchangListView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(exchangeView.mas_bottom);
         make.left.right.bottom.equalTo(self.view);
     }];
     
-    goodsView.delegate = self;
-    goodsView.dataSource = self;
-    
-    [goodsView registerClass:[GoodsViewCell class] forCellWithReuseIdentifier:id_goodsCell];
-    
 }
 
-- (void)clickRegularButton{
-    
-    MemberRegualrController *regularController = [[MemberRegualrController alloc] init];
-    
-    [self.navigationController pushViewController:regularController animated:YES];
-    
-}
+
 
 
 #pragma mark - 点击赚积分
 - (IBAction)clickEarnScoreBtn:(UIButton *)sender {
     
-    ScoreDetailController *scoreDetailVC    = [[ScoreDetailController alloc] init];
-    scoreDetailVC.hidesBottomBarWhenPushed  = YES;
-    [self.navigationController pushViewController:scoreDetailVC animated:YES];
+    EarnScoreController *earnScoreVC    = [[EarnScoreController alloc] init];
+    earnScoreVC.hidesBottomBarWhenPushed  = YES;
+    [self.navigationController pushViewController:earnScoreVC animated:YES];
 }
 
 #pragma mark - 点击升级
@@ -112,49 +128,71 @@ static NSString *id_goodsCell = @"id_goodsCell";
 }
 
 
-#pragma mark - UICollectionView的数据源和代理
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
     return 1;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 4;
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return 3;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    GoodsExchangeCell *changeCell = [tableView dequeueReusableCellWithIdentifier:id_exchangeCell forIndexPath:indexPath];
     
-    GoodsViewCell *goodsCell = [collectionView dequeueReusableCellWithReuseIdentifier:id_goodsCell forIndexPath:indexPath];
-    goodsCell.backgroundColor = [UIColor whiteColor];
-    
-    return goodsCell;
+    return changeCell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    WashCarTicketController *ticketVC = [[WashCarTicketController alloc] init];
-    ticketVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:ticketVC animated:YES];
 }
 
-#pragma mark - item布局设置
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return CGSizeMake(140, 80);
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    
-    return 36;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 36;
-}
-
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    
-    return UIEdgeInsetsMake(18, 23.75, 18, 23.75);
-}
+//#pragma mark - UICollectionView的数据源和代理
+//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+//    return 1;
+//}
+//
+//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+//    return 4;
+//}
+//
+//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    GoodsViewCell *goodsCell = [collectionView dequeueReusableCellWithReuseIdentifier:id_goodsCell forIndexPath:indexPath];
+//    goodsCell.backgroundColor = [UIColor whiteColor];
+//    
+//    return goodsCell;
+//}
+//
+//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    WashCarTicketController *ticketVC = [[WashCarTicketController alloc] init];
+//    ticketVC.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:ticketVC animated:YES];
+//}
+//
+//#pragma mark - item布局设置
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    return CGSizeMake(140, 80);
+//}
+//
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+//    
+//    return 36;
+//}
+//
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+//    return 36;
+//}
+//
+//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+//    
+//    return UIEdgeInsetsMake(18, 23.75, 18, 23.75);
+//}
 
 
 

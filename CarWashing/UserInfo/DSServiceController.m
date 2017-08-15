@@ -115,18 +115,7 @@
 
 - (void)showAlertWithMessage:(NSString *)message{
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"呼叫" message:@"13661682431" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    [alertController addAction:cancelAction];
-    
-    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    [alertController addAction:OKAction];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
+    [PhoneHelper dial: @"1008611"];
 }
 
 

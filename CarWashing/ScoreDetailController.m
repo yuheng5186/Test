@@ -14,12 +14,55 @@
 
 @property (nonatomic, weak) UITableView *scoreListView;
 
+@property (nonatomic, weak) UIView *headView;
+@property (nonatomic, weak) UIButton *earnButton;
+@property (nonatomic, weak) UIButton *exchangeButton;
+@property (nonatomic, weak) UILabel *scoreLabel;
+
 /** 记录点击的是第几个Button */
 @property (nonatomic, assign) NSInteger scoreTag;
 
 @end
 
 @implementation ScoreDetailController
+
+- (UIView *)headView {
+    
+    if (!_headView) {
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height)];
+        _headView = headView;
+        [self.view addSubview:_headView];
+    }
+    
+    return _headView;
+}
+
+
+- (UIButton *)earnButton {
+    
+    if (!_earnButton) {
+        
+        UIButton *earnButton = [[UIButton alloc] init];
+        _earnButton = earnButton;
+        [self.headView addSubview:_earnButton];
+    }
+    
+    return _earnButton;
+}
+
+- (UIButton *)exchangeButton {
+    
+    if (!_exchangeButton) {
+        
+        UIButton *exchangeButton = [[UIButton alloc] init];
+        _exchangeButton = exchangeButton;
+        [self.headView addSubview:_exchangeButton];
+    }
+    
+    return _exchangeButton;
+}
+
+
 
 - (UITableView *)scoreListView {
     
@@ -35,7 +78,7 @@
 
 - (void)drawNavigation{
     
-    [self drawTitle:@"积分详情"];
+    [self drawTitle:@"我的积分"];
 }
 
 

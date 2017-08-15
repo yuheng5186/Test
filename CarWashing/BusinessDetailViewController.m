@@ -15,6 +15,7 @@
 #import "ShopViewController.h"
 #import "BusinessMapController.h"
 #import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 
 @interface BusinessDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, CLLocationManagerDelegate>
@@ -206,11 +207,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
 #pragma mark - 点击拨打客服
 - (void)didClickServiceBtn:(UIButton *)button {
     
-    NSString *title = @"";
-    
-    NSString *message = @"是否拨打客服电话";
-    
-    [self showAlertWithTitle:title message:message];
+    [PhoneHelper dial: @"1008611"];
 }
 
 #pragma mark - 点击查看全部评价
@@ -370,7 +367,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     
     
-    //[self gothereWithAddress:@"外滩" andLat:@"121.24" andLon:@"31.00"];
+    //[self gothereWithAddress:@"外滩" andLat:@"31.00" andLon:@"121.24"];
     
     [self showMapNavigationViewWithtargetLatitude:31.00 targetLongitute:121.24 toName:@"松江"];
 }
@@ -387,7 +384,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        [PhoneHelper dial: @"1008611"];
+        
         
 
         
@@ -399,6 +396,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
 }
 
 
+#pragma mark - 拨打商家电话
 - (IBAction)didClickShopPhoneBtn:(UIButton *)sender {
     
     NSString *message = @"是否拨打商家电话";
@@ -531,12 +529,13 @@ static NSString *businessCommentCell = @"businessCommentCell";
         double NowLat,NowLon;
         
 //
-//        bd_encrypt(_targetLatitude,_targetLongitute,&AdressLat,&AdressLon);
-//        bd_encrypt(_currentLatitude,_currentLongitute, &NowLat, &NowLon);
+//        bd_encrypt(_targetLatitude, _targetLongitute, &AdressLat, &AdressLon);
+//        bd_encrypt(_currentLatitude, _currentLongitute, &NowLat, &NowLon)
         
-        NSString *stringURL = [NSString stringWithFormat:@"baidumap://map/direction?origin=%f,%f&destination=%f,%f&&mode=driving",_currentLatitude,_currentLongitute,_targetLatitude,_targetLongitute];
-        NSURL *url = [NSURL URLWithString:stringURL];
-        [[UIApplication sharedApplication] openURL:url];
+//        
+//        NSString *stringURL = [NSString stringWithFormat:@"baidumap://map/direction?origin=%f,%f&destination=%f,%f&&mode=driving",_currentLatitude,_currentLongitute,_targetLatitude,_targetLongitute];
+//        NSURL *url = [NSURL URLWithString:stringURL];
+//        [[UIApplication sharedApplication] openURL:url];
     }else if (actionSheet.cancelButtonIndex==buttonIndex){
         //解决点击取消后重复出现选择框的问题
         [actionSheet removeFromSuperview];
@@ -568,7 +567,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     }
     else
     {
-        UIAlertView *alvertView=[[UIAlertView alloc]initWithTitle:@"提示"message:@"请到设置->隐私,打开定位服务"delegate:nil cancelButtonTitle:@"确定"otherButtonTitles: nil];
+        UIAlertView *alvertView=[[UIAlertView alloc] initWithTitle:@"提示"message:@"请到设置->隐私,打开定位服务"delegate:nil cancelButtonTitle:@"确定"otherButtonTitles: nil];
         [alvertView show];
     }
     
