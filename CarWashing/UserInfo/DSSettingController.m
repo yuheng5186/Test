@@ -11,6 +11,7 @@
 #import "DSAboutController.h"
 #import "DSFeedbackController.h"
 #import "DSGetScoreController.h"
+#import "LoginViewController.h"
 
 @interface DSSettingController ()<UITableViewDelegate,UITableViewDataSource,LKAlertViewDelegate>
 
@@ -45,10 +46,10 @@
     appImageView.centerX           = upView.centerX;
     
     NSString *showName              = @"分享金顶洗车，让您的好友可以下载金顶客户端";
-    UIFont *showNameFont            = [UIFont systemFontOfSize:16];
+    UIFont *showNameFont            = [UIFont systemFontOfSize:13];
     UILabel *showNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:showName font:showNameFont] font:showNameFont text:showName isCenter:NO];
-    showNameLabel.textColor         = [UIColor colorFromHex:@"#8B8B8B"];
-    showNameLabel.top               = appImageView.bottom +Main_Screen_Height*20/667;
+    showNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
+    showNameLabel.top               = appImageView.bottom +Main_Screen_Height*25/667;
     showNameLabel.centerX           = appImageView.centerX;
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*200/667) style:UITableViewStyleGrouped];
@@ -72,7 +73,7 @@
 }
 - (void) logoutButtonClick:(id)sender {
     
-    LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:nil message:@"确定退出当前账户么？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定"];
+    LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:@"提示" message:@"是否退出当前账户？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定"];
     alartView.tag               = 110;
     [alartView show];
 
@@ -131,6 +132,8 @@
     }
     cell.backgroundColor    = [UIColor whiteColor];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.textColor    = [UIColor colorFromHex:@"#999999"];
+    cell.textLabel.font         = [UIFont systemFontOfSize:13];
     
     if (indexPath.row == 0) {
         cell.textLabel.text     = @"密码管理";
@@ -234,7 +237,11 @@
         if (buttonIndex == 0) {
             
         }else{
-            
+                LoginViewController *loginViewControler     = [[LoginViewController alloc] init];
+                UINavigationController *navController       = [[UINavigationController alloc] initWithRootViewController:loginViewControler];
+                navController.navigationBar.hidden          = YES;
+        
+                [self presentViewController: navController animated: YES completion:nil];
             
         }
     }else{

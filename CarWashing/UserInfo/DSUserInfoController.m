@@ -93,10 +93,7 @@
             return 1;
             break;
         case 1:
-            return 3;
-            break;
-        case 2:
-            return 1;
+            return 4;
             break;
         default:
             break;
@@ -123,7 +120,10 @@
     }
     cell.backgroundColor    = [UIColor whiteColor];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-
+    cell.textLabel.textColor    = [UIColor colorFromHex:@"#4a4a4a"];
+    cell.textLabel.font         = [UIFont systemFontOfSize:15];
+    cell.detailTextLabel.font   = [UIFont systemFontOfSize:14];
+    
     if (indexPath.section == 0) {
         cell.textLabel.text     = @"头像";
         self.userImageView  = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, cell.contentView.centerY-11, 60, 60) imageName:@"gerenxinxitou"];
@@ -142,15 +142,18 @@
 
             cell.detailTextLabel.text   = userName;
         }
-        else {
+        else if (indexPath.row == 2) {
             cell.textLabel.text         = @"性别";
             cell.detailTextLabel.text   = self.sexString;
+        }else {
+        
+            cell.textLabel.text         = @"微信绑定";
+            cell.detailTextLabel.text   = @"去绑定";
         }
         
     }
     else{
-        cell.textLabel.text         = @"微信绑定";
-        cell.detailTextLabel.text   = @"去绑定";
+
     }
     
     
@@ -170,7 +173,8 @@
         AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
         if (authStatus == AVAuthorizationStatusRestricted || authStatus ==AVAuthorizationStatusDenied){
             //无权限 做一个友好的提示
-            UIAlertView * alart = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"请您设置允许APP访问您的相机->设置->隐私->相机" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil]; [alart show]; return ;
+//            UIAlertView * alart = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"请您设置允许APP访问您的相机->设置->隐私->相机" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil]; [alart show]; return ;
+            
         } else {
             LKActionSheet *avatarSheet  = [[LKActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册中选择", nil];
             avatarSheet.tag             = 1001;

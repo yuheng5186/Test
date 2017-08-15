@@ -7,6 +7,7 @@
 //
 
 #import "DSAboutController.h"
+#import "DSAgreementController.h"
 
 @interface DSAboutController ()
 
@@ -55,22 +56,45 @@
     contentNameLabel.top                = upView.bottom +Main_Screen_Height*20/667;
     contentNameLabel.centerX            = appImageView.centerX;
     
-    NSString *serviceProtocolName              = @"金顶洗车服务协议";
-    UIFont *serviceProtocolNameFont            = [UIFont boldSystemFontOfSize:16];
-    UILabel *serviceProtocolNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:serviceProtocolName font:serviceProtocolNameFont] font:serviceProtocolNameFont text:serviceProtocolName isCenter:NO];
-    serviceProtocolNameLabel.textColor         = [UIColor colorFromHex:@"#3868ce"];
-    serviceProtocolNameLabel.top               = contentNameLabel.bottom +Main_Screen_Height*100/667;
-    serviceProtocolNameLabel.centerX           = appImageView.centerX;
+//    NSString *serviceProtocolName              = @"金顶洗车服务协议";
+//    UIFont *serviceProtocolNameFont            = [UIFont boldSystemFontOfSize:16];
+//    UILabel *serviceProtocolNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:serviceProtocolName font:serviceProtocolNameFont] font:serviceProtocolNameFont text:serviceProtocolName isCenter:NO];
+//    serviceProtocolNameLabel.textColor         = [UIColor colorFromHex:@"#3868ce"];
+//    serviceProtocolNameLabel.top               = contentNameLabel.bottom +Main_Screen_Height*100/667;
+//    serviceProtocolNameLabel.centerX           = appImageView.centerX;
+    
+    UIButton *updateRuleButton          = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*320/375, Main_Screen_Height*30/667)];
+    [updateRuleButton setTitleColor:[UIColor colorFromHex:@"#293754"] forState:UIControlStateNormal];
+    NSMutableAttributedString *title    = [[NSMutableAttributedString alloc] initWithString:@"金顶洗车服务协议"];
+    NSRange titleRange = {0,[title length]};
+    [title addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleNone] range:titleRange];
+    [title addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"3869ce"] range:NSMakeRange(0, 8)];
+    [updateRuleButton setAttributedTitle:title forState:UIControlStateNormal];
+    [updateRuleButton setBackgroundColor:[UIColor clearColor]];
+    [updateRuleButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [updateRuleButton addTarget:self action:@selector(agreeButtonByClick:) forControlEvents:UIControlEventTouchUpInside];
+    updateRuleButton.top              = contentNameLabel.bottom +Main_Screen_Height*100/667;
+    updateRuleButton.centerX          = appImageView.centerX;
+    [self.contentView addSubview:updateRuleButton];
+    
+    
+    
     
     NSString *copyrightlName              = @"Copyright2014-2017金顶版权所有  沪ICP备";
     UIFont *copyrightlNameFont            = [UIFont boldSystemFontOfSize:16];
     UILabel *copyrightlNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:copyrightlName font:copyrightlNameFont] font:copyrightlNameFont text:copyrightlName isCenter:NO];
     copyrightlNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
-    copyrightlNameLabel.top               = serviceProtocolNameLabel.bottom +Main_Screen_Height*15/667;
+    copyrightlNameLabel.top               = updateRuleButton.bottom +Main_Screen_Height*15/667;
     copyrightlNameLabel.centerX           = appImageView.centerX;
     
 }
-
+- (void) agreeButtonByClick:(id)sender {
+    
+    DSAgreementController *agreeController      = [[DSAgreementController alloc]init];
+    agreeController.hidesBottomBarWhenPushed    = YES;
+    [self.navigationController pushViewController:agreeController animated:YES];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -15,6 +15,10 @@
 @property (nonatomic, weak)UIViewController *parentVC;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 
-+ (instancetype)defaultPopHelpView;
+@property (nonatomic,strong) NSString  *titleLabel;
+@property (nonatomic,strong) NSString  *contentShowLabel;
 
+
++ (instancetype)defaultPopHelpView:(NSString *)string;
+- (id)initWithFrame:(CGRect)frame string:(NSString *)string;
 @end
