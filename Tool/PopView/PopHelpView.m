@@ -19,7 +19,7 @@
     // Drawing code
 }
 */
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame string:(NSString *)string
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -29,7 +29,7 @@
         _helpView.layer.cornerRadius = 10;
         [self addSubview:_helpView];
         
-        _helpTitleLabel.text          = @"一键扫码，快速开启";
+        _helpTitleLabel.text          = string;
         _contentLabel.textColor       = [UIColor colorFromHex:@"#999999"];
         _contentLabel.text            = @"在金顶洗车的自动洗车机上都有对应的二维码，只需用手机扫码，便可以启动机器";
         
@@ -45,11 +45,11 @@
     [_parentVC lew_dismissPopupViewWithanimation:[LewPopupViewAnimationDrop new]];
     
 }
-+ (instancetype)defaultPopHelpView{
++ (instancetype)defaultPopHelpView:(NSString *)string{
     
     //    return [[PopupView alloc]initWithFrame:CGRectMake(0, 0, 195, 210)];
     
-    PopHelpView *popView  = [[PopHelpView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*340/375, Main_Screen_Height*246/667)];
+    PopHelpView *popView  = [[PopHelpView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*340/375, Main_Screen_Height*246/667) string:string];
     //    popView.layer.cornerRadius  = 5;
     //    popView.backgroundColor = [UIColor whiteColor];
     //    UILabel *label  = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 30)];

@@ -35,7 +35,7 @@
 
 - (void) helpButtonClick:(id)sender {
     
-    PopHelpView *view = [PopHelpView defaultPopHelpView];
+    PopHelpView *view = [PopHelpView defaultPopHelpView:@"一键扫码，快速开启"];
     view.parentVC = self;
     
     [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{

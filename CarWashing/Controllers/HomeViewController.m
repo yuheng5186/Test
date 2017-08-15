@@ -568,7 +568,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    return 90;
+    return 160;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -669,35 +669,35 @@
     contentShowStringLabel.centerX           = Main_Screen_Width/2;
     contentShowStringLabel.top               = Main_Screen_Height*58/667;
     
-//    
-//    if (indexPath.section == 3) {
-//        UIImageView  *bankaImageView       = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 90) imageName:@"banka"];
-//        bankaImageView.left                = 0;
-//        bankaImageView.top                 = 0;
-//    }
     
-//    NSString *remindShowString              = @"还剩余8次自动扫码洗车";
-//    UIFont *remindShowStringFont            = [UIFont systemFontOfSize:18];
-//    UILabel *remindShowStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:remindShowString font:remindShowStringFont] font:remindShowStringFont text:remindShowString isCenter:NO];
-//    remindShowStringLabel.textColor         = [UIColor blackColor];
-//    remindShowStringLabel.left              = contentShowStringLabel.left;
-//    remindShowStringLabel.top               = contentShowStringLabel.bottom +Main_Screen_Height*10/667;
+    NSString *remindShowString              = @"还剩余8次自动扫码洗车";
+    UIFont *remindShowStringFont            = [UIFont systemFontOfSize:14];
+    UILabel *remindShowStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:remindShowString font:remindShowStringFont] font:remindShowStringFont text:remindShowString isCenter:NO];
+    remindShowStringLabel.textColor         = [UIColor colorFromHex:@"#999999"];
+    remindShowStringLabel.centerX           = contentShowStringLabel.centerX;
+    remindShowStringLabel.top               = contentShowStringLabel.bottom +Main_Screen_Height*10/667;
     
-//    if (indexPath.row == 0) {
-//        recordimageView.image           = nil;
-//        titleStringLabel.text           = nil;
-//        timeStringLabel.text            = nil;
-//        contentStringLabel.text         = nil;
-//        contentShowStringLabel.text     = nil;
-//        remindShowStringLabel.text      = nil;
-//        
-//        
-//        
-//    }if (indexPath.row == 1) {
-//        recordimageView.image   = [UIImage imageNamed:@"quanyi"];
-//        titleStringLabel.text   = @"用户权益";
-//    }
+    UIView  *backgroundView         = [UIUtil drawLineInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*40/667) color:[UIColor colorFromHex:@"#999999"]];
+    backgroundView.top              = remindShowStringLabel.bottom +Main_Screen_Height*14/667;
     
+    
+    NSString *getString              = @"查看详情";
+    
+    if (indexPath.section == 1) {
+        getString   = @"立即领取";
+    }
+    if (indexPath.section == 2) {
+        getString   = @"立即领取";
+
+    }
+    
+    UIFont *getStringFont            = [UIFont systemFontOfSize:14];
+    UILabel *getStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:getString font:getStringFont] font:getStringFont text:getString isCenter:NO];
+    getStringLabel.textColor         = [UIColor blackColor];
+    getStringLabel.centerX           = backgroundView.centerX;
+    getStringLabel.centerY           = backgroundView.centerY;
+    
+//    cell.height = backgroundView.bottom;
     return cell;
 }
 
