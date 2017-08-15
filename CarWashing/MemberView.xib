@@ -141,7 +141,7 @@
                 <outlet property="phoneLabel" destination="P9q-e0-z0S" id="Urm-Yg-N3a"/>
                 <outlet property="topContainView" destination="FcW-dK-4NL" id="0vD-0k-zII"/>
             </connections>
-            <point key="canvasLocation" x="-223" y="-296"/>
+            <point key="canvasLocation" x="-140" y="-294"/>
         </view>
     </objects>
     <resources>

@@ -185,12 +185,12 @@
 		50B26EA61F315E9B009B3B9F /* AllOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B26EA51F315E9B009B3B9F /* AllOrderController.m */; };
 		50B26EA91F315EB8009B3B9F /* PayOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B26EA81F315EB8009B3B9F /* PayOrderController.m */; };
 		50B26EAC1F315EF0009B3B9F /* CommentOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B26EAB1F315EF0009B3B9F /* CommentOrderController.m */; };
-		50B26EBB1F3182CF009B3B9F /* GoodsViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B26EBA1F3182CF009B3B9F /* GoodsViewLayout.m */; };
-		50B26EBE1F31864D009B3B9F /* GoodsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B26EBD1F31864D009B3B9F /* GoodsViewCell.m */; };
 		50B26EC11F319D7F009B3B9F /* WashCarTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B26EC01F319D7F009B3B9F /* WashCarTicketController.m */; };
 		50B26EC41F31A048009B3B9F /* CarTicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B26EC31F31A048009B3B9F /* CarTicketView.m */; };
 		50B26EC61F31A0A7009B3B9F /* CarTicketView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50B26EC51F31A0A7009B3B9F /* CarTicketView.xib */; };
 		50B26EC91F31AFA7009B3B9F /* IcreaseCarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B26EC81F31AFA7009B3B9F /* IcreaseCarController.m */; };
+		50CAA69E1F41A7D700138CEF /* GoodsExchangeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CAA69D1F41A7D700138CEF /* GoodsExchangeCell.m */; };
+		50CAA6A11F41AB0300138CEF /* EarnScoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CAA6A01F41AB0300138CEF /* EarnScoreController.m */; };
 		50D30E7D1F2044C20086D3ED /* BusinessDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D30E7C1F2044C20086D3ED /* BusinessDetailHeaderView.xib */; };
 		50D30E811F20988A0086D3ED /* BusinessDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D30E7F1F20988A0086D3ED /* BusinessDetailCell.m */; };
 		50D30E821F20988A0086D3ED /* BusinessDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D30E801F20988A0086D3ED /* BusinessDetailCell.xib */; };
@@ -569,10 +569,6 @@
 		50B26EA81F315EB8009B3B9F /* PayOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOrderController.m; sourceTree = "<group>"; };
 		50B26EAA1F315EF0009B3B9F /* CommentOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentOrderController.h; sourceTree = "<group>"; };
 		50B26EAB1F315EF0009B3B9F /* CommentOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentOrderController.m; sourceTree = "<group>"; };
-		50B26EB91F3182CF009B3B9F /* GoodsViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsViewLayout.h; sourceTree = "<group>"; };
-		50B26EBA1F3182CF009B3B9F /* GoodsViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsViewLayout.m; sourceTree = "<group>"; };
-		50B26EBC1F31864D009B3B9F /* GoodsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsViewCell.h; sourceTree = "<group>"; };
-		50B26EBD1F31864D009B3B9F /* GoodsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsViewCell.m; sourceTree = "<group>"; };
 		50B26EBF1F319D7F009B3B9F /* WashCarTicketController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WashCarTicketController.h; sourceTree = "<group>"; };
 		50B26EC01F319D7F009B3B9F /* WashCarTicketController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WashCarTicketController.m; sourceTree = "<group>"; };
 		50B26EC21F31A048009B3B9F /* CarTicketView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarTicketView.h; sourceTree = "<group>"; };
@@ -580,6 +576,10 @@
 		50B26EC51F31A0A7009B3B9F /* CarTicketView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarTicketView.xib; sourceTree = "<group>"; };
 		50B26EC71F31AFA7009B3B9F /* IcreaseCarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IcreaseCarController.h; sourceTree = "<group>"; };
 		50B26EC81F31AFA7009B3B9F /* IcreaseCarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IcreaseCarController.m; sourceTree = "<group>"; };
+		50CAA69C1F41A7D700138CEF /* GoodsExchangeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsExchangeCell.h; sourceTree = "<group>"; };
+		50CAA69D1F41A7D700138CEF /* GoodsExchangeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsExchangeCell.m; sourceTree = "<group>"; };
+		50CAA69F1F41AB0300138CEF /* EarnScoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarnScoreController.h; sourceTree = "<group>"; };
+		50CAA6A01F41AB0300138CEF /* EarnScoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarnScoreController.m; sourceTree = "<group>"; };
 		50D30E7C1F2044C20086D3ED /* BusinessDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BusinessDetailHeaderView.xib; sourceTree = "<group>"; };
 		50D30E7E1F20988A0086D3ED /* BusinessDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessDetailCell.h; sourceTree = "<group>"; };
 		50D30E7F1F20988A0086D3ED /* BusinessDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessDetailCell.m; sourceTree = "<group>"; };
@@ -804,10 +804,10 @@
 				188907151F283184009E20B0 /* DSGetScoreController.m */,
 				181E92ED1F2081840006511E /* DSMembershipController.h */,
 				181E92EE1F2081840006511E /* DSMembershipController.m */,
-				50B26EB91F3182CF009B3B9F /* GoodsViewLayout.h */,
-				50B26EBA1F3182CF009B3B9F /* GoodsViewLayout.m */,
-				50B26EBC1F31864D009B3B9F /* GoodsViewCell.h */,
-				50B26EBD1F31864D009B3B9F /* GoodsViewCell.m */,
+				50CAA69F1F41AB0300138CEF /* EarnScoreController.h */,
+				50CAA6A01F41AB0300138CEF /* EarnScoreController.m */,
+				50CAA69C1F41A7D700138CEF /* GoodsExchangeCell.h */,
+				50CAA69D1F41A7D700138CEF /* GoodsExchangeCell.m */,
 				50B26EBF1F319D7F009B3B9F /* WashCarTicketController.h */,
 				50B26EC01F319D7F009B3B9F /* WashCarTicketController.m */,
 				50B26EC21F31A048009B3B9F /* CarTicketView.h */,
@@ -1463,6 +1463,7 @@
 				TargetAttributes = {
 					18B803711F1DA2A300B52432 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 6AWGM9A2YP;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -1619,6 +1620,7 @@
 				181E92FE1F2088E80006511E /* DSMyCarController.m in Sources */,
 				181E92CC1F1F39CC0006511E /* UIColor+HexColor.m in Sources */,
 				18B69EC01F346A3F007DA0E4 /* DSScanQRCodeController.m in Sources */,
+				50CAA6A11F41AB0300138CEF /* EarnScoreController.m in Sources */,
 				5097FE131F2F4173002EF8F8 /* JPCityViewController.m in Sources */,
 				180E42E91F3AB37D00013D2D /* YzdHUDImageView.m in Sources */,
 				181E92EF1F2081840006511E /* DSMembershipController.m in Sources */,
@@ -1635,9 +1637,7 @@
 				50E2EE841F1F4D3C00FAF130 /* YZMenuButton.m in Sources */,
 				501672491F29DEB500384186 /* ScoreDetailController.m in Sources */,
 				1853BA341F28A02B00B98C7F /* JFAreaDataManager.m in Sources */,
-				50B26EBE1F31864D009B3B9F /* GoodsViewCell.m in Sources */,
 				501672101F297A3500384186 /* ShopViewController.m in Sources */,
-				50B26EBB1F3182CF009B3B9F /* GoodsViewLayout.m in Sources */,
 				181E93041F208C520006511E /* DSMyCardController.m in Sources */,
 				18B69EA61F32CB52007DA0E4 /* ZFMaskView.m in Sources */,
 				50B26E961F307B76009B3B9F /* RechargeController.m in Sources */,
@@ -1754,6 +1754,7 @@
 				180E43231F3D836F00013D2D /* WeixinSessionActivity.m in Sources */,
 				1805AC931F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				50E2EE7E1F1F4D3C00FAF130 /* YZAllCourseViewController.m in Sources */,
+				50CAA69E1F41A7D700138CEF /* GoodsExchangeCell.m in Sources */,
 				50B26E931F307AE5009B3B9F /* DiscountController.m in Sources */,
 				5097FE161F2F42F0002EF8F8 /* MyCarPortController.m in Sources */,
 				180E43211F3D836F00013D2D /* HYActivityView.m in Sources */,
@@ -1928,7 +1929,7 @@
 			baseConfigurationReference = 786364A9A4C81732835898A5 /* Pods-CarWashing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6AWGM9A2YP;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
@@ -1943,7 +1944,7 @@
 			baseConfigurationReference = 1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6AWGM9A2YP;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
