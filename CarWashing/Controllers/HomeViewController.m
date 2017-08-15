@@ -156,7 +156,7 @@
     UIFont *logoNameFont            = [UIFont boldSystemFontOfSize:14];
     UILabel *logoNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:logoName font:logoNameFont] font:logoNameFont text:logoName isCenter:NO];
     logoNameLabel.textColor         = [UIColor whiteColor];
-    logoNameLabel.left              = logoImageView.right +Main_Screen_Width*11/375;
+    logoNameLabel.centerX           = Main_Screen_Width/2;
     logoNameLabel.centerY           = logoImageView.centerY;
     
     
@@ -323,8 +323,8 @@
     
     UITapGestureRecognizer  *tapPayGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapPayButtonClick:)];
     [payView addGestureRecognizer:tapPayGesture];
-    UIImage *payImage              = [UIImage imageNamed:@"libao"];
-    UIImageView *payImageView      = [UIUtil drawCustomImgViewInView:payView frame:CGRectMake(0, 0, payImage.size.width,payImage.size.height) imageName:@"libao"];
+    UIImage *payImage              = [UIImage imageNamed:@"jihuokaquan"];
+    UIImageView *payImageView      = [UIUtil drawCustomImgViewInView:payView frame:CGRectMake(0, 0, payImage.size.width,payImage.size.height) imageName:@"jihuokaquan"];
     payImageView.left              = Main_Screen_Width*20/375;
     payImageView.top               = Main_Screen_Height*10/667;
     
@@ -479,12 +479,12 @@
     UITapGestureRecognizer  *tapDiscountGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDiscountButtonClick:)];
     [discountView addGestureRecognizer:tapDiscountGesture];
 
-    UIImage *discountImage              = [UIImage imageNamed:@"cheyouquan"];
-    UIImageView *discountImageView      = [UIUtil drawCustomImgViewInView:discountView frame:CGRectMake(0, 0, discountImage.size.width,discountImage.size.height) imageName:@"cheyouquan"];
+    UIImage *discountImage              = [UIImage imageNamed:@"libao"];
+    UIImageView *discountImageView      = [UIUtil drawCustomImgViewInView:discountView frame:CGRectMake(0, 0, discountImage.size.width,discountImage.size.height) imageName:@"libao"];
     discountImageView.left              = Main_Screen_Width*20/375;
     discountImageView.top               = Main_Screen_Height*10/667;
 
-    NSString *discountName              = @"优惠";
+    NSString *discountName              = @"优惠活动";
     UIFont *discountNameFont            = [UIFont systemFontOfSize:14];
     UILabel *discountNameLabel          = [UIUtil drawLabelInView:discountView frame:[UIUtil textRect:discountName font:discountNameFont] font:discountNameFont text:discountName isCenter:NO];
     discountNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
@@ -568,7 +568,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    return 160;
+    return Main_Screen_Height*150/667;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -593,11 +593,11 @@
     NSString *imageString               = @"xiaofeijilu";
     
     if (indexPath.section == 1) {
-        imageString         = @"zensong";
+        imageString         = @"quanyi";
     }
     
     if (indexPath.section == 2) {
-        imageString         = @"quanyi";
+        imageString         = @"zensong";
     }
     
 //    UIImage *recordImage                = [UIImage imageNamed:imageString];
@@ -670,15 +670,27 @@
     contentShowStringLabel.top               = Main_Screen_Height*58/667;
     
     
-    NSString *remindShowString              = @"还剩余8次自动扫码洗车";
-    UIFont *remindShowStringFont            = [UIFont systemFontOfSize:14];
+    NSString *remindShowString              = @"金雷快修车店";
+    
+    if (indexPath.section == 0) {
+        remindShowString    = @"金雷快修车店";
+    }else if (indexPath.section == 1){
+    
+        remindShowString    = @"平台商家下单洗车可抵扣";
+    }else if (indexPath.section == 2){
+    
+        remindShowString    = @"当月可免费洗车4次";
+    }
+    
+    UIFont *remindShowStringFont            = [UIFont systemFontOfSize:12];
     UILabel *remindShowStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:remindShowString font:remindShowStringFont] font:remindShowStringFont text:remindShowString isCenter:NO];
     remindShowStringLabel.textColor         = [UIColor colorFromHex:@"#999999"];
     remindShowStringLabel.centerX           = contentShowStringLabel.centerX;
     remindShowStringLabel.top               = contentShowStringLabel.bottom +Main_Screen_Height*10/667;
     
-    UIView  *backgroundView         = [UIUtil drawLineInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*40/667) color:[UIColor colorFromHex:@"#999999"]];
-    backgroundView.top              = remindShowStringLabel.bottom +Main_Screen_Height*14/667;
+    UIView  *backgroundView         = [UIUtil drawLineInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*30/667) color:[UIColor colorFromHex:@"#eaeaea"]];
+    backgroundView.left             = 0;
+    backgroundView.top              = Main_Screen_Height*150/667 - backgroundView.height;
     
     
     NSString *getString              = @"查看详情";
@@ -693,7 +705,7 @@
     
     UIFont *getStringFont            = [UIFont systemFontOfSize:14];
     UILabel *getStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:getString font:getStringFont] font:getStringFont text:getString isCenter:NO];
-    getStringLabel.textColor         = [UIColor blackColor];
+    getStringLabel.textColor         = [UIColor colorFromHex:@"#868686"];
     getStringLabel.centerX           = backgroundView.centerX;
     getStringLabel.centerY           = backgroundView.centerY;
     
