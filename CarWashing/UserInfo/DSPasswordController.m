@@ -63,7 +63,7 @@
 }
 - (void) submitButtonClick:(id)sender {
 
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UITableViewDataSource

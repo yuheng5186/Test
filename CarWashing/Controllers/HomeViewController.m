@@ -39,6 +39,7 @@
 #import "DSDownloadController.h"
 #import "DSShareGetMoneyController.h"
 #import "DSAddShopController.h"
+#import "DSSaleActivityController.h"
 
 @interface HomeViewController ()<JFLocationDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -471,9 +472,30 @@
 //    shopNameLabel.top               = shopImageView.bottom +Main_Screen_Height*10/667;
     
     
+    UIView *discountView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    discountView.centerX                   = Main_Screen_Width*5/8;
+    discountView.top                       = payView.bottom +Main_Screen_Height*0/375;
+
+    UITapGestureRecognizer  *tapDiscountGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDiscountButtonClick:)];
+    [discountView addGestureRecognizer:tapDiscountGesture];
+
+    UIImage *discountImage              = [UIImage imageNamed:@"cheyouquan"];
+    UIImageView *discountImageView      = [UIUtil drawCustomImgViewInView:discountView frame:CGRectMake(0, 0, discountImage.size.width,discountImage.size.height) imageName:@"cheyouquan"];
+    discountImageView.left              = Main_Screen_Width*20/375;
+    discountImageView.top               = Main_Screen_Height*10/667;
+
+    NSString *discountName              = @"优惠";
+    UIFont *discountNameFont            = [UIFont systemFontOfSize:14];
+    UILabel *discountNameLabel          = [UIUtil drawLabelInView:discountView frame:[UIUtil textRect:discountName font:discountNameFont] font:discountNameFont text:discountName isCenter:NO];
+    discountNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
+    discountNameLabel.centerX           = discountImageView.centerX;
+    discountNameLabel.top               = discountImageView.bottom +Main_Screen_Height*12/667;
+    
+    
+    
     UIView *carClubView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    carClubView.centerX                   = Main_Screen_Width*5/8;
-    carClubView.top                       = payView.bottom +Main_Screen_Height*0/375;
+    carClubView.centerX                   = Main_Screen_Width*7/8;
+    carClubView.top                       = serviceView.bottom +Main_Screen_Height*0/375;
     
     UITapGestureRecognizer  *tapCarClubGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapCarClubButtonClick:)];
     [carClubView addGestureRecognizer:tapCarClubGesture];
@@ -793,7 +815,9 @@
 }
 - (void) tapDiscountButtonClick:(id)sender {
 
-    
+    DSSaleActivityController *saleController    = [[DSSaleActivityController alloc]init];
+    saleController.hidesBottomBarWhenPushed     = YES;
+    [self.navigationController pushViewController:saleController animated:YES];
 
 }
 

@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStylePlain];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStyleGrouped];
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     self.tableView.top              = 0;
@@ -52,13 +52,23 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
+-(CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.01f;
+}
+
+-(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section
+
+{
+    return 10.00f;
+}
 
 #pragma mark --
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ActivityListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ActivityListCell" forIndexPath:indexPath];
-    if (indexPath.row == 0) {
+    if (indexPath.section == 0) {
         cell.activityImageView.image    = [UIImage imageNamed:@"faxiantu1"];
         cell.activityTitleLabel.text    = @"开车一看就知道是老司机";
         cell.activityTimeLabel.text     = @"2017-7-28 14:01";

@@ -11,6 +11,7 @@
 #import "DSAboutController.h"
 #import "DSFeedbackController.h"
 #import "DSGetScoreController.h"
+#import "LoginViewController.h"
 
 @interface DSSettingController ()<UITableViewDelegate,UITableViewDataSource,LKAlertViewDelegate>
 
@@ -72,7 +73,7 @@
 }
 - (void) logoutButtonClick:(id)sender {
     
-    LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:nil message:@"确定退出当前账户么？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定"];
+    LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:@"提示" message:@"是否退出当前账户？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定"];
     alartView.tag               = 110;
     [alartView show];
 
@@ -236,7 +237,11 @@
         if (buttonIndex == 0) {
             
         }else{
-            
+                LoginViewController *loginViewControler     = [[LoginViewController alloc] init];
+                UINavigationController *navController       = [[UINavigationController alloc] initWithRootViewController:loginViewControler];
+                navController.navigationBar.hidden          = YES;
+        
+                [self presentViewController: navController animated: YES completion:nil];
             
         }
     }else{

@@ -18,14 +18,13 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"优惠活动" Color:[UIColor blackColor]];
+    [self drawTitle:@"优惠活动"];
     
 }
 
 - (void) drawContent
 {
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
+    
     
 }
 - (void)viewDidLoad {

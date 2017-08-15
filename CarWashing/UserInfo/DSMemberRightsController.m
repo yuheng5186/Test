@@ -60,14 +60,18 @@
     progressView.frame                    = CGRectMake(0, 0, Main_Screen_Width -Main_Screen_Width*40/375, 40);
     progressView.top                      = membershipScoreNameLabel.bottom +Main_Screen_Height*10/667;
     progressView.centerX                  = Main_Screen_Width/2;
-    progressView.progress                 = 0.5;
+    progressView.progress                 = 0.0;
     progressView.trackTintColor           = [UIColor colorFromHex:@"#e6e6e6"];
     progressView.progressTintColor        = [UIColor colorFromHex:@"#febb02"];
     progressView.transform                = CGAffineTransformMakeScale(1.0f, 5.0f);
     progressView.layer.cornerRadius       = 20;
-    [progressView setProgress:0.5 animated:YES];
+    
+    float number       = 1600/3000.0f;
+    
+    [progressView setProgress:number animated:YES];
     
     [middleView addSubview:progressView];
+    
     
 
     
