@@ -197,16 +197,16 @@
             changePhone.hidesBottomBarWhenPushed    = YES;
             [self.navigationController pushViewController:changePhone animated:YES];
             
-        }else {
+        }else if (indexPath.row == 2){
             LKActionSheet *actionSheet = [[LKActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"男",@"女",nil];
             
             
             [actionSheet showInView:[AppDelegate sharedInstance].window.rootViewController.view];
+        }else {
+            
+            LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:nil message:@"”金顶洗车“想要打开“微信”" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认"];
+            [alartView show];
         }
-    }else {
-    
-        LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:nil message:@"”金顶洗车“想要打开“微信”" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认"];
-        [alartView show];
     }
 }
 
