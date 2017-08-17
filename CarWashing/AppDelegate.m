@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "MenuTabBarController.h"
 #import "LoginViewController.h"
-
+#import "IQKeyboardManager.h"
 
 @interface AppDelegate ()
 
@@ -20,7 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+    [IQKeyboardManager sharedManager].enable = YES;
     [AMapServices sharedServices].apiKey = @"f6d2c4b2f6bbe466b2d1b1889783445e";
     
     application.statusBarHidden                     = NO;

@@ -33,7 +33,7 @@
 
 @property (nonatomic, weak) UILabel *lbl;
 @property (nonatomic, weak) UILabel *lbl2;
-
+@property (nonatomic, weak) UITextField *carNum;
 @end
 
 static NSString * HeaderId = @"header";
@@ -79,9 +79,11 @@ static NSString * HeaderId = @"header";
 }
 
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+   
+
     //self.carImageView.image = [UIImage imageNamed:@"02"];
     
     for (int index = 0; index < 3; index++) {
@@ -246,6 +248,7 @@ static NSString * HeaderId = @"header";
             numTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
             numTF.font = [UIFont systemFontOfSize:12];
             numTF.delegate = self;
+            self.carNum=numTF;
             [carCell.contentView addSubview:numTF];
             
             [provinceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
