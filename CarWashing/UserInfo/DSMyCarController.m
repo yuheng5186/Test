@@ -15,7 +15,7 @@
 #import "UIView+Uitls.h"
 #import "QFDatePickerView.h"
 #import "ProvinceShortController.h"
-
+#import "IQKeyboardManager.h"
 
 @interface DSMyCarController ()<UITableViewDelegate, UITableViewDataSource, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource, UITextFieldDelegate,UIGestureRecognizerDelegate>
 
@@ -83,7 +83,7 @@ static NSString * HeaderId = @"header";
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-
+    [IQKeyboardManager sharedManager].enable = YES;
     //self.carImageView.image = [UIImage imageNamed:@"02"];
     
     for (int index = 0; index < 3; index++) {
@@ -217,7 +217,7 @@ static NSString * HeaderId = @"header";
     
     static NSString *id_carCell = @"id_carCell";
     UITableViewCell *carCell = [tableView dequeueReusableCellWithIdentifier:id_carCell];
-    
+    carCell.selectionStyle=UITableViewCellSelectionStyleNone;
     carCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:id_carCell];
     
     if (indexPath.section == 0) {
