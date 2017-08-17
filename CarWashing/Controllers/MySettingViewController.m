@@ -25,6 +25,10 @@
 #import "PopupView.h"
 #import "LewPopupViewAnimationDrop.h"
 
+#import "ShareView.h"
+#import "UIView+TYAlertView.h"
+#import "TYAlertController+BlurEffects.h"
+
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,LKAlertViewDelegate>
 
 
@@ -360,7 +364,12 @@
 //        recommendController.hidesBottomBarWhenPushed            = YES;
 //        [self.navigationController pushViewController:recommendController animated:YES];
         
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.baidu.com"]];
+        ShareView *shareView = [ShareView createViewFromNib];
+        TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:shareView preferredStyle:TYAlertControllerStyleAlert];
+        
+        [alertController setBlurEffectWithView:self.view];
+        //[alertController setBlurEffectWithView:(UIView *)view style:(BlurEffectStyle)blurStyle];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 
 }

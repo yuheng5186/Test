@@ -15,6 +15,10 @@
 #import "JPCityViewController.h"
 #import "BusinessDetailViewController.h"
 
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "HTTPDefine.h"
+
 @interface BusinessViewController ()<UITableViewDelegate, UITableViewDataSource,YZPullDownMenuDataSource>
 
 @property (nonatomic, weak) UITableView *salerListView;
@@ -59,6 +63,8 @@ static NSString *id_salerListCell = @"salerListViewCell";
     [self setupUI];
     
     [self setSearchMenu];
+    
+    [self setData];
 }
 
 
@@ -195,7 +201,37 @@ static NSString *id_salerListCell = @"salerListViewCell";
     return 240;
 }
 
+-(void)setData
+{
+    NSDictionary *mulDic = @{
+                             @"City":@"上海市",
+                             @"Area":@"闵行区",
+                             @"ShopType":@1,
+                             @"ServiceCode":@101,
+                             @"DefaultSort":@1,
+                             @"Ym":@31.192255,
+                             @"Xm":@121.52334,
+                             @"PageIndex":@0,
+                             @"PageSize":@10
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetStoreList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        
+        
+        NSLog(@"%@",dict);
+        
+        
+        
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取失败失败" autoHidden:YES interval:2];
+    }];
 
+}
 
 
 - (void)didReceiveMemoryWarning {

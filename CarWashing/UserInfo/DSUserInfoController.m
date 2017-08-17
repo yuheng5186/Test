@@ -13,7 +13,10 @@
 #import<AVFoundation/AVMediaFormat.h>
 #import <AVFoundation/AVCaptureDevice.h>
 
-
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "UdStorage.h"
+#import "HTTPDefine.h"
 
 @interface DSUserInfoController ()<UITableViewDelegate,UITableViewDataSource,LKActionSheetDelegate,LKAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -185,7 +188,9 @@
         
 
         
-    }else if (indexPath.section == 1){
+    }
+    else if (indexPath.section == 1)
+    {
         if (indexPath.row == 0) {
             DSChangeNameController  *changeNameController   = [[DSChangeNameController alloc]init];
             changeNameController.hidesBottomBarWhenPushed   = YES;
@@ -197,17 +202,20 @@
             changePhone.hidesBottomBarWhenPushed    = YES;
             [self.navigationController pushViewController:changePhone animated:YES];
             
-        }else {
+        }else if (indexPath.row == 2){
             LKActionSheet *actionSheet = [[LKActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"男",@"女",nil];
             
             
             [actionSheet showInView:[AppDelegate sharedInstance].window.rootViewController.view];
         }
-    }else {
-    
-        LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:nil message:@"”金顶洗车“想要打开“微信”" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认"];
-        [alartView show];
+        else
+        {
+            
+            LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:nil message:@"”金顶洗车“想要打开“微信”" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认"];
+            [alartView show];
+        }
     }
+    
 }
 
 #pragma mark - LKActionSheetDelegate
@@ -254,12 +262,62 @@
             {
                 self.sexString = @"男";
                 [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+                
+                NSDictionary *mulDic = @{
+                                         @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                         @"ModifyType":@"4",
+                                         @"Sex":@"0"
+                                         };
+                NSDictionary *params = @{
+                                         @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                         @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                         };
+                [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/UserInfoEdit",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                    
+                    
+                    
+                    NSLog(@"%@",dict);
+                    
+                    
+                    
+                } fail:^(NSError *error) {
+                    [self.view showInfo:@"设置失败" autoHidden:YES interval:2];
+                }];
+                
+                
+                
+                
+                
             }
                 break;
             case 1:
             {
                 self.sexString = @"女";
                 [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+                
+                
+                NSDictionary *mulDic = @{
+                                         @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                         @"ModifyType":@"4",
+                                         @"Sex":@"1"
+                                         };
+                NSDictionary *params = @{
+                                         @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                         @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                         };
+                [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/UserInfoEdit",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                    
+                    
+                    
+                    NSLog(@"%@",dict);
+                    
+                    
+                    
+                } fail:^(NSError *error) {
+                    [self.view showInfo:@"设置失败" autoHidden:YES interval:2];
+                }];
+
+                
             }
                 break;
             default:
@@ -276,7 +334,33 @@
 
 - (void)processImage:(UIImage *)image
 {
-    self.userImageView.image = image;
+    
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"ModifyType":@"1",
+                             @"Headimg":[self imageToString:image]
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool base64convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool base64convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/UserInfoEdit",Khttp] success:^(NSDictionary *dict, BOOL success) {
+
+        NSLog(@"%@",dict);
+        self.userImageView.image = image;
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"设置失败" autoHidden:YES interval:2];
+    }];
+}
+
+- (NSString *)imageToString:(UIImage *)image {
+    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+    NSString *dataStr = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
+    NSLog(@"%@",dataStr);
+    
+    return dataStr;
 }
 
 

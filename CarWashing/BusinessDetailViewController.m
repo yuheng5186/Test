@@ -17,6 +17,10 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+#import "ShareView.h"
+#import "UIView+TYAlertView.h"
+#import "TYAlertController+BlurEffects.h"
+
 
 @interface BusinessDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, CLLocationManagerDelegate>
 
@@ -353,6 +357,12 @@ static NSString *businessCommentCell = @"businessCommentCell";
 #pragma mark - 点击分享按钮
 - (void)didClickShareButton:(UIButton *)button {
     
+    ShareView *shareView = [ShareView createViewFromNib];
+    TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:shareView preferredStyle:TYAlertControllerStyleAlert];
+    
+    [alertController setBlurEffectWithView:self.view];
+    //[alertController setBlurEffectWithView:(UIView *)view style:(BlurEffectStyle)blurStyle];
+    [self presentViewController:alertController animated:YES completion:nil];
     
 }
 

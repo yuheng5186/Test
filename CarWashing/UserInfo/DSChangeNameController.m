@@ -7,6 +7,10 @@
 //
 
 #import "DSChangeNameController.h"
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "UdStorage.h"
+#import "HTTPDefine.h"
 
 @interface DSChangeNameController ()<UITextFieldDelegate>
 
@@ -23,7 +27,23 @@
     
 }
 - (void) buttonClick:(id)sender {
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"ModifyType":@"2",
+                             @"Name":self.userNameText.text
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/UserInfoEdit",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        NSLog(@"%@",dict);
 
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+    }];
 }
 
 - (void) drawContent
@@ -58,6 +78,10 @@
 
 }
 - (void) userNameTextChanged:(UITextField *)sender {
+    
+    
+    
+    
 
 }
 
