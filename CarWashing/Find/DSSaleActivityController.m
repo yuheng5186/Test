@@ -42,6 +42,8 @@
     self.tableView.dataSource       = self;
     self.tableView.emptyDataSetDelegate=self;
     self.tableView.emptyDataSetSource=self;
+    self.tableView.tableFooterView = [UIView new];
+    self.tableView.tableFooterView = [UIView new];
 //    self.tableView.scrollEnabled    = NO;
     self.tableView.tableFooterView  = [UIView new];
     self.tableView.tableHeaderView  = [UIView new];
@@ -83,7 +85,7 @@
 
     UIView *view = [[UIView alloc] init];
 
-    NSString *title     = @"2017-7-23 9:30";
+    NSString *title     = @" ";
     UIFont *titleFont   = [UIFont systemFontOfSize:14];
     
     UILabel *titleLabel     = [UIUtil drawLabelInView:view frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*30/667) font:titleFont text:title isCenter:YES];
@@ -199,7 +201,7 @@
  */
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return -64.f;
+    return -64.f-105;
 }
 
 //无数据占位
@@ -232,26 +234,6 @@
 - (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
     return [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
 }
-//设置按钮的文本和按钮的背景图片
-
-//- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state  {
-////    NSLog(@"buttonTitleForEmptyDataSet:点击上传照片");
-////    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f]};
-////    return [[NSAttributedString alloc] initWithString:@"点击上传照片" attributes:attributes];
-//}
-// 返回可以点击的按钮 上面带文字
-- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-    NSDictionary *attribute = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f],NSBackgroundColorAttributeName:[UIColor whiteColor]};
-    return [[NSAttributedString alloc] initWithString:@"aa" attributes:attribute];
-}
-
-//- (UIImage *)buttonImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-//    return [UIImage imageNamed:@"aichexiaoditu"];
-//}
--(UIImage *)buttonBackgroundImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state{
-    return [UIImage imageNamed:@"aichexiaoditu"];
-
-}
 //是否显示空白页，默认YES
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
     return YES;
@@ -281,14 +263,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

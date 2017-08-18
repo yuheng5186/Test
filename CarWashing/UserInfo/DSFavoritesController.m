@@ -52,6 +52,8 @@ static NSString *id_salerListCell = @"salerListCell";
 #pragma maek-空白页
     self.favoriteListView.emptyDataSetSource = self;
     self.favoriteListView.emptyDataSetDelegate = self;
+    //可以去除tableView的多余的线，否则会影响美观
+    self.favoriteListView.tableFooterView = [UIView new];
     UINib *nib = [UINib nibWithNibName:@"SalerListViewCell" bundle:nil];
     
     [self.favoriteListView registerNib:nib forCellReuseIdentifier:id_salerListCell];
@@ -95,8 +97,8 @@ static NSString *id_salerListCell = @"salerListCell";
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
     NSString *text = @"客管你还没有收藏";
     
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:16.0f],
-                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:13.0f],
+                                 NSForegroundColorAttributeName: [UIColor colorFromHex:@"#4a4a4a"]};
     
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }

@@ -112,27 +112,24 @@ static NSString *id_discountCell = @"id_discountCell";
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
     NSString *text = @"客官你还没有办理过卡";
     
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:16.0f],
-                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:13.0f],
+                                 NSForegroundColorAttributeName: [UIColor colorFromHex:@"#4a4a4a"]};
     
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 //设置按钮的文本和按钮的背景图片
-
-//- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state  {
-////    NSLog(@"buttonTitleForEmptyDataSet:点击上传照片");
-////    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f]};
-////    return [[NSAttributedString alloc] initWithString:@"点击上传照片" attributes:attributes];
-//}
-// 返回可以点击的按钮 上面带文字
-- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-    NSDictionary *attribute = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f]};
-    return [[NSAttributedString alloc] initWithString:@"去购卡" attributes:attribute];
+- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state  {
+//    NSLog(@"buttonTitleForEmptyDataSet:点击上传照片");
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],NSForegroundColorAttributeName:[UIColor whiteColor]};
+    return [[NSAttributedString alloc] initWithString:@"去购卡" attributes:attributes];
 }
-
-
+#pragma mark-背景图片
+//-(UIImage *)buttonBackgroundImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state{
+//    
+//    return [UIImage imageNamed:@"mashangxiche-"];
+//}
 - (UIImage *)buttonImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-    return [UIImage imageNamed:@"button_image"];
+    return [UIImage imageNamed:@"qgouka"];
 }
 //是否显示空白页，默认YES
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
@@ -163,40 +160,8 @@ static NSString *id_discountCell = @"id_discountCell";
  */
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return -64.f;
-}
-//如果需要更复杂的布局，则可以返回自定义视图:
-//- (UIView *)customViewForEmptyDataSet:(UIScrollView *)scrollView
-//{
-//
-//}
-//这是设置内容描述的
-//- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
-//    NSString *text = @"请检查网络后再重试";
-//    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
-//    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
-//    paragraph.alignment = NSTextAlignmentCenter;
-//    NSDictionary *attributes = @{
-//                                 NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
-//                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
-//                                 NSParagraphStyleAttributeName: paragraph
-//                                 };
-//    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
-//}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    return -64.f-44-55;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
