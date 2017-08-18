@@ -11,9 +11,9 @@
 #import "DiscountCategoryView.h"
 #import "DiscountController.h"
 #import "RechargeController.h"
-#import "UIScrollView+EmptyDataSet.h"
 
-@interface DSCardGroupController ()<UIScrollViewDelegate,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+
+@interface DSCardGroupController ()<UIScrollViewDelegate>
 
 @property (nonatomic, weak) UIView *containerView;
 

@@ -194,6 +194,14 @@
 
 
 #pragma mark - 无数据占位
+/**
+ *  调整垂直位置
+ */
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return -64.f;
+}
+
 //无数据占位
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
     return [UIImage imageNamed:@"youhuihuodong_kongbai"];
@@ -233,13 +241,16 @@
 //}
 // 返回可以点击的按钮 上面带文字
 - (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-    NSDictionary *attribute = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f]};
-    return [[NSAttributedString alloc] initWithString:@"" attributes:attribute];
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f],NSBackgroundColorAttributeName:[UIColor whiteColor]};
+    return [[NSAttributedString alloc] initWithString:@"aa" attributes:attribute];
 }
 
+//- (UIImage *)buttonImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
+//    return [UIImage imageNamed:@"aichexiaoditu"];
+//}
+-(UIImage *)buttonBackgroundImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state{
+    return [UIImage imageNamed:@"aichexiaoditu"];
 
-- (UIImage *)buttonImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-    return [UIImage imageNamed:@"button_image"];
 }
 //是否显示空白页，默认YES
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {

@@ -158,6 +158,13 @@ static NSString *id_discountCell = @"id_discountCell";
 - (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView {
     return NSLog(@"空白页按钮点击事件");
 }
+/**
+ *  调整垂直位置
+ */
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return -64.f;
+}
 //如果需要更复杂的布局，则可以返回自定义视图:
 //- (UIView *)customViewForEmptyDataSet:(UIScrollView *)scrollView
 //{

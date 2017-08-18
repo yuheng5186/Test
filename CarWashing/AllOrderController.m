@@ -199,6 +199,13 @@ static NSString *id_cancelCell = @"id_cancelCell";
 - (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView {
     return NSLog(@"空白页按钮点击事件");
 }
+/**
+ *  调整垂直位置
+ */
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return -64.f;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

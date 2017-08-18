@@ -23,6 +23,7 @@ static NSString *id_salerListCell = @"salerListCell";
 - (UITableView *)favoriteListView{
     if (nil == _favoriteListView) {
         UITableView *favoriteListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 64)];
+       
         [self.view addSubview:favoriteListView];
         _favoriteListView = favoriteListView;
     }
@@ -41,6 +42,7 @@ static NSString *id_salerListCell = @"salerListCell";
     [super viewDidLoad];
     
     [self setupUI];
+  self.favoriteListView.separatorStyle=UITableViewCellSeparatorStyleNone;
 }
 
 - (void)setupUI {
@@ -65,7 +67,8 @@ static NSString *id_salerListCell = @"salerListCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     SalerListViewCell *favoriCell = [tableView dequeueReusableCellWithIdentifier:id_salerListCell forIndexPath:indexPath];
-    
+//    favoriCell.backgroundColor=[UIColor redColor];
+
     return favoriCell;
 }
 
@@ -77,6 +80,7 @@ static NSString *id_salerListCell = @"salerListCell";
 }
 
 - (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView{
+    
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath: @"shoucang_kongbai"];
     animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
     animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI_2, 0.0, 0.0,   1.0)];
@@ -141,6 +145,13 @@ static NSString *id_salerListCell = @"salerListCell";
 //空白页按钮点击事件
 - (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView {
     return NSLog(@"空白页按钮点击事件");
+}
+/**
+ *  调整垂直位置
+ */
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return -64.f;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
