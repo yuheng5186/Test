@@ -75,6 +75,25 @@
 		183997661F2586D300702071 /* ActivityListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183997641F2586D300702071 /* ActivityListCell.xib */; };
 		1839979F1F25E69100702071 /* DSPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1839979E1F25E69100702071 /* DSPasswordController.m */; };
 		183997A21F25F00700702071 /* DSAboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183997A11F25F00700702071 /* DSAboutController.m */; };
+		1850901C1F43F19B00795E0A /* LCMD5Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850901B1F43F19B00795E0A /* LCMD5Tool.m */; };
+		185090221F441AF500795E0A /* AFNetworkingTool+GetToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850901F1F441AF500795E0A /* AFNetworkingTool+GetToken.m */; };
+		185090231F441AF500795E0A /* AFNetworkingTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090211F441AF500795E0A /* AFNetworkingTool.m */; };
+		185090271F441BFA00795E0A /* UdStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090261F441BFA00795E0A /* UdStorage.m */; };
+		1850902D1F45573F00795E0A /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850902B1F45573F00795E0A /* ShareView.m */; };
+		1850902E1F45573F00795E0A /* ShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1850902C1F45573F00795E0A /* ShareView.xib */; };
+		185090431F4557E100795E0A /* TYAlertController+TransitionAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090301F4557E100795E0A /* TYAlertController+TransitionAnimate.m */; };
+		185090441F4557E100795E0A /* TYAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090321F4557E100795E0A /* TYAlertController.m */; };
+		185090451F4557E100795E0A /* TYAlertDropDownAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090341F4557E100795E0A /* TYAlertDropDownAnimation.m */; };
+		185090461F4557E100795E0A /* TYAlertFadeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090361F4557E100795E0A /* TYAlertFadeAnimation.m */; };
+		185090471F4557E100795E0A /* TYAlertScaleFadeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090381F4557E100795E0A /* TYAlertScaleFadeAnimation.m */; };
+		185090481F4557E100795E0A /* TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850903A1F4557E100795E0A /* TYAlertView.m */; };
+		185090491F4557E100795E0A /* TYBaseAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850903C1F4557E100795E0A /* TYBaseAnimation.m */; };
+		1850904A1F4557E100795E0A /* TYShowAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850903E1F4557E100795E0A /* TYShowAlertView.m */; };
+		1850904B1F4557E100795E0A /* UIView+TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090401F4557E100795E0A /* UIView+TYAlertView.m */; };
+		1850904C1F4557E100795E0A /* UIView+TYAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090421F4557E100795E0A /* UIView+TYAutoLayout.m */; };
+		185090521F4558AC00795E0A /* TYAlertController+BlurEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850904F1F4558AC00795E0A /* TYAlertController+BlurEffects.m */; };
+		185090531F4558AC00795E0A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090511F4558AC00795E0A /* UIImage+ImageEffects.m */; };
+		185090571F4586B200795E0A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090561F4586B200795E0A /* User.m */; };
 		1853BA031F28444000B98C7F /* DSFeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA021F28444000B98C7F /* DSFeedbackController.m */; };
 		1853BA061F28475500B98C7F /* DSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA051F28475500B98C7F /* DSTextView.m */; };
 		1853BA091F28674F00B98C7F /* LKAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA081F28674F00B98C7F /* LKAlertView.m */; };
@@ -365,6 +384,43 @@
 		1839979E1F25E69100702071 /* DSPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSPasswordController.m; path = UserInfo/DSPasswordController.m; sourceTree = "<group>"; };
 		183997A01F25F00700702071 /* DSAboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAboutController.h; path = UserInfo/DSAboutController.h; sourceTree = "<group>"; };
 		183997A11F25F00700702071 /* DSAboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAboutController.m; path = UserInfo/DSAboutController.m; sourceTree = "<group>"; };
+		1850901A1F43F19B00795E0A /* LCMD5Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCMD5Tool.h; sourceTree = "<group>"; };
+		1850901B1F43F19B00795E0A /* LCMD5Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMD5Tool.m; sourceTree = "<group>"; };
+		1850901E1F441AF500795E0A /* AFNetworkingTool+GetToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFNetworkingTool+GetToken.h"; sourceTree = "<group>"; };
+		1850901F1F441AF500795E0A /* AFNetworkingTool+GetToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFNetworkingTool+GetToken.m"; sourceTree = "<group>"; };
+		185090201F441AF500795E0A /* AFNetworkingTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkingTool.h; sourceTree = "<group>"; };
+		185090211F441AF500795E0A /* AFNetworkingTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkingTool.m; sourceTree = "<group>"; };
+		185090251F441BFA00795E0A /* UdStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UdStorage.h; sourceTree = "<group>"; };
+		185090261F441BFA00795E0A /* UdStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UdStorage.m; sourceTree = "<group>"; };
+		185090281F454AA000795E0A /* HTTPDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPDefine.h; sourceTree = "<group>"; };
+		1850902A1F45573F00795E0A /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
+		1850902B1F45573F00795E0A /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
+		1850902C1F45573F00795E0A /* ShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareView.xib; sourceTree = "<group>"; };
+		185090301F4557E100795E0A /* TYAlertController+TransitionAnimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TYAlertController+TransitionAnimate.m"; sourceTree = "<group>"; };
+		185090311F4557E100795E0A /* TYAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertController.h; sourceTree = "<group>"; };
+		185090321F4557E100795E0A /* TYAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertController.m; sourceTree = "<group>"; };
+		185090331F4557E100795E0A /* TYAlertDropDownAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertDropDownAnimation.h; sourceTree = "<group>"; };
+		185090341F4557E100795E0A /* TYAlertDropDownAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertDropDownAnimation.m; sourceTree = "<group>"; };
+		185090351F4557E100795E0A /* TYAlertFadeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertFadeAnimation.h; sourceTree = "<group>"; };
+		185090361F4557E100795E0A /* TYAlertFadeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertFadeAnimation.m; sourceTree = "<group>"; };
+		185090371F4557E100795E0A /* TYAlertScaleFadeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertScaleFadeAnimation.h; sourceTree = "<group>"; };
+		185090381F4557E100795E0A /* TYAlertScaleFadeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertScaleFadeAnimation.m; sourceTree = "<group>"; };
+		185090391F4557E100795E0A /* TYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertView.h; sourceTree = "<group>"; };
+		1850903A1F4557E100795E0A /* TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertView.m; sourceTree = "<group>"; };
+		1850903B1F4557E100795E0A /* TYBaseAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYBaseAnimation.h; sourceTree = "<group>"; };
+		1850903C1F4557E100795E0A /* TYBaseAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYBaseAnimation.m; sourceTree = "<group>"; };
+		1850903D1F4557E100795E0A /* TYShowAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYShowAlertView.h; sourceTree = "<group>"; };
+		1850903E1F4557E100795E0A /* TYShowAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYShowAlertView.m; sourceTree = "<group>"; };
+		1850903F1F4557E100795E0A /* UIView+TYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAlertView.h"; sourceTree = "<group>"; };
+		185090401F4557E100795E0A /* UIView+TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAlertView.m"; sourceTree = "<group>"; };
+		185090411F4557E100795E0A /* UIView+TYAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAutoLayout.h"; sourceTree = "<group>"; };
+		185090421F4557E100795E0A /* UIView+TYAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAutoLayout.m"; sourceTree = "<group>"; };
+		1850904E1F4558AC00795E0A /* TYAlertController+BlurEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TYAlertController+BlurEffects.h"; sourceTree = "<group>"; };
+		1850904F1F4558AC00795E0A /* TYAlertController+BlurEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TYAlertController+BlurEffects.m"; sourceTree = "<group>"; };
+		185090501F4558AC00795E0A /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		185090511F4558AC00795E0A /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		185090551F4586B200795E0A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		185090561F4586B200795E0A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		1853BA011F28444000B98C7F /* DSFeedbackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSFeedbackController.h; path = UserInfo/DSFeedbackController.h; sourceTree = "<group>"; };
 		1853BA021F28444000B98C7F /* DSFeedbackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSFeedbackController.m; path = UserInfo/DSFeedbackController.m; sourceTree = "<group>"; };
 		1853BA041F28475500B98C7F /* DSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSTextView.h; path = Tool/DSTextView.h; sourceTree = "<group>"; };
@@ -643,6 +699,7 @@
 		1805AC801F3808DB00FD0844 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				185090541F4586B200795E0A /* account */,
 				1805AC811F38090D00FD0844 /* LoginViewController.h */,
 				1805AC821F38090D00FD0844 /* LoginViewController.m */,
 				1805AC841F385C8600FD0844 /* DSAgreementController.h */,
@@ -731,6 +788,11 @@
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				1850904D1F4558AC00795E0A /* Blur Effects */,
+				1850902F1F4557E100795E0A /* TYAlertController */,
+				185090291F45573F00795E0A /* ShareView */,
+				185090241F441BFA00795E0A /* 本地存储 */,
+				1850901D1F441AF500795E0A /* AFNetwork */,
 				187CCBEF1F43F77E00FCDF1C /* CustomSlider */,
 				180E43181F3D835600013D2D /* weixinshare */,
 				180E42FE1F3B46F300013D2D /* BFSToast */,
@@ -763,6 +825,8 @@
 				18218FE71F2ADA8A00F7207F /* DSSegmentView.m */,
 				180E432D1F41921E00013D2D /* PhoneHelper.h */,
 				180E432E1F41921E00013D2D /* PhoneHelper.m */,
+				1850901A1F43F19B00795E0A /* LCMD5Tool.h */,
+				1850901B1F43F19B00795E0A /* LCMD5Tool.m */,
 			);
 			name = Tool;
 			path = ..;
@@ -953,6 +1017,89 @@
 				182190081F301BF600F7207F /* DSActivityDetailCell.m */,
 			);
 			name = CustomCell;
+			sourceTree = "<group>";
+		};
+		1850901D1F441AF500795E0A /* AFNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				185090281F454AA000795E0A /* HTTPDefine.h */,
+				1850901E1F441AF500795E0A /* AFNetworkingTool+GetToken.h */,
+				1850901F1F441AF500795E0A /* AFNetworkingTool+GetToken.m */,
+				185090201F441AF500795E0A /* AFNetworkingTool.h */,
+				185090211F441AF500795E0A /* AFNetworkingTool.m */,
+			);
+			name = AFNetwork;
+			path = Tool/AFNetwork;
+			sourceTree = "<group>";
+		};
+		185090241F441BFA00795E0A /* 本地存储 */ = {
+			isa = PBXGroup;
+			children = (
+				185090251F441BFA00795E0A /* UdStorage.h */,
+				185090261F441BFA00795E0A /* UdStorage.m */,
+			);
+			name = "本地存储";
+			path = "Tool/本地存储";
+			sourceTree = "<group>";
+		};
+		185090291F45573F00795E0A /* ShareView */ = {
+			isa = PBXGroup;
+			children = (
+				1850902A1F45573F00795E0A /* ShareView.h */,
+				1850902B1F45573F00795E0A /* ShareView.m */,
+				1850902C1F45573F00795E0A /* ShareView.xib */,
+			);
+			name = ShareView;
+			path = Tool/ShareView;
+			sourceTree = "<group>";
+		};
+		1850902F1F4557E100795E0A /* TYAlertController */ = {
+			isa = PBXGroup;
+			children = (
+				185090301F4557E100795E0A /* TYAlertController+TransitionAnimate.m */,
+				185090311F4557E100795E0A /* TYAlertController.h */,
+				185090321F4557E100795E0A /* TYAlertController.m */,
+				185090331F4557E100795E0A /* TYAlertDropDownAnimation.h */,
+				185090341F4557E100795E0A /* TYAlertDropDownAnimation.m */,
+				185090351F4557E100795E0A /* TYAlertFadeAnimation.h */,
+				185090361F4557E100795E0A /* TYAlertFadeAnimation.m */,
+				185090371F4557E100795E0A /* TYAlertScaleFadeAnimation.h */,
+				185090381F4557E100795E0A /* TYAlertScaleFadeAnimation.m */,
+				185090391F4557E100795E0A /* TYAlertView.h */,
+				1850903A1F4557E100795E0A /* TYAlertView.m */,
+				1850903B1F4557E100795E0A /* TYBaseAnimation.h */,
+				1850903C1F4557E100795E0A /* TYBaseAnimation.m */,
+				1850903D1F4557E100795E0A /* TYShowAlertView.h */,
+				1850903E1F4557E100795E0A /* TYShowAlertView.m */,
+				1850903F1F4557E100795E0A /* UIView+TYAlertView.h */,
+				185090401F4557E100795E0A /* UIView+TYAlertView.m */,
+				185090411F4557E100795E0A /* UIView+TYAutoLayout.h */,
+				185090421F4557E100795E0A /* UIView+TYAutoLayout.m */,
+			);
+			name = TYAlertController;
+			path = Tool/TYAlertController;
+			sourceTree = "<group>";
+		};
+		1850904D1F4558AC00795E0A /* Blur Effects */ = {
+			isa = PBXGroup;
+			children = (
+				1850904E1F4558AC00795E0A /* TYAlertController+BlurEffects.h */,
+				1850904F1F4558AC00795E0A /* TYAlertController+BlurEffects.m */,
+				185090501F4558AC00795E0A /* UIImage+ImageEffects.h */,
+				185090511F4558AC00795E0A /* UIImage+ImageEffects.m */,
+			);
+			name = "Blur Effects";
+			path = "Tool/Blur Effects";
+			sourceTree = "<group>";
+		};
+		185090541F4586B200795E0A /* account */ = {
+			isa = PBXGroup;
+			children = (
+				185090551F4586B200795E0A /* User.h */,
+				185090561F4586B200795E0A /* User.m */,
+			);
+			name = account;
+			path = UserInfo/account;
 			sourceTree = "<group>";
 		};
 		1853BA311F28A01600B98C7F /* JFCityViewController */ = {
@@ -1477,7 +1624,6 @@
 				TargetAttributes = {
 					18B803711F1DA2A300B52432 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = W85DM2ZM4W;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -1525,6 +1671,7 @@
 				5071B47E1F38099C009FFF67 /* OrderDetailView.xib in Resources */,
 				50D30E7D1F2044C20086D3ED /* BusinessDetailHeaderView.xib in Resources */,
 				50B26E6E1F301B60009B3B9F /* RechargeCell.xib in Resources */,
+				1850902E1F45573F00795E0A /* ShareView.xib in Resources */,
 				5097FDFE1F2ECE2F002EF8F8 /* TicketCashView.xib in Resources */,
 				5094A63A1F346E7000407808 /* CancelPayCell.xib in Resources */,
 				50E2EE5A1F1F4A9000FAF130 /* SalerListViewCell.xib in Resources */,
@@ -1637,18 +1784,22 @@
 				50B26E641F300D60009B3B9F /* PayPurchaseCardController.m in Sources */,
 				18B69EAA1F32CB5B007DA0E4 /* ZFConst.m in Sources */,
 				5016720D1F297A3500384186 /* ShopCommentController.m in Sources */,
+				185090571F4586B200795E0A /* User.m in Sources */,
 				183997651F2586D300702071 /* ActivityListCell.m in Sources */,
 				181E92FE1F2088E80006511E /* DSMyCarController.m in Sources */,
 				181E92CC1F1F39CC0006511E /* UIColor+HexColor.m in Sources */,
 				18B69EC01F346A3F007DA0E4 /* DSScanQRCodeController.m in Sources */,
 				50CAA6A11F41AB0300138CEF /* EarnScoreController.m in Sources */,
 				5097FE131F2F4173002EF8F8 /* JPCityViewController.m in Sources */,
+				185090461F4557E100795E0A /* TYAlertFadeAnimation.m in Sources */,
 				180E42E91F3AB37D00013D2D /* YzdHUDImageView.m in Sources */,
 				181E92EF1F2081840006511E /* DSMembershipController.m in Sources */,
 				5094A6251F3447CD00407808 /* BusinessEstimateCell.m in Sources */,
 				18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */,
 				181E92F21F20848D0006511E /* DSOrderController.m in Sources */,
+				185090481F4557E100795E0A /* TYAlertView.m in Sources */,
 				18B697B51F21DBCE009FF73A /* DSWheelGroupController.m in Sources */,
+				185090491F4557E100795E0A /* TYBaseAnimation.m in Sources */,
 				5097FE1A1F2F4335002EF8F8 /* MyCarViewCell.m in Sources */,
 				188907121F2730F4009E20B0 /* DSUpdateRuleController.m in Sources */,
 				181E92CB1F1F39CC0006511E /* UIColor+Additions.m in Sources */,
@@ -1666,7 +1817,9 @@
 				18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */,
 				180E43271F414A5E00013D2D /* PopHelpView.m in Sources */,
 				1853BA4E1F28A04C00B98C7F /* JFLocation.m in Sources */,
+				185090231F441AF500795E0A /* AFNetworkingTool.m in Sources */,
 				180E43071F3C5C2D00013D2D /* DSDownloadController.m in Sources */,
+				1850904C1F4557E100795E0A /* UIView+TYAutoLayout.m in Sources */,
 				180E42D21F39A89000013D2D /* DSAddMerchantController.m in Sources */,
 				50B26E991F307D31009B3B9F /* DiscountDetailView.m in Sources */,
 				180E42E81F3AB37D00013D2D /* YzdHUDBackgroundView.m in Sources */,
@@ -1713,6 +1866,7 @@
 				18B69E9C1F32CA71007DA0E4 /* ScanController.m in Sources */,
 				5016724F1F2A023600384186 /* ScoreGetController.m in Sources */,
 				180E42DB1F39B97A00013D2D /* DSCarWashingActivityController.m in Sources */,
+				185090221F441AF500795E0A /* AFNetworkingTool+GetToken.m in Sources */,
 				181E92CF1F1F39CC0006511E /* UIView+Frame.m in Sources */,
 				507FED011F2B3111009CC505 /* CashViewController.m in Sources */,
 				18B697B21F21DB3F009FF73A /* DSCarTravellingController.m in Sources */,
@@ -1722,14 +1876,17 @@
 				50E2EE831F1F4D3C00FAF130 /* UIView+YZCategory.m in Sources */,
 				18218FE81F2ADA8A00F7207F /* DSSegmentView.m in Sources */,
 				501672521F2A091000384186 /* ScoreCategoryView.m in Sources */,
+				185090431F4557E100795E0A /* TYAlertController+TransitionAnimate.m in Sources */,
 				500C6BA41F3AE619007D34A1 /* QFDatePickerView.m in Sources */,
 				182190091F301BF600F7207F /* DSActivityDetailCell.m in Sources */,
 				180E43221F3D836F00013D2D /* WeixinActivity.m in Sources */,
 				1805AC911F386FA800FD0844 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */,
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
+				1850904A1F4557E100795E0A /* TYShowAlertView.m in Sources */,
 				50B26EA31F315D76009B3B9F /* OrderCategoryView.m in Sources */,
 				5094A62F1F346E4200407808 /* SuccessPayCell.m in Sources */,
+				185090451F4557E100795E0A /* TYAlertDropDownAnimation.m in Sources */,
 				1853BA481F28A04100B98C7F /* JFCityHeaderView.m in Sources */,
 				50769F4F1F3C549300DDFCC7 /* BusinessPayCell.m in Sources */,
 				50E2EE801F1F4D3C00FAF130 /* YZMoreMenuViewController.m in Sources */,
@@ -1737,6 +1894,7 @@
 				5071B4841F39D3CC009FFF67 /* MyCarInfosHeaderView.m in Sources */,
 				50B26EA61F315E9B009B3B9F /* AllOrderController.m in Sources */,
 				181E93071F208D560006511E /* DSRecommendController.m in Sources */,
+				1850904B1F4557E100795E0A /* UIView+TYAlertView.m in Sources */,
 				180E43041F3B471100013D2D /* UIView+BFSToastInfo.m in Sources */,
 				500C6BF51F3B5B13007D34A1 /* BusinessMapController.m in Sources */,
 				50B26EA01F30819D009B3B9F /* RechargeDetailController.m in Sources */,
@@ -1784,20 +1942,27 @@
 				50769F521F3D52C500DDFCC7 /* ProvinceShortController.m in Sources */,
 				1853BA4B1F28A04100B98C7F /* JFSearchView.m in Sources */,
 				180E42EA1F3AB37D00013D2D /* YzdHUDIndicator.m in Sources */,
+				185090471F4557E100795E0A /* TYAlertScaleFadeAnimation.m in Sources */,
 				50B26EAC1F315EF0009B3B9F /* CommentOrderController.m in Sources */,
 				183997A21F25F00700702071 /* DSAboutController.m in Sources */,
 				1853BA491F28A04100B98C7F /* JFCityTableViewCell.m in Sources */,
 				180E42D81F39B8C200013D2D /* DSUserRightDetailController.m in Sources */,
+				185090531F4558AC00795E0A /* UIImage+ImageEffects.m in Sources */,
 				181E92D81F1F3BAE0006511E /* FindViewController.m in Sources */,
 				180E42E71F3AB37D00013D2D /* UIWindow+YzdHUD.m in Sources */,
+				185090441F4557E100795E0A /* TYAlertController.m in Sources */,
 				180E43241F3D836F00013D2D /* WeixinTimelineActivity.m in Sources */,
 				501672461F29DA6C00384186 /* MemberRegualrController.m in Sources */,
+				185090271F441BFA00795E0A /* UdStorage.m in Sources */,
+				1850901C1F43F19B00795E0A /* LCMD5Tool.m in Sources */,
 				180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */,
 				5071B4811F381366009FFF67 /* OrderCommentController.m in Sources */,
 				181E93291F20B0510006511E /* SXScrPageView.m in Sources */,
 				5016724C1F2A020600384186 /* ScoreIntroController.m in Sources */,
 				18B69EA21F32CB48007DA0E4 /* UIColor+Zirkfied.m in Sources */,
+				185090521F4558AC00795E0A /* TYAlertController+BlurEffects.m in Sources */,
 				181E92E91F207FF60006511E /* DSSettingController.m in Sources */,
+				1850902D1F45573F00795E0A /* ShareView.m in Sources */,
 				181E92F81F2086620006511E /* DSExchangeController.m in Sources */,
 				180E42EF1F3AC78800013D2D /* UIViewController+LewPopupViewController.m in Sources */,
 			);
@@ -1951,12 +2116,12 @@
 			baseConfigurationReference = 786364A9A4C81732835898A5 /* Pods-CarWashing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = W85DM2ZM4W;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing123;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing;
 				PRODUCT_NAME = CarWashing;
 			};
 			name = Debug;
@@ -1966,12 +2131,12 @@
 			baseConfigurationReference = 1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = W85DM2ZM4W;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing123;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing;
 				PRODUCT_NAME = CarWashing;
 			};
 			name = Release;

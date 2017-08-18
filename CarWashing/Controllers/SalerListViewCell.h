@@ -28,5 +28,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *starView;
 
+@property (weak, nonatomic) IBOutlet UILabel *ScoreLabel;
 
 @end

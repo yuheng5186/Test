@@ -10,6 +10,10 @@
 #import "WeixinSessionActivity.h"
 #import "WeixinTimelineActivity.h"
 #import "HYActivityView.h"
+#import "ShareView.h"
+#import "UIView+TYAlertView.h"
+#import "TYAlertController+BlurEffects.h"
+
 @interface DSShareGetMoneyController ()
 {
     
@@ -93,10 +97,17 @@
 }
 
 - (void) getMoneyButtonClick:(id)sender {
+    
+    ShareView *shareView = [ShareView createViewFromNib];
+    TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:shareView preferredStyle:TYAlertControllerStyleAlert];
+    
+    [alertController setBlurEffectWithView:self.view];
+    //[alertController setBlurEffectWithView:(UIView *)view style:(BlurEffectStyle)blurStyle];
+    [self presentViewController:alertController animated:YES completion:nil];
 
-        UIActivityViewController *activityView = [[UIActivityViewController alloc] initWithActivityItems:@[@"这里是标题", [UIImage imageNamed:@"zensong"], [NSURL URLWithString:@"http://www.google.com"]] applicationActivities:activity];
-        activityView.excludedActivityTypes = @[UIActivityTypeAirDrop];
-        [self presentViewController:activityView animated:YES completion:nil];
+//        UIActivityViewController *activityView = [[UIActivityViewController alloc] initWithActivityItems:@[@"这里是标题", [UIImage imageNamed:@"zensong"], [NSURL URLWithString:@"http://www.google.com"]] applicationActivities:activity];
+//        activityView.excludedActivityTypes = @[UIActivityTypeAirDrop];
+//        [self presentViewController:activityView animated:YES completion:nil];
     
 //    if (!self.activityView) {
 //        self.activityView = [[HYActivityView alloc]initWithTitle:@"分享到" referView:self.view];

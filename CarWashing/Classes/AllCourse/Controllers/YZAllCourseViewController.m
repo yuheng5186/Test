@@ -23,6 +23,9 @@ static NSString * const categoryDetailID = @"categoryDetailID";
 
 @property (strong, nonatomic) NSString *selectedCategory;
 
+@property (strong, nonatomic) NSMutableArray *MerChantCategory;
+@property (strong, nonatomic) NSMutableArray *MerChantServiceCategory;
+
 @end
 
 @implementation YZAllCourseViewController
@@ -31,6 +34,12 @@ static NSString * const categoryDetailID = @"categoryDetailID";
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
+    
+    
+//    _MerChantCategory = [[NSMutableArray alloc] initWithObjects:@"全部门店",@"洗车服务",@"轮胎门店",@"保养门店",@"安装门店",@"改装门店",@"4s门店", nil];
+    _MerChantCategory = [[NSMutableArray alloc] initWithObjects:@"洗车服务", nil];
+    _MerChantServiceCategory = [[NSMutableArray alloc] initWithObjects:@"普洗-5座轿车",@"普洗-7座轿车",@"精洗-7座轿车",@"全车打蜡-5座轿车",@"全车打蜡-7座轿车",@"内饰清洗-5座轿车",@"内饰清洗-7座轿车", nil];
+    
     [self.categoryTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:categoryID];
     [self.categoryDetailTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:categoryDetailID];
 }
@@ -48,11 +57,11 @@ static NSString * const categoryDetailID = @"categoryDetailID";
 {
     if (tableView == self.categoryTableView) {
         // 左边的类别表格 👈
-        return 5;
+        return [_MerChantCategory count];
         
     } else {
         // 右边的类别详情表格 👉
-        return 10;
+        return [_MerChantServiceCategory count];
     }
 }
 
@@ -61,9 +70,10 @@ static NSString * const categoryDetailID = @"categoryDetailID";
     if (tableView == self.categoryTableView) {
         // 左边的类别表格 👈
         UITableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:categoryID];
-        cell.textLabel.text = [NSString stringWithFormat:@"小学%ld",indexPath.row];
+        cell.textLabel.text = [_MerChantCategory objectAtIndex:indexPath.row];
         cell.textLabel.font = [UIFont systemFontOfSize:12];
         cell.textLabel.textColor = [UIColor colorFromHex:@"#999999"];
+        [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
         return cell;
     }
     
@@ -71,8 +81,8 @@ static NSString * const categoryDetailID = @"categoryDetailID";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:categoryDetailID];
     cell.textLabel.font = [UIFont systemFontOfSize:12];
     cell.textLabel.textColor = [UIColor colorFromHex:@"#999999"];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ : 详%ld",_selectedCategory,indexPath.row];
-    
+    cell.textLabel.text = [_MerChantServiceCategory objectAtIndex:indexPath.row];
+    [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     return cell;
     
 }
