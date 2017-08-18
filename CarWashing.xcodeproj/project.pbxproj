@@ -93,6 +93,7 @@
 		1850904C1F4557E100795E0A /* UIView+TYAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090421F4557E100795E0A /* UIView+TYAutoLayout.m */; };
 		185090521F4558AC00795E0A /* TYAlertController+BlurEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850904F1F4558AC00795E0A /* TYAlertController+BlurEffects.m */; };
 		185090531F4558AC00795E0A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090511F4558AC00795E0A /* UIImage+ImageEffects.m */; };
+		185090571F4586B200795E0A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090561F4586B200795E0A /* User.m */; };
 		1853BA031F28444000B98C7F /* DSFeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA021F28444000B98C7F /* DSFeedbackController.m */; };
 		1853BA061F28475500B98C7F /* DSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA051F28475500B98C7F /* DSTextView.m */; };
 		1853BA091F28674F00B98C7F /* LKAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA081F28674F00B98C7F /* LKAlertView.m */; };
@@ -418,6 +419,8 @@
 		1850904F1F4558AC00795E0A /* TYAlertController+BlurEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TYAlertController+BlurEffects.m"; sourceTree = "<group>"; };
 		185090501F4558AC00795E0A /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		185090511F4558AC00795E0A /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		185090551F4586B200795E0A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		185090561F4586B200795E0A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		1853BA011F28444000B98C7F /* DSFeedbackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSFeedbackController.h; path = UserInfo/DSFeedbackController.h; sourceTree = "<group>"; };
 		1853BA021F28444000B98C7F /* DSFeedbackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSFeedbackController.m; path = UserInfo/DSFeedbackController.m; sourceTree = "<group>"; };
 		1853BA041F28475500B98C7F /* DSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSTextView.h; path = Tool/DSTextView.h; sourceTree = "<group>"; };
@@ -696,6 +699,7 @@
 		1805AC801F3808DB00FD0844 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				185090541F4586B200795E0A /* account */,
 				1805AC811F38090D00FD0844 /* LoginViewController.h */,
 				1805AC821F38090D00FD0844 /* LoginViewController.m */,
 				1805AC841F385C8600FD0844 /* DSAgreementController.h */,
@@ -1086,6 +1090,16 @@
 			);
 			name = "Blur Effects";
 			path = "Tool/Blur Effects";
+			sourceTree = "<group>";
+		};
+		185090541F4586B200795E0A /* account */ = {
+			isa = PBXGroup;
+			children = (
+				185090551F4586B200795E0A /* User.h */,
+				185090561F4586B200795E0A /* User.m */,
+			);
+			name = account;
+			path = UserInfo/account;
 			sourceTree = "<group>";
 		};
 		1853BA311F28A01600B98C7F /* JFCityViewController */ = {
@@ -1610,7 +1624,6 @@
 				TargetAttributes = {
 					18B803711F1DA2A300B52432 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = W85DM2ZM4W;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -1771,6 +1784,7 @@
 				50B26E641F300D60009B3B9F /* PayPurchaseCardController.m in Sources */,
 				18B69EAA1F32CB5B007DA0E4 /* ZFConst.m in Sources */,
 				5016720D1F297A3500384186 /* ShopCommentController.m in Sources */,
+				185090571F4586B200795E0A /* User.m in Sources */,
 				183997651F2586D300702071 /* ActivityListCell.m in Sources */,
 				181E92FE1F2088E80006511E /* DSMyCarController.m in Sources */,
 				181E92CC1F1F39CC0006511E /* UIColor+HexColor.m in Sources */,
@@ -2102,12 +2116,12 @@
 			baseConfigurationReference = 786364A9A4C81732835898A5 /* Pods-CarWashing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = W85DM2ZM4W;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing123;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing;
 				PRODUCT_NAME = CarWashing;
 			};
 			name = Debug;
@@ -2117,12 +2131,12 @@
 			baseConfigurationReference = 1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = W85DM2ZM4W;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing123;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing;
 				PRODUCT_NAME = CarWashing;
 			};
 			name = Release;

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -254,6 +253,8 @@
                 <outlet property="distanceLabel" destination="tgz-VX-5Ei" id="8Fi-kb-qp2"/>
                 <outlet property="favoriteButton" destination="sb1-hm-Thp" id="abs-SN-dSW"/>
                 <outlet property="freeCheckLabel" destination="9gs-hl-E62" id="OdP-o0-gNr"/>
+                <outlet property="img1" destination="nTf-A9-UN4" id="KQ8-5V-cam"/>
+                <outlet property="img2" destination="iJw-Mx-rww" id="0ty-q7-8xY"/>
                 <outlet property="nameLabel" destination="vsy-uM-wV1" id="tab-9V-xGg"/>
                 <outlet property="naviLabel" destination="6kP-OF-rnV" id="GWG-pI-sZL"/>
                 <outlet property="naviSmallBtn" destination="oC1-Xi-toJ" id="5re-6W-YcW"/>

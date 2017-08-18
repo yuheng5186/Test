@@ -11,6 +11,7 @@
 #import "AFNetworkingTool.h"
 #import "UdStorage.h"
 #import "HTTPDefine.h"
+#import "AppDelegate.h"
 
 @interface DSChangeNameController ()<UITextFieldDelegate>
 
@@ -39,7 +40,17 @@
     
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/UserInfoEdit",Khttp] success:^(NSDictionary *dict, BOOL success) {
         
-        NSLog(@"%@",dict);
+         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+         {
+             APPDELEGATE.currentUser.userName = self.userNameText.text;
+             NSNotification * notice = [NSNotification notificationWithName:@"updatenamesuccess" object:nil userInfo:@{@"username":self.userNameText.text}];
+             [[NSNotificationCenter defaultCenter]postNotification:notice];
+             [self.navigationController popViewControllerAnimated:YES];
+         }
+         else
+         {
+            [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+         }
 
     } fail:^(NSError *error) {
         [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
@@ -63,7 +74,7 @@
     
     self.userNameText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-240, 40)];
     //        self.phoneNumberText.placeholder    = @"输入验证码";
-    self.userNameText.placeholder    = @"15800781856";
+    self.userNameText.placeholder    = APPDELEGATE.currentUser.userName;
 //    self.userNameText.text           = @"15800781856";
     self.userNameText.delegate       = self;
     self.userNameText.returnKeyType  = UIReturnKeyDone;

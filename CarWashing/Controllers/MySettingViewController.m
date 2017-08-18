@@ -28,12 +28,16 @@
 #import "ShareView.h"
 #import "UIView+TYAlertView.h"
 #import "TYAlertController+BlurEffects.h"
+#import "HTTPDefine.h"
+#import "AppDelegate.h"
+
 
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,LKAlertViewDelegate>
 
 
 @property (nonatomic, strong) UITableView *tableView;
-
+@property (nonatomic, strong) UILabel *userNameLabel;
+@property (nonatomic, strong) UIButton  *editButton;
 @end
 
 @implementation MySettingViewController
@@ -50,6 +54,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.hidden = YES;
+    
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(noticeupdateUserName:) name:@"updatenamesuccess" object:nil];
+    
+    [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];
     
     [self createSubView];
 }
@@ -69,9 +78,24 @@
     
     
 //    UIImage *editImage              = [UIImage imageNamed:@"icon_defaultavatar"];
-    UIButton  *editButton           = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) iconName:@"touxiang" target:self action:@selector(editButtonClick:)];
-    editButton.top                  = titleNameLabel.bottom +Main_Screen_Height*5/667;
-    editButton.centerX              = titleNameLabel.centerX;
+    
+    
+    self.editButton           = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) iconName:@"touxiang" target:self action:@selector(editButtonClick:)];
+    self.editButton.top                  = titleNameLabel.bottom +Main_Screen_Height*5/667;
+    self.editButton.centerX              = titleNameLabel.centerX;
+    self.editButton.layer.masksToBounds = YES;
+    self.editButton.layer.cornerRadius = Main_Screen_Height*40/667;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
+        NSURL *url=[NSURL URLWithString:ImageURL];
+        NSData *data=[NSData dataWithContentsOfURL:url];
+        UIImage *img=[UIImage imageWithData:data];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.editButton setImage:img forState:UIControlStateNormal];
+        });
+    });
+    
 
     UIImage *settingImage           = [UIImage imageNamed:@"shezhi"];
     UIButton  *settingButton        = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, settingImage.size.width, settingImage.size.height) iconName:@"shezhi" target:self action:@selector(settingButtonClick:)];
@@ -79,13 +103,13 @@
     settingButton.right             = Main_Screen_Width -Main_Screen_Width*10/375;
     
     
-    NSString *userName              = @"15800781856";
+//    NSString *userName              = APPDELEGATE.currentUser.userName;
     UIFont *userNameFont            = [UIFont boldSystemFontOfSize:16];
-    UILabel *userNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:userName font:userNameFont] font:userNameFont text:userName isCenter:NO];
-    userNameLabel.textColor         = [UIColor whiteColor];
-    userNameLabel.top               = editButton.bottom +Main_Screen_Height*13/667;
-    userNameLabel.centerX           = upView.centerX;
-    
+    self.userNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:APPDELEGATE.currentUser.userName font:userNameFont] font:userNameFont text:APPDELEGATE.currentUser.userName isCenter:NO];
+    self.userNameLabel.textColor         = [UIColor whiteColor];
+    self.userNameLabel.top               = self.editButton.bottom +Main_Screen_Height*13/667;
+    self.userNameLabel.centerX           = upView.centerX;
+
     
     
     NSString *membershipString      = @"会员特权";
@@ -93,16 +117,16 @@
     UIButton *membershipButton      = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) text:membershipString font:membershipFont color:[UIColor whiteColor] target:self action:@selector(menbershipButtonClick:)];
     membershipButton.backgroundColor= [UIColor colorFromHex:@"#FDBB2C"];
     membershipButton.layer.cornerRadius = 10;
-    membershipButton.centerX        = editButton.centerX-Main_Screen_Width*50/375;
-    membershipButton.top            = userNameLabel.bottom +Main_Screen_Height*10/667;
+    membershipButton.centerX        = self.editButton.centerX-Main_Screen_Width*50/375;
+    membershipButton.top            = self.userNameLabel.bottom +Main_Screen_Height*10/667;
     
     NSString *signString      = @"会员签到";
     UIFont *signFont          = [UIFont systemFontOfSize:15];
     UIButton *signButton      = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) text:signString font:signFont color:[UIColor whiteColor] target:self action:@selector(signButtonClick:)];
     signButton.backgroundColor= [UIColor colorFromHex:@"#5AB2F1"];
     signButton.layer.cornerRadius = 10;
-    signButton.centerX        = editButton.centerX +Main_Screen_Width*50/375;
-    signButton.top            = userNameLabel.bottom +Main_Screen_Height*10/667;
+    signButton.centerX        = self.editButton.centerX +Main_Screen_Width*50/375;
+    signButton.top            = self.userNameLabel.bottom +Main_Screen_Height*10/667;
     
     UIView *backgroudView                  = [UIUtil drawLineInView:upView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*100/667) color:[UIColor whiteColor]];
     backgroudView.bottom                = upView.bottom;
@@ -372,6 +396,37 @@
         [self presentViewController:alertController animated:YES completion:nil];
     }
 
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.tableView reloadData];
+    
+}
+
+-(void)noticeupdateUserName:(NSNotification *)sender{
+    self.userNameLabel.frame = [UIUtil textRect:APPDELEGATE.currentUser.userName font:[UIFont boldSystemFontOfSize:16]];
+    self.userNameLabel.top               = self.editButton.bottom +Main_Screen_Height*13/667;
+    self.userNameLabel.centerX           = Main_Screen_Width/2;
+    self.userNameLabel.text = APPDELEGATE.currentUser.userName;
+}
+
+
+-(void)noticeupdateUserheadimg:(NSNotification *)sender{
+//    UIImageView *imageV = [[UIImageView alloc]init];
+//    NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
+//    NSURL *url=[NSURL URLWithString:ImageURL];
+//    [imageV sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"touxiang"]];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
+        NSURL *url=[NSURL URLWithString:ImageURL];
+        NSData *data=[NSData dataWithContentsOfURL:url];
+        UIImage *img=[UIImage imageWithData:data];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.editButton setImage:img forState:UIControlStateNormal];
+        });
+    });
 }
 
 #pragma mark ---LKAlertViewDelegate---

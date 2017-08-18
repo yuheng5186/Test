@@ -233,7 +233,7 @@
                                                             mutabilityOption:NSPropertyListImmutable
                                                                       format:NULL
                                                             errorDescription:NULL];
-            NSLog(@"%@",str);
+//            NSLog(@"%@",str);
             
             NSError *errorstr;
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&errorstr];
@@ -383,7 +383,7 @@
     
     NSString * hmutStr = [[mutStr componentsSeparatedByCharactersInSet: doNotWant]componentsJoinedByString: @""];
     
-    NSLog(@"%@",hmutStr);
+//    NSLog(@"%@",hmutStr);
     
     
     
@@ -422,8 +422,7 @@
     //去掉字符串中的换行符
     
     [mutStr replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:range2];
-    NSRange range3 = {0,mutStr.length};
-    [mutStr replaceOccurrencesOfString:@"\\" withString:@"" options:1 range:range3];
+    
     
     return mutStr;
     

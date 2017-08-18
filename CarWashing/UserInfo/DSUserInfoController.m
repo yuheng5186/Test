@@ -12,6 +12,7 @@
 #import "DSChangeNameController.h"
 #import<AVFoundation/AVMediaFormat.h>
 #import <AVFoundation/AVCaptureDevice.h>
+#import "UIImageView+WebCache.h"
 
 #import "LCMD5Tool.h"
 #import "AFNetworkingTool.h"
@@ -45,6 +46,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(noticeupdateUserName:) name:@"updatenamesuccess" object:nil];
     
     self.sexString = @"未填写";
     [self createSubView];
@@ -130,24 +134,43 @@
     if (indexPath.section == 0) {
         cell.textLabel.text     = @"头像";
         self.userImageView  = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, cell.contentView.centerY-11, 60, 60) imageName:@"gerenxinxitou"];
+        
+        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
+        NSURL *url=[NSURL URLWithString:ImageURL];
+        [self.userImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"gerenxinxitou"]];
+      
         self.userImageView.left          = Main_Screen_Width*280/375;
+        self.userImageView.layer.masksToBounds = YES;
+        self.userImageView.layer.cornerRadius = 30;
         
         
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
             cell.textLabel.text         = @"昵称";
-            cell.detailTextLabel.text   = @"15800781856";
+            cell.detailTextLabel.text   = APPDELEGATE.currentUser.userName;
             
         }else if (indexPath.row == 1){
             cell.textLabel.text         = @"手机号";
-            NSString  *number = @"15800781856";
+            NSString  *number = APPDELEGATE.currentUser.userPhone;
             NSString *userName              = [number stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
 
             cell.detailTextLabel.text   = userName;
         }
         else if (indexPath.row == 2) {
             cell.textLabel.text         = @"性别";
-            cell.detailTextLabel.text   = self.sexString;
+            if([APPDELEGATE.currentUser.userSex isKindOfClass:[NSNull null]])
+            {
+                cell.detailTextLabel.text   = self.sexString;
+            }
+            else if([APPDELEGATE.currentUser.userSex isEqual:@"0"])
+            {
+                cell.detailTextLabel.text   = @"男";
+            }
+            else
+            {
+                cell.detailTextLabel.text   = @"女";
+            }
+            
         }else {
         
             cell.textLabel.text         = @"微信绑定";
@@ -276,6 +299,8 @@
                     
                     
                     NSLog(@"%@",dict);
+                    APPDELEGATE.currentUser.userSex = @"0";
+                    [self.tableView reloadData];
                     
                     
                     
@@ -307,9 +332,9 @@
                 [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/UserInfoEdit",Khttp] success:^(NSDictionary *dict, BOOL success) {
                     
                     
-                    
+                    APPDELEGATE.currentUser.userSex = @"1";
                     NSLog(@"%@",dict);
-                    
+                    [self.tableView reloadData];
                     
                     
                 } fail:^(NSError *error) {
@@ -334,6 +359,9 @@
 - (void)processImage:(UIImage *)image
 {
     
+    
+    NSLog(@"%@",[UdStorage getObjectforKey:@"Account_Id"]);
+    
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                              @"ModifyType":@"1",
@@ -346,7 +374,25 @@
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/UserInfoEdit",Khttp] success:^(NSDictionary *dict, BOOL success) {
 
         NSLog(@"%@",dict);
-        self.userImageView.image = image;
+        
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            
+            APPDELEGATE.currentUser.userImagePath = [[dict objectForKey:@"JsonData"] objectForKey:@"Headimg"];
+            self.userImageView.image = image;
+            
+            NSNotification * notice = [NSNotification notificationWithName:@"updateheadimgsuccess" object:nil userInfo:nil];
+            [[NSNotificationCenter defaultCenter]postNotification:notice];
+            
+        }
+        else
+        {
+            [self.view showInfo:@"修改头像失败" autoHidden:YES interval:2];
+        }
+
+        
+        
         
     } fail:^(NSError *error) {
         [self.view showInfo:@"设置失败" autoHidden:YES interval:2];
@@ -361,6 +407,12 @@
     
     return dataStr;
 }
+
+-(void)noticeupdateUserName:(NSNotification *)sender{
+  
+    [self.tableView reloadData];
+}
+
 
 
 #pragma mark ---LKAlertViewDelegate---

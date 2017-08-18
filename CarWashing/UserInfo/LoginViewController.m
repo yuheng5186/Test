@@ -171,9 +171,9 @@
 
 //    if (self.userMobileFieldText.text.length == 11) {
 //        if (self.verifyFieldText.text.length == 4) {
-    
-            
-            
+//    
+//            
+//            
 //            NSDictionary *mulDic = @{
 //                                     @"Mobile":self.userMobileFieldText.text,
 //                                     @"VerCode":self.verifyFieldText.text
@@ -183,21 +183,25 @@
 //                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
 //                                     };
 //            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/Login",Khttp] success:^(NSDictionary *dict, BOOL success) {
+//             
+//                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+//                {
+//                    [UdStorage storageObject:[[dict objectForKey:@"JsonData"] objectForKey:@"Account_Id"] forKey:@"Account_Id"];
+    
+//                    APPDELEGATE.currentUser = [User getInstanceByDic:[dict objectForKey:@"JsonData"]];
+    
+                    MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
+                    [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
+//                }
+//                else
+//                {
+//                    [self.view showInfo:@"验证码不正确" autoHidden:YES interval:2];
+//                }
 //                
-//                
-//                
-//                NSLog(@"%@",dict);
-//                
-//                [UdStorage storageObject:[[dict objectForKey:@"JsonData"] objectForKey:@"Account_Id"] forKey:@"Account_Id"];
-            
-                MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
-                [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
-                
-                
 //            } fail:^(NSError *error) {
 //                [self.view showInfo:@"登录失败" autoHidden:YES interval:2];
 //            }];
-            
+    
             
             
             
