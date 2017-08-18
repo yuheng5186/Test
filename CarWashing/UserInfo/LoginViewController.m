@@ -15,6 +15,7 @@
 #import "AFNetworkingTool.h"
 #import "UdStorage.h"
 #import "HTTPDefine.h"
+#import "IQKeyboardManager.h"
 
 @interface LoginViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
@@ -55,6 +56,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [IQKeyboardManager sharedManager].enable = NO;
     // Do any additional setup after loading the view.
     
     [self createSubView];

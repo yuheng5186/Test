@@ -15,5 +15,5 @@
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSString *sayTime;
 @property (nonatomic, copy) NSString *starName;
-
+@property (nonatomic, copy) NSString *thumbNum;
 @end

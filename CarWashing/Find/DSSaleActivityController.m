@@ -8,9 +8,9 @@
 
 #import "DSSaleActivityController.h"
 #import "DSUserRightDetailController.h"
+#import "UIScrollView+EmptyDataSet.h"//第三方空白页
 
-
-@interface DSSaleActivityController ()<UITableViewDelegate,UITableViewDataSource>
+@interface DSSaleActivityController ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -35,12 +35,13 @@
     // Do any additional setup after loading the view.
     [self createSubView];
 }
-
 - (void) createSubView {
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStyleGrouped];
     self.tableView.top              = 0;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
+    self.tableView.emptyDataSetDelegate=self;
+    self.tableView.emptyDataSetSource=self;
 //    self.tableView.scrollEnabled    = NO;
     self.tableView.tableFooterView  = [UIView new];
     self.tableView.tableHeaderView  = [UIView new];
@@ -63,7 +64,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return 1;
+    return 0;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -192,6 +193,89 @@
 }
 
 
+#pragma mark - 无数据占位
+/**
+ *  调整垂直位置
+ */
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return -64.f;
+}
+
+//无数据占位
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+    return [UIImage imageNamed:@"youhuihuodong_kongbai"];
+}
+
+- (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView{
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath: @"youhuihuodong_kongbai"];
+    animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+    animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI_2, 0.0, 0.0,   1.0)];
+    animation.duration = 0.25;
+    animation.cumulative = YES;
+    animation.repeatCount = MAXFLOAT;
+    return animation;
+}
+//设置文字（上图下面的文字，我这个图片默认没有这个文字的）是富文本样式，扩展性很强！
+
+//这个是设置标题文字的
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @"活动正在赶来";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:16.0f],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+//设置占位图空白页的背景色( 图片优先级高于文字)
+
+- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
+    return [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
+}
+//设置按钮的文本和按钮的背景图片
+
+//- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state  {
+////    NSLog(@"buttonTitleForEmptyDataSet:点击上传照片");
+////    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f]};
+////    return [[NSAttributedString alloc] initWithString:@"点击上传照片" attributes:attributes];
+//}
+// 返回可以点击的按钮 上面带文字
+- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f],NSBackgroundColorAttributeName:[UIColor whiteColor]};
+    return [[NSAttributedString alloc] initWithString:@"aa" attributes:attribute];
+}
+
+//- (UIImage *)buttonImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
+//    return [UIImage imageNamed:@"aichexiaoditu"];
+//}
+-(UIImage *)buttonBackgroundImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state{
+    return [UIImage imageNamed:@"aichexiaoditu"];
+
+}
+//是否显示空白页，默认YES
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
+    return YES;
+}
+//是否允许点击，默认YES
+- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView {
+    return NO;
+}
+//是否允许滚动，默认NO
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
+    return YES;
+}
+//图片是否要动画效果，默认NO
+- (BOOL) emptyDataSetShouldAllowImageViewAnimate:(UIScrollView *)scrollView {
+    return YES;
+}
+//空白页点击事件
+- (void)emptyDataSetDidTapView:(UIScrollView *)scrollView {
+    NSLog(@"空白页点击事件");
+}
+//空白页按钮点击事件
+- (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView {
+    return NSLog(@"空白页按钮点击事件");
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

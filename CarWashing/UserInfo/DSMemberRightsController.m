@@ -8,7 +8,8 @@
 
 #import "DSMemberRightsController.h"
 #import "DSUpdateRuleController.h"
-@interface DSMemberRightsController ()
+#import "HYSlider.h"
+@interface DSMemberRightsController ()<HYSliderDelegate>
 
 @end
 
@@ -56,6 +57,15 @@
     membershipScoreNameLabel.top               = Main_Screen_Height*10/667;
     membershipScoreNameLabel.centerX           = membershipImageView.centerX;
     
+//  HYSlider *SliderView = [[HYSlider alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width -Main_Screen_Width*40/375, 10)];
+//    SliderView.currentValueColor = [UIColor orangeColor];
+//    SliderView.maxValue = 1000;
+//    SliderView.currentSliderValue = 600;
+//    SliderView.showTextColor = [UIColor orangeColor];
+//    SliderView.showTouchView = YES;
+//    SliderView.showScrollTextView = YES;
+//    SliderView.touchViewColor = [UIColor orangeColor];
+//    SliderView.delegate = self;
     UIProgressView *progressView          = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
     progressView.frame                    = CGRectMake(0, 0, Main_Screen_Width -Main_Screen_Width*40/375, 40);
     progressView.top                      = membershipScoreNameLabel.bottom +Main_Screen_Height*10/667;
@@ -69,8 +79,9 @@
     float number       = 1600/3000.0f;
     
     [progressView setProgress:number animated:YES];
-    
     [middleView addSubview:progressView];
+//
+//    [middleView addSubview:SliderView];
     
     
 
@@ -79,15 +90,15 @@
     UIFont *allScoreNameFont            = [UIFont systemFontOfSize:16];
     UILabel *allScoreNameLabel          = [UIUtil drawLabelInView:middleView frame:[UIUtil textRect:allScoreName font:allScoreNameFont] font:allScoreNameFont text:allScoreName isCenter:NO];
     allScoreNameLabel.textColor         = [UIColor colorFromHex:@"#8B8B8B"];
-    allScoreNameLabel.top               = progressView.bottom +Main_Screen_Height*5/667;
-    allScoreNameLabel.right             = progressView.right;
+    allScoreNameLabel.top               = progressView .bottom +Main_Screen_Height*5/667;
+    allScoreNameLabel.right             = progressView .right;
     
     NSString *scoreRemindName              = @"在获得800积分升级为黄金会员";
     UIFont *scoreRemindNameFont            = [UIFont systemFontOfSize:16];
     UILabel *scoreRemindNameLabel          = [UIUtil drawLabelInView:middleView frame:[UIUtil textRect:scoreRemindName font:scoreRemindNameFont] font:scoreRemindNameFont text:scoreRemindName isCenter:NO];
     scoreRemindNameLabel.textColor         = [UIColor colorFromHex:@"#868686"];
     scoreRemindNameLabel.top               = allScoreNameLabel.bottom +Main_Screen_Height*5/667;
-    scoreRemindNameLabel.centerX           = progressView.centerX;
+    scoreRemindNameLabel.centerX           = progressView .centerX;
     
     UIImageView *updateMemberButton        = [UIUtil drawCustomImgViewInView:middleView frame:CGRectMake(0, 0, Main_Screen_Width*20/375, Main_Screen_Height*20/667) imageName:@"shengji"];
     updateMemberButton.layer.cornerRadius  = 5;

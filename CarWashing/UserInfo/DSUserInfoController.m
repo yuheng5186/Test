@@ -207,13 +207,12 @@
             
             
             [actionSheet showInView:[AppDelegate sharedInstance].window.rootViewController.view];
-        }
-        else
-        {
+        }else {
             
             LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:nil message:@"”金顶洗车“想要打开“微信”" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认"];
             [alartView show];
         }
+
     }
     
 }

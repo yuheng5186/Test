@@ -9,7 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>DZNEmptyDataSet.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FMDB.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>IQKeyboardManager.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,7 +52,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>15B064AFF2D17F6B4A8977A4407BF85C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1A11954019778365B811CC73E59C682B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2ED2B0D2C6AF0894D10073F269845379</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5437890023F30CA85DFCA260CA914D48</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,6 +87,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>904F4F27FD314010A3812EB2A9306183</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9DC8D9E02903E93BD0B2FEC9D846EA20</key>
 		<dict>
 			<key>primary</key>
@@ -73,6 +103,11 @@
 			<true/>
 		</dict>
 		<key>AD747A33DF162CC0A9E6E05404DBECAE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F88D5E1A3CFE59C8982E4827D62C28FA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -10,9 +10,10 @@
 #import <Masonry.h>
 #import "MyCarViewCell.h"
 #import "IcreaseCarController.h"
+#import "UIScrollView+EmptyDataSet.h"//第三方空白页
 
+@interface MyCarPortController ()<UITableViewDataSource, UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
-@interface MyCarPortController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) UIView *increaseView;
 
@@ -68,6 +69,9 @@ static NSString *id_carListCell = @"id_carListCell";
     
     self.carListView.delegate = self;
     self.carListView.dataSource = self;
+#pragma maek-空白页
+    self.carListView.emptyDataSetSource = self;
+    self.carListView.emptyDataSetDelegate = self;
     self.carListView.rowHeight = 140;
     [self.carListView registerNib:[UINib nibWithNibName:@"MyCarViewCell" bundle:nil] forCellReuseIdentifier:id_carListCell];
     
@@ -89,7 +93,7 @@ static NSString *id_carListCell = @"id_carListCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -176,6 +180,82 @@ static NSString *id_carListCell = @"id_carListCell";
     
 }
 
+
+
+#pragma mark - 无数据占位
+//无数据占位
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+    return [UIImage imageNamed:@"cheku_kongbai"];
+}
+
+- (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView{
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath: @"cheku_kongbai"];
+    animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+    animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI_2, 0.0, 0.0,   1.0)];
+    animation.duration = 0.25;
+    animation.cumulative = YES;
+    animation.repeatCount = MAXFLOAT;
+    return animation;
+}
+//设置文字（上图下面的文字，我这个图片默认没有这个文字的）是富文本样式，扩展性很强！
+
+//这个是设置标题文字的
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @"小二已在此恭候你多时";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:16.0f],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+//设置按钮的文本和按钮的背景图片
+
+//- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state  {
+////    NSLog(@"buttonTitleForEmptyDataSet:点击上传照片");
+////    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f]};
+////    return [[NSAttributedString alloc] initWithString:@"点击上传照片" attributes:attributes];
+//}
+// 返回可以点击的按钮 上面带文字
+- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f]};
+    return [[NSAttributedString alloc] initWithString:@"" attributes:attribute];
+}
+
+
+- (UIImage *)buttonImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
+    return [UIImage imageNamed:@"button_image"];
+}
+//是否显示空白页，默认YES
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
+    return YES;
+}
+//是否允许点击，默认YES
+- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView {
+    return NO;
+}
+//是否允许滚动，默认NO
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
+    return YES;
+}
+//图片是否要动画效果，默认NO
+- (BOOL) emptyDataSetShouldAllowImageViewAnimate:(UIScrollView *)scrollView {
+    return YES;
+}
+//空白页点击事件
+- (void)emptyDataSetDidTapView:(UIScrollView *)scrollView {
+    NSLog(@"空白页点击事件");
+}
+//空白页按钮点击事件
+- (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView {
+    return NSLog(@"空白页按钮点击事件");
+}
+/**
+ *  调整垂直位置
+ */
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return -64.f;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -15,7 +15,7 @@
 #import "UIView+Uitls.h"
 #import "QFDatePickerView.h"
 #import "ProvinceShortController.h"
-
+#import "IQKeyboardManager.h"
 
 @interface DSMyCarController ()<UITableViewDelegate, UITableViewDataSource, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource, UITextFieldDelegate,UIGestureRecognizerDelegate>
 
@@ -33,7 +33,7 @@
 
 @property (nonatomic, weak) UILabel *lbl;
 @property (nonatomic, weak) UILabel *lbl2;
-
+@property (nonatomic, weak) UITextField *carNum;
 @end
 
 static NSString * HeaderId = @"header";
@@ -79,9 +79,11 @@ static NSString * HeaderId = @"header";
 }
 
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+   
+    [IQKeyboardManager sharedManager].enable = YES;
     //self.carImageView.image = [UIImage imageNamed:@"02"];
     
     for (int index = 0; index < 3; index++) {
@@ -215,7 +217,7 @@ static NSString * HeaderId = @"header";
     
     static NSString *id_carCell = @"id_carCell";
     UITableViewCell *carCell = [tableView dequeueReusableCellWithIdentifier:id_carCell];
-    
+    carCell.selectionStyle=UITableViewCellSelectionStyleNone;
     carCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:id_carCell];
     
     if (indexPath.section == 0) {
@@ -246,6 +248,7 @@ static NSString * HeaderId = @"header";
             numTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
             numTF.font = [UIFont systemFontOfSize:12];
             numTF.delegate = self;
+            self.carNum=numTF;
             [carCell.contentView addSubview:numTF];
             
             [provinceBtn mas_makeConstraints:^(MASConstraintMaker *make) {

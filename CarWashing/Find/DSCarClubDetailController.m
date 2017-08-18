@@ -11,7 +11,7 @@
 #import "DSActivityDetailCell.h"
 #import "UITableView+SDAutoTableViewCellHeight.h"
 #import "TPKeyboardAvoidingScrollView.h"
-
+#import "IQKeyboardManager.h"
 
 @interface DSCarClubDetailController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
@@ -38,6 +38,7 @@
 @property (nonatomic, strong) UIButton          *downGoodButton;
 @property (nonatomic, strong) UILabel           *sayShowLabel;
 @property (nonatomic, strong) UILabel           *goodShowLabel;
+@property (nonatomic, strong)UIView *downView;
 
 @property (nonatomic, strong) TPKeyboardAvoidingScrollView *scrollView;
 
@@ -60,9 +61,46 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//     [IQKeyboardManager sharedManager].enable = YES;
     // Do any additional setup after loading the view.
+    //添加监听，当键盘出现时收到消息
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
+    //添加监听，当键盘退出时收到消息
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:)name:UIKeyboardWillHideNotification object:nil];
     [self createSubView];
 }
+// 当键盘出现或改变时调用
+- (void)keyboardWillShow:(NSNotification *)aNotification
+{
+    // 获取键盘的高度
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    int height = keyboardRect.size.height;
+
+    if (self.userSayTextField.text.length ==0) {//键盘弹出
+        
+        self.downView.frame = CGRectMake(0, Main_Screen_Height -Main_Screen_Height*100/667-height, Main_Screen_Width, Main_Screen_Height*60/667);
+    }else{
+        CGRect rect =CGRectMake(0, Main_Screen_Height -Main_Screen_Height*100/667-height, Main_Screen_Width, Main_Screen_Height*60/667);
+        self.downView.frame = rect;
+    }
+}
+// 当键退出时调用
+- (void)keyboardWillHide:(NSNotification *)aNotification
+{
+
+    if (self.userSayTextField.text.length ==0) {//键盘弹出
+        
+        self.downView.frame = CGRectMake(0, Main_Screen_Height -Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*60/667);
+    }else{
+        CGRect rect =CGRectMake(0, Main_Screen_Height -Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*60/667);
+        self.downView.frame = rect;
+    }
+
+}
+
+
 - (void) createSubView {
 
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStylePlain];
@@ -280,9 +318,9 @@
     [header layoutSubviews];
     self.tableView.tableHeaderView  = header;
     
-    UIView *downView = [UIView new];
-    downView.frame = CGRectMake(0, Main_Screen_Height -Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*60/667);
-    downView.backgroundColor  = [UIColor whiteColor];
+    self.downView = [UIView new];
+    self.downView .frame = CGRectMake(0, Main_Screen_Height -Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*60/667);
+    self.downView .backgroundColor  = [UIColor whiteColor];
     
     
     self.userSayTextField                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-150, Main_Screen_Height*40/667)];
@@ -298,7 +336,7 @@
     self.userSayTextField.left           = Main_Screen_Width*10/375 ;
     self.userSayTextField.top            = Main_Screen_Height*10/667;
     [self.userSayTextField addTarget:self action:@selector(userSayTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
-    [downView addSubview:self.userSayTextField];
+    [self.downView  addSubview:self.userSayTextField];
     
     
     UIButton    *sayButton = [UIButton new];
@@ -306,7 +344,7 @@
     sayButton.backgroundColor  = [UIColor whiteColor];
     [sayButton addTarget:self action:@selector(sayButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     self.sayButton         = sayButton;
-    [downView addSubview:sayButton];
+    [self.downView  addSubview:sayButton];
     
     sayButton.sd_layout
     .leftSpaceToView(self.userSayTextField, 10)
@@ -320,11 +358,11 @@
     sayShowLabel.font                       = [UIFont systemFontOfSize:12];
     sayShowLabel.text                       = @"369";
     self.sayShowLabel                       = sayShowLabel;
-    [downView addSubview:sayShowLabel];
+    [self.downView  addSubview:sayShowLabel];
     
     sayShowLabel.sd_layout
     .leftSpaceToView(sayButton, 5)
-    .topSpaceToView(downView, 12)
+    .topSpaceToView(self.downView , 12)
     .widthIs(40)
     .heightIs(20);
     
@@ -333,7 +371,7 @@
     downGoodButton.backgroundColor  = [UIColor whiteColor];
     [downGoodButton addTarget:self action:@selector(downGoodButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     self.downGoodButton         = downGoodButton;
-    [downView addSubview:downGoodButton];
+    [self.downView  addSubview:downGoodButton];
     
     downGoodButton.sd_layout
     .leftSpaceToView(self.sayShowLabel, 5)
@@ -347,18 +385,18 @@
     goodShowLabel.font                       = [UIFont systemFontOfSize:12];
     goodShowLabel.text                       = @"369";
     self.sayShowLabel                       = goodShowLabel;
-    [downView addSubview:goodShowLabel];
+    [self.downView  addSubview:goodShowLabel];
     
     goodShowLabel.sd_layout
     .leftSpaceToView(downGoodButton, 0)
-    .topSpaceToView(downView, 12)
+    .topSpaceToView(self.downView , 12)
     .widthIs(40)
     .heightIs(20);
     
     
-    [downView layoutSubviews];
+    [self.downView  layoutSubviews];
 
-    [self.contentView addSubview:downView];
+    [self.contentView addSubview:self.downView ];
     
 //    [self.scrollView addSubview:self.contentView];
 //    [self.view addSubview:self.scrollView];
@@ -380,7 +418,7 @@
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
-    return YES;
+       return YES;
 }
 - (void) sayButtonClick:(id)sender {
 
@@ -496,6 +534,17 @@
     if (!cell) {
         cell = [[DSActivityDetailCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellStatic];
     }
+    cell.thumbOnclick=^(UIButton *btn){
+        if (btn.selected) {
+            
+             [self.view showInfo:@"取消点赞!" autoHidden:YES];
+        }else{
+             [self.view showInfo:@"点赞成功!" autoHidden:YES];
+            
+        }
+        btn.selected=!btn.selected;
+    
+    };
     cell.model  = self.modelsArray[indexPath.row];
     
     

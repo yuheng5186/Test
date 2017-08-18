@@ -73,6 +73,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
     // Do any additional setup after loading the view.
     self.title = @"首页";
     self.navigationController.navigationBar.hidden = YES;
@@ -548,8 +549,6 @@
 //    
 //    UITapGestureRecognizer  *tapNewGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapNewButtonClick:)];
 //    [newBagView addGestureRecognizer:tapNewGesture];
-    
-    
 }
 
 #pragma mark - UITableViewDataSource

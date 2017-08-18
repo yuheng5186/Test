@@ -12,5 +12,5 @@
 @interface DSActivityDetailCell : UITableViewCell
 
 @property (nonatomic, strong) DSUserModel *model;
-
+@property(nonatomic,copy) void (^thumbOnclick)(UIButton *btn);
 @end

@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CarWashing/UserInfo/DSUserInfoController.m"
-            timestampString = "524648656.780879"
+            filePath = "CarWashing/Controllers/MySettingViewController.m"
+            timestampString = "524660346.096954"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "312"
-            endingLineNumber = "312"
-            landmarkName = "-actionSheet:clickedButtonAtIndex:"
+            startingLineNumber = "416"
+            endingLineNumber = "416"
+            landmarkName = "-noticeupdateUserheadimg:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
