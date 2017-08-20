@@ -19,7 +19,7 @@
 - (UIImageView *)cheakView
 {
     if (_cheakView == nil) {
-        _cheakView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"选中对号"]];
+//        _cheakView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"选中对号"]];
         self.accessoryView = _cheakView;
     }
     return _cheakView;
@@ -28,7 +28,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
+//        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }

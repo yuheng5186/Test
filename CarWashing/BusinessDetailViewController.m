@@ -17,6 +17,11 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+#import "ShareView.h"
+#import "UIView+TYAlertView.h"
+#import "TYAlertController+BlurEffects.h"
+#import "HTTPDefine.h"
+
 
 @interface BusinessDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, CLLocationManagerDelegate>
 
@@ -63,6 +68,8 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     //self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
+    NSLog(@"%@",self.dic);
+    
     [self setupUI];
 }
 
@@ -74,7 +81,18 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     UIImageView *detaiImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 375/2)];
     
-    detaiImgView.image = [UIImage imageNamed:@"hangdiantu"];
+//    detaiImgView.image = [UIImage imageNamed:@"hangdiantu"];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,self.dic[@"Img"]];
+        NSURL *url=[NSURL URLWithString:ImageURL];
+        NSData *data=[NSData dataWithContentsOfURL:url];
+        UIImage *img=[UIImage imageWithData:data];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            detaiImgView.image = img;
+        });
+    });
+
     
     [containHeadView addSubview:detaiImgView];
     
@@ -84,6 +102,63 @@ static NSString *businessCommentCell = @"businessCommentCell";
     headerView.frame = CGRectMake(0, 375/2, Main_Screen_Width, 196);
     
     self.headerView = headerView;
+    
+    headerView.nameLabel.text = self.dic[@"MerName"];
+    headerView.adressLabel.text = self.dic[@"MerAddress"];
+    [headerView.starImageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",self.dic[@"Score"]] substringToIndex:1]]]];
+    headerView.scoreLabel.text = [NSString stringWithFormat:@"%@分",self.dic[@"Score"]];
+    headerView.adressLabel2.text = self.dic[@"MerAddress"];
+    headerView.openTimeLabel.text = self.dic[@"ServiceTime"];
+    headerView.distanceLabel.text = [NSString stringWithFormat:@"%@km",self.dic[@"Distance"]];
+    headerView.ServiceNumLabel.text = [NSString stringWithFormat:@"服务%@单",self.dic[@"ServiceCount"]];
+    if([self.dic[@"ShopType"] intValue] == 1)
+    {
+        headerView.shopTypeLabel.text = @"洗车服务";
+    }
+    
+    headerView.freeCheckLabel.hidden = YES;
+    headerView.qualityLabel.hidden = YES;
+    
+    NSArray *lab = [[self.dic objectForKey:@"MerFlag"] componentsSeparatedByString:@","];
+    UILabel *MerflagsLabel;
+    for (int i = 0; i < [lab count]; i++) {
+        MerflagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20 + i % 3 * 67,  i / 3 * 25 + 83, 60, 15)];
+        MerflagsLabel.text = lab[i];
+        MerflagsLabel.backgroundColor = [UIColor redColor];
+        [MerflagsLabel setFont:[UIFont fontWithName:@"Helvetica" size:11 ]];
+        MerflagsLabel.textColor = [UIColor colorFromHex:@"#fefefe"];
+        MerflagsLabel.backgroundColor = [UIColor colorFromHex:@"#ff7556"];
+        MerflagsLabel.textAlignment = NSTextAlignmentCenter;
+        MerflagsLabel.layer.masksToBounds = YES;
+        MerflagsLabel.layer.cornerRadius = 7.5;
+        [headerView addSubview:MerflagsLabel];
+    }
+    
+//    if([self.dic objectForKey:@"MerFlag"])
+//    {
+//        if([lab count] <= 3)
+//        {
+//           
+//        }
+//        else if(([lab count] > 3) && ([lab count] <= 6))
+//        {
+//            containHeadView.frame = CGRectMake(0, 0, Main_Screen_Width, 375/2 + 196+15);
+//            headerView.frame = CGRectMake(0, 375/2, Main_Screen_Width, 196+15);
+//            headerView.separateView.frame.origin.y
+//            
+//        }
+//        else
+//        {
+//            containHeadView.frame = CGRectMake(0, 0, Main_Screen_Width, 375/2 + 196+30);
+//            headerView.frame = CGRectMake(0, 375/2, Main_Screen_Width, 196+30);
+//        }
+//        
+//    }
+   
+
+    
+    
+    
     [containHeadView addSubview:headerView];
     //detaiImgView.bottom  = headerView.top;
 
@@ -206,8 +281,10 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 #pragma mark - 点击拨打客服
 - (void)didClickServiceBtn:(UIButton *)button {
-    
-    [PhoneHelper dial: @"1008611"];
+    NSString *message = @"是否拨打商家电话";
+    NSString *title = @"";
+    [self showAlertWithTitle:title message:message];
+    [PhoneHelper dial: self.dic[@"MerPhone"]];
 }
 
 #pragma mark - 点击查看全部评价
@@ -241,7 +318,14 @@ static NSString *businessCommentCell = @"businessCommentCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    if(section == 1)
+    {
+        return [self.dic[@"CommentCount"] integerValue];
+    }
+    else
+    {
+        return 4;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -334,7 +418,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     if (section == 0) {
         textLab.text = @"服务活动";
     }else{
-        textLab.text = @"评论 (58)";
+        textLab.text = [NSString stringWithFormat:@"评论 (%@)",self.dic[@"CommentCount"]];
     }
     
     return textLab.text;
@@ -353,6 +437,12 @@ static NSString *businessCommentCell = @"businessCommentCell";
 #pragma mark - 点击分享按钮
 - (void)didClickShareButton:(UIButton *)button {
     
+    ShareView *shareView = [ShareView createViewFromNib];
+    TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:shareView preferredStyle:TYAlertControllerStyleAlert];
+    
+    [alertController setBlurEffectWithView:self.view];
+    //[alertController setBlurEffectWithView:(UIView *)view style:(BlurEffectStyle)blurStyle];
+    [self presentViewController:alertController animated:YES completion:nil];
     
 }
 

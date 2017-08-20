@@ -148,8 +148,8 @@ static NSString *id_cancelCell = @"id_cancelCell";
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
     NSString *text = @"你还没有订单信息";
     
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:16.0f],
-                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:13.0f],
+                                 NSForegroundColorAttributeName: [UIColor colorFromHex: @"#4a4a4a"]};
     
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
@@ -159,21 +159,15 @@ static NSString *id_cancelCell = @"id_cancelCell";
     return [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
 }
 //设置按钮的文本和按钮的背景图片
-
-//- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state  {
-////    NSLog(@"buttonTitleForEmptyDataSet:点击上传照片");
-////    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f]};
-////    return [[NSAttributedString alloc] initWithString:@"点击上传照片" attributes:attributes];
-//}
-// 返回可以点击的按钮 上面带文字
-- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-    NSDictionary *attribute = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f]};
-    return [[NSAttributedString alloc] initWithString:@"马上去洗车" attributes:attribute];
+- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state  {
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],NSForegroundColorAttributeName:[UIColor whiteColor]};
+    return [[NSAttributedString alloc] initWithString:@"马上去洗车" attributes:attributes];
 }
-
-
+-(UIImage *)buttonBackgroundImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state{
+     return [UIImage imageNamed:@"qxiche"];
+}
 - (UIImage *)buttonImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-    return [UIImage imageNamed:@"button_image"];
+    return [UIImage imageNamed:@"qxiche"];
 }
 //是否显示空白页，默认YES
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
@@ -204,7 +198,7 @@ static NSString *id_cancelCell = @"id_cancelCell";
  */
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return -64.f;
+    return -64.f-44-55;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

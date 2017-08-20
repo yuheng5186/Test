@@ -203,8 +203,8 @@ static NSString *id_carListCell = @"id_carListCell";
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
     NSString *text = @"小二已在此恭候你多时";
     
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:16.0f],
-                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:13.0f],
+                                 NSForegroundColorAttributeName: [UIColor colorFromHex: @"#4a4a4a"]};
     
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
@@ -254,7 +254,7 @@ static NSString *id_carListCell = @"id_carListCell";
  */
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return -64.f;
+    return -64.f-105;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

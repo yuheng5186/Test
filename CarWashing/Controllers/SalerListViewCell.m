@@ -37,6 +37,7 @@
     
     self.typeShopLabel.textColor = [UIColor colorFromHex:@"#868686"];
     self.distanceLabel.textColor = [UIColor colorFromHex:@"#868686"];
+    self.ScoreLabel.textColor = [UIColor colorFromHex:@"#868686"];
     
 }
 

@@ -11,6 +11,10 @@
 #import "AppDelegate.h"
 #import "DSAgreementController.h"
 #import "TPKeyboardAvoidingScrollView.h"
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "UdStorage.h"
+#import "HTTPDefine.h"
 #import "IQKeyboardManager.h"
 
 @interface LoginViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
@@ -167,8 +171,41 @@
 
 //    if (self.userMobileFieldText.text.length == 11) {
 //        if (self.verifyFieldText.text.length == 4) {
-            MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
-            [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
+//    
+//            
+//            
+//            NSDictionary *mulDic = @{
+//                                     @"Mobile":self.userMobileFieldText.text,
+//                                     @"VerCode":self.verifyFieldText.text
+//                                     };
+//            NSDictionary *params = @{
+//                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+//                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+//                                     };
+//            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/Login",Khttp] success:^(NSDictionary *dict, BOOL success) {
+//             
+//                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+//                {
+//                    [UdStorage storageObject:[[dict objectForKey:@"JsonData"] objectForKey:@"Account_Id"] forKey:@"Account_Id"];
+    
+//                    APPDELEGATE.currentUser = [User getInstanceByDic:[dict objectForKey:@"JsonData"]];
+    
+                    MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
+                    [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
+//                }
+//                else
+//                {
+//                    [self.view showInfo:@"验证码不正确" autoHidden:YES interval:2];
+//                }
+//                
+//            } fail:^(NSError *error) {
+//                [self.view showInfo:@"登录失败" autoHidden:YES interval:2];
+//            }];
+    
+            
+            
+            
+            
 //        }else{
 //            [self.view showInfo:@"请输入4位验证码！" autoHidden:YES interval:2];
 //        }
@@ -300,16 +337,46 @@
 - (void) getVeriifyByButtonClick:(id)sender {
     
     if (self.userMobileFieldText.text.length == 11) {
+        
+        
         [self startTimer];
         [self.view showInfo:@"验证码发送成功，请在手机上查收！" autoHidden:YES interval:2];
+    
+        NSDictionary *mulDic = @{@"Mobile":self.userMobileFieldText.text};
+//        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//        manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+//        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil];
+//        NSMutableData *tempJsonData = [NSMutableData dataWithData:jsonData];
+//        [manager POST:@"http://192.168.3.101:8090/api/User/GetVerCode" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+//            NSLog(@"请求成功---%@", responseObject);
+//            NSString *jsonString;
+//            jsonString = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+//            NSLog(@"请求成功string---%@", jsonString);
+//            NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+//            NSLog(@"请求成功---%@", dic);
+//        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//            NSLog(@"请求失败---%@", error);
+//        }];
+
+
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetVerCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            NSLog(@"%@",dict);
+        } fail:^(NSError *error) {
+            NSLog(@"%@",@"fail");
+        }];
+        
     }else
     {
         [self.view showInfo:@"请输入正确的11位手机号码" autoHidden:YES];
 
     }
-    
-
 }
+
 
 - (void)startTimer
 {

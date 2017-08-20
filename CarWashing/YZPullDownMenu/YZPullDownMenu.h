@@ -10,6 +10,8 @@
 
 @class YZPullDownItem,YZPullDownMenu;
 
+
+
 /**
  *  下拉菜单数据源协议
  */
@@ -23,6 +25,8 @@
  *  @return 下拉菜单有多少列
  */
 - (NSInteger)numberOfColsInMenu:(YZPullDownMenu *)pullDownMenu;
+
+
 
 /**
  *  下拉菜单每列按钮外观
@@ -102,4 +106,6 @@ extern NSString * const YZUpdateMenuTitleNote;
  *  刷新下拉菜单
  */
 - (void)reload;
+
+- (void)dismiss;
 @end

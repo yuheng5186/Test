@@ -24,7 +24,7 @@ static NSString * const ID = @"cell";
     
     _selectedCol = 0;
     
-    _titleArray = @[@"综合排序",@"人气排序",@"评分排序",@"评价最多"];
+    _titleArray = @[@"默认排序",@"附近优先",@"评分最高",@"服务最多"];
     
     [self.tableView registerClass:[YZSortCell class] forCellReuseIdentifier:ID];
     
@@ -51,7 +51,7 @@ static NSString * const ID = @"cell";
     if (indexPath.row == 0) {
         [cell setSelected:YES animated:NO];
     }
-    
+    [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     return cell;
 }
 

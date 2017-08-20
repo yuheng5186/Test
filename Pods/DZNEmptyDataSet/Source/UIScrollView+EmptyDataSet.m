@@ -506,11 +506,13 @@ static char const * const kEmptyDataSetView =       "emptyDataSetView";
             // Configure button
             if (buttonImage) {
                 [view.button setImage:buttonImage forState:UIControlStateNormal];
+               
                 [view.button setImage:[self dzn_buttonImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
             }
             else if (buttonTitle) {
                 [view.button setAttributedTitle:buttonTitle forState:UIControlStateNormal];
                 [view.button setAttributedTitle:[self dzn_buttonTitleForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+                 view.button .contentMode=UIViewContentModeScaleAspectFill;
                 [view.button setBackgroundImage:[self dzn_buttonBackgroundImageForState:UIControlStateNormal] forState:UIControlStateNormal];
                 [view.button setBackgroundImage:[self dzn_buttonBackgroundImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
             }

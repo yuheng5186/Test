@@ -12,8 +12,10 @@
 #import "UITableView+SDAutoTableViewCellHeight.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "IQKeyboardManager.h"
+#import "UIScrollView+EmptyDataSet.h"//第三方空白页
 
-@interface DSCarClubDetailController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+
+@interface DSCarClubDetailController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 
@@ -103,16 +105,19 @@
 
 - (void) createSubView {
 
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStylePlain];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height+64) style:UITableViewStylePlain];
     self.tableView.top              = 0;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
+#pragma maek-空白页
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
     //    self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor  = [UIColor whiteColor];
     //    self.tableView.scrollEnabled    = NO;
     //    self.tableView.tableFooterView  = [UIView new];
-    self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 180, 0);
+    self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 380, 0);
     [self.contentView addSubview:self.tableView];
+    self.tableView.backgroundColor=[UIColor clearColor];
     
     [self createHeaderView];
     [self creatModelsWithCount:10];
@@ -521,9 +526,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    return 0;
     
-    
-    return self.modelsArray.count;
+//    return self.modelsArray.count;
 }
 
 
@@ -551,6 +556,85 @@
     return cell;
 }
 
+#pragma mark - 无数据占位
+//无数据占位
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+    return [UIImage imageNamed:@"pinglun_kongbai"];
+}
+
+- (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView{
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath: @"pinglun_kongbai"];
+    animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+    animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI_2, 0.0, 0.0,   1.0)];
+    animation.duration = 0.25;
+    animation.cumulative = YES;
+    animation.repeatCount = MAXFLOAT;
+    return animation;
+}
+//设置文字（上图下面的文字，我这个图片默认没有这个文字的）是富文本样式，扩展性很强！
+
+//这个是设置标题文字的
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @"暂无评论信息";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:16.0f],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+//设置占位图空白页的背景色( 图片优先级高于文字)
+
+- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
+    return [UIColor greenColor];
+}
+// 返回可以点击的按钮 上面带文字
+- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f]};
+    return [[NSAttributedString alloc] initWithString:@"afdfdgfd" attributes:attribute];
+}
+
+
+- (UIImage *)buttonImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
+    return [UIImage imageNamed:@"pinglun_kongbai"];
+}
+//是否显示空白页，默认YES
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
+    return YES;
+}
+//是否允许点击，默认YES
+- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView {
+    return NO;
+}
+//是否允许滚动，默认NO
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
+    return YES;
+}
+//图片是否要动画效果，默认NO
+- (BOOL) emptyDataSetShouldAllowImageViewAnimate:(UIScrollView *)scrollView {
+    return YES;
+}
+//空白页点击事件
+- (void)emptyDataSetDidTapView:(UIScrollView *)scrollView {
+    NSLog(@"空白页点击事件");
+}
+//空白页按钮点击事件
+- (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView {
+    return NSLog(@"空白页按钮点击事件");
+}
+/**
+ *  调整垂直位置
+ */
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{//偏移量计算逻辑 ->
+//    当前屏幕一半的高度 = (获取屏幕的的高度->减去导航栏高度)/2
+    //判断headerView高度是否超过屏幕的一半
+    BOOL isHeader =  (CGRectGetHeight(self.tableView.tableHeaderView.frame)>(self.view.bounds.size.height-64)/2);
+    //计算偏移量 (bgView 为空白占位图)
+//    CGFloat height=CGRectGetHeight(self.tableView.tableHeaderView.frame.size.height-(self.view.bounds.size.height-64)/2));
+//    return isHeader?self.tableView.tableHeaderView.frame.size.height-(self.view.bounds.size.height-64)/2:-64;
+    return 450;
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
