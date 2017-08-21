@@ -39,9 +39,9 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         UITextField *activateTF = [[UITextField alloc] init];
         activateTF.backgroundColor = [UIColor whiteColor];
         activateTF.placeholder = @"  请输入激活码";
-        activateTF.font = [UIFont systemFontOfSize:11];
+        activateTF.font = [UIFont systemFontOfSize:Main_Screen_Height*11/667];
         activateTF.textColor = [UIColor colorFromHex:@"#c8c8c8"];
-        activateTF.layer.cornerRadius = 15;
+        activateTF.layer.cornerRadius = Main_Screen_Height*15/667;
         activateTF.clipsToBounds = YES;
         _activateTF = activateTF;
         [self.view addSubview:activateTF];
@@ -59,8 +59,8 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         [activateBtn setTitle:@"激活卡" forState:UIControlStateNormal];
         activateBtn.backgroundColor = [UIColor colorFromHex:@"#febb02"];
         activateBtn.titleLabel.tintColor = [UIColor colorFromHex:@"#ffffff"];
-        activateBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-        activateBtn.layer.cornerRadius = 15;
+        activateBtn.titleLabel.font = [UIFont systemFontOfSize:Main_Screen_Height*13/667];
+        activateBtn.layer.cornerRadius = Main_Screen_Height*15/667;
         activateBtn.clipsToBounds = YES;
         _activateBtn = activateBtn;
         [self.view addSubview:_activateBtn];
@@ -111,24 +111,24 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     //
     //    [self addCardChildViewControllers];
     [self.activateTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).mas_offset(12);
-        make.top.equalTo(self.view).mas_offset(74);
-        make.width.mas_equalTo(260);
-        make.height.mas_equalTo(30);
+        make.left.equalTo(self.view).mas_offset(Main_Screen_Width*12/375);
+        make.top.equalTo(self.view).mas_offset(64+Main_Screen_Height*10/667);
+        make.width.mas_equalTo(Main_Screen_Width*260/375);
+        make.height.mas_equalTo(Main_Screen_Height*30/667);
     }];
     
     [self.activateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.view).mas_equalTo(-12);
-        make.top.equalTo(self.view).mas_equalTo(74);
-        make.width.mas_equalTo(75);
-        make.height.mas_equalTo(30);
+        make.right.equalTo(self.view).mas_equalTo(-Main_Screen_Width*12/375);
+        make.top.equalTo(self.view).mas_equalTo(64+Main_Screen_Height*10/667);
+        make.width.mas_equalTo(Main_Screen_Width*75/375);
+        make.height.mas_equalTo(Main_Screen_Height*30/667);
     }];
     
     
     [self.rechargeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_activateTF.mas_bottom).mas_offset(20);
-        make.left.equalTo(self.view).mas_offset(10);
-        make.right.equalTo(self.view).mas_offset(-10);
+        make.top.equalTo(_activateTF.mas_bottom).mas_offset(Main_Screen_Height*20/667);
+        make.left.equalTo(self.view).mas_offset(Main_Screen_Width*10/375);
+        make.right.equalTo(self.view).mas_offset(-Main_Screen_Width*10/375);
         make.height.mas_equalTo(self.view.height);
     }];
     
@@ -136,7 +136,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     self.rechargeView.dataSource = self;
     
     [self.rechargeView registerNib:[UINib nibWithNibName:@"RechargeCell" bundle:nil] forCellReuseIdentifier:id_rechargeCell];
-    self.rechargeView.rowHeight = 100;
+    self.rechargeView.rowHeight = Main_Screen_Height*100/667;
     //self.rechargeView.backgroundColor = [UIColor whiteColor];
     
     UIView *blankView = [[UIView alloc] initWithFrame:CGRectMake(_activateTF.frame.origin.x,_activateTF.frame.origin.y,15.0, _activateTF.frame.size.height)];
