@@ -107,6 +107,12 @@
 
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height+Main_Screen_Height*64/667) style:UITableViewStylePlain];
     self.tableView.top              = 0;
+
+    if (Main_Screen_Height == 568) {
+        self.tableView.top              = Main_Screen_Height*10/667;
+
+    }
+
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
 #pragma maek-空白页
