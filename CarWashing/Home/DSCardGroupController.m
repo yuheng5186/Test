@@ -42,6 +42,8 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         activateTF.font = [UIFont systemFontOfSize:Main_Screen_Height*11/667];
         activateTF.textColor = [UIColor colorFromHex:@"#c8c8c8"];
         activateTF.layer.cornerRadius = Main_Screen_Height*15/667;
+        activateTF.layer.borderWidth  = 1;
+        activateTF.layer.borderColor  = [UIColor colorFromHex:@"#c8c8c8"].CGColor;
         activateTF.clipsToBounds = YES;
         _activateTF = activateTF;
         [self.view addSubview:activateTF];
@@ -110,9 +112,15 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     //    [self setupScrollView];
     //
     //    [self addCardChildViewControllers];
+    
+    
+    UIView *titleView                  = [UIUtil drawLineInView:self.view frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*50/667) color:[UIColor whiteColor]];
+    titleView.top                      = 64;
+    
+    
     [self.activateTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).mas_offset(Main_Screen_Width*12/375);
-        make.top.equalTo(self.view).mas_offset(64+Main_Screen_Height*10/667);
+        make.left.equalTo(titleView).mas_offset(Main_Screen_Width*12/375);
+        make.top.equalTo(titleView).mas_offset(Main_Screen_Height*10/667);
         make.width.mas_equalTo(Main_Screen_Width*260/375);
         make.height.mas_equalTo(Main_Screen_Height*30/667);
     }];
@@ -126,7 +134,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
     
     [self.rechargeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_activateTF.mas_bottom).mas_offset(Main_Screen_Height*20/667);
+        make.top.equalTo(titleView.mas_bottom).mas_offset(0);
         make.left.equalTo(self.view).mas_offset(Main_Screen_Width*10/375);
         make.right.equalTo(self.view).mas_offset(-Main_Screen_Width*10/375);
         make.height.mas_equalTo(self.view.height);
