@@ -73,7 +73,7 @@
     scanImageView.width = Main_Screen_Width - 65*2;
     scanImageView.height = Main_Screen_Width - 65*2;
     scanImageView.centerX = Main_Screen_Width/2;
-    scanImageView.centerY = self.contentView.height/2 -100;
+    scanImageView.centerY = self.contentView.height/2-50;
     
     _scanNetImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"saomiaozhong"]];
     
@@ -83,30 +83,30 @@
     
     NSString *tooltip = @"请对准机器上的二维码";
     
-    UIFont *textFont = [UIFont boldSystemFontOfSize:17];
+    UIFont *textFont = [UIFont boldSystemFontOfSize:Main_Screen_Height*18/667];
     UILabel *lbl = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, [UIUtil textHeight:tooltip font:textFont]) font:textFont text:tooltip isCenter:YES color:[UIColor whiteColor]];
     lbl.numberOfLines = 0;
     lbl.centerY = scanImageView.top/2;
-    lbl.top     = self.scanWindow.bottom +20;
+    lbl.top     = self.scanWindow.bottom +Main_Screen_Height*20/667;
     
     
-    self.flashlight     = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, 100, 50) iconName:@"Flashlight_N" target:self action:@selector(flashlightButtonClcik:)];
-    self.flashlight.top = lbl.bottom +50;
+    self.flashlight     = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*50/667) iconName:@"Flashlight_N" target:self action:@selector(flashlightButtonClcik:)];
+    self.flashlight.top = lbl.bottom +Main_Screen_Height*50/667;
     self.flashlight.right = scanImageView.right;
     
     NSString  *openString     = @"打开手电筒";
-    UIFont    *openStringFont = [UIFont systemFontOfSize:16];
-    self.flashlightSwitch     = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, 150, 20) font:openStringFont text:openString isCenter:NO];
+    UIFont    *openStringFont = [UIFont systemFontOfSize:Main_Screen_Height*15/667];
+    self.flashlightSwitch     = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*20/667) font:openStringFont text:openString isCenter:NO];
     self.flashlightSwitch.textColor = [UIColor whiteColor];
     self.flashlightSwitch.top = self.flashlight.bottom;
-    self.flashlightSwitch.left  = self.flashlight.left+10;
+    self.flashlightSwitch.left  = self.flashlight.left+Main_Screen_Height*10/667;
     
-    self.inputButton        = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, 100, 50) iconName:@"shurubianhao" target:self action:@selector(inputButtonClcik:)];
-    self.inputButton.top    = lbl.bottom +50;
+    self.inputButton        = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*50/667) iconName:@"shurubianhao" target:self action:@selector(inputButtonClcik:)];
+    self.inputButton.top    = lbl.bottom +Main_Screen_Height*50/667;
     self.inputButton.left   = scanImageView.left;
     
     NSString  *inpotString       = @"输入机器编号开锁";
-    UIFont    *inputStringFont   = [UIFont systemFontOfSize:16];
+    UIFont    *inputStringFont   = [UIFont systemFontOfSize:Main_Screen_Height*15/667];
     self.inputLabel             = [UIUtil drawLabelInView:self.contentView frame:[UIUtil textRect:inpotString font:inputStringFont]font:inputStringFont text:inpotString isCenter:NO];
     self.inputLabel.textColor   = [UIColor whiteColor];
     self.inputLabel.top         = self.inputButton.bottom;
