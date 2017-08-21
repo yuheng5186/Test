@@ -115,7 +115,7 @@
     //    self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
     //    self.tableView.scrollEnabled    = NO;
     //    self.tableView.tableFooterView  = [UIView new];
-    self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 380, 0);
+    self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 180, 0);
     [self.contentView addSubview:self.tableView];
     self.tableView.backgroundColor=[UIColor clearColor];
     
@@ -297,7 +297,7 @@
     UILabel *sayNumberLab                   = [UILabel new];
     sayNumberLab.textColor                  = [UIColor blackColor];
     sayNumberLab.font                       = [UIFont systemFontOfSize:16];
-    sayNumberLab.text                       = @"评论（28）";
+    sayNumberLab.text                       = @"评论（0）";
     self.sayNumberLab                       = sayNumberLab;
     [header addSubview:sayNumberLab];
     
@@ -322,6 +322,27 @@
     [header setupAutoHeightWithBottomView:bottomLine bottomMargin:10];
     [header layoutSubviews];
     self.tableView.tableHeaderView  = header;
+    
+    
+    
+    UIView *v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 215)];
+    v.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:v];
+    
+    
+    UIImageView *ImgView = [[UIImageView alloc] initWithFrame:CGRectMake(120, 27, 135, 120)];
+    ImgView.image = [UIImage imageNamed:@"pinglun_kongbai"];
+    [v addSubview:ImgView];
+    
+    UILabel *nocommentlab = [[UILabel alloc]initWithFrame:CGRectMake(0, ImgView.frame.origin.y+ImgView.frame.size.height+17, Main_Screen_Width, 14)];
+    nocommentlab.text = @"暂无评价信息";
+    nocommentlab.font = [UIFont systemFontOfSize:16];
+    nocommentlab.textAlignment = NSTextAlignmentCenter;
+    nocommentlab.textColor = [UIColor colorFromHex:@"#999999"];
+    [v addSubview:nocommentlab];
+    self.tableView.tableFooterView = v;
+    
+    
     
     self.downView = [UIView new];
     self.downView .frame = CGRectMake(0, Main_Screen_Height -Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*60/667);
@@ -585,9 +606,7 @@
 }
 //设置占位图空白页的背景色( 图片优先级高于文字)
 
-- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
-    return [UIColor greenColor];
-}
+
 // 返回可以点击的按钮 上面带文字
 - (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
     NSDictionary *attribute = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f]};

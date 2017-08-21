@@ -17,6 +17,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *freeCheckLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *qualityProtectedLabel;
+@property (weak, nonatomic) IBOutlet UILabel *namelabel;
+@property (weak, nonatomic) IBOutlet UILabel *addresslabel;
+@property (weak, nonatomic) IBOutlet UILabel *typelabel;
 
 
 

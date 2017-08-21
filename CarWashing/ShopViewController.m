@@ -52,10 +52,12 @@
     
     //门店简介
     ShopIntroController *introController = [[ShopIntroController alloc] init];
+    introController.dic = self.dic;
     [self addChildViewController:introController];
     
     //门店评价
     ShopCommentController *commentController = [[ShopCommentController alloc] init];
+    commentController.dic = self.dic;
     [self addChildViewController:commentController];
     
     [_containerView addSubview:introController.view];

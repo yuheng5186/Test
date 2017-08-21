@@ -188,12 +188,38 @@ static NSString *businessCommentCell = @"businessCommentCell";
     [commentBtn setTitleColor:[UIColor colorFromHex:@"#3a3a3a"] forState:UIControlStateNormal];
     commentBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     commentBtn.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:commentBtn];
     
-    //添加点击事件
-    [commentBtn addTarget:self action:@selector(clickCommentButton) forControlEvents:UIControlEventTouchUpInside];
+    UIView *v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 215)];
+//    v.backgroundColor = [UIColor redColor];
     
-    detailTableView.tableFooterView = commentBtn;
+    if([self.dic[@"CommentCount"] integerValue]>0)
+    {
+        [self.view addSubview:commentBtn];
+        //添加点击事件
+        [commentBtn addTarget:self action:@selector(clickCommentButton) forControlEvents:UIControlEventTouchUpInside];
+        
+        detailTableView.tableFooterView = commentBtn;
+    }else
+    {
+        [self.view addSubview:v];
+        
+        
+        UIImageView *ImgView = [[UIImageView alloc] initWithFrame:CGRectMake(120, 27, 135, 120)];
+        ImgView.image = [UIImage imageNamed:@"pinglun_kongbai"];
+        [v addSubview:ImgView];
+        
+        UILabel *nocommentlab = [[UILabel alloc]initWithFrame:CGRectMake(0, ImgView.frame.origin.y+ImgView.frame.size.height+17, Main_Screen_Width, 14)];
+        nocommentlab.text = @"暂无评价信息";
+        nocommentlab.font = [UIFont systemFontOfSize:16];
+        nocommentlab.textAlignment = NSTextAlignmentCenter;
+        nocommentlab.textColor = [UIColor colorFromHex:@"#999999"];
+        [v addSubview:nocommentlab];
+        detailTableView.tableFooterView = v;
+    }
+    
+//    [self.view addSubview:commentBtn];
+    
+    
     
     //底部支付栏
     UIView *payToolBar = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 60, Main_Screen_Width, 60)];
@@ -299,6 +325,8 @@ static NSString *businessCommentCell = @"businessCommentCell";
 - (void)clickDetailView{
     
     ShopViewController *shopController = [[ShopViewController alloc] init];
+    
+    shopController.dic = self.dic;
     
     [self.navigationController pushViewController:shopController animated:YES];
 }

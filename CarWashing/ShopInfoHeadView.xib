@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -201,10 +201,13 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="addresslabel" destination="1hp-jF-3u0" id="WA3-13-qC5"/>
                 <outlet property="freeCheckLabel" destination="j4H-U7-Fwm" id="kZ9-8O-tXg"/>
+                <outlet property="namelabel" destination="RmW-RU-P9b" id="fj3-3G-reV"/>
                 <outlet property="qualityProtectedLabel" destination="VOr-A7-USv" id="Fbl-I3-qDY"/>
                 <outlet property="separateLine" destination="rLV-g1-hnC" id="t94-Z4-54T"/>
                 <outlet property="separateView" destination="Lia-kb-okI" id="Ca7-In-DWR"/>
+                <outlet property="typelabel" destination="BmW-ES-rVh" id="2yZ-NY-XIz"/>
             </connections>
             <point key="canvasLocation" x="11.5" y="-310.5"/>
         </view>

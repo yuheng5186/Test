@@ -43,7 +43,12 @@ static NSString *id_infoCell = @"id_infoCell";
 - (void)setupUI {
     
     self.infoHeadView.frame = CGRectMake(0, 0, Main_Screen_Width, 280);
-    
+    self.infoHeadView.namelabel.text = self.dic[@"MerName"];
+    self.infoHeadView.addresslabel.text = self.dic[@"MerAddress"];
+    if([self.dic[@"ShopType"] intValue] == 1)
+    {
+        self.infoHeadView.typelabel.text = @"洗车服务";
+    }
     UITableView *infoTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height - 108) style:UITableViewStylePlain];
     _infoTableView = infoTableView;
     [self.view addSubview:_infoTableView];

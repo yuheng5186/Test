@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ShopCommentController : UIViewController
+@property (nonatomic,copy) NSDictionary *dic;
 
 @end

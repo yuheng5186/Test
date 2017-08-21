@@ -10,4 +10,6 @@
 
 @interface ShopViewController : BaseController
 
+@property (nonatomic,copy) NSDictionary *dic;
+
 @end

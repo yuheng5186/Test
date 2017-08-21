@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ShopIntroController : UIViewController
+@property (nonatomic,copy) NSDictionary *dic;
 
 @end
