@@ -281,8 +281,10 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 #pragma mark - 点击拨打客服
 - (void)didClickServiceBtn:(UIButton *)button {
-    
-    [PhoneHelper dial: @"1008611"];
+    NSString *message = @"是否拨打商家电话";
+    NSString *title = @"";
+    [self showAlertWithTitle:title message:message];
+    [PhoneHelper dial: self.dic[@"MerPhone"]];
 }
 
 #pragma mark - 点击查看全部评价
@@ -316,7 +318,14 @@ static NSString *businessCommentCell = @"businessCommentCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    if(section == 1)
+    {
+        return [self.dic[@"CommentCount"] integerValue];
+    }
+    else
+    {
+        return 4;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -409,7 +418,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     if (section == 0) {
         textLab.text = @"服务活动";
     }else{
-        textLab.text = @"评论 (58)";
+        textLab.text = [NSString stringWithFormat:@"评论 (%@)",self.dic[@"CommentCount"]];
     }
     
     return textLab.text;
