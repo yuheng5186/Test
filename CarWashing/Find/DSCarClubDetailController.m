@@ -105,7 +105,7 @@
 
 - (void) createSubView {
 
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height+64) style:UITableViewStylePlain];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height+Main_Screen_Height*64/667) style:UITableViewStylePlain];
     self.tableView.top              = 0;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
@@ -356,13 +356,17 @@
     self.userSayTextField.textAlignment  = NSTextAlignmentLeft;
     self.userSayTextField.font           = [UIFont systemFontOfSize:12];
     self.userSayTextField.backgroundColor= [UIColor whiteColor];
-    self.userSayTextField.layer.cornerRadius    = 20;
+    self.userSayTextField.layer.cornerRadius    = Main_Screen_Height*20/667;
     self.userSayTextField.layer.borderWidth     = 1;
     self.userSayTextField.layer.borderColor     = [UIColor colorFromHex:@"#b4b4b4"].CGColor;
     self.userSayTextField.left           = Main_Screen_Width*10/375 ;
     self.userSayTextField.top            = Main_Screen_Height*10/667;
     [self.userSayTextField addTarget:self action:@selector(userSayTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.downView  addSubview:self.userSayTextField];
+    
+    UIView *blankView = [[UIView alloc] initWithFrame:CGRectMake(self.userSayTextField.frame.origin.x,self.userSayTextField.frame.origin.y,15.0, self.userSayTextField.frame.size.height)];
+    self.userSayTextField.leftView = blankView;
+    self.userSayTextField.leftViewMode =UITextFieldViewModeAlways;
     
     
     UIButton    *sayButton = [UIButton new];
@@ -448,7 +452,7 @@
 }
 - (void) sayButtonClick:(id)sender {
 
-    [self.userSayTextField resignFirstResponder];
+    [self.userSayTextField becomeFirstResponder];
     
 }
 - (void) downGoodButtonClick:(UIButton *)sender {
