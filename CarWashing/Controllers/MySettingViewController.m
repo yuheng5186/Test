@@ -112,7 +112,7 @@
 
     
     
-    NSString *membershipString      = @"会员特权";
+    NSString *membershipString      = @"个人信息";
     UIFont *membershipFont          = [UIFont systemFontOfSize:Main_Screen_Height*15/667];
     UIButton *membershipButton      = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) text:membershipString font:membershipFont color:[UIColor whiteColor] target:self action:@selector(menbershipButtonClick:)];
     membershipButton.backgroundColor= [UIColor colorFromHex:@"#FDBB2C"];
@@ -227,9 +227,13 @@
 }
 - (void) menbershipButtonClick:(id)sender {
     
-    DSMemberRightsController *memberRightsVC    = [[DSMemberRightsController alloc]init];
-    memberRightsVC.hidesBottomBarWhenPushed     = YES;
-    [self.navigationController pushViewController:memberRightsVC animated:YES];
+//    DSMemberRightsController *memberRightsVC    = [[DSMemberRightsController alloc]init];
+//    memberRightsVC.hidesBottomBarWhenPushed     = YES;
+//    [self.navigationController pushViewController:memberRightsVC animated:YES];
+    
+    DSUserInfoController *userInfoController    = [[DSUserInfoController alloc]init];
+    userInfoController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:userInfoController animated:YES];
     
 }
 
