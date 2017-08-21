@@ -10,4 +10,9 @@
 
 @interface GoodsExchangeCell : UITableViewCell
 
+@property (nonatomic, weak) UIImageView *backImgV;
+@property (nonatomic, weak) UILabel *nameLab;
+@property (nonatomic, weak) UILabel *introLab;
+@property (nonatomic, weak) UILabel *scoreLab;
+
 @end

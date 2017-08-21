@@ -19,7 +19,7 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"洗车劵"];
+    [self drawTitle:@"体验卡"];
     
 }
 
