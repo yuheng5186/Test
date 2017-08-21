@@ -104,7 +104,7 @@
     
     
 //    NSString *userName              = APPDELEGATE.currentUser.userName;
-    UIFont *userNameFont            = [UIFont boldSystemFontOfSize:16];
+    UIFont *userNameFont            = [UIFont boldSystemFontOfSize:Main_Screen_Height*16/667];
     self.userNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:APPDELEGATE.currentUser.userName font:userNameFont] font:userNameFont text:APPDELEGATE.currentUser.userName isCenter:NO];
     self.userNameLabel.textColor         = [UIColor whiteColor];
     self.userNameLabel.top               = self.editButton.bottom +Main_Screen_Height*13/667;
@@ -113,18 +113,18 @@
     
     
     NSString *membershipString      = @"会员特权";
-    UIFont *membershipFont          = [UIFont systemFontOfSize:15];
+    UIFont *membershipFont          = [UIFont systemFontOfSize:Main_Screen_Height*15/667];
     UIButton *membershipButton      = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) text:membershipString font:membershipFont color:[UIColor whiteColor] target:self action:@selector(menbershipButtonClick:)];
     membershipButton.backgroundColor= [UIColor colorFromHex:@"#FDBB2C"];
-    membershipButton.layer.cornerRadius = 10;
+    membershipButton.layer.cornerRadius = Main_Screen_Height*10/667;
     membershipButton.centerX        = self.editButton.centerX-Main_Screen_Width*50/375;
     membershipButton.top            = self.userNameLabel.bottom +Main_Screen_Height*10/667;
     
     NSString *signString      = @"会员签到";
-    UIFont *signFont          = [UIFont systemFontOfSize:15];
+    UIFont *signFont          = [UIFont systemFontOfSize:Main_Screen_Height*15/667];
     UIButton *signButton      = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) text:signString font:signFont color:[UIColor whiteColor] target:self action:@selector(signButtonClick:)];
     signButton.backgroundColor= [UIColor colorFromHex:@"#5AB2F1"];
-    signButton.layer.cornerRadius = 10;
+    signButton.layer.cornerRadius = Main_Screen_Height*10/667;
     signButton.centerX        = self.editButton.centerX +Main_Screen_Width*50/375;
     signButton.top            = self.userNameLabel.bottom +Main_Screen_Height*10/667;
     

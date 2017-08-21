@@ -65,7 +65,7 @@
 - (void) createSubView {
 
     NSString   *headerString     = @"登录";
-    UIFont     *headerFont       = [UIFont systemFontOfSize:20];
+    UIFont     *headerFont       = [UIFont systemFontOfSize:Main_Screen_Height*20/667];
     UILabel *deaderLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*30/667) font:headerFont text:headerString isCenter:NO];
     deaderLabel.textColor        = [UIColor blackColor];
     deaderLabel.textAlignment    = NSTextAlignmentCenter;
@@ -81,7 +81,7 @@
     NSString   *titleString     = @"金顶洗车";
     NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc]initWithString:titleString];
     CGAffineTransform matrix = CGAffineTransformMake(1, 0, tanf(-20 * (CGFloat)M_PI / 180), 1, 0, 0);
-    UIFont     *titleFont       = [UIFont boldSystemFontOfSize:25];
+    UIFont     *titleFont       = [UIFont boldSystemFontOfSize:Main_Screen_Height*25/667];
     UILabel *titleLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*30/667) font:titleFont text:titleString isCenter:NO];
     titleLabel.attributedText   = attributed;
     titleLabel.transform        = matrix;
@@ -92,7 +92,7 @@
     titleLabel.top              = logoImageView.bottom +Main_Screen_Height*20/667;
     
     NSString   *welcomeString     = @"欢迎登录金顶洗车APP";
-    UIFont     *welcomeFont       = [UIFont systemFontOfSize:14];
+    UIFont     *welcomeFont       = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
     UILabel *welcomeLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*200/375, Main_Screen_Height*30/667) font:welcomeFont text:welcomeString isCenter:NO];
     welcomeLabel.textColor        = [UIColor colorFromHex:@"#febb02"];
     welcomeLabel.textAlignment    = NSTextAlignmentCenter;
@@ -122,7 +122,7 @@
     
     
     NSString   *remindString     = @"新用户验证码登录即可完成注册";
-    UIFont     *remindFont       = [UIFont systemFontOfSize:12];
+    UIFont     *remindFont       = [UIFont systemFontOfSize:Main_Screen_Height*12/667];
     UILabel *remindLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*250/375, Main_Screen_Height*30/667) font:remindFont text:remindString isCenter:NO];
     remindLabel.textColor        = [UIColor colorFromHex:@"#999999"];
     remindLabel.textAlignment    = NSTextAlignmentCenter;
@@ -130,11 +130,11 @@
     remindLabel.top              = self.tableView.bottom +Main_Screen_Height*20/667;
     
     NSString *buttonString        = @"登录";
-    UIFont   *buttonFont          = [UIFont systemFontOfSize:16];
+    UIFont   *buttonFont          = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
     UIButton  *loginButton        = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*280/375, Main_Screen_Height*45/667) text:buttonString font:buttonFont color:[UIColor colorFromHex:@"#ffffff"] target:self action:@selector(loginButtonClick:)];
     loginButton.backgroundColor   = [UIColor colorFromHex:@"#febb02"];
     loginButton.tintColor         = [UIColor whiteColor];
-    loginButton.layer.cornerRadius  = 5;
+    loginButton.layer.cornerRadius  = Main_Screen_Height*5/667;
     loginButton.bottom            = backgroundImageView.bottom -Main_Screen_Height*65/667;
     loginButton.centerX           = Main_Screen_Width/2;
     
@@ -149,7 +149,7 @@
 
     [updateRuleButton setAttributedTitle:title forState:UIControlStateNormal];
     [updateRuleButton setBackgroundColor:[UIColor clearColor]];
-    [updateRuleButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [updateRuleButton.titleLabel setFont:[UIFont systemFontOfSize:Main_Screen_Height*14/667]];
     [updateRuleButton addTarget:self action:@selector(agreeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     updateRuleButton.top              = loginButton.bottom +Main_Screen_Height*20/667;
     updateRuleButton.centerX          = loginButton.centerX;
@@ -267,7 +267,7 @@
         self.userMobileFieldText.returnKeyType  = UIReturnKeyDone;
         self.userMobileFieldText.keyboardType   = UIKeyboardTypeNumberPad;
         self.userMobileFieldText.textAlignment  = NSTextAlignmentLeft;
-        self.userMobileFieldText.font           = [UIFont systemFontOfSize:16];
+        self.userMobileFieldText.font           = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
         self.userMobileFieldText.backgroundColor= [UIColor whiteColor];
         self.userMobileFieldText.centerY        = cell.centerY;
         self.userMobileFieldText.left           = Main_Screen_Width*50/375 ;
@@ -285,7 +285,7 @@
         self.verifyFieldText.returnKeyType  = UIReturnKeyDone;
         self.verifyFieldText.keyboardType   = UIKeyboardTypeNumberPad;
         self.verifyFieldText.textAlignment  = NSTextAlignmentLeft;
-        self.verifyFieldText.font           = [UIFont systemFontOfSize:16];
+        self.verifyFieldText.font           = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
         //        self.verifyFieldText.backgroundColor= [UIColor grayColor];
         self.verifyFieldText.centerY        = cell.centerY;
         self.verifyFieldText.left           = Main_Screen_Width*50/375 ;
@@ -294,11 +294,11 @@
         [cell.contentView addSubview:self.verifyFieldText];
         
         NSString *getVeriifyString      = @"获取验证码";
-        UIFont *getVeriifyStringFont          = [UIFont systemFontOfSize:14];
+        UIFont *getVeriifyStringFont          = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
          self.getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*30/667) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyByButtonClick:)];
         self.getVeriifyStringButton.backgroundColor=  [UIColor colorWithHex:0xFFB500 alpha:1.0];
         self.getVeriifyStringButton.layer.masksToBounds  = YES;
-        self.getVeriifyStringButton.layer.cornerRadius = 15;
+        self.getVeriifyStringButton.layer.cornerRadius = Main_Screen_Height*15/667;
         self.getVeriifyStringButton.right          = self.tableView.width;
         self.getVeriifyStringButton.centerY        = self.verifyFieldText.centerY;
         
