@@ -298,6 +298,7 @@ static NSString * HeaderId = @"header";
             textTF.delegate = self;
             textTF.tag = indexPath.row;
             textTF.placeholder = @"请填写";
+            textTF.keyboardType    = UIKeyboardTypeNumberPad;
             textTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
             textTF.font = [UIFont systemFontOfSize:12];
             [carCell.contentView addSubview:textTF];
