@@ -65,8 +65,8 @@
     
     [singleLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.centerX.equalTo(_firstButton);
-        make.width.mas_equalTo(60);
-        make.height.mas_equalTo(5);
+        make.width.mas_equalTo(60*Main_Screen_Height/667);
+        make.height.mas_equalTo(5*Main_Screen_Height/667);
     }];
 }
 
@@ -152,7 +152,7 @@
     
     [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     
-    button.titleLabel.font = [UIFont systemFontOfSize:15];
+    button.titleLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     
     
     

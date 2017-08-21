@@ -111,7 +111,7 @@ static NSString * HeaderId = @"header";
 - (void)setupUI {
     
     //无限轮播图
-    NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, (Main_Screen_Width - 60) * 9 / 16 + 24)];
+    NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, (Main_Screen_Width - 60*Main_Screen_Height/667) * 9*Main_Screen_Height/667 / 16*Main_Screen_Height/667+ 24*Main_Screen_Height/667)];
     pageFlowView.backgroundColor = [UIColor whiteColor];
     pageFlowView.delegate = self;
     pageFlowView.dataSource = self;
@@ -145,7 +145,7 @@ static NSString * HeaderId = @"header";
 
 #pragma mark NewPagedFlowView Delegate
 - (CGSize)sizeForPageInFlowView:(NewPagedFlowView *)flowView {
-    return CGSizeMake(Main_Screen_Width - 84, (Main_Screen_Width - 84) / 2);
+    return CGSizeMake(Main_Screen_Width - 84*Main_Screen_Height/667, (Main_Screen_Width - 84*Main_Screen_Height/667) / 2);
 }
 
 - (void)didSelectCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex {
@@ -163,7 +163,7 @@ static NSString * HeaderId = @"header";
 - (UIView *)flowView:(NewPagedFlowView *)flowView cellForPageAtIndex:(NSInteger)index{
     PGIndexBannerSubiew *bannerView = (PGIndexBannerSubiew *)[flowView dequeueReusableCell];
     if (!bannerView) {
-        bannerView = [[PGIndexBannerSubiew alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width - 84, (Main_Screen_Width - 84) / 2)];
+        bannerView = [[PGIndexBannerSubiew alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width - 84*Main_Screen_Height/667, (Main_Screen_Width - 84*Main_Screen_Height/667) / 2)];
         bannerView.layer.cornerRadius = 4;
         bannerView.layer.masksToBounds = YES;
     }
@@ -182,13 +182,13 @@ static NSString * HeaderId = @"header";
     
     [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(containImageView);
-        make.width.height.mas_equalTo(30);
+        make.width.height.mas_equalTo(30*Main_Screen_Height/667);
     }];
     
     [carImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(containImageView);
-        make.left.equalTo(containImageView).mas_equalTo(24);
-        make.width.height.mas_equalTo(67);
+        make.left.equalTo(containImageView).mas_equalTo(24*Main_Screen_Height/667);
+        make.width.height.mas_equalTo(67*Main_Screen_Height/667);
     }];
     
     bannerView.mainImageView = containImageView;
@@ -253,19 +253,19 @@ static NSString * HeaderId = @"header";
             
             [provinceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(carCell.textLabel);
-                make.left.equalTo(carCell.contentView).mas_offset(110);
+                make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
             }];
             
             [provinceImgV mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.right.equalTo(provinceBtn);
                 make.bottom.equalTo(provinceBtn);
-                make.width.height.mas_equalTo(7);
+                make.width.height.mas_equalTo(7*Main_Screen_Height/667);
             }];
             
             [numTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(provinceBtn);
-                make.leading.equalTo(provinceBtn.mas_trailing).mas_offset(16);
-                make.width.mas_equalTo(200);
+                make.leading.equalTo(provinceBtn.mas_trailing).mas_offset(16*Main_Screen_Height/667);
+                make.width.mas_equalTo(200*Main_Screen_Height/667);
             }];
         }else{
             carCell.textLabel.text = @"品牌车系";
@@ -275,13 +275,13 @@ static NSString * HeaderId = @"header";
             UITextField *brandTF = [[UITextField alloc] init];
             brandTF.placeholder = @"请填写";
             brandTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
-            brandTF.font = [UIFont systemFontOfSize:12];
+            brandTF.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
             [carCell.contentView addSubview:brandTF];
             
             [brandTF mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(carCell.contentView).mas_offset(110);
+                make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
                 make.centerY.equalTo(carCell);
-                make.right.equalTo(carCell.contentView).mas_offset(-12);
+                make.right.equalTo(carCell.contentView).mas_offset(-12*Main_Screen_Height/667);
             }];
         }
     }
@@ -291,7 +291,7 @@ static NSString * HeaderId = @"header";
         NSArray *arr = @[@"车架号码",@"生产年份",@"上路时间",@"行驶里程"];
         carCell.textLabel.text = arr[indexPath.row];
         carCell.textLabel.textColor = [UIColor colorFromHex:@"#868686"];
-        carCell.textLabel.font = [UIFont systemFontOfSize:14];
+        carCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
         
         if (indexPath.row == 0 || indexPath.row == 3) {
             UITextField *textTF = [[UITextField alloc] init];
@@ -300,13 +300,13 @@ static NSString * HeaderId = @"header";
             textTF.placeholder = @"请填写";
             textTF.keyboardType    = UIKeyboardTypeNumberPad;
             textTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
-            textTF.font = [UIFont systemFontOfSize:12];
+            textTF.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
             [carCell.contentView addSubview:textTF];
             
             [textTF mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(carCell.contentView).mas_offset(110);
+                make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
                 make.centerY.equalTo(carCell);
-                make.right.equalTo(carCell.contentView).mas_offset(-12);
+                make.right.equalTo(carCell.contentView).mas_offset(-12*Main_Screen_Height/667);
             }];
         }else {
             
@@ -316,11 +316,11 @@ static NSString * HeaderId = @"header";
                 _lbl = lbl;
                 lbl.text = @"请选择";
                 lbl.textColor = [UIColor colorFromHex:@"#868686"];
-                lbl.font = [UIFont systemFontOfSize:12];
+                lbl.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
                 [carCell.contentView addSubview:lbl];
                 
                 [lbl mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.equalTo(carCell.contentView).mas_offset(110);
+                    make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
                     make.centerY.equalTo(carCell);
                 }];
             }else {
@@ -328,11 +328,11 @@ static NSString * HeaderId = @"header";
                 _lbl2 = lbl2;
                 lbl2.text = @"请选择";
                 lbl2.textColor = [UIColor colorFromHex:@"#868686"];
-                lbl2.font = [UIFont systemFontOfSize:12];
+                lbl2.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
                 [carCell.contentView addSubview:lbl2];
                 
                 [lbl2 mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.equalTo(carCell.contentView).mas_offset(110);
+                    make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
                     make.centerY.equalTo(carCell);
                 }];
             }
@@ -347,7 +347,7 @@ static NSString * HeaderId = @"header";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 40;
+    return 40*Main_Screen_Height/667;
     
 }
 

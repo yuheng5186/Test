@@ -40,14 +40,14 @@
        
         [bgButton setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
         [bgButton setTitleColor:[UIColor colorWithRed:80/255.0 green:80/255.0 blue:80/255.0 alpha:1] forState:UIControlStateNormal];
-        bgButton.titleLabel.font = [UIFont systemFontOfSize:16];
+        bgButton.titleLabel.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         bgButton.imageView.contentMode = UIViewContentModeCenter;
         bgButton.imageView.clipsToBounds = NO;
         bgButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 //        bgButton.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
 //        bgButton.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
-        bgButton.contentEdgeInsets = UIEdgeInsetsMake(30, SCREEN_WIDTH-30, 30, 0);
-        bgButton.titleEdgeInsets = UIEdgeInsetsMake(0, -SCREEN_WIDTH+30, 0, 50);
+        bgButton.contentEdgeInsets = UIEdgeInsetsMake(30, SCREEN_WIDTH-30*Main_Screen_Height/667, 30*Main_Screen_Height/667, 0);
+        bgButton.titleEdgeInsets = UIEdgeInsetsMake(0, -SCREEN_WIDTH+30*Main_Screen_Height/667, 0, 50*Main_Screen_Height/667);
         [bgButton addTarget:self action:@selector(headBtnClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:bgButton];
         _bgButton = bgButton;

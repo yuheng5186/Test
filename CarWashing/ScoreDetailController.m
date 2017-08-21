@@ -33,7 +33,7 @@
 - (UIView *)headView {
     
     if (!_headView) {
-        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 135)];
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 135*Main_Screen_Height/667)];
         headView.backgroundColor = [UIColor whiteColor];
         _headView = headView;
         [self.view addSubview:_headView];
@@ -48,7 +48,7 @@
         
         UILabel *scoreLabel = [[UILabel alloc] init];
         scoreLabel.textColor = [UIColor colorFromHex:@"#febb02"];
-        scoreLabel.font = [UIFont systemFontOfSize:24];
+        scoreLabel.font = [UIFont systemFontOfSize:24*Main_Screen_Height/667];
         _scoreLabel = scoreLabel;
         [self.headView addSubview:_scoreLabel];
     }
@@ -64,7 +64,7 @@
         UIButton *earnButton = [[UIButton alloc] init];
         [earnButton setTitle:@"赚积分" forState:UIControlStateNormal];
         [earnButton setTitleColor:[UIColor colorFromHex:@"#4a4a4a"] forState:UIControlStateNormal];
-        earnButton.layer.cornerRadius = 17.5;
+        earnButton.layer.cornerRadius = 17.5*Main_Screen_Height/667;
         earnButton.layer.borderWidth = 1;
         earnButton.layer.borderColor = [UIColor colorFromHex:@"febb02"].CGColor;
         _earnButton = earnButton;
@@ -81,7 +81,7 @@
         UIButton *exchangeButton = [[UIButton alloc] init];
         [exchangeButton setTitle:@"积分兑换" forState:UIControlStateNormal];
         [exchangeButton setTitleColor:[UIColor colorFromHex:@"#4a4a4a"] forState:UIControlStateNormal];
-        exchangeButton.layer.cornerRadius = 17.5;
+        exchangeButton.layer.cornerRadius = 17.5*Main_Screen_Height/667;
         exchangeButton.layer.borderWidth = 1;
         exchangeButton.layer.borderColor = [UIColor colorFromHex:@"febb02"].CGColor;
         _exchangeButton = exchangeButton;
@@ -124,7 +124,7 @@
     
     self.scoreListView.delegate = self;
     self.scoreListView.dataSource = self;
-    self.scoreListView.rowHeight = 60;
+    self.scoreListView.rowHeight = 60*Main_Screen_Height/667;
     
     self.scoreLabel.text = @"1680";
     
@@ -134,28 +134,28 @@
     
     //约束
     [_scoreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_headView).mas_offset(33);
+        make.top.equalTo(_headView).mas_offset(33*Main_Screen_Height/667);
         make.centerX.equalTo(_headView);
     }];
     
     [_earnButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_scoreLabel.mas_bottom).mas_offset(25);
-        make.left.equalTo(_headView).mas_offset(28);
-        make.width.mas_equalTo(130);
-        make.height.mas_equalTo(35);
+        make.top.equalTo(_scoreLabel.mas_bottom).mas_offset(25*Main_Screen_Height/667);
+        make.left.equalTo(_headView).mas_offset(28*Main_Screen_Height/667);
+        make.width.mas_equalTo(130*Main_Screen_Height/667);
+        make.height.mas_equalTo(35*Main_Screen_Height/667);
     }];
     
     [_exchangeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_earnButton);
-        make.right.equalTo(_headView).mas_offset(-28);
-        make.width.mas_equalTo(130);
-        make.height.mas_equalTo(35);
+        make.right.equalTo(_headView).mas_offset(-28*Main_Screen_Height/667);
+        make.width.mas_equalTo(130*Main_Screen_Height/667);
+        make.height.mas_equalTo(35*Main_Screen_Height/667);
     }];
     
     [_scoreListView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_sliderView.mas_bottom);
         make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(Main_Screen_Height - 135 - 108 - 10);
+        make.bottom.equalTo(self.view);
     }];
     
 }
@@ -164,7 +164,7 @@
 #pragma mark - 创建上部的SliderView
 - (void)setupTopSliderView {
     
-    HQSliderView *sliderView = [[HQSliderView alloc] initWithFrame:CGRectMake(0, 64 + 130 + 10, Main_Screen_Width, 44)];
+    HQSliderView *sliderView = [[HQSliderView alloc] initWithFrame:CGRectMake(0, 64 + (130 + 10)*Main_Screen_Height/667, Main_Screen_Width, 44*Main_Screen_Height/667)];
     _sliderView = sliderView;
     sliderView.titleArr = @[@"全部",@"收入",@"支出"];
     sliderView.delegate = self;

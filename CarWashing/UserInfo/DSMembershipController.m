@@ -60,7 +60,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 - (void)setupUI {
     
     MemberView *memberShipView = [MemberView memberView];
-    memberShipView.frame = CGRectMake(0, 64, Main_Screen_Width, 113);
+    memberShipView.frame = CGRectMake(0, 64*Main_Screen_Height/667, Main_Screen_Width, 113*Main_Screen_Height/667);
     [self.view addSubview:memberShipView];
     
     UIView *exchangeView = [[UIView alloc] init];
@@ -69,7 +69,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     UILabel *exchangeLabel = [[UILabel alloc] init];
     exchangeLabel.text = @"精品兑换";
-    exchangeLabel.font = [UIFont systemFontOfSize:14];
+    exchangeLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     exchangeLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     [exchangeView addSubview:exchangeLabel];
     
@@ -81,16 +81,16 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     self.exchangListView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.exchangListView.delegate = self;
     self.exchangListView.dataSource = self;
-    self.exchangListView.rowHeight = 90;
+    self.exchangListView.rowHeight = 90*Main_Screen_Height/667;
     self.exchangListView.backgroundColor = [UIColor whiteColor];
     
     [self.exchangListView registerClass:[GoodsExchangeCell class] forCellReuseIdentifier:id_exchangeCell];
     
     //约束
     [exchangeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(memberShipView.mas_bottom).mas_offset(10);
+        make.top.equalTo(memberShipView.mas_bottom).mas_offset(10*Main_Screen_Height/667);
         make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(40*Main_Screen_Height/667);
     }];
     
     [exchangeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -110,8 +110,8 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     [_exchangListView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(exchangeView.mas_bottom);
         make.bottom.equalTo(self.view);
-        make.left.equalTo(self.view).mas_equalTo(10);
-        make.right.equalTo(self.view).mas_equalTo(-10);
+        make.left.equalTo(self.view).mas_equalTo(10*Main_Screen_Height/667);
+        make.right.equalTo(self.view).mas_equalTo(-10*Main_Screen_Height/667);
     }];
     
 }
@@ -189,7 +189,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10;
+    return 10*Main_Screen_Height/667;
 }
 
 

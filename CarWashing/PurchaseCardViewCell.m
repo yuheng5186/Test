@@ -26,15 +26,15 @@
     
     UIView *containView = [[UIView alloc] init];
     containView.backgroundColor = [UIColor whiteColor];
-    containView.layer.cornerRadius = 5;
+    containView.layer.cornerRadius = 5*Main_Screen_Height/667;
     containView.clipsToBounds = YES;
     [self.contentView addSubview:containView];
     
     [containView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView).mas_offset(10);
-        make.right.equalTo(self.contentView).mas_offset(-10);
-        make.top.equalTo(self.contentView).mas_offset(5);
-        make.bottom.equalTo(self.contentView).mas_offset(-5);
+        make.left.equalTo(self.contentView).mas_offset(10*Main_Screen_Height/667);
+        make.right.equalTo(self.contentView).mas_offset(-10*Main_Screen_Height/667);
+        make.top.equalTo(self.contentView).mas_offset(5*Main_Screen_Height/667);
+        make.bottom.equalTo(self.contentView).mas_offset(-5*Main_Screen_Height/667);
     }];
     
     
@@ -53,19 +53,19 @@
     [containView addSubview:buyButton];
     
     [cardLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(containView.mas_bottom).mas_offset(-60);
-        make.left.equalTo(containView.mas_left).mas_offset(10);
+        make.bottom.equalTo(containView.mas_bottom).mas_offset(-60*Main_Screen_Height/667);
+        make.left.equalTo(containView.mas_left).mas_offset(10*Main_Screen_Height/667);
     }];
     
     [priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(containView.mas_bottom).mas_offset(-20);
-        make.left.equalTo(containView.mas_left).mas_offset(10);
+        make.bottom.equalTo(containView.mas_bottom).mas_offset(-20*Main_Screen_Height/667);
+        make.left.equalTo(containView.mas_left).mas_offset(10*Main_Screen_Height/667);
     }];
     
     [buyButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(containView.mas_right).mas_offset(-20);
-        make.bottom.equalTo(containView.mas_bottom).mas_offset(-10);
-        make.width.mas_equalTo(80);
+        make.right.equalTo(containView.mas_right).mas_offset(-20*Main_Screen_Height/667);
+        make.bottom.equalTo(containView.mas_bottom).mas_offset(-10*Main_Screen_Height/667);
+        make.width.mas_equalTo(80*Main_Screen_Height/667);
     }];
 }
 

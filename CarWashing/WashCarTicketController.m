@@ -28,16 +28,16 @@
     [super viewDidLoad];
     
     CarTicketView *ticketView = [CarTicketView carTicketView];
-    ticketView.frame = CGRectMake(10, 64 + 10, Main_Screen_Width - 20, 80);
+    ticketView.frame = CGRectMake(10*Main_Screen_Height/667, 64 + 10*Main_Screen_Height/667, Main_Screen_Width - 20*Main_Screen_Height/667, 80*Main_Screen_Height/667);
     [self.view addSubview:ticketView];
     
     UIButton *exchangeButton = [UIUtil drawDefaultButton:self.view title:@"500积分兑换" target:self action:@selector(didClickExhangeButton:)];
     
     [exchangeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ticketView.mas_bottom).mas_offset(60);
+        make.top.equalTo(ticketView.mas_bottom).mas_offset(60*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
-        make.height.mas_equalTo(48);
-        make.width.mas_equalTo(350);
+        make.height.mas_equalTo(48*Main_Screen_Height/667);
+        make.width.mas_equalTo(350*Main_Screen_Height/667);
     }];
 }
                                 

@@ -20,11 +20,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.freeCheckLabel.layer.cornerRadius = 7.5;
+    self.freeCheckLabel.layer.cornerRadius = 7.5*Main_Screen_Height/667;
     self.freeCheckLabel.clipsToBounds = YES;
     self.freeCheckLabel.backgroundColor = [UIColor colorFromHex:@"#517ab6"];
     
-    self.qualityProtectedLabel.layer.cornerRadius = 7.5;
+    self.qualityProtectedLabel.layer.cornerRadius = 7.5*Main_Screen_Height/667;
     self.qualityProtectedLabel.clipsToBounds = YES;
     self.qualityProtectedLabel.backgroundColor = [UIColor colorFromHex:@"#f85460"];
     
