@@ -57,7 +57,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     self.payTableView = payTableView;
     payTableView.delegate = self;
     payTableView.dataSource = self;
-    payTableView.rowHeight = 50;
+    payTableView.rowHeight = 50*Main_Screen_Height/667;
     
     [self.view addSubview:payTableView];
     
@@ -145,27 +145,27 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
     
     //底部支付栏
-    UIView *payBottomView = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 60, Main_Screen_Width, 60)];
+    UIView *payBottomView = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 60, Main_Screen_Width, 60*Main_Screen_Height/667)];
     payBottomView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:payBottomView];
     
     UILabel *bottomPriceLab = [[UILabel alloc] init];
     bottomPriceLab.text = @"¥54.00";
-    bottomPriceLab.font = [UIFont systemFontOfSize:18];
+    bottomPriceLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     bottomPriceLab.textColor = [UIColor colorFromHex:@"#ff525a"];
     [payBottomView addSubview:bottomPriceLab];
     
     [bottomPriceLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(payBottomView).mas_offset(30);
-        make.top.equalTo(payBottomView).mas_offset(20);
+        make.left.mas_equalTo(payBottomView).mas_offset(30*Main_Screen_Height/667);
+        make.top.equalTo(payBottomView).mas_offset(20*Main_Screen_Height/667);
         
     }];
     
-    UIButton *bottomPayButton = [[UIButton alloc] initWithFrame:CGRectMake(Main_Screen_Width - 136, 0, 136, 60)];
+    UIButton *bottomPayButton = [[UIButton alloc] initWithFrame:CGRectMake(Main_Screen_Width - 136*Main_Screen_Height/667, 0, 136*Main_Screen_Height/667, 60*Main_Screen_Height/667)];
     bottomPayButton.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     [bottomPayButton setTitle:@"立即付款" forState:UIControlStateNormal];
     [bottomPayButton setTintColor:[UIColor whiteColor]];
-    bottomPayButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    bottomPayButton.titleLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
 
     //方法子
     [bottomPayButton addTarget:self action:@selector(showAlertWithTitle:message:) forControlEvents:UIControlEventTouchUpInside];
@@ -228,8 +228,8 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
         payCell.textLabel.text = @"服务商家";
         payCell.detailTextLabel.text = @"上海金雷洗车";
         payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-        payCell.textLabel.font = [UIFont systemFontOfSize:14];
-        payCell.detailTextLabel.font = [UIFont systemFontOfSize:13];
+        payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+        payCell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#999999"];
         
     }else {
@@ -239,7 +239,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
         cell.imageView.image = [UIImage imageNamed:self.payImageNameArr[indexPath.row]];
         cell.textLabel.text = self.payNameArray[indexPath.row];
         cell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-        cell.textLabel.font = [UIFont systemFontOfSize:15];
+        cell.textLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
         
 //        UIButton *payWayBtn = [[UIButton alloc] init];
 //        [payWayBtn setImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
@@ -289,7 +289,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     UILabel *wayLabel = [[UILabel alloc] init];
     wayLabel.text = @"  请选择支付方式";
     wayLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-    wayLabel.font = [UIFont systemFontOfSize:14];
+    wayLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     
     
     return wayLabel;
@@ -298,15 +298,15 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
     if (section == 2) {
-        return 30;
+        return 30*Main_Screen_Height/667;
     }
     
-    return 10;
+    return 10*Main_Screen_Height/667;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 10;
+    return 10*Main_Screen_Height/667;
 }
 
 

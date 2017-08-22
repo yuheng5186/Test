@@ -70,12 +70,12 @@
     
     [self setupTopServiceSliderView];
     
-    UITableView *serviceListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 108, Main_Screen_Width, Main_Screen_Height)];
+    UITableView *serviceListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 44*Main_Screen_Height/667, Main_Screen_Width, Main_Screen_Height)];
     serviceListView.delegate = self;
     serviceListView.dataSource = self;
     [self.view addSubview:serviceListView];
     self.serviceListView = serviceListView;
-    self.serviceListView.sectionHeaderHeight = 50;
+    self.serviceListView.sectionHeaderHeight = 50*Main_Screen_Height/667;
     
     
     //底部电话客服
@@ -90,23 +90,23 @@
     //[phoneBtn setTintColor:[UIColor blackColor]];
     [phoneBtn setTitleColor:[UIColor colorFromHex:@"#4a4a4a"] forState:UIControlStateNormal];
    
-    phoneBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    phoneBtn.titleLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     [phoneBtn setImage:[UIImage imageNamed:@"kefuzixun"] forState:UIControlStateNormal];
     [bottomPhoneView addSubview:phoneBtn];
     
     [bottomPhoneView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
-        make.height.mas_equalTo(60);
+        make.height.mas_equalTo(60*Main_Screen_Height/667);
     }];
     
     [phoneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(bottomPhoneView);
-        make.width.mas_equalTo(100);
-        make.height.mas_equalTo(60);
+        make.width.mas_equalTo(100*Main_Screen_Height/667);
+        make.height.mas_equalTo(60*Main_Screen_Height/667);
     }];
     
     phoneBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    [phoneBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+    [phoneBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10*Main_Screen_Height/667, 0, 0)];
     
     [phoneBtn addTarget:self action:@selector(showAlertWithMessage:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -122,7 +122,7 @@
 #pragma mark - 创建上部的SliderView
 - (void)setupTopServiceSliderView {
     
-    HQSliderView *serviceSliderView = [[HQSliderView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 44)];
+    HQSliderView *serviceSliderView = [[HQSliderView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 44*Main_Screen_Height/667)];
     serviceSliderView.titleArr = @[@"常见问题",@"车型疑问",@"APP使用"];
     serviceSliderView.delegate = self;
     [self.view addSubview:serviceSliderView];
@@ -163,7 +163,7 @@
     
     serviceCell.textViewLabel.text = answerModel.answer;
     
-    self.textSize = [self getLabelSizeFortextFont:[UIFont systemFontOfSize:15] textLabel:answerModel.answer];
+    self.textSize = [self getLabelSizeFortextFont:[UIFont systemFontOfSize:15*Main_Screen_Height/667] textLabel:answerModel.answer];
     
     
     //    if (serviceCell == nil) {

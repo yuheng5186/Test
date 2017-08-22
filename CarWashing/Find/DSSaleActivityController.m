@@ -9,6 +9,7 @@
 #import "DSSaleActivityController.h"
 #import "DSUserRightDetailController.h"
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
+#import <Masonry.h>
 
 @interface DSSaleActivityController ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
@@ -60,17 +61,17 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return 0;
+    return 1;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 150;
+    return 90;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -84,8 +85,8 @@
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
     UIView *view = [[UIView alloc] init];
-
-    NSString *title     = @" ";
+    
+    NSString *title     = @"2017-7-23 9:30";
     UIFont *titleFont   = [UIFont systemFontOfSize:14];
     
     UILabel *titleLabel     = [UIUtil drawLabelInView:view frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*30/667) font:titleFont text:title isCenter:YES];
@@ -103,11 +104,64 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     }
     cell.backgroundColor    = [UIColor whiteColor];
-    //    cell.imageView.image    = [UIImage imageNamed:@"btnImage"];
-    cell.layer.cornerRadius = 6;
-    cell.layer.masksToBounds = YES;
-    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    UIImageView *backV = [[UIImageView alloc] init];
+    [cell.contentView addSubview:backV];
+    
+    UILabel *titleLab = [[UILabel alloc] init];
+    titleLab.font = [UIFont systemFontOfSize:18];
+    titleLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+    [cell.contentView addSubview:titleLab];
+    
+    UILabel *introLab = [[UILabel alloc] init];
+    introLab.font = [UIFont systemFontOfSize:14];
+    introLab.textColor = [UIColor colorFromHex:@"#999999"];
+    [cell.contentView addSubview:introLab];
+    
+    UIImageView *markV = [[UIImageView alloc] init];
+    markV.image = [UIImage imageNamed:@"dianjitiaozhuan"];
+    [cell.contentView addSubview:markV];
+    
+    [backV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.bottom.left.equalTo(cell.contentView);
+    }];
+    
+    [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(cell.contentView).mas_offset(28);
+        make.top.equalTo(cell.contentView).mas_offset(24);
+    }];
+    
+    [introLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(titleLab);
+        make.top.equalTo(titleLab.mas_bottom).mas_offset(12);
+    }];
+    
+    [markV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(introLab);
+        make.leading.equalTo(introLab.mas_trailing).mas_offset(20);
+    }];
+    
+    if (indexPath.section == 0) {
+        
+        backV.image = [UIImage imageNamed:@"xinyonghuu"];
+        titleLab.text = @"新用户注册奖励";
+        introLab.text = @"免费获得洗车体验卡一张";
+    }
+    
+    if (indexPath.section == 1) {
+        backV.image = [UIImage imageNamed:@"huiyuanquanyitu"];
+        titleLab.text = @"金顶会员专享权益";
+        introLab.text = @"平台商家下单洗车可抵扣";
+    }
+    
+    if (indexPath.section == 2) {
+        backV.image = [UIImage imageNamed:@"yonghuzhuanxiangditu"];
+        titleLab.text = @"金顶会员专享";
+        introLab.text = @"平台商家下单洗车可抵扣";
+    }
+    
+    
     
     return cell;
 }
@@ -124,7 +178,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // 圆角弧度半径
-    CGFloat cornerRadius = 6.f;
+    CGFloat cornerRadius = Main_Screen_Height*6/667;
     // 设置cell的背景色为透明，如果不设置这个的话，则原来的背景色不会被覆盖
     cell.backgroundColor = UIColor.clearColor;
     
@@ -135,7 +189,7 @@
     CGMutablePathRef pathRef = CGPathCreateMutable();
     // 获取cell的size
     // 第一个参数,是整个 cell 的 bounds, 第二个参数是距左右两端的距离,第三个参数是距上下两端的距离
-    CGRect bounds = CGRectInset(cell.bounds, 10, 0);
+    CGRect bounds = CGRectInset(cell.bounds, Main_Screen_Width*10/375, 0);
     
     // CGRectGetMinY：返回对象顶点坐标
     // CGRectGetMaxY：返回对象底点坐标

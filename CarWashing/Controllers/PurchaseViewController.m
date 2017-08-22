@@ -92,7 +92,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 
 
 - (void)setupUI {
-
+    
     //定位按钮
     self.locationManager = [[JFLocation alloc] init];
     _locationManager.delegate = self;
@@ -102,7 +102,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     upView.top                      = 0;
     
     NSString *titleName              = @"购卡";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18*Main_Screen_Height/667];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = upView.centerX;
@@ -113,14 +113,14 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     self.locationButton.backgroundColor   = [UIColor clearColor];
     [self.locationButton setTitle:@"上海" forState:UIControlStateNormal];
     [self.locationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.locationButton.titleLabel.font   = [UIFont systemFontOfSize:14];
+    self.locationButton.titleLabel.font   = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
     self.locationButton.left              = Main_Screen_Width*14/375;
-    self.locationButton.centerY           = self.navigationView.centerY;
+    self.locationButton.centerY           = titleNameLabel.centerY;
     [self.locationButton addTarget:self action:@selector(clickLocationButton) forControlEvents:UIControlEventTouchUpInside];
     [self.locationButton setImage:[UIImage imageNamed:@"dingwei"] forState:UIControlStateNormal];
-    self.locationButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+    self.locationButton.imageEdgeInsets = UIEdgeInsetsMake(0, -Main_Screen_Width*10/375, 0, 0);
     [self.locationButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-    self.locationButton.layer.cornerRadius = 15;
+    self.locationButton.layer.cornerRadius = Main_Screen_Height*15/667;
     //self.locationButton.clipsToBounds = YES;
     self.locationButton.layer.borderWidth = 1;
     self.locationButton.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -129,14 +129,14 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     
     
     //无限轮播图
-    NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, (Main_Screen_Width - 70) * 9 / 16 + 24)];
+    NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, (Main_Screen_Width - 70*Main_Screen_Height/667) * 9*Main_Screen_Height/667 / 16*Main_Screen_Height/667 + 24*Main_Screen_Height/667)];
     pageFlowView.backgroundColor = [UIColor whiteColor];
     pageFlowView.delegate = self;
     pageFlowView.dataSource = self;
     //pageFlowView.minimumPageAlpha = 0.1;
     pageFlowView.minimumPageScale = 0.85;
     pageFlowView.orientation = NewPagedFlowViewOrientationHorizontal;
- 
+    
     [self.view addSubview:pageFlowView];
     [pageFlowView reloadData];
     
@@ -150,29 +150,29 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     
     //关于卡片的label
     UILabel *functionLabel = [[UILabel alloc] init];
-    functionLabel.text = @"卡片功能";
-    functionLabel.font = [UIFont systemFontOfSize:15];
+    functionLabel.text = @"超值享受";
+    functionLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     functionLabel.textAlignment = NSTextAlignmentCenter;
     functionLabel.textColor = [UIColor colorFromHex:@"#868686"];
     [self.view addSubview:functionLabel];
     
     UILabel *introLabelOne = [[UILabel alloc] init];
-    introLabelOne.text = @"您可以享受会员权益";
-    introLabelOne.font = [UIFont systemFontOfSize:13];
+    introLabelOne.text = @"您可以获得会员积分";
+    introLabelOne.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
     introLabelOne.textAlignment = NSTextAlignmentCenter;
     introLabelOne.textColor = [UIColor colorFromHex:@"#999999"];
     [self.view addSubview:introLabelOne];
     
     UILabel *introLabelTwo = [[UILabel alloc] init];
-    introLabelTwo.text = @"并且可以持卡";
-    introLabelTwo.font = [UIFont systemFontOfSize:15];
+    introLabelTwo.text = @"拥有一年的使用期限";
+    introLabelTwo.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     introLabelTwo.textAlignment = NSTextAlignmentCenter;
     introLabelTwo.textColor = [UIColor colorFromHex:@"#999999"];
     [self.view addSubview:introLabelTwo];
     
     UILabel *introLabelThree = [[UILabel alloc] init];
-    introLabelThree.text = @"免费洗车5次";
-    introLabelThree.font = [UIFont systemFontOfSize:15];
+    introLabelThree.text = @"优质洗车100次";
+    introLabelThree.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     introLabelThree.textAlignment = NSTextAlignmentCenter;
     introLabelThree.textColor = [UIColor colorFromHex:@"#999999"];
     [self.view addSubview:introLabelThree];
@@ -181,52 +181,52 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     [buyButton setTitle:@"现在购买" forState:UIControlStateNormal];
     [buyButton setTintColor:[UIColor colorFromHex:@"#ffffff"]];
     buyButton.backgroundColor = [UIColor colorFromHex:@"#293754"];
-    buyButton.titleLabel.font = [UIFont systemFontOfSize:18];
-    buyButton.layer.cornerRadius = 15;
+    buyButton.titleLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
+    buyButton.layer.cornerRadius = 15*Main_Screen_Height/667;
     [buyButton addTarget:self action:@selector(didSelectCell:withSubViewIndex:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:buyButton];
     
     
     [_pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.top.equalTo(pageFlowView.mas_bottom).mas_offset(23);
+        make.top.equalTo(pageFlowView.mas_bottom).mas_offset(23*Main_Screen_Height/667);
     }];
     
     [functionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.pageControl.mas_bottom).mas_offset(25);
+        make.top.equalTo(self.pageControl.mas_bottom).mas_offset(25*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
     }];
     
     [introLabelOne mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(functionLabel.mas_bottom).mas_offset(25);
+        make.top.equalTo(functionLabel.mas_bottom).mas_offset(25*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
     }];
     
     [introLabelTwo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(introLabelOne.mas_bottom).mas_offset(12);
+        make.top.equalTo(introLabelOne.mas_bottom).mas_offset(12*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
     }];
     
     [introLabelThree mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(introLabelTwo.mas_bottom).mas_offset(12);
+        make.top.equalTo(introLabelTwo.mas_bottom).mas_offset(12*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
     }];
     
     [buyButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(introLabelThree.mas_bottom).mas_offset(50);
+        make.top.equalTo(introLabelThree.mas_bottom).mas_offset(50*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
-        make.width.mas_equalTo(120);
-        make.height.mas_equalTo(30);
+        make.width.mas_equalTo(120*Main_Screen_Height/667);
+        make.height.mas_equalTo(30*Main_Screen_Height/667);
     }];
     
 }
 
 #pragma mark - 点击购买
 //- (void)didCickBuyButton {
-//    
+//
 //    PayPurchaseCardController *payCardVC = [[PayPurchaseCardController alloc] init];
 //    payCardVC.hidesBottomBarWhenPushed = YES;
-//    
+//
 //    [self.navigationController pushViewController:payCardVC animated:YES];
 //}
 
@@ -239,7 +239,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 
 #pragma mark NewPagedFlowView Delegate
 - (CGSize)sizeForPageInFlowView:(NewPagedFlowView *)flowView {
-    return CGSizeMake(Main_Screen_Width - 84, (Main_Screen_Width - 84) * 9 / 16);
+    return CGSizeMake(Main_Screen_Width - 84*Main_Screen_Height/667, (Main_Screen_Width - 84*Main_Screen_Height/667) * 9*Main_Screen_Height/667 / 16*Main_Screen_Height/667);
 }
 
 - (void)didSelectCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex {
@@ -261,8 +261,8 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 - (UIView *)flowView:(NewPagedFlowView *)flowView cellForPageAtIndex:(NSInteger)index{
     PGIndexBannerSubiew *bannerView = (PGIndexBannerSubiew *)[flowView dequeueReusableCell];
     if (!bannerView) {
-        bannerView = [[PGIndexBannerSubiew alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width - 84, (Main_Screen_Width - 70) * 9 / 16)];
-        bannerView.layer.cornerRadius = 4;
+        bannerView = [[PGIndexBannerSubiew alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width - 84*Main_Screen_Width/375, (Main_Screen_Width - 70*Main_Screen_Height/667) * 9*Main_Screen_Height/667 / 16*Main_Screen_Height/667)];
+        bannerView.layer.cornerRadius = 4*Main_Screen_Height/667;
         bannerView.layer.masksToBounds = YES;
     }
     

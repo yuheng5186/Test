@@ -133,15 +133,15 @@
     
     if (indexPath.section == 0) {
         cell.textLabel.text     = @"头像";
-        self.userImageView  = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, cell.contentView.centerY-11, 60, 60) imageName:@"gerenxinxitou"];
+        self.userImageView  = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, cell.contentView.centerY-Main_Screen_Height*11/667, Main_Screen_Width*60/375, Main_Screen_Height*60/667) imageName:@"gerenxinxitou"];
         
         NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
         NSURL *url=[NSURL URLWithString:ImageURL];
         [self.userImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"gerenxinxitou"]];
       
-        self.userImageView.left          = Main_Screen_Width*280/375;
+        self.userImageView.left          = Main_Screen_Width*275/375;
         self.userImageView.layer.masksToBounds = YES;
-        self.userImageView.layer.cornerRadius = 30;
+        self.userImageView.layer.cornerRadius = Main_Screen_Height*30/667;
         
         
     }else if (indexPath.section == 1){

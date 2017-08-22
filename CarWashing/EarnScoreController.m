@@ -7,7 +7,9 @@
 //
 
 #import "EarnScoreController.h"
-#import "MemberRegualrController.h"
+//#import "MemberRegualrController.h"
+#import "WayToUpGradeCell.h"
+#import "ScoreDetailController.h"
 
 @interface EarnScoreController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -17,6 +19,8 @@
 
 @end
 
+static NSString *id_earnViewCell = @"id_earnViewCell";
+
 @implementation EarnScoreController
 
 
@@ -24,7 +28,7 @@
     
     if (!_adverView) {
         
-        UIImageView *adverView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 200)];
+        UIImageView *adverView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 100*Main_Screen_Height/667)];
         _adverView = adverView;
         [self.view addSubview:adverView];
     }
@@ -36,7 +40,7 @@
     
     if (!_earnWayView) {
         
-        UITableView *earnWayView = [[UITableView alloc] initWithFrame:CGRectMake(0, 264, Main_Screen_Width, Main_Screen_Height - 264) style:UITableViewStylePlain];
+        UITableView *earnWayView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 100*Main_Screen_Height/667, Main_Screen_Width, Main_Screen_Height - 64 - 100*Main_Screen_Height/667) style:UITableViewStyleGrouped];
         _earnWayView = earnWayView;
         [self.view addSubview:_earnWayView];
     }
@@ -47,15 +51,18 @@
 - (void)drawNavigation {
     
     [self drawTitle:@"赚积分"];
-    [self drawRightTextButton:@"积分规则" action:@selector(clickRegularButton)];
+    [self drawRightTextButton:@"我的积分" action:@selector(clickMyScoreButton)];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    self.adverView.image = [UIImage imageNamed:@"mendiantese"];
     
     self.earnWayView.delegate = self;
     self.earnWayView.dataSource = self;
+    self.earnWayView.rowHeight = 90*Main_Screen_Height/667;
+    [self.earnWayView registerClass:[WayToUpGradeCell class] forCellReuseIdentifier:id_earnViewCell];
     
 }
 
@@ -70,21 +77,49 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    WayToUpGradeCell *earnScoreCell = [tableView dequeueReusableCellWithIdentifier:id_earnViewCell forIndexPath:indexPath];
     
+    if (indexPath.row == 0) {
+        
+        earnScoreCell.iconV.image = [UIImage imageNamed:@"xinyonghuzhuce"];
+        earnScoreCell.waysLab.text = @"新用户注册";
+        earnScoreCell.wayToLab.text = @"完成手机号绑定注册";
+        earnScoreCell.valuesLab.text = @"+20积分";
+    }else if (indexPath.row == 1) {
+        
+        earnScoreCell.iconV.image = [UIImage imageNamed:@"yaoqinghaoyou"];
+        earnScoreCell.waysLab.text = @"邀请好友";
+        earnScoreCell.wayToLab.text = @"邀请好友并完成注册";
+        earnScoreCell.valuesLab.text = @"+200积分";
+    }else if (indexPath.row == 2) {
+        
+        earnScoreCell.iconV.image = [UIImage imageNamed:@"wanshancheliangxinxi"];
+        earnScoreCell.waysLab.text = @"完善车辆信息";
+        earnScoreCell.wayToLab.text = @"完成车辆绑定,填写车辆信息";
+        earnScoreCell.valuesLab.text = @"+50积分";
+    }else {
+        
+        earnScoreCell.iconV.image = [UIImage imageNamed:@"wanshangerenxinxi"];
+        earnScoreCell.waysLab.text = @"完善隔个人信息";
+        earnScoreCell.wayToLab.text = @"填写个人姓名完善个人信息";
+        earnScoreCell.valuesLab.text = @"+20积分";
+    }
     
+    return earnScoreCell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return nil;
+    return 10*Main_Screen_Height/667;
 }
 
 
 
-
-
-- (void)clickRegularButton{
+- (void)clickMyScoreButton{
     
-    MemberRegualrController *regularController = [[MemberRegualrController alloc] init];
-    
-    [self.navigationController pushViewController:regularController animated:YES];
+    ScoreDetailController *scoreController = [[ScoreDetailController alloc] init];
+    scoreController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:scoreController animated:YES];
     
 }
 
@@ -96,13 +131,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

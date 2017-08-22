@@ -124,10 +124,10 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 - (void)setupUI {
     
-    UIView *containHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 375/2 + 196)];
+    UIView *containHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Width/2 + 196*Main_Screen_Height/667)];
     [self.view addSubview:containHeadView];
     
-    UIImageView *detaiImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 375/2)];
+    UIImageView *detaiImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Width/2)];
     
 //    detaiImgView.image = [UIImage imageNamed:@"hangdiantu"];
     
@@ -147,7 +147,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     BusinessDetailHeaderView *headerView = [BusinessDetailHeaderView businessDetailHeaderView];
     
-    headerView.frame = CGRectMake(0, 375/2, Main_Screen_Width, 196);
+    headerView.frame = CGRectMake(0, Main_Screen_Width/2, Main_Screen_Width, 196*Main_Screen_Height/667);
     
     self.headerView = headerView;
     
@@ -179,7 +179,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
         MerflagsLabel.backgroundColor = [UIColor colorFromHex:@"#ff7556"];
         MerflagsLabel.textAlignment = NSTextAlignmentCenter;
         MerflagsLabel.layer.masksToBounds = YES;
-        MerflagsLabel.layer.cornerRadius = 7.5;
+        MerflagsLabel.layer.cornerRadius = 7.5*Main_Screen_Height/667;
         [headerView addSubview:MerflagsLabel];
     }
     
@@ -219,7 +219,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     [headerView addTarget:self action:@selector(clickDetailView) forControlEvents:UIControlEventTouchUpInside];
     
     
-    UITableView *detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 124) style:UITableViewStyleGrouped];
+    UITableView *detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 124*Main_Screen_Height/667) style:UITableViewStyleGrouped];
     self.detailTableView = detailTableView;
     
     detailTableView.delegate = self;
@@ -237,13 +237,13 @@ static NSString *businessCommentCell = @"businessCommentCell";
     [self.view addSubview:detailTableView];
     
     //表尾
-    UIButton *commentBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
+    UIButton *commentBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50*Main_Screen_Height/667)];
     [commentBtn setTitle:@"查看全部评价" forState:UIControlStateNormal];
     [commentBtn setTitleColor:[UIColor colorFromHex:@"#3a3a3a"] forState:UIControlStateNormal];
-    commentBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    commentBtn.titleLabel.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     commentBtn.backgroundColor = [UIColor whiteColor];
     
-    UIView *v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 215)];
+    UIView *v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 215*Main_Screen_Height/667)];
 //    v.backgroundColor = [UIColor redColor];
     
     if([self.dic[@"CommentCount"] integerValue]>0)
@@ -258,13 +258,13 @@ static NSString *businessCommentCell = @"businessCommentCell";
         [self.view addSubview:v];
         
         
-        UIImageView *ImgView = [[UIImageView alloc] initWithFrame:CGRectMake(120, 27, 135, 120)];
+        UIImageView *ImgView = [[UIImageView alloc] initWithFrame:CGRectMake(120*Main_Screen_Height/667, 27*Main_Screen_Height/667, 135*Main_Screen_Height/667, 120*Main_Screen_Height/667)];
         ImgView.image = [UIImage imageNamed:@"pinglun_kongbai"];
         [v addSubview:ImgView];
         
-        UILabel *nocommentlab = [[UILabel alloc]initWithFrame:CGRectMake(0, ImgView.frame.origin.y+ImgView.frame.size.height+17, Main_Screen_Width, 14)];
+        UILabel *nocommentlab = [[UILabel alloc]initWithFrame:CGRectMake(0, ImgView.frame.origin.y+ImgView.frame.size.height+17*Main_Screen_Height/667, Main_Screen_Width, 14*Main_Screen_Height/667)];
         nocommentlab.text = @"暂无评价信息";
-        nocommentlab.font = [UIFont systemFontOfSize:16];
+        nocommentlab.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         nocommentlab.textAlignment = NSTextAlignmentCenter;
         nocommentlab.textColor = [UIColor colorFromHex:@"#999999"];
         [v addSubview:nocommentlab];
@@ -276,7 +276,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     
     //底部支付栏
-    UIView *payToolBar = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 60, Main_Screen_Width, 60)];
+    UIView *payToolBar = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 60*Main_Screen_Height/667, Main_Screen_Width, 60)];
     payToolBar.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:payToolBar];
@@ -324,12 +324,13 @@ static NSString *businessCommentCell = @"businessCommentCell";
         [payToolBar addSubview:lblCarType];
     }
     
+
     
     UIButton *payBtn = [[UIButton alloc] init];
-    payBtn.frame     = CGRectMake(Main_Screen_Width - 92, 0, 92, 60);
+    payBtn.frame     = CGRectMake(Main_Screen_Width - 92*Main_Screen_Height/667, 0, 92*Main_Screen_Height/667, 60*Main_Screen_Height/667);
     [payBtn setTitle:@"去结算" forState:UIControlStateNormal];
     [payBtn setTintColor:[UIColor colorFromHex:@"#ffffff"]];
-    payBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+    payBtn.titleLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     //payBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     payBtn.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     [payToolBar addSubview:payBtn];
@@ -339,18 +340,18 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     //约束
     [lblPrice mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(payToolBar).mas_offset(12);
-        make.left.equalTo(payToolBar).mas_offset(20);
+        make.top.mas_equalTo(payToolBar).mas_offset(12*Main_Screen_Height/667);
+        make.left.equalTo(payToolBar).mas_offset(20*Main_Screen_Height/667);
     }];
     
     [formerPriceLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(lblPrice.mas_trailing).mas_offset(10);
+        make.leading.equalTo(lblPrice.mas_trailing).mas_offset(10*Main_Screen_Height/667);
         make.bottom.equalTo(lblPrice);
     }];
     
     [lblCarType mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(lblPrice);
-        make.top.mas_equalTo(lblPrice.mas_bottom).mas_offset(6);
+        make.top.mas_equalTo(lblPrice.mas_bottom).mas_offset(6*Main_Screen_Height/667);
     }];
     
     /*[payBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -373,14 +374,14 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     
     [serviceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(payToolBar).mas_offset(12);
-        make.trailing.equalTo(payBtn.mas_leading).mas_equalTo(-37);
-        make.width.height.mas_equalTo(20);
+        make.top.equalTo(payToolBar).mas_offset(12*Main_Screen_Height/667);
+        make.trailing.equalTo(payBtn.mas_leading).mas_equalTo(-37*Main_Screen_Height/667);
+        make.width.height.mas_equalTo(20*Main_Screen_Height/667);
     }];
     
     [serviceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(serviceBtn);
-        make.top.equalTo(serviceBtn.mas_bottom).mas_offset(7);
+        make.top.equalTo(serviceBtn.mas_bottom).mas_offset(7*Main_Screen_Height/667);
     }];
     
 }
@@ -545,10 +546,10 @@ static NSString *businessCommentCell = @"businessCommentCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section == 0) {
-        return 100;
+        return 100*Main_Screen_Height/667;
     }
     
-    return 110;
+    return 110*Main_Screen_Height/667;
 }
 
 
@@ -559,7 +560,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 40;
+    return 40*Main_Screen_Height/667;
     
 }
 

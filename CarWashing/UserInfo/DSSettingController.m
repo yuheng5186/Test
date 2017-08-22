@@ -46,11 +46,13 @@
     appImageView.centerX           = upView.centerX;
     
     NSString *showName              = @"分享金顶洗车，让您的好友可以下载金顶客户端";
-    UIFont *showNameFont            = [UIFont systemFontOfSize:13];
+    UIFont *showNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*13/667];
     UILabel *showNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:showName font:showNameFont] font:showNameFont text:showName isCenter:NO];
     showNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
     showNameLabel.top               = appImageView.bottom +Main_Screen_Height*25/667;
     showNameLabel.centerX           = appImageView.centerX;
+    
+    upView.height                   = showNameLabel.bottom +Main_Screen_Height*10/667;
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*200/667) style:UITableViewStyleGrouped];
     self.tableView.top              = upView.bottom;

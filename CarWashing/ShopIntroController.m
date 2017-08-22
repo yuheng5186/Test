@@ -43,7 +43,7 @@ static NSString *id_infoCell = @"id_infoCell";
 
 - (void)setupUI {
     
-    self.infoHeadView.frame = CGRectMake(0, 0, Main_Screen_Width, 280);
+    self.infoHeadView.frame = CGRectMake(0, 0, Main_Screen_Width, 280*Main_Screen_Height/667);
     self.infoHeadView.namelabel.text = self.dic[@"MerName"];
     self.infoHeadView.addresslabel.text = self.dic[@"MerAddress"];
     if([self.dic[@"ShopType"] intValue] == 1)
@@ -71,7 +71,8 @@ static NSString *id_infoCell = @"id_infoCell";
     }
 
     
-    UITableView *infoTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height - 108) style:UITableViewStylePlain];
+
+    UITableView *infoTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height - 64 - 44*Main_Screen_Height/667) style:UITableViewStylePlain];
     _infoTableView = infoTableView;
     [self.view addSubview:_infoTableView];
     
@@ -80,7 +81,7 @@ static NSString *id_infoCell = @"id_infoCell";
     
     
     infoTableView.tableHeaderView = self.infoHeadView;
-    infoTableView.rowHeight = 200;
+    infoTableView.rowHeight = 200*Main_Screen_Height/667;
     
 }
 
@@ -110,7 +111,7 @@ static NSString *id_infoCell = @"id_infoCell";
             infoImageView.image = img;
         });
     });
-    infoImageView.frame = CGRectMake(0, 0, Main_Screen_Width, 200);
+    infoImageView.frame = CGRectMake(0, 0, Main_Screen_Width, 200*Main_Screen_Height/667);
     [cell.contentView addSubview:infoImageView];
     
 

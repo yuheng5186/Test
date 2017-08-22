@@ -38,9 +38,9 @@
     
     [payWayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentView);
-        make.right.equalTo(self.contentView).mas_offset(-12);
-        make.width.mas_equalTo(21);
-        make.height.mas_equalTo(21);
+        make.right.equalTo(self.contentView).mas_offset(-12*Main_Screen_Height/667);
+        make.width.mas_equalTo(21*Main_Screen_Height/667);
+        make.height.mas_equalTo(21*Main_Screen_Height/667);
     }];
 }
 

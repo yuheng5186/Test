@@ -165,25 +165,25 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     
     
     //底部支付栏
-    UIView *payBottomView = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 60, Main_Screen_Width, 60)];
+    UIView *payBottomView = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 60*Main_Screen_Height/667, Main_Screen_Width, 60*Main_Screen_Height/667)];
     payBottomView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:payBottomView];
     
     UILabel *bottomPriceLab = [[UILabel alloc] init];
     bottomPriceLab.text = @"¥54.00";
-    bottomPriceLab.font = [UIFont systemFontOfSize:18];
+    bottomPriceLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     bottomPriceLab.textColor = [UIColor colorFromHex:@"#ff525a"];
     [payBottomView addSubview:bottomPriceLab];
     
     [bottomPriceLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(payBottomView);
-        make.left.equalTo(payBottomView).mas_offset(30);
+        make.left.equalTo(payBottomView).mas_offset(30*Main_Screen_Height/667);
     }];
     
     UIButton *bottomPayButton = [[UIButton alloc] initWithFrame:CGRectMake(Main_Screen_Width - 136, 0, 136, 60)];
     bottomPayButton.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     [bottomPayButton setTitle:@"立即付款" forState:UIControlStateNormal];
-    bottomPayButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    bottomPayButton.titleLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     [bottomPayButton setTintColor:[UIColor whiteColor]];
     
     //方法子
@@ -237,10 +237,10 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section == 0 && indexPath.row == 1) {
-        return 67;
+        return 67*Main_Screen_Height/667;
     }
     
-    return 50;
+    return 50*Main_Screen_Height/667;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellStatic = @"cellStatic";
@@ -251,7 +251,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     }
     
     cell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    cell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     
     if (indexPath.section == 0 && indexPath.row == 1) {
         
@@ -301,7 +301,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     cell.detailTextLabel.text = @"洗车月卡";
     
     cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
-    cell.detailTextLabel.font = [UIFont systemFontOfSize:13];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
     
     
     return cell;
@@ -334,15 +334,15 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
     if (section == 2) {
-        return 30;
+        return 30*Main_Screen_Height/667;
     }
     
-    return 10;
+    return 10*Main_Screen_Height/667;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 10;
+    return 10*Main_Screen_Height/667;
 }
 
 #pragma mark - 点击cell

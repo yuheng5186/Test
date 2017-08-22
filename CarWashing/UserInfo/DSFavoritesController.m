@@ -99,7 +99,7 @@ static NSString *id_salerListCell = @"salerListCell";
     
     [self.favoriteListView registerNib:nib forCellReuseIdentifier:id_salerListCell];
     
-    self.favoriteListView.rowHeight = 110;
+    self.favoriteListView.rowHeight = 110*Main_Screen_Height/667;
     
 }
 

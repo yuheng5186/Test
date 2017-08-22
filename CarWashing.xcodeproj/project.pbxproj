@@ -115,6 +115,8 @@
 		187CCBF21F43F7FF00FCDF1C /* HYSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 187CCBF11F43F7FF00FCDF1C /* HYSlider.m */; };
 		188907121F2730F4009E20B0 /* DSUpdateRuleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188907111F2730F4009E20B0 /* DSUpdateRuleController.m */; };
 		188907161F283184009E20B0 /* DSGetScoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188907151F283184009E20B0 /* DSGetScoreController.m */; };
+		18A4B1B11F4AAB5200C64978 /* HowToUpGradeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B1B01F4AAB5200C64978 /* HowToUpGradeController.m */; };
+		18A4B1B41F4AAB7800C64978 /* WayToUpGradeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B1B31F4AAB7800C64978 /* WayToUpGradeCell.m */; };
 		18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A11F21A44F009FF73A /* DSMessageDetailController.m */; };
 		18B697A51F21A87F009FF73A /* DSScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A41F21A87F009FF73A /* DSScanController.m */; };
 		18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A71F21D420009FF73A /* DSCardGroupController.m */; };
@@ -464,6 +466,10 @@
 		188907111F2730F4009E20B0 /* DSUpdateRuleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSUpdateRuleController.m; path = UserInfo/DSUpdateRuleController.m; sourceTree = "<group>"; };
 		188907141F283184009E20B0 /* DSGetScoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSGetScoreController.h; path = UserInfo/DSGetScoreController.h; sourceTree = "<group>"; };
 		188907151F283184009E20B0 /* DSGetScoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSGetScoreController.m; path = UserInfo/DSGetScoreController.m; sourceTree = "<group>"; };
+		18A4B1AF1F4AAB5200C64978 /* HowToUpGradeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HowToUpGradeController.h; sourceTree = "<group>"; };
+		18A4B1B01F4AAB5200C64978 /* HowToUpGradeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HowToUpGradeController.m; sourceTree = "<group>"; };
+		18A4B1B21F4AAB7800C64978 /* WayToUpGradeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayToUpGradeCell.h; sourceTree = "<group>"; };
+		18A4B1B31F4AAB7800C64978 /* WayToUpGradeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayToUpGradeCell.m; sourceTree = "<group>"; };
 		18B697A01F21A44F009FF73A /* DSMessageDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMessageDetailController.h; path = Home/DSMessageDetailController.h; sourceTree = "<group>"; };
 		18B697A11F21A44F009FF73A /* DSMessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMessageDetailController.m; path = Home/DSMessageDetailController.m; sourceTree = "<group>"; };
 		18B697A31F21A87F009FF73A /* DSScanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSScanController.h; path = Home/DSScanController.h; sourceTree = "<group>"; };
@@ -879,6 +885,10 @@
 				188907151F283184009E20B0 /* DSGetScoreController.m */,
 				181E92ED1F2081840006511E /* DSMembershipController.h */,
 				181E92EE1F2081840006511E /* DSMembershipController.m */,
+				18A4B1AF1F4AAB5200C64978 /* HowToUpGradeController.h */,
+				18A4B1B01F4AAB5200C64978 /* HowToUpGradeController.m */,
+				18A4B1B21F4AAB7800C64978 /* WayToUpGradeCell.h */,
+				18A4B1B31F4AAB7800C64978 /* WayToUpGradeCell.m */,
 				50CAA69F1F41AB0300138CEF /* EarnScoreController.h */,
 				50CAA6A01F41AB0300138CEF /* EarnScoreController.m */,
 				50CAA69C1F41A7D700138CEF /* GoodsExchangeCell.h */,
@@ -1835,6 +1845,7 @@
 				50E2EE851F1F4D3C00FAF130 /* YZSortViewController.m in Sources */,
 				18B697A51F21A87F009FF73A /* DSScanController.m in Sources */,
 				1853BA091F28674F00B98C7F /* LKAlertView.m in Sources */,
+				18A4B1B11F4AAB5200C64978 /* HowToUpGradeController.m in Sources */,
 				50E2EE841F1F4D3C00FAF130 /* YZMenuButton.m in Sources */,
 				501672491F29DEB500384186 /* ScoreDetailController.m in Sources */,
 				1853BA341F28A02B00B98C7F /* JFAreaDataManager.m in Sources */,
@@ -1868,6 +1879,7 @@
 				18B697AF1F21DAE7009FF73A /* DSCarClubController.m in Sources */,
 				50B26EC11F319D7F009B3B9F /* WashCarTicketController.m in Sources */,
 				1853BA4A1F28A04100B98C7F /* JFCityViewController.m in Sources */,
+				18A4B1B41F4AAB7800C64978 /* WayToUpGradeCell.m in Sources */,
 				50B26E851F306E0A009B3B9F /* DiscountDetailController.m in Sources */,
 				181E92DE1F1F3BE40006511E /* MySettingViewController.m in Sources */,
 				5061A43F1F3AAECE003939A4 /* UIView+Uitls.m in Sources */,

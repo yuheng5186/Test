@@ -102,6 +102,21 @@
     TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:shareView preferredStyle:TYAlertControllerStyleAlert];
     
     [alertController setBlurEffectWithView:self.view];
+    alertController.alertView.width     = Main_Screen_Width;
+    alertController.alertView.height    = Main_Screen_Height*230/667;
+//    if (Main_Screen_Height == 568) {
+        alertController.alertViewOriginY    = self.contentView.height- alertController.alertView.height;
+//
+//    }else if(Main_Screen_Height == 667){
+//        alertController.alertViewOriginY    = self.contentView.height- Main_Screen_Height*180/667;
+//
+//        
+//    }else if(Main_Screen_Height == 736){
+//        alertController.alertViewOriginY    = self.contentView.height- Main_Screen_Height*160/667;
+//
+//    }else{
+//        
+//    }
     //[alertController setBlurEffectWithView:(UIView *)view style:(BlurEffectStyle)blurStyle];
     [self presentViewController:alertController animated:YES completion:nil];
 

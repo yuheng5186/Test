@@ -34,7 +34,7 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ActivityListCell" bundle:nil] forCellReuseIdentifier:@"ActivityListCell"];
     
-    self.tableView.rowHeight        = 200;
+    self.tableView.rowHeight        = Main_Screen_Height*205/667;
     self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 180, 0);
     [self.contentView addSubview:self.tableView];
     

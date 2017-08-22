@@ -47,7 +47,7 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
     self.payOrderView.dataSource = self;
     
     [self.payOrderView registerNib:[UINib nibWithNibName:@"DelayPayCell" bundle:nil] forCellReuseIdentifier:id_delayPayCell];
-    self.payOrderView.rowHeight = 150;
+    self.payOrderView.rowHeight = 150*Main_Screen_Height/667;
 }
 
 
@@ -68,7 +68,7 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10;
+    return 10*Main_Screen_Height/667;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

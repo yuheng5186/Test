@@ -19,6 +19,8 @@
 @property (nonatomic, weak) UILabel *noticeLabelOne;
 @property (nonatomic, weak) UILabel *noticeLabeTwo;
 
+@property (nonatomic, weak) UIView  *titleView;
+
 @end
 
 @implementation RechargeDetailController
@@ -69,6 +71,10 @@
 //    UILabel *noticeLabelTwo = [[UILabel alloc] init];
 //    noticeLabelTwo.text = @"2、有任何问题,可咨询金顶客服";
 //    [self.view addSubview:noticeLabelTwo];
+    
+    self.titleView                          = [UIUtil drawLineInView:self.view frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*50/667) color:[UIColor whiteColor]];
+    self.titleView.top                      = 64;
+    self.titleView.height                   = self.noticeLabel.bottom +Main_Screen_Height*10/667;
     
     [self.washCarLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.containView).mas_offset(20);

@@ -179,7 +179,7 @@
         [self.view addConstraintToView:backgroundView edageInset:UIEdgeInsetsZero];
         backgroundView.alpha = 0;
         [UIView animateWithDuration:0.3 animations:^{
-            backgroundView.alpha = 1;
+            backgroundView.alpha = 0.5;
         } completion:^(BOOL finished) {
             [_backgroundView removeFromSuperview];
             _backgroundView = backgroundView;

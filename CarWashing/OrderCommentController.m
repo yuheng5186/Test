@@ -35,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIView *containStarView = [[UIView alloc] initWithFrame:CGRectMake(0, 74, Main_Screen_Width, 110)];
+    UIView *containStarView = [[UIView alloc] initWithFrame:CGRectMake(0, 64 + 10*Main_Screen_Height/667, Main_Screen_Width, 110*Main_Screen_Height/667)];
     containStarView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:containStarView];
     
@@ -48,7 +48,7 @@
     UILabel *gradeLabel = [[UILabel alloc] init];
     gradeLabel.text = @"打分星评";
     gradeLabel.textColor = [UIColor colorFromHex:@"4a4a4a"];
-    gradeLabel.font = [UIFont systemFontOfSize:16];
+    gradeLabel.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     [containStarView addSubview:gradeLabel];
     
     
@@ -74,39 +74,39 @@
     
     
     [gradeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(containStarView).mas_offset(22);
+        make.top.equalTo(containStarView).mas_offset(22*Main_Screen_Height/667);
         make.centerX.equalTo(containStarView);
     }];
     
     _firstButton = self.buttonArray[0];
     
     [self.buttonArray[0] mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(containStarView).mas_offset(89);
-        make.top.equalTo(gradeLabel.mas_bottom).mas_offset(25);
-        make.width.height.mas_equalTo(26);
+        make.left.equalTo(containStarView).mas_offset(89*Main_Screen_Height/667);
+        make.top.equalTo(gradeLabel.mas_bottom).mas_offset(25*Main_Screen_Height/667);
+        make.width.height.mas_equalTo(26*Main_Screen_Height/667);
     }];
     
     [self.buttonArray[1] mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.buttonArray[0]);
-        make.leading.equalTo(self.buttonArray[0].mas_trailing).mas_offset(16.75);
+        make.leading.equalTo(self.buttonArray[0].mas_trailing).mas_offset(16.75*Main_Screen_Height/667);
         make.size.equalTo(self.buttonArray[0]);
     }];
     
     [self.buttonArray[2] mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.buttonArray[1]);
-        make.leading.equalTo(self.buttonArray[1].mas_trailing).mas_offset(16.75);
+        make.leading.equalTo(self.buttonArray[1].mas_trailing).mas_offset(16.75*Main_Screen_Height/667);
         make.size.equalTo(self.buttonArray[1]);
     }];
     
     [self.buttonArray[3] mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.buttonArray[2]);
-        make.leading.equalTo(self.buttonArray[2].mas_trailing).mas_offset(16.75);
+        make.leading.equalTo(self.buttonArray[2].mas_trailing).mas_offset(16.75*Main_Screen_Height/667);
         make.size.equalTo(self.buttonArray[2]);
     }];
     
     [self.buttonArray[4] mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.buttonArray[3]);
-        make.leading.equalTo(self.buttonArray[3].mas_trailing).mas_offset(16.75);
+        make.leading.equalTo(self.buttonArray[3].mas_trailing).mas_offset(16.75*Main_Screen_Height/667);
         make.size.equalTo(self.buttonArray[3]);
     }];
     
@@ -118,17 +118,17 @@
     [self.view addSubview:commentTextView];
     
     [commentTextView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(containStarView.mas_bottom).mas_offset(10);
+        make.top.equalTo(containStarView.mas_bottom).mas_offset(10*Main_Screen_Height/667);
         make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(200);
+        make.height.mas_equalTo(200*Main_Screen_Height/667);
     }];
     
     UIButton *signinButton = [UIUtil drawDefaultButton:self.view title:@"发表评价" target:self action:@selector(clickSigninButton:)];
     
     [signinButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view).mas_offset(-25);
-        make.width.mas_equalTo(350);
-        make.height.mas_equalTo(38);
+        make.bottom.equalTo(self.view).mas_offset(-25*Main_Screen_Height/667);
+        make.width.mas_equalTo(350*Main_Screen_Height/667);
+        make.height.mas_equalTo(38*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
     }];
 }
@@ -176,7 +176,7 @@
     
     if (textView.text.length < 1) {
         textView.text = @"亲,您的评价可以帮助到别人哦";
-        textView.font = [UIFont systemFontOfSize:13];
+        textView.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         textView.textColor = [UIColor colorFromHex:@"#999999"];
     }
 }
