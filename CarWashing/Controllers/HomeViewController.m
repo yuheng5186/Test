@@ -130,44 +130,26 @@
     UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*64/667) color:[UIColor colorFromHex:@"#293754"]];
     titleView.top                      = 0;
     
-    NSString *titleName              = @"    ";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
+    NSString *titleName              = @"金顶洗车";
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:Main_Screen_Height*14/667];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
-    titleNameLabel.textColor         = [UIColor blackColor];
+    titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = titleView.centerX;
-    titleNameLabel.centerY           = titleView.centerY +Main_Screen_Height*10/667;
-    
-//    UIImage *messagesImage           = [UIImage imageNamed:@"sousuo"];
-//    UIButton  *messagesButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, messagesImage.size.width, messagesImage.size.height) iconName:@"sousuo" target:self action:@selector(messagesButtonClick:)];
-//    messagesButton.right             = Main_Screen_Width -Main_Screen_Width*20/375;
-//    messagesButton.centerY           = titleNameLabel.centerY;
-    
-//    UIImage *messagesImage           = [UIImage imageNamed:@"xiaoxi"];
-//    UIButton  *messagesButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, messagesImage.size.width, messagesImage.size.height) iconName:@"xiaoxi" target:self action:@selector(messagesButtonClick:)];
-//    messagesButton.right             = Main_Screen_Width -Main_Screen_Width*10/375;
-//    messagesButton.centerY           = titleNameLabel.centerY;
-    
-//    UIImage *searchImage           = [UIImage imageNamed:@"sousuo"];
-//    UIButton  *searchButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, searchImage.size.width, searchImage.size.height) iconName:@"sousuo" target:self action:@selector(messagesButtonClick:)];
-//    searchButton.right             = downloadButton.left -20;
-//    searchButton.centerY           = titleNameLabel.centerY;
-    
-
-    
+    titleNameLabel.centerY           = titleView.centerY +Main_Screen_Height*5/667;
     
     
     UIImage *logeImage              = [UIImage imageNamed:@"xichebaidi"];
     UIImageView *logoImageView      = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, logeImage.size.width,logeImage.size.height) imageName:@"xichebaidi"];
     logoImageView.left              = Main_Screen_Width*12/375;
-    logoImageView.centerY           = titleNameLabel.centerY+Main_Screen_Height*5/667;
+    logoImageView.centerY           = titleNameLabel.centerY;
     
     
-    NSString *logoName              = @"金顶洗车";
-    UIFont *logoNameFont            = [UIFont boldSystemFontOfSize:14];
-    UILabel *logoNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:logoName font:logoNameFont] font:logoNameFont text:logoName isCenter:NO];
-    logoNameLabel.textColor         = [UIColor whiteColor];
-    logoNameLabel.centerX           = Main_Screen_Width/2;
-    logoNameLabel.centerY           = logoImageView.centerY;
+//    NSString *logoName              = @"金顶洗车";
+//    UIFont *logoNameFont            = [UIFont boldSystemFontOfSize:14];
+//    UILabel *logoNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:logoName font:logoNameFont] font:logoNameFont text:logoName isCenter:NO];
+//    logoNameLabel.textColor         = [UIColor whiteColor];
+//    logoNameLabel.centerX           = Main_Screen_Width/2;
+//    logoNameLabel.centerY           = logoImageView.centerY;
     
     
     
@@ -222,7 +204,7 @@
     scanImageView.top               = Main_Screen_Height*10/667;
     
     NSString *scanName              = @"扫一扫";
-    UIFont *scanNameFont            = [UIFont systemFontOfSize:14];
+    UIFont *scanNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
     UILabel *scanNameLabel          = [UIUtil drawLabelInView:scanView frame:[UIUtil textRect:scanName font:scanNameFont] font:scanNameFont text:scanName isCenter:NO];
     scanNameLabel.textColor         = [UIColor colorFromHex:@"#fefefe"];
     scanNameLabel.centerX           = scanImageView.centerX;
@@ -241,32 +223,11 @@
     cardBagImageView.top               = Main_Screen_Height*10/667;
     
     NSString *cardBagName              = @"卡包";
-    UIFont *cardBagNameFont            = [UIFont systemFontOfSize:14];
+    UIFont *cardBagNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
     UILabel *cardBagNameLabel          = [UIUtil drawLabelInView:cardBagView frame:[UIUtil textRect:cardBagName font:cardBagNameFont] font:cardBagNameFont text:cardBagName isCenter:NO];
     cardBagNameLabel.textColor         = [UIColor colorFromHex:@"#fefefe"];
     cardBagNameLabel.centerX           = cardBagImageView.centerX;
     cardBagNameLabel.top               = cardBagImageView.bottom +Main_Screen_Height*6/667;
-    
-    
-//    UIView *discountView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-//    discountView.centerX                   = Main_Screen_Width*5/8;
-//    discountView.top                       = Main_Screen_Height*20/375;
-//    
-//    UITapGestureRecognizer  *tapDiscountGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDiscountButtonClick:)];
-//    [discountView addGestureRecognizer:tapDiscountGesture];
-//    
-//    UIImage *discountImage              = [UIImage imageNamed:@"youhui"];
-//    UIImageView *discountImageView      = [UIUtil drawCustomImgViewInView:discountView frame:CGRectMake(0, 0, discountImage.size.width,discountImage.size.height) imageName:@"youhui"];
-//    discountImageView.centerX           = discountView.size.width/2;
-//    discountImageView.top               = Main_Screen_Height*10/667;
-//    
-//    NSString *discountName              = @"优惠";
-//    UIFont *discountNameFont            = [UIFont systemFontOfSize:16];
-//    UILabel *discountNameLabel          = [UIUtil drawLabelInView:discountView frame:[UIUtil textRect:discountName font:discountNameFont] font:discountNameFont text:discountName isCenter:NO];
-//    discountNameLabel.textColor         = [UIColor colorFromHex:@"#fefefe"];
-//    discountNameLabel.centerX           = discountImageView.centerX;
-//    discountNameLabel.top               = discountImageView.bottom +Main_Screen_Height*10/667;
-    
     
     
     UIView *memberRightView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
@@ -282,13 +243,11 @@
     memberRightImageView.top               = Main_Screen_Height*10/667;
     
     NSString *rightName              = @"会员特权";
-    UIFont *rightNameFont            = [UIFont systemFontOfSize:14];
+    UIFont *rightNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
     UILabel *rightNameLabel          = [UIUtil drawLabelInView:memberRightView frame:[UIUtil textRect:rightName font:rightNameFont] font:rightNameFont text:rightName isCenter:NO];
     rightNameLabel.textColor         = [UIColor colorFromHex:@"#fefefe"];
     rightNameLabel.centerX           = memberRightImageView.centerX;
     rightNameLabel.top               = memberRightImageView.bottom +Main_Screen_Height*6/667;
-    
-    
     
     
     UIView *scoreView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
@@ -304,27 +263,13 @@
     scoreImageView.top               = Main_Screen_Height*10/667;
     
     NSString *scoreName              = @"积分";
-    UIFont *scoreNameFont            = [UIFont systemFontOfSize:14];
+    UIFont *scoreNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
     UILabel *scoreNameLabel          = [UIUtil drawLabelInView:scoreView frame:[UIUtil textRect:scoreName font:scoreNameFont] font:scoreNameFont text:scoreName isCenter:NO];
     scoreNameLabel.textColor         = [UIColor colorFromHex:@"#fefefe"];
     scoreNameLabel.centerX           = scoreImageView.centerX;
     scoreNameLabel.top               = scoreImageView.bottom +Main_Screen_Height*6/667;
-    
 
     backgroudView.height             = scoreView.bottom +Main_Screen_Height*25/667;
-    
-    
-    
-//    NSString *restName              = @"剩余8次";
-//    UIFont *restNameFont            = [UIFont systemFontOfSize:16];
-//    UILabel *restNameLabel          = [UIUtil drawLabelInView:scanView frame:[UIUtil textRect:restName font:restNameFont] font:restNameFont text:restName isCenter:NO];
-//    restNameLabel.textColor         = [UIColor grayColor];
-//    restNameLabel.centerX           = scanNameLabel.centerX;
-//    restNameLabel.top               = scanNameLabel.bottom +Main_Screen_Height*5/667;
-    
-    
-//    UIView *lineView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*1/667) color:[UIColor grayColor]];
-//    lineView.top                       = cardBagView.bottom +Main_Screen_Height*40/667;
     
     
     UIView *payView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
@@ -339,7 +284,7 @@
     payImageView.top               = Main_Screen_Height*10/667;
     
     NSString *payName              = @"激活卡券";
-    UIFont *payNameFont            = [UIFont systemFontOfSize:12];
+    UIFont *payNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*12/667];
     UILabel *payNameLabel          = [UIUtil drawLabelInView:payView frame:[UIUtil textRect:payName font:payNameFont] font:payNameFont text:payName isCenter:NO];
     payNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
     payNameLabel.centerX           = payImageView.centerX;
@@ -358,30 +303,11 @@
     signImageView.top               = Main_Screen_Height*10/667;
     
     NSString *signName              = @"每日签到";
-    UIFont *signNameFont            = [UIFont systemFontOfSize:12];
+    UIFont *signNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*12/667];
     UILabel *signNameLabel          = [UIUtil drawLabelInView:signView frame:[UIUtil textRect:signName font:signNameFont] font:signNameFont text:signName isCenter:NO];
     signNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
     signNameLabel.centerX           = signImageView.centerX;
     signNameLabel.top               = signImageView.bottom +Main_Screen_Height*12/667;
-    
-//    UIView *memberRightView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-//    memberRightView.centerX                   = Main_Screen_Width*5/8;
-//    memberRightView.top                       = backgroudView.bottom +Main_Screen_Height*10/375;
-//    
-//    UITapGestureRecognizer  *tapMemberRightGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapMemberRightButtonClick:)];
-//    [memberRightView addGestureRecognizer:tapMemberRightGesture];
-//    
-//    UIImage *memberImage                   = [UIImage imageNamed:@"huiyuan"];
-//    UIImageView *memberRightImageView      = [UIUtil drawCustomImgViewInView:memberRightView frame:CGRectMake(0, 0, memberImage.size.width,memberImage.size.height) imageName:@"huiyuan"];
-//    memberRightImageView.left              = Main_Screen_Width*20/375;
-//    memberRightImageView.top               = Main_Screen_Height*10/667;
-//    
-//    NSString *rightName              = @"会员特权";
-//    UIFont *rightNameFont            = [UIFont systemFontOfSize:16];
-//    UILabel *rightNameLabel          = [UIUtil drawLabelInView:memberRightView frame:[UIUtil textRect:rightName font:rightNameFont] font:rightNameFont text:rightName isCenter:NO];
-//    rightNameLabel.textColor         = [UIColor blackColor];
-//    rightNameLabel.centerX           = memberRightImageView.centerX;
-//    rightNameLabel.top               = memberRightImageView.bottom +Main_Screen_Height*10/667;
     
     UIView *shopView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     shopView.centerX                   = Main_Screen_Width*5/8;
@@ -396,7 +322,7 @@
     shopImageView.top               = Main_Screen_Height*10/667;
     
     NSString *shopName              = @"商家入驻";
-    UIFont *shopNameFont            = [UIFont systemFontOfSize:12];
+    UIFont *shopNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*12/667];
     UILabel *shopNameLabel          = [UIUtil drawLabelInView:shopView frame:[UIUtil textRect:shopName font:shopNameFont] font:shopNameFont text:shopName isCenter:NO];
     shopNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
     shopNameLabel.centerX           = shopImageView.centerX;
@@ -416,7 +342,7 @@
     serviceImageView.top               = Main_Screen_Height*10/667;
     
     NSString *serviceName              = @"客服咨询";
-    UIFont *serviceNameFont            = [UIFont systemFontOfSize:12];
+    UIFont *serviceNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*12/667];
     UILabel *serviceNameLabel          = [UIUtil drawLabelInView:serviceView frame:[UIUtil textRect:serviceName font:serviceNameFont] font:serviceNameFont text:serviceName isCenter:NO];
     serviceNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
     serviceNameLabel.centerX           = serviceImageView.centerX;
@@ -437,7 +363,7 @@
     
     
     NSString *myCarName              = @"我的爱车";
-    UIFont *myCarNameFont            = [UIFont systemFontOfSize:12];
+    UIFont *myCarNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*12/667];
     UILabel *myCarNameLabel          = [UIUtil drawLabelInView:myCarView frame:[UIUtil textRect:myCarName font:myCarNameFont] font:myCarNameFont text:myCarName isCenter:NO];
     myCarNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
     myCarNameLabel.centerX           = myCarImageView.centerX;
@@ -456,7 +382,7 @@
     shareImageView.top               = Main_Screen_Height*10/667;
     
     NSString *shareName              = @"分享赚钱";
-    UIFont *shareNameFont            = [UIFont systemFontOfSize:12];
+    UIFont *shareNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*12/667];
     UILabel *shareNameLabel          = [UIUtil drawLabelInView:shareView frame:[UIUtil textRect:shareName font:shareNameFont] font:shareNameFont text:shareName isCenter:NO];
     shareNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
     shareNameLabel.centerX           = shareImageView.centerX;
@@ -495,7 +421,7 @@
     discountImageView.top               = Main_Screen_Height*10/667;
 
     NSString *discountName              = @"优惠活动";
-    UIFont *discountNameFont            = [UIFont systemFontOfSize:12];
+    UIFont *discountNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*12/667];
     UILabel *discountNameLabel          = [UIUtil drawLabelInView:discountView frame:[UIUtil textRect:discountName font:discountNameFont] font:discountNameFont text:discountName isCenter:NO];
     discountNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
     discountNameLabel.centerX           = discountImageView.centerX;
@@ -516,7 +442,7 @@
     carClubImageView.top               = Main_Screen_Height*10/667;
     
     NSString *carClubName              = @"车友圈";
-    UIFont *carClubNameFont            = [UIFont systemFontOfSize:12];
+    UIFont *carClubNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*12/667];
     UILabel *CarClubNameLabel          = [UIUtil drawLabelInView:carClubView frame:[UIUtil textRect:carClubName font:carClubNameFont] font:carClubNameFont text:carClubName isCenter:NO];
     CarClubNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
     CarClubNameLabel.centerX           = carClubImageView.centerX;
