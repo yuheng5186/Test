@@ -130,7 +130,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     
     //约束
     [headContainView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).mas_offset(64*Main_Screen_Height/667);
+        make.top.equalTo(self.view).mas_offset(64);
         make.left.right.equalTo(self.view);
         make.height.mas_equalTo(130*Main_Screen_Height/667);
     }];

@@ -20,14 +20,14 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jindinghuiyuantu" translatesAutoresizingMaskIntoConstraints="NO" id="Vp3-OH-hEg">
-                            <rect key="frame" x="16" y="8" width="52" height="52"/>
+                            <rect key="frame" x="16" y="0.0" width="52" height="52"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="52" id="0UK-zs-7Zg"/>
                                 <constraint firstAttribute="height" constant="52" id="daC-P2-AIB"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13000000000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZU9-dr-hhs">
-                            <rect key="frame" x="90" y="25" width="99" height="18"/>
+                            <rect key="frame" x="90" y="17" width="99" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -37,7 +37,7 @@
                     <constraints>
                         <constraint firstItem="Vp3-OH-hEg" firstAttribute="leading" secondItem="YJW-xs-lvQ" secondAttribute="leading" constant="16" id="2Iy-md-7ql"/>
                         <constraint firstItem="ZU9-dr-hhs" firstAttribute="centerY" secondItem="Vp3-OH-hEg" secondAttribute="centerY" id="PIe-Xu-hCm"/>
-                        <constraint firstItem="Vp3-OH-hEg" firstAttribute="top" secondItem="YJW-xs-lvQ" secondAttribute="top" constant="8" id="V8G-fK-pjx"/>
+                        <constraint firstItem="Vp3-OH-hEg" firstAttribute="top" secondItem="YJW-xs-lvQ" secondAttribute="top" id="V8G-fK-pjx"/>
                         <constraint firstItem="ZU9-dr-hhs" firstAttribute="leading" secondItem="Vp3-OH-hEg" secondAttribute="trailing" constant="22" id="WR5-Gr-WtN"/>
                         <constraint firstAttribute="height" constant="68" id="fox-3C-7tM"/>
                     </constraints>

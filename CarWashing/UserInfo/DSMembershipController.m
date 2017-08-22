@@ -64,7 +64,6 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     
     [self.view addSubview:memberShipView];
-    
     UIView *exchangeView = [[UIView alloc] init];
     
     [self.view addSubview:exchangeView];
