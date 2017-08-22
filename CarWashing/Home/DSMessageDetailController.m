@@ -57,7 +57,7 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
-    return 30.0f;
+    return 30.0f*Main_Screen_Height/667;
 }
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
@@ -66,10 +66,10 @@
     UILabel  *titleLabel;
     if (headerView == nil) {
         headerView  = [[UITableViewHeaderFooterView alloc]initWithReuseIdentifier:headerSectionID];
-        titleLabel  = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
-        titleLabel.font = [UIFont systemFontOfSize:16];
+        titleLabel  = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200*Main_Screen_Height/667, 40*Main_Screen_Height/667)];
+        titleLabel.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         titleLabel.text = @"2017-7-27 10:53:05";
-        titleLabel.centerX  = self.navigationView.centerX +20;
+        titleLabel.centerX  = self.navigationView.centerX +20*Main_Screen_Height/667;
         [headerView addSubview:titleLabel];
     }
     return headerView;
@@ -77,7 +77,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 10;
+    return 10*Main_Screen_Height/667;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -89,7 +89,7 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 120;
+    return 120*Main_Screen_Height/667;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -102,23 +102,23 @@
     cell.backgroundColor    = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-    UILabel *titleLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 240, 20) font:[UIFont systemFontOfSize:16] text:@"[免费领取洗车券]领取入口" isCenter:NO];
-    titleLabel.top       = 10;
-    titleLabel.left      = 10;
+    UILabel *titleLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 240*Main_Screen_Height/667, 20*Main_Screen_Height/667) font:[UIFont systemFontOfSize:16] text:@"[免费领取洗车券]领取入口" isCenter:NO];
+    titleLabel.top       = 10*Main_Screen_Height/667;
+    titleLabel.left      = 10*Main_Screen_Height/667;
     
-    UILabel *remindLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 240, 20) font:[UIFont systemFontOfSize:14] text:@"限时领取，即刻领取..." isCenter:NO];
+    UILabel *remindLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 240*Main_Screen_Height/667, 20*Main_Screen_Height/667) font:[UIFont systemFontOfSize:14] text:@"限时领取，即刻领取..." isCenter:NO];
     remindLabel.top       = titleLabel.bottom +Main_Screen_Height*10/667;
-    remindLabel.left      = 10;
+    remindLabel.left      = 10*Main_Screen_Height/667;
     
-    UIView *lineView      = [UIUtil drawLineInView:cell.contentView frame:CGRectMake(0, 0, 340, 1) color:[UIColor grayColor]];
+    UIView *lineView      = [UIUtil drawLineInView:cell.contentView frame:CGRectMake(0, 0, 340*Main_Screen_Height/667, 1) color:[UIColor grayColor]];
     lineView.top          = remindLabel.bottom +Main_Screen_Height*10/667;
-    lineView.left         = 10;
+    lineView.left         = 10*Main_Screen_Height/667;
     
-    UILabel *detailLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 240, 20) font:[UIFont systemFontOfSize:14] text:@"查看详情" isCenter:NO];
+    UILabel *detailLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 240*Main_Screen_Height/667, 20) font:[UIFont systemFontOfSize:14*Main_Screen_Height/667] text:@"查看详情" isCenter:NO];
     detailLabel.top       = lineView.bottom +Main_Screen_Height*10/667;
-    detailLabel.left      = 10;
+    detailLabel.left      = 10*Main_Screen_Height/667;
     
-    UIImageView *nextImageView      = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, 0, 30,30) imageName:@"WechatIMG772"];
+    UIImageView *nextImageView      = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, 0, 30*Main_Screen_Height/667,30*Main_Screen_Height/667) imageName:@"WechatIMG772"];
     nextImageView.right             = Main_Screen_Width -Main_Screen_Width*20/375;
     nextImageView.top               = lineView.bottom +Main_Screen_Height*10/667;
     

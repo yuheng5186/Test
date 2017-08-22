@@ -160,7 +160,7 @@
     [segmentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(self.view);
         make.top.equalTo(self.view).mas_offset(64);
-        make.height.mas_equalTo(44);
+        make.height.mas_equalTo(44*Main_Screen_Height/667);
     }];
     
     //给block赋值

@@ -9,9 +9,14 @@
 #import "ShopCommentController.h"
 #import "BusinessEstimateCell.h"
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
+#import "HTTPDefine.h"
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
 @interface ShopCommentController ()<UITableViewDataSource, UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic, weak) UITableView *commentListView;
+
+@property (nonatomic, strong) NSMutableArray *MerchantCommentListData;
 
 @end
 
@@ -31,6 +36,9 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.MerchantCommentListData = [[NSMutableArray alloc]init];
+    [self GetCommentDetail];
+    
     self.commentListView.delegate = self;
     self.commentListView.dataSource = self;
 #pragma maek-空白页
@@ -42,12 +50,71 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
     self.commentListView.rowHeight = 110*Main_Screen_Height/667;
 }
 
+-(void)GetCommentDetail
+{
+    NSDictionary *mulDic = @{
+                             @"MerCode":[NSString stringWithFormat:@"%d",[self.dic[@"MerCode"] intValue]],
+                             @"PageIndex":@0,
+                             @"PageSize":@10
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetCommentDetail",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+            [self.MerchantCommentListData addObjectsFromArray:arr];
+            [_commentListView reloadData];
+        }
+        else
+        {
+            [self.view showInfo:@"商家评论信息获取失败" autoHidden:YES interval:2];
+        }
+        
+        
+        
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+    }];
+
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [self.MerchantCommentListData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BusinessEstimateCell *commentCell = [tableView dequeueReusableCellWithIdentifier:id_commentShopCell forIndexPath:indexPath];
+    
+    if(self.MerchantCommentListData != 0)
+    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,[[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"FromuserImg"]];
+            NSURL *url=[NSURL URLWithString:ImageURL];
+            NSData *data=[NSData dataWithContentsOfURL:url];
+            UIImage *img=[UIImage imageWithData:data];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                commentCell.headImageView.image = img;
+            });
+        });
+        
+        commentCell.phoneLabel.text = [[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"FromuserName"];
+        [commentCell.userScoreLabel setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",[[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"Score"]] substringToIndex:1]]]];
+        commentCell.commentLabel.text = [[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"CommentContent"];
+        commentCell.dateLabel.text = [[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"CommentDate"];
+        commentCell.timeLabel.hidden = YES;
+    }
+    else
+    {
+        
+    }
+    
+    
     
     return commentCell;
     
@@ -55,7 +122,7 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UILabel *commentTitleLabel = [[UILabel alloc] init];
-    commentTitleLabel.text = @"  评价(58)";
+    commentTitleLabel.text = [NSString stringWithFormat:@"  评论(%@)",self.dic[@"CommentCount"]];
     commentTitleLabel.backgroundColor = [UIColor colorFromHex:@"#dfdfdf"];
     commentTitleLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     commentTitleLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];

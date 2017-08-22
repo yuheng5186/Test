@@ -45,7 +45,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    self.detailView.frame = CGRectMake(0, 64, Main_Screen_Width, 400);
+    self.detailView.frame = CGRectMake(0, 64, Main_Screen_Width, 400*Main_Screen_Height/667);
 }
 
 - (void)didReceiveMemoryWarning {

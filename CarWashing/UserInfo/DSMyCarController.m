@@ -17,6 +17,12 @@
 #import "ProvinceShortController.h"
 #import "IQKeyboardManager.h"
 
+#import "HTTPDefine.h"
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "MyCar.h"
+#import "UdStorage.h"
+
 @interface DSMyCarController ()<UITableViewDelegate, UITableViewDataSource, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource, UITextFieldDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) UIImageView *carImageView;
@@ -29,11 +35,15 @@
 
 @property (nonatomic, weak) UIButton *provinceBtn;
 
-
+@property (nonatomic, strong) NSMutableArray *CarArray;
+@property (nonatomic, assign) NSInteger Xuhao;
 
 @property (nonatomic, weak) UILabel *lbl;
 @property (nonatomic, weak) UILabel *lbl2;
 @property (nonatomic, weak) UITextField *carNum;
+@property (nonatomic, weak) UITextField *carBrand;
+@property (nonatomic, weak) UITextField *ChassisNum;
+@property (nonatomic, weak) UITextField *Mileage;
 @end
 
 static NSString * HeaderId = @"header";
@@ -48,6 +58,8 @@ static NSString * HeaderId = @"header";
     }
     return _imageArray;
 }
+
+
 
 //- (UIImageView *)carImageView {
 //    
@@ -64,6 +76,7 @@ static NSString * HeaderId = @"header";
     if (_carInfoView == nil) {
         
         UITableView *carInfoView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height) style:UITableViewStyleGrouped];
+        carInfoView.contentInset     = UIEdgeInsetsMake(0, 0, 80, 0);
         _carInfoView = carInfoView;
         [self.view addSubview:_carInfoView];
     }
@@ -85,15 +98,14 @@ static NSString * HeaderId = @"header";
    
     [IQKeyboardManager sharedManager].enable = YES;
     //self.carImageView.image = [UIImage imageNamed:@"02"];
+    _Xuhao = 0;
+    _CarArray = [NSMutableArray array];
     
-    for (int index = 0; index < 3; index++) {
-        UIImage *image = [UIImage imageNamed:@"aicheditu"];
-        [self.imageArray addObject:image];
-    }
-    
+    [self getMyCarData];
     
     
-    [self setupUI];
+    
+  
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEditing)];
     tap.delegate = self;
@@ -106,6 +118,52 @@ static NSString * HeaderId = @"header";
         return NO;//关闭手势
     }//否则手势存在
     return YES;
+}
+
+-(void)getMyCarData
+{
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/GetCarList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+            for(NSDictionary *dic in arr)
+            {
+                MyCar *newcar = [[MyCar alloc]init];
+                [newcar setValuesForKeysWithDictionary:dic];
+                [_CarArray addObject:newcar];
+            }
+            
+            for (int index = 0; index < [_CarArray count]; index++) {
+                UIImage *image = [UIImage imageNamed:@"aicheditu"];
+                [self.imageArray addObject:image];
+            }
+            
+              [self setupUI];
+            
+//            [_carInfoView reloadData];
+            
+        }
+        else
+        {
+            [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        }
+        
+        
+        
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+    }];
+
 }
 
 - (void)setupUI {
@@ -149,7 +207,8 @@ static NSString * HeaderId = @"header";
 }
 
 - (void)didSelectCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex {
-    
+//    NSLog(@"%ld",subIndex);
+    _Xuhao = subIndex;
 }
 
 
@@ -175,6 +234,18 @@ static NSString * HeaderId = @"header";
     UIImageView *iconImageView = [[UIImageView alloc] init];
     iconImageView.image = [UIImage imageNamed:@"aichemoren"];
     [containImageView addSubview:iconImageView];
+    MyCar *car = [[MyCar alloc]init];
+    car = [_CarArray objectAtIndex:index];
+    if(car.IsDefaultFav == 0)
+    {
+        iconImageView.hidden = YES;
+    }
+    else
+    {
+        iconImageView.hidden = NO;
+    }
+    
+    
     
     UIImageView *carImageView = [[UIImageView alloc] init];
     carImageView.image = [UIImage imageNamed:@"aiche1"];
@@ -199,6 +270,8 @@ static NSString * HeaderId = @"header";
 - (void)didScrollToPage:(NSInteger)pageNumber inFlowView:(NewPagedFlowView *)flowView {
     
     //self.pageControl.currentPage = pageNumber;
+//    NSLog(@"%ld",pageNumber);
+    _Xuhao = pageNumber;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -219,6 +292,9 @@ static NSString * HeaderId = @"header";
     UITableViewCell *carCell = [tableView dequeueReusableCellWithIdentifier:id_carCell];
     carCell.selectionStyle=UITableViewCellSelectionStyleNone;
     carCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:id_carCell];
+    
+    MyCar *car = [[MyCar alloc]init];
+    car = [_CarArray objectAtIndex:_Xuhao];
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
@@ -245,9 +321,11 @@ static NSString * HeaderId = @"header";
             
             UITextField *numTF = [[UITextField alloc] init];
             numTF.placeholder = @"请输入车牌号";
+            numTF.text = car.PlateNumber;
             numTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
             numTF.font = [UIFont systemFontOfSize:12];
             numTF.delegate = self;
+            numTF.tag = 100;
             self.carNum=numTF;
             [carCell.contentView addSubview:numTF];
             
@@ -274,7 +352,11 @@ static NSString * HeaderId = @"header";
             
             UITextField *brandTF = [[UITextField alloc] init];
             brandTF.placeholder = @"请填写";
+            brandTF.text = car.CarBrand;
+            brandTF.tag = 101;
             brandTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
+
+            self.carBrand = brandTF;
             brandTF.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
             [carCell.contentView addSubview:brandTF];
             
@@ -286,20 +368,45 @@ static NSString * HeaderId = @"header";
         }
     }
     
-    if (indexPath.section == 1) {
+    if (indexPath.section == 1)
+    {
         
         NSArray *arr = @[@"车架号码",@"生产年份",@"上路时间",@"行驶里程"];
         carCell.textLabel.text = arr[indexPath.row];
         carCell.textLabel.textColor = [UIColor colorFromHex:@"#868686"];
         carCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
         
-        if (indexPath.row == 0 || indexPath.row == 3) {
+        if (indexPath.row == 0)
+        {
             UITextField *textTF = [[UITextField alloc] init];
             textTF.delegate = self;
-            textTF.tag = indexPath.row;
+            textTF.tag = 102;
+            textTF.text = car.ChassisNum;
+            textTF.placeholder = @"请填写";
+            textTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
+            textTF.font = [UIFont systemFontOfSize:12];
+            self.ChassisNum = textTF;
+            [carCell.contentView addSubview:textTF];
+            
+            [textTF mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(carCell.contentView).mas_offset(110);
+                make.centerY.equalTo(carCell);
+                make.right.equalTo(carCell.contentView).mas_offset(-12);
+            }];
+        }
+        
+        
+        else if (indexPath.row == 3)
+        {
+            UITextField *textTF = [[UITextField alloc] init];
+            textTF.delegate = self;
+            textTF.tag = 103;
+            textTF.text = [NSString stringWithFormat:@"%ld",car.Mileage];
             textTF.placeholder = @"请填写";
             textTF.keyboardType    = UIKeyboardTypeNumberPad;
             textTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
+
+            self.Mileage = textTF;
             textTF.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
             [carCell.contentView addSubview:textTF];
             
@@ -308,13 +415,18 @@ static NSString * HeaderId = @"header";
                 make.centerY.equalTo(carCell);
                 make.right.equalTo(carCell.contentView).mas_offset(-12*Main_Screen_Height/667);
             }];
-        }else {
+        }
+        
+        
+        else
+        {
             
             carCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            if (indexPath.row == 1) {
+            if (indexPath.row == 1)
+            {
                 UILabel *lbl = [[UILabel alloc] init];
                 _lbl = lbl;
-                lbl.text = @"请选择";
+                lbl.text = [NSString stringWithFormat:@"%ld",car.Manufacture];
                 lbl.textColor = [UIColor colorFromHex:@"#868686"];
                 lbl.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
                 [carCell.contentView addSubview:lbl];
@@ -323,10 +435,13 @@ static NSString * HeaderId = @"header";
                     make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
                     make.centerY.equalTo(carCell);
                 }];
-            }else {
+            }
+            else
+            {
                 UILabel *lbl2 = [[UILabel alloc] init];
                 _lbl2 = lbl2;
-                lbl2.text = @"请选择";
+                lbl2.text = car.DepartureTime;
+                
                 lbl2.textColor = [UIColor colorFromHex:@"#868686"];
                 lbl2.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
                 [carCell.contentView addSubview:lbl2];
@@ -380,16 +495,18 @@ static NSString * HeaderId = @"header";
         
         if (indexPath.row == 1) {
             QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
-                
+            
                 self.lbl.text = str;
+ 
             }];
             [datePickerView show];
         }
         
         if (indexPath.row == 2) {
             QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
-                
+ 
                 self.lbl2.text = str;
+
             }];
             [datePickerView show];
         }
@@ -422,7 +539,7 @@ static NSString * HeaderId = @"header";
     //键盘高度
     CGFloat keyboardHeight = 216.0f;
     //获取tag
-    //NSLog(@"hhhhh === %d",textField.tag);
+//    NSLog(@"hhhhh === %ld",textField.tag);
     //判断键盘高度是否遮住输入框，具体超过多少距离，移动多少距离（自己算好就可以，不一定和这里一样）
     if ((self.carInfoView.bounds.size.height - 264) - keyboardHeight - 60 * (textField.tag + 1) < 0 &&(self.carInfoView.bounds.size.height - 264) - keyboardHeight - 60 * (textField.tag + 1) > -60) {
         
@@ -457,17 +574,56 @@ static NSString * HeaderId = @"header";
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
 //}
 //
-//- (void)viewWillDisappear:(BOOL)animated
-//{
-//    [super viewWillDisappear:animated];
-//    
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    
+    MyCar *car = [[MyCar alloc]init];
+    car = [_CarArray objectAtIndex:_Xuhao];
+    
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"CarCode":[NSString stringWithFormat:@"%ld",car.CarCode],
+                             @"ModifyType":@1,
+                             @"CarBrand":self.carBrand.text,
+                             @"PlateNumber":[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,self.carNum.text],
+                             @"ChassisNum":self.ChassisNum.text,
+                             @"Manufacture":[self.lbl.text substringToIndex:4],
+                             @"DepartureTime":self.lbl2.text,
+                             @"Mileage":self.Mileage.text
+                            };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/ModifyCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            [self.view showInfo:@"修改成功" autoHidden:YES interval:2];
+            
+            
+        }
+        else
+        {
+            [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+        }
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+    }];
+    
+    
+    
+    
 //    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
-//}
+}
 //
 //- (void)keyboardWillShow:(NSNotification *)noti
 //{
@@ -532,7 +688,7 @@ static NSString * HeaderId = @"header";
 - (void)clickMycarPort {
     
     MyCarPortController *carPortVC = [[MyCarPortController alloc] init];
-    
+    carPortVC.mycararray = _CarArray;
     carPortVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:carPortVC animated:YES];
     

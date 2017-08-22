@@ -62,7 +62,7 @@
     
     NSString   *titleString     = @"推荐得“洗车卡”";
     
-    UIFont     *titleFont       = [UIFont boldSystemFontOfSize:25];
+    UIFont     *titleFont       = [UIFont boldSystemFontOfSize:25*Main_Screen_Height/667];
     UILabel *titleLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*300/375, Main_Screen_Height*60/667) font:titleFont text:titleString isCenter:NO];
     titleLabel.text             = titleString;
     titleLabel.textColor        = [UIColor colorFromHex:@"#545454"];
@@ -72,7 +72,7 @@
     
     
     NSString *showString              = @"邀请新人完成注册，即可获得价值99元洗车卡";
-    UIFont *showStringFont            = [UIFont systemFontOfSize:14];
+    UIFont *showStringFont            = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     UILabel *showLabel          = [UIUtil drawLabelInView:self.contentView frame:[UIUtil textRect:showString font:showStringFont] font:showStringFont text:showString isCenter:NO];
     showLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
     showLabel.textAlignment     = NSTextAlignmentCenter;
@@ -86,10 +86,10 @@
     
 //    UIButton    *getMoneyButton = [UIUtil drawDefaultButton:self.contentView title:@"立即邀请，新人可获得99元洗车卡" target:self action:@selector(getMoneyButtonClick:)];
     NSString *string   = @"立即邀请，新人可获得99元洗车卡";
-    UIFont  *stringFont = [UIFont systemFontOfSize:16];
+    UIFont  *stringFont = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     UIButton    *getMoneyButton = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width -Main_Screen_Width*60/375, Main_Screen_Height*40/667) text:string font:stringFont color:[UIColor whiteColor] target:self action:@selector(getMoneyButtonClick:)];
     getMoneyButton.backgroundColor  = [UIColor colorWithHex:0xFFB500 alpha:1.0];
-    getMoneyButton.layer.cornerRadius   = 5;
+    getMoneyButton.layer.cornerRadius   = 5*Main_Screen_Height/667;
     getMoneyButton.bottom          = Main_Screen_Height -Main_Screen_Height*77/667;
     getMoneyButton.centerX      = self.contentView.centerX;
 //    getMoneyButton.width        = Main_Screen_Width - Main_Screen_Width*40/375;
@@ -170,8 +170,8 @@
 - (void)setThumbImage:(SendMessageToWXReq *)req
 {
     if (image) {
-        CGFloat width = 100.0f;
-        CGFloat height = image.size.height * 100.0f / image.size.width;
+        CGFloat width = 100.0f*Main_Screen_Height/667;
+        CGFloat height = image.size.height * 100.0f*Main_Screen_Height/667 / image.size.width;
         UIGraphicsBeginImageContext(CGSizeMake(width, height));
         [image drawInRect:CGRectMake(0, 0, width, height)];
         UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();

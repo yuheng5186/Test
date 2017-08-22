@@ -8,6 +8,10 @@
 
 #import "DSAddMerchantController.h"
 
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "HTTPDefine.h"
+
 @interface DSAddMerchantController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -32,7 +36,31 @@
     
 }
 - (void) rightButtonClick:(id)sender {
+    
+    
+    NSDictionary *mulDic = @{
+                             @"Name":self.merchantFieldText.text,
+                             @"Phone":self.phoneFieldText.text,
+                             @"Address":self.addressFieldText.text
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/AddMerchantSettledInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        
+        
+        [self.view showInfo:@"入驻成功" autoHidden:YES interval:2];
+        
+        
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"入驻失败" autoHidden:YES interval:2];
+    }];
 
+    
     
 }
 
@@ -68,7 +96,7 @@
 -(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section
 
 {
-    return 10.0f;
+    return 10.0f*Main_Screen_Height/667;
 }
 
 
@@ -95,7 +123,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 50;
+    return 50*Main_Screen_Height/667;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

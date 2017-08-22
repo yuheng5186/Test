@@ -10,12 +10,22 @@
 #import <Masonry.h>
 #import "QFDatePickerView.h"
 
+#import "HTTPDefine.h"
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "MyCar.h"
+#import "UdStorage.h"
+
 @interface IcreaseCarController ()<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) UITableView *carInfoView;
 
 @property (nonatomic, weak) UILabel *lbl;
 @property (nonatomic, weak) UILabel *lbl2;
+@property (nonatomic, weak) UITextField *numTF;
+@property (nonatomic, weak) UITextField *brandTF;
+@property (nonatomic, weak) UITextField *text1;
+@property (nonatomic, weak) UITextField *text2;
 
 @end
 
@@ -98,18 +108,20 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             provinceLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             [carCell.contentView addSubview:provinceLabel];
             
-            UITextField *numTF = [[UITextField alloc] init];
-            numTF.placeholder = @"请输入车牌号";
-            numTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
-            numTF.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
-            [carCell.contentView addSubview:numTF];
+            UITextField *numTF1 = [[UITextField alloc] init];
+            _numTF = numTF1;
+            numTF1.placeholder = @"请输入车牌号";
+            numTF1.textColor = [UIColor colorFromHex:@"#b4b4b4"];
+            numTF1.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+            [carCell.contentView addSubview:numTF1];
+
             
             [provinceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(carCell.textLabel);
                 make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
             }];
             
-            [numTF mas_makeConstraints:^(MASConstraintMaker *make) {
+            [numTF1 mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(provinceLabel);
                 make.leading.equalTo(provinceLabel.mas_trailing).mas_offset(16*Main_Screen_Height/667);
                 make.width.mas_equalTo(200*Main_Screen_Height/667);
@@ -119,14 +131,16 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             carCell.textLabel.textColor = [UIColor colorFromHex:@"#868686"];
             carCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             
-            UITextField *brandTF = [[UITextField alloc] init];
-            brandTF.placeholder = @"请填写";
-            brandTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
-            brandTF.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
-            [carCell.contentView addSubview:brandTF];
+            UITextField *brandTF1 = [[UITextField alloc] init];
+            _brandTF = brandTF1;
+            brandTF1.placeholder = @"请填写";
+            brandTF1.textColor = [UIColor colorFromHex:@"#b4b4b4"];
+            brandTF1.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+            [carCell.contentView addSubview:brandTF1];
             
-            [brandTF mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
+            [brandTF1 mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(carCell.contentView).mas_offset(110);
+
                 make.centerY.equalTo(carCell);
                 make.right.equalTo(carCell.contentView).mas_offset(-12*Main_Screen_Height/667);
             }];
@@ -140,18 +154,33 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         carCell.textLabel.textColor = [UIColor colorFromHex:@"#868686"];
         carCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
         
-        if (indexPath.row == 0 || indexPath.row == 3) {
-            UITextField *textTF = [[UITextField alloc] init];
-            textTF.placeholder = @"请填写";
-            textTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
-            textTF.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
-            [carCell.contentView addSubview:textTF];
+        if (indexPath.row == 0) {
+            UITextField *textTF1 = [[UITextField alloc] init];
+            _text1 = textTF1;
+            textTF1.placeholder = @"请填写";
+            textTF1.textColor = [UIColor colorFromHex:@"#b4b4b4"];
+            textTF1.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+            [carCell.contentView addSubview:textTF1];
             
-            [textTF mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
+            [textTF1 mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(carCell.contentView).mas_offset(110);
                 make.centerY.equalTo(carCell);
                 make.right.equalTo(carCell.contentView).mas_offset(-12*Main_Screen_Height/667);
             }];
+        }
+        else if (indexPath.row == 3) {
+                UITextField *textTF2 = [[UITextField alloc] init];
+                _text2 = textTF2;
+                textTF2.placeholder = @"请填写";
+                textTF2.textColor = [UIColor colorFromHex:@"#b4b4b4"];
+                textTF2.font = [UIFont systemFontOfSize:12];
+                [carCell.contentView addSubview:textTF2];
+                
+                [textTF2 mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.equalTo(carCell.contentView).mas_offset(110);
+                    make.centerY.equalTo(carCell);
+                    make.right.equalTo(carCell.contentView).mas_offset(-12);
+                }];
         }else {
             
             
@@ -252,6 +281,63 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
 
 
 - (void)didClickSaveButton {
+    NSDictionary *mulDic = @{
+                             @"CarBrand":_brandTF.text,
+                             @"PlateNumber":_numTF.text,
+                             @"ChassisNum":_text1.text,
+                             @"EngineNum":@"",
+                             @"Manufacture":[_lbl.text substringWithRange:NSMakeRange(0,4)],
+                             @"DepartureTime":_lbl2.text,
+                             @"Mileage":_text2.text,
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                             };
+    NSMutableArray *ad = [NSMutableArray array];
+    
+    for (NSString *key in mulDic.allKeys) {
+        if ([[mulDic objectForKey:key] isEqual:[NSNull null]])
+        {
+            [ad addObject:[mulDic objectForKey:key]];
+        }
+    }
+    
+    if([ad count] == 0)
+    {
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/AddCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            
+        
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+                [self.view showInfo:@"新增成功" autoHidden:YES interval:2];
+            }
+            
+            else
+            {
+                [self.view showInfo:@"新增失败" autoHidden:YES interval:2];
+            }
+            
+            
+            
+            
+            
+            
+        } fail:^(NSError *error) {
+            [self.view showInfo:@"新增失败" autoHidden:YES interval:2];
+        }];
+
+    }
+    else
+    {
+        [self.view showInfo:@"请将信息填写完整" autoHidden:YES interval:2];
+    }
+    
+    
+    
+    
     
 }
 

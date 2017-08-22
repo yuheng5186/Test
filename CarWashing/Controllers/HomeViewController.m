@@ -41,6 +41,11 @@
 #import "DSAddShopController.h"
 #import "DSSaleActivityController.h"
 
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "HTTPDefine.h"
+#import "UdStorage.h"
+
 @interface HomeViewController ()<JFLocationDelegate,UITableViewDelegate,UITableViewDataSource>
 
 /** 选择的结果*/
@@ -52,6 +57,8 @@
 @property (nonatomic, strong) JFAreaDataManager *manager;
 
 @property (nonatomic,strong) UITableView *tableView;
+
+@property (nonatomic,assign) NSInteger IsSign;
 
 @end
 
@@ -77,6 +84,8 @@
     // Do any additional setup after loading the view.
     self.title = @"首页";
     self.navigationController.navigationBar.hidden = YES;
+    
+    _IsSign = 0;
     
     [self createSubView];
     
@@ -840,13 +849,122 @@
 }
 
 - (void) tapSignButtonClick:(id)sender {
-
-    PopupView *view = [PopupView defaultPopupView];
-    view.parentVC = self;
     
-    [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYYMMdd"];
+    NSDate *datenow = [NSDate date];
+    NSString *currentTimeString = [formatter stringFromDate:datenow];
+    
+    if([UdStorage getObjectforKey:@"SignTime"])
+    {
+        if([[UdStorage getObjectforKey:@"SignTime"] intValue]<[currentTimeString intValue])
+        {
+            NSDictionary *mulDic = @{
+                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                                     };
+            NSDictionary *params = @{
+                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                     };
+            
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/AddUserSign",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                
+                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                {
+
+                    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+                    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+                    [inputFormatter setDateFormat:@"yyyy/MM/dd"];
+                    NSDate* inputDate = [inputFormatter dateFromString:[[dict objectForKey:@"JsonData"] objectForKey:@"SignTime"]];
+                    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+                    [outputFormatter setLocale:[NSLocale currentLocale]];
+                    [outputFormatter setDateFormat:@"yyyyMMdd"];
+                    NSString *targetTime = [outputFormatter stringFromDate:inputDate];
+                    
+                    [UdStorage storageObject:targetTime forKey:@"SignTime"];
+                    
+                    PopupView *view = [PopupView defaultPopupView];
+                    view.parentVC = self;
+                    
+                    [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{
+                        
+                    }];
+                }
+                
+                else
+                {
+                    [self.view showInfo:@"签到失败" autoHidden:YES interval:2];
+                }
+                
+                
+                
+            } fail:^(NSError *error) {
+                [self.view showInfo:@"签到失败" autoHidden:YES interval:2];
+            }];
+
+        }
+        else
+        {
+            [self.view showInfo:@"今天已经签过到了" autoHidden:YES interval:2];
+        }
+    }
+    else
+    {
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
         
-    }];
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/AddUserSign",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+                
+                NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+                [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+                [inputFormatter setDateFormat:@"yyyy/MM/dd"];
+                NSDate* inputDate = [inputFormatter dateFromString:[[dict objectForKey:@"JsonData"] objectForKey:@"SignTime"]];
+                NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+                [outputFormatter setLocale:[NSLocale currentLocale]];
+                [outputFormatter setDateFormat:@"yyyyMMdd"];
+                NSString *targetTime = [outputFormatter stringFromDate:inputDate];
+                
+                [UdStorage storageObject:targetTime forKey:@"SignTime"];
+                
+                PopupView *view = [PopupView defaultPopupView];
+                view.parentVC = self;
+                
+                [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{
+                    
+                }];
+            }
+            
+            else
+            {
+                [self.view showInfo:@"签到失败" autoHidden:YES interval:2];
+            }
+            
+            
+            
+        } fail:^(NSError *error) {
+            [self.view showInfo:@"签到失败" autoHidden:YES interval:2];
+        }];
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
 }
 - (void) tapMemberRightButtonClick:(id)sender {
 

@@ -70,7 +70,7 @@
     
     
     NSString *titleName              = @"";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:16];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:16*Main_Screen_Height/667];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.top               = Main_Screen_Height*30/667;
@@ -145,7 +145,7 @@
     orderImageView.top               = Main_Screen_Height*24/667;
     
     NSString *orderName              = @"订单";
-    UIFont *orderNameFont            = [UIFont systemFontOfSize:15];
+    UIFont *orderNameFont            = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     UILabel *orderNameLabel          = [UIUtil drawLabelInView:orderView frame:[UIUtil textRect:orderName font:orderNameFont] font:orderNameFont text:orderName isCenter:NO];
     orderNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
     orderNameLabel.centerX           = orderImageView.centerX;
@@ -167,7 +167,7 @@
     favoritesImageView.top               = Main_Screen_Height*24/667;
     
     NSString *favoritesName              = @"收藏";
-    UIFont *favoritesNameFont            = [UIFont systemFontOfSize:15];
+    UIFont *favoritesNameFont            = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     UILabel *favoritesNameLabel          = [UIUtil drawLabelInView:favoritesView frame:[UIUtil textRect:favoritesName font:favoritesNameFont] font:favoritesNameFont text:favoritesName isCenter:NO];
     favoritesNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
     favoritesNameLabel.centerX           = favoritesImageView.centerX;
@@ -187,7 +187,7 @@
     exchangeImageView.top               = Main_Screen_Height*24/667;
     
     NSString *exchangeName              = @"激活";
-    UIFont *exchangeNameFont            = [UIFont systemFontOfSize:15];
+    UIFont *exchangeNameFont            = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     UILabel *exchangeNameLabel          = [UIUtil drawLabelInView:exchangeView frame:[UIUtil textRect:exchangeName font:exchangeNameFont] font:exchangeNameFont text:exchangeName isCenter:NO];
     exchangeNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
     exchangeNameLabel.centerX           = exchangeImageView.centerX;
@@ -282,7 +282,7 @@
 #pragma mark - UITableViewDataSource
 -(CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 10.f;
+    return 10.f*Main_Screen_Height/667;
 }
 
 -(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section
@@ -318,7 +318,7 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 46;
+    return 46*Main_Screen_Height/667;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -412,7 +412,7 @@
 }
 
 -(void)noticeupdateUserName:(NSNotification *)sender{
-    self.userNameLabel.frame = [UIUtil textRect:APPDELEGATE.currentUser.userName font:[UIFont boldSystemFontOfSize:16]];
+    self.userNameLabel.frame = [UIUtil textRect:APPDELEGATE.currentUser.userName font:[UIFont boldSystemFontOfSize:16*Main_Screen_Height/667]];
     self.userNameLabel.top               = self.editButton.bottom +Main_Screen_Height*13/667;
     self.userNameLabel.centerX           = Main_Screen_Width/2;
     self.userNameLabel.text = APPDELEGATE.currentUser.userName;

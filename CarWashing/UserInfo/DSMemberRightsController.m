@@ -10,6 +10,7 @@
 #import "DSUpdateRuleController.h"
 #import <Masonry.h>
 #import "HowToUpGradeController.h"
+#import "MemberRightsDetailController.h"
 @interface DSMemberRightsController ()<UITableViewDelegate, UITableViewDataSource>
 
 @end
@@ -70,7 +71,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     UIButton *gradeBtn = [[UIButton alloc] init];
     [gradeBtn setTitle:@"如何升级到黄金会员" forState:UIControlStateNormal];
     [gradeBtn setTitleColor:[UIColor colorFromHex:@"#4a4a4a"] forState:UIControlStateNormal];
-    gradeBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    gradeBtn.titleLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [gradeBtn setImage:[UIImage imageNamed:@"xiaohuojian"] forState:UIControlStateNormal];
     [containView addSubview:gradeBtn];
     
@@ -149,7 +150,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return 10;
+    return 10*Main_Screen_Height/667;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
@@ -193,6 +194,15 @@ static NSString *id_rightsCell = @"id_rightsCell";
 //}
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    MemberRightsDetailController *VC = [[MemberRightsDetailController alloc] init];
+    VC.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:VC animated:YES];
+}
+
+
 
 #pragma mark -------button click------
 
@@ -208,25 +218,25 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
 }
 
-#pragma mark -------tapGesture click------
-- (void) tapSymbolButtonClick:(id)sender {
-    
-    
-}
-
-- (void) tapDiscountButtonClick:(id)sender {
-    
-    
-}
-- (void) tapMaintainButtonClick:(id)sender {
-    
-    
-}
-
-- (void) tapGoodsButtonClick:(id)sender {
-    
-    
-}
+//#pragma mark -------tapGesture click------
+//- (void) tapSymbolButtonClick:(id)sender {
+//    
+//    
+//}
+//
+//- (void) tapDiscountButtonClick:(id)sender {
+//    
+//    
+//}
+//- (void) tapMaintainButtonClick:(id)sender {
+//    
+//    
+//}
+//
+//- (void) tapGoodsButtonClick:(id)sender {
+//    
+//    
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
