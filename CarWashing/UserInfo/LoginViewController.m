@@ -187,7 +187,7 @@
 //                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
 //                {
 //                    [UdStorage storageObject:[[dict objectForKey:@"JsonData"] objectForKey:@"Account_Id"] forKey:@"Account_Id"];
-    
+//    
 //                    APPDELEGATE.currentUser = [User getInstanceByDic:[dict objectForKey:@"JsonData"]];
     
                     MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
@@ -201,11 +201,11 @@
 //            } fail:^(NSError *error) {
 //                [self.view showInfo:@"登录失败" autoHidden:YES interval:2];
 //            }];
-    
-            
-            
-            
-            
+//    
+//            
+//            
+//            
+//            
 //        }else{
 //            [self.view showInfo:@"请输入4位验证码！" autoHidden:YES interval:2];
 //        }
