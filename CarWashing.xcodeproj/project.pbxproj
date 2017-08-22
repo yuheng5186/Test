@@ -13,6 +13,7 @@
 		1805AC911F386FA800FD0844 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC8B1F386FA800FD0844 /* TPKeyboardAvoidingScrollView.m */; };
 		1805AC921F386FA800FD0844 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC8D1F386FA800FD0844 /* TPKeyboardAvoidingTableView.m */; };
 		1805AC931F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC8F1F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
+		1807D94A1F4C23FC0080C4AB /* HYSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807D9491F4C23FC0080C4AB /* HYSlider.m */; };
 		180E42D21F39A89000013D2D /* DSAddMerchantController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42D11F39A89000013D2D /* DSAddMerchantController.m */; };
 		180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42D41F39B88900013D2D /* DSConsumerDetailController.m */; };
 		180E42D81F39B8C200013D2D /* DSUserRightDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42D71F39B8C200013D2D /* DSUserRightDetailController.m */; };
@@ -110,7 +111,6 @@
 		1853BA4A1F28A04100B98C7F /* JFCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA421F28A04100B98C7F /* JFCityViewController.m */; };
 		1853BA4B1F28A04100B98C7F /* JFSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA441F28A04100B98C7F /* JFSearchView.m */; };
 		1853BA4E1F28A04C00B98C7F /* JFLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA4D1F28A04C00B98C7F /* JFLocation.m */; };
-		187CCBF21F43F7FF00FCDF1C /* HYSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 187CCBF11F43F7FF00FCDF1C /* HYSlider.m */; };
 		188907121F2730F4009E20B0 /* DSUpdateRuleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188907111F2730F4009E20B0 /* DSUpdateRuleController.m */; };
 		188907161F283184009E20B0 /* DSGetScoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188907151F283184009E20B0 /* DSGetScoreController.m */; };
 		18A4B1B11F4AAB5200C64978 /* HowToUpGradeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B1B01F4AAB5200C64978 /* HowToUpGradeController.m */; };
@@ -263,6 +263,8 @@
 		1805AC8D1F386FA800FD0844 /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPKeyboardAvoidingTableView.m; path = Tool/TPKeyboardAvoid/TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
 		1805AC8E1F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+TPKeyboardAvoidingAdditions.h"; path = "Tool/TPKeyboardAvoid/UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		1805AC8F1F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+TPKeyboardAvoidingAdditions.m"; path = "Tool/TPKeyboardAvoid/UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		1807D9481F4C23FC0080C4AB /* HYSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYSlider.h; sourceTree = "<group>"; };
+		1807D9491F4C23FC0080C4AB /* HYSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYSlider.m; sourceTree = "<group>"; };
 		180E42D01F39A89000013D2D /* DSAddMerchantController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAddMerchantController.h; path = Home/DSAddMerchantController.h; sourceTree = "<group>"; };
 		180E42D11F39A89000013D2D /* DSAddMerchantController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAddMerchantController.m; path = Home/DSAddMerchantController.m; sourceTree = "<group>"; };
 		180E42D31F39B88900013D2D /* DSConsumerDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSConsumerDetailController.h; path = Home/DSConsumerDetailController.h; sourceTree = "<group>"; };
@@ -454,8 +456,6 @@
 		1853BA441F28A04100B98C7F /* JFSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFSearchView.m; path = JFCityViewController/JFSearchView.m; sourceTree = "<group>"; };
 		1853BA4C1F28A04C00B98C7F /* JFLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFLocation.h; path = JFCityViewController/Location/JFLocation.h; sourceTree = "<group>"; };
 		1853BA4D1F28A04C00B98C7F /* JFLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFLocation.m; path = JFCityViewController/Location/JFLocation.m; sourceTree = "<group>"; };
-		187CCBF01F43F7FF00FCDF1C /* HYSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYSlider.h; sourceTree = "<group>"; };
-		187CCBF11F43F7FF00FCDF1C /* HYSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYSlider.m; sourceTree = "<group>"; };
 		188907101F2730F4009E20B0 /* DSUpdateRuleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSUpdateRuleController.h; path = UserInfo/DSUpdateRuleController.h; sourceTree = "<group>"; };
 		188907111F2730F4009E20B0 /* DSUpdateRuleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSUpdateRuleController.m; path = UserInfo/DSUpdateRuleController.m; sourceTree = "<group>"; };
 		188907141F283184009E20B0 /* DSGetScoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSGetScoreController.h; path = UserInfo/DSGetScoreController.h; sourceTree = "<group>"; };
@@ -1141,8 +1141,8 @@
 		187CCBEF1F43F77E00FCDF1C /* CustomSlider */ = {
 			isa = PBXGroup;
 			children = (
-				187CCBF01F43F7FF00FCDF1C /* HYSlider.h */,
-				187CCBF11F43F7FF00FCDF1C /* HYSlider.m */,
+				1807D9481F4C23FC0080C4AB /* HYSlider.h */,
+				1807D9491F4C23FC0080C4AB /* HYSlider.m */,
 			);
 			name = CustomSlider;
 			path = Tool/CustomSlider;
@@ -1825,7 +1825,6 @@
 				181E93041F208C520006511E /* DSMyCardController.m in Sources */,
 				18B69EA61F32CB52007DA0E4 /* ZFMaskView.m in Sources */,
 				50B26E961F307B76009B3B9F /* RechargeController.m in Sources */,
-				187CCBF21F43F7FF00FCDF1C /* HYSlider.m in Sources */,
 				18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */,
 				180E43271F414A5E00013D2D /* PopHelpView.m in Sources */,
 				1853BA4E1F28A04C00B98C7F /* JFLocation.m in Sources */,
@@ -1914,6 +1913,7 @@
 				181E92DB1F1F3BC60006511E /* PurchaseViewController.m in Sources */,
 				5016721B1F297DA500384186 /* payCardDetailCell.m in Sources */,
 				5061A43E1F3AAECE003939A4 /* SCBaseViewController.m in Sources */,
+				1807D94A1F4C23FC0080C4AB /* HYSlider.m in Sources */,
 				182190061F301BA400F7207F /* DSUserModel.m in Sources */,
 				1853BA0C1F28774400B98C7F /* LKActionSheet.m in Sources */,
 				188907161F283184009E20B0 /* DSGetScoreController.m in Sources */,

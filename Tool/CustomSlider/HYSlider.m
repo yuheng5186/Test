@@ -2,7 +2,9 @@
 //  HYSlider.m
 //  HYSlider
 //
-
+//  Created by heyang on 16/6/3.
+//  Copyright © 2016年 heyang. All rights reserved.
+//
 
 #import "HYSlider.h"
 @interface HYSlider ()
@@ -13,6 +15,7 @@
 @property (nonatomic,strong) UILabel *scrollShowTextLabel;
 @property (nonatomic,strong) UIView *touchView;
 @property (nonatomic) CGFloat hyMaxValue;
+
 @end
 @implementation HYSlider
 
@@ -22,6 +25,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setup];
+        self.backgroundColor=[UIColor greenColor];
+        self.leftView.backgroundColor=[UIColor yellowColor];
     }
     return self;
 }
@@ -30,6 +35,8 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         [self setup];
+        self.backgroundColor=[UIColor greenColor];
+        self.leftView.backgroundColor=[UIColor yellowColor];
     }
     return self;
 }
@@ -45,7 +52,7 @@
     }
     
     _textLabel = [[UILabel alloc]initWithFrame: CGRectMake(self.leftView.frame.size.width - 20, 0, 20, self.frame.size.height)];
-    _textLabel.textColor = [UIColor whiteColor];
+    _textLabel.textColor = [UIColor blackColor];
     _textLabel.font = [UIFont systemFontOfSize:9.0];
     [self.leftView addSubview:_textLabel];
     self.textLabel.text = [NSString stringWithFormat:@"%.f",currentSliderValue];
@@ -89,7 +96,7 @@
     _showScrollTextView = showScrollTextView;
     
     self.scrollShowTextView.hidden = !showScrollTextView;
-    self.scrollShowTextView.frame = CGRectMake((self.touchView.frame.origin.x)>= 0 ? (self.touchView.frame.origin.x):(0) ,- 25, 20, 20);
+    self.scrollShowTextView.frame = CGRectMake((self.touchView.frame.origin.x)>= 0 ? (self.touchView.frame.origin.x):(0) ,- 25, 36, 20);
     self.scrollShowTextLabel.text = [NSString stringWithFormat:@"%.f",self.currentSliderValue];
 }
 
@@ -102,10 +109,11 @@
     
     /** 显示文字label*/
     _textLabel = [[UILabel alloc]init];
-    _textLabel.textColor = [UIColor whiteColor];
+    _textLabel.textColor = [UIColor blackColor];
     _textLabel.font = [UIFont systemFontOfSize:9.0];
     _textLabel.textAlignment = NSTextAlignmentRight;
     [self.leftView addSubview:_textLabel];
+   
     
     /** 数值视图*/
     _leftView = [[UIView alloc]init];
@@ -119,15 +127,15 @@
     
     
     /** 浮标image*/
-    _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,20,20)];
+    _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,36,20)];
     _imageView.image = [UIImage imageNamed:@"huiyuanfenshukuang"];
     [_scrollShowTextView addSubview:_imageView];
     
     /** 浮标数值显示label*/
-    _scrollShowTextLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0 , 20, 20)];
+    _scrollShowTextLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0 , 36, 20)];
     _scrollShowTextLabel.textAlignment = NSTextAlignmentCenter;
     _scrollShowTextLabel.textColor = [UIColor whiteColor];
-    _scrollShowTextLabel.font = [UIFont systemFontOfSize:10.0];
+    _scrollShowTextLabel.font = [UIFont systemFontOfSize:13.0];
     [_scrollShowTextView addSubview:_scrollShowTextLabel];
     
     
@@ -138,7 +146,7 @@
     _touchView.layer.borderColor = [UIColor whiteColor].CGColor;
     _touchView.layer.borderWidth = 2.0;
     _touchView.backgroundColor = [UIColor yellowColor];
-    [self addSubview:_touchView];
+//    [self addSubview:_touchView];
     
     /** 默认最大值*/
     _hyMaxValue = 255.0;
@@ -162,7 +170,7 @@
         if((translation.x >=0 && ((_hyMaxValue/self.frame.size.width) * translation.x) <= _hyMaxValue)){
           
             self.leftView.frame           = CGRectMake(0, 0, translation.x, self.frame.size.height);
-            self.scrollShowTextView.frame = CGRectMake((translation.x-18)>= 0 ? (translation.x-18):(0) ,- 48, 20, 20);
+            self.scrollShowTextView.frame = CGRectMake((translation.x-18)>= 0 ? (translation.x-18):(0) ,- 48, 36, 20);
             self.textLabel .frame             = CGRectMake((self.leftView.frame.size.width - 20) >= 0 ? (self.leftView.frame.size.width - 20):(0) , 0, 20, self.frame.size.height);
             self.textLabel.text           = [NSString stringWithFormat:@"%.f",(_hyMaxValue/self.frame.size.width) * translation.x];
             self.scrollShowTextLabel.text = [NSString stringWithFormat:@"%.f",(_hyMaxValue/self.frame.size.width) * translation.x];
