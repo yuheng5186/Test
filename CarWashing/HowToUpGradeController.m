@@ -56,7 +56,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     [super viewDidLoad];
     
     [self setupUI];
-    self.view.backgroundColor=[UIColor whiteColor];
+//    self.view.backgroundColor=[UIColor whiteColor];
 }
 
 - (void)setupUI {
@@ -85,16 +85,22 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     HYSlider *slider = [[HYSlider alloc]initWithFrame:CGRectMake(35, gradeLab.frame.origin.y+gradeLab.frame.size.height+5, Main_Screen_Width-46, 9)];
     slider.backgroundColor=[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
     
-    slider.currentValueColor = [UIColor orangeColor];
+    slider.currentValueColor = [UIColor colorFromHex:@"#febb02"];
     slider.maxValue = 1000;
     slider.currentSliderValue = 600;
-    slider.showTextColor = [UIColor orangeColor];
+    slider.showTextColor = [UIColor colorFromHex:@"#febb02"];
     slider.showTouchView = YES;
     slider.showScrollTextView = YES;
-    slider.touchViewColor = [UIColor orangeColor];
+    slider.touchViewColor = [UIColor colorFromHex:@"#febb02"];
     slider.delegate = self;
     [self.view addSubview:slider];
+    UILabel *maxLab = [[UILabel alloc] init];
     
+    maxLab.textColor =[UIColor colorFromHex:@"#ffffff"];
+    maxLab.textAlignment=NSTextAlignmentRight;
+    maxLab.font = [UIFont systemFontOfSize:10];
+    maxLab.text =[NSString stringWithFormat:@"%d",1000];
+    [self.view addSubview:maxLab];
     
     UIButton *displayBtn = [[UIButton alloc] init];
     displayBtn.userInteractionEnabled = NO;
@@ -147,11 +153,21 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
         make.width.mas_equalTo(Main_Screen_Width-46);
         make.height.mas_equalTo(9);
     }];
-    [displayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(slider.mas_bottom).mas_offset(20*Main_Screen_Height/667);
-        make.centerX.equalTo(headContainView);
-        make.width.mas_equalTo(250*Main_Screen_Height/667);
+    [maxLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(slider.mas_bottom).mas_offset(5);
+        //        make.left.equalTo(headContainView).mas_offset(23);
+        make.right.equalTo(slider);
+        make.width.mas_equalTo(46);
+        make.height.mas_equalTo(9);
     }];
+    
+    [displayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(slider.mas_bottom).mas_offset(10);
+        make.centerX.equalTo(headContainView);
+        make.width.mas_equalTo(250);
+        make.bottom.equalTo(headContainView).mas_offset(10);
+    }];
+
     
     [containView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.equalTo(self.view);
@@ -244,7 +260,10 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     
     [self.navigationController pushViewController:earnScoreVC animated:YES];
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+}
 
 
 - (void)didReceiveMemoryWarning {
