@@ -147,7 +147,7 @@
     NSString *orderName              = @"订单";
     UIFont *orderNameFont            = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     UILabel *orderNameLabel          = [UIUtil drawLabelInView:orderView frame:[UIUtil textRect:orderName font:orderNameFont] font:orderNameFont text:orderName isCenter:NO];
-    orderNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
+    orderNameLabel.textColor         = [UIColor blackColor];
     orderNameLabel.centerX           = orderImageView.centerX;
     orderNameLabel.top               = orderImageView.bottom +Main_Screen_Height*10/667;
     
@@ -169,7 +169,7 @@
     NSString *favoritesName              = @"收藏";
     UIFont *favoritesNameFont            = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     UILabel *favoritesNameLabel          = [UIUtil drawLabelInView:favoritesView frame:[UIUtil textRect:favoritesName font:favoritesNameFont] font:favoritesNameFont text:favoritesName isCenter:NO];
-    favoritesNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
+    favoritesNameLabel.textColor         = [UIColor blackColor];
     favoritesNameLabel.centerX           = favoritesImageView.centerX;
     favoritesNameLabel.top               = favoritesImageView.bottom +Main_Screen_Height*10/667;
     
@@ -189,7 +189,7 @@
     NSString *exchangeName              = @"激活";
     UIFont *exchangeNameFont            = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     UILabel *exchangeNameLabel          = [UIUtil drawLabelInView:exchangeView frame:[UIUtil textRect:exchangeName font:exchangeNameFont] font:exchangeNameFont text:exchangeName isCenter:NO];
-    exchangeNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
+    exchangeNameLabel.textColor         = [UIColor blackColor];
     exchangeNameLabel.centerX           = exchangeImageView.centerX;
     exchangeNameLabel.top               = exchangeImageView.bottom +Main_Screen_Height*10/667;
     
@@ -318,7 +318,7 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 46*Main_Screen_Height/667;
+    return 50*Main_Screen_Height/667;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -330,7 +330,7 @@
     }
     cell.backgroundColor    = [UIColor whiteColor];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.textColor    = [UIColor colorFromHex:@"#868686"];
+    cell.textLabel.textColor    = [UIColor blackColor];
     cell.textLabel.font         = [UIFont systemFontOfSize:15];
     cell.detailTextLabel.font   = [UIFont systemFontOfSize:14];
 

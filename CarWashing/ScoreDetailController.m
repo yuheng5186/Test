@@ -33,7 +33,7 @@
 - (UIView *)headView {
     
     if (!_headView) {
-        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 135*Main_Screen_Height/667)];
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 175*Main_Screen_Height/667)];
         headView.backgroundColor = [UIColor whiteColor];
         _headView = headView;
         [self.view addSubview:_headView];
@@ -48,7 +48,7 @@
         
         UILabel *scoreLabel = [[UILabel alloc] init];
         scoreLabel.textColor = [UIColor colorFromHex:@"#febb02"];
-        scoreLabel.font = [UIFont systemFontOfSize:24*Main_Screen_Height/667];
+        scoreLabel.font = [UIFont systemFontOfSize:38*Main_Screen_Height/667];
         _scoreLabel = scoreLabel;
         [self.headView addSubview:_scoreLabel];
     }
@@ -64,9 +64,9 @@
         UIButton *earnButton = [[UIButton alloc] init];
         [earnButton setTitle:@"赚积分" forState:UIControlStateNormal];
         [earnButton setTitleColor:[UIColor colorFromHex:@"#4a4a4a"] forState:UIControlStateNormal];
-        earnButton.layer.cornerRadius = 17.5*Main_Screen_Height/667;
+        earnButton.layer.cornerRadius = 20*Main_Screen_Height/667;
         earnButton.layer.borderWidth = 1;
-        earnButton.layer.borderColor = [UIColor colorFromHex:@"febb02"].CGColor;
+        earnButton.layer.borderColor = [UIColor blackColor].CGColor;
         _earnButton = earnButton;
         [self.headView addSubview:_earnButton];
     }
@@ -81,9 +81,9 @@
         UIButton *exchangeButton = [[UIButton alloc] init];
         [exchangeButton setTitle:@"积分兑换" forState:UIControlStateNormal];
         [exchangeButton setTitleColor:[UIColor colorFromHex:@"#4a4a4a"] forState:UIControlStateNormal];
-        exchangeButton.layer.cornerRadius = 17.5*Main_Screen_Height/667;
+        exchangeButton.layer.cornerRadius = 20*Main_Screen_Height/667;
         exchangeButton.layer.borderWidth = 1;
-        exchangeButton.layer.borderColor = [UIColor colorFromHex:@"febb02"].CGColor;
+        exchangeButton.layer.borderColor = [UIColor blackColor].CGColor;
         _exchangeButton = exchangeButton;
         [self.headView addSubview:_exchangeButton];
     }
@@ -142,14 +142,14 @@
         make.top.equalTo(_scoreLabel.mas_bottom).mas_offset(25*Main_Screen_Height/667);
         make.left.equalTo(_headView).mas_offset(28*Main_Screen_Height/667);
         make.width.mas_equalTo(130*Main_Screen_Height/667);
-        make.height.mas_equalTo(35*Main_Screen_Height/667);
+        make.height.mas_equalTo(40*Main_Screen_Height/667);
     }];
     
     [_exchangeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_earnButton);
         make.right.equalTo(_headView).mas_offset(-28*Main_Screen_Height/667);
         make.width.mas_equalTo(130*Main_Screen_Height/667);
-        make.height.mas_equalTo(35*Main_Screen_Height/667);
+        make.height.mas_equalTo(40*Main_Screen_Height/667);
     }];
     
     [_scoreListView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -158,13 +158,19 @@
         make.bottom.equalTo(self.view);
     }];
     
+    [_sliderView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_headView.mas_bottom);
+        make.width.mas_equalTo(Main_Screen_Width);
+        make.height.mas_equalTo(44*Main_Screen_Height/667);
+    }];
+    
 }
 
 
 #pragma mark - 创建上部的SliderView
 - (void)setupTopSliderView {
     
-    HQSliderView *sliderView = [[HQSliderView alloc] initWithFrame:CGRectMake(0, 64 + (130 + 10)*Main_Screen_Height/667, Main_Screen_Width, 44*Main_Screen_Height/667)];
+    HQSliderView *sliderView = [[HQSliderView alloc] initWithFrame:CGRectZero];
     _sliderView = sliderView;
     sliderView.titleArr = @[@"全部",@"收入",@"支出"];
     sliderView.delegate = self;
