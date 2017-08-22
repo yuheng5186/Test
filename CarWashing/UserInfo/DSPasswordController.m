@@ -112,7 +112,7 @@
         self.userMobileFieldText.keyboardType   = UIKeyboardTypeNumberPad;
 
         self.userMobileFieldText.textAlignment  = NSTextAlignmentLeft;
-        self.userMobileFieldText.font           = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        self.userMobileFieldText.font           = [UIFont systemFontOfSize:14];
         self.userMobileFieldText.backgroundColor= [UIColor whiteColor];
         self.userMobileFieldText.centerY        = cell.centerY;
         self.userMobileFieldText.left           = Main_Screen_Width*70/375 ;
@@ -127,7 +127,7 @@
         self.verifyFieldText.delegate       = self;
         self.verifyFieldText.returnKeyType  = UIReturnKeyDone;
         self.verifyFieldText.textAlignment  = NSTextAlignmentLeft;
-        self.verifyFieldText.font           = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        self.verifyFieldText.font           = [UIFont systemFontOfSize:14];
         self.verifyFieldText.clearButtonMode= UITextFieldViewModeAlways;
         self.verifyFieldText.keyboardType   = UIKeyboardTypeNumberPad;
 
@@ -154,7 +154,7 @@
         self.passwordNewFieldText.returnKeyType  = UIReturnKeyDone;
         self.passwordNewFieldText.clearButtonMode= UITextFieldViewModeAlways;
         self.passwordNewFieldText.textAlignment  = NSTextAlignmentLeft;
-        self.passwordNewFieldText.font           = [UIFont systemFontOfSize:13];
+        self.passwordNewFieldText.font           = [UIFont systemFontOfSize:14];
         self.passwordNewFieldText.backgroundColor= [UIColor whiteColor];
         self.passwordNewFieldText.centerY        = cell.centerY;
         self.passwordNewFieldText.left           = Main_Screen_Width*70/375 ;
@@ -170,7 +170,7 @@
         self.passwordAgainFieldText.returnKeyType  = UIReturnKeyDone;
         self.passwordAgainFieldText.textAlignment  = NSTextAlignmentLeft;
         self.passwordAgainFieldText.clearButtonMode= UITextFieldViewModeAlways;
-        self.passwordAgainFieldText.font           = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        self.passwordAgainFieldText.font           = [UIFont systemFontOfSize:14];
         self.passwordAgainFieldText.backgroundColor= [UIColor whiteColor];
         self.passwordAgainFieldText.centerY        = cell.centerY;
         self.passwordAgainFieldText.left           = Main_Screen_Width*70/375 ;

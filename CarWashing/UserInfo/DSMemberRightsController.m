@@ -132,9 +132,11 @@ static NSString *id_rightsCell = @"id_rightsCell";
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     cell.textLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
     
+    
     cell.detailTextLabel.text = @"门店吸尘是可抵扣相应金额,每月领取一次";
     cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
     cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#999999"];
+    
     
     if (indexPath.section == 0) {
         cell.textLabel.text = @"10元洗车券";
