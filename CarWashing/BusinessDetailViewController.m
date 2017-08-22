@@ -21,9 +21,16 @@
 #import "UIView+TYAlertView.h"
 #import "TYAlertController+BlurEffects.h"
 #import "HTTPDefine.h"
-
+#import "LCMD5Tool.h"
+#import "UdStorage.h"
+#import "AFNetworkingTool.h"
 
 @interface BusinessDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, CLLocationManagerDelegate>
+{
+    UILabel *lblPrice;
+    UILabel *formerPriceLab;
+    UILabel *lblCarType;
+}
 
 @property (nonatomic, weak) BusinessDetailHeaderView *headerView;
 
@@ -33,6 +40,9 @@
 
 @property (nonatomic, weak) BusinessDetailCell *detailCell;
 
+@property (nonatomic, strong) NSMutableArray *MerchantDetailData;
+
+@property (nonatomic, strong) NSDictionary *dic;
 
 #pragma mark - map
 @property (nonatomic, assign) double currentLatitude;
@@ -68,11 +78,49 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     //self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    NSLog(@"%@",self.dic);
+    self.dic = [[NSMutableDictionary alloc]init];
     
-    [self setupUI];
+    self.MerchantDetailData = [[NSMutableArray alloc]init];
+    
+    [self setMerChantDetailData];
+    
+    
 }
 
+-(void)setMerChantDetailData
+{
+    [self.MerchantDetailData removeAllObjects];
+    
+    NSDictionary *mulDic = @{
+                             @"MerCode":[NSString stringWithFormat:@"%ld",self.MerCode],
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetStoreDetail",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            self.dic = [dict objectForKey:@"JsonData"];
+            //        [self.MerchantDetailData addObjectsFromArray:arr];
+            
+            [self setupUI];
+        }
+        else
+        {
+            [self.view showInfo:@"商家信息获取失败" autoHidden:YES interval:2];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+      
+        
+        
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+    }];
+}
 
 - (void)setupUI {
     
@@ -110,6 +158,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     headerView.adressLabel2.text = self.dic[@"MerAddress"];
     headerView.openTimeLabel.text = self.dic[@"ServiceTime"];
     headerView.distanceLabel.text = [NSString stringWithFormat:@"%@km",self.dic[@"Distance"]];
+    
     headerView.ServiceNumLabel.text = [NSString stringWithFormat:@"服务%@单",self.dic[@"ServiceCount"]];
     if([self.dic[@"ShopType"] intValue] == 1)
     {
@@ -133,6 +182,11 @@ static NSString *businessCommentCell = @"businessCommentCell";
         MerflagsLabel.layer.cornerRadius = 7.5*Main_Screen_Height/667;
         [headerView addSubview:MerflagsLabel];
     }
+    
+    [headerView.favoriteButton addTarget:self
+                          action:@selector(BtnClickCollect:)
+                        forControlEvents:UIControlEventTouchUpInside];
+    headerView.favoriteButton.selected = ([[self.dic objectForKey:@"IsCollection"] intValue] == 1)?YES:NO;
     
 //    if([self.dic objectForKey:@"MerFlag"])
 //    {
@@ -227,23 +281,50 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     [self.view addSubview:payToolBar];
     
-    UILabel *lblPrice = [[UILabel alloc] init];
-    lblPrice.text = @"¥24.00";
-    lblPrice.font = [UIFont systemFontOfSize:18];
-    lblPrice.textColor = [UIColor colorFromHex:@"#ff525a"];
-    [payToolBar addSubview:lblPrice];
     
-    UILabel *formerPriceLab = [[UILabel alloc] init];
-    formerPriceLab.text = @"¥38.00";
-    formerPriceLab.textColor = [UIColor colorFromHex:@"#999999"];
-    formerPriceLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
-    [payToolBar addSubview:formerPriceLab];
+
+    if([self.dic[@"MerSerList"] count] == 0)
+    {
+        lblPrice = [[UILabel alloc] init];
+        lblPrice.text = @"0";
+        lblPrice.font = [UIFont systemFontOfSize:18];
+        lblPrice.textColor = [UIColor colorFromHex:@"#ff525a"];
+        [payToolBar addSubview:lblPrice];
+        
+        formerPriceLab = [[UILabel alloc] init];
+        formerPriceLab.text = @"0";
+        formerPriceLab.textColor = [UIColor colorFromHex:@"#999999"];
+        formerPriceLab.font = [UIFont systemFontOfSize:13];
+        [payToolBar addSubview:formerPriceLab];
+        
+        lblCarType = [[UILabel alloc] init];
+        lblCarType.text = @"";
+        lblCarType.font = [UIFont systemFontOfSize:13];
+        lblCarType.textColor = [UIColor colorFromHex:@"#999999"];
+        [payToolBar addSubview:lblCarType];
+    }
+    else
+    {
+        lblPrice = [[UILabel alloc] init];
+        lblPrice.text = [NSString stringWithFormat:@"¥%@",[[self.dic[@"MerSerList"] objectAtIndex:0] objectForKey:@"CurrentPrice"]];
+        lblPrice.font = [UIFont systemFontOfSize:18];
+        lblPrice.textColor = [UIColor colorFromHex:@"#ff525a"];
+        [payToolBar addSubview:lblPrice];
+        
+        formerPriceLab = [[UILabel alloc] init];
+        formerPriceLab.text = [NSString stringWithFormat:@"¥%@",[[self.dic[@"MerSerList"] objectAtIndex:0] objectForKey:@"OriginalPrice"]];
+        formerPriceLab.textColor = [UIColor colorFromHex:@"#999999"];
+        formerPriceLab.font = [UIFont systemFontOfSize:13];
+        [payToolBar addSubview:formerPriceLab];
+        
+        lblCarType = [[UILabel alloc] init];
+        lblCarType.text = [[self.dic[@"MerSerList"] objectAtIndex:0] objectForKey:@"SerName"];
+        lblCarType.font = [UIFont systemFontOfSize:13];
+        lblCarType.textColor = [UIColor colorFromHex:@"#999999"];
+        [payToolBar addSubview:lblCarType];
+    }
     
-    UILabel *lblCarType = [[UILabel alloc] init];
-    lblCarType.text = @"标准洗车-五座轿车";
-    lblCarType.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
-    lblCarType.textColor = [UIColor colorFromHex:@"#999999"];
-    [payToolBar addSubview:lblCarType];
+
     
     UIButton *payBtn = [[UIButton alloc] init];
     payBtn.frame     = CGRectMake(Main_Screen_Width - 92*Main_Screen_Height/667, 0, 92*Main_Screen_Height/667, 60*Main_Screen_Height/667);
@@ -305,6 +386,50 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
 }
 
+#pragma mark - 点击取消/收藏
+-(void)BtnClickCollect:(UIButton *)button
+{
+//    if (button.selected)
+//    {
+    
+        
+        NSDictionary *mulDic = @{
+                                 @"MerCode":[NSString stringWithFormat:@"%ld",self.MerCode],
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+//                                 @"IsFavourite":[UdStorage getObjectforKey:@"Account_Id"],
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/AddFavouriteMerchant",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+//               [self.view showInfo:@"收藏成功" autoHidden:YES interval:2];
+            }
+            else
+            {
+//                [self.view showInfo:@"收藏失败" autoHidden:YES interval:2];
+//                [self.navigationController popViewControllerAnimated:YES];
+            }
+            
+            
+            
+            
+        } fail:^(NSError *error) {
+//            [self.view showInfo:@"收藏失败" autoHidden:YES interval:2];
+        }];
+
+        
+//    }
+//    else
+//    {
+//        NSLog(@"no");
+//    }
+    
+}
+
 #pragma mark - 点击拨打客服
 - (void)didClickServiceBtn:(UIButton *)button {
     NSString *message = @"是否拨打商家电话";
@@ -317,6 +442,8 @@ static NSString *businessCommentCell = @"businessCommentCell";
 - (void)clickCommentButton {
     
     ShopViewController *commentVC = [[ShopViewController alloc] init];
+    
+    commentVC.dic = self.dic;
     
     [self.navigationController pushViewController:commentVC animated:YES];
 }
@@ -348,11 +475,18 @@ static NSString *businessCommentCell = @"businessCommentCell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(section == 1)
     {
-        return [self.dic[@"CommentCount"] integerValue];
+        if([self.dic[@"MerComList"] count]>5)
+        {
+            return 5;
+        }
+        else
+        {
+            return [self.dic[@"MerComList"] count];
+        }
     }
     else
     {
-        return 4;
+        return [self.dic[@"MerSerList"] count];
     }
 }
 
@@ -366,9 +500,10 @@ static NSString *businessCommentCell = @"businessCommentCell";
         businessDetailCell.selectionStyle = UITableViewCellSelectionStyleNone;
         _detailCell = businessDetailCell;
         
-        businessDetailCell.carLabel.text = @"标准洗车-五座轿车";
-        businessDetailCell.clearLabel.text = @"整车泡沫冲洗擦干、轮胎轮轴冲洗清洁、车内吸尘、内饰脚垫等简单除尘";
-        businessDetailCell.priceLabel.text = @"¥24.00";
+        businessDetailCell.carLabel.text = [[self.dic[@"MerSerList"] objectAtIndex:indexPath.row] objectForKey:@"SerName"];
+        businessDetailCell.clearLabel.text = [[self.dic[@"MerSerList"] objectAtIndex:indexPath.row] objectForKey:@"SerComment"];
+        businessDetailCell.priceLabel.text = [NSString stringWithFormat:@"¥%@",[[self.dic[@"MerSerList"] objectAtIndex:indexPath.row] objectForKey:@"CurrentPrice"]];
+        businessDetailCell.originPriceLabel.text = [NSString stringWithFormat:@"¥%@",[[self.dic[@"MerSerList"] objectAtIndex:indexPath.row] objectForKey:@"OriginalPrice"]];
         
         //单选状态
         NSInteger row = [indexPath row];
@@ -385,6 +520,23 @@ static NSString *businessCommentCell = @"businessCommentCell";
     }
     
     BusinessEstimateCell *estimateCell = [tableView dequeueReusableCellWithIdentifier:businessCommentCell forIndexPath:indexPath];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserImg"]];
+        NSURL *url=[NSURL URLWithString:ImageURL];
+        NSData *data=[NSData dataWithContentsOfURL:url];
+        UIImage *img=[UIImage imageWithData:data];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+             estimateCell.headImageView.image = img;
+        });
+    });
+    
+    estimateCell.phoneLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserName"];
+    [estimateCell.userScoreLabel setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",self.dic[@"Score"]] substringToIndex:1]]]];
+    estimateCell.commentLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentContent"];
+    estimateCell.dateLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentDate"];
+    estimateCell.timeLabel.hidden = YES;
+    
     estimateCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return estimateCell;
@@ -429,6 +581,14 @@ static NSString *businessCommentCell = @"businessCommentCell";
             [self.detailCell.stateButton setBackgroundImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
             
             self.lastPath = indexPath;
+            
+            lblPrice.text = [NSString stringWithFormat:@"¥%@",[[self.dic[@"MerSerList"] objectAtIndex:self.lastPath.row] objectForKey:@"CurrentPrice"]];
+            formerPriceLab.text = [NSString stringWithFormat:@"¥%@",[[self.dic[@"MerSerList"] objectAtIndex:self.lastPath.row] objectForKey:@"OriginalPrice"]];
+            lblCarType.text = [[self.dic[@"MerSerList"] objectAtIndex:self.lastPath.row] objectForKey:@"SerName"];
+            
+            
+//            NSLog(@"%ld",self.lastPath.row);
+            
             
         }
     }
@@ -525,10 +685,11 @@ static NSString *businessCommentCell = @"businessCommentCell";
 - (void)viewWillAppear:(BOOL)animated {
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.detailTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
-    if ([_detailTableView.delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
-        [_detailTableView.delegate tableView:_detailTableView didSelectRowAtIndexPath:indexPath];
-    }
+    self.lastPath = indexPath;
+//    [self.detailTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+//    if ([_detailTableView.delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
+//        [_detailTableView.delegate tableView:_detailTableView didSelectRowAtIndexPath:indexPath];
+//    }
 }
 
 

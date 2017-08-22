@@ -10,6 +10,7 @@
 
 @interface BusinessDetailViewController : BaseController
 
-@property (nonatomic,copy) NSDictionary *dic;
+
+@property (nonatomic,assign) NSInteger MerCode;
 
 @end
