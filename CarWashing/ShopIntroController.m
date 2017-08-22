@@ -9,6 +9,7 @@
 #import "ShopIntroController.h"
 #import "ShopInfoHeadView.h"
 #import "BusinessMapController.h"
+#import "HTTPDefine.h"
 
 @interface ShopIntroController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -49,6 +50,27 @@ static NSString *id_infoCell = @"id_infoCell";
     {
         self.infoHeadView.typelabel.text = @"洗车服务";
     }
+    
+    
+    self.infoHeadView.freeCheckLabel.hidden = YES;
+    self.infoHeadView.qualityProtectedLabel.hidden = YES;
+    
+    NSArray *lab = [[self.dic objectForKey:@"MerFlag"] componentsSeparatedByString:@","];
+    UILabel *MerflagsLabel;
+    for (int i = 0; i < [lab count]; i++) {
+        MerflagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(12 + i % 3 * 67,  199, 60, 15)];
+        MerflagsLabel.text = lab[i];
+        MerflagsLabel.backgroundColor = [UIColor redColor];
+        [MerflagsLabel setFont:[UIFont fontWithName:@"Helvetica" size:11 ]];
+        MerflagsLabel.textColor = [UIColor colorFromHex:@"#fefefe"];
+        MerflagsLabel.backgroundColor = [UIColor colorFromHex:@"#ff7556"];
+        MerflagsLabel.textAlignment = NSTextAlignmentCenter;
+        MerflagsLabel.layer.masksToBounds = YES;
+        MerflagsLabel.layer.cornerRadius = 7.5;
+        [self.infoHeadView addSubview:MerflagsLabel];
+    }
+
+    
     UITableView *infoTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height - 108) style:UITableViewStylePlain];
     _infoTableView = infoTableView;
     [self.view addSubview:_infoTableView];
@@ -63,7 +85,7 @@ static NSString *id_infoCell = @"id_infoCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -78,7 +100,16 @@ static NSString *id_infoCell = @"id_infoCell";
     
     
     UIImageView *infoImageView = [[UIImageView alloc] init];
-    infoImageView.image = [UIImage imageNamed:@"hangdiantu"];
+//    infoImageView.image = [UIImage imageNamed:@"hangdiantu"];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,self.dic[@"Img"]];
+        NSURL *url=[NSURL URLWithString:ImageURL];
+        NSData *data=[NSData dataWithContentsOfURL:url];
+        UIImage *img=[UIImage imageWithData:data];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            infoImageView.image = img;
+        });
+    });
     infoImageView.frame = CGRectMake(0, 0, Main_Screen_Width, 200);
     [cell.contentView addSubview:infoImageView];
     
@@ -118,6 +149,8 @@ static NSString *id_infoCell = @"id_infoCell";
     [alertController addAction:cancelAction];
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [PhoneHelper dial: self.dic[@"MerPhone"]];
         
     }];
     [alertController addAction:OKAction];

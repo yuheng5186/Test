@@ -61,6 +61,8 @@ static NSString *id_carListCell = @"id_carListCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"%@",self.mycararray);
+    
     [self setupUI];
 }
 
@@ -93,7 +95,7 @@ static NSString *id_carListCell = @"id_carListCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -250,8 +250,8 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     //跳转商家详情
     BusinessDetailViewController *detailController = [[BusinessDetailViewController alloc] init];
-    detailController.hidesBottomBarWhenPushed       = YES;
-    detailController.dic                            = [self.MerchantData objectAtIndex:indexPath.row];
+    detailController.hidesBottomBarWhenPushed      = YES;
+    detailController.MerCode                       = [[[self.MerchantData objectAtIndex:indexPath.row] objectForKey:@"MerCode"] integerValue];
     [self.navigationController pushViewController:detailController animated:YES];
 }
 
@@ -380,6 +380,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
+    
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetStoreList",Khttp] success:^(NSDictionary *dict, BOOL success) {
         
         

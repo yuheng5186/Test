@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="109.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="109"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pingluntouxiang" translatesAutoresizingMaskIntoConstraints="NO" id="XRR-Vv-PWG">
@@ -24,6 +25,12 @@
                             <constraint firstAttribute="width" constant="35" id="Pf3-XZ-R4T"/>
                             <constraint firstAttribute="height" constant="35" id="pGq-h2-QXU"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <real key="value" value="17.5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="130****1234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAg-UZ-bDt">
                         <rect key="frame" x="57" y="22" width="99" height="21"/>
@@ -44,33 +51,25 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15:30:56" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmW-pW-pa3">
-                        <rect key="frame" x="308.5" y="25" width="54.5" height="16"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017-07-27" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fv6-PA-7cb">
-                        <rect key="frame" x="228.5" y="25" width="72" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2017-07-27" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fv6-PA-7cb">
+                        <rect key="frame" x="229" y="25" width="130" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="vmW-pW-pa3" secondAttribute="trailing" constant="12" id="2uD-4Q-Efp"/>
                     <constraint firstItem="VAg-UZ-bDt" firstAttribute="leading" secondItem="XRR-Vv-PWG" secondAttribute="trailing" constant="10" id="4oR-4f-nd6"/>
                     <constraint firstAttribute="trailing" secondItem="tOh-fC-Xtp" secondAttribute="trailing" constant="12" id="DTD-s1-h1O"/>
                     <constraint firstItem="lsM-vX-4Vn" firstAttribute="top" secondItem="VAg-UZ-bDt" secondAttribute="bottom" constant="8" id="Ew1-qO-F3f"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Fv6-PA-7cb" secondAttribute="trailing" constant="8" id="Idw-cg-9mP"/>
                     <constraint firstItem="VAg-UZ-bDt" firstAttribute="centerY" secondItem="XRR-Vv-PWG" secondAttribute="centerY" id="JzN-YC-rjs"/>
                     <constraint firstItem="XRR-Vv-PWG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="KoW-pw-Yvp"/>
                     <constraint firstItem="tOh-fC-Xtp" firstAttribute="leading" secondItem="VAg-UZ-bDt" secondAttribute="leading" id="RO4-zN-OYe"/>
                     <constraint firstItem="lsM-vX-4Vn" firstAttribute="leading" secondItem="VAg-UZ-bDt" secondAttribute="leading" id="Wvi-gt-fgf"/>
                     <constraint firstItem="tOh-fC-Xtp" firstAttribute="top" secondItem="lsM-vX-4Vn" secondAttribute="bottom" constant="8" id="Yn8-1y-G9L"/>
-                    <constraint firstItem="vmW-pW-pa3" firstAttribute="leading" secondItem="Fv6-PA-7cb" secondAttribute="trailing" constant="8" id="ZvH-hg-dlt"/>
                     <constraint firstItem="XRR-Vv-PWG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="bJT-0u-z0q"/>
                     <constraint firstAttribute="bottom" secondItem="tOh-fC-Xtp" secondAttribute="bottom" constant="8" id="uGw-nT-z5b"/>
-                    <constraint firstItem="vmW-pW-pa3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="yQP-7p-IDa"/>
                     <constraint firstItem="Fv6-PA-7cb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="yo8-qx-zyl"/>
                 </constraints>
             </tableViewCellContentView>
@@ -79,7 +78,6 @@
                 <outlet property="dateLabel" destination="Fv6-PA-7cb" id="X9J-uy-gmt"/>
                 <outlet property="headImageView" destination="XRR-Vv-PWG" id="hR1-hS-2sI"/>
                 <outlet property="phoneLabel" destination="VAg-UZ-bDt" id="Nme-24-Snh"/>
-                <outlet property="timeLabel" destination="vmW-pW-pa3" id="SVn-ff-Urj"/>
                 <outlet property="userScoreLabel" destination="lsM-vX-4Vn" id="sE0-vr-Uz7"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="87"/>

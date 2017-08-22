@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -247,6 +248,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="ServiceNumLabel" destination="IQA-RW-0Ij" id="ZnA-B2-5py"/>
                 <outlet property="adressLabel" destination="eKm-rc-TZ2" id="3dP-Js-cp5"/>
                 <outlet property="adressLabel2" destination="4Ae-uk-brs" id="AfT-Ir-bdc"/>
                 <outlet property="buttonView" destination="m2S-Ew-y8U" id="6dr-uK-C6n"/>

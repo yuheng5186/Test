@@ -71,6 +71,8 @@
 		18218FEB1F2B0C3C00F7207F /* DSCarClubDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18218FEA1F2B0C3C00F7207F /* DSCarClubDetailController.m */; };
 		182190061F301BA400F7207F /* DSUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 182190051F301BA400F7207F /* DSUserModel.m */; };
 		182190091F301BF600F7207F /* DSActivityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182190081F301BF600F7207F /* DSActivityDetailCell.m */; };
+		18322AAF1F4AD1C7003ABB7B /* Carcircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AAE1F4AD1C7003ABB7B /* Carcircle.m */; };
+		18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB21F4AD6DC003ABB7B /* MyCar.m */; };
 		183997651F2586D300702071 /* ActivityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183997631F2586D300702071 /* ActivityListCell.m */; };
 		183997661F2586D300702071 /* ActivityListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183997641F2586D300702071 /* ActivityListCell.xib */; };
 		1839979F1F25E69100702071 /* DSPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1839979E1F25E69100702071 /* DSPasswordController.m */; };
@@ -377,6 +379,10 @@
 		182190051F301BA400F7207F /* DSUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSUserModel.m; path = Find/CustomCell/DSUserModel.m; sourceTree = "<group>"; };
 		182190071F301BF600F7207F /* DSActivityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSActivityDetailCell.h; path = Find/CustomCell/DSActivityDetailCell.h; sourceTree = "<group>"; };
 		182190081F301BF600F7207F /* DSActivityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSActivityDetailCell.m; path = Find/CustomCell/DSActivityDetailCell.m; sourceTree = "<group>"; };
+		18322AAD1F4AD1C7003ABB7B /* Carcircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Carcircle.h; sourceTree = "<group>"; };
+		18322AAE1F4AD1C7003ABB7B /* Carcircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Carcircle.m; sourceTree = "<group>"; };
+		18322AB11F4AD6DC003ABB7B /* MyCar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCar.h; sourceTree = "<group>"; };
+		18322AB21F4AD6DC003ABB7B /* MyCar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCar.m; sourceTree = "<group>"; };
 		183997621F2586D300702071 /* ActivityListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityListCell.h; path = Find/CustomCell/ActivityListCell.h; sourceTree = "<group>"; };
 		183997631F2586D300702071 /* ActivityListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityListCell.m; path = Find/CustomCell/ActivityListCell.m; sourceTree = "<group>"; };
 		183997641F2586D300702071 /* ActivityListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActivityListCell.xib; path = Find/CustomCell/ActivityListCell.xib; sourceTree = "<group>"; };
@@ -854,6 +860,7 @@
 		181E92E01F20532B0006511E /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
+				18322AB01F4AD6A8003ABB7B /* Model */,
 				181E92E11F2054C50006511E /* DSUserInfoController.h */,
 				181E92E21F2054C50006511E /* DSUserInfoController.m */,
 				1853BA101F288D9800B98C7F /* DSChangeNameController.h */,
@@ -954,6 +961,7 @@
 		181E93081F2094420006511E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				18322AAC1F4AD181003ABB7B /* model */,
 				18B69E9A1F32CA71007DA0E4 /* ScanController.h */,
 				18B69E9B1F32CA71007DA0E4 /* ScanController.m */,
 				181E93091F2094C10006511E /* DSMessagesController.h */,
@@ -1001,6 +1009,26 @@
 				180E432B1F417E3500013D2D /* DSAddShopController.m */,
 			);
 			name = Home;
+			sourceTree = "<group>";
+		};
+		18322AAC1F4AD181003ABB7B /* model */ = {
+			isa = PBXGroup;
+			children = (
+				18322AAD1F4AD1C7003ABB7B /* Carcircle.h */,
+				18322AAE1F4AD1C7003ABB7B /* Carcircle.m */,
+			);
+			name = model;
+			path = Home/model;
+			sourceTree = "<group>";
+		};
+		18322AB01F4AD6A8003ABB7B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18322AB11F4AD6DC003ABB7B /* MyCar.h */,
+				18322AB21F4AD6DC003ABB7B /* MyCar.m */,
+			);
+			name = Model;
+			path = UserInfo/Model;
 			sourceTree = "<group>";
 		};
 		183997611F25868F00702071 /* CustomCell */ = {
@@ -1885,6 +1913,7 @@
 				1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */,
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
 				1850904A1F4557E100795E0A /* TYShowAlertView.m in Sources */,
+				18322AAF1F4AD1C7003ABB7B /* Carcircle.m in Sources */,
 				50B26EA31F315D76009B3B9F /* OrderCategoryView.m in Sources */,
 				5094A62F1F346E4200407808 /* SuccessPayCell.m in Sources */,
 				185090451F4557E100795E0A /* TYAlertDropDownAnimation.m in Sources */,
@@ -1928,6 +1957,7 @@
 				1853BA451F28A04100B98C7F /* JFButton.m in Sources */,
 				50B26EC91F31AFA7009B3B9F /* IcreaseCarController.m in Sources */,
 				18B69EA31F32CB48007DA0E4 /* UIImage+Zirkfied.m in Sources */,
+				18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */,
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
 				5071B47C1F380987009FFF67 /* OrderDetailView.m in Sources */,
 				180E430A1F3C741100013D2D /* DSShareGetMoneyController.m in Sources */,
