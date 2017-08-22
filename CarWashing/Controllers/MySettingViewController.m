@@ -134,7 +134,7 @@
     
     UIView *orderView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     orderView.centerX                   = Main_Screen_Width/4 -Main_Screen_Width*20/375;
-    orderView.top                       = 0;
+    orderView.top                       = Main_Screen_Height*10/667;
     
     UITapGestureRecognizer  *tapOrderGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapOrderButtonClick:)];
     [orderView addGestureRecognizer:tapOrderGesture];
@@ -142,7 +142,7 @@
     UIImage     *orderImage          = [UIImage imageNamed:@"dingdan"];
     UIImageView *orderImageView      = [UIUtil drawCustomImgViewInView:orderView frame:CGRectMake(0, 0, orderImage.size.width,orderImage.size.height) imageName:@"dingdan"];
     orderImageView.centerX           = orderView.width/2;
-    orderImageView.top               = Main_Screen_Height*24/667;
+    orderImageView.top               = Main_Screen_Height*15/667;
     
     NSString *orderName              = @"订单";
     UIFont *orderNameFont            = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
@@ -156,7 +156,7 @@
     
     UIView *favoritesView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     favoritesView.centerX                   = Main_Screen_Width/2;
-    favoritesView.top                       = 0;
+    favoritesView.top                       = Main_Screen_Height*10/667;
     
     UITapGestureRecognizer  *favoritesTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapFavoritesButtonClick:)];
     [favoritesView addGestureRecognizer:favoritesTapGesture];
@@ -164,7 +164,7 @@
     UIImage     *favoritesImage          = [UIImage imageNamed:@"shoucang"];
     UIImageView *favoritesImageView      = [UIUtil drawCustomImgViewInView:favoritesView frame:CGRectMake(0, 0, favoritesImage.size.width,favoritesImage.size.height) imageName:@"shoucang"];
     favoritesImageView.centerX           = favoritesView.width/2;
-    favoritesImageView.top               = Main_Screen_Height*24/667;
+    favoritesImageView.top               = Main_Screen_Height*15/667;
     
     NSString *favoritesName              = @"收藏";
     UIFont *favoritesNameFont            = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
@@ -176,7 +176,7 @@
     
     UIView *exchangeView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     exchangeView.centerX                   = Main_Screen_Width*3/4 +Main_Screen_Width*20/375;
-    exchangeView.top                       = 0;
+    exchangeView.top                       = Main_Screen_Height*10/667;
     
     UITapGestureRecognizer  *exchangeTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapExchangeButtonClick:)];
     [exchangeView addGestureRecognizer:exchangeTapGesture];
@@ -184,7 +184,7 @@
     UIImage     *exchangeImage          = [UIImage imageNamed:@"duihuanliwu"];
     UIImageView *exchangeImageView      = [UIUtil drawCustomImgViewInView:exchangeView frame:CGRectMake(0, 0, exchangeImage.size.width,exchangeImage.size.height) imageName:@"duihuanliwu"];
     exchangeImageView.centerX           = exchangeView.width/2;
-    exchangeImageView.top               = Main_Screen_Height*24/667;
+    exchangeImageView.top               = Main_Screen_Height*15/667;
     
     NSString *exchangeName              = @"激活";
     UIFont *exchangeNameFont            = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
