@@ -32,7 +32,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 - (UITableView *)rechargeView {
     
     if (_rechargeView == nil) {
-        UITableView *rechargeView = [[UITableView alloc] initWithFrame:CGRectInset(self.view.bounds, 10, 10) style:UITableViewStyleGrouped];
+        UITableView *rechargeView = [[UITableView alloc] initWithFrame:CGRectInset(self.view.bounds, 10*Main_Screen_Height/667, 10*Main_Screen_Height/667) style:UITableViewStyleGrouped];
         _rechargeView = rechargeView;
         [self.view addSubview:_rechargeView];
     }
@@ -69,7 +69,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10;
+    return 10*Main_Screen_Height/667;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

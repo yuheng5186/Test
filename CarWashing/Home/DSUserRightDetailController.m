@@ -39,7 +39,7 @@
     backgroundImageView.centerX           = upView.centerX;
     
     NSString *showString             = @"扫码洗车免费体验券";
-    UIFont    *showFont              = [UIFont boldSystemFontOfSize:18];
+    UIFont    *showFont              = [UIFont boldSystemFontOfSize:18*Main_Screen_Height/667];
     UILabel     *showlabel           = [UIUtil drawLabelInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*200/375, Main_Screen_Height*20/667) font:showFont text:showString isCenter:NO];
     showlabel.textColor              = [UIColor whiteColor];
     showlabel.left                   = Main_Screen_Width*25/375;

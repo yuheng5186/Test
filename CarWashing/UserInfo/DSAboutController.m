@@ -71,7 +71,7 @@
     [title addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"3869ce"] range:NSMakeRange(0, 8)];
     [updateRuleButton setAttributedTitle:title forState:UIControlStateNormal];
     [updateRuleButton setBackgroundColor:[UIColor clearColor]];
-    [updateRuleButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [updateRuleButton.titleLabel setFont:[UIFont systemFontOfSize:14*Main_Screen_Height/667]];
     [updateRuleButton addTarget:self action:@selector(agreeButtonByClick:) forControlEvents:UIControlEventTouchUpInside];
     updateRuleButton.top              = contentNameLabel.bottom +Main_Screen_Height*100/667;
     updateRuleButton.centerX          = appImageView.centerX;

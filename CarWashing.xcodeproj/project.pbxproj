@@ -115,6 +115,7 @@
 		188907161F283184009E20B0 /* DSGetScoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188907151F283184009E20B0 /* DSGetScoreController.m */; };
 		18A4B1B11F4AAB5200C64978 /* HowToUpGradeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B1B01F4AAB5200C64978 /* HowToUpGradeController.m */; };
 		18A4B1B41F4AAB7800C64978 /* WayToUpGradeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B1B31F4AAB7800C64978 /* WayToUpGradeCell.m */; };
+		18A4B1B71F4BF9C800C64978 /* MemberRightsDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B1B61F4BF9C800C64978 /* MemberRightsDetailController.m */; };
 		18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A11F21A44F009FF73A /* DSMessageDetailController.m */; };
 		18B697A51F21A87F009FF73A /* DSScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A41F21A87F009FF73A /* DSScanController.m */; };
 		18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A71F21D420009FF73A /* DSCardGroupController.m */; };
@@ -464,6 +465,8 @@
 		18A4B1B01F4AAB5200C64978 /* HowToUpGradeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HowToUpGradeController.m; sourceTree = "<group>"; };
 		18A4B1B21F4AAB7800C64978 /* WayToUpGradeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayToUpGradeCell.h; sourceTree = "<group>"; };
 		18A4B1B31F4AAB7800C64978 /* WayToUpGradeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayToUpGradeCell.m; sourceTree = "<group>"; };
+		18A4B1B51F4BF9C800C64978 /* MemberRightsDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberRightsDetailController.h; sourceTree = "<group>"; };
+		18A4B1B61F4BF9C800C64978 /* MemberRightsDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberRightsDetailController.m; sourceTree = "<group>"; };
 		18B697A01F21A44F009FF73A /* DSMessageDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMessageDetailController.h; path = Home/DSMessageDetailController.h; sourceTree = "<group>"; };
 		18B697A11F21A44F009FF73A /* DSMessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMessageDetailController.m; path = Home/DSMessageDetailController.m; sourceTree = "<group>"; };
 		18B697A31F21A87F009FF73A /* DSScanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSScanController.h; path = Home/DSScanController.h; sourceTree = "<group>"; };
@@ -951,6 +954,8 @@
 				5097FE191F2F4335002EF8F8 /* MyCarViewCell.xib */,
 				181E92FF1F208AF20006511E /* DSMemberRightsController.h */,
 				181E93001F208AF20006511E /* DSMemberRightsController.m */,
+				18A4B1B51F4BF9C800C64978 /* MemberRightsDetailController.h */,
+				18A4B1B61F4BF9C800C64978 /* MemberRightsDetailController.m */,
 				181E93021F208C520006511E /* DSMyCardController.h */,
 				181E93031F208C520006511E /* DSMyCardController.m */,
 				181E93051F208D560006511E /* DSRecommendController.h */,
@@ -1844,6 +1849,7 @@
 				50B26E681F301B29009B3B9F /* DiscountCell.m in Sources */,
 				18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */,
 				181E92CE1F1F39CC0006511E /* UIUtil.m in Sources */,
+				18A4B1B71F4BF9C800C64978 /* MemberRightsDetailController.m in Sources */,
 				501672161F297D8200384186 /* PurchaseCardViewCell.m in Sources */,
 				181E930B1F2094C10006511E /* DSMessagesController.m in Sources */,
 				50B26EA91F315EB8009B3B9F /* PayOrderController.m in Sources */,

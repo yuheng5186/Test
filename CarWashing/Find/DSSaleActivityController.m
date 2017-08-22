@@ -71,16 +71,16 @@
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 90;
+    return 90*Main_Screen_Height/667;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return 10.0f;
+    return 10.0f*Main_Screen_Height/667;
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 40.01f;
+    return 40.01f*Main_Screen_Height/667;
 }
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
@@ -110,12 +110,12 @@
     [cell.contentView addSubview:backV];
     
     UILabel *titleLab = [[UILabel alloc] init];
-    titleLab.font = [UIFont systemFontOfSize:18];
+    titleLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     titleLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     [cell.contentView addSubview:titleLab];
     
     UILabel *introLab = [[UILabel alloc] init];
-    introLab.font = [UIFont systemFontOfSize:14];
+    introLab.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     introLab.textColor = [UIColor colorFromHex:@"#999999"];
     [cell.contentView addSubview:introLab];
     
@@ -128,18 +128,18 @@
     }];
     
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(cell.contentView).mas_offset(28);
-        make.top.equalTo(cell.contentView).mas_offset(24);
+        make.left.equalTo(cell.contentView).mas_offset(28*Main_Screen_Height/667);
+        make.top.equalTo(cell.contentView).mas_offset(24*Main_Screen_Height/667);
     }];
     
     [introLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(titleLab);
-        make.top.equalTo(titleLab.mas_bottom).mas_offset(12);
+        make.top.equalTo(titleLab.mas_bottom).mas_offset(12*Main_Screen_Height/667);
     }];
     
     [markV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(introLab);
-        make.leading.equalTo(introLab.mas_trailing).mas_offset(20);
+        make.leading.equalTo(introLab.mas_trailing).mas_offset(20*Main_Screen_Height/667);
     }];
     
     if (indexPath.section == 0) {

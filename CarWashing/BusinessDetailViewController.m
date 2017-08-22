@@ -76,7 +76,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 - (void)setupUI {
     
-    UIView *containHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Width/2 + 196*Main_Screen_Height/667)];
+    UIView *containHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Width/2 + 196)];
     [self.view addSubview:containHeadView];
     
     UIImageView *detaiImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Width/2)];
@@ -99,7 +99,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     BusinessDetailHeaderView *headerView = [BusinessDetailHeaderView businessDetailHeaderView];
     
-    headerView.frame = CGRectMake(0, Main_Screen_Width/2, Main_Screen_Width, 196*Main_Screen_Height/667);
+    headerView.frame = CGRectMake(0, Main_Screen_Width/2, Main_Screen_Width, 196);
     
     self.headerView = headerView;
     
