@@ -36,7 +36,7 @@ static NSString *id_discountCell = @"id_discountCell";
     
     if (_discountView == nil) {
         
-        UITableView *discountView = [[UITableView alloc] initWithFrame:CGRectInset(self.view.bounds, 10, 10) style:UITableViewStyleGrouped];
+        UITableView *discountView = [[UITableView alloc] initWithFrame:CGRectInset(self.view.bounds, 10*Main_Screen_Height/667, 10*Main_Screen_Height/667) style:UITableViewStyleGrouped];
         _discountView = discountView;
         [self.view addSubview:_discountView];
     }
@@ -55,7 +55,7 @@ static NSString *id_discountCell = @"id_discountCell";
     [self.discountView registerNib:[UINib nibWithNibName:@"DiscountCell" bundle:nil] forCellReuseIdentifier:id_discountCell];
     
     self.discountView.backgroundColor = [UIColor whiteColor];
-    self.discountView.rowHeight = 80;
+    self.discountView.rowHeight = 80*Main_Screen_Height/667;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -75,7 +75,7 @@ static NSString *id_discountCell = @"id_discountCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10;
+    return 10*Main_Screen_Height/667;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

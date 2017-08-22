@@ -54,7 +54,7 @@
     titleView.top                      = 0;
     
     NSString *titleName              = @"扫码洗车";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18*Main_Screen_Height/667];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = titleView.centerX;
@@ -90,10 +90,10 @@
 - (void)setupScanWindowView
 {
     UIImageView *scanImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"saomakuang"]];
-    scanImageView.width = Main_Screen_Width - 65*2;
-    scanImageView.height = Main_Screen_Width - 65*2;
+    scanImageView.width = Main_Screen_Width - 65*2*Main_Screen_Height/667;
+    scanImageView.height = Main_Screen_Width - 65*2*Main_Screen_Height/667;
     scanImageView.centerX = Main_Screen_Width/2;
-    scanImageView.centerY = self.contentView.height/2-50;
+    scanImageView.centerY = self.contentView.height/2-50*Main_Screen_Height/667;
     
     _scanNetImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"saomiaozhong"]];
     
@@ -248,7 +248,7 @@
         
     }else{
         
-        CGFloat scanNetImageViewH = 241;
+        CGFloat scanNetImageViewH = 241*Main_Screen_Height/667;
         CGFloat scanWindowH = _scanWindow.width;
         CGFloat scanNetImageViewW = _scanWindow.width;
         

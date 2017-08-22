@@ -19,7 +19,7 @@
     if (self) {
         
         [self addSubview:self.mainImageView];
-        //[self addSubview:self.coverView];
+        
     }
     
     return self;
@@ -33,6 +33,8 @@
     }
     return _mainImageView;
 }
+
+
 
 //- (UIView *)coverView {
 //    if (_coverView == nil) {

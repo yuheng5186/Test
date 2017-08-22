@@ -97,6 +97,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     [super viewDidLoad];
     
     [self setupUI];
+    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
