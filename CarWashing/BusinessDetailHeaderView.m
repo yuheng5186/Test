@@ -44,11 +44,11 @@
     self.scoreLabel.textColor = [UIColor colorFromHex:@"#dfdfdf"];
     
     self.freeCheckLabel.backgroundColor = [UIColor colorFromHex:@"#517ab6"];
-    self.freeCheckLabel.layer.cornerRadius = 7.5;
+    self.freeCheckLabel.layer.cornerRadius = 7.5*Main_Screen_Height/667;
     self.freeCheckLabel.clipsToBounds = YES;
     
     self.qualityLabel.backgroundColor = [UIColor colorFromHex:@"f85460"];
-    self.qualityLabel.layer.cornerRadius = 7.5;
+    self.qualityLabel.layer.cornerRadius = 7.5*Main_Screen_Height/667;
     self.qualityLabel.clipsToBounds = YES;
     
     self.buttonView.backgroundColor = [UIColor colorFromHex:@"#64affa"];

@@ -34,21 +34,21 @@
     _nameLab = nameLab;
     nameLab.textColor = [UIColor colorFromHex:@"#ffffff"];
     nameLab.text = @"体验卡";
-    nameLab.font = [UIFont systemFontOfSize:16];
+    nameLab.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     [self.contentView addSubview:nameLab];
     
     UILabel *introLab = [[UILabel alloc] init];
     _introLab = introLab;
     introLab.textColor = [UIColor colorFromHex:@"#ffffff"];
     introLab.text = @"商家洗车自动抵扣";
-    introLab.font = [UIFont systemFontOfSize:13];
+    introLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
     [self.contentView addSubview:introLab];
     
     UILabel *scoreLab = [[UILabel alloc] init];
     _scoreLab = scoreLab;
     scoreLab.text = @"1000积分";
     scoreLab.textColor = [UIColor colorFromHex:@"#ffffff"];
-    scoreLab.font = [UIFont systemFontOfSize:18];
+    scoreLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     [self.contentView addSubview:scoreLab];
     
     [backImgV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -56,18 +56,18 @@
     }];
     
     [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView).mas_offset(22);
-        make.top.equalTo(self.contentView).mas_offset(21);
+        make.left.equalTo(self.contentView).mas_offset(22*Main_Screen_Height/667);
+        make.top.equalTo(self.contentView).mas_offset(21*Main_Screen_Height/667);
     }];
     
     [introLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(nameLab);
-        make.top.equalTo(nameLab.mas_bottom).mas_offset(10);
+        make.top.equalTo(nameLab.mas_bottom).mas_offset(10*Main_Screen_Height/667);
     }];
     
     [scoreLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.contentView).mas_offset(-11);
-        make.bottom.equalTo(self.contentView).mas_offset(-11);
+        make.right.equalTo(self.contentView).mas_offset(-11*Main_Screen_Height/667);
+        make.bottom.equalTo(self.contentView).mas_offset(-11*Main_Screen_Height/667);
     }];
     
 }

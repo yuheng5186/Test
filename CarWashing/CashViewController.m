@@ -30,7 +30,7 @@
     [self.view addSubview:dissmissBtn];
     
     TicketCashView *containView = [TicketCashView ticketCashView];
-    containView.frame = CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 195);
+    containView.frame = CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 195*Main_Screen_Height/667);
     //containView.backgroundColor = [UIColor blueColor];
     self.containView = containView;
     
@@ -42,7 +42,7 @@
     [super viewDidAppear:animated];
     
     //更改视图
-    self.containView.frame = CGRectMake(0, Main_Screen_Height - 195, Main_Screen_Width, 195);
+    self.containView.frame = CGRectMake(0, Main_Screen_Height - 195*Main_Screen_Height/667, Main_Screen_Width, 195*Main_Screen_Height/667);
     
     [UIView animateWithDuration:0.25 animations:^{
         [self.view layoutIfNeeded];
@@ -53,7 +53,7 @@
 - (void)clickDissmissButton{
     
     //更改视图
-    self.containView.frame = CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 195);
+    self.containView.frame = CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 195*Main_Screen_Height/667);
     
     [UIView animateWithDuration:0.25 animations:^{
         

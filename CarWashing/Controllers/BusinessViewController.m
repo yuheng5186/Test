@@ -148,7 +148,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     [self.salerListView registerNib:nib forCellReuseIdentifier:id_salerListCell];
     
     
-    self.salerListView.contentInset = UIEdgeInsetsMake(0, 0, 180, 0);
+    self.salerListView.contentInset = UIEdgeInsetsMake(0, 0, 180*Main_Screen_Height/667, 0);
    
     
 }
@@ -312,7 +312,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     [button setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateSelected];
     [button setImage:[UIImage imageNamed:@"xiala"] forState:UIControlStateNormal];
     [button setImage:[UIImage imageNamed:@"shangla"] forState:UIControlStateSelected];
-    button.titleLabel.font = [UIFont systemFontOfSize:12];
+    button.titleLabel.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     
     return button;
 }

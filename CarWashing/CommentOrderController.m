@@ -46,7 +46,7 @@ static NSString *id_successPayCell = @"id_successPayCell";
     self.commentOrderView.dataSource = self;
     
     [self.commentOrderView registerNib:[UINib nibWithNibName:@"SuccessPayCell" bundle:nil] forCellReuseIdentifier:id_successPayCell];
-    self.commentOrderView.rowHeight = 150;
+    self.commentOrderView.rowHeight = 150*Main_Screen_Height/667;
 }
 
 
@@ -67,7 +67,7 @@ static NSString *id_successPayCell = @"id_successPayCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10;
+    return 10*Main_Screen_Height/667;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

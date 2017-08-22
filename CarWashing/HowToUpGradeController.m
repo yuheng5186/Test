@@ -67,11 +67,11 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     UILabel *gradeLab = [[UILabel alloc] init];
     gradeLab.text = @"白银会员";
     gradeLab.textColor = [UIColor colorFromHex:@"#ffffff"];
-    gradeLab.font = [UIFont systemFontOfSize:15];
+    gradeLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [self.view addSubview:gradeLab];
     
     //滑块
-    HYSlider *slider = [[HYSlider alloc] initWithFrame:CGRectMake(23, 132, Main_Screen_Width - 46, 4)];
+    HYSlider *slider = [[HYSlider alloc] initWithFrame:CGRectMake(23*Main_Screen_Height/667, 64 + 68*Main_Screen_Height/667, Main_Screen_Width - 46, 4*Main_Screen_Height/667)];
     slider.currentValueColor = [UIColor redColor];
     slider.maxValue = 1000;
     slider.currentSliderValue = 600;
@@ -86,10 +86,10 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     displayBtn.userInteractionEnabled = NO;
     [displayBtn setTitle:@"再获得400积分升级为黄金会员" forState:UIControlStateNormal];
     [displayBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    displayBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    displayBtn.titleLabel.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     [displayBtn setImage:[UIImage imageNamed:@"xiaohuojian"] forState:UIControlStateNormal];
     displayBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    [displayBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+    [displayBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10*Main_Screen_Height/667, 0, 0)];
     [headContainView addSubview:displayBtn];
     
     //底部
@@ -110,13 +110,13 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     
     //约束
     [headContainView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).mas_offset(64);
+        make.top.equalTo(self.view).mas_offset(64*Main_Screen_Height/667);
         make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(130);
+        make.height.mas_equalTo(130*Main_Screen_Height/667);
     }];
     
     [gradeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(headContainView).mas_offset(9);
+        make.top.equalTo(headContainView).mas_offset(9*Main_Screen_Height/667);
         make.centerX.equalTo(headContainView);
     }];
     
@@ -128,20 +128,20 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
 //    }];
     
     [displayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(slider.mas_bottom).mas_offset(20);
+        make.top.equalTo(slider.mas_bottom).mas_offset(20*Main_Screen_Height/667);
         make.centerX.equalTo(headContainView);
-        make.width.mas_equalTo(250);
+        make.width.mas_equalTo(250*Main_Screen_Height/667);
     }];
     
     [containView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.equalTo(self.view);
-        make.height.mas_equalTo(49);
+        make.height.mas_equalTo(49*Main_Screen_Height/667);
     }];
     
     [getMoreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(containView);
-        make.height.mas_equalTo(40);
-        make.width.mas_equalTo(250);
+        make.height.mas_equalTo(40*Main_Screen_Height/667);
+        make.width.mas_equalTo(250*Main_Screen_Height/667);
     }];
     
     getMoreBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -151,12 +151,12 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     
     self.wayToEarnScoreView.delegate = self;
     self.wayToEarnScoreView.dataSource = self;
-    self.wayToEarnScoreView.rowHeight = 90;
+    self.wayToEarnScoreView.rowHeight = 90*Main_Screen_Height/667;
     
     [_wayToEarnScoreView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(headContainView.mas_bottom);
         make.right.left.equalTo(headContainView);
-        make.height.mas_equalTo(Main_Screen_Height - 64 - 130 - 49);
+        make.height.mas_equalTo(Main_Screen_Height - 64 - 130*Main_Screen_Height/667 - 49*Main_Screen_Height/667);
     }];
     
     [self.wayToEarnScoreView registerClass:[WayToUpGradeCell class] forCellReuseIdentifier:id_wayToUpCell];
@@ -211,7 +211,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10;
+    return 10*Main_Screen_Height/667;
 }
 
 

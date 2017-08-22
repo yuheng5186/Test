@@ -110,8 +110,10 @@
                     <color key="backgroundColor" red="1" green="0.67869665670000001" blue="0.093383055830000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstItem="Da5-xF-kll" firstAttribute="centerY" secondItem="gHF-Li-SsL" secondAttribute="centerY" id="2zb-7j-nrX"/>
+                        <constraint firstItem="u0O-fD-QVH" firstAttribute="leading" secondItem="avn-Xs-7uj" secondAttribute="trailing" constant="23" id="3Na-me-Vbu"/>
                         <constraint firstItem="u0O-fD-QVH" firstAttribute="centerY" secondItem="gHF-Li-SsL" secondAttribute="centerY" id="4Kq-EW-Qus"/>
                         <constraint firstItem="jgh-Pq-8Rg" firstAttribute="centerY" secondItem="gHF-Li-SsL" secondAttribute="centerY" id="DHj-TR-NM4"/>
+                        <constraint firstItem="avn-Xs-7uj" firstAttribute="leading" secondItem="c6y-hM-H7p" secondAttribute="trailing" constant="11" id="H8A-P8-hHK"/>
                         <constraint firstItem="c6y-hM-H7p" firstAttribute="centerY" secondItem="gHF-Li-SsL" secondAttribute="centerY" id="ONs-ud-zVC"/>
                         <constraint firstItem="4w4-6s-WBe" firstAttribute="centerY" secondItem="gHF-Li-SsL" secondAttribute="centerY" id="QVk-zx-5Ng"/>
                         <constraint firstItem="jgh-Pq-8Rg" firstAttribute="leading" secondItem="u0O-fD-QVH" secondAttribute="trailing" constant="7" id="Rh3-Aq-XzV"/>
@@ -145,7 +147,7 @@
                 <outlet property="phoneLabel" destination="ZU9-dr-hhs" id="z4B-mh-SZB"/>
                 <outlet property="topContainView" destination="YJW-xs-lvQ" id="Vwp-xf-uVx"/>
             </connections>
-            <point key="canvasLocation" x="-297" y="-421"/>
+            <point key="canvasLocation" x="-423" y="-433"/>
         </view>
     </objects>
     <resources>

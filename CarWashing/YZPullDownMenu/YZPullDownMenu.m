@@ -129,7 +129,7 @@ NSString * const YZUpdateMenuTitleNote = @"YZUpdateMenuTitleNote";
 {
     self.backgroundColor = [UIColor whiteColor];
     
-    _separateLineTopMargin = 10;
+    _separateLineTopMargin = 10*Main_Screen_Height/667;
     
     _separateLineColor =  [UIColor colorWithRed:221 / 255.0 green:221 / 255.0 blue:221 / 255.0 alpha:1];
     

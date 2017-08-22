@@ -25,7 +25,7 @@
     self.priceLabel.textColor = [UIColor colorFromHex:@"#ff525a"];
     
     [self.stateButton setTitleColor:[UIColor colorFromHex:@"#afafaf"] forState:UIControlStateNormal];
-    self.stateButton.layer.cornerRadius = 12.5;
+    self.stateButton.layer.cornerRadius = 12.5*Main_Screen_Height/667;
     self.stateButton.layer.borderWidth = 1;
     self.stateButton.layer.borderColor = [UIColor colorFromHex:@"#afafaf"].CGColor;
     [self.stateButton addTarget:self action:@selector(clickCommentButton:) forControlEvents:UIControlEventTouchUpInside];

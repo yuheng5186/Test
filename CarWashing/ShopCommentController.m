@@ -39,7 +39,7 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
     //可以去除tableView的多余的线，否则会影响美观
     self.commentListView.tableFooterView = [UIView new];
     [self.commentListView registerNib:[UINib nibWithNibName:@"BusinessEstimateCell" bundle:nil] forCellReuseIdentifier:id_commentShopCell];
-    self.commentListView.rowHeight = 110;
+    self.commentListView.rowHeight = 110*Main_Screen_Height/667;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -58,7 +58,7 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
     commentTitleLabel.text = @"  评价(58)";
     commentTitleLabel.backgroundColor = [UIColor colorFromHex:@"#dfdfdf"];
     commentTitleLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-    commentTitleLabel.font = [UIFont systemFontOfSize:14];
+    commentTitleLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     
     return commentTitleLabel;
 }
@@ -66,7 +66,7 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 40;
+    return 40*Main_Screen_Height/667;
     
 }
 

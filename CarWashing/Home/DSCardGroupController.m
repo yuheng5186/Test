@@ -174,7 +174,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10;
+    return 10*Main_Screen_Height/667;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

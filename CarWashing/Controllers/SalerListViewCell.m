@@ -28,10 +28,10 @@
     self.shopAdressLabel.textColor = [UIColor colorFromHex:@"#999999"];
     self.separateLine.backgroundColor = [UIColor colorFromHex:@"#e6e6e6"];
     
-    self.freeTestLabel.layer.cornerRadius = 7.5;
+    self.freeTestLabel.layer.cornerRadius = 7.5*Main_Screen_Height/667;
     self.freeTestLabel.clipsToBounds = YES;
     self.freeTestLabel.backgroundColor = [UIColor colorFromHex:@"#517ab6"];
-    self.qualityLabel.layer.cornerRadius = 7.5;
+    self.qualityLabel.layer.cornerRadius = 7.5*Main_Screen_Height/667;
     self.qualityLabel.clipsToBounds = YES;
     self.qualityLabel.backgroundColor = [UIColor colorFromHex:@"#f85460"];
     

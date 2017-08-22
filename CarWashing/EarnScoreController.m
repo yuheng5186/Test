@@ -28,7 +28,7 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
     
     if (!_adverView) {
         
-        UIImageView *adverView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 100)];
+        UIImageView *adverView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 100*Main_Screen_Height/667)];
         _adverView = adverView;
         [self.view addSubview:adverView];
     }
@@ -40,7 +40,7 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
     
     if (!_earnWayView) {
         
-        UITableView *earnWayView = [[UITableView alloc] initWithFrame:CGRectMake(0, 164, Main_Screen_Width, Main_Screen_Height - 164) style:UITableViewStyleGrouped];
+        UITableView *earnWayView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 100*Main_Screen_Height/667, Main_Screen_Width, Main_Screen_Height - 64 - 100*Main_Screen_Height/667) style:UITableViewStyleGrouped];
         _earnWayView = earnWayView;
         [self.view addSubview:_earnWayView];
     }
@@ -61,7 +61,7 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
     
     self.earnWayView.delegate = self;
     self.earnWayView.dataSource = self;
-    self.earnWayView.rowHeight = 90;
+    self.earnWayView.rowHeight = 90*Main_Screen_Height/667;
     [self.earnWayView registerClass:[WayToUpGradeCell class] forCellReuseIdentifier:id_earnViewCell];
     
 }
@@ -110,7 +110,7 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10;
+    return 10*Main_Screen_Height/667;
 }
 
 
