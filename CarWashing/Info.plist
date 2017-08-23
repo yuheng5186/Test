@@ -37,6 +37,7 @@
 	<string>1</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>weixin</string>
 		<string>iosamap</string>
 		<string>baidumap</string>
 	</array>
