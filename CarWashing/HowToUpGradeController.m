@@ -162,7 +162,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     }];
     
     [displayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(slider.mas_bottom).mas_offset(5);
+        make.top.equalTo(slider.mas_bottom).mas_offset(10);
         make.centerX.equalTo(headContainView);
         make.width.mas_equalTo(250);
         make.bottom.equalTo(headContainView).mas_offset(10);
@@ -192,7 +192,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     [_wayToEarnScoreView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(headContainView.mas_bottom);
         make.right.left.equalTo(headContainView);
-        make.height.mas_equalTo(Main_Screen_Height - 64 - 130*Main_Screen_Height/667 - 49*Main_Screen_Height/667);
+        make.height.mas_equalTo(Main_Screen_Height - 64 - 150*Main_Screen_Height/667 - 49*Main_Screen_Height/667);
     }];
     
     [self.wayToEarnScoreView registerClass:[WayToUpGradeCell class] forCellReuseIdentifier:id_wayToUpCell];
