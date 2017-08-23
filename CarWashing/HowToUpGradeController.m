@@ -68,7 +68,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     UILabel *gradeLab = [[UILabel alloc] init];
     gradeLab.text = @"白银会员";
     gradeLab.textColor = [UIColor colorFromHex:@"#ffffff"];
-    gradeLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+    gradeLab.font = [UIFont boldSystemFontOfSize:15*Main_Screen_Height/667];
     [self.view addSubview:gradeLab];
     
     //滑块
@@ -132,7 +132,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     [headContainView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).mas_offset(64);
         make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(130*Main_Screen_Height/667);
+        make.height.mas_equalTo(150*Main_Screen_Height/667);
     }];
     
     [gradeLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -162,7 +162,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     }];
     
     [displayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(slider.mas_bottom).mas_offset(10);
+        make.top.equalTo(slider.mas_bottom).mas_offset(5);
         make.centerX.equalTo(headContainView);
         make.width.mas_equalTo(250);
         make.bottom.equalTo(headContainView).mas_offset(10);
