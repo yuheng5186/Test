@@ -50,15 +50,15 @@
     
     self.navigationController.navigationBar.hidden = YES;
 
-    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*64/667) color:[UIColor colorFromHex:@"#293754"]];
+    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#293754"]];
     titleView.top                      = 0;
     
     NSString *titleName              = @"扫码洗车";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18*Main_Screen_Height/667];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:14*Main_Screen_Height/667];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = titleView.centerX;
-    titleNameLabel.centerY           = titleView.centerY +Main_Screen_Height*10/667;
+    titleNameLabel.centerY           = titleView.centerY +8;
     
     NSString  *helpString     = @"使用帮助";
     UIFont    *helpStringFont = [UIFont systemFontOfSize:Main_Screen_Width*16/375];

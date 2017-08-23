@@ -127,15 +127,15 @@
 
 - (void) createNavTitleView {
     
-    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*64/667) color:[UIColor colorFromHex:@"#293754"]];
+    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#293754"]];
     titleView.top                      = 0;
     
     NSString *titleName              = @"金顶洗车";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:Main_Screen_Height*14/667];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:Main_Screen_Height*16/667];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = titleView.centerX;
-    titleNameLabel.centerY           = titleView.centerY +Main_Screen_Height*5/667;
+    titleNameLabel.centerY           = titleView.centerY +8;
     
     
     UIImage *logeImage              = [UIImage imageNamed:@"xichebaidi"];
@@ -194,7 +194,7 @@
     
     UIView *scanView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     scanView.centerX                   = Main_Screen_Width/8;
-    scanView.top                       = Main_Screen_Height*10/375;
+    scanView.top                       = Main_Screen_Height*25/667;
     
     UITapGestureRecognizer  *tapScanGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapScanButtonClick:)];
     [scanView addGestureRecognizer:tapScanGesture];
@@ -212,7 +212,7 @@
     
     UIView *cardBagView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     cardBagView.centerX                   = Main_Screen_Width*3/8;
-    cardBagView.top                       = Main_Screen_Height*10/375;
+    cardBagView.centerY                   = scanView.centerY;
     
     UITapGestureRecognizer  *tapCardBagGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapCardBagButtonClick:)];
     [cardBagView addGestureRecognizer:tapCardBagGesture];
@@ -232,7 +232,7 @@
     
     UIView *memberRightView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     memberRightView.centerX                   = Main_Screen_Width*5/8;
-    memberRightView.top                       = Main_Screen_Height*10/375;
+    memberRightView.centerY                   = cardBagView.centerY;
     
     UITapGestureRecognizer  *tapMemberRightGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapMemberRightButtonClick:)];
     [memberRightView addGestureRecognizer:tapMemberRightGesture];
@@ -252,7 +252,7 @@
     
     UIView *scoreView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     scoreView.centerX                   = Main_Screen_Width*7/8;
-    scoreView.top                       = Main_Screen_Height*10/375;
+    scoreView.centerY                   = cardBagView.centerY;
     
     UITapGestureRecognizer  *tapScoreGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapScoreButtonClick:)];
     [scoreView addGestureRecognizer:tapScoreGesture];
@@ -269,7 +269,9 @@
     scoreNameLabel.centerX           = scoreImageView.centerX;
     scoreNameLabel.top               = scoreImageView.bottom +Main_Screen_Height*6/667;
 
-    backgroudView.height             = scoreView.bottom +Main_Screen_Height*25/667;
+    
+    //  背景高度
+    backgroudView.height             = scanView.bottom +Main_Screen_Height*25/667;
     
     
     UIView *payView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
@@ -280,7 +282,7 @@
     [payView addGestureRecognizer:tapPayGesture];
     UIImage *payImage              = [UIImage imageNamed:@"jihuokaquan"];
     UIImageView *payImageView      = [UIUtil drawCustomImgViewInView:payView frame:CGRectMake(0, 0, payImage.size.width,payImage.size.height) imageName:@"jihuokaquan"];
-    payImageView.left              = Main_Screen_Width*20/375;
+    payImageView.left              = Main_Screen_Width*15/375;
     payImageView.top               = Main_Screen_Height*10/667;
     
     NSString *payName              = @"激活卡券";
@@ -299,7 +301,7 @@
     
     UIImage *signImage              = [UIImage imageNamed:@"qiandao"];
     UIImageView *signImageView      = [UIUtil drawCustomImgViewInView:signView frame:CGRectMake(0, 0, signImage.size.width,signImage.size.height) imageName:@"qiandao"];
-    signImageView.left              = Main_Screen_Width*20/375;
+    signImageView.left              = Main_Screen_Width*15/375;
     signImageView.top               = Main_Screen_Height*10/667;
     
     NSString *signName              = @"每日签到";
@@ -318,7 +320,7 @@
     
     UIImage *shopImage              = [UIImage imageNamed:@"shangjiaruzhu"];
     UIImageView *shopImageView      = [UIUtil drawCustomImgViewInView:shopView frame:CGRectMake(0, 0, shopImage.size.width,shopImage.size.height) imageName:@"shangjiaruzhu"];
-    shopImageView.left              = Main_Screen_Width*20/375;
+    shopImageView.left              = Main_Screen_Width*15/375;
     shopImageView.top               = Main_Screen_Height*10/667;
     
     NSString *shopName              = @"商家入驻";
@@ -338,7 +340,7 @@
     
     UIImage *serviceImage              = [UIImage imageNamed:@"kefu"];
     UIImageView *serviceImageView      = [UIUtil drawCustomImgViewInView:serviceView frame:CGRectMake(0, 0, serviceImage.size.width,serviceImage.size.height) imageName:@"kefu"];
-    serviceImageView.left              = Main_Screen_Width*20/375;
+    serviceImageView.left              = Main_Screen_Width*15/375;
     serviceImageView.top               = Main_Screen_Height*10/667;
     
     NSString *serviceName              = @"客服咨询";
@@ -358,7 +360,7 @@
     
     UIImage *myCarImage              = [UIImage imageNamed:@"qiche"];
     UIImageView *myCarImageView      = [UIUtil drawCustomImgViewInView:myCarView frame:CGRectMake(0, 0, myCarImage.size.width,myCarImage.size.height) imageName:@"qiche"];
-    myCarImageView.left              = Main_Screen_Width*20/375;
+    myCarImageView.left              = Main_Screen_Width*15/375;
     myCarImageView.top               = Main_Screen_Height*10/667;
     
     
@@ -378,7 +380,7 @@
     
     UIImage *shareImage              = [UIImage imageNamed:@"shouyefenxiang"];
     UIImageView *shareImageView      = [UIUtil drawCustomImgViewInView:shareView frame:CGRectMake(0, 0, shareImage.size.width,shareImage.size.height) imageName:@"shouyefenxiang"];
-    shareImageView.left              = Main_Screen_Width*20/375;
+    shareImageView.left              = Main_Screen_Width*15/375;
     shareImageView.top               = Main_Screen_Height*10/667;
     
     NSString *shareName              = @"分享赚钱";
@@ -417,7 +419,7 @@
 
     UIImage *discountImage              = [UIImage imageNamed:@"libao"];
     UIImageView *discountImageView      = [UIUtil drawCustomImgViewInView:discountView frame:CGRectMake(0, 0, discountImage.size.width,discountImage.size.height) imageName:@"libao"];
-    discountImageView.left              = Main_Screen_Width*20/375;
+    discountImageView.left              = Main_Screen_Width*15/375;
     discountImageView.top               = Main_Screen_Height*10/667;
 
     NSString *discountName              = @"优惠活动";
@@ -438,7 +440,7 @@
     
     UIImage *carClubImage              = [UIImage imageNamed:@"cheyouquan"];
     UIImageView *carClubImageView      = [UIUtil drawCustomImgViewInView:carClubView frame:CGRectMake(0, 0, carClubImage.size.width,carClubImage.size.height) imageName:@"cheyouquan"];
-    carClubImageView.left              = Main_Screen_Width*20/375;
+    carClubImageView.left              = Main_Screen_Width*15/375;
     carClubImageView.top               = Main_Screen_Height*10/667;
     
     NSString *carClubName              = @"车友圈";

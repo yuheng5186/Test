@@ -12,6 +12,12 @@
 #import "IcreaseCarController.h"
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
 
+#import "HTTPDefine.h"
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "MyCar.h"
+#import "UdStorage.h"
+
 @interface MyCarPortController ()<UITableViewDataSource, UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 
@@ -20,6 +26,10 @@
 @property (nonatomic, weak) UITableView *carListView;
 
 @property (nonatomic, strong) NSIndexPath *nowPath;
+
+@property(nonatomic ,strong)NSMutableArray *mycararray;
+
+@property(nonatomic ,strong)NSMutableArray *myDefaultcararray;
 
 @end
 
@@ -31,7 +41,7 @@ static NSString *id_carListCell = @"id_carListCell";
     
     if (_carListView == nil) {
         
-        UITableView *carListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height) style:UITableViewStyleGrouped];
+        UITableView *carListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height)];
         _carListView = carListView;
         [self.view addSubview:_carListView];
     }
@@ -61,9 +71,67 @@ static NSString *id_carListCell = @"id_carListCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"%@",self.mycararray);
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(noticeincreaseMyCar:) name:@"increasemycarsuccess" object:nil];
+    _mycararray = [[NSMutableArray alloc]init];
     
-    [self setupUI];
+    _myDefaultcararray = [[NSMutableArray alloc]init];
+    
+    [self getMyCarData];
+    
+//    [self setupUI];
+}
+
+-(void)getMyCarData
+{
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/GetCarList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+            for(NSDictionary *dic in arr)
+            {
+//                MyCar *newcar = [[MyCar alloc]init];
+                if([dic[@"IsDefaultFav"] intValue] == 1)
+                {
+//                    [newcar setValuesForKeysWithDictionary:dic];
+                    [_myDefaultcararray addObject:dic];
+                }
+                else
+                {
+                    [_mycararray addObject:dic];
+                }
+                
+            }
+            
+            
+            [self setupUI];
+            
+            [_carListView reloadData];
+            
+        }
+        else
+        {
+            [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+            [self setupUI];
+        }
+        
+        
+        
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self setupUI];
+    }];
+    
 }
 
 
@@ -74,7 +142,7 @@ static NSString *id_carListCell = @"id_carListCell";
 #pragma maek-空白页
     self.carListView.emptyDataSetSource = self;
     self.carListView.emptyDataSetDelegate = self;
-    self.carListView.rowHeight = 140*Main_Screen_Height/667;
+    self.carListView.contentInset     = UIEdgeInsetsMake(0, 0, 180, 0);
     [self.carListView registerNib:[UINib nibWithNibName:@"MyCarViewCell" bundle:nil] forCellReuseIdentifier:id_carListCell];
     
     
@@ -90,29 +158,114 @@ static NSString *id_carListCell = @"id_carListCell";
 
 #pragma mark - 数据源代理
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 150*Main_Screen_Height/667;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    
+    if([_myDefaultcararray count] == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 2;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    
+    if([_myDefaultcararray count] != 0)
+    {
+        if(section == 1)
+        {
+            return [self.mycararray count];
+        }
+        else
+        {
+            return 1;
+        }
+    }
+    else
+    {
+        return [self.mycararray count];
+    }
+
+    
+    
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if([_myDefaultcararray count] != 0)
+    {
+        if(section == 1)
+        {
+            return 10*Main_Screen_Height/667;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    else
+    {
+        return 0;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     MyCarViewCell *carCell = [tableView dequeueReusableCellWithIdentifier:id_carListCell];
     
-    if (indexPath.section == self.nowPath.section) {
-        
-        carCell.defaultButton.selected = YES;
-        [carCell.defaultButton setTitle:@"已默认" forState:UIControlStateNormal];
-        
-    }else {
-        
-        carCell.defaultButton.selected = NO;
-        [carCell.defaultButton setTitle:@"设置默认" forState:UIControlStateNormal];
-        
+    
+    if([_myDefaultcararray count] != 0)
+    {
+        if(indexPath.section == 0)
+        {
+            carCell.manuLabel.text = [NSString stringWithFormat:@"%@年产",[[_myDefaultcararray objectAtIndex:indexPath.row] objectForKey:@"Manufacture"]];
+            carCell.brandLabel.text = [[_myDefaultcararray objectAtIndex:indexPath.row] objectForKey:@"CarBrand"];
+            carCell.defaultButton.selected = YES;
+            carCell.defaultButton.enabled = NO;
+            carCell.deleteButton.tag = indexPath.row+10000;
+            [carCell.defaultButton setTitle:@"已默认" forState:UIControlStateNormal];
+        }
+        else
+        {
+            carCell.manuLabel.text = [NSString stringWithFormat:@"%@年产",[[_mycararray objectAtIndex:indexPath.row] objectForKey:@"Manufacture"]];
+            carCell.brandLabel.text = [[_mycararray objectAtIndex:indexPath.row] objectForKey:@"CarBrand"];
+            carCell.defaultButton.selected = NO;
+            carCell.defaultButton.tag = indexPath.row;
+            carCell.deleteButton.tag = indexPath.row;
+            [carCell.defaultButton setTitle:@"设置默认" forState:UIControlStateNormal];
+        }
     }
+    else
+    {
+        carCell.manuLabel.text = [NSString stringWithFormat:@"%@年产",[[_mycararray objectAtIndex:indexPath.row] objectForKey:@"Manufacture"]];
+        carCell.brandLabel.text = [[_mycararray objectAtIndex:indexPath.row] objectForKey:@"CarBrand"];
+        carCell.defaultButton.selected = NO;
+        carCell.defaultButton.tag = indexPath.row;
+        carCell.deleteButton.tag = indexPath.row;
+        [carCell.defaultButton setTitle:@"设置默认" forState:UIControlStateNormal];
+    }
+    
+    
+    
+//    if (indexPath.section == self.nowPath.section) {
+//        
+//        carCell.defaultButton.selected = YES;
+//        [carCell.defaultButton setTitle:@"已默认" forState:UIControlStateNormal];
+//        
+//    }else {
+//        
+//        carCell.defaultButton.selected = NO;
+//        [carCell.defaultButton setTitle:@"设置默认" forState:UIControlStateNormal];
+//        
+//    }
     
     
     return carCell;
@@ -127,9 +280,7 @@ static NSString *id_carListCell = @"id_carListCell";
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10*Main_Screen_Height/667;
-}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
@@ -138,22 +289,59 @@ static NSString *id_carListCell = @"id_carListCell";
 
 
 
-- (IBAction)didClickDefaultButton:(id)button {
+- (IBAction)didClickDefaultButton:(UIButton *)button {
     
-    UITableViewCell *cell = (UITableViewCell *) [[button superview] superview];
     
-    NSIndexPath *path = [self.carListView indexPathForCell:cell];
+    
+//    UITableViewCell *cell = (UITableViewCell *) [[button superview] superview];
+    
+//    NSIndexPath *path = [self.carListView indexPathForCell:cell];
     
     //记录当下的indexpath
-    self.nowPath = path;
+//    self.nowPath = path;
     
-    [self.carListView reloadData];
+    
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"CarCode":[[_mycararray objectAtIndex:button.tag] objectForKey:@"CarCode"],
+                                 @"ModifyType":@2,
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/ModifyCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+                [self.view showInfo:@"修改成功" autoHidden:YES interval:2];
+                _mycararray = [[NSMutableArray alloc]init];
+                _myDefaultcararray = [[NSMutableArray alloc]init];
+                [self getMyCarData];
+//                [self.carListView reloadData];
+                NSNotification * notice = [NSNotification notificationWithName:@"updatemycarsuccess" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter]postNotification:notice];
+                
+            }
+            else
+            {
+                [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+            }
+            
+        } fail:^(NSError *error) {
+            [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+        }];
+
+    
+    
+    
+    
     
     
 }
 
 
-- (IBAction)didClickDeleteButton:(id)sender {
+- (IBAction)didClickDeleteButton:(UIButton *)sender {
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"是否删除车辆信息" preferredStyle:UIAlertControllerStyleAlert];
     
@@ -163,6 +351,77 @@ static NSString *id_carListCell = @"id_carListCell";
     [alertController addAction:cancelAction];
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+            
+            if(sender.tag >= 10000)
+            {
+                NSDictionary *mulDic = @{
+                                         @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                         @"CarCode":[[_myDefaultcararray objectAtIndex:sender.tag - 10000] objectForKey:@"CarCode"],
+                                         @"ModifyType":@3,
+                                         };
+                NSDictionary *params = @{
+                                         @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                         @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                         };
+                [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/ModifyCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                    
+                    if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                    {
+                        [self.view showInfo:@"修改成功" autoHidden:YES interval:2];
+                        _mycararray = [[NSMutableArray alloc]init];
+                        _myDefaultcararray = [[NSMutableArray alloc]init];
+                        [self getMyCarData];
+                        NSNotification * notice = [NSNotification notificationWithName:@"updatemycarsuccess" object:nil userInfo:nil];
+                        [[NSNotificationCenter defaultCenter]postNotification:notice];
+                    }
+                    else
+                    {
+                        [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+                    }
+                    
+                } fail:^(NSError *error) {
+                    [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+                }];
+            }
+            else
+            {
+                NSDictionary *mulDic = @{
+                                         @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                         @"CarCode":[[_mycararray objectAtIndex:sender.tag] objectForKey:@"CarCode"],
+                                         @"ModifyType":@3,
+                                         };
+                NSDictionary *params = @{
+                                         @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                         @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                         };
+                [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/ModifyCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                    
+                    if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                    {
+                        [self.view showInfo:@"修改成功" autoHidden:YES interval:2];
+                        _mycararray = [[NSMutableArray alloc]init];
+                        _myDefaultcararray = [[NSMutableArray alloc]init];
+                        [self getMyCarData];
+                        NSNotification * notice = [NSNotification notificationWithName:@"updatemycarsuccess" object:nil userInfo:nil];
+                        [[NSNotificationCenter defaultCenter]postNotification:notice];
+                    }
+                    else
+                    {
+                        [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+                    }
+                    
+                } fail:^(NSError *error) {
+                    [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+                }];
+            }
+
+        
+            
+            
+//        NSLog(@"%ld",sender.tag);
+        
         
     }];
     [alertController addAction:OKAction];
@@ -178,11 +437,16 @@ static NSString *id_carListCell = @"id_carListCell";
     
     IcreaseCarController *increaseVC = [[IcreaseCarController alloc] init];
     increaseVC.hidesBottomBarWhenPushed = YES;
+    increaseVC.titlename = @"新增车辆";
     [self.navigationController pushViewController:increaseVC animated:YES];
     
 }
 
-
+-(void)noticeincreaseMyCar:(NSNotification *)sender{
+    _mycararray = [[NSMutableArray alloc]init];
+    _myDefaultcararray = [[NSMutableArray alloc]init];
+    [self getMyCarData];
+}
 
 #pragma mark - 无数据占位
 //无数据占位

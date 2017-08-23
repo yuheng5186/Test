@@ -7,7 +7,11 @@
 //
 
 #import "BaseController.h"
+#import "MyCar.h"
 
 @interface IcreaseCarController : BaseController
+
+@property(nonatomic,copy)NSString *titlename;
+@property(nonatomic,strong)MyCar *mycar;
 
 @end

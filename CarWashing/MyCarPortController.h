@@ -10,6 +10,4 @@
 
 @interface MyCarPortController : BaseController
 
-@property (nonatomic,copy) NSMutableArray *mycararray;
-
 @end

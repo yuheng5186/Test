@@ -74,6 +74,7 @@
 		182190091F301BF600F7207F /* DSActivityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182190081F301BF600F7207F /* DSActivityDetailCell.m */; };
 		18322AAF1F4AD1C7003ABB7B /* Carcircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AAE1F4AD1C7003ABB7B /* Carcircle.m */; };
 		18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB21F4AD6DC003ABB7B /* MyCar.m */; };
+		18322AB71F4C2226003ABB7B /* CarClubNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB61F4C2226003ABB7B /* CarClubNews.m */; };
 		183997651F2586D300702071 /* ActivityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183997631F2586D300702071 /* ActivityListCell.m */; };
 		183997661F2586D300702071 /* ActivityListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183997641F2586D300702071 /* ActivityListCell.xib */; };
 		1839979F1F25E69100702071 /* DSPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1839979E1F25E69100702071 /* DSPasswordController.m */; };
@@ -388,6 +389,8 @@
 		18322AAE1F4AD1C7003ABB7B /* Carcircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Carcircle.m; sourceTree = "<group>"; };
 		18322AB11F4AD6DC003ABB7B /* MyCar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCar.h; sourceTree = "<group>"; };
 		18322AB21F4AD6DC003ABB7B /* MyCar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCar.m; sourceTree = "<group>"; };
+		18322AB51F4C2226003ABB7B /* CarClubNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarClubNews.h; sourceTree = "<group>"; };
+		18322AB61F4C2226003ABB7B /* CarClubNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarClubNews.m; sourceTree = "<group>"; };
 		183997621F2586D300702071 /* ActivityListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityListCell.h; path = Find/CustomCell/ActivityListCell.h; sourceTree = "<group>"; };
 		183997631F2586D300702071 /* ActivityListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityListCell.m; path = Find/CustomCell/ActivityListCell.m; sourceTree = "<group>"; };
 		183997641F2586D300702071 /* ActivityListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActivityListCell.xib; path = Find/CustomCell/ActivityListCell.xib; sourceTree = "<group>"; };
@@ -1046,6 +1049,16 @@
 			path = UserInfo/Model;
 			sourceTree = "<group>";
 		};
+		18322AB41F4C21F7003ABB7B /* model */ = {
+			isa = PBXGroup;
+			children = (
+				18322AB51F4C2226003ABB7B /* CarClubNews.h */,
+				18322AB61F4C2226003ABB7B /* CarClubNews.m */,
+			);
+			name = model;
+			path = Find/model;
+			sourceTree = "<group>";
+		};
 		183997611F25868F00702071 /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1184,6 +1197,7 @@
 		18B697A91F21DA60009FF73A /* Find */ = {
 			isa = PBXGroup;
 			children = (
+				18322AB41F4C21F7003ABB7B /* model */,
 				183997611F25868F00702071 /* CustomCell */,
 				18B697AA1F21DAB3009FF73A /* DSSaleActivityController.h */,
 				18B697AB1F21DAB3009FF73A /* DSSaleActivityController.m */,
@@ -1770,6 +1784,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-CarWashing/Pods-CarWashing-resources.sh",
 				"${PODS_ROOT}/AMap2DMap/MAMapKit.framework/AMap.bundle",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -1907,6 +1922,7 @@
 				50E2EE861F1F4D3C00FAF130 /* YZSortCell.m in Sources */,
 				501672331F297FF000384186 /* ProblemTitleModel.m in Sources */,
 				180E42EB1F3AB37D00013D2D /* YzdHUDLabel.m in Sources */,
+				18322AB71F4C2226003ABB7B /* CarClubNews.m in Sources */,
 				5094A6341F346E5800407808 /* DelayPayCell.m in Sources */,
 				18B803771F1DA2A300B52432 /* main.m in Sources */,
 				18B69E9C1F32CA71007DA0E4 /* ScanController.m in Sources */,

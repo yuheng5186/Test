@@ -98,15 +98,15 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     _locationManager.delegate = self;
     
     
-    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*64/667) color:[UIColor colorFromHex:@"#293754"]];
+    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#293754"]];
     upView.top                      = 0;
     
     NSString *titleName              = @"购卡";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18*Main_Screen_Height/667];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:16*Main_Screen_Height/667];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = upView.centerX;
-    titleNameLabel.centerY           = upView.centerY +Main_Screen_Height*10/667;
+    titleNameLabel.centerY           = upView.centerY +8;
     
     self.locationButton        = [UIButton buttonWithType:UIButtonTypeCustom];
     self.locationButton.frame             = CGRectMake(0, 0, Main_Screen_Width*70/375, Main_Screen_Height*30/667);
