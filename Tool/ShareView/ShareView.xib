@@ -28,7 +28,6 @@
                     </state>
                     <connections>
                         <action selector="shareWechatFriendsBtn:" destination="-1" eventType="touchUpInside" id="JWn-xW-RUf"/>
-                        <action selector="weixinShare" destination="iN0-l3-epB" eventType="touchUpInside" id="GaE-PC-2Kd"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gXT-hU-UGW">
@@ -41,7 +40,6 @@
                             </state>
                             <connections>
                                 <action selector="cancelButton:" destination="-1" eventType="touchUpInside" id="Wbc-Bl-YTL"/>
-                                <action selector="cancleAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="RUH-5a-GpM"/>
                             </connections>
                         </button>
                     </subviews>
@@ -77,7 +75,6 @@
                         <color key="titleShadowColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
-                        <action selector="pyqShare" destination="iN0-l3-epB" eventType="touchUpInside" id="w7d-YU-MWL"/>
                         <action selector="shareWechatPYQBtn:" destination="-1" eventType="touchUpInside" id="7Ew-H5-uy0"/>
                     </connections>
                 </button>
@@ -98,10 +95,6 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="pyqBtn" destination="99Q-2n-nhD" id="L7f-S7-ws0"/>
-                <outlet property="weixinBtn" destination="Kq9-16-RJg" id="7Tk-3y-2ky"/>
-            </connections>
             <point key="canvasLocation" x="-37" y="-12"/>
         </view>
     </objects>
