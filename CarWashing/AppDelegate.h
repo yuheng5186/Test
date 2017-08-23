@@ -19,5 +19,8 @@
 
 @property (strong, nonatomic) User *currentUser;
 
+@property float autoSizeScaleX;
+@property float autoSizeScaleY;
+
 @end
 

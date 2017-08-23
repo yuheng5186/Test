@@ -75,6 +75,9 @@
 		18322AAF1F4AD1C7003ABB7B /* Carcircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AAE1F4AD1C7003ABB7B /* Carcircle.m */; };
 		18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB21F4AD6DC003ABB7B /* MyCar.m */; };
 		18322AB71F4C2226003ABB7B /* CarClubNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB61F4C2226003ABB7B /* CarClubNews.m */; };
+		18322ABA1F4D7A5D003ABB7B /* QWMclistTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB91F4D7A5D003ABB7B /* QWMclistTableViewCell.m */; };
+		18322ABD1F4D7D8B003ABB7B /* UILabel+StringFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322ABC1F4D7D8B003ABB7B /* UILabel+StringFrame.m */; };
+		18322AC01F4D950C003ABB7B /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322ABF1F4D950C003ABB7B /* Card.m */; };
 		183997651F2586D300702071 /* ActivityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183997631F2586D300702071 /* ActivityListCell.m */; };
 		183997661F2586D300702071 /* ActivityListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183997641F2586D300702071 /* ActivityListCell.xib */; };
 		1839979F1F25E69100702071 /* DSPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1839979E1F25E69100702071 /* DSPasswordController.m */; };
@@ -391,6 +394,12 @@
 		18322AB21F4AD6DC003ABB7B /* MyCar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCar.m; sourceTree = "<group>"; };
 		18322AB51F4C2226003ABB7B /* CarClubNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarClubNews.h; sourceTree = "<group>"; };
 		18322AB61F4C2226003ABB7B /* CarClubNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarClubNews.m; sourceTree = "<group>"; };
+		18322AB81F4D7A5D003ABB7B /* QWMclistTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWMclistTableViewCell.h; sourceTree = "<group>"; };
+		18322AB91F4D7A5D003ABB7B /* QWMclistTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWMclistTableViewCell.m; sourceTree = "<group>"; };
+		18322ABB1F4D7D8B003ABB7B /* UILabel+StringFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+StringFrame.h"; path = "Tool/UILabel+StringFrame.h"; sourceTree = "<group>"; };
+		18322ABC1F4D7D8B003ABB7B /* UILabel+StringFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+StringFrame.m"; path = "Tool/UILabel+StringFrame.m"; sourceTree = "<group>"; };
+		18322ABE1F4D950C003ABB7B /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		18322ABF1F4D950C003ABB7B /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
 		183997621F2586D300702071 /* ActivityListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityListCell.h; path = Find/CustomCell/ActivityListCell.h; sourceTree = "<group>"; };
 		183997631F2586D300702071 /* ActivityListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityListCell.m; path = Find/CustomCell/ActivityListCell.m; sourceTree = "<group>"; };
 		183997641F2586D300702071 /* ActivityListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActivityListCell.xib; path = Find/CustomCell/ActivityListCell.xib; sourceTree = "<group>"; };
@@ -821,6 +830,8 @@
 				1853BA311F28A01600B98C7F /* JFCityViewController */,
 				1853BA0A1F28774400B98C7F /* LKActionSheet.h */,
 				1853BA0B1F28774400B98C7F /* LKActionSheet.m */,
+				18322ABB1F4D7D8B003ABB7B /* UILabel+StringFrame.h */,
+				18322ABC1F4D7D8B003ABB7B /* UILabel+StringFrame.m */,
 				1853BA071F28674F00B98C7F /* LKAlertView.h */,
 				1853BA081F28674F00B98C7F /* LKAlertView.m */,
 				181E93271F20B0510006511E /* SXScrPageView.h */,
@@ -1327,6 +1338,8 @@
 			children = (
 				181E92D31F1F3B900006511E /* BusinessViewController.h */,
 				181E92D41F1F3B900006511E /* BusinessViewController.m */,
+				18322AB81F4D7A5D003ABB7B /* QWMclistTableViewCell.h */,
+				18322AB91F4D7A5D003ABB7B /* QWMclistTableViewCell.m */,
 				501672001F29797600384186 /* BusinessDetailViewController.h */,
 				501672011F29797600384186 /* BusinessDetailViewController.m */,
 				500C6BF31F3B5B13007D34A1 /* BusinessMapController.h */,
@@ -1380,6 +1393,8 @@
 				50B26E631F300D60009B3B9F /* PayPurchaseCardController.m */,
 				501672171F297DA500384186 /* payCardDetailCell.h */,
 				501672181F297DA500384186 /* payCardDetailCell.m */,
+				18322ABE1F4D950C003ABB7B /* Card.h */,
+				18322ABF1F4D950C003ABB7B /* Card.m */,
 			);
 			name = Purchase;
 			sourceTree = "<group>";
@@ -1856,6 +1871,7 @@
 				5094A6251F3447CD00407808 /* BusinessEstimateCell.m in Sources */,
 				18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */,
 				181E92F21F20848D0006511E /* DSOrderController.m in Sources */,
+				18322ABA1F4D7A5D003ABB7B /* QWMclistTableViewCell.m in Sources */,
 				185090481F4557E100795E0A /* TYAlertView.m in Sources */,
 				18B697B51F21DBCE009FF73A /* DSWheelGroupController.m in Sources */,
 				185090491F4557E100795E0A /* TYBaseAnimation.m in Sources */,
@@ -1864,6 +1880,7 @@
 				181E92CB1F1F39CC0006511E /* UIColor+Additions.m in Sources */,
 				50E2EE851F1F4D3C00FAF130 /* YZSortViewController.m in Sources */,
 				18B697A51F21A87F009FF73A /* DSScanController.m in Sources */,
+				18322ABD1F4D7D8B003ABB7B /* UILabel+StringFrame.m in Sources */,
 				1853BA091F28674F00B98C7F /* LKAlertView.m in Sources */,
 				18A4B1B11F4AAB5200C64978 /* HowToUpGradeController.m in Sources */,
 				50E2EE841F1F4D3C00FAF130 /* YZMenuButton.m in Sources */,
@@ -2018,6 +2035,7 @@
 				185090441F4557E100795E0A /* TYAlertController.m in Sources */,
 				180E43241F3D836F00013D2D /* WeixinTimelineActivity.m in Sources */,
 				501672461F29DA6C00384186 /* MemberRegualrController.m in Sources */,
+				18322AC01F4D950C003ABB7B /* Card.m in Sources */,
 				185090271F441BFA00795E0A /* UdStorage.m in Sources */,
 				1850901C1F43F19B00795E0A /* LCMD5Tool.m in Sources */,
 				180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */,

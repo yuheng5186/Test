@@ -90,20 +90,20 @@
     return _goodNumberLabel;
 }
 
-- (IBAction)goodButtonClick:(id)sender {
-    UIButton *button = (UIButton *)sender;
-    if (button.selected == NO) {
-        [self.goodButton setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
-        self.goodNumberLabel.text                     = @"1289";
-//        [self.view showInfo:@"点赞成功!" autoHidden:YES];
-    }else {
-        [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
-        self.goodNumberLabel.text                     = @"1288";
-//        [self.view showInfo:@"取消点赞!" autoHidden:YES];
-        
-    }
-    button.selected = !button.selected;
-}
+//- (IBAction)goodButtonClick:(id)sender {
+//    UIButton *button = (UIButton *)sender;
+//    if (button.selected == NO) {
+//        [self.goodButton setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
+////        self.goodNumberLabel.text                     = @"1289";
+////        [self.view showInfo:@"点赞成功!" autoHidden:YES];
+//    }else {
+//        [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
+////        self.goodNumberLabel.text                     = @"1288";
+////        [self.view showInfo:@"取消点赞!" autoHidden:YES];
+//        
+//    }
+//    button.selected = !button.selected;
+//}
 
 - (IBAction)sayButtonClick:(id)sender {
     

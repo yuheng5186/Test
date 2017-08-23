@@ -17,10 +17,18 @@
 #import "PGIndexBannerSubiew.h"
 #import <Masonry.h>
 
-
+#import "HTTPDefine.h"
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "UdStorage.h"
+#import "Card.h"
+#import "MBProgressHUD.h"
 
 #define KCURRENTCITYINFODEFAULTS [NSUserDefaults standardUserDefaults]
 @interface PurchaseViewController ()<JFLocationDelegate, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource, UIScrollViewDelegate>
+{
+    MBProgressHUD *HUD;
+}
 
 @property (nonatomic, strong) NSArray *titles;
 /** 选择的结果*/
@@ -39,6 +47,9 @@
 @property (nonatomic, weak) UIScrollView *cycleView;
 
 @property (nonatomic, weak) UIPageControl *pageControl;
+
+@property (nonatomic, strong) NSMutableArray *CardArray;
+@property (nonatomic, assign) NSInteger Xuhao;
 
 @end
 
@@ -80,18 +91,11 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden = YES;
     
-    for (int index = 0; index < 3; index++) {
-        UIImage *image = [UIImage imageNamed:@"kabeijing"];
-        [self.imageArray addObject:image];
-    }
+//    for (int index = 0; index < 3; index++) {
+//        UIImage *image = [UIImage imageNamed:@"kabeijing"];
+//        [self.imageArray addObject:image];
+//    }
     
-    [self setupUI];
-}
-
-
-
-
-- (void)setupUI {
     
     //定位按钮
     self.locationManager = [[JFLocation alloc] init];
@@ -127,7 +131,74 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     [upView addSubview:self.locationButton];
     
     
+    _Xuhao = 0;
+    _CardArray = [NSMutableArray array];
     
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
+    
+   
+    
+    [self getMyCardData];
+    
+}
+
+-(void)getMyCardData
+{
+    NSDictionary *mulDic = @{
+                             @"GetCardType":@1
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardConfigList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+            for(NSDictionary *dic in arr)
+            {
+                Card *card = [[Card alloc]init];
+                [card setValuesForKeysWithDictionary:dic];
+                [_CardArray addObject:card];
+            }
+            
+            for (int index = 0; index < [_CardArray count]; index++) {
+                UIImage *image = [UIImage imageNamed:@"kabeijing"];
+                [self.imageArray addObject:image];
+            }
+            
+            [self setupUI];
+            
+            [HUD setHidden:YES];
+            
+        }
+        else
+        {
+            [HUD setHidden:YES];
+            [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+            
+        }
+        
+        
+        
+        
+    } fail:^(NSError *error) {
+        [HUD setHidden:YES];
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+    }];
+    
+}
+
+
+
+- (void)setupUI {
     //无限轮播图
     NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, (Main_Screen_Width - 70*Main_Screen_Height/667) * 9*Main_Screen_Height/667 / 16 + 24)];
     pageFlowView.backgroundColor = [UIColor whiteColor];
@@ -266,10 +337,14 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
         bannerView.layer.masksToBounds = YES;
     }
     
+    
+    
     bannerView.mainImageView.image = self.imageArray[index];
     
+    Card *card = (Card *)[_CardArray objectAtIndex:index];
+    
     UILabel *cardNameLab = [[UILabel alloc] init];
-    cardNameLab.text = @"百洗无忧卡";
+    cardNameLab.text = card.CardName;
     cardNameLab.textColor = [UIColor colorFromHex:@"#ffffff"];
     cardNameLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [bannerView addSubview:cardNameLab];
@@ -287,7 +362,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     [bannerView addSubview:scoreLab];
     
     UILabel *invalidLab = [[UILabel alloc] init];
-    invalidLab.text = @"有效期12个月";
+    invalidLab.text = [NSString stringWithFormat:@"有效期%ld天",card.ExpiredDay];
     invalidLab.textColor = [UIColor colorFromHex:@"#ffffff"];
     invalidLab.font = [UIFont systemFontOfSize:10*Main_Screen_Height/667];
     [bannerView addSubview:invalidLab];

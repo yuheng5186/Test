@@ -12,11 +12,14 @@
 #import "HTTPDefine.h"
 #import "LCMD5Tool.h"
 #import "AFNetworkingTool.h"
+#import "MBProgressHUD.h"
 @interface ShopCommentController ()<UITableViewDataSource, UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic, weak) UITableView *commentListView;
 
 @property (nonatomic, strong) NSMutableArray *MerchantCommentListData;
+
+@property (nonatomic)NSInteger page;
 
 @end
 
@@ -26,7 +29,7 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
 
 - (UITableView *)commentListView{
     if (_commentListView == nil) {
-        UITableView *commenListView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+        UITableView *commenListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height-44*Main_Screen_Height/667-64) style:UITableViewStyleGrouped];
         _commentListView = commenListView;
         [self.view addSubview:commenListView];
     }
@@ -37,7 +40,7 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
     [super viewDidLoad];
     
     self.MerchantCommentListData = [[NSMutableArray alloc]init];
-    [self GetCommentDetail];
+    
     
     self.commentListView.delegate = self;
     self.commentListView.dataSource = self;
@@ -48,13 +51,77 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
     self.commentListView.tableFooterView = [UIView new];
     [self.commentListView registerNib:[UINib nibWithNibName:@"BusinessEstimateCell" bundle:nil] forCellReuseIdentifier:id_commentShopCell];
     self.commentListView.rowHeight = 110*Main_Screen_Height/667;
+    
+    [self setupRefresh];
 }
+
+-(void)setupRefresh
+{
+    self.commentListView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        
+        [self headerRereshing];
+        
+    }];
+    
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    self.commentListView.mj_header.automaticallyChangeAlpha = YES;
+    
+    [self.commentListView.mj_header beginRefreshing];
+    
+    // 上拉刷新
+    self.commentListView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        
+        [self footerRereshing];
+        
+    }];
+}
+
+- (void)headerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        _MerchantCommentListData = [NSMutableArray new];
+
+        self.page = 0 ;
+
+        [self GetCommentDetail];
+        
+    });
+}
+
+
+- (void)footerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        if(_MerchantCommentListData.count == 0)
+        {
+            [self GetCommentDetail];
+        }
+        else
+        {
+            self.page++;
+            [self GetCommentDetailmore];
+            
+        }
+        
+        
+        
+        
+        // 刷新表格
+        
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        
+    });
+}
+
 
 -(void)GetCommentDetail
 {
     NSDictionary *mulDic = @{
                              @"MerCode":[NSString stringWithFormat:@"%d",[self.dic[@"MerCode"] intValue]],
-                             @"PageIndex":@0,
+                             @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
                              @"PageSize":@10
                              };
     NSDictionary *params = @{
@@ -68,11 +135,13 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
             [self.MerchantCommentListData addObjectsFromArray:arr];
+            [_commentListView.mj_header endRefreshing];
             [_commentListView reloadData];
         }
         else
         {
             [self.view showInfo:@"商家评论信息获取失败" autoHidden:YES interval:2];
+            [_commentListView.mj_header endRefreshing];
         }
         
         
@@ -80,9 +149,70 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
         
     } fail:^(NSError *error) {
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [_commentListView.mj_header endRefreshing];
     }];
 
 }
+
+-(void)GetCommentDetailmore
+{
+    NSDictionary *mulDic = @{
+                             @"MerCode":[NSString stringWithFormat:@"%d",[self.dic[@"MerCode"] intValue]],
+                             @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
+                             @"PageSize":@10
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetCommentDetail",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+            if(arr.count == 0)
+            {
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.removeFromSuperViewOnHide =YES;
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"无更多数据";
+                hud.minSize = CGSizeMake(132.f, 108.0f);
+                [hud hide:YES afterDelay:3];
+                [_commentListView.mj_footer endRefreshing];
+                self.page--;
+            }
+            else
+            {
+                [self.MerchantCommentListData addObjectsFromArray:arr];
+                [_commentListView.mj_footer endRefreshing];
+                [_commentListView reloadData];
+            }
+        }
+        else
+        {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.removeFromSuperViewOnHide =YES;
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"无更多数据";
+            hud.minSize = CGSizeMake(132.f, 108.0f);
+            [hud hide:YES afterDelay:3];
+            [_commentListView.mj_footer endRefreshing];
+            self.page--;
+        }
+        
+        
+        
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [_commentListView.mj_header endRefreshing];
+    }];
+    
+}
+
+
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.MerchantCommentListData count];
@@ -122,7 +252,7 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UILabel *commentTitleLabel = [[UILabel alloc] init];
-    commentTitleLabel.text = [NSString stringWithFormat:@"  评论(%@)",self.dic[@"CommentCount"]];
+    commentTitleLabel.text = [NSString stringWithFormat:@"  评论(%ld)",[self.MerchantCommentListData count]];
     commentTitleLabel.backgroundColor = [UIColor colorFromHex:@"#dfdfdf"];
     commentTitleLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     commentTitleLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];

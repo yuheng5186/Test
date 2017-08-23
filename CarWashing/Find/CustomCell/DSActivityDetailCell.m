@@ -68,7 +68,7 @@
     thumbupvie.titleLabel.textColor=[UIColor colorFromHex:@"#868686"];
     [thumbupvie setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     thumbupvie.titleLabel.font               = [UIFont systemFontOfSize:12];
-    [thumbupvie setTitle:@"99" forState:UIControlStateNormal];
+    [thumbupvie setTitle:@"0" forState:UIControlStateNormal];
     [thumbupvie setImage:[UIImage imageNamed:@"pinglundianzan"] forState:UIControlStateNormal];
     [thumbupvie setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateSelected];
      [thumbupvie setTitleEdgeInsets:UIEdgeInsetsMake(10, -thumbupvie.imageView.image.size.width, 0, thumbupvie.imageView.image.size.width)];
@@ -140,7 +140,19 @@
     _contentLabel.text      = model.Comment;
     _sayTimeLabel.text      = model.CommentDate;
 //    _starImageView.image    = [UIImage imageNamed:model.starName];
-//    _ThumbUpBtn.titleLabel.text=model.thumbNum;
+    [_ThumbUpBtn setTitle:[NSString stringWithFormat:@"%ld",model.Support] forState:UIControlStateNormal];
+    if(model.IsGive == 1)
+    {
+        [_ThumbUpBtn setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
+        _ThumbUpBtn.selected = YES;
+    }
+    else
+    {
+        [_ThumbUpBtn setImage:[UIImage imageNamed:@"pinglundianzan"] forState:UIControlStateNormal];
+        _ThumbUpBtn.selected = NO;
+    }
+    
+    
     CGFloat bottomMargin = 10;
     
     

@@ -15,12 +15,16 @@
 #import "AFNetworkingTool.h"
 #import "HTTPDefine.h"
 #import "UdStorage.h"
+#import "QWMclistTableViewCell.h"
+#import "MBProgressHUD.h"
 
 @interface DSFavoritesController ()<UITableViewDelegate, UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic, weak) UITableView *favoriteListView;
 
 @property (nonatomic, strong) NSMutableArray *MyFavouriteMerchantData;
+
+@property (nonatomic)NSInteger page;
 
 @end
 
@@ -49,10 +53,10 @@ static NSString *id_salerListCell = @"salerListCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.MyFavouriteMerchantData = [[NSMutableArray alloc]init];
-    [self getMyFavouriteMC];
+    
     
     [self setupUI];
-  self.favoriteListView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    self.favoriteListView.separatorStyle=UITableViewCellSeparatorStyleNone;
 }
 
 -(void)getMyFavouriteMC
@@ -70,21 +74,99 @@ static NSString *id_salerListCell = @"salerListCell";
                              };
     
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetFavouriteMerchant",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+            if(arr.count == 0)
+            {
+                //                [self.view showInfo:@"暂无更多数据" autoHidden:YES interval:2];
+                [self.favoriteListView reloadData];
+                [self.favoriteListView.mj_header endRefreshing];
+            }
+            else
+            {
+                [self.MyFavouriteMerchantData addObjectsFromArray:arr];
+                [self.favoriteListView reloadData];
+                [self.favoriteListView.mj_header endRefreshing];
+            }
+            
+            
+        }
+        else
+        {
+            [self.view showInfo:@"数据请求失败" autoHidden:YES interval:2];
+            [self.favoriteListView.mj_header endRefreshing];
+        }
         
         
         
-        NSArray *arr = [NSArray array];
-        arr = [dict objectForKey:@"JsonData"];
-        [self.MyFavouriteMerchantData addObjectsFromArray:arr];
-        [self.favoriteListView reloadData];
         
         
         
     } fail:^(NSError *error) {
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.favoriteListView.mj_header endRefreshing];
     }];
 
 }
+
+-(void)getMyFavouriteMCmore
+{
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"Ym":@31.192255,
+                             @"Xm":@121.52334,
+                             @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
+                             @"PageSize":@10
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetFavouriteMerchant",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+            if(arr.count == 0)
+            {
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.removeFromSuperViewOnHide =YES;
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"无更多数据";
+                hud.minSize = CGSizeMake(132.f, 108.0f);
+                [hud hide:YES afterDelay:3];
+                [self.favoriteListView.mj_footer endRefreshing];
+                self.page--;
+            }
+            else
+            {
+                [self.MyFavouriteMerchantData addObjectsFromArray:arr];
+                [self.favoriteListView reloadData];
+                [self.favoriteListView.mj_footer endRefreshing];
+            }
+            
+        }
+        else
+        {
+            [self.view showInfo:@"数据请求失败" autoHidden:YES interval:2];
+            [self.favoriteListView.mj_footer endRefreshing];
+        }
+        
+       
+        
+        
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.favoriteListView.mj_footer endRefreshing];
+    }];
+    
+}
+
 
 - (void)setupUI {
     
@@ -95,13 +177,76 @@ static NSString *id_salerListCell = @"salerListCell";
     self.favoriteListView.emptyDataSetDelegate = self;
     //可以去除tableView的多余的线，否则会影响美观
     self.favoriteListView.tableFooterView = [UIView new];
-    UINib *nib = [UINib nibWithNibName:@"SalerListViewCell" bundle:nil];
+//    UINib *nib = [UINib nibWithNibName:@"SalerListViewCell" bundle:nil];
     
-    [self.favoriteListView registerNib:nib forCellReuseIdentifier:id_salerListCell];
+//    [self.favoriteListView registerNib:nib forCellReuseIdentifier:id_salerListCell];
     
     self.favoriteListView.rowHeight = 110*Main_Screen_Height/667;
     
+    [self setupRefresh];
+    
 }
+
+-(void)setupRefresh
+{
+    self.favoriteListView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        
+        [self headerRereshing];
+        
+    }];
+    
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    self.favoriteListView.mj_header.automaticallyChangeAlpha = YES;
+    
+    [self.favoriteListView.mj_header beginRefreshing];
+    
+    // 上拉刷新
+    self.favoriteListView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        
+        [self footerRereshing];
+        
+    }];
+}
+
+- (void)headerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_MyFavouriteMerchantData removeAllObjects];
+        //
+        self.page = 0 ;
+        [self getMyFavouriteMC];
+        
+    });
+}
+
+- (void)footerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        if(_MyFavouriteMerchantData.count == 0)
+        {
+            [self getMyFavouriteMC];
+        }
+        else
+        {
+            self.page++;
+            
+            [self getMyFavouriteMCmore];
+            
+        }
+        //
+        //
+        //
+        //
+        //        // 刷新表格
+        //
+        //        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        
+    });
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [self.MyFavouriteMerchantData count];
@@ -109,62 +254,89 @@ static NSString *id_salerListCell = @"salerListCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    SalerListViewCell *favoriCell = [tableView dequeueReusableCellWithIdentifier:id_salerListCell forIndexPath:indexPath];
-//    favoriCell.backgroundColor=[UIColor redColor];
+//    SalerListViewCell *favoriCell = [tableView dequeueReusableCellWithIdentifier:id_salerListCell forIndexPath:indexPath];
+////    favoriCell.backgroundColor=[UIColor redColor];
+//    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,[[self.MyFavouriteMerchantData objectAtIndex:indexPath.row] objectForKey:@"Img"]];
+//        NSURL *url=[NSURL URLWithString:ImageURL];
+//        NSData *data=[NSData dataWithContentsOfURL:url];
+//        UIImage *img=[UIImage imageWithData:data];
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+//            favoriCell.shopImageView.image = img;
+//        });
+//    });
+//    favoriCell.shopNameLabel.text = [[self.MyFavouriteMerchantData objectAtIndex:indexPath.row]objectForKey:@"MerName"];
+//    favoriCell.shopAdressLabel.text = [[self.MyFavouriteMerchantData objectAtIndex:indexPath.row]objectForKey:@"MerAddress"];
+//    //    salerListViewCell.freeTestLabel.text = [[self.MerchantData objectAtIndex:indexPath.row]objectForKey:@"MerName"];
+//    //    salerListViewCell.qualityLabel.text = [[self.MerchantData objectAtIndex:indexPath.row]objectForKey:@"MerName"];
+//    favoriCell.distanceLabel.text = [NSString stringWithFormat:@"%@km",[[self.MyFavouriteMerchantData objectAtIndex:indexPath.row]objectForKey:@"Distance"]];
+//    
+//    if([[[self.MyFavouriteMerchantData objectAtIndex:indexPath.row]objectForKey:@"ShopType"] intValue] == 1)
+//    {
+//        favoriCell.typeShopLabel.text = @"洗车服务";
+//    }
+//    
+//    
+//    
+//    favoriCell.ScoreLabel.text = [NSString stringWithFormat:@"%@分",[[self.MyFavouriteMerchantData objectAtIndex:indexPath.row]objectForKey:@"Score"]];
+//    
+//    [favoriCell.starView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",[[self.MyFavouriteMerchantData objectAtIndex:indexPath.row]objectForKey:@"Score"]] substringToIndex:1]]]];
+//    
+//    NSArray *lab = [[[self.MyFavouriteMerchantData objectAtIndex:indexPath.row]objectForKey:@"MerFlag"] componentsSeparatedByString:@","];
+//    
+//    for (int i = 0; i < [lab count]; i++) {
+//        UILabel *MerflagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(115 + i % 3 * 67,  i / 3 * 25 + 88, 60, 15)];
+//        MerflagsLabel.text = lab[i];
+//        MerflagsLabel.backgroundColor = [UIColor redColor];
+//        [MerflagsLabel setFont:[UIFont fontWithName:@"Helvetica" size:11 ]];
+//        MerflagsLabel.textColor = [UIColor colorFromHex:@"#fefefe"];
+//        MerflagsLabel.backgroundColor = [UIColor colorFromHex:@"#ff7556"];
+//        MerflagsLabel.textAlignment = NSTextAlignmentCenter;
+//        MerflagsLabel.layer.masksToBounds = YES;
+//        MerflagsLabel.layer.cornerRadius = 7.5;
+//        [favoriCell.contentView addSubview:MerflagsLabel];
+//    }
+//    
+//    favoriCell.qualityLabel.hidden = YES;
+//    favoriCell.freeTestLabel.hidden = YES;
+//    
+//    UIView *view2 = [[UIView alloc]initWithFrame:CGRectMake(0, favoriCell.contentView.frame.size.height -0.5,self.contentView.frame.size.width,0.5)];
+//    view2.backgroundColor = [UIColor colorWithRed:230/255.f green:230/255.f blue:230/255.f alpha:1.0f];
+//    [favoriCell.contentView addSubview:view2];
+//    
+//    favoriCell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    [_favoriteListView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+//    
+//
+//    return favoriCell;
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,[[self.MyFavouriteMerchantData objectAtIndex:indexPath.row] objectForKey:@"Img"]];
-        NSURL *url=[NSURL URLWithString:ImageURL];
-        NSData *data=[NSData dataWithContentsOfURL:url];
-        UIImage *img=[UIImage imageWithData:data];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            favoriCell.shopImageView.image = img;
-        });
-    });
-    favoriCell.shopNameLabel.text = [[self.MyFavouriteMerchantData objectAtIndex:indexPath.row]objectForKey:@"MerName"];
-    favoriCell.shopAdressLabel.text = [[self.MyFavouriteMerchantData objectAtIndex:indexPath.row]objectForKey:@"MerAddress"];
-    //    salerListViewCell.freeTestLabel.text = [[self.MerchantData objectAtIndex:indexPath.row]objectForKey:@"MerName"];
-    //    salerListViewCell.qualityLabel.text = [[self.MerchantData objectAtIndex:indexPath.row]objectForKey:@"MerName"];
-    favoriCell.distanceLabel.text = [NSString stringWithFormat:@"%@km",[[self.MyFavouriteMerchantData objectAtIndex:indexPath.row]objectForKey:@"Distance"]];
+    static NSString *CellIdentifier=@"Cell";
+    [tableView registerClass:[QWMclistTableViewCell class] forCellReuseIdentifier:CellIdentifier];
+    QWMclistTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    if([[[self.MyFavouriteMerchantData objectAtIndex:indexPath.row]objectForKey:@"ShopType"] intValue] == 1)
+    if (cell == nil)
     {
-        favoriCell.typeShopLabel.text = @"洗车服务";
+        cell = [[QWMclistTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
-    
-    
-    favoriCell.ScoreLabel.text = [NSString stringWithFormat:@"%@分",[[self.MyFavouriteMerchantData objectAtIndex:indexPath.row]objectForKey:@"Score"]];
-    
-    [favoriCell.starView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",[[self.MyFavouriteMerchantData objectAtIndex:indexPath.row]objectForKey:@"Score"]] substringToIndex:1]]]];
-    
-    NSArray *lab = [[[self.MyFavouriteMerchantData objectAtIndex:indexPath.row]objectForKey:@"MerFlag"] componentsSeparatedByString:@","];
-    
-    for (int i = 0; i < [lab count]; i++) {
-        UILabel *MerflagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(115 + i % 3 * 67,  i / 3 * 25 + 88, 60, 15)];
-        MerflagsLabel.text = lab[i];
-        MerflagsLabel.backgroundColor = [UIColor redColor];
-        [MerflagsLabel setFont:[UIFont fontWithName:@"Helvetica" size:11 ]];
-        MerflagsLabel.textColor = [UIColor colorFromHex:@"#fefefe"];
-        MerflagsLabel.backgroundColor = [UIColor colorFromHex:@"#ff7556"];
-        MerflagsLabel.textAlignment = NSTextAlignmentCenter;
-        MerflagsLabel.layer.masksToBounds = YES;
-        MerflagsLabel.layer.cornerRadius = 7.5;
-        [favoriCell.contentView addSubview:MerflagsLabel];
+    else
+    {
+        //删除cell的所有子视图
+        while ([cell.contentView.subviews lastObject] != nil)
+        {
+            [(UIView*)[cell.contentView.subviews lastObject] removeFromSuperview];
+        }
     }
+    [cell setlayoutCell];
     
-    favoriCell.qualityLabel.hidden = YES;
-    favoriCell.freeTestLabel.hidden = YES;
     
-    UIView *view2 = [[UIView alloc]initWithFrame:CGRectMake(0, favoriCell.contentView.frame.size.height -0.5,self.contentView.frame.size.width,0.5)];
-    view2.backgroundColor = [UIColor colorWithRed:230/255.f green:230/255.f blue:230/255.f alpha:1.0f];
-    [favoriCell.contentView addSubview:view2];
+    NSDictionary *dic=[self.MyFavouriteMerchantData objectAtIndex:indexPath.row];
+    [cell setUpCellWithDic:dic];
+    [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+    [cell setBackgroundColor:[UIColor clearColor]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
     
-    favoriCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [_favoriteListView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
-    
-
-    return favoriCell;
 }
 
 

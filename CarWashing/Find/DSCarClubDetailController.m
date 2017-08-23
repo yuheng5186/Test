@@ -157,6 +157,15 @@
     
     UIImageView *userImageView  = [UIImageView new];
     userImageView.image         = [UIImage imageNamed:@"icon0.jpg"];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,newsDetail.FromusrImg];
+        NSURL *url=[NSURL URLWithString:ImageURL];
+        NSData *data=[NSData dataWithContentsOfURL:url];
+        UIImage *img=[UIImage imageWithData:data];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [userImageView setImage:img];
+        });
+    });
     self.userImageView          = userImageView;
     [header addSubview:userImageView];
     
@@ -726,9 +735,25 @@
                 [model setValuesForKeysWithDictionary:dic];
                 [_moreArray addObject:model];
             }
-            [_modelsArray addObjectsFromArray:_moreArray];
-            [_tableView reloadData];
-            [self.tableView.mj_footer endRefreshing];
+            if(_moreArray.count == 0)
+            {
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.removeFromSuperViewOnHide =YES;
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"无更多数据";
+                hud.minSize = CGSizeMake(132.f, 108.0f);
+                [hud hide:YES afterDelay:3];
+                [self.tableView.mj_footer endRefreshing];
+                self.page--;
+            }
+            else
+            {
+                [_modelsArray addObjectsFromArray:_moreArray];
+                [_tableView reloadData];
+                [self.tableView.mj_footer endRefreshing];
+            }
+            
+            
             
         }
         else
@@ -744,7 +769,7 @@
             
             
 //            [self.view showInfo:@"获取数据失败" autoHidden:YES interval:2];
-            [self.tableView.mj_footer endRefreshing];
+            
         }
         
     } fail:^(NSError *error) {
@@ -1034,13 +1059,14 @@
     if (!cell) {
         cell = [[DSActivityDetailCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellStatic];
     }
+    DSUserModel *model=(DSUserModel *)self.modelsArray[indexPath.row];
     cell.thumbOnclick=^(UIButton *btn){
         if (btn.selected) {
-            
+            [self addCommentariesSupportTypeid:[NSString stringWithFormat:@"%ld",model.CommentCode] andSupType:@"2"];
              [self.view showInfo:@"取消点赞!" autoHidden:YES];
         }else{
              [self.view showInfo:@"点赞成功!" autoHidden:YES];
-            
+            [self addCommentariesSupportTypeid:[NSString stringWithFormat:@"%ld",model.CommentCode] andSupType:@"2"];
         }
         btn.selected=!btn.selected;
     
@@ -1056,6 +1082,51 @@
     
     
     return cell;
+}
+
+#pragma mark-评论支持
+-(void)addCommentariesSupportTypeid:(NSString *)SupTypeCodestr andSupType:(NSString *)SupTypestr{
+    NSLog(@"添加评论借口参数：%ld==%@",(long)self.ActivityCode,self.userSayTextField.text);
+    //1#文章;2#评论
+    //    "Account_Id": "404832711505",
+    //    "SupTypeCode": "100001",
+    //    "SupType": "2"
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"SupTypeCode":SupTypeCodestr,
+                             @"SupType":SupTypestr
+                             };
+    NSLog(@"添加评论借口参数：%@",mulDic);
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivitySupporInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"%@",dict);
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+//            [self.view showInfo:[dict objectForKey:@"ResultMessage"] autoHidden:YES interval:2];
+            //            self.dic = [dict objectForKey:@"JsonData"];
+            //        [self.MerchantDetailData addObjectsFromArray:arr];
+            
+            [self headerRereshing];
+        }
+        else
+        {
+            [self.view showInfo:@"评论支持添加失败" autoHidden:YES interval:2];
+            //            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+        
+        
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+    }];
+    
+    
 }
 
 #pragma mark-添加评论借口

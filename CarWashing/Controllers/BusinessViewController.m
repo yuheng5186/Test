@@ -14,10 +14,13 @@
 #import "YZAllCourseViewController.h"
 #import "JPCityViewController.h"
 #import "BusinessDetailViewController.h"
+#import "QWMclistTableViewCell.h"
 
 #import "LCMD5Tool.h"
 #import "AFNetworkingTool.h"
 #import "HTTPDefine.h"
+#import "MBProgressHUD.h"
+
 
 
 @interface BusinessViewController ()<UITableViewDelegate, UITableViewDataSource,YZPullDownMenuDataSource>
@@ -33,6 +36,10 @@
 
 @property (nonatomic, strong) NSMutableArray *MerchantData;
 
+@property (nonatomic,strong) NSMutableArray *otherArray;
+
+@property (nonatomic)NSInteger page;
+
 
 @end
 
@@ -43,7 +50,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 - (UITableView *)salerListView {
     if (nil == _salerListView) {
-        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height*108/667, Main_Screen_Width, Main_Screen_Height) style:UITableViewStylePlain];
+        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height*108/667, Main_Screen_Width, Main_Screen_Height-Main_Screen_Height*108/667-49) style:UITableViewStylePlain];
         _salerListView = salerListView;
         [self.view addSubview:salerListView];
         
@@ -76,8 +83,8 @@ static NSString *id_salerListCell = @"salerListViewCell";
     NSDictionary *dic = @{@"0":array1,@"1":@"普洗-5座轿车",@"2":@"默认排序"};
     self.pramsDic  = [NSMutableDictionary dictionaryWithDictionary:dic];
     self.MerchantData = [[NSMutableArray alloc]init];
-    [self setData];
-    
+     self.page = 0;
+    self.otherArray = [[NSMutableArray alloc]init];
     
     
     
@@ -107,11 +114,10 @@ static NSString *id_salerListCell = @"salerListViewCell";
         }
         
         
+        [self.salerListView.mj_header beginRefreshing];
+//        [self headerRereshing];
         
         
-        
-        
-        [self setData];
         
     }];
 
@@ -148,9 +154,68 @@ static NSString *id_salerListCell = @"salerListViewCell";
     [self.salerListView registerNib:nib forCellReuseIdentifier:id_salerListCell];
     
     
-    self.salerListView.contentInset = UIEdgeInsetsMake(0, 0, 180*Main_Screen_Height/667, 0);
-   
+    [self setupRefresh];
+
+}
+
+-(void)setupRefresh
+{
+    self.salerListView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        
+        [self headerRereshing];
+        
+    }];
     
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    self.salerListView.mj_header.automaticallyChangeAlpha = YES;
+    
+    [self.salerListView.mj_header beginRefreshing];
+    
+    // 上拉刷新
+    self.salerListView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        
+        [self footerRereshing];
+        
+    }];
+}
+
+- (void)headerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_MerchantData removeAllObjects];
+//
+        self.page = 0 ;
+        [self setData];
+        
+    });
+}
+
+- (void)footerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        if(_MerchantData.count == 0)
+        {
+            [self setData];
+        }
+        else
+        {
+            self.page++;
+            _otherArray = [NSMutableArray new];
+            [self setDatamore];
+            
+        }
+//
+//        
+//        
+//        
+//        // 刷新表格
+//        
+//        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        
+    });
 }
 
 
@@ -171,78 +236,50 @@ static NSString *id_salerListCell = @"salerListViewCell";
     {
         if([lab count] <= 3)
         {
-            return 110;
+            return 110*Main_Screen_Height/667;
         }
         else if(([lab count] > 3) && ([lab count] <= 6))
         {
-            return 125;
+            return 125*Main_Screen_Height/667;
         }
         else
         {
-            return 140;
+            return 140*Main_Screen_Height/667;
         }
         
     }
     else
-        return 110;
+        return 110*Main_Screen_Height/667;
 
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier=@"Cell";
+    [tableView registerClass:[QWMclistTableViewCell class] forCellReuseIdentifier:CellIdentifier];
+    QWMclistTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    SalerListViewCell *salerListViewCell = [tableView dequeueReusableCellWithIdentifier:id_salerListCell forIndexPath:indexPath];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,[[self.MerchantData objectAtIndex:indexPath.row] objectForKey:@"Img"]];
-        NSURL *url=[NSURL URLWithString:ImageURL];
-        NSData *data=[NSData dataWithContentsOfURL:url];
-        UIImage *img=[UIImage imageWithData:data];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            salerListViewCell.shopImageView.image = img;
-        });
-    });
-    salerListViewCell.shopNameLabel.text = [[self.MerchantData objectAtIndex:indexPath.row]objectForKey:@"MerName"];
-    salerListViewCell.shopAdressLabel.text = [[self.MerchantData objectAtIndex:indexPath.row]objectForKey:@"MerAddress"];
-//    salerListViewCell.freeTestLabel.text = [[self.MerchantData objectAtIndex:indexPath.row]objectForKey:@"MerName"];
-//    salerListViewCell.qualityLabel.text = [[self.MerchantData objectAtIndex:indexPath.row]objectForKey:@"MerName"];
-    salerListViewCell.distanceLabel.text = [NSString stringWithFormat:@"%@km",[[self.MerchantData objectAtIndex:indexPath.row]objectForKey:@"Distance"]];
-    
-    if([[[self.MerchantData objectAtIndex:indexPath.row]objectForKey:@"ShopType"] intValue] == 1)
+    if (cell == nil)
     {
-        salerListViewCell.typeShopLabel.text = @"洗车服务";
+        cell = [[QWMclistTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
-    
-    
-    salerListViewCell.ScoreLabel.text = [NSString stringWithFormat:@"%@分",[[self.MerchantData objectAtIndex:indexPath.row]objectForKey:@"Score"]];
-    
-    [salerListViewCell.starView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",[[self.MerchantData objectAtIndex:indexPath.row]objectForKey:@"Score"]] substringToIndex:1]]]];
-    
-    NSArray *lab = [[[self.MerchantData objectAtIndex:indexPath.row]objectForKey:@"MerFlag"] componentsSeparatedByString:@","];
-    
-    for (int i = 0; i < [lab count]; i++) {
-        UILabel *MerflagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(115 + i % 3 * 67,  i / 3 * 25 + 88, 60, 15)];
-        MerflagsLabel.text = lab[i];
-        MerflagsLabel.backgroundColor = [UIColor redColor];
-        [MerflagsLabel setFont:[UIFont fontWithName:@"Helvetica" size:11 ]];
-        MerflagsLabel.textColor = [UIColor colorFromHex:@"#fefefe"];
-        MerflagsLabel.backgroundColor = [UIColor colorFromHex:@"#ff7556"];
-        MerflagsLabel.textAlignment = NSTextAlignmentCenter;
-        MerflagsLabel.layer.masksToBounds = YES;
-        MerflagsLabel.layer.cornerRadius = 7.5;
-        [salerListViewCell.contentView addSubview:MerflagsLabel];
+    else
+    {
+        //删除cell的所有子视图
+        while ([cell.contentView.subviews lastObject] != nil)
+        {
+            [(UIView*)[cell.contentView.subviews lastObject] removeFromSuperview];
+        }
     }
+    [cell setlayoutCell];
     
-    salerListViewCell.qualityLabel.hidden = YES;
-    salerListViewCell.freeTestLabel.hidden = YES;
     
-    UIView *view2 = [[UIView alloc]initWithFrame:CGRectMake(0, salerListViewCell.contentView.frame.size.height -0.5,self.contentView.frame.size.width,0.5)];
-    view2.backgroundColor = [UIColor colorWithRed:230/255.f green:230/255.f blue:230/255.f alpha:1.0f];
-    [salerListViewCell.contentView addSubview:view2];
+    NSDictionary *dic=[self.MerchantData objectAtIndex:indexPath.row];
+    [cell setUpCellWithDic:dic];
+    [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+    [cell setBackgroundColor:[UIColor clearColor]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
     
-    salerListViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [_salerListView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
-    return salerListViewCell;
 }
 
 
@@ -383,20 +420,114 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetStoreList",Khttp] success:^(NSDictionary *dict, BOOL success) {
         
-        
-        
-        NSArray *arr = [NSArray array];
-        arr = [dict objectForKey:@"JsonData"];
-        [self.MerchantData addObjectsFromArray:arr];
-        [_salerListView reloadData];
-        
-        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+            if(arr.count == 0)
+            {
+//                [self.view showInfo:@"暂无更多数据" autoHidden:YES interval:2];
+                [self.salerListView reloadData];
+                [self.salerListView.mj_header endRefreshing];
+            }
+            else
+            {
+                [self.MerchantData addObjectsFromArray:arr];
+                [self.salerListView reloadData];
+                [self.salerListView.mj_header endRefreshing];
+            }
+            
+        }
+        else
+        {
+            [self.view showInfo:@"数据请求失败" autoHidden:YES interval:2];
+            [self.salerListView.mj_header endRefreshing];
+        }
         
     } fail:^(NSError *error) {
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.salerListView.mj_header endRefreshing];
     }];
 
 }
+
+-(void)setDatamore
+{
+    
+    NSString *DefaultSort;
+    
+    if([[self.pramsDic objectForKey:@"2"] isEqualToString:@"默认排序"])
+    {
+        DefaultSort = @"1";
+    }
+    else if([[self.pramsDic objectForKey:@"2"] isEqualToString:@"附近优先"])
+    {
+        DefaultSort = @"2";
+    }
+    else if([[self.pramsDic objectForKey:@"2"] isEqualToString:@"评分最高"])
+    {
+        DefaultSort = @"3";
+    }
+    else
+    {
+        DefaultSort = @"4";
+    }
+    
+    
+    NSDictionary *mulDic = @{
+                             @"City":[[self.pramsDic objectForKey:@"0"] objectAtIndex:0],
+                             @"Area":[[self.pramsDic objectForKey:@"0"] objectAtIndex:1],
+                             @"ShopType":@1,
+                             @"ServiceCode":@101,
+                             @"DefaultSort":DefaultSort,
+                             @"Ym":@31.192255,
+                             @"Xm":@121.52334,
+                             @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
+                             @"PageSize":@10
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetStoreList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+            if(arr.count == 0)
+            {
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.removeFromSuperViewOnHide =YES;
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"无更多数据";
+                hud.minSize = CGSizeMake(132.f, 108.0f);
+                [hud hide:YES afterDelay:3];
+                [self.salerListView.mj_footer endRefreshing];
+                self.page--;
+            }
+            else
+            {
+                [self.MerchantData addObjectsFromArray:arr];
+                [self.salerListView reloadData];
+                [self.salerListView.mj_footer endRefreshing];
+            }
+            
+        }
+        else
+        {
+            [self.view showInfo:@"数据请求失败" autoHidden:YES interval:2];
+            [self.salerListView.mj_footer endRefreshing];
+        }
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.salerListView.mj_header endRefreshing];
+    }];
+    
+}
+
 
 //-(void)noticeupdatexuanze:(NSNotification *)sender{
 //    NSInteger col = [self.childViewControllers indexOfObject:sender.object];
