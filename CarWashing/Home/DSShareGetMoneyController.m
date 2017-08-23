@@ -14,6 +14,8 @@
 #import "UIView+TYAlertView.h"
 #import "TYAlertController+BlurEffects.h"
 
+#import "ShareWeChatController.h"
+
 @interface DSShareGetMoneyController ()
 {
     
@@ -98,14 +100,21 @@
 
 - (void) getMoneyButtonClick:(id)sender {
     
-    ShareView *shareView = [ShareView createViewFromNib];
-    TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:shareView preferredStyle:TYAlertControllerStyleAlert];
+    ShareWeChatController *shareVC = [[ShareWeChatController alloc] init];
     
-    [alertController setBlurEffectWithView:self.view];
-    alertController.alertView.width     = Main_Screen_Width;
-    alertController.alertView.height    = Main_Screen_Height*230/667;
+    shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:shareVC animated:NO completion:nil];
+    
+    
+    
+//    ShareView *shareView = [ShareView createViewFromNib];
+//    TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:shareView preferredStyle:TYAlertControllerStyleAlert];
+//    
+//    [alertController setBlurEffectWithView:self.view];
+//    alertController.alertView.width     = Main_Screen_Width;
+//    alertController.alertView.height    = Main_Screen_Height*230/667;
 //    if (Main_Screen_Height == 568) {
-        alertController.alertViewOriginY    = self.contentView.height- alertController.alertView.height;
+        //alertController.alertViewOriginY    = self.contentView.height- alertController.alertView.height;
 //
 //    }else if(Main_Screen_Height == 667){
 //        alertController.alertViewOriginY    = self.contentView.height- Main_Screen_Height*180/667;
@@ -118,7 +127,7 @@
 //        
 //    }
     //[alertController setBlurEffectWithView:(UIView *)view style:(BlurEffectStyle)blurStyle];
-    [self presentViewController:alertController animated:YES completion:nil];
+    //[self presentViewController:alertController animated:YES completion:nil];
 
 //        UIActivityViewController *activityView = [[UIActivityViewController alloc] initWithActivityItems:@[@"这里是标题", [UIImage imageNamed:@"zensong"], [NSURL URLWithString:@"http://www.google.com"]] applicationActivities:activity];
 //        activityView.excludedActivityTypes = @[UIActivityTypeAirDrop];

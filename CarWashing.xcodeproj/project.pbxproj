@@ -119,6 +119,10 @@
 		18A4B1B11F4AAB5200C64978 /* HowToUpGradeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B1B01F4AAB5200C64978 /* HowToUpGradeController.m */; };
 		18A4B1B41F4AAB7800C64978 /* WayToUpGradeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B1B31F4AAB7800C64978 /* WayToUpGradeCell.m */; };
 		18A4B1B71F4BF9C800C64978 /* MemberRightsDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B1B61F4BF9C800C64978 /* MemberRightsDetailController.m */; };
+		18A4B2291F4D6CAB00C64978 /* UIView+AutoSizeToDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B2271F4D6CAB00C64978 /* UIView+AutoSizeToDevice.m */; };
+		18A4B22A1F4D6CAB00C64978 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B2281F4D6CAB00C64978 /* README.md */; };
+		18A4B22D1F4D7D6E00C64978 /* ShareWeChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B22C1F4D7D6E00C64978 /* ShareWeChatController.m */; };
+		18A4B2301F4D832300C64978 /* ShareWechatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B22F1F4D832300C64978 /* ShareWechatView.m */; };
 		18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A11F21A44F009FF73A /* DSMessageDetailController.m */; };
 		18B697A51F21A87F009FF73A /* DSScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A41F21A87F009FF73A /* DSScanController.m */; };
 		18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A71F21D420009FF73A /* DSCardGroupController.m */; };
@@ -476,6 +480,13 @@
 		18A4B1B31F4AAB7800C64978 /* WayToUpGradeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayToUpGradeCell.m; sourceTree = "<group>"; };
 		18A4B1B51F4BF9C800C64978 /* MemberRightsDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberRightsDetailController.h; sourceTree = "<group>"; };
 		18A4B1B61F4BF9C800C64978 /* MemberRightsDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberRightsDetailController.m; sourceTree = "<group>"; };
+		18A4B2261F4D6CAB00C64978 /* UIView+AutoSizeToDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoSizeToDevice.h"; sourceTree = "<group>"; };
+		18A4B2271F4D6CAB00C64978 /* UIView+AutoSizeToDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoSizeToDevice.m"; sourceTree = "<group>"; };
+		18A4B2281F4D6CAB00C64978 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		18A4B22B1F4D7D6E00C64978 /* ShareWeChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareWeChatController.h; sourceTree = "<group>"; };
+		18A4B22C1F4D7D6E00C64978 /* ShareWeChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareWeChatController.m; sourceTree = "<group>"; };
+		18A4B22E1F4D832300C64978 /* ShareWechatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareWechatView.h; sourceTree = "<group>"; };
+		18A4B22F1F4D832300C64978 /* ShareWechatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareWechatView.m; sourceTree = "<group>"; };
 		18B697A01F21A44F009FF73A /* DSMessageDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMessageDetailController.h; path = Home/DSMessageDetailController.h; sourceTree = "<group>"; };
 		18B697A11F21A44F009FF73A /* DSMessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMessageDetailController.m; path = Home/DSMessageDetailController.m; sourceTree = "<group>"; };
 		18B697A31F21A87F009FF73A /* DSScanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSScanController.h; path = Home/DSScanController.h; sourceTree = "<group>"; };
@@ -806,6 +817,7 @@
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				18A4B2241F4D6CAB00C64978 /* AutoSizeToDevice-master */,
 				1850904D1F4558AC00795E0A /* Blur Effects */,
 				1850902F1F4557E100795E0A /* TYAlertController */,
 				185090291F45573F00795E0A /* ShareView */,
@@ -1023,6 +1035,10 @@
 				180E43061F3C5C2D00013D2D /* DSDownloadController.m */,
 				180E43081F3C741100013D2D /* DSShareGetMoneyController.h */,
 				180E43091F3C741100013D2D /* DSShareGetMoneyController.m */,
+				18A4B22B1F4D7D6E00C64978 /* ShareWeChatController.h */,
+				18A4B22C1F4D7D6E00C64978 /* ShareWeChatController.m */,
+				18A4B22E1F4D832300C64978 /* ShareWechatView.h */,
+				18A4B22F1F4D832300C64978 /* ShareWechatView.m */,
 				180E432A1F417E3500013D2D /* DSAddShopController.h */,
 				180E432B1F417E3500013D2D /* DSAddShopController.m */,
 			);
@@ -1192,6 +1208,24 @@
 			);
 			name = CustomSlider;
 			path = Tool/CustomSlider;
+			sourceTree = "<group>";
+		};
+		18A4B2241F4D6CAB00C64978 /* AutoSizeToDevice-master */ = {
+			isa = PBXGroup;
+			children = (
+				18A4B2251F4D6CAB00C64978 /* AutoSizeToDevice */,
+				18A4B2281F4D6CAB00C64978 /* README.md */,
+			);
+			path = "AutoSizeToDevice-master";
+			sourceTree = "<group>";
+		};
+		18A4B2251F4D6CAB00C64978 /* AutoSizeToDevice */ = {
+			isa = PBXGroup;
+			children = (
+				18A4B2261F4D6CAB00C64978 /* UIView+AutoSizeToDevice.h */,
+				18A4B2271F4D6CAB00C64978 /* UIView+AutoSizeToDevice.m */,
+			);
+			path = AutoSizeToDevice;
 			sourceTree = "<group>";
 		};
 		18B697A91F21DA60009FF73A /* Find */ = {
@@ -1926,6 +1960,7 @@
 				5094A6341F346E5800407808 /* DelayPayCell.m in Sources */,
 				18B803771F1DA2A300B52432 /* main.m in Sources */,
 				18B69E9C1F32CA71007DA0E4 /* ScanController.m in Sources */,
+				18A4B2291F4D6CAB00C64978 /* UIView+AutoSizeToDevice.m in Sources */,
 				5016724F1F2A023600384186 /* ScoreGetController.m in Sources */,
 				180E42DB1F39B97A00013D2D /* DSCarWashingActivityController.m in Sources */,
 				185090221F441AF500795E0A /* AFNetworkingTool+GetToken.m in Sources */,
@@ -2014,18 +2049,21 @@
 				180E42D81F39B8C200013D2D /* DSUserRightDetailController.m in Sources */,
 				185090531F4558AC00795E0A /* UIImage+ImageEffects.m in Sources */,
 				181E92D81F1F3BAE0006511E /* FindViewController.m in Sources */,
+				18A4B22A1F4D6CAB00C64978 /* README.md in Sources */,
 				180E42E71F3AB37D00013D2D /* UIWindow+YzdHUD.m in Sources */,
 				185090441F4557E100795E0A /* TYAlertController.m in Sources */,
 				180E43241F3D836F00013D2D /* WeixinTimelineActivity.m in Sources */,
 				501672461F29DA6C00384186 /* MemberRegualrController.m in Sources */,
 				185090271F441BFA00795E0A /* UdStorage.m in Sources */,
 				1850901C1F43F19B00795E0A /* LCMD5Tool.m in Sources */,
+				18A4B2301F4D832300C64978 /* ShareWechatView.m in Sources */,
 				180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */,
 				5071B4811F381366009FFF67 /* OrderCommentController.m in Sources */,
 				181E93291F20B0510006511E /* SXScrPageView.m in Sources */,
 				5016724C1F2A020600384186 /* ScoreIntroController.m in Sources */,
 				18B69EA21F32CB48007DA0E4 /* UIColor+Zirkfied.m in Sources */,
 				185090521F4558AC00795E0A /* TYAlertController+BlurEffects.m in Sources */,
+				18A4B22D1F4D7D6E00C64978 /* ShareWeChatController.m in Sources */,
 				181E92E91F207FF60006511E /* DSSettingController.m in Sources */,
 				1850902D1F45573F00795E0A /* ShareView.m in Sources */,
 				181E92F81F2086620006511E /* DSExchangeController.m in Sources */,

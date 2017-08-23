@@ -8,12 +8,14 @@
 
 #import "DelayPayCell.h"
 #import "BusinessPayController.h"
+#import "UIView+AutoSizeToDevice.h"
 
 @implementation DelayPayCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+    self.dg_viewAutoSizeToDevice = YES;
     
     self.orderLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     
