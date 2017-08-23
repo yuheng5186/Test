@@ -127,7 +127,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id_rightsCell];
     
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:id_rightsCell];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.imageView.image = [UIImage imageNamed:@"shengjihoukaquan"];
     
 
@@ -148,13 +148,15 @@ static NSString *id_rightsCell = @"id_rightsCell";
         string = @"15元洗车券";
         detailString    = @"门店吸尘是可抵扣相应金额,每月领取一次";
     }
-    UILabel *titleLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 240*Main_Screen_Height/667, 20*Main_Screen_Height/667) font:[UIFont systemFontOfSize:16] text:string isCenter:NO];
-    titleLabel.top       = 10*Main_Screen_Height/667;
+    UILabel *titleLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 20*Main_Screen_Height/667) font:[UIFont systemFontOfSize:14] text:string isCenter:NO];
+    titleLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
+
+    titleLabel.top       = 16*Main_Screen_Height/667;
     titleLabel.left      = 60*Main_Screen_Height/667;
     
-    UILabel *detailLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 240*Main_Screen_Height/667, 20*Main_Screen_Height/667) font:[UIFont systemFontOfSize:12] text:detailString isCenter:NO];
+    UILabel *detailLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 20*Main_Screen_Height/667) font:[UIFont systemFontOfSize:12] text:detailString isCenter:NO];
     detailLabel.textColor = [UIColor colorFromHex:@"#999999"];
-    detailLabel.top       = titleLabel.bottom +5*Main_Screen_Height/667;
+    detailLabel.top       = titleLabel.bottom +10*Main_Screen_Height/667;
     detailLabel.left      = 60*Main_Screen_Height/667;
     return cell;
 }
