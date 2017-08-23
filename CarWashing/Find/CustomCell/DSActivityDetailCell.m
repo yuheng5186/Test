@@ -140,6 +140,7 @@
     _contentLabel.text      = model.Comment;
     _sayTimeLabel.text      = model.CommentDate;
 //    _starImageView.image    = [UIImage imageNamed:model.starName];
+
     [_ThumbUpBtn setTitle:[NSString stringWithFormat:@"%ld",model.Support] forState:UIControlStateNormal];
     if(model.IsGive == 1)
     {
@@ -153,6 +154,7 @@
     }
     
     
+
     CGFloat bottomMargin = 10;
     
     

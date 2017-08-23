@@ -7,12 +7,14 @@
 //
 
 #import "CancelPayCell.h"
+#import "UIView+AutoSizeToDevice.h"
 
 @implementation CancelPayCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+    self.dg_viewAutoSizeToDevice = YES;
     
     self.orderLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     

@@ -127,13 +127,13 @@
     }
     cell.backgroundColor    = [UIColor whiteColor];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.textColor    = [UIColor colorFromHex:@"#4a4a4a"];
-    cell.textLabel.font         = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
-    cell.detailTextLabel.font   = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    cell.textLabel.textColor    = [UIColor blackColor];
+    cell.textLabel.font         = [UIFont systemFontOfSize:15];
+    cell.detailTextLabel.font   = [UIFont systemFontOfSize:14];
     
     if (indexPath.section == 0) {
         cell.textLabel.text     = @"头像";
-        self.userImageView  = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, cell.contentView.centerY-Main_Screen_Height*11/667, Main_Screen_Width*60/375, Main_Screen_Height*60/667) imageName:@"gerenxinxitou"];
+        self.userImageView  = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0,Main_Screen_Height*10/667, Main_Screen_Width*60/375, Main_Screen_Height*60/667) imageName:@"gerenxinxitou"];
         
         NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
         NSURL *url=[NSURL URLWithString:ImageURL];

@@ -10,9 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareWeChatController"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ShareView">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ShareWechatView">
             <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -27,27 +27,29 @@
                         <color key="titleShadowColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
-                        <action selector="weixinShare" destination="iN0-l3-epB" eventType="touchUpInside" id="GaE-PC-2Kd"/>
+                        <action selector="shareWechatFriendsBtn:" destination="-1" eventType="touchUpInside" id="JWn-xW-RUf"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gXT-hU-UGW">
                     <rect key="frame" x="0.0" y="172.5" width="375" height="57.5"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3bC-ZI-otZ">
-                            <rect key="frame" x="172" y="14" width="31" height="30"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="57.5"/>
                             <state key="normal" title="取消">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
-                                <action selector="cancleAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="RUH-5a-GpM"/>
+                                <action selector="cancelButton:" destination="-1" eventType="touchUpInside" id="Wbc-Bl-YTL"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.88917374399107729" green="0.88917374399107729" blue="0.88917374399107729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="3bC-ZI-otZ" firstAttribute="centerY" secondItem="gXT-hU-UGW" secondAttribute="centerY" id="4RQ-UT-Iyn"/>
-                        <constraint firstItem="3bC-ZI-otZ" firstAttribute="centerX" secondItem="gXT-hU-UGW" secondAttribute="centerX" id="7Ez-ei-NgX"/>
+                        <constraint firstItem="3bC-ZI-otZ" firstAttribute="top" secondItem="gXT-hU-UGW" secondAttribute="top" id="LPX-M5-aPB"/>
+                        <constraint firstAttribute="trailing" secondItem="3bC-ZI-otZ" secondAttribute="trailing" id="S0o-9c-0tK"/>
+                        <constraint firstAttribute="bottom" secondItem="3bC-ZI-otZ" secondAttribute="bottom" id="Txy-Ex-UhT"/>
                         <constraint firstAttribute="width" secondItem="gXT-hU-UGW" secondAttribute="height" multiplier="72:11" id="nfY-PN-LmF"/>
+                        <constraint firstItem="3bC-ZI-otZ" firstAttribute="leading" secondItem="gXT-hU-UGW" secondAttribute="leading" id="oaI-nW-RRp"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信好友" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4q-xY-x1s">
@@ -73,7 +75,7 @@
                         <color key="titleShadowColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
-                        <action selector="pyqShare" destination="iN0-l3-epB" eventType="touchUpInside" id="w7d-YU-MWL"/>
+                        <action selector="shareWechatPYQBtn:" destination="-1" eventType="touchUpInside" id="7Ew-H5-uy0"/>
                     </connections>
                 </button>
             </subviews>
@@ -93,11 +95,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="pyqBtn" destination="99Q-2n-nhD" id="L7f-S7-ws0"/>
-                <outlet property="weixinBtn" destination="Kq9-16-RJg" id="7Tk-3y-2ky"/>
-            </connections>
-            <point key="canvasLocation" x="19" y="-8"/>
+            <point key="canvasLocation" x="-37" y="-12"/>
         </view>
     </objects>
     <resources>
