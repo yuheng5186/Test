@@ -57,7 +57,7 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.adverView.image = [UIImage imageNamed:@"mendiantese"];
+    self.adverView.image = [UIImage imageNamed:@"guanggao11"];
     
     self.earnWayView.delegate = self;
     self.earnWayView.dataSource = self;
