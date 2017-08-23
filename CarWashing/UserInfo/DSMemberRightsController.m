@@ -129,26 +129,38 @@ static NSString *id_rightsCell = @"id_rightsCell";
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:id_rightsCell];
     
     cell.imageView.image = [UIImage imageNamed:@"shengjihoukaquan"];
+    
+
+    
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     cell.textLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
     
     
-    cell.detailTextLabel.text = @"门店吸尘是可抵扣相应金额,每月领取一次";
     cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
     cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#999999"];
     
-    
+    NSString    *string;
+    NSString    *detailString;
     if (indexPath.section == 0) {
-        cell.textLabel.text = @"10元洗车券";
+        string = @"10元洗车券";
+        detailString    = @"自动扫码洗车可使用，达到该等级当月可领取";
     }else {
-        cell.textLabel.text = @"15元洗车券";
+        string = @"15元洗车券";
+        detailString    = @"门店吸尘是可抵扣相应金额,每月领取一次";
     }
+    UILabel *titleLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 240*Main_Screen_Height/667, 20*Main_Screen_Height/667) font:[UIFont systemFontOfSize:16] text:string isCenter:NO];
+    titleLabel.top       = 10*Main_Screen_Height/667;
+    titleLabel.left      = 60*Main_Screen_Height/667;
     
+    UILabel *detailLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 240*Main_Screen_Height/667, 20*Main_Screen_Height/667) font:[UIFont systemFontOfSize:12] text:detailString isCenter:NO];
+    detailLabel.textColor = [UIColor colorFromHex:@"#999999"];
+    detailLabel.top       = titleLabel.bottom +5*Main_Screen_Height/667;
+    detailLabel.left      = 60*Main_Screen_Height/667;
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
+    return 70;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
@@ -156,16 +168,16 @@ static NSString *id_rightsCell = @"id_rightsCell";
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
-    return 40;
+    return 50;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *hederview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 40)];
+    UIView *hederview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
     hederview.backgroundColor=[UIColor colorFromHex:@"0xf0f0f0"];
-    UIView *hederviews=[[UIView alloc]initWithFrame:CGRectMake(0, 10, Main_Screen_Width, 29)];
+    UIView *hederviews=[[UIView alloc]initWithFrame:CGRectMake(0, 10, Main_Screen_Width, 40)];
     hederviews.backgroundColor=[UIColor whiteColor];
     
     
-    UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, Main_Screen_Width, 29)];
+    UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, Main_Screen_Width, 40)];
     
     infoLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
     infoLabel.font = [UIFont systemFontOfSize:15];
