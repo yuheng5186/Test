@@ -14,7 +14,7 @@
 #import "DSUpdateRuleController.h"
 
 
-@interface HowToUpGradeController ()<UITableViewDelegate, UITableViewDataSource>
+@interface HowToUpGradeController ()<UITableViewDelegate, UITableViewDataSource,HYSliderDelegate>
 
 @property (nonatomic, weak) UITableView *wayToEarnScoreView;
 
@@ -56,6 +56,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     [super viewDidLoad];
     
     [self setupUI];
+//    self.view.backgroundColor=[UIColor whiteColor];
 }
 
 - (void)setupUI {
@@ -67,20 +68,39 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     UILabel *gradeLab = [[UILabel alloc] init];
     gradeLab.text = @"白银会员";
     gradeLab.textColor = [UIColor colorFromHex:@"#ffffff"];
-    gradeLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+    gradeLab.font = [UIFont boldSystemFontOfSize:15*Main_Screen_Height/667];
     [self.view addSubview:gradeLab];
     
     //滑块
-    HYSlider *slider = [[HYSlider alloc] initWithFrame:CGRectMake(23*Main_Screen_Height/667, 64 + 68*Main_Screen_Height/667, Main_Screen_Width - 46, 4*Main_Screen_Height/667)];
-    slider.currentValueColor = [UIColor redColor];
+//    HYSlider *slider = [[HYSlider alloc] initWithFrame:CGRectMake(23*Main_Screen_Height/667, 64 + 68*Main_Screen_Height/667, Main_Screen_Width - 46, 4*Main_Screen_Height/667)];
+//    slider.currentValueColor = [UIColor redColor];
+//    slider.maxValue = 1000;
+//    slider.currentSliderValue = 600;
+//    slider.showTextColor = [UIColor redColor];
+//    slider.showTouchView = YES;
+//    slider.showScrollTextView = YES;
+//    slider.touchViewColor = [UIColor redColor];
+//    [self.view addSubview:slider];
+    
+    HYSlider *slider = [[HYSlider alloc]initWithFrame:CGRectMake(35, gradeLab.frame.origin.y+gradeLab.frame.size.height+5, Main_Screen_Width-46, 9)];
+    slider.backgroundColor=[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
+    
+    slider.currentValueColor = [UIColor colorFromHex:@"#febb02"];
     slider.maxValue = 1000;
     slider.currentSliderValue = 600;
-    slider.showTextColor = [UIColor redColor];
+    slider.showTextColor = [UIColor colorFromHex:@"#febb02"];
     slider.showTouchView = YES;
     slider.showScrollTextView = YES;
-    slider.touchViewColor = [UIColor redColor];
+    slider.touchViewColor = [UIColor colorFromHex:@"#febb02"];
+    slider.delegate = self;
     [self.view addSubview:slider];
+    UILabel *maxLab = [[UILabel alloc] init];
     
+    maxLab.textColor =[UIColor colorFromHex:@"#ffffff"];
+    maxLab.textAlignment=NSTextAlignmentRight;
+    maxLab.font = [UIFont systemFontOfSize:10];
+    maxLab.text =[NSString stringWithFormat:@"%d",1000];
+    [self.view addSubview:maxLab];
     
     UIButton *displayBtn = [[UIButton alloc] init];
     displayBtn.userInteractionEnabled = NO;
@@ -110,9 +130,9 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     
     //约束
     [headContainView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).mas_offset(64*Main_Screen_Height/667);
+        make.top.equalTo(self.view).mas_offset(64);
         make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(130*Main_Screen_Height/667);
+        make.height.mas_equalTo(150*Main_Screen_Height/667);
     }];
     
     [gradeLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -126,12 +146,28 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
 //        make.right.equalTo(headContainView).mas_offset(-23);
 //        make.height.mas_equalTo(4);
 //    }];
+    [slider mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(gradeLab.mas_bottom).mas_offset(35);
+        make.left.equalTo(headContainView).mas_offset(23);
+        make.right.equalTo(headContainView).mas_offset(-23);
+        make.width.mas_equalTo(Main_Screen_Width-46);
+        make.height.mas_equalTo(9);
+    }];
+    [maxLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(slider.mas_bottom).mas_offset(5);
+        //        make.left.equalTo(headContainView).mas_offset(23);
+        make.right.equalTo(slider);
+        make.width.mas_equalTo(46);
+        make.height.mas_equalTo(9);
+    }];
     
     [displayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(slider.mas_bottom).mas_offset(20*Main_Screen_Height/667);
+        make.top.equalTo(slider.mas_bottom).mas_offset(10);
         make.centerX.equalTo(headContainView);
-        make.width.mas_equalTo(250*Main_Screen_Height/667);
+        make.width.mas_equalTo(250);
+        make.bottom.equalTo(headContainView).mas_offset(10);
     }];
+
     
     [containView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.equalTo(self.view);
@@ -156,7 +192,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     [_wayToEarnScoreView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(headContainView.mas_bottom);
         make.right.left.equalTo(headContainView);
-        make.height.mas_equalTo(Main_Screen_Height - 64 - 130*Main_Screen_Height/667 - 49*Main_Screen_Height/667);
+        make.height.mas_equalTo(Main_Screen_Height - 64 - 150*Main_Screen_Height/667 - 49*Main_Screen_Height/667);
     }];
     
     [self.wayToEarnScoreView registerClass:[WayToUpGradeCell class] forCellReuseIdentifier:id_wayToUpCell];
@@ -224,7 +260,10 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     
     [self.navigationController pushViewController:earnScoreVC animated:YES];
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

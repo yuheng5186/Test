@@ -162,10 +162,10 @@
     
     
     userImageView.sd_layout
-    .leftSpaceToView(header, 10)
-    .topSpaceToView(header, 10)
-    .heightIs(40)
-    .widthIs(40);
+    .leftSpaceToView(header, 10*Main_Screen_Height/667)
+    .topSpaceToView(header, 10*Main_Screen_Height/667)
+    .heightIs(40*Main_Screen_Height/667)
+    .widthIs(40*Main_Screen_Height/667);
     userImageView.sd_cornerRadiusFromWidthRatio     = @(0.5);
     
     
@@ -178,10 +178,10 @@
     [header addSubview:userName];
     
     userName.sd_layout
-    .leftSpaceToView(userImageView, 10)
-    .topSpaceToView(header, 10)
-    .heightIs(20)
-    .widthIs(150);
+    .leftSpaceToView(userImageView, 10*Main_Screen_Height/667)
+    .topSpaceToView(header, 10*Main_Screen_Height/667)
+    .heightIs(20*Main_Screen_Height/667)
+    .widthIs(150*Main_Screen_Height/667);
     
     
     UILabel *seeNumberLabel                   = [UILabel new];
@@ -193,10 +193,10 @@
     [header addSubview:seeNumberLabel];
     
     seeNumberLabel.sd_layout
-    .rightSpaceToView(header, 10)
-    .topSpaceToView(header, 10)
-    .heightIs(20)
-    .widthIs(40);
+    .rightSpaceToView(header, 10*Main_Screen_Height/667)
+    .topSpaceToView(header, 10*Main_Screen_Height/667)
+    .heightIs(20*Main_Screen_Height/667)
+    .widthIs(40*Main_Screen_Height/667);
     
     
     UIImageView *seeImageView  = [UIImageView new];
@@ -206,10 +206,10 @@
     
     
     seeImageView.sd_layout
-    .rightSpaceToView(seeNumberLabel, 5)
-    .topSpaceToView(header, 12)
-    .heightIs(15)
-    .widthIs(15);
+    .rightSpaceToView(seeNumberLabel, 5*Main_Screen_Height/667)
+    .topSpaceToView(header, 12*Main_Screen_Height/667)
+    .heightIs(15*Main_Screen_Height/667)
+    .widthIs(15*Main_Screen_Height/667);
     
     
     
@@ -217,16 +217,16 @@
     UILabel *sayTimeLab                 = [UILabel new];
     sayTimeLab.textColor                = [UIColor colorFromHex:@"#999999"];
     sayTimeLab.text                     = newsDetail.ActDate;
-    sayTimeLab.font                     = [UIFont systemFontOfSize:11];
+    sayTimeLab.font                     = [UIFont systemFontOfSize:11*Main_Screen_Height/667];
     self.sayTime                        = sayTimeLab;
     [header addSubview:sayTimeLab];
     
     
     sayTimeLab.sd_layout
     .leftEqualToView(userName)
-    .topSpaceToView(userName, 5)
-    .widthIs(150)
-    .heightIs(20);
+    .topSpaceToView(userName, 5*Main_Screen_Height/667)
+    .widthIs(150*Main_Screen_Height/667)
+    .heightIs(20*Main_Screen_Height/667);
     
     
     
@@ -238,9 +238,9 @@
     [header addSubview:backgroudView];
     
     backgroudView.sd_layout
-    .topSpaceToView(sayTimeLab, 10)
+    .topSpaceToView(sayTimeLab, 10*Main_Screen_Height/667)
     .leftEqualToView(header)
-    .heightIs(300);
+    .heightIs(300*Main_Screen_Height/667);
     
     UILabel *textTitleLabel                 = [UILabel new];
     textTitleLabel.textColor                = [UIColor colorFromHex:@"#4a4a4a"];
@@ -251,15 +251,15 @@
     
     
     textTitleLabel.sd_layout
-    .leftSpaceToView(backgroudView, 10)
-    .topSpaceToView(backgroudView, 10)
-    .widthIs(250)
-    .heightIs(40);
+    .leftSpaceToView(backgroudView, 10*Main_Screen_Height/667)
+    .topSpaceToView(backgroudView, 10*Main_Screen_Height/667)
+    .widthIs(250*Main_Screen_Height/667)
+    .heightIs(40*Main_Screen_Height/667);
     
     UILabel *textContentLabel                 = [UILabel new];
     textContentLabel.textColor                = [UIColor colorFromHex:@"#999999"];
     textContentLabel.text                     = newsDetail.Comment;
-    textContentLabel.font                     = [UIFont systemFontOfSize:14];
+    textContentLabel.font                     = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     textContentLabel.numberOfLines            = 0;
     self.textContentLabel                     = textContentLabel;
     [backgroudView addSubview:textContentLabel];
@@ -267,8 +267,8 @@
     
     textContentLabel.sd_layout
     .leftEqualToView(textTitleLabel)
-    .rightSpaceToView(backgroudView, 10)
-    .topSpaceToView(textTitleLabel, 10)
+    .rightSpaceToView(backgroudView, 10*Main_Screen_Height/667)
+    .topSpaceToView(textTitleLabel, 10*Main_Screen_Height/667)
     .autoHeightRatio(0);
     
     UIImageView *textImageView  = [UIImageView new];
@@ -285,10 +285,10 @@
     [backgroudView addSubview:textImageView];
     
     textImageView.sd_layout
-    .topSpaceToView(textContentLabel, 10)
+    .topSpaceToView(textContentLabel, 10*Main_Screen_Height/667)
     .leftEqualToView(textContentLabel)
     .widthRatioToView(textContentLabel, 1)
-    .heightIs(200);
+    .heightIs(200*Main_Screen_Height/667);
     
     
     UIButton    *goodButton = [UIButton new];
@@ -299,10 +299,10 @@
     [backgroudView addSubview:goodButton];
     
     goodButton.sd_layout
-    .topSpaceToView(textImageView, 10)
+    .topSpaceToView(textImageView, 10*Main_Screen_Height/667)
     .centerXEqualToView(textImageView)
-    .heightIs(50)
-    .widthIs(50);
+    .heightIs(50*Main_Screen_Height/667)
+    .widthIs(50*Main_Screen_Height/667);
     goodButton.layer.cornerRadius = goodButton.size.width/2;
     
     
@@ -310,16 +310,16 @@
     UILabel  *goodNumberLabel                = [UILabel new];
     goodNumberLabel.textColor                = [UIColor colorFromHex:@"#999999"];
     goodNumberLabel.text                     = @"共有168人点赞过";
-    goodNumberLabel.font                     = [UIFont systemFontOfSize:14];
+    goodNumberLabel.font                     = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     self.goodNumberLabel                     = goodNumberLabel;
     goodNumberLabel.textAlignment            = NSTextAlignmentCenter;
     [backgroudView addSubview:goodNumberLabel];
     
     goodNumberLabel.sd_layout
-    .topSpaceToView(goodButton, 10)
+    .topSpaceToView(goodButton, 10*Main_Screen_Height/667)
     .centerXEqualToView(goodButton)
-    .widthIs(150)
-    .heightIs(20);
+    .widthIs(150*Main_Screen_Height/667)
+    .heightIs(20*Main_Screen_Height/667);
     
     
     [backgroudView setupAutoHeightWithBottomView:goodNumberLabel bottomMargin:10];
@@ -328,16 +328,16 @@
     
     UILabel *sayNumberLab                   = [UILabel new];
     sayNumberLab.textColor                  = [UIColor blackColor];
-    sayNumberLab.font                       = [UIFont systemFontOfSize:16];
+    sayNumberLab.font                       = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     sayNumberLab.text                       = @"评论（0）";
     self.sayNumberLab                       = sayNumberLab;
     [header addSubview:sayNumberLab];
     
     sayNumberLab.sd_layout
-    .leftSpaceToView(header, 10)
-    .topSpaceToView(backgroudView, 10)
-    .widthIs(100)
-    .heightIs(20);
+    .leftSpaceToView(header, 10*Main_Screen_Height/667)
+    .topSpaceToView(backgroudView, 10*Main_Screen_Height/667)
+    .widthIs(100*Main_Screen_Height/667)
+    .heightIs(20*Main_Screen_Height/667);
     
     
     UIView *bottomLine = [UIView new];
@@ -345,14 +345,14 @@
     [header addSubview:bottomLine];
     
     bottomLine.sd_layout
-    .topSpaceToView(sayNumberLab, 10)
+    .topSpaceToView(sayNumberLab, 10*Main_Screen_Height/667)
     .leftSpaceToView(header, 0)
     .rightSpaceToView(header, 0)
     .heightIs(1);
     
     
-    
-    [header setupAutoHeightWithBottomView:bottomLine bottomMargin:10];
+
+    [header setupAutoHeightWithBottomView:bottomLine bottomMargin:10*Main_Screen_Height/667];
     [header layoutSubviews];
     self.tableView.tableHeaderView  = header;
     
@@ -369,7 +369,7 @@
         
         UILabel *nocommentlab = [[UILabel alloc]initWithFrame:CGRectMake(0, ImgView.frame.origin.y+ImgView.frame.size.height+17*Main_Screen_Height/667, Main_Screen_Width, 14*Main_Screen_Height/667)];
         nocommentlab.text = @"暂无评价信息";
-        nocommentlab.font = [UIFont systemFontOfSize:16];
+        nocommentlab.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         nocommentlab.textAlignment = NSTextAlignmentCenter;
         nocommentlab.textColor = [UIColor colorFromHex:@"#999999"];
         [v addSubview:nocommentlab];
@@ -390,7 +390,7 @@
     self.userSayTextField.delegate       = self;
     self.userSayTextField.returnKeyType  = UIReturnKeyDone;
     self.userSayTextField.textAlignment  = NSTextAlignmentLeft;
-    self.userSayTextField.font           = [UIFont systemFontOfSize:12];
+    self.userSayTextField.font           = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     self.userSayTextField.backgroundColor= [UIColor whiteColor];
     self.userSayTextField.layer.cornerRadius    = Main_Screen_Height*20/667;
     self.userSayTextField.layer.borderWidth     = 1;
@@ -413,24 +413,24 @@
     [self.downView  addSubview:sayButton];
     
     sayButton.sd_layout
-    .leftSpaceToView(self.userSayTextField, 10)
+    .leftSpaceToView(self.userSayTextField, 10*Main_Screen_Height/667)
     .centerYEqualToView(self.userSayTextField)
-    .heightIs(20)
-    .widthIs(20);
+    .heightIs(20*Main_Screen_Height/667)
+    .widthIs(20*Main_Screen_Height/667);
     
     
     UILabel *sayShowLabel                   = [UILabel new];
     sayShowLabel.textColor                  = [UIColor colorFromHex:@"#999999"];
-    sayShowLabel.font                       = [UIFont systemFontOfSize:12];
+    sayShowLabel.font                       = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     sayShowLabel.text                       = @"369";
     self.sayShowLabel                       = sayShowLabel;
     [self.downView  addSubview:sayShowLabel];
     
     sayShowLabel.sd_layout
     .leftSpaceToView(sayButton, 5)
-    .topSpaceToView(self.downView , 12)
-    .widthIs(40)
-    .heightIs(20);
+    .topSpaceToView(self.downView , 12*Main_Screen_Height/667)
+    .widthIs(40*Main_Screen_Height/667)
+    .heightIs(20*Main_Screen_Height/667);
     
     UIButton    *downGoodButton = [UIButton new];
     [downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
@@ -440,24 +440,24 @@
     [self.downView  addSubview:downGoodButton];
     
     downGoodButton.sd_layout
-    .leftSpaceToView(self.sayShowLabel, 5)
+    .leftSpaceToView(self.sayShowLabel, 5*Main_Screen_Height/667)
     .centerYEqualToView(self.userSayTextField)
-    .heightIs(20)
-    .widthIs(20);
+    .heightIs(20*Main_Screen_Height/667)
+    .widthIs(20*Main_Screen_Height/667);
     
     
     UILabel *goodShowLabel                   = [UILabel new];
     goodShowLabel.textColor                  = [UIColor colorFromHex:@"#999999"];
-    goodShowLabel.font                       = [UIFont systemFontOfSize:12];
+    goodShowLabel.font                       = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     goodShowLabel.text                       = @"369";
     self.goodShowLabel                       = goodShowLabel;
     [self.downView  addSubview:goodShowLabel];
     
     goodShowLabel.sd_layout
     .leftSpaceToView(downGoodButton, 0)
-    .topSpaceToView(self.downView , 12)
-    .widthIs(40)
-    .heightIs(20);
+    .topSpaceToView(self.downView , 12*Main_Screen_Height/667)
+    .widthIs(40*Main_Screen_Height/667)
+    .heightIs(20*Main_Screen_Height/667);
     
     self.goodNumberLabel.text = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount];
     self.sayNumberLab.text = [NSString stringWithFormat:@"评论(%ld)",newsDetail.CommentCount];
@@ -1184,7 +1184,7 @@
     //计算偏移量 (bgView 为空白占位图)
 //    CGFloat height=CGRectGetHeight(self.tableView.tableHeaderView.frame.size.height-(self.view.bounds.size.height-64)/2));
 //    return isHeader?self.tableView.tableHeaderView.frame.size.height-(self.view.bounds.size.height-64)/2:-64;
-    return 450;
+    return 450*Main_Screen_Height/667;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

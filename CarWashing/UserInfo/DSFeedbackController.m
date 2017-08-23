@@ -36,11 +36,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    DSTextView * textView =[[DSTextView alloc] initWithFrame:CGRectMake(10, 100, [UIScreen mainScreen].bounds.size.width - 20, 180)];
+    DSTextView * textView =[[DSTextView alloc] initWithFrame:CGRectMake(10, 100, [UIScreen mainScreen].bounds.size.width - 20, 180*Main_Screen_Height/667)];
     textView.backgroundColor = [UIColor whiteColor];
     textView.placeholderColor = [UIColor lightGrayColor];
     textView.placeholder = @"您的意见是我们前进的最大动力，谢谢！";
-    textView.font = [UIFont systemFontOfSize:17];
+    textView.font = [UIFont systemFontOfSize:17*Main_Screen_Height/667];
     textView.delegate = self;
     textView.layer.borderWidth =1;
     textView.layer.borderColor =[UIColor redColor].CGColor;

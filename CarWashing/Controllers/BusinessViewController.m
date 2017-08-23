@@ -128,15 +128,15 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 - (void)setupUI {
     
-    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*64/667) color:[UIColor colorFromHex:@"#293754"]];
+    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#293754"]];
     titleView.top                      = 0;
     
     NSString *titleName              = @"商家";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:Main_Screen_Height*16/667];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = titleView.centerX;
-    titleNameLabel.centerY           = titleView.centerY +Main_Screen_Height*10/667;
+    titleNameLabel.centerY           = titleView.centerY +8;
     
     //
     self.salerListView.delegate = self;

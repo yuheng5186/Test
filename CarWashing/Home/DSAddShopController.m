@@ -43,10 +43,10 @@
     
     
     NSString *string                = @"马上入住，立即赚钱";
-    UIFont  *stringFont             = [UIFont systemFontOfSize:16];
+    UIFont  *stringFont             = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     UIButton    *getMoneyButton     = [UIUtil drawButtonInView:self.scrollView frame:CGRectMake(0, 0, Main_Screen_Width -Main_Screen_Width*60/375, Main_Screen_Height*40/667) text:string font:stringFont color:[UIColor whiteColor] target:self action:@selector(getShopMoneyButtonClick:)];
     getMoneyButton.backgroundColor  = [UIColor colorWithHex:0xFFB500 alpha:1.0];
-    getMoneyButton.layer.cornerRadius   = 5;
+    getMoneyButton.layer.cornerRadius   = 5*Main_Screen_Height/667;
     getMoneyButton.bottom           = adImageView.bottom -Main_Screen_Height*10/667;
     getMoneyButton.centerX          = self.contentView.centerX;
     

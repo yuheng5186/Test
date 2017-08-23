@@ -81,7 +81,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     self.navigationController.navigationBar.hidden = YES;
     
     for (int index = 0; index < 3; index++) {
-        UIImage *image = [UIImage imageNamed:@"图层-5"];
+        UIImage *image = [UIImage imageNamed:@"kabeijing"];
         [self.imageArray addObject:image];
     }
     
@@ -98,15 +98,15 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     _locationManager.delegate = self;
     
     
-    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*64/667) color:[UIColor colorFromHex:@"#293754"]];
+    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#293754"]];
     upView.top                      = 0;
     
     NSString *titleName              = @"购卡";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18*Main_Screen_Height/667];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:16*Main_Screen_Height/667];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = upView.centerX;
-    titleNameLabel.centerY           = upView.centerY +Main_Screen_Height*10/667;
+    titleNameLabel.centerY           = upView.centerY +8;
     
     self.locationButton        = [UIButton buttonWithType:UIButtonTypeCustom];
     self.locationButton.frame             = CGRectMake(0, 0, Main_Screen_Width*70/375, Main_Screen_Height*30/667);
@@ -129,7 +129,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     
     
     //无限轮播图
-    NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, (Main_Screen_Width - 70*Main_Screen_Height/667) * 9*Main_Screen_Height/667 / 16*Main_Screen_Height/667 + 24*Main_Screen_Height/667)];
+    NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, (Main_Screen_Width - 70*Main_Screen_Height/667) * 9*Main_Screen_Height/667 / 16 + 24)];
     pageFlowView.backgroundColor = [UIColor whiteColor];
     pageFlowView.delegate = self;
     pageFlowView.dataSource = self;
@@ -239,7 +239,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 
 #pragma mark NewPagedFlowView Delegate
 - (CGSize)sizeForPageInFlowView:(NewPagedFlowView *)flowView {
-    return CGSizeMake(Main_Screen_Width - 84*Main_Screen_Height/667, (Main_Screen_Width - 84*Main_Screen_Height/667) * 9*Main_Screen_Height/667 / 16*Main_Screen_Height/667);
+    return CGSizeMake(Main_Screen_Width - 84*Main_Screen_Height/667, (Main_Screen_Width - 84*Main_Screen_Height/667) * 9*Main_Screen_Height/667 / 16);
 }
 
 - (void)didSelectCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex {
@@ -261,12 +261,81 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 - (UIView *)flowView:(NewPagedFlowView *)flowView cellForPageAtIndex:(NSInteger)index{
     PGIndexBannerSubiew *bannerView = (PGIndexBannerSubiew *)[flowView dequeueReusableCell];
     if (!bannerView) {
-        bannerView = [[PGIndexBannerSubiew alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width - 84*Main_Screen_Width/375, (Main_Screen_Width - 70*Main_Screen_Height/667) * 9*Main_Screen_Height/667 / 16*Main_Screen_Height/667)];
+        bannerView = [[PGIndexBannerSubiew alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width - 84*Main_Screen_Height/667, (Main_Screen_Width - 70*Main_Screen_Height/667) * 9*Main_Screen_Height/667 / 16)];
         bannerView.layer.cornerRadius = 4*Main_Screen_Height/667;
         bannerView.layer.masksToBounds = YES;
     }
     
     bannerView.mainImageView.image = self.imageArray[index];
+    
+    UILabel *cardNameLab = [[UILabel alloc] init];
+    cardNameLab.text = @"百洗无忧卡";
+    cardNameLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    cardNameLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+    [bannerView addSubview:cardNameLab];
+    
+    UILabel *timesLab = [[UILabel alloc] init];
+    timesLab.text = @"持卡洗车次数100次";
+    timesLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    timesLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
+    [bannerView addSubview:timesLab];
+    
+    UILabel *scoreLab = [[UILabel alloc] init];
+    scoreLab.text = @"购卡获得5250积分";
+    scoreLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    scoreLab.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+    [bannerView addSubview:scoreLab];
+    
+    UILabel *invalidLab = [[UILabel alloc] init];
+    invalidLab.text = @"有效期12个月";
+    invalidLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    invalidLab.font = [UIFont systemFontOfSize:10*Main_Screen_Height/667];
+    [bannerView addSubview:invalidLab];
+    
+    UILabel *introValueLab = [[UILabel alloc] init];
+    introValueLab.text = @"尊享超值价";
+    introValueLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    introValueLab.font = [UIFont systemFontOfSize:10*Main_Screen_Height/667];
+    [bannerView addSubview:introValueLab];
+    
+    UILabel *priceLab = [[UILabel alloc] init];
+    priceLab.text = @"1050";
+    priceLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    priceLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
+    [bannerView addSubview:priceLab];
+    
+    //约束
+    [cardNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bannerView).mas_offset(20*Main_Screen_Height/667);
+        make.left.equalTo(bannerView).mas_offset(20*Main_Screen_Height/667);
+    }];
+    
+    [timesLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(cardNameLab.mas_bottom).mas_offset(16*Main_Screen_Height/667);
+        make.leading.equalTo(cardNameLab);
+    }];
+    
+    [scoreLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(timesLab.mas_bottom).mas_offset(12*Main_Screen_Height/667);
+        make.leading.equalTo(cardNameLab);
+    }];
+    
+    [invalidLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(scoreLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);
+        make.leading.equalTo(cardNameLab);
+    }];
+    
+    [introValueLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(invalidLab.mas_bottom).mas_offset(25*Main_Screen_Height/667);
+        make.leading.equalTo(cardNameLab);
+    }];
+    
+    [priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(introValueLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);
+        make.leading.equalTo(cardNameLab);
+    }];
+    
+    
     
     return bannerView;
 }

@@ -70,7 +70,7 @@
     
     
     NSString *titleName              = @"";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:16];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:16*Main_Screen_Height/667];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.top               = Main_Screen_Height*30/667;
@@ -134,7 +134,7 @@
     
     UIView *orderView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     orderView.centerX                   = Main_Screen_Width/4 -Main_Screen_Width*20/375;
-    orderView.top                       = 0;
+    orderView.top                       = Main_Screen_Height*10/667;
     
     UITapGestureRecognizer  *tapOrderGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapOrderButtonClick:)];
     [orderView addGestureRecognizer:tapOrderGesture];
@@ -142,12 +142,12 @@
     UIImage     *orderImage          = [UIImage imageNamed:@"dingdan"];
     UIImageView *orderImageView      = [UIUtil drawCustomImgViewInView:orderView frame:CGRectMake(0, 0, orderImage.size.width,orderImage.size.height) imageName:@"dingdan"];
     orderImageView.centerX           = orderView.width/2;
-    orderImageView.top               = Main_Screen_Height*24/667;
+    orderImageView.top               = Main_Screen_Height*15/667;
     
     NSString *orderName              = @"订单";
-    UIFont *orderNameFont            = [UIFont systemFontOfSize:15];
+    UIFont *orderNameFont            = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     UILabel *orderNameLabel          = [UIUtil drawLabelInView:orderView frame:[UIUtil textRect:orderName font:orderNameFont] font:orderNameFont text:orderName isCenter:NO];
-    orderNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
+    orderNameLabel.textColor         = [UIColor blackColor];
     orderNameLabel.centerX           = orderImageView.centerX;
     orderNameLabel.top               = orderImageView.bottom +Main_Screen_Height*10/667;
     
@@ -156,7 +156,7 @@
     
     UIView *favoritesView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     favoritesView.centerX                   = Main_Screen_Width/2;
-    favoritesView.top                       = 0;
+    favoritesView.top                       = Main_Screen_Height*10/667;
     
     UITapGestureRecognizer  *favoritesTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapFavoritesButtonClick:)];
     [favoritesView addGestureRecognizer:favoritesTapGesture];
@@ -164,19 +164,19 @@
     UIImage     *favoritesImage          = [UIImage imageNamed:@"shoucang"];
     UIImageView *favoritesImageView      = [UIUtil drawCustomImgViewInView:favoritesView frame:CGRectMake(0, 0, favoritesImage.size.width,favoritesImage.size.height) imageName:@"shoucang"];
     favoritesImageView.centerX           = favoritesView.width/2;
-    favoritesImageView.top               = Main_Screen_Height*24/667;
+    favoritesImageView.top               = Main_Screen_Height*15/667;
     
     NSString *favoritesName              = @"收藏";
-    UIFont *favoritesNameFont            = [UIFont systemFontOfSize:15];
+    UIFont *favoritesNameFont            = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     UILabel *favoritesNameLabel          = [UIUtil drawLabelInView:favoritesView frame:[UIUtil textRect:favoritesName font:favoritesNameFont] font:favoritesNameFont text:favoritesName isCenter:NO];
-    favoritesNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
+    favoritesNameLabel.textColor         = [UIColor blackColor];
     favoritesNameLabel.centerX           = favoritesImageView.centerX;
     favoritesNameLabel.top               = favoritesImageView.bottom +Main_Screen_Height*10/667;
     
     
     UIView *exchangeView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     exchangeView.centerX                   = Main_Screen_Width*3/4 +Main_Screen_Width*20/375;
-    exchangeView.top                       = 0;
+    exchangeView.top                       = Main_Screen_Height*10/667;
     
     UITapGestureRecognizer  *exchangeTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapExchangeButtonClick:)];
     [exchangeView addGestureRecognizer:exchangeTapGesture];
@@ -184,12 +184,12 @@
     UIImage     *exchangeImage          = [UIImage imageNamed:@"duihuanliwu"];
     UIImageView *exchangeImageView      = [UIUtil drawCustomImgViewInView:exchangeView frame:CGRectMake(0, 0, exchangeImage.size.width,exchangeImage.size.height) imageName:@"duihuanliwu"];
     exchangeImageView.centerX           = exchangeView.width/2;
-    exchangeImageView.top               = Main_Screen_Height*24/667;
+    exchangeImageView.top               = Main_Screen_Height*15/667;
     
     NSString *exchangeName              = @"激活";
-    UIFont *exchangeNameFont            = [UIFont systemFontOfSize:15];
+    UIFont *exchangeNameFont            = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     UILabel *exchangeNameLabel          = [UIUtil drawLabelInView:exchangeView frame:[UIUtil textRect:exchangeName font:exchangeNameFont] font:exchangeNameFont text:exchangeName isCenter:NO];
-    exchangeNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
+    exchangeNameLabel.textColor         = [UIColor blackColor];
     exchangeNameLabel.centerX           = exchangeImageView.centerX;
     exchangeNameLabel.top               = exchangeImageView.bottom +Main_Screen_Height*10/667;
     
@@ -282,7 +282,7 @@
 #pragma mark - UITableViewDataSource
 -(CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 10.f;
+    return 10.f*Main_Screen_Height/667;
 }
 
 -(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section
@@ -318,7 +318,7 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 46;
+    return 50*Main_Screen_Height/667;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -330,7 +330,7 @@
     }
     cell.backgroundColor    = [UIColor whiteColor];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.textColor    = [UIColor colorFromHex:@"#868686"];
+    cell.textLabel.textColor    = [UIColor blackColor];
     cell.textLabel.font         = [UIFont systemFontOfSize:15];
     cell.detailTextLabel.font   = [UIFont systemFontOfSize:14];
 
@@ -412,7 +412,7 @@
 }
 
 -(void)noticeupdateUserName:(NSNotification *)sender{
-    self.userNameLabel.frame = [UIUtil textRect:APPDELEGATE.currentUser.userName font:[UIFont boldSystemFontOfSize:16]];
+    self.userNameLabel.frame = [UIUtil textRect:APPDELEGATE.currentUser.userName font:[UIFont boldSystemFontOfSize:16*Main_Screen_Height/667]];
     self.userNameLabel.top               = self.editButton.bottom +Main_Screen_Height*13/667;
     self.userNameLabel.centerX           = Main_Screen_Width/2;
     self.userNameLabel.text = APPDELEGATE.currentUser.userName;

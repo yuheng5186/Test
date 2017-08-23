@@ -39,10 +39,10 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         UITextField *activateTF = [[UITextField alloc] init];
         activateTF.backgroundColor = [UIColor whiteColor];
         activateTF.placeholder = @"  请输入激活码";
-        activateTF.font = [UIFont systemFontOfSize:Main_Screen_Height*11/667];
+        activateTF.font = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
         activateTF.textColor = [UIColor colorFromHex:@"#c8c8c8"];
-        activateTF.layer.cornerRadius = Main_Screen_Height*15/667;
-        activateTF.layer.borderWidth  = 1;
+        activateTF.layer.cornerRadius = Main_Screen_Height*20/667;
+        activateTF.layer.borderWidth  = 0.5;
         activateTF.layer.borderColor  = [UIColor colorFromHex:@"#c8c8c8"].CGColor;
         activateTF.clipsToBounds = YES;
         _activateTF = activateTF;
@@ -61,8 +61,8 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         [activateBtn setTitle:@"激活卡" forState:UIControlStateNormal];
         activateBtn.backgroundColor = [UIColor colorFromHex:@"#febb02"];
         activateBtn.titleLabel.tintColor = [UIColor colorFromHex:@"#ffffff"];
-        activateBtn.titleLabel.font = [UIFont systemFontOfSize:Main_Screen_Height*13/667];
-        activateBtn.layer.cornerRadius = Main_Screen_Height*15/667;
+        activateBtn.titleLabel.font = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
+        activateBtn.layer.cornerRadius = Main_Screen_Height*20/667;
         activateBtn.clipsToBounds = YES;
         _activateBtn = activateBtn;
         [self.view addSubview:_activateBtn];
@@ -97,6 +97,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     [super viewDidLoad];
     
     [self setupUI];
+    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -114,22 +115,22 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     //    [self addCardChildViewControllers];
     
     
-    UIView *titleView                  = [UIUtil drawLineInView:self.view frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*50/667) color:[UIColor whiteColor]];
+    UIView *titleView                  = [UIUtil drawLineInView:self.view frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*60/667) color:[UIColor whiteColor]];
     titleView.top                      = 64;
     
     
     [self.activateTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(titleView).mas_offset(Main_Screen_Width*12/375);
+        make.left.equalTo(titleView).mas_offset(Main_Screen_Width*10/375);
         make.top.equalTo(titleView).mas_offset(Main_Screen_Height*10/667);
-        make.width.mas_equalTo(Main_Screen_Width*260/375);
-        make.height.mas_equalTo(Main_Screen_Height*30/667);
+        make.width.mas_equalTo(Main_Screen_Width*270/375);
+        make.height.mas_equalTo(Main_Screen_Height*40/667);
     }];
     
     [self.activateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.view).mas_equalTo(-Main_Screen_Width*12/375);
+        make.right.equalTo(self.view).mas_equalTo(-Main_Screen_Width*10/375);
         make.top.equalTo(self.view).mas_equalTo(64+Main_Screen_Height*10/667);
         make.width.mas_equalTo(Main_Screen_Width*75/375);
-        make.height.mas_equalTo(Main_Screen_Height*30/667);
+        make.height.mas_equalTo(Main_Screen_Height*40/667);
     }];
     
     

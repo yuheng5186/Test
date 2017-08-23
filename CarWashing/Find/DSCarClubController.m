@@ -74,7 +74,7 @@
 -(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section
 
 {
-    return 10.00f;
+    return 10.00f*Main_Screen_Height/667;
 }
 
 //- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

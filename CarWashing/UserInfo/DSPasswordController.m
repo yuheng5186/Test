@@ -79,12 +79,12 @@
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 45;
+    return 45*Main_Screen_Height/667;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
 
-    return 10.0f;
+    return 10.0f*Main_Screen_Height/667;
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
@@ -104,7 +104,7 @@
     if (indexPath.section == 0) {
         cell.imageView.image                = [UIImage imageNamed:@"yonghushouji"];
         
-        self.userMobileFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(10, 45, Main_Screen_Width-Main_Screen_Width*70/375, Main_Screen_Height*40/667)];
+        self.userMobileFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(10*Main_Screen_Height/667, 45*Main_Screen_Height/667, Main_Screen_Width-Main_Screen_Width*70/375, Main_Screen_Height*40/667)];
         self.userMobileFieldText.placeholder    = @"15800781856";
         self.userMobileFieldText.delegate       = self;
         self.userMobileFieldText.clearButtonMode= UITextFieldViewModeAlways;
@@ -112,7 +112,7 @@
         self.userMobileFieldText.keyboardType   = UIKeyboardTypeNumberPad;
 
         self.userMobileFieldText.textAlignment  = NSTextAlignmentLeft;
-        self.userMobileFieldText.font           = [UIFont systemFontOfSize:13];
+        self.userMobileFieldText.font           = [UIFont systemFontOfSize:14];
         self.userMobileFieldText.backgroundColor= [UIColor whiteColor];
         self.userMobileFieldText.centerY        = cell.centerY;
         self.userMobileFieldText.left           = Main_Screen_Width*70/375 ;
@@ -122,12 +122,12 @@
     }else if (indexPath.section == 1){
         cell.imageView.image                = [UIImage imageNamed:@"mimayanzheng"];
         
-        self.verifyFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(10, 45, Main_Screen_Width-Main_Screen_Width*240/375, Main_Screen_Height*40/667)];
+        self.verifyFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(10*Main_Screen_Height/667, 45*Main_Screen_Height/667, Main_Screen_Width-Main_Screen_Width*240/375, Main_Screen_Height*40/667)];
         self.verifyFieldText.placeholder    = @"输入验证码";
         self.verifyFieldText.delegate       = self;
         self.verifyFieldText.returnKeyType  = UIReturnKeyDone;
         self.verifyFieldText.textAlignment  = NSTextAlignmentLeft;
-        self.verifyFieldText.font           = [UIFont systemFontOfSize:13];
+        self.verifyFieldText.font           = [UIFont systemFontOfSize:14];
         self.verifyFieldText.clearButtonMode= UITextFieldViewModeAlways;
         self.verifyFieldText.keyboardType   = UIKeyboardTypeNumberPad;
 
@@ -154,7 +154,7 @@
         self.passwordNewFieldText.returnKeyType  = UIReturnKeyDone;
         self.passwordNewFieldText.clearButtonMode= UITextFieldViewModeAlways;
         self.passwordNewFieldText.textAlignment  = NSTextAlignmentLeft;
-        self.passwordNewFieldText.font           = [UIFont systemFontOfSize:13];
+        self.passwordNewFieldText.font           = [UIFont systemFontOfSize:14];
         self.passwordNewFieldText.backgroundColor= [UIColor whiteColor];
         self.passwordNewFieldText.centerY        = cell.centerY;
         self.passwordNewFieldText.left           = Main_Screen_Width*70/375 ;
@@ -164,13 +164,13 @@
     }else{
         cell.imageView.image                = [UIImage imageNamed:@"mimasuo"];
         
-        self.passwordAgainFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(10, 45, Main_Screen_Width-Main_Screen_Width*70/375, Main_Screen_Height*40/667)];
+        self.passwordAgainFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(10*Main_Screen_Height/667, 45*Main_Screen_Height/667, Main_Screen_Width-Main_Screen_Width*70/375, Main_Screen_Height*40/667)];
         self.passwordAgainFieldText.placeholder    = @"再次输入密码";
         self.passwordAgainFieldText.delegate       = self;
         self.passwordAgainFieldText.returnKeyType  = UIReturnKeyDone;
         self.passwordAgainFieldText.textAlignment  = NSTextAlignmentLeft;
         self.passwordAgainFieldText.clearButtonMode= UITextFieldViewModeAlways;
-        self.passwordAgainFieldText.font           = [UIFont systemFontOfSize:13];
+        self.passwordAgainFieldText.font           = [UIFont systemFontOfSize:14];
         self.passwordAgainFieldText.backgroundColor= [UIColor whiteColor];
         self.passwordAgainFieldText.centerY        = cell.centerY;
         self.passwordAgainFieldText.left           = Main_Screen_Width*70/375 ;

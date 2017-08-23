@@ -60,9 +60,10 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 - (void)setupUI {
     
     MemberView *memberShipView = [MemberView memberView];
-    memberShipView.frame = CGRectMake(0, 64*Main_Screen_Height/667, Main_Screen_Width, 113*Main_Screen_Height/667);
-    [self.view addSubview:memberShipView];
+    memberShipView.frame = CGRectMake(0, 64, Main_Screen_Width, 120*Main_Screen_Height/667);
     
+    
+    [self.view addSubview:memberShipView];
     UIView *exchangeView = [[UIView alloc] init];
     
     [self.view addSubview:exchangeView];

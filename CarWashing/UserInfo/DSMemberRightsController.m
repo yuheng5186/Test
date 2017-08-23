@@ -10,6 +10,7 @@
 #import "DSUpdateRuleController.h"
 #import <Masonry.h>
 #import "HowToUpGradeController.h"
+#import "MemberRightsDetailController.h"
 @interface DSMemberRightsController ()<UITableViewDelegate, UITableViewDataSource>
 
 @end
@@ -70,7 +71,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     UIButton *gradeBtn = [[UIButton alloc] init];
     [gradeBtn setTitle:@"如何升级到黄金会员" forState:UIControlStateNormal];
     [gradeBtn setTitleColor:[UIColor colorFromHex:@"#4a4a4a"] forState:UIControlStateNormal];
-    gradeBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    gradeBtn.titleLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [gradeBtn setImage:[UIImage imageNamed:@"xiaohuojian"] forState:UIControlStateNormal];
     [containView addSubview:gradeBtn];
     
@@ -126,39 +127,95 @@ static NSString *id_rightsCell = @"id_rightsCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id_rightsCell];
     
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:id_rightsCell];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.imageView.image = [UIImage imageNamed:@"shengjihoukaquan"];
+    
+
+    
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     cell.textLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
     
-    cell.detailTextLabel.text = @"门店吸尘是可抵扣相应金额,每月领取一次";
+    
     cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
-    cell.textLabel.textColor = [UIColor colorFromHex:@"#999999"];
+    cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#999999"];
     
+    NSString    *string;
+    NSString    *detailString;
     if (indexPath.section == 0) {
-        cell.textLabel.text = @"10元洗车券";
+        string = @"10元洗车券";
+        detailString    = @"自动扫码洗车可使用，达到该等级当月可领取";
     }else {
-        cell.textLabel.text = @"15元洗车券";
+        string = @"15元洗车券";
+        detailString    = @"门店吸尘是可抵扣相应金额,每月领取一次";
     }
+    UILabel *titleLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 20*Main_Screen_Height/667) font:[UIFont systemFontOfSize:14] text:string isCenter:NO];
+    titleLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
+
+    titleLabel.top       = 16*Main_Screen_Height/667;
+    titleLabel.left      = 60*Main_Screen_Height/667;
     
+    UILabel *detailLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 20*Main_Screen_Height/667) font:[UIFont systemFontOfSize:12] text:detailString isCenter:NO];
+    detailLabel.textColor = [UIColor colorFromHex:@"#999999"];
+    detailLabel.top       = titleLabel.bottom +10*Main_Screen_Height/667;
+    detailLabel.left      = 60*Main_Screen_Height/667;
     return cell;
 }
 
-
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 70;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return 10;
+    return 10*Main_Screen_Height/667;
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return 50;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *hederview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
+    hederview.backgroundColor=[UIColor colorFromHex:@"0xf0f0f0"];
+    UIView *hederviews=[[UIView alloc]initWithFrame:CGRectMake(0, 10, Main_Screen_Width, 40)];
+    hederviews.backgroundColor=[UIColor whiteColor];
+    
+    
+    UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, Main_Screen_Width, 40)];
+    
+    infoLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
+    infoLabel.font = [UIFont systemFontOfSize:15];
     
     if (section == 0) {
-        return @"我的特权";
-    }else {
         
-        return @"升级后可获得特权";
+        infoLabel.text = @"  等级特权";
+        
+    }else{
+        
+        infoLabel.text = @"  升级后可获得特权";
     }
+    
+    [hederviews addSubview:infoLabel];
+    [hederview addSubview:hederviews];
+    
+    return hederview;
+}
+
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    
+//    if (section == 0) {
+//        return @"我的特权";
+//    }else {
+//        
+//        return @"升级后可获得特权";
+//    }
+//}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    MemberRightsDetailController *VC = [[MemberRightsDetailController alloc] init];
+    VC.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 
@@ -177,25 +234,25 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
 }
 
-#pragma mark -------tapGesture click------
-- (void) tapSymbolButtonClick:(id)sender {
-    
-    
-}
-
-- (void) tapDiscountButtonClick:(id)sender {
-    
-    
-}
-- (void) tapMaintainButtonClick:(id)sender {
-    
-    
-}
-
-- (void) tapGoodsButtonClick:(id)sender {
-    
-    
-}
+//#pragma mark -------tapGesture click------
+//- (void) tapSymbolButtonClick:(id)sender {
+//    
+//    
+//}
+//
+//- (void) tapDiscountButtonClick:(id)sender {
+//    
+//    
+//}
+//- (void) tapMaintainButtonClick:(id)sender {
+//    
+//    
+//}
+//
+//- (void) tapGoodsButtonClick:(id)sender {
+//    
+//    
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -83,7 +83,7 @@
 -(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section
 
 {
-    return 10.0f;
+    return 10.0f*Main_Screen_Height/667;
 }
 
 
@@ -112,9 +112,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        return 80;
+        return 80*Main_Screen_Height/667;
     }else{
-        return 50;
+        return 50*Main_Screen_Height/667;
     }
 }
 
@@ -128,8 +128,8 @@
     cell.backgroundColor    = [UIColor whiteColor];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.textColor    = [UIColor colorFromHex:@"#4a4a4a"];
-    cell.textLabel.font         = [UIFont systemFontOfSize:15];
-    cell.detailTextLabel.font   = [UIFont systemFontOfSize:14];
+    cell.textLabel.font         = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+    cell.detailTextLabel.font   = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     
     if (indexPath.section == 0) {
         cell.textLabel.text     = @"头像";

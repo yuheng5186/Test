@@ -122,7 +122,7 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
+    return 50*Main_Screen_Height/667;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -134,8 +134,8 @@
     }
     cell.backgroundColor    = [UIColor whiteColor];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.textColor    = [UIColor colorFromHex:@"#999999"];
-    cell.textLabel.font         = [UIFont systemFontOfSize:13];
+    cell.textLabel.textColor    = [UIColor blackColor];
+    cell.textLabel.font         = [UIFont systemFontOfSize:15];
     
     if (indexPath.row == 0) {
         cell.textLabel.text     = @"密码管理";

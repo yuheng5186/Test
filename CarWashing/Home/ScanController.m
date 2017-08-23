@@ -105,20 +105,20 @@
 //    [upView addSubview:self.backHintLabel];
     
     //手电筒
-    CGFloat flashlight_width = 40;
-    CGFloat flashlight_height = 40;
+    CGFloat flashlight_width = 40*Main_Screen_Height/667;
+    CGFloat flashlight_height = 40*Main_Screen_Height/667;
     
     self.flashlight = [UIButton buttonWithType:UIButtonTypeCustom];
     self.flashlight.frame = CGRectMake(0, 0, flashlight_width, flashlight_height);
-    self.flashlight.center = CGPointMake(SCREEN_WIDTH - 100, SCREEN_HEIGHT / 2+150);
+    self.flashlight.center = CGPointMake(SCREEN_WIDTH - 100*Main_Screen_Height/667, SCREEN_HEIGHT / 2+150*Main_Screen_Height/667);
 
     [self.flashlight setImage:[UIImage imageNamed:@"Flashlight_N"] forState:UIControlStateNormal];
     [self.flashlight addTarget:self action:@selector(flashlightAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.flashlight];
     
     //手电筒提示Label
-    CGFloat flashlightHint_width = 100;
-    CGFloat flashlightHint_height = 30;
+    CGFloat flashlightHint_width = 100*Main_Screen_Height/667;
+    CGFloat flashlightHint_height = 30*Main_Screen_Height/667;
     
     self.flashlightHintLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, flashlightHint_width, flashlightHint_height)];
     self.flashlightHintLabel.text = @"打开手电筒";
@@ -184,7 +184,7 @@
     sender.selected = !sender.selected;
     if (sender.selected) {
         [sender setImage:[UIImage imageNamed:@"Flashlight_H"] forState:UIControlStateSelected];
-        self.flashlightHintLabel.textColor = ZFColor(133, 235, 0, 1);
+        self.flashlightHintLabel.textColor = ZFColor(133*Main_Screen_Height/667, 235*Main_Screen_Height/667, 0, 1);
         
         //打开闪光灯
         AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
