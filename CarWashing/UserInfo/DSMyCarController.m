@@ -565,8 +565,6 @@ static NSString * HeaderId = @"header";
         headView.infosLabel.text = @"其他信息";
         headView.imgV.image = [UIImage imageNamed:@"qitaxinxi"];
     }
-    
-    
     return headView;
 }
 
