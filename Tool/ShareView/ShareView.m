@@ -299,6 +299,20 @@
 //
     //创建分享参数
     [self hideView];
+    
+    
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.text                = @"简单文本分享测试";
+    req.bText               = YES;
+    // 目标场景
+    // 发送到聊天界面  WXSceneSession
+    // 发送到朋友圈    WXSceneTimeline
+    // 发送到微信收藏  WXSceneFavorite
+    req.scene               = WXSceneSession;
+    [WXApi sendReq:req];
+    
+    
+    
 //    //创建分享参数
 //    if (![WXApi isWXAppInstalled]) {
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"您尚未安装微信"

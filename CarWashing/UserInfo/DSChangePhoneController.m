@@ -70,7 +70,7 @@
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return Main_Screen_Height*60/667;
+    return Main_Screen_Height*50/667;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -91,7 +91,7 @@
         self.phoneNumberText.textAlignment  = NSTextAlignmentLeft;
         self.phoneNumberText.font           = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
         self.phoneNumberText.backgroundColor= [UIColor whiteColor];
-        self.phoneNumberText.centerY        = cell.centerY+Main_Screen_Height*8/667;
+        self.phoneNumberText.top            = Main_Screen_Height*5/667;
         self.phoneNumberText.left           = Main_Screen_Width*10/375 ;
         
         [self.phoneNumberText addTarget:self action:@selector(phoneNumberTextChanged:) forControlEvents:UIControlEventEditingChanged];
@@ -99,11 +99,11 @@
         
         NSString *getVeriifyStr      = @"获取验证码";
         UIFont *getVeriifyStrFont          = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
-        UIButton *getVeriifyStrButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*110/375, Main_Screen_Height*40/667) text:getVeriifyStr font:getVeriifyStrFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyBtnClick:)];
+        UIButton *getVeriifyStrButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*110/375, Main_Screen_Height*30/667) text:getVeriifyStr font:getVeriifyStrFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyBtnClick:)];
         getVeriifyStrButton.backgroundColor= [UIColor colorWithHex:0xFFB500 alpha:1.0];
-        getVeriifyStrButton.layer.cornerRadius = Main_Screen_Height*20/667;
+        getVeriifyStrButton.layer.cornerRadius = Main_Screen_Height*15/667;
         getVeriifyStrButton.right          = Main_Screen_Width -Main_Screen_Width*10/375;
-        getVeriifyStrButton.centerY        = self.phoneNumberText.centerY;
+        getVeriifyStrButton.top            = Main_Screen_Height*10/667;
     }else if (indexPath.row == 1){
         self.verifyNumberFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*150/375, Main_Screen_Height*40/667)];
         self.verifyNumberFieldText.placeholder    = @"请输入验证码";
@@ -114,7 +114,7 @@
 
         self.verifyNumberFieldText.font           = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
         self.verifyNumberFieldText.backgroundColor= [UIColor whiteColor];
-        self.verifyNumberFieldText.centerY        = cell.centerY;
+        self.verifyNumberFieldText.top            = Main_Screen_Height*5/667;
         self.verifyNumberFieldText.left           = Main_Screen_Width*10/375;
         
         [self.verifyNumberFieldText addTarget:self action:@selector(verifyNumberFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
