@@ -14,12 +14,25 @@
 #import "IQKeyboardManager.h"
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
 
+#import "HTTPDefine.h"
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "CarClubNews.h"
+#import "UdStorage.h"
+#import "MBProgressHUD.h"
+
 
 @interface DSCarClubDetailController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
+{
+    CarClubNews *newsDetail;
+    
+    
+}
 
 @property (nonatomic,strong) UITableView *tableView;
 
 @property (nonatomic, strong) NSMutableArray    *modelsArray;
+@property (nonatomic, strong) NSMutableArray    *moreArray;
 @property (nonatomic, strong) UIImageView       *userImageView;
 @property (nonatomic, strong) UIImageView       *seeImageView;
 @property (nonatomic, strong) UILabel           *seeNumber;
@@ -41,6 +54,7 @@
 @property (nonatomic, strong) UILabel           *sayShowLabel;
 @property (nonatomic, strong) UILabel           *goodShowLabel;
 @property (nonatomic, strong)UIView *downView;
+@property (nonatomic)NSInteger page;
 
 @property (nonatomic, strong) TPKeyboardAvoidingScrollView *scrollView;
 
@@ -56,7 +70,7 @@
 
 - (void) drawContent
 {
-    self.contentView.top                = Main_Screen_Height*44/667;
+    self.contentView.top                = 44;
     self.contentView.height             = self.view.height;
 }
 
@@ -65,11 +79,16 @@
     [super viewDidLoad];
 //     [IQKeyboardManager sharedManager].enable = YES;
     // Do any additional setup after loading the view.
+    
+    newsDetail = [[CarClubNews alloc]init];
+    self.page = 0;
+    
     //添加监听，当键盘出现时收到消息
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     //添加监听，当键盘退出时收到消息
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:)name:UIKeyboardWillHideNotification object:nil];
-    [self createSubView];
+    
+     [self createSubView];
 }
 // 当键盘出现或改变时调用
 - (void)keyboardWillShow:(NSNotification *)aNotification
@@ -105,11 +124,11 @@
 
 - (void) createSubView {
 
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height+Main_Screen_Height*64/667) style:UITableViewStylePlain];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height-64-Main_Screen_Height*60/667)];
     self.tableView.top              = 0;
 
     if (Main_Screen_Height == 568) {
-        self.tableView.top              = Main_Screen_Height*10/667;
+        self.tableView.top              = 20;
 
     }
 
@@ -121,12 +140,11 @@
     //    self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
     //    self.tableView.scrollEnabled    = NO;
     //    self.tableView.tableFooterView  = [UIView new];
-    self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 180, 0);
+//    self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 180, 0);
     [self.contentView addSubview:self.tableView];
     self.tableView.backgroundColor=[UIColor clearColor];
     
-    [self createHeaderView];
-    [self creatModelsWithCount:10];
+    [self setupRefresh];
 }
 
 - (void) createHeaderView {
@@ -155,7 +173,7 @@
     userName.textColor                  = [UIColor blackColor];
     userName.font                       = [UIFont systemFontOfSize:14];
     userName.textColor                  = [UIColor colorFromHex:@"#3a3a3a"];
-    userName.text                       = @"15800781856";
+    userName.text                       = newsDetail.FromusrName;
     self.userName                       = userName;
     [header addSubview:userName];
     
@@ -170,8 +188,8 @@
     seeNumberLabel.textColor                  = [UIColor blackColor];
     seeNumberLabel.font                       = [UIFont systemFontOfSize:12];
     seeNumberLabel.textColor                  = [UIColor colorFromHex:@"#868686"];
-    seeNumberLabel.text                       = @"369";
-    self.userName                            = seeNumberLabel;
+    seeNumberLabel.text                       = [NSString stringWithFormat:@"%ld",newsDetail.Readcount];
+    self.seeNumber                            = seeNumberLabel;
     [header addSubview:seeNumberLabel];
     
     seeNumberLabel.sd_layout
@@ -198,7 +216,7 @@
     
     UILabel *sayTimeLab                 = [UILabel new];
     sayTimeLab.textColor                = [UIColor colorFromHex:@"#999999"];
-    sayTimeLab.text                     = @"2017-7-31 15:30:56";
+    sayTimeLab.text                     = newsDetail.ActDate;
     sayTimeLab.font                     = [UIFont systemFontOfSize:11];
     self.sayTime                        = sayTimeLab;
     [header addSubview:sayTimeLab];
@@ -226,7 +244,7 @@
     
     UILabel *textTitleLabel                 = [UILabel new];
     textTitleLabel.textColor                = [UIColor colorFromHex:@"#4a4a4a"];
-    textTitleLabel.text                     = @"夏天如何防止高温？";
+    textTitleLabel.text                     = newsDetail.ActivityName;
     textTitleLabel.font                     = [UIFont systemFontOfSize:14];
     self.textTitleLabel                     = textTitleLabel;
     [backgroudView addSubview:textTitleLabel];
@@ -240,7 +258,7 @@
     
     UILabel *textContentLabel                 = [UILabel new];
     textContentLabel.textColor                = [UIColor colorFromHex:@"#999999"];
-    textContentLabel.text                     = @"夏天到来,随着温度越来越高,很多抵抗力差的人在高温环境下很容易中暑.今天太阳城管理网分享几条经验,教亲们如何采取措施,防止中暑.每天要喝7-8杯水,夏天是个严重缺水的季节,所以要增加水量,做到水分充足.补充水分也可以选择喝茶,因为茶味略苦性寒，具有消暑、解毒、去火等功能,但饮茶不能过量，茶水以清淡适中为宜哦.还有水果跟蔬菜也可补充水分.记住不要等到口渴了才喝水, 因为口渴表示身体已经缺水了.吃的东西越多，为了消化这些食物，身体产生的代谢热量就越多.一定要注意少吃高蛋白的食物，因为它们产生的代谢热量特别多.高蛋白质的食物如:牛奶,肉,鸡蛋,豆类等.还要吃得清淡,像黄瓜,西红柿等,这些蔬菜含水量多.夏天的衣服一定要尽量穿透气、浅色的.散热的棉质衣服而且要宽松的.浅色的衣服不会吸热.所以尽量不要穿暗色的衣服易吸热,像黑色,灰色等.";
+    textContentLabel.text                     = newsDetail.Comment;
     textContentLabel.font                     = [UIFont systemFontOfSize:14];
     textContentLabel.numberOfLines            = 0;
     self.textContentLabel                     = textContentLabel;
@@ -254,7 +272,15 @@
     .autoHeightRatio(0);
     
     UIImageView *textImageView  = [UIImageView new];
-    textImageView.image         = [UIImage imageNamed:@"hangdiantu"];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,newsDetail.IndexImg];
+        NSURL *url=[NSURL URLWithString:ImageURL];
+        NSData *data=[NSData dataWithContentsOfURL:url];
+        UIImage *img=[UIImage imageWithData:data];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [textImageView setImage:img];
+        });
+    });
     self.textImageView          = textImageView;
     [backgroudView addSubview:textImageView];
     
@@ -325,28 +351,32 @@
     .heightIs(1);
     
     
+    
     [header setupAutoHeightWithBottomView:bottomLine bottomMargin:10];
     [header layoutSubviews];
     self.tableView.tableHeaderView  = header;
     
+    if(_modelsArray.count == 0)
+    {
+        UIView *v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 215*Main_Screen_Height/667)];
+        v.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:v];
+        
+        
+        UIImageView *ImgView = [[UIImageView alloc] initWithFrame:CGRectMake(120*Main_Screen_Width/375, 27*Main_Screen_Height/667, 135*Main_Screen_Width/375, 120*Main_Screen_Height/667)];
+        ImgView.image = [UIImage imageNamed:@"pinglun_kongbai"];
+        [v addSubview:ImgView];
+        
+        UILabel *nocommentlab = [[UILabel alloc]initWithFrame:CGRectMake(0, ImgView.frame.origin.y+ImgView.frame.size.height+17*Main_Screen_Height/667, Main_Screen_Width, 14*Main_Screen_Height/667)];
+        nocommentlab.text = @"暂无评价信息";
+        nocommentlab.font = [UIFont systemFontOfSize:16];
+        nocommentlab.textAlignment = NSTextAlignmentCenter;
+        nocommentlab.textColor = [UIColor colorFromHex:@"#999999"];
+        [v addSubview:nocommentlab];
+        self.tableView.tableFooterView = v;
+    }
     
-    
-    UIView *v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 215)];
-    v.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:v];
-    
-    
-    UIImageView *ImgView = [[UIImageView alloc] initWithFrame:CGRectMake(120, 27, 135, 120)];
-    ImgView.image = [UIImage imageNamed:@"pinglun_kongbai"];
-    [v addSubview:ImgView];
-    
-    UILabel *nocommentlab = [[UILabel alloc]initWithFrame:CGRectMake(0, ImgView.frame.origin.y+ImgView.frame.size.height+17, Main_Screen_Width, 14)];
-    nocommentlab.text = @"暂无评价信息";
-    nocommentlab.font = [UIFont systemFontOfSize:16];
-    nocommentlab.textAlignment = NSTextAlignmentCenter;
-    nocommentlab.textColor = [UIColor colorFromHex:@"#999999"];
-    [v addSubview:nocommentlab];
-    self.tableView.tableFooterView = v;
+
     
     
     
@@ -420,7 +450,7 @@
     goodShowLabel.textColor                  = [UIColor colorFromHex:@"#999999"];
     goodShowLabel.font                       = [UIFont systemFontOfSize:12];
     goodShowLabel.text                       = @"369";
-    self.sayShowLabel                       = goodShowLabel;
+    self.goodShowLabel                       = goodShowLabel;
     [self.downView  addSubview:goodShowLabel];
     
     goodShowLabel.sd_layout
@@ -429,6 +459,27 @@
     .widthIs(40)
     .heightIs(20);
     
+    self.goodNumberLabel.text = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount];
+    self.sayNumberLab.text = [NSString stringWithFormat:@"评论(%ld)",newsDetail.CommentCount];
+    if(newsDetail.IsGive == 1)
+    {
+        [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
+        self.goodButton.selected = YES;
+        
+        [self.downGoodButton setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
+        self.downGoodButton.selected = YES;
+    }
+    else
+    {
+        [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
+        self.goodButton.selected = NO;
+        
+        
+        [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
+        self.downGoodButton.selected = NO;
+    }
+    self.sayShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.CommentCount];
+    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount];
     
     [self.downView  layoutSubviews];
 
@@ -438,6 +489,271 @@
 //    [self.view addSubview:self.scrollView];
 
 }
+
+-(void)requestActivityDetail
+{
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"ActivityCode":[NSString stringWithFormat:@"%ld",self.ActivityCode]
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/GetActivityInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+//            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
+            
+            NSDictionary *dic = [dict objectForKey:@"JsonData"];
+            
+            [newsDetail setValuesForKeysWithDictionary:dic];
+            
+            
+            NSArray *arr = [NSArray array];
+            arr = [dic objectForKey:@"actModelList"];
+            for(NSDictionary *dic in arr)
+            {
+
+//                NSLog(@"%@",dic);
+                DSUserModel *model = [DSUserModel new];
+            
+                [model setValuesForKeysWithDictionary:dic];
+                [_modelsArray addObject:model];
+            }
+
+       
+//            self.userName.text = newsDetail.FromusrName;
+//            self.sayTime.text = newsDetail.ActDate;
+//            self.seeNumber.text = [NSString stringWithFormat:@"%ld",newsDetail.Readcount];
+//            self.textTitleLabel.text = newsDetail.ActivityName;
+//            self.textContentLabel.text = newsDetail.Comment;
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//                                                NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,newsDetail.IndexImg];
+//                                                NSURL *url=[NSURL URLWithString:ImageURL];
+//                                                NSData *data=[NSData dataWithContentsOfURL:url];
+//                                                UIImage *img=[UIImage imageWithData:data];
+//                                                dispatch_sync(dispatch_get_main_queue(), ^{
+//                                                    [self.textImageView setImage:img];
+//                                                });
+//                                            });
+//            self.goodNumberLabel.text = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount];
+//            self.sayNumberLab.text = [NSString stringWithFormat:@"评论(%ld)",newsDetail.CommentCount];
+//            if(newsDetail.IsGive == 1)
+//            {
+//                [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
+//                [self.downGoodButton setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
+//                self.goodButton.selected = YES;
+//                self.downGoodButton.selected = YES;
+//            }
+//            else
+//            {
+//                [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
+//                [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
+//                self.goodButton.selected = NO;
+//                self.downGoodButton.selected = NO;
+//            }
+//            self.sayShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.CommentCount];
+//            self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount];
+            
+//
+           [self createHeaderView];
+            [_tableView reloadData];
+            [self.tableView.mj_header endRefreshing];
+        }
+        else
+        {
+            [self.view showInfo:@"获取数据失败" autoHidden:YES interval:2];
+            [self.tableView.mj_header endRefreshing];
+        }
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取数据失败" autoHidden:YES interval:2];
+        [self.tableView.mj_header endRefreshing];
+    }];
+
+}
+
+-(void)setupRefresh
+{
+    
+    
+    
+    self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        
+        [self headerRereshing];
+        
+    }];
+    
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    
+    [self.tableView.mj_header beginRefreshing];
+    
+    // 上拉刷新
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        
+        [self footerRereshing];
+        
+    }];
+    
+    
+}
+
+- (void)headerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        _modelsArray = [NSMutableArray new];
+        self.page = 0 ;
+        
+        [self requestActivityDetail];
+        
+    });
+}
+
+
+- (void)footerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        if(_modelsArray.count == 0)
+        {
+            [self requestCommentList];
+        }
+        else
+        {
+            self.page++;
+            _moreArray = [NSMutableArray array];
+            [self requestCommentList2];
+            
+            
+//            if(_moreArray.count == 0)
+//            {
+//                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//                hud.removeFromSuperViewOnHide =YES;
+//                hud.mode = MBProgressHUDModeText;
+//                hud.labelText = @"无更多数据";
+//                hud.minSize = CGSizeMake(132.f, 108.0f);
+//                [hud hide:YES afterDelay:3];
+//                [self.tableView.mj_footer endRefreshing];
+//                self.page--;
+//            }
+//            else
+//            {
+//                
+//                
+//                [self.tableView reloadData];
+//                [self.tableView.mj_footer endRefreshing];
+//            }
+        }
+        
+        
+        
+        
+        // 刷新表格
+        
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        
+    });
+}
+
+
+-(void)requestCommentList
+{
+    NSDictionary *mulDic = @{
+                             @"ActivityCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
+                             @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
+                             @"PageSize":@10
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/GetActivityCommentList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+//            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+            for(NSDictionary *dic in arr)
+            {
+                DSUserModel *model = [DSUserModel new];
+                [model setValuesForKeysWithDictionary:dic];
+                [_modelsArray addObject:model];
+            }
+            [_tableView reloadData];
+            [self.tableView.mj_footer endRefreshing];
+            
+        }
+        else
+        {
+            [self.view showInfo:@"获取数据失败" autoHidden:YES interval:2];
+            [self.tableView.mj_footer endRefreshing];
+        }
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取数据失败" autoHidden:YES interval:2];
+        [self.tableView.mj_footer endRefreshing];
+    }];
+
+}
+
+-(void)requestCommentList2
+{
+    NSDictionary *mulDic = @{
+                             @"ActivityCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
+                             @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
+                             @"PageSize":@10
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/GetActivityCommentList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            //            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+            for(NSDictionary *dic in arr)
+            {
+                DSUserModel *model = [DSUserModel new];
+                [model setValuesForKeysWithDictionary:dic];
+                [_moreArray addObject:model];
+            }
+            [_modelsArray addObjectsFromArray:_moreArray];
+            [_tableView reloadData];
+            [self.tableView.mj_footer endRefreshing];
+            
+        }
+        else
+        {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.removeFromSuperViewOnHide =YES;
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"无更多数据";
+            hud.minSize = CGSizeMake(132.f, 108.0f);
+            [hud hide:YES afterDelay:3];
+            [self.tableView.mj_footer endRefreshing];
+            self.page--;
+            
+            
+//            [self.view showInfo:@"获取数据失败" autoHidden:YES interval:2];
+            [self.tableView.mj_footer endRefreshing];
+        }
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取数据失败" autoHidden:YES interval:2];
+        [self.tableView.mj_footer endRefreshing];
+    }];
+    
+}
+
 
 - (TPKeyboardAvoidingScrollView *)scrollView {
     if (!_scrollView) {
@@ -464,28 +780,175 @@
 - (void) downGoodButtonClick:(UIButton *)sender {
 
     if (sender.selected == NO) {
-        [self.downGoodButton setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
-        self.sayShowLabel.text                     = @"170";
-        [self.view showInfo:@"点赞成功!" autoHidden:YES];
+        
+        
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"SupTypeCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
+                                 @"SupType": @1
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivitySupporInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+                [self.view showInfo:@"点赞成功" autoHidden:YES interval:2];
+                
+                [self.downGoodButton setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
+                self.goodShowLabel.text                     = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount+1];
+                newsDetail.GiveCount++;
+                self.goodNumberLabel.text = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount];
+                [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
+                self.goodButton.selected = YES;
+            }
+            else
+            {
+                [self.view showInfo:@"点赞失败" autoHidden:YES interval:2];
+                [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
+                self.downGoodButton.selected = NO;
+            }
+            
+        } fail:^(NSError *error) {
+            [self.view showInfo:@"点赞失败" autoHidden:YES interval:2];
+            [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
+            self.downGoodButton.selected = NO;
+        }];
+        
+        
+        
     }else {
-        [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
-        self.sayShowLabel.text                     = @"169";
-        [self.view showInfo:@"取消点赞!" autoHidden:YES];
+        
+        
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"SupTypeCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
+                                 @"SupType": @1
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivitySupporInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+                [self.view showInfo:@"取消点赞成功" autoHidden:YES interval:2];
+                self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount-1];
+                [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
+               
+                newsDetail.GiveCount--;
+                [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
+                self.goodNumberLabel.text                     = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount];
+                self.goodButton.selected = NO;
+            }
+            else
+            {
+                [self.view showInfo:@"取消点赞失败" autoHidden:YES interval:2];
+                [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
+                self.downGoodButton.selected = YES;
+            }
+            
+        } fail:^(NSError *error) {
+            [self.view showInfo:@"取消点赞失败" autoHidden:YES interval:2];
+            [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
+            self.downGoodButton.selected = YES;
+        }];
+        
+        
+        
+        
         
     }
+
     
     sender.selected = !sender.selected;
 }
 - (void) goodButtonClick:(UIButton *)sender {
 
     if (sender.selected == NO) {
-        [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
-        self.goodNumberLabel.text                     = @"共有169人点赞过";
-        [self.view showInfo:@"点赞成功!" autoHidden:YES];
+        
+        
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"SupTypeCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
+                                 @"SupType": @1
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivitySupporInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+                [self.view showInfo:@"点赞成功" autoHidden:YES interval:2];
+                
+                [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
+                self.goodNumberLabel.text                     = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount + 1];
+                newsDetail.GiveCount++;
+                self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount];
+                [self.downGoodButton setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
+                self.downGoodButton.selected = YES;
+            }
+            else
+            {
+                [self.view showInfo:@"点赞失败" autoHidden:YES interval:2];
+                [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
+                self.downGoodButton.selected = NO;
+            }
+            
+        } fail:^(NSError *error) {
+            [self.view showInfo:@"点赞失败" autoHidden:YES interval:2];
+            [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
+            self.downGoodButton.selected = NO;
+        }];
+
+        
+    
     }else {
-        [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
-        self.goodNumberLabel.text                     = @"共有168人点赞过";
-        [self.view showInfo:@"取消点赞!" autoHidden:YES];
+        
+        
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"SupTypeCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
+                                 @"SupType": @1
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivitySupporInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+                [self.view showInfo:@"取消点赞成功" autoHidden:YES interval:2];
+                
+                [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
+                self.goodNumberLabel.text                     = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount - 1];
+                newsDetail.GiveCount--;
+                self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount];
+                [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
+                self.downGoodButton.selected = NO;
+            }
+            else
+            {
+                [self.view showInfo:@"取消点赞失败" autoHidden:YES interval:2];
+                [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
+                self.downGoodButton.selected = YES;
+            }
+            
+        } fail:^(NSError *error) {
+            [self.view showInfo:@"取消点赞失败" autoHidden:YES interval:2];
+            [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
+            self.downGoodButton.selected = YES;
+        }];
+        
+        
+        
+        
 
     }
 
@@ -494,70 +957,71 @@
     
 }
 
-- (void) creatModelsWithCount:(NSInteger)count {
-    
-    if (!_modelsArray) {
-        _modelsArray = [NSMutableArray new];
-    }
-    
-    NSArray *iconImageNamesArray = @[@"icon0.jpg",
-                                     @"icon1.jpg",
-                                     @"icon2.jpg",
-                                     @"icon3.jpg",
-                                     @"icon4.jpg",
-                                     ];
-    
-    NSArray *starImageArray      = @[@"5xing.jpg",
-                                     @"4xing.jpg",
-                                     @"3xing.jpg",
-                                     @"2xing.jpg",
-                                     @"1xing.jpg",
-                                     ];
-    
-    NSArray *namesArray = @[@"158****1856",
-                            @"风口上的猪",
-                            @"梅超风",
-                            @"我叫郭德纲",
-                            @"Hello Kitty"];
-    
-    NSArray *textArray = @[@"游泳。 最重要的是保持平和安详的心态。正所谓：心静自然凉。我经常用这一招，很有效果。",
-                           @"在饮食方面，一方面体弱人群要适量饮用淡盐水；另一方面，少吃油腻食品。",
-                           @"少吃多餐且清淡",
-                           @"合理的安排休息时间，每天保证8小时足够的睡眠以保持充分的体能，可有效达到防暑目的哦.",
-                           @"尽量不要上午10点至下午16点出门"
-                           ];
-    
-    
-    
-    for (int i = 0; i < iconImageNamesArray.count; i++) {
-        //        int iconRandomIndex = arc4random_uniform(5);
-        //        int nameRandomIndex = arc4random_uniform(5);
-        //        int contentRandomIndex = arc4random_uniform(5);
-        
-        DSUserModel *model = [DSUserModel new];
-        model.iconName = iconImageNamesArray[i];
-        model.name = namesArray[i];
-        model.content = textArray[i];
-        model.sayTime   = @"2017-7-31";
-        model.starName  = starImageArray[i];
-        
-        //        DSUserModel *model = [DSUserModel new];
-        //        model.iconName = iconImageNamesArray[i];
-        //        model.name = namesArray[i];
-        //        model.content = textArray[i];
-        
-        // 模拟“有或者无图片”
-        
-        [self.modelsArray addObject:model];
-    }
-    
-}
+
+//- (void) creatModelsWithCount:(NSInteger)count {
+//    
+//    if (!_modelsArray) {
+//        _modelsArray = [NSMutableArray new];
+//    }
+//    
+//    NSArray *iconImageNamesArray = @[@"icon0.jpg",
+//                                     @"icon1.jpg",
+//                                     @"icon2.jpg",
+//                                     @"icon3.jpg",
+//                                     @"icon4.jpg",
+//                                     ];
+//    
+//    NSArray *starImageArray      = @[@"5xing.jpg",
+//                                     @"4xing.jpg",
+//                                     @"3xing.jpg",
+//                                     @"2xing.jpg",
+//                                     @"1xing.jpg",
+//                                     ];
+//    
+//    NSArray *namesArray = @[@"158****1856",
+//                            @"风口上的猪",
+//                            @"梅超风",
+//                            @"我叫郭德纲",
+//                            @"Hello Kitty"];
+//    
+//    NSArray *textArray = @[@"游泳。 最重要的是保持平和安详的心态。正所谓：心静自然凉。我经常用这一招，很有效果。",
+//                           @"在饮食方面，一方面体弱人群要适量饮用淡盐水；另一方面，少吃油腻食品。",
+//                           @"少吃多餐且清淡",
+//                           @"合理的安排休息时间，每天保证8小时足够的睡眠以保持充分的体能，可有效达到防暑目的哦.",
+//                           @"尽量不要上午10点至下午16点出门"
+//                           ];
+//    
+//    
+//    
+//    for (int i = 0; i < iconImageNamesArray.count; i++) {
+//        //        int iconRandomIndex = arc4random_uniform(5);
+//        //        int nameRandomIndex = arc4random_uniform(5);
+//        //        int contentRandomIndex = arc4random_uniform(5);
+//        
+//        DSUserModel *model = [DSUserModel new];
+////        model.iconName = iconImageNamesArray[i];
+////        model.name = namesArray[i];
+////        model.content = textArray[i];
+////        model.sayTime   = @"2017-7-31";
+////        model.starName  = starImageArray[i];
+//        
+//        //        DSUserModel *model = [DSUserModel new];
+//        //        model.iconName = iconImageNamesArray[i];
+//        //        model.name = namesArray[i];
+//        //        model.content = textArray[i];
+//        
+//        // 模拟“有或者无图片”
+//        
+//        [self.modelsArray addObject:model];
+//    }
+//    
+//}
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return [_modelsArray count];
     
 //    return self.modelsArray.count;
 }
@@ -581,10 +1045,68 @@
         btn.selected=!btn.selected;
     
     };
-    cell.model  = self.modelsArray[indexPath.row];
+    if(self.modelsArray.count == 0)
+    {
+        
+    }
+    else
+    {
+        cell.model  = self.modelsArray[indexPath.row];
+    }
     
     
     return cell;
+}
+
+#pragma mark-添加评论借口
+-(void)addCommentariesData{
+    //    "JsonData": {"ActivityCode": 1001,"Account_Id": "404832711505",
+    //        "Comment": "第一条测试"}
+    
+    NSLog(@"添加评论借口参数：%ld==%@",(long)self.ActivityCode,self.userSayTextField.text);
+    //    ht://192.168.3.101:8090/api/Activity/AddActivityCommentInfo
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"ActivityCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
+                             @"Comment":self.userSayTextField.text
+                             };
+    NSLog(@"添加评论借口参数：%@",mulDic);
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityCommentInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"%@",dict);
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            [self.view showInfo:@"评论添加成功" autoHidden:YES interval:2];
+            //            self.dic = [dict objectForKey:@"JsonData"];
+            //        [self.MerchantDetailData addObjectsFromArray:arr];
+            
+            [self headerRereshing];
+        }
+        else
+        {
+            [self.view showInfo:@"评论添加失败" autoHidden:YES interval:2];
+            //            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+        
+        
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"评论添加失败" autoHidden:YES interval:2];
+    }];
+    
+    
+}
+#pragma mark-监听键盘的done事件
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    NSLog(@"%@",textField.text);
+    [self addCommentariesData];
+    textField.text = @"";
 }
 
 #pragma mark - 无数据占位
@@ -675,7 +1197,15 @@
     // >>>>>>>>>>>>>>>>>>>>> * cell自适应步骤2 * >>>>>>>>>>>>>>>>>>>>>>>>
     /* model 为模型实例， keyPath 为 model 的属性名，通过 kvc 统一赋值接口 */
     
-    return [self.tableView cellHeightForIndexPath:indexPath model:self.modelsArray[indexPath.row] keyPath:@"model" cellClass:[DSActivityDetailCell class] contentViewWidth:[self cellContentViewWith]];
+    if(self.modelsArray.count == 0)
+    {
+        return 0;
+    }
+    else
+    {
+        return [self.tableView cellHeightForIndexPath:indexPath model:self.modelsArray[indexPath.row] keyPath:@"model" cellClass:[DSActivityDetailCell class] contentViewWidth:[self cellContentViewWith]];
+    }
+    
 }
 
 - (CGFloat)cellContentViewWith

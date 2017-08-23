@@ -8,12 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DSUserModel : NSObject
+@interface DSUserModel : JSONModel
 
-@property (nonatomic, copy) NSString *iconName;
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *content;
-@property (nonatomic, copy) NSString *sayTime;
-@property (nonatomic, copy) NSString *starName;
-@property (nonatomic, copy) NSString *thumbNum;
+@property (nonatomic, copy) NSString *Account_Id;
+@property (nonatomic)NSInteger ActivityCode;
+@property (nonatomic, copy) NSString *Comment;
+@property (nonatomic)NSInteger CommentCode;
+@property (nonatomic, copy) NSString *CommentDate;
+@property (nonatomic, copy) NSString *CommentUserImg;
+@property (nonatomic, copy) NSString *CommentUserName;
+@property (nonatomic) id<Optional> IsAudite;
+@property (nonatomic) id<Optional> IsGive;
+@property (nonatomic) NSInteger PageIndex;
+
+@property (nonatomic) id<Optional> PageSize;
+
+@property (nonatomic) NSInteger Support;
 @end

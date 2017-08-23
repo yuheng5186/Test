@@ -16,6 +16,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *manuLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *CarImageV;
 
 
 @end

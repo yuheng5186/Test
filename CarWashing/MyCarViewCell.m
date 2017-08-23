@@ -24,7 +24,7 @@
     [super awakeFromNib];
     
     self.defaultButton.backgroundColor = [UIColor whiteColor];
-    
+    self.brandLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     
 }
 

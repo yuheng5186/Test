@@ -53,7 +53,7 @@
     
     UILabel *lab3           = [UILabel new];
     lab3.textColor          = [UIColor colorFromHex:@"#999999"];
-    lab3.font               = [UIFont systemFontOfSize:14];
+    lab3.font               = [UIFont systemFontOfSize:12];
     _sayTimeLabel           = lab3;
     
     UIImageView     *view4 = [UIImageView new];
@@ -93,14 +93,14 @@
     .leftSpaceToView(_iconImageView, 10)
     .heightRatioToView(_iconImageView, 0.4);
     
-    _starImageView.sd_layout
-    .topSpaceToView(_nameLabel, 5)
-    .leftEqualToView(_nameLabel)
-    .heightIs(15)
-    .widthIs(80);
+//    _starImageView.sd_layout
+//    .topSpaceToView(_nameLabel, 5)
+//    .leftEqualToView(_nameLabel)
+//    .heightIs(15)
+//    .widthIs(80);
     
     _contentLabel.sd_layout
-    .topSpaceToView(_starImageView, 10)
+    .topSpaceToView(_nameLabel, 10)
     .leftEqualToView(_nameLabel)
     .autoHeightRatio(0);
     
@@ -117,7 +117,7 @@
     
     _iconImageView.sd_cornerRadiusFromWidthRatio = @(0.5);
     
-    [_contentLabel setSingleLineAutoResizeWithMaxWidth:260];
+    [_contentLabel setSingleLineAutoResizeWithMaxWidth:200];
     [_nameLabel setSingleLineAutoResizeWithMaxWidth:150];
     
     [_sayTimeLabel setSingleLineAutoResizeWithMaxWidth:150];
@@ -135,12 +135,12 @@
 - (void) setModel:(DSUserModel *)model {
     
     _model  = model;
-    _iconImageView.image    = [UIImage imageNamed:model.iconName];
-    _nameLabel.text         = model.name;
-    _contentLabel.text      = model.content;
-    _sayTimeLabel.text      = model.sayTime;
-    _starImageView.image    = [UIImage imageNamed:model.starName];
-    _ThumbUpBtn.titleLabel.text=model.thumbNum;
+    _iconImageView.image    = [UIImage imageNamed:model.CommentUserImg];
+    _nameLabel.text         = model.CommentUserName;
+    _contentLabel.text      = model.Comment;
+    _sayTimeLabel.text      = model.CommentDate;
+//    _starImageView.image    = [UIImage imageNamed:model.starName];
+//    _ThumbUpBtn.titleLabel.text=model.thumbNum;
     CGFloat bottomMargin = 10;
     
     
