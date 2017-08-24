@@ -32,70 +32,84 @@
 - (void)setupUI {
     
     UIImageView *cardImgV = [[UIImageView alloc] init];
-    cardImgV.image = [UIImage imageNamed:@"tiyankaditu"];
+    cardImgV.image = [UIImage imageNamed:@"bg_card"];
     [self.view addSubview:cardImgV];
     
     UILabel *cardNameLab = [[UILabel alloc] init];
     cardNameLab.text = @"体验卡";
-    cardNameLab.textColor = [UIColor colorFromHex:@"#ffffff"];
-    cardNameLab.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
+    cardNameLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     [cardImgV addSubview:cardNameLab];
     
-    UILabel *timesLab = [[UILabel alloc] init];
-    timesLab.text = @"免费洗车2次";
-    timesLab.textColor = [UIColor colorFromHex:@"#ffffff"];
-    timesLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
-    [cardImgV addSubview:timesLab];
+    UILabel *introLab = [[UILabel alloc] init];
+    introLab.text = @"扫码洗车服务中使用";
+    introLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+    [cardImgV addSubview:introLab];
     
     UILabel *invalidLab = [[UILabel alloc] init];
     invalidLab.text = @"截止日期：2017-8-10";
-    invalidLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    invalidLab.textColor = [UIColor colorFromHex:@"#999999"];
     invalidLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
     [cardImgV addSubview:invalidLab];
     
+    UILabel *brandLab = [[UILabel alloc] init];
+    brandLab.text = @"";
+    brandLab.font = [UIFont systemFontOfSize:11];
+    [cardImgV addSubview:brandLab];
+    
     UIButton *getBtn = [UIUtil drawDefaultButton:self.view title:@"立即领取" target:self action:@selector(didClickGetBtn)];
     
-    UIButton *checkCardBtn = [[UIButton alloc] init];
+    UIButton *checkCardBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [checkCardBtn setTitle:@"查看卡包" forState:UIControlStateNormal];
     [checkCardBtn setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
     checkCardBtn.titleLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+    [checkCardBtn setImage:[UIImage imageNamed:@"huiyuandianjitiaozhuan"] forState:UIControlStateNormal];
+    checkCardBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -150*Main_Screen_Height/667);
+    [checkCardBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -50*Main_Screen_Height/667, 0, 0)];
+    
     [checkCardBtn addTarget:self action:@selector(didClickCheckCardBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:checkCardBtn];
     
     
     //约束
     [cardImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).mas_offset(64 + 26*Main_Screen_Height/667);
-        make.left.equalTo(self.view).mas_offset(12*Main_Screen_Height/667);
-        make.right.equalTo(self.view).mas_offset(-12*Main_Screen_Height/667);
-        make.height.mas_equalTo(90*Main_Screen_Height/667);
+        make.top.equalTo(self.view).mas_offset(64 + 10*Main_Screen_Height/667);
+        make.left.equalTo(self.view).mas_offset(37.5*Main_Screen_Height/667);
+        make.right.equalTo(self.view).mas_offset(-37.5*Main_Screen_Height/667);
+        make.height.mas_equalTo(192*Main_Screen_Height/667);
     }];
     
     [cardNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(cardImgV).mas_offset(12*Main_Screen_Height/667);
-        make.left.equalTo(cardImgV).mas_offset(14*Main_Screen_Height/667);
+        make.top.equalTo(cardImgV).mas_offset(20*Main_Screen_Height/667);
+        make.left.equalTo(cardImgV).mas_offset(20*Main_Screen_Height/667);
     }];
     
-    [timesLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(cardNameLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);
+    [brandLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(cardNameLab);
+        make.leading.equalTo(cardNameLab.mas_trailing).mas_offset(5*Main_Screen_Height/667);
+    }];
+    
+    [introLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(cardNameLab.mas_bottom).mas_offset(10*Main_Screen_Height/667);
         make.leading.equalTo(cardNameLab);
     }];
     
     [invalidLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(timesLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);
         make.leading.equalTo(cardNameLab);
+        make.bottom.equalTo(cardImgV).mas_offset(-18*Main_Screen_Height/667);
     }];
     
     [getBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(cardImgV.mas_bottom).mas_offset(19*Main_Screen_Height/667);
+        make.top.equalTo(cardImgV.mas_bottom).mas_offset(15*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
         make.width.mas_equalTo(351*Main_Screen_Height/667);
         make.height.mas_equalTo(48*Main_Screen_Height/667);
     }];
     
     [checkCardBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(getBtn.mas_bottom).mas_offset(18*Main_Screen_Height/667);
+        make.top.equalTo(getBtn.mas_bottom);
         make.centerX.equalTo(self.view);
+        make.height.mas_equalTo(45*Main_Screen_Height/667);
+        make.width.mas_equalTo(100*Main_Screen_Height/667);
     }];
     
     UITableView *noticeView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
@@ -103,7 +117,7 @@
     [self.view addSubview:noticeView];
     
     [noticeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(checkCardBtn.mas_bottom).mas_offset(18*Main_Screen_Height/667);
+        make.top.equalTo(checkCardBtn.mas_bottom);
         make.bottom.equalTo(self.view);
         make.width.mas_equalTo(Main_Screen_Width);
     }];
