@@ -10,6 +10,8 @@
 #import "MenuTabBarController.h"
 #import "LoginViewController.h"
 #import "IQKeyboardManager.h"
+#import "DSGuideViewController.h"
+
 
 @interface AppDelegate ()
 {
@@ -50,11 +52,18 @@
     self.window									= [[UIWindow alloc] initWithFrame: UIScreen.mainScreen.bounds];
 
     
-    LoginViewController *loginControl = [[LoginViewController alloc]init];
-    UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:loginControl];
-    nav.navigationBar.hidden      = YES;
-
+    
+    DSGuideViewController *guideControl = [[DSGuideViewController alloc]init];
+    UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:guideControl];
     self.window.rootViewController      = nav;
+    
+    
+    
+//    LoginViewController *loginControl = [[LoginViewController alloc]init];
+//    UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:loginControl];
+//    nav.navigationBar.hidden      = YES;
+//
+//    self.window.rootViewController      = nav;
    
     
 //    MenuTabBarController *menuTabBarController	= [[MenuTabBarController alloc] init];
