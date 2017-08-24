@@ -38,7 +38,7 @@
         
         UIButton *bgButton = [UIButton buttonWithType:UIButtonTypeCustom];
        
-        [bgButton setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
+        [bgButton setImage:[UIImage imageNamed:@"xiala"] forState:UIControlStateNormal];
         [bgButton setTitleColor:[UIColor colorWithRed:80/255.0 green:80/255.0 blue:80/255.0 alpha:1] forState:UIControlStateNormal];
         bgButton.titleLabel.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         bgButton.imageView.contentMode = UIViewContentModeCenter;
