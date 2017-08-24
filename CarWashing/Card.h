@@ -14,7 +14,7 @@
 @property (nonatomic ,copy)NSString *Description;
 @property (nonatomic ,copy)NSString *Img;
 @property (nonatomic ,copy)NSString *ExpiredTimes;
-@property (nonatomic ,copy)NSString *CardPrice;
+@property (nonatomic ,copy)NSDecimalNumber *CardPrice;
 @property (nonatomic ,copy)NSString *Account_Id;
 @property (nonatomic)NSInteger Integralnum;
 @property (nonatomic)NSInteger CardType;

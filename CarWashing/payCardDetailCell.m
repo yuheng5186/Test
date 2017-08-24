@@ -27,12 +27,14 @@
     useCardLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     useCardLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     [self.contentView addSubview:useCardLabel];
+    useCardLabel.hidden = YES;
     
     UILabel *timesCardLabel = [[UILabel alloc] init];
     timesCardLabel.text = @"可免费洗车10次";
     timesCardLabel.textAlignment = NSTextAlignmentRight;
     timesCardLabel.textColor = [UIColor colorFromHex:@"#febb02"];
     timesCardLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+    self.timesCardLabel = timesCardLabel;
     [self.contentView addSubview:timesCardLabel];
     
     UILabel *brandCardLabel = [[UILabel alloc] init];
@@ -62,7 +64,10 @@
     }];
 }
 
-
+-(void)setTimes:(NSString *)string
+{
+    
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

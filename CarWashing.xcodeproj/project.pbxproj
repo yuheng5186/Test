@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0401E8CA1F4E674700F0CA79 /* DSStartWashingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0401E8C91F4E674700F0CA79 /* DSStartWashingController.m */; };
+		0401E8CD1F4E67AE00F0CA79 /* DSCompleteWashingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0401E8CC1F4E67AE00F0CA79 /* DSCompleteWashingController.m */; };
 		1805AC831F38090D00FD0844 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC821F38090D00FD0844 /* LoginViewController.m */; };
 		1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC851F385C8600FD0844 /* DSAgreementController.m */; };
 		1805AC901F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC891F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.m */; };
@@ -263,6 +265,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0401E8C81F4E674700F0CA79 /* DSStartWashingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSStartWashingController.h; path = Home/DSStartWashingController.h; sourceTree = "<group>"; };
+		0401E8C91F4E674700F0CA79 /* DSStartWashingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSStartWashingController.m; path = Home/DSStartWashingController.m; sourceTree = "<group>"; };
+		0401E8CB1F4E67AE00F0CA79 /* DSCompleteWashingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSCompleteWashingController.h; path = Home/DSCompleteWashingController.h; sourceTree = "<group>"; };
+		0401E8CC1F4E67AE00F0CA79 /* DSCompleteWashingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSCompleteWashingController.m; path = Home/DSCompleteWashingController.m; sourceTree = "<group>"; };
 		06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CarWashing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1805AC811F38090D00FD0844 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = UserInfo/LoginViewController.h; sourceTree = "<group>"; };
 		1805AC821F38090D00FD0844 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = UserInfo/LoginViewController.m; sourceTree = "<group>"; };
@@ -1059,6 +1065,10 @@
 				18A4B22F1F4D832300C64978 /* ShareWechatView.m */,
 				180E432A1F417E3500013D2D /* DSAddShopController.h */,
 				180E432B1F417E3500013D2D /* DSAddShopController.m */,
+				0401E8C81F4E674700F0CA79 /* DSStartWashingController.h */,
+				0401E8C91F4E674700F0CA79 /* DSStartWashingController.m */,
+				0401E8CB1F4E67AE00F0CA79 /* DSCompleteWashingController.h */,
+				0401E8CC1F4E67AE00F0CA79 /* DSCompleteWashingController.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1915,6 +1925,7 @@
 				181E92CC1F1F39CC0006511E /* UIColor+HexColor.m in Sources */,
 				18B69EC01F346A3F007DA0E4 /* DSScanQRCodeController.m in Sources */,
 				50CAA6A11F41AB0300138CEF /* EarnScoreController.m in Sources */,
+				0401E8CA1F4E674700F0CA79 /* DSStartWashingController.m in Sources */,
 				5097FE131F2F4173002EF8F8 /* JPCityViewController.m in Sources */,
 				185090461F4557E100795E0A /* TYAlertFadeAnimation.m in Sources */,
 				180E42E91F3AB37D00013D2D /* YzdHUDImageView.m in Sources */,
@@ -1929,6 +1940,7 @@
 				5097FE1A1F2F4335002EF8F8 /* MyCarViewCell.m in Sources */,
 				188907121F2730F4009E20B0 /* DSUpdateRuleController.m in Sources */,
 				181E92CB1F1F39CC0006511E /* UIColor+Additions.m in Sources */,
+				0401E8CD1F4E67AE00F0CA79 /* DSCompleteWashingController.m in Sources */,
 				50E2EE851F1F4D3C00FAF130 /* YZSortViewController.m in Sources */,
 				18B697A51F21A87F009FF73A /* DSScanController.m in Sources */,
 				18322ABD1F4D7D8B003ABB7B /* UILabel+StringFrame.m in Sources */,

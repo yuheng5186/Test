@@ -11,9 +11,18 @@
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
 #import <Masonry.h>
 
+#import "HTTPDefine.h"
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "MBProgressHUD.h"
+
 @interface DSSaleActivityController ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, strong) NSMutableArray *CouponListData;
+
+@property (nonatomic)NSInteger page;
 
 @end
 
@@ -51,17 +60,112 @@
     self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
 //    self.tableView.backgroundColor  = [UIColor blueColor];
     [self.contentView addSubview:self.tableView];
-    
+    _CouponListData = [[NSMutableArray alloc]init];
+    [self GetCouponList];
+//    [self setupRefresh];
     
 //    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
 //        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
 //    }
 }
 
+//-(void)setupRefresh
+//{
+//    self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+//        
+//        [self headerRereshing];
+//        
+//    }];
+//    
+//    // 设置自动切换透明度(在导航栏下面自动隐藏)
+//    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+//    
+//    [self.tableView.mj_header beginRefreshing];
+//    
+//    // 上拉刷新
+//    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+//        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+//        
+//        [self footerRereshing];
+//        
+//    }];
+//}
+
+//- (void)headerRereshing
+//{
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        _CouponListData = [NSMutableArray new];
+//        
+//        self.page = 0 ;
+//        
+//        [self GetCouponList];
+//        
+//    });
+//}
+
+
+//- (void)footerRereshing
+//{
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        
+//        if(_CouponListData.count == 0)
+//        {
+//            [self GetCouponList];
+//        }
+//        else
+//        {
+//            self.page++;
+//            [self GetCouponListmore];
+//            
+//        }
+//        
+//        
+//        
+//        
+//        // 刷新表格
+//        
+//        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+//        
+//    });
+//}
+
+-(void)GetCouponList
+{
+    NSDictionary *mulDic = @{
+                             @"GetCardType":@2
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardConfigList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+            [_CouponListData addObjectsFromArray:arr];
+            [self.tableView reloadData];
+        }
+        else
+        {
+            [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }];
+    
+}
+
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return [_CouponListData count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -86,7 +190,7 @@
 
     UIView *view = [[UIView alloc] init];
     
-    NSString *title     = @"2017-7-23 9:30";
+    NSString *title     = [[_CouponListData objectAtIndex:section] objectForKey:@"CreateTime"];
     UIFont *titleFont   = [UIFont systemFontOfSize:14];
     
     UILabel *titleLabel     = [UIUtil drawLabelInView:view frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*30/667) font:titleFont text:title isCenter:YES];
@@ -142,26 +246,23 @@
         make.leading.equalTo(introLab.mas_trailing).mas_offset(20*Main_Screen_Height/667);
     }];
     
-    if (indexPath.section == 0) {
-        
-        backV.image = [UIImage imageNamed:@"xinyonghuu"];
-        titleLab.text = @"新用户注册奖励";
-        introLab.text = @"免费获得洗车体验卡一张";
-    }
+ 
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,[[_CouponListData objectAtIndex:indexPath.section] objectForKey:@"Img"]];
+        NSURL *url=[NSURL URLWithString:ImageURL];
+        NSData *data=[NSData dataWithContentsOfURL:url];
+        UIImage *img=[UIImage imageWithData:data];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            backV.image = img;
+            if(backV.image == nil)
+            {
+                backV.image = [UIImage imageNamed:@"yonghuzhuanxiangditu"];
+            }
+        });
+    });
     
-    if (indexPath.section == 1) {
-        backV.image = [UIImage imageNamed:@"huiyuanquanyitu"];
-        titleLab.text = @"金顶会员专享权益";
-        introLab.text = @"平台商家下单洗车可抵扣";
-    }
-    
-    if (indexPath.section == 2) {
-        backV.image = [UIImage imageNamed:@"yonghuzhuanxiangditu"];
-        titleLab.text = @"金顶会员专享";
-        introLab.text = @"平台商家下单洗车可抵扣";
-    }
-    
-    
+    titleLab.text = [[_CouponListData objectAtIndex:indexPath.section] objectForKey:@"Description"];
+    introLab.text = [NSString stringWithFormat:@"免费获得洗车%@一张",[[_CouponListData objectAtIndex:indexPath.section] objectForKey:@"CardName"]];
     
     return cell;
 }
