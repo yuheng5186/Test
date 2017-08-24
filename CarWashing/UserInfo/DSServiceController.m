@@ -203,7 +203,7 @@
 
 - (CGSize)getLabelSizeFortextFont:(UIFont *)font textLabel:(NSString *)text{
     NSDictionary * totalMoneydic = [NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName,nil];
-    CGSize totalMoneySize =[text boundingRectWithSize:CGSizeMake(Main_Screen_Width-16,1000) options:NSStringDrawingUsesLineFragmentOrigin  attributes:totalMoneydic context:nil].size;
+    CGSize totalMoneySize =[text boundingRectWithSize:CGSizeMake(Main_Screen_Width-16*Main_Screen_Height/667,1000*Main_Screen_Height/667) options:NSStringDrawingUsesLineFragmentOrigin  attributes:totalMoneydic context:nil].size;
     return totalMoneySize;
 }
 

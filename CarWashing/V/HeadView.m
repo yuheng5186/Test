@@ -46,7 +46,7 @@
         bgButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 //        bgButton.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
 //        bgButton.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
-        bgButton.contentEdgeInsets = UIEdgeInsetsMake(30, SCREEN_WIDTH-30*Main_Screen_Height/667, 30*Main_Screen_Height/667, 0);
+        bgButton.contentEdgeInsets = UIEdgeInsetsMake(30*Main_Screen_Height/667, SCREEN_WIDTH-30*Main_Screen_Height/667, 30*Main_Screen_Height/667, 0);
         bgButton.titleEdgeInsets = UIEdgeInsetsMake(0, -SCREEN_WIDTH+30*Main_Screen_Height/667, 0, 50*Main_Screen_Height/667);
         [bgButton addTarget:self action:@selector(headBtnClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:bgButton];
