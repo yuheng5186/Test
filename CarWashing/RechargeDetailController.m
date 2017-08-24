@@ -42,6 +42,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"%@",self.card);
+    
     [self setupUI];
 }
 
@@ -75,6 +77,12 @@
 //    self.titleView                          = [UIUtil drawLineInView:self.view frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*50/667) color:[UIColor whiteColor]];
 //    self.titleView.top                      = 64*Main_Screen_Height/667;
 //    self.titleView.height                   = self.noticeLabel.bottom +Main_Screen_Height*10/667;
+    
+    
+    self.washCarLabel.text = self.card.CardName;
+    self.validityLabel.text = [NSString stringWithFormat:@"有效期至%@",self.card.ExpEndDates];
+    self.timesLabel.text = [NSString stringWithFormat:@"免费洗车次数%ld次",self.card.CardCount];
+    
     
     [self.washCarLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.containView).mas_offset(20*Main_Screen_Height/667);
@@ -124,7 +132,7 @@
     
     if (!_washCarLabel) {
         UILabel *washCarLabel = [[UILabel alloc] init];
-        washCarLabel.text = @"洗车月卡";
+        washCarLabel.text = self.card.CardName;
         washCarLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
         washCarLabel.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         _washCarLabel = washCarLabel;
@@ -138,7 +146,7 @@
     if (!_validityLabel) {
         
         UILabel *validityLabel = [[UILabel alloc] init];
-        validityLabel.text = @"有效期至: 2017-8-1";
+        validityLabel.text = [NSString stringWithFormat:@"有效期至%@",self.card.ExpEndDates];
         validityLabel.textColor = [UIColor colorFromHex:@"#999999"];
         validityLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         _validityLabel = validityLabel;
@@ -152,7 +160,7 @@
     
     if (!_timesLabel) {
         UILabel *timesLabel = [[UILabel alloc] init];
-        timesLabel.text = @"免费洗车次数6次";
+        timesLabel.text = [NSString stringWithFormat:@"免费洗车次数%ld次",self.card.CardCount];
         timesLabel.textColor = [UIColor colorFromHex:@"#999999"];
         timesLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         _timesLabel = timesLabel;

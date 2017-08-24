@@ -11,7 +11,22 @@
 #import <Masonry.h>
 #import "HowToUpGradeController.h"
 #import "MemberRightsDetailController.h"
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "MBProgressHUD.h"
+#import "UdStorage.h"
+#import "HTTPDefine.h"
 @interface DSMemberRightsController ()<UITableViewDelegate, UITableViewDataSource>
+{
+    UITableView *memberRightsView;
+    
+    UILabel *membershipNameLabel;
+    UIButton *gradeBtn;
+    UIImageView *membershipImageView;
+}
+
+@property (nonatomic, strong) NSMutableArray *MembershipprivilegesArray;
+@property (nonatomic, strong) NSMutableDictionary *MembershipprivilegesDic;
 
 @end
 
@@ -32,6 +47,10 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
     [self createSubView];
     
+    _MembershipprivilegesArray = [[NSMutableArray alloc]init];
+    _MembershipprivilegesDic = [[NSMutableDictionary alloc]init];
+    [self GetMembershipprivileges];
+    
 }
 - (void) createSubView {
     UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*130/667) color:[UIColor colorFromHex:@"#293754"]];
@@ -39,14 +58,15 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
     
     UIImage *membershipImage              = [UIImage imageNamed:@"huiyuantou"];
-    UIImageView *membershipImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(0, 0, membershipImage.size.width, membershipImage.size.height) imageName:@"huiyuantou"];
-    
+    membershipImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(0, 0, membershipImage.size.width, membershipImage.size.height) imageName:@"huiyuantou"];
+    membershipImageView.layer.masksToBounds = YES;
+    membershipImageView.layer.cornerRadius  = membershipImage.size.height/2;
     membershipImageView.top               = Main_Screen_Height*15/667;
     membershipImageView.centerX           = upView.centerX;
     
     NSString *membershipName              = @"白银会员";
     UIFont *membershipNameFont            = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
-    UILabel *membershipNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:membershipName font:membershipNameFont] font:membershipNameFont text:membershipName isCenter:NO];
+    membershipNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:membershipName font:membershipNameFont] font:membershipNameFont text:membershipName isCenter:NO];
     membershipNameLabel.textColor         = [UIColor colorFromHex:@"#ffffff"];
     membershipNameLabel.top               = membershipImageView.bottom +Main_Screen_Height*10/667;
     membershipNameLabel.centerX           = membershipImageView.centerX;
@@ -54,7 +74,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     upView.height       = membershipNameLabel.bottom+Main_Screen_Height*10/667;
     
 
-    UITableView *memberRightsView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    memberRightsView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [self.view addSubview:memberRightsView];
     
     
@@ -68,7 +88,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     containView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:containView];
     
-    UIButton *gradeBtn = [[UIButton alloc] init];
+    gradeBtn = [[UIButton alloc] init];
     [gradeBtn setTitle:@"如何升级到黄金会员" forState:UIControlStateNormal];
     [gradeBtn setTitleColor:[UIColor colorFromHex:@"#4a4a4a"] forState:UIControlStateNormal];
     gradeBtn.titleLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
@@ -100,6 +120,95 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
     [gradeBtn addTarget:self action:@selector(clickHowToIncreaseGradeBtn) forControlEvents:UIControlEventTouchUpInside];
     
+    
+}
+
+-(void)GetMembershipprivileges
+{
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"GetCardType":@3
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardConfigList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            _MembershipprivilegesDic = [dict objectForKey:@"JsonData"];
+//            for(NSDictionary *dic in arr)
+//            {
+//                CardBag *model = [CardBag new];
+//                [model setValuesForKeysWithDictionary:dic];
+//                [_CardbagData addObject:model];
+//            }
+            
+            [self UpdateUI];
+            
+            
+            
+            [memberRightsView reloadData];
+        }
+        else
+        {
+            [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }];
+
+}
+
+-(void)UpdateUI
+{
+    
+    NSLog(@"%@",_MembershipprivilegesDic);
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,_MembershipprivilegesDic[@"Headimg"]];
+        NSURL *url=[NSURL URLWithString:ImageURL];
+        NSData *data=[NSData dataWithContentsOfURL:url];
+        UIImage *img=[UIImage imageWithData:data];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            membershipImageView.image = img;
+        });
+    });
+    
+    if([_MembershipprivilegesDic[@"Level_id"] integerValue] == 1)
+    {
+        membershipNameLabel.text = @"普通会员";
+        [gradeBtn setTitle:@"如何升级到白银会员" forState:UIControlStateNormal];
+    }
+    else if([_MembershipprivilegesDic[@"Level_id"] integerValue] == 2)
+    {
+        membershipNameLabel.text = @"白银会员";
+        [gradeBtn setTitle:@"如何升级到黄金会员" forState:UIControlStateNormal];
+    }
+    else if([_MembershipprivilegesDic[@"Level_id"] integerValue] == 3)
+    {
+        membershipNameLabel.text = @"黄金会员";
+        [gradeBtn setTitle:@"如何升级到铂金会员" forState:UIControlStateNormal];
+    }
+    else if([_MembershipprivilegesDic[@"Level_id"] integerValue] == 4)
+    {
+        membershipNameLabel.text = @"铂金会员";
+        [gradeBtn setTitle:@"如何升级到钻石会员" forState:UIControlStateNormal];
+    }
+    else if([_MembershipprivilegesDic[@"Level_id"] integerValue] == 5)
+    {
+        membershipNameLabel.text = @"钻石会员";
+        [gradeBtn setTitle:@"如何升级到黑钻会员" forState:UIControlStateNormal];
+    }
+    else
+    {
+        membershipNameLabel.text = @"黑钻会员";
+        [gradeBtn setTitle:@"您已经是黑钻会员" forState:UIControlStateNormal];
+    }
     
 }
 

@@ -146,8 +146,8 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
     [self.rechargeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(titleView.mas_bottom).mas_offset(0);
-        make.left.equalTo(self.view).mas_offset(Main_Screen_Width*10/375);
-        make.right.equalTo(self.view).mas_offset(-Main_Screen_Width*10/375);
+        make.left.equalTo(self.view).mas_offset(Main_Screen_Width*37.5/375);
+        make.right.equalTo(self.view).mas_offset(-Main_Screen_Width*37.5/375);
         make.height.mas_equalTo(self.view.height);
     }];
     
@@ -155,7 +155,8 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     self.rechargeView.dataSource = self;
     
     [self.rechargeView registerNib:[UINib nibWithNibName:@"RechargeCell" bundle:nil] forCellReuseIdentifier:id_rechargeCell];
-    self.rechargeView.rowHeight = Main_Screen_Height*100/667;
+    self.rechargeView.rowHeight = Main_Screen_Height*192/667;
+    self.rechargeView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //self.rechargeView.backgroundColor = [UIColor whiteColor];
     
     UIView *blankView = [[UIView alloc] initWithFrame:CGRectMake(_activateTF.frame.origin.x,_activateTF.frame.origin.y,15.0, _activateTF.frame.size.height)];
@@ -214,9 +215,55 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     RechargeCell *cell = [tableView dequeueReusableCellWithIdentifier:id_rechargeCell forIndexPath:indexPath];
+    cell.contentView.backgroundColor = self.view.backgroundColor;
+    cell.backgroundColor = self.view.backgroundColor;
+    
+    CardBag *card = (CardBag *)[_CardbagData objectAtIndex:indexPath.section];
+    
+    cell.CardnameLabel.text = card.CardName;
+    cell.CarddesLabel.text = [NSString stringWithFormat:@"%@ 免费洗车%ld次",card.Description,card.CardCount];
     
     
+    
+    
+    
+    cell.CardTimeLabel.text = [NSString stringWithFormat:@"有效期: %@-%@",[self DateZhuan:card.ExpStartDates],[self DateZhuan:card.ExpEndDates]];
+    
+    if(card.CardUseState == 2)
+    {
+        cell.CardnameLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+        cell.tagLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+        cell.CarddesLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+        cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yishiyong"];
+        
+    }
+    else if(card.CardUseState == 3)
+    {
+        cell.CardnameLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+        cell.tagLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+        cell.CarddesLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+        cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yiguoqi"];
+    }
+    
+    
+    
+    
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+-(NSString *)DateZhuan:(NSString *)string
+{
+    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    [inputFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate*inputDate = [inputFormatter dateFromString:string];
+    NSDateFormatter*outputFormatter = [[NSDateFormatter alloc] init];
+    [outputFormatter setLocale:[NSLocale currentLocale]];
+    [outputFormatter setDateFormat:@"yyyy.MM.dd"];
+    NSString*str = [outputFormatter stringFromDate:inputDate];
+    return str;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -229,10 +276,11 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     return 0.1;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPat{
-    
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    CardBag *card = (CardBag *)[_CardbagData objectAtIndex:indexPath.section];
     RechargeDetailController *rechargeDetailVC = [[RechargeDetailController alloc] init];
     rechargeDetailVC.hidesBottomBarWhenPushed = YES;
+    rechargeDetailVC.card = card;
     [self.navigationController pushViewController:rechargeDetailVC animated:YES];
     
 }
