@@ -13,7 +13,12 @@
 //#import "RechargeController.h"
 #import "RechargeCell.h"
 #import "RechargeDetailController.h"
-
+#import "HTTPDefine.h"
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "MBProgressHUD.h"
+#import "UdStorage.h"
+#import "CardBag.h"
 
 @interface DSCardGroupController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -25,6 +30,8 @@
 @property (nonatomic, weak) UITextField *activateTF;
 @property (nonatomic, weak) UIButton *activateBtn;
 @property (nonatomic, weak) UITableView *rechargeView;
+
+@property (nonatomic, strong) NSMutableArray *CardbagData;
 
 @end
 
@@ -95,8 +102,11 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self setupUI];
+    
+    _CardbagData = [[NSMutableArray alloc]init];
+    [self GetCardbagList];
     
 }
 
@@ -154,10 +164,46 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
 }
 
+-(void)GetCardbagList
+{
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardInfoList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+            for(NSDictionary *dic in arr)
+            {
+                CardBag *model = [CardBag new];
+                [model setValuesForKeysWithDictionary:dic];
+                [_CardbagData addObject:model];
+            }
+            [_rechargeView reloadData];
+        }
+        else
+        {
+            [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }];
+
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 2;
+    return [_CardbagData count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

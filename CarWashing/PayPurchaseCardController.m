@@ -280,7 +280,15 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     else if (indexPath.section == 0 && indexPath.row == 2) {
         
         cell.textLabel.text  = @"有效期";
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"即日起至%@",self.choosecard.ExpiredTimes];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate *datenow = [NSDate date];
+//        NSString *currentTimeString = [formatter stringFromDate:datenow];
+//        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+//        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+//        NSDate *myDate = [dateFormatter dateFromString:currentTimeString];
+        NSDate *newDate = [datenow dateByAddingTimeInterval:60 * 60 * 24 * self.choosecard.ExpiredDay];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"即日起至%@",[formatter stringFromDate:newDate]];
         
         cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
