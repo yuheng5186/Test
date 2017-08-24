@@ -74,19 +74,64 @@
         
         [self dismissViewControllerAnimated:NO completion:nil];
     }];
+    
+    if ([self.delegate respondsToSelector:@selector(setTabBarIsHide:)]) {
+        
+        UIViewController *vc = [[UIViewController alloc] init];
+        [self.delegate setTabBarIsHide:vc];
+    }
 }
 
 
 - (IBAction)shareWechatFriendsBtn:(UIButton *)sender {
+    
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.text                = @"简单文本分享测试";
+    req.bText               = YES;
+    // 目标场景
+    // 发送到聊天界面  WXSceneSession
+    // 发送到朋友圈    WXSceneTimeline
+    // 发送到微信收藏  WXSceneFavorite
+    req.scene               = WXSceneSession;
+    [WXApi sendReq:req];
 }
 
 
 
 - (IBAction)shareWechatPYQBtn:(UIButton *)sender {
+    
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.text                = @"简单文本分享测试";
+    req.bText               = YES;
+    // 目标场景
+    // 发送到聊天界面  WXSceneSession
+    // 发送到朋友圈    WXSceneTimeline
+    // 发送到微信收藏  WXSceneFavorite
+    req.scene               = WXSceneTimeline;
+    [WXApi sendReq:req];
 }
 
 
 - (IBAction)cancelButton:(UIButton *)sender {
+    
+    //更改视图
+    self.shareView.frame = CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 230*Main_Screen_Height/667);
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        [self.view layoutIfNeeded];
+        
+    } completion:^(BOOL finished) {
+        
+        [self dismissViewControllerAnimated:NO completion:nil];
+    }];
+    
+    
+    if ([self.delegate respondsToSelector:@selector(setTabBarIsHide:)]) {
+        
+        UIViewController *vc = [[UIViewController alloc] init];
+        [self.delegate setTabBarIsHide:vc];
+    }
 }
 
 
