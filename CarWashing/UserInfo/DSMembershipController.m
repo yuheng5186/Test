@@ -82,8 +82,9 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     self.exchangListView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.exchangListView.delegate = self;
     self.exchangListView.dataSource = self;
-    self.exchangListView.rowHeight = 90*Main_Screen_Height/667;
+    self.exchangListView.rowHeight = 192*Main_Screen_Height/667;
     self.exchangListView.backgroundColor = [UIColor whiteColor];
+    self.exchangListView.showsVerticalScrollIndicator = NO;
     
     [self.exchangListView registerClass:[GoodsExchangeCell class] forCellReuseIdentifier:id_exchangeCell];
     
@@ -111,8 +112,8 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     [_exchangListView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(exchangeView.mas_bottom);
         make.bottom.equalTo(self.view);
-        make.left.equalTo(self.view).mas_equalTo(10*Main_Screen_Height/667);
-        make.right.equalTo(self.view).mas_equalTo(-10*Main_Screen_Height/667);
+        make.left.equalTo(self.view).mas_equalTo(30*Main_Screen_Height/667);
+        make.right.equalTo(self.view).mas_equalTo(-30*Main_Screen_Height/667);
     }];
     
 }
@@ -173,7 +174,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GoodsExchangeCell *changeCell = [tableView dequeueReusableCellWithIdentifier:id_exchangeCell forIndexPath:indexPath];
     
-    
+    changeCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     
     return changeCell;
