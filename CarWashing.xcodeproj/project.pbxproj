@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0401E8CA1F4E674700F0CA79 /* DSStartWashingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0401E8C91F4E674700F0CA79 /* DSStartWashingController.m */; };
+		0401E8CD1F4E67AE00F0CA79 /* DSCompleteWashingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0401E8CC1F4E67AE00F0CA79 /* DSCompleteWashingController.m */; };
 		1805AC831F38090D00FD0844 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC821F38090D00FD0844 /* LoginViewController.m */; };
 		1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC851F385C8600FD0844 /* DSAgreementController.m */; };
 		1805AC901F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC891F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.m */; };
@@ -126,6 +128,8 @@
 		18A4B22A1F4D6CAB00C64978 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B2281F4D6CAB00C64978 /* README.md */; };
 		18A4B22D1F4D7D6E00C64978 /* ShareWeChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B22C1F4D7D6E00C64978 /* ShareWeChatController.m */; };
 		18A4B2301F4D832300C64978 /* ShareWechatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B22F1F4D832300C64978 /* ShareWechatView.m */; };
+		18A4B23A1F4E9F2200C64978 /* CLLocation+YCLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B2391F4E9F2200C64978 /* CLLocation+YCLocation.m */; };
+		18A4B23D1F4E9F3600C64978 /* JXMapNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B23C1F4E9F3600C64978 /* JXMapNavigationView.m */; };
 		18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A11F21A44F009FF73A /* DSMessageDetailController.m */; };
 		18B697A51F21A87F009FF73A /* DSScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A41F21A87F009FF73A /* DSScanController.m */; };
 		18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A71F21D420009FF73A /* DSCardGroupController.m */; };
@@ -261,6 +265,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0401E8C81F4E674700F0CA79 /* DSStartWashingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSStartWashingController.h; path = Home/DSStartWashingController.h; sourceTree = "<group>"; };
+		0401E8C91F4E674700F0CA79 /* DSStartWashingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSStartWashingController.m; path = Home/DSStartWashingController.m; sourceTree = "<group>"; };
+		0401E8CB1F4E67AE00F0CA79 /* DSCompleteWashingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSCompleteWashingController.h; path = Home/DSCompleteWashingController.h; sourceTree = "<group>"; };
+		0401E8CC1F4E67AE00F0CA79 /* DSCompleteWashingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSCompleteWashingController.m; path = Home/DSCompleteWashingController.m; sourceTree = "<group>"; };
 		06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CarWashing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1805AC811F38090D00FD0844 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = UserInfo/LoginViewController.h; sourceTree = "<group>"; };
 		1805AC821F38090D00FD0844 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = UserInfo/LoginViewController.m; sourceTree = "<group>"; };
@@ -496,6 +504,10 @@
 		18A4B22C1F4D7D6E00C64978 /* ShareWeChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareWeChatController.m; sourceTree = "<group>"; };
 		18A4B22E1F4D832300C64978 /* ShareWechatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareWechatView.h; sourceTree = "<group>"; };
 		18A4B22F1F4D832300C64978 /* ShareWechatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareWechatView.m; sourceTree = "<group>"; };
+		18A4B2381F4E9F2200C64978 /* CLLocation+YCLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+YCLocation.h"; sourceTree = "<group>"; };
+		18A4B2391F4E9F2200C64978 /* CLLocation+YCLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+YCLocation.m"; sourceTree = "<group>"; };
+		18A4B23B1F4E9F3600C64978 /* JXMapNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXMapNavigationView.h; sourceTree = "<group>"; };
+		18A4B23C1F4E9F3600C64978 /* JXMapNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXMapNavigationView.m; sourceTree = "<group>"; };
 		18B697A01F21A44F009FF73A /* DSMessageDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMessageDetailController.h; path = Home/DSMessageDetailController.h; sourceTree = "<group>"; };
 		18B697A11F21A44F009FF73A /* DSMessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMessageDetailController.m; path = Home/DSMessageDetailController.m; sourceTree = "<group>"; };
 		18B697A31F21A87F009FF73A /* DSScanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSScanController.h; path = Home/DSScanController.h; sourceTree = "<group>"; };
@@ -826,6 +838,7 @@
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				18A4B2371F4E9F0400C64978 /* MapNavigationView */,
 				18A4B2241F4D6CAB00C64978 /* AutoSizeToDevice-master */,
 				1850904D1F4558AC00795E0A /* Blur Effects */,
 				1850902F1F4557E100795E0A /* TYAlertController */,
@@ -1052,6 +1065,10 @@
 				18A4B22F1F4D832300C64978 /* ShareWechatView.m */,
 				180E432A1F417E3500013D2D /* DSAddShopController.h */,
 				180E432B1F417E3500013D2D /* DSAddShopController.m */,
+				0401E8C81F4E674700F0CA79 /* DSStartWashingController.h */,
+				0401E8C91F4E674700F0CA79 /* DSStartWashingController.m */,
+				0401E8CB1F4E67AE00F0CA79 /* DSCompleteWashingController.h */,
+				0401E8CC1F4E67AE00F0CA79 /* DSCompleteWashingController.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1237,6 +1254,17 @@
 				18A4B2271F4D6CAB00C64978 /* UIView+AutoSizeToDevice.m */,
 			);
 			path = AutoSizeToDevice;
+			sourceTree = "<group>";
+		};
+		18A4B2371F4E9F0400C64978 /* MapNavigationView */ = {
+			isa = PBXGroup;
+			children = (
+				18A4B2381F4E9F2200C64978 /* CLLocation+YCLocation.h */,
+				18A4B2391F4E9F2200C64978 /* CLLocation+YCLocation.m */,
+				18A4B23B1F4E9F3600C64978 /* JXMapNavigationView.h */,
+				18A4B23C1F4E9F3600C64978 /* JXMapNavigationView.m */,
+			);
+			name = MapNavigationView;
 			sourceTree = "<group>";
 		};
 		18B697A91F21DA60009FF73A /* Find */ = {
@@ -1897,6 +1925,7 @@
 				181E92CC1F1F39CC0006511E /* UIColor+HexColor.m in Sources */,
 				18B69EC01F346A3F007DA0E4 /* DSScanQRCodeController.m in Sources */,
 				50CAA6A11F41AB0300138CEF /* EarnScoreController.m in Sources */,
+				0401E8CA1F4E674700F0CA79 /* DSStartWashingController.m in Sources */,
 				5097FE131F2F4173002EF8F8 /* JPCityViewController.m in Sources */,
 				185090461F4557E100795E0A /* TYAlertFadeAnimation.m in Sources */,
 				180E42E91F3AB37D00013D2D /* YzdHUDImageView.m in Sources */,
@@ -1911,6 +1940,7 @@
 				5097FE1A1F2F4335002EF8F8 /* MyCarViewCell.m in Sources */,
 				188907121F2730F4009E20B0 /* DSUpdateRuleController.m in Sources */,
 				181E92CB1F1F39CC0006511E /* UIColor+Additions.m in Sources */,
+				0401E8CD1F4E67AE00F0CA79 /* DSCompleteWashingController.m in Sources */,
 				50E2EE851F1F4D3C00FAF130 /* YZSortViewController.m in Sources */,
 				18B697A51F21A87F009FF73A /* DSScanController.m in Sources */,
 				18322ABD1F4D7D8B003ABB7B /* UILabel+StringFrame.m in Sources */,
@@ -1994,6 +2024,7 @@
 				182190091F301BF600F7207F /* DSActivityDetailCell.m in Sources */,
 				180E43221F3D836F00013D2D /* WeixinActivity.m in Sources */,
 				1805AC911F386FA800FD0844 /* TPKeyboardAvoidingScrollView.m in Sources */,
+				18A4B23A1F4E9F2200C64978 /* CLLocation+YCLocation.m in Sources */,
 				1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */,
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
 				1850904A1F4557E100795E0A /* TYShowAlertView.m in Sources */,
@@ -2009,6 +2040,7 @@
 				50B26EA61F315E9B009B3B9F /* AllOrderController.m in Sources */,
 				181E93071F208D560006511E /* DSRecommendController.m in Sources */,
 				1850904B1F4557E100795E0A /* UIView+TYAlertView.m in Sources */,
+				18A4B23D1F4E9F3600C64978 /* JXMapNavigationView.m in Sources */,
 				180E43041F3B471100013D2D /* UIView+BFSToastInfo.m in Sources */,
 				500C6BF51F3B5B13007D34A1 /* BusinessMapController.m in Sources */,
 				50B26EA01F30819D009B3B9F /* RechargeDetailController.m in Sources */,

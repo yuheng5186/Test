@@ -7,12 +7,15 @@
 //
 
 #import "AnswerCell.h"
+#import "UIView+AutoSizeToDevice.h"
 
 @implementation AnswerCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.textViewLabel.userInteractionEnabled = NO;
+    
+    self.dg_viewAutoSizeToDevice = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -18,6 +18,8 @@
 
 @property (nonatomic, weak) UITableView *serviceListView;
 
+@property (nonatomic, weak) HQSliderView *serviceSliderView;
+
 /** 记录点击的是第几个Button */
 @property (nonatomic, assign) NSInteger serviceTag;
 
@@ -70,7 +72,7 @@
     
     [self setupTopServiceSliderView];
     
-    UITableView *serviceListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 44*Main_Screen_Height/667, Main_Screen_Width, Main_Screen_Height)];
+    UITableView *serviceListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 44, Main_Screen_Width, Main_Screen_Height - 64 - (44+60)*Main_Screen_Height/667)];
     serviceListView.delegate = self;
     serviceListView.dataSource = self;
     [self.view addSubview:serviceListView];
@@ -94,9 +96,15 @@
     [phoneBtn setImage:[UIImage imageNamed:@"kefuzixun"] forState:UIControlStateNormal];
     [bottomPhoneView addSubview:phoneBtn];
     
+//    [serviceListView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(_serviceSliderView.mas_bottom);
+//        make.width.mas_equalTo(Main_Screen_Width);
+//    }];
+    
     [bottomPhoneView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
         make.height.mas_equalTo(60*Main_Screen_Height/667);
+        
     }];
     
     [phoneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -123,6 +131,7 @@
 - (void)setupTopServiceSliderView {
     
     HQSliderView *serviceSliderView = [[HQSliderView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 44*Main_Screen_Height/667)];
+    _serviceSliderView = serviceSliderView;
     serviceSliderView.titleArr = @[@"常见问题",@"车型疑问",@"APP使用"];
     serviceSliderView.delegate = self;
     [self.view addSubview:serviceSliderView];
@@ -163,7 +172,7 @@
     
     serviceCell.textViewLabel.text = answerModel.answer;
     
-    self.textSize = [self getLabelSizeFortextFont:[UIFont systemFontOfSize:15*Main_Screen_Height/667] textLabel:answerModel.answer];
+    self.textSize = [self getLabelSizeFortextFont:[UIFont systemFontOfSize:15] textLabel:answerModel.answer];
     
     
     //    if (serviceCell == nil) {
@@ -203,7 +212,7 @@
 
 - (CGSize)getLabelSizeFortextFont:(UIFont *)font textLabel:(NSString *)text{
     NSDictionary * totalMoneydic = [NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName,nil];
-    CGSize totalMoneySize =[text boundingRectWithSize:CGSizeMake(Main_Screen_Width-16,1000) options:NSStringDrawingUsesLineFragmentOrigin  attributes:totalMoneydic context:nil].size;
+    CGSize totalMoneySize =[text boundingRectWithSize:CGSizeMake(Main_Screen_Width-16,2000) options:NSStringDrawingUsesLineFragmentOrigin  attributes:totalMoneydic context:nil].size;
     return totalMoneySize;
 }
 

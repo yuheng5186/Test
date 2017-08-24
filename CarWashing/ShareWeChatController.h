@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SetTabBarDelegate <NSObject>
+
+- (void)setTabBarIsHide:(UIViewController *)VC;
+
+@end
+
 @interface ShareWeChatController : UIViewController
 
+@property (nonatomic, weak) id<SetTabBarDelegate> delegate;
 
 @end
