@@ -10,4 +10,6 @@
 
 @interface DSUserRightDetailController : BaseController
 
+@property(nonatomic,copy)NSString *ConfigCode;
+
 @end

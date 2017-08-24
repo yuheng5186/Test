@@ -273,6 +273,7 @@
     
     DSUserRightDetailController *rightController    = [[DSUserRightDetailController alloc]init];
     rightController.hidesBottomBarWhenPushed        = YES;
+    rightController.ConfigCode                      = [[_CouponListData objectAtIndex:indexPath.section] objectForKey:@"ConfigCode"];
     [self.navigationController pushViewController:rightController animated:YES];
 }
 

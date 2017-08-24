@@ -80,6 +80,7 @@
 		18322ABA1F4D7A5D003ABB7B /* QWMclistTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB91F4D7A5D003ABB7B /* QWMclistTableViewCell.m */; };
 		18322ABD1F4D7D8B003ABB7B /* UILabel+StringFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322ABC1F4D7D8B003ABB7B /* UILabel+StringFrame.m */; };
 		18322AC01F4D950C003ABB7B /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322ABF1F4D950C003ABB7B /* Card.m */; };
+		18322AC31F4EC157003ABB7B /* CardBag.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AC21F4EC157003ABB7B /* CardBag.m */; };
 		183997651F2586D300702071 /* ActivityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183997631F2586D300702071 /* ActivityListCell.m */; };
 		183997661F2586D300702071 /* ActivityListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183997641F2586D300702071 /* ActivityListCell.xib */; };
 		1839979F1F25E69100702071 /* DSPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1839979E1F25E69100702071 /* DSPasswordController.m */; };
@@ -412,6 +413,8 @@
 		18322ABC1F4D7D8B003ABB7B /* UILabel+StringFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+StringFrame.m"; path = "Tool/UILabel+StringFrame.m"; sourceTree = "<group>"; };
 		18322ABE1F4D950C003ABB7B /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		18322ABF1F4D950C003ABB7B /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		18322AC11F4EC157003ABB7B /* CardBag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardBag.h; sourceTree = "<group>"; };
+		18322AC21F4EC157003ABB7B /* CardBag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardBag.m; sourceTree = "<group>"; };
 		183997621F2586D300702071 /* ActivityListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityListCell.h; path = Find/CustomCell/ActivityListCell.h; sourceTree = "<group>"; };
 		183997631F2586D300702071 /* ActivityListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityListCell.m; path = Find/CustomCell/ActivityListCell.m; sourceTree = "<group>"; };
 		183997641F2586D300702071 /* ActivityListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActivityListCell.xib; path = Find/CustomCell/ActivityListCell.xib; sourceTree = "<group>"; };
@@ -1078,6 +1081,8 @@
 			children = (
 				18322AAD1F4AD1C7003ABB7B /* Carcircle.h */,
 				18322AAE1F4AD1C7003ABB7B /* Carcircle.m */,
+				18322AC11F4EC157003ABB7B /* CardBag.h */,
+				18322AC21F4EC157003ABB7B /* CardBag.m */,
 			);
 			name = model;
 			path = Home/model;
@@ -1952,6 +1957,7 @@
 				501672101F297A3500384186 /* ShopViewController.m in Sources */,
 				181E93041F208C520006511E /* DSMyCardController.m in Sources */,
 				18B69EA61F32CB52007DA0E4 /* ZFMaskView.m in Sources */,
+				18322AC31F4EC157003ABB7B /* CardBag.m in Sources */,
 				50B26E961F307B76009B3B9F /* RechargeController.m in Sources */,
 				18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */,
 				180E43271F414A5E00013D2D /* PopHelpView.m in Sources */,
