@@ -22,8 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *sayButton;
 
 
-- (IBAction)goodButtonClick:(id)sender;
-- (IBAction)sayButtonClick:(id)sender;
+
 
 
 @end

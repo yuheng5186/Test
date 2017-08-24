@@ -41,7 +41,7 @@ static NSString *id_carListCell = @"id_carListCell";
     
     if (_carListView == nil) {
         
-        UITableView *carListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height)];
+        UITableView *carListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 64 - (48+25+25)*Main_Screen_Height/667)];
         _carListView = carListView;
         [self.view addSubview:_carListView];
     }
@@ -142,7 +142,6 @@ static NSString *id_carListCell = @"id_carListCell";
 #pragma maek-空白页
     self.carListView.emptyDataSetSource = self;
     self.carListView.emptyDataSetDelegate = self;
-    self.carListView.contentInset     = UIEdgeInsetsMake(0, 0, 180, 0);
     [self.carListView registerNib:[UINib nibWithNibName:@"MyCarViewCell" bundle:nil] forCellReuseIdentifier:id_carListCell];
     
     

@@ -18,6 +18,7 @@
 @property NSInteger CommentCount;//评论次数
 @property NSInteger GiveCount;//点赞次数
 @property (copy, nonatomic)NSString *FromusrName;//文章作者
+@property (copy, nonatomic)NSString *FromusrImg;//文章作者
 @property (copy, nonatomic)NSString *IndexImg;//首页图片
 @property (copy, nonatomic)NSString *ActDate;//创建时间
 @property (nonatomic)NSInteger IsGive;//是否点赞

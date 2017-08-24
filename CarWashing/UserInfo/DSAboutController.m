@@ -81,10 +81,10 @@
     
     
     NSString *copyrightlName              = @"Copyright2014-2017金顶版权所有  沪ICP备";
-    UIFont *copyrightlNameFont            = [UIFont boldSystemFontOfSize:Main_Screen_Height*16/667];
+    UIFont *copyrightlNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
     UILabel *copyrightlNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:copyrightlName font:copyrightlNameFont] font:copyrightlNameFont text:copyrightlName isCenter:NO];
     copyrightlNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
-    copyrightlNameLabel.top               = updateRuleButton.bottom +Main_Screen_Height*15/667;
+    copyrightlNameLabel.top               = updateRuleButton.bottom +Main_Screen_Height*5/667;
     copyrightlNameLabel.centerX           = appImageView.centerX;
     
 }

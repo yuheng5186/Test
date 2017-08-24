@@ -140,8 +140,21 @@
     _contentLabel.text      = model.Comment;
     _sayTimeLabel.text      = model.CommentDate;
 //    _starImageView.image    = [UIImage imageNamed:model.starName];
-    
+
     [_ThumbUpBtn setTitle:[NSString stringWithFormat:@"%ld",model.Support] forState:UIControlStateNormal];
+    if(model.IsGive == 1)
+    {
+        [_ThumbUpBtn setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
+        _ThumbUpBtn.selected = YES;
+    }
+    else
+    {
+        [_ThumbUpBtn setImage:[UIImage imageNamed:@"pinglundianzan"] forState:UIControlStateNormal];
+        _ThumbUpBtn.selected = NO;
+    }
+    
+    
+
     CGFloat bottomMargin = 10;
     
     

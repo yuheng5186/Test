@@ -18,7 +18,7 @@
 @property (nonatomic, copy) NSString *CommentUserImg;
 @property (nonatomic, copy) NSString *CommentUserName;
 @property (nonatomic) id<Optional> IsAudite;
-@property (nonatomic) id<Optional> IsGive;
+@property (nonatomic) NSInteger IsGive;
 @property (nonatomic) NSInteger PageIndex;
 
 @property (nonatomic) id<Optional> PageSize;

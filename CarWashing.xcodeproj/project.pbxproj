@@ -75,6 +75,9 @@
 		18322AAF1F4AD1C7003ABB7B /* Carcircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AAE1F4AD1C7003ABB7B /* Carcircle.m */; };
 		18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB21F4AD6DC003ABB7B /* MyCar.m */; };
 		18322AB71F4C2226003ABB7B /* CarClubNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB61F4C2226003ABB7B /* CarClubNews.m */; };
+		18322ABA1F4D7A5D003ABB7B /* QWMclistTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB91F4D7A5D003ABB7B /* QWMclistTableViewCell.m */; };
+		18322ABD1F4D7D8B003ABB7B /* UILabel+StringFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322ABC1F4D7D8B003ABB7B /* UILabel+StringFrame.m */; };
+		18322AC01F4D950C003ABB7B /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322ABF1F4D950C003ABB7B /* Card.m */; };
 		183997651F2586D300702071 /* ActivityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183997631F2586D300702071 /* ActivityListCell.m */; };
 		183997661F2586D300702071 /* ActivityListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183997641F2586D300702071 /* ActivityListCell.xib */; };
 		1839979F1F25E69100702071 /* DSPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1839979E1F25E69100702071 /* DSPasswordController.m */; };
@@ -119,6 +122,10 @@
 		18A4B1B11F4AAB5200C64978 /* HowToUpGradeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B1B01F4AAB5200C64978 /* HowToUpGradeController.m */; };
 		18A4B1B41F4AAB7800C64978 /* WayToUpGradeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B1B31F4AAB7800C64978 /* WayToUpGradeCell.m */; };
 		18A4B1B71F4BF9C800C64978 /* MemberRightsDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B1B61F4BF9C800C64978 /* MemberRightsDetailController.m */; };
+		18A4B2291F4D6CAB00C64978 /* UIView+AutoSizeToDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B2271F4D6CAB00C64978 /* UIView+AutoSizeToDevice.m */; };
+		18A4B22A1F4D6CAB00C64978 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B2281F4D6CAB00C64978 /* README.md */; };
+		18A4B22D1F4D7D6E00C64978 /* ShareWeChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B22C1F4D7D6E00C64978 /* ShareWeChatController.m */; };
+		18A4B2301F4D832300C64978 /* ShareWechatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B22F1F4D832300C64978 /* ShareWechatView.m */; };
 		18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A11F21A44F009FF73A /* DSMessageDetailController.m */; };
 		18B697A51F21A87F009FF73A /* DSScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A41F21A87F009FF73A /* DSScanController.m */; };
 		18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A71F21D420009FF73A /* DSCardGroupController.m */; };
@@ -391,6 +398,12 @@
 		18322AB21F4AD6DC003ABB7B /* MyCar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCar.m; sourceTree = "<group>"; };
 		18322AB51F4C2226003ABB7B /* CarClubNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarClubNews.h; sourceTree = "<group>"; };
 		18322AB61F4C2226003ABB7B /* CarClubNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarClubNews.m; sourceTree = "<group>"; };
+		18322AB81F4D7A5D003ABB7B /* QWMclistTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWMclistTableViewCell.h; sourceTree = "<group>"; };
+		18322AB91F4D7A5D003ABB7B /* QWMclistTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWMclistTableViewCell.m; sourceTree = "<group>"; };
+		18322ABB1F4D7D8B003ABB7B /* UILabel+StringFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+StringFrame.h"; path = "Tool/UILabel+StringFrame.h"; sourceTree = "<group>"; };
+		18322ABC1F4D7D8B003ABB7B /* UILabel+StringFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+StringFrame.m"; path = "Tool/UILabel+StringFrame.m"; sourceTree = "<group>"; };
+		18322ABE1F4D950C003ABB7B /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		18322ABF1F4D950C003ABB7B /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
 		183997621F2586D300702071 /* ActivityListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityListCell.h; path = Find/CustomCell/ActivityListCell.h; sourceTree = "<group>"; };
 		183997631F2586D300702071 /* ActivityListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityListCell.m; path = Find/CustomCell/ActivityListCell.m; sourceTree = "<group>"; };
 		183997641F2586D300702071 /* ActivityListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActivityListCell.xib; path = Find/CustomCell/ActivityListCell.xib; sourceTree = "<group>"; };
@@ -476,6 +489,13 @@
 		18A4B1B31F4AAB7800C64978 /* WayToUpGradeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayToUpGradeCell.m; sourceTree = "<group>"; };
 		18A4B1B51F4BF9C800C64978 /* MemberRightsDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberRightsDetailController.h; sourceTree = "<group>"; };
 		18A4B1B61F4BF9C800C64978 /* MemberRightsDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberRightsDetailController.m; sourceTree = "<group>"; };
+		18A4B2261F4D6CAB00C64978 /* UIView+AutoSizeToDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoSizeToDevice.h"; sourceTree = "<group>"; };
+		18A4B2271F4D6CAB00C64978 /* UIView+AutoSizeToDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoSizeToDevice.m"; sourceTree = "<group>"; };
+		18A4B2281F4D6CAB00C64978 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		18A4B22B1F4D7D6E00C64978 /* ShareWeChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareWeChatController.h; sourceTree = "<group>"; };
+		18A4B22C1F4D7D6E00C64978 /* ShareWeChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareWeChatController.m; sourceTree = "<group>"; };
+		18A4B22E1F4D832300C64978 /* ShareWechatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareWechatView.h; sourceTree = "<group>"; };
+		18A4B22F1F4D832300C64978 /* ShareWechatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareWechatView.m; sourceTree = "<group>"; };
 		18B697A01F21A44F009FF73A /* DSMessageDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMessageDetailController.h; path = Home/DSMessageDetailController.h; sourceTree = "<group>"; };
 		18B697A11F21A44F009FF73A /* DSMessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMessageDetailController.m; path = Home/DSMessageDetailController.m; sourceTree = "<group>"; };
 		18B697A31F21A87F009FF73A /* DSScanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSScanController.h; path = Home/DSScanController.h; sourceTree = "<group>"; };
@@ -806,6 +826,7 @@
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				18A4B2241F4D6CAB00C64978 /* AutoSizeToDevice-master */,
 				1850904D1F4558AC00795E0A /* Blur Effects */,
 				1850902F1F4557E100795E0A /* TYAlertController */,
 				185090291F45573F00795E0A /* ShareView */,
@@ -821,6 +842,8 @@
 				1853BA311F28A01600B98C7F /* JFCityViewController */,
 				1853BA0A1F28774400B98C7F /* LKActionSheet.h */,
 				1853BA0B1F28774400B98C7F /* LKActionSheet.m */,
+				18322ABB1F4D7D8B003ABB7B /* UILabel+StringFrame.h */,
+				18322ABC1F4D7D8B003ABB7B /* UILabel+StringFrame.m */,
 				1853BA071F28674F00B98C7F /* LKAlertView.h */,
 				1853BA081F28674F00B98C7F /* LKAlertView.m */,
 				181E93271F20B0510006511E /* SXScrPageView.h */,
@@ -1023,6 +1046,10 @@
 				180E43061F3C5C2D00013D2D /* DSDownloadController.m */,
 				180E43081F3C741100013D2D /* DSShareGetMoneyController.h */,
 				180E43091F3C741100013D2D /* DSShareGetMoneyController.m */,
+				18A4B22B1F4D7D6E00C64978 /* ShareWeChatController.h */,
+				18A4B22C1F4D7D6E00C64978 /* ShareWeChatController.m */,
+				18A4B22E1F4D832300C64978 /* ShareWechatView.h */,
+				18A4B22F1F4D832300C64978 /* ShareWechatView.m */,
 				180E432A1F417E3500013D2D /* DSAddShopController.h */,
 				180E432B1F417E3500013D2D /* DSAddShopController.m */,
 			);
@@ -1194,6 +1221,24 @@
 			path = Tool/CustomSlider;
 			sourceTree = "<group>";
 		};
+		18A4B2241F4D6CAB00C64978 /* AutoSizeToDevice-master */ = {
+			isa = PBXGroup;
+			children = (
+				18A4B2251F4D6CAB00C64978 /* AutoSizeToDevice */,
+				18A4B2281F4D6CAB00C64978 /* README.md */,
+			);
+			path = "AutoSizeToDevice-master";
+			sourceTree = "<group>";
+		};
+		18A4B2251F4D6CAB00C64978 /* AutoSizeToDevice */ = {
+			isa = PBXGroup;
+			children = (
+				18A4B2261F4D6CAB00C64978 /* UIView+AutoSizeToDevice.h */,
+				18A4B2271F4D6CAB00C64978 /* UIView+AutoSizeToDevice.m */,
+			);
+			path = AutoSizeToDevice;
+			sourceTree = "<group>";
+		};
 		18B697A91F21DA60009FF73A /* Find */ = {
 			isa = PBXGroup;
 			children = (
@@ -1327,6 +1372,8 @@
 			children = (
 				181E92D31F1F3B900006511E /* BusinessViewController.h */,
 				181E92D41F1F3B900006511E /* BusinessViewController.m */,
+				18322AB81F4D7A5D003ABB7B /* QWMclistTableViewCell.h */,
+				18322AB91F4D7A5D003ABB7B /* QWMclistTableViewCell.m */,
 				501672001F29797600384186 /* BusinessDetailViewController.h */,
 				501672011F29797600384186 /* BusinessDetailViewController.m */,
 				500C6BF31F3B5B13007D34A1 /* BusinessMapController.h */,
@@ -1380,6 +1427,8 @@
 				50B26E631F300D60009B3B9F /* PayPurchaseCardController.m */,
 				501672171F297DA500384186 /* payCardDetailCell.h */,
 				501672181F297DA500384186 /* payCardDetailCell.m */,
+				18322ABE1F4D950C003ABB7B /* Card.h */,
+				18322ABF1F4D950C003ABB7B /* Card.m */,
 			);
 			name = Purchase;
 			sourceTree = "<group>";
@@ -1681,7 +1730,6 @@
 				TargetAttributes = {
 					18B803711F1DA2A300B52432 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 6AWGM9A2YP;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -1856,6 +1904,7 @@
 				5094A6251F3447CD00407808 /* BusinessEstimateCell.m in Sources */,
 				18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */,
 				181E92F21F20848D0006511E /* DSOrderController.m in Sources */,
+				18322ABA1F4D7A5D003ABB7B /* QWMclistTableViewCell.m in Sources */,
 				185090481F4557E100795E0A /* TYAlertView.m in Sources */,
 				18B697B51F21DBCE009FF73A /* DSWheelGroupController.m in Sources */,
 				185090491F4557E100795E0A /* TYBaseAnimation.m in Sources */,
@@ -1864,6 +1913,7 @@
 				181E92CB1F1F39CC0006511E /* UIColor+Additions.m in Sources */,
 				50E2EE851F1F4D3C00FAF130 /* YZSortViewController.m in Sources */,
 				18B697A51F21A87F009FF73A /* DSScanController.m in Sources */,
+				18322ABD1F4D7D8B003ABB7B /* UILabel+StringFrame.m in Sources */,
 				1853BA091F28674F00B98C7F /* LKAlertView.m in Sources */,
 				18A4B1B11F4AAB5200C64978 /* HowToUpGradeController.m in Sources */,
 				50E2EE841F1F4D3C00FAF130 /* YZMenuButton.m in Sources */,
@@ -1926,6 +1976,7 @@
 				5094A6341F346E5800407808 /* DelayPayCell.m in Sources */,
 				18B803771F1DA2A300B52432 /* main.m in Sources */,
 				18B69E9C1F32CA71007DA0E4 /* ScanController.m in Sources */,
+				18A4B2291F4D6CAB00C64978 /* UIView+AutoSizeToDevice.m in Sources */,
 				5016724F1F2A023600384186 /* ScoreGetController.m in Sources */,
 				180E42DB1F39B97A00013D2D /* DSCarWashingActivityController.m in Sources */,
 				185090221F441AF500795E0A /* AFNetworkingTool+GetToken.m in Sources */,
@@ -2014,18 +2065,22 @@
 				180E42D81F39B8C200013D2D /* DSUserRightDetailController.m in Sources */,
 				185090531F4558AC00795E0A /* UIImage+ImageEffects.m in Sources */,
 				181E92D81F1F3BAE0006511E /* FindViewController.m in Sources */,
+				18A4B22A1F4D6CAB00C64978 /* README.md in Sources */,
 				180E42E71F3AB37D00013D2D /* UIWindow+YzdHUD.m in Sources */,
 				185090441F4557E100795E0A /* TYAlertController.m in Sources */,
 				180E43241F3D836F00013D2D /* WeixinTimelineActivity.m in Sources */,
 				501672461F29DA6C00384186 /* MemberRegualrController.m in Sources */,
+				18322AC01F4D950C003ABB7B /* Card.m in Sources */,
 				185090271F441BFA00795E0A /* UdStorage.m in Sources */,
 				1850901C1F43F19B00795E0A /* LCMD5Tool.m in Sources */,
+				18A4B2301F4D832300C64978 /* ShareWechatView.m in Sources */,
 				180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */,
 				5071B4811F381366009FFF67 /* OrderCommentController.m in Sources */,
 				181E93291F20B0510006511E /* SXScrPageView.m in Sources */,
 				5016724C1F2A020600384186 /* ScoreIntroController.m in Sources */,
 				18B69EA21F32CB48007DA0E4 /* UIColor+Zirkfied.m in Sources */,
 				185090521F4558AC00795E0A /* TYAlertController+BlurEffects.m in Sources */,
+				18A4B22D1F4D7D6E00C64978 /* ShareWeChatController.m in Sources */,
 				181E92E91F207FF60006511E /* DSSettingController.m in Sources */,
 				1850902D1F45573F00795E0A /* ShareView.m in Sources */,
 				181E92F81F2086620006511E /* DSExchangeController.m in Sources */,
@@ -2181,7 +2236,7 @@
 			baseConfigurationReference = 786364A9A4C81732835898A5 /* Pods-CarWashing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6AWGM9A2YP;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
@@ -2196,7 +2251,7 @@
 			baseConfigurationReference = 1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6AWGM9A2YP;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;

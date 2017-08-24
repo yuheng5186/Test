@@ -12,6 +12,9 @@
 #import "IQKeyboardManager.h"
 
 @interface AppDelegate ()
+{
+    AppDelegate *myDelegate;
+}
 
 @end
 
@@ -21,6 +24,19 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
+    myDelegate = [[UIApplication sharedApplication] delegate];
+    
+    if(Main_Screen_Height > 568)
+    {
+        myDelegate.autoSizeScaleX = Main_Screen_Width/375;
+        myDelegate.autoSizeScaleY = Main_Screen_Height/667;
+    }
+    else
+    {
+        myDelegate.autoSizeScaleX = Main_Screen_Width/375;
+        myDelegate.autoSizeScaleY = Main_Screen_Height/667;
+    }
+    
     [IQKeyboardManager sharedManager].enable = YES;
     [AMapServices sharedServices].apiKey = @"f6d2c4b2f6bbe466b2d1b1889783445e";
     
