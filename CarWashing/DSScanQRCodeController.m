@@ -10,6 +10,8 @@
 #import "DSExchangeController.h"
 #import "PopHelpView.h"
 #import "LewPopupViewAnimationDrop.h"
+#import "DSStartWashingController.h"
+
 @interface DSScanQRCodeController ()<AVCaptureMetadataOutputObjectsDelegate>
 
 @property (nonatomic, strong) AVCaptureSession *session;
@@ -114,7 +116,9 @@
 }
 - (void) inputButtonClcik:(UIButton *)sender {
 
-    
+    DSStartWashingController *startVC           = [[DSStartWashingController alloc]init];
+    startVC.hidesBottomBarWhenPushed            = YES;
+    [self.navigationController pushViewController:startVC animated:YES];
 }
 - (void) flashlightButtonClcik:(UIButton *)sender {
     
@@ -203,9 +207,9 @@
     NSString *imei                          = outMessage;
     
     if (imei != nil) {
-        DSExchangeController *exchangeVC        = [[DSExchangeController alloc]init];
-        exchangeVC.hidesBottomBarWhenPushed     = YES;
-        [self.navigationController pushViewController:exchangeVC animated:YES];
+        DSStartWashingController *startVC           = [[DSStartWashingController alloc]init];
+        startVC.hidesBottomBarWhenPushed            = YES;
+        [self.navigationController pushViewController:startVC animated:YES];
     }
 }
 

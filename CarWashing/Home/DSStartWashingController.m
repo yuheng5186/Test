@@ -152,9 +152,11 @@
     timeStrLabel.top              = washingCardLabel.bottom+Main_Screen_Height*2/667;
     
     
-    //    UIImageView *logoImageView  = [UIUtil drawCustomImgViewInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*100/667) imageName:@"guanggao33"];
-    
-    UIButton    *adButton       = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*100/667) iconName:@"guanggao33" target:self action:@selector(adButtonClick:)];
+    UIButton    *adButton       = [UIButton buttonWithType:UIButtonTypeCustom];
+    adButton.frame              = CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*100/667);
+    adButton.backgroundColor    = [UIColor redColor];
+    [adButton setBackgroundImage:[UIImage imageNamed:@"guanggao33"] forState:UIControlStateNormal];
+    [adButton addTarget:self action:@selector(adButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     //    logoImageView.bottom        = self.contentView.height -Main_Screen_Height*80/667;
     if (Main_Screen_Height == 568) {
@@ -168,13 +170,17 @@
     }
     
     adButton.centerX       = titleView.size.width/2;
+    [self.contentView addSubview:adButton];
+
     
-    
-    UIButton    *adPageButton       = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*100/667) iconName:@"guanggao11" target:self action:@selector(adPageButtonClick:)];
-    
-    
+    UIButton    *adPageButton       = [UIButton buttonWithType:UIButtonTypeCustom];
+    adPageButton.frame              = CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*100/667);
+    adPageButton.backgroundColor    = [UIColor redColor];
+    [adPageButton setBackgroundImage:[UIImage imageNamed:@"guanggao11"] forState:UIControlStateNormal];
+    [adPageButton addTarget:self action:@selector(adPageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     adPageButton.bottom        = adButton.top -Main_Screen_Height*10/667;
     adPageButton.centerX       = titleView.size.width/2;
+    [self.contentView addSubview:adPageButton];
     
 }
 

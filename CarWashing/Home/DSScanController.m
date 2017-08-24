@@ -12,7 +12,6 @@
 #import "LewPopupViewAnimationDrop.h"
 
 #import "DSStartWashingController.h"
-#import "DSStartWashingController.h"
 
 @interface DSScanController ()<AVCaptureMetadataOutputObjectsDelegate>
 
@@ -64,7 +63,7 @@
     titleNameLabel.centerY           = titleView.centerY +8;
     
     NSString  *helpString     = @"使用帮助";
-    UIFont    *helpStringFont = [UIFont systemFontOfSize:Main_Screen_Width*16/375];
+    UIFont    *helpStringFont = [UIFont systemFontOfSize:Main_Screen_Width*14/375];
     UIButton   *helpButton      = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) text:helpString font:helpStringFont color:[UIColor whiteColor] target:self action:@selector(helpButtonClick:)];
     helpButton.tintColor = [UIColor whiteColor];
     helpButton.centerY   = titleNameLabel.centerY;
