@@ -25,14 +25,12 @@
 #import "PopupView.h"
 #import "LewPopupViewAnimationDrop.h"
 
-#import "ShareView.h"
-#import "UIView+TYAlertView.h"
-#import "TYAlertController+BlurEffects.h"
+#import "ShareWeChatController.h"
 #import "HTTPDefine.h"
 #import "AppDelegate.h"
 
 
-@interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,LKAlertViewDelegate>
+@interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,SetTabBarDelegate>
 
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -387,19 +385,12 @@
 //            [self.navigationController pushViewController:myCardController animated:YES];
         }
     }else{
-//        DSRecommendController *recommendController              = [[DSRecommendController alloc]init];
-//        recommendController.hidesBottomBarWhenPushed            = YES;
-//        [self.navigationController pushViewController:recommendController animated:YES];
+        ShareWeChatController *shareVC = [[ShareWeChatController alloc] init];
+        shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        shareVC.delegate = self;
         
-        ShareView *shareView = [ShareView createViewFromNib];
-        TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:shareView preferredStyle:TYAlertControllerStyleAlert];
-        
-        [alertController setBlurEffectWithView:self.view];
-        alertController.alertView.width     = Main_Screen_Width;
-        alertController.alertView.height    = Main_Screen_Height*230/667;
-        alertController.alertViewOriginY    = self.contentView.height- alertController.alertView.height;
-        //[alertController setBlurEffectWithView:(UIView *)view style:(BlurEffectStyle)blurStyle];
-        [self presentViewController:alertController animated:YES completion:nil];
+        self.tabBarController.tabBar.hidden = YES;
+        [self presentViewController:shareVC animated:NO completion:nil];
     }
 
 }
@@ -435,10 +426,12 @@
     });
 }
 
-#pragma mark ---LKAlertViewDelegate---
-- (void)alertView:(LKAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
 
+
+#pragma mark - modal代理
+- (void)setTabBarIsHide:(UIViewController *)VC {
+    
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {
