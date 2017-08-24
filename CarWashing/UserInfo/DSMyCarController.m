@@ -178,8 +178,8 @@ static NSString * HeaderId = @"header";
     pageFlowView.backgroundColor = [UIColor whiteColor];
     pageFlowView.delegate = self;
     pageFlowView.dataSource = self;
-    //pageFlowView.minimumPageAlpha = 0.1;
-    pageFlowView.minimumPageScale = 0.85;
+    pageFlowView.minimumPageAlpha = 0.85;
+    pageFlowView.orginPageCount = self.imageArray.count;
     pageFlowView.orientation = NewPagedFlowViewOrientationHorizontal;
     
     [self.view addSubview:pageFlowView];
@@ -285,7 +285,7 @@ static NSString * HeaderId = @"header";
 - (void)didScrollToPage:(NSInteger)pageNumber inFlowView:(NewPagedFlowView *)flowView {
     
     //self.pageControl.currentPage = pageNumber;
-//    NSLog(@"%ld",pageNumber);
+    NSLog(@"%ld",pageNumber);
     _Xuhao = pageNumber;
     MyCar *car = [[MyCar alloc]init];
     car = [_CarArray objectAtIndex:_Xuhao];

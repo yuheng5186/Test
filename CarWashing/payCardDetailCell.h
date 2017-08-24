@@ -14,4 +14,6 @@
 @property (nonatomic, weak) UILabel *timesCardLabel;
 @property (nonatomic, weak) UILabel *brandCardLabel;
 
+-(void)setTimes:(NSString *)string;
+
 @end

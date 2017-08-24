@@ -19,10 +19,18 @@
     if (self) {
         
         [self addSubview:self.mainImageView];
-        
+        [self addSubview:self.coverView];
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleCellTapAction:)];
+        [self addGestureRecognizer:singleTap];
     }
     
     return self;
+}
+
+- (void)singleCellTapAction:(UIGestureRecognizer *)gesture {
+    if (self.didSelectCellBlock) {
+        self.didSelectCellBlock(self.tag, self);
+    }
 }
 
 - (UIImageView *)mainImageView {
@@ -34,14 +42,12 @@
     return _mainImageView;
 }
 
-
-
-//- (UIView *)coverView {
-//    if (_coverView == nil) {
-//        _coverView = [[UIView alloc] initWithFrame:self.bounds];
-//        _coverView.backgroundColor = [UIColor blackColor];
-//    }
-//    return _coverView;
-//}
+- (UIView *)coverView {
+    if (_coverView == nil) {
+        _coverView = [[UIView alloc] initWithFrame:self.bounds];
+        _coverView.backgroundColor = [UIColor blackColor];
+    }
+    return _coverView;
+}
 
 @end

@@ -28,6 +28,8 @@
 @interface PurchaseViewController ()<JFLocationDelegate, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource, UIScrollViewDelegate>
 {
     MBProgressHUD *HUD;
+    UILabel *introLabelTwo;
+    UILabel *introLabelThree;
 }
 
 @property (nonatomic, strong) NSArray *titles;
@@ -50,6 +52,7 @@
 
 @property (nonatomic, strong) NSMutableArray *CardArray;
 @property (nonatomic, assign) NSInteger Xuhao;
+@property (nonatomic, strong) UIView *middleview;
 
 @end
 
@@ -82,21 +85,17 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     self.navigationView.hidden  = YES;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
-    
-    
-}
 
+
+}
+//-(void) drawNavigation {
+//
+//    [self drawTitle:@"购卡"];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden = YES;
-    
-//    for (int index = 0; index < 3; index++) {
-//        UIImage *image = [UIImage imageNamed:@"kabeijing"];
-//        [self.imageArray addObject:image];
-//    }
-    
-    
     //定位按钮
     self.locationManager = [[JFLocation alloc] init];
     _locationManager.delegate = self;
@@ -131,19 +130,15 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     [upView addSubview:self.locationButton];
     
     
-    _Xuhao = 0;
-    _CardArray = [NSMutableArray array];
+    _middleview = [[UIView alloc]initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height-64)];
+    _middleview.backgroundColor = [UIColor colorFromHex:@"#fafafa"];
+    [self.contentView addSubview:_middleview];
+//    for (int index = 0; index < 3; index++) {
+//        UIImage *image = [UIImage imageNamed:@"kabeijing"];
+//        [self.imageArray addObject:image];
+//    }
     
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    HUD.removeFromSuperViewOnHide =YES;
-    HUD.mode = MBProgressHUDModeIndeterminate;
-    HUD.labelText = @"加载中";
-    HUD.minSize = CGSizeMake(132.f, 108.0f);
     
-    
-   
-    
-    [self getMyCardData];
     
 }
 
@@ -199,25 +194,30 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 
 
 - (void)setupUI {
+    
+    Card *card = (Card *)[_CardArray objectAtIndex:_Xuhao];
+    
     //无限轮播图
-    NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, (Main_Screen_Width - 70*Main_Screen_Height/667) * 9*Main_Screen_Height/667 / 16 + 24)];
+    NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, (Main_Screen_Width - 70*Main_Screen_Height/667) * 9*Main_Screen_Height/667 / 16 + 24)];
     pageFlowView.backgroundColor = [UIColor whiteColor];
     pageFlowView.delegate = self;
     pageFlowView.dataSource = self;
-    //pageFlowView.minimumPageAlpha = 0.1;
-    pageFlowView.minimumPageScale = 0.85;
+    pageFlowView.minimumPageAlpha = 0.4;
+//    pageFlowView.minimumPageScale = 0.85;
+    pageFlowView.orginPageCount = self.imageArray.count;
     pageFlowView.orientation = NewPagedFlowViewOrientationHorizontal;
-    
-    [self.view addSubview:pageFlowView];
+    [_middleview addSubview:pageFlowView];
     [pageFlowView reloadData];
+    [pageFlowView stopTimer];
     
     UIPageControl *pageControl = [[UIPageControl alloc] init];
     pageControl.numberOfPages = self.imageArray.count;
     pageControl.userInteractionEnabled = NO;
+    pageControl.currentPage = 0;
     [pageControl setValue:[UIImage imageNamed:@"xuanzhong"] forKey:@"currentPageImage"];
     [pageControl setValue:[UIImage imageNamed:@"wei_xuanzhong"] forKey:@"pageImage"];
-    self.pageControl = pageControl;
-    [self.view addSubview:pageControl];
+    pageFlowView.pageControl = pageControl;
+    [_middleview addSubview:pageControl];
     
     //关于卡片的label
     UILabel *functionLabel = [[UILabel alloc] init];
@@ -225,28 +225,28 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     functionLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     functionLabel.textAlignment = NSTextAlignmentCenter;
     functionLabel.textColor = [UIColor colorFromHex:@"#868686"];
-    [self.view addSubview:functionLabel];
+    [_middleview addSubview:functionLabel];
     
     UILabel *introLabelOne = [[UILabel alloc] init];
     introLabelOne.text = @"您可以获得会员积分";
     introLabelOne.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
     introLabelOne.textAlignment = NSTextAlignmentCenter;
     introLabelOne.textColor = [UIColor colorFromHex:@"#999999"];
-    [self.view addSubview:introLabelOne];
+    [_middleview addSubview:introLabelOne];
     
-    UILabel *introLabelTwo = [[UILabel alloc] init];
-    introLabelTwo.text = @"拥有一年的使用期限";
+    introLabelTwo = [[UILabel alloc] init];
+    introLabelTwo.text = [NSString stringWithFormat:@"有效期%ld天",card.ExpiredDay];
     introLabelTwo.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     introLabelTwo.textAlignment = NSTextAlignmentCenter;
     introLabelTwo.textColor = [UIColor colorFromHex:@"#999999"];
-    [self.view addSubview:introLabelTwo];
+    [_middleview addSubview:introLabelTwo];
     
-    UILabel *introLabelThree = [[UILabel alloc] init];
-    introLabelThree.text = @"优质洗车100次";
+    introLabelThree = [[UILabel alloc] init];
+    introLabelThree.text = [NSString stringWithFormat:@"优质洗车%ld次",card.CardCount];
     introLabelThree.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     introLabelThree.textAlignment = NSTextAlignmentCenter;
     introLabelThree.textColor = [UIColor colorFromHex:@"#999999"];
-    [self.view addSubview:introLabelThree];
+    [_middleview addSubview:introLabelThree];
     
     UIButton *buyButton = [[UIButton alloc] init];
     [buyButton setTitle:@"现在购买" forState:UIControlStateNormal];
@@ -255,16 +255,17 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     buyButton.titleLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     buyButton.layer.cornerRadius = 15*Main_Screen_Height/667;
     [buyButton addTarget:self action:@selector(didSelectCell:withSubViewIndex:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:buyButton];
+    [_middleview addSubview:buyButton];
     
+//    _pageControl.hidden = YES;
     
-    [_pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
+    [pageFlowView.pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(_middleview);
         make.top.equalTo(pageFlowView.mas_bottom).mas_offset(23*Main_Screen_Height/667);
     }];
     
     [functionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.pageControl.mas_bottom).mas_offset(25*Main_Screen_Height/667);
+        make.top.equalTo(pageFlowView.pageControl.mas_bottom).mas_offset(25*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
     }];
     
@@ -292,14 +293,35 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    _Xuhao = 0;
+    _CardArray = [[NSMutableArray alloc]init];
+    _imageArray = [[NSMutableArray alloc]init];
+    
+    [_middleview removeAllSubviews];
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
+    [self getMyCardData];
+
+}
+
+
+
 #pragma mark - 点击购买
-//- (void)didCickBuyButton {
-//
-//    PayPurchaseCardController *payCardVC = [[PayPurchaseCardController alloc] init];
-//    payCardVC.hidesBottomBarWhenPushed = YES;
-//
-//    [self.navigationController pushViewController:payCardVC animated:YES];
-//}
+- (void)didCickBuyButton {
+
+    Card *card = (Card *)[_CardArray objectAtIndex:_Xuhao];
+    PayPurchaseCardController *payCardVC = [[PayPurchaseCardController alloc] init];
+    payCardVC.hidesBottomBarWhenPushed = YES;
+    payCardVC.choosecard = card;
+    [self.navigationController pushViewController:payCardVC animated:YES];
+}
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -314,10 +336,10 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 }
 
 - (void)didSelectCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex {
-    
+    Card *card = (Card *)[_CardArray objectAtIndex:_Xuhao];
     PayPurchaseCardController *payCardVC = [[PayPurchaseCardController alloc] init];
     payCardVC.hidesBottomBarWhenPushed = YES;
-    
+    payCardVC.choosecard = card;
     [self.navigationController pushViewController:payCardVC animated:YES];
 }
 
@@ -337,9 +359,9 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
         bannerView.layer.masksToBounds = YES;
     }
     
-    
-    
-    bannerView.mainImageView.image = self.imageArray[index];
+    UIImageView *containImageView = [[UIImageView alloc] initWithFrame:bannerView.bounds];
+    containImageView.image = self.imageArray[index];
+    [bannerView addSubview:containImageView];
     
     Card *card = (Card *)[_CardArray objectAtIndex:index];
     
@@ -350,13 +372,13 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     [bannerView addSubview:cardNameLab];
     
     UILabel *timesLab = [[UILabel alloc] init];
-    timesLab.text = @"持卡洗车次数100次";
+    timesLab.text = [NSString stringWithFormat:@"持卡洗车次数%ld次",card.CardCount];
     timesLab.textColor = [UIColor colorFromHex:@"#ffffff"];
     timesLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     [bannerView addSubview:timesLab];
     
     UILabel *scoreLab = [[UILabel alloc] init];
-    scoreLab.text = @"购卡获得5250积分";
+    scoreLab.text = [NSString stringWithFormat:@"购卡获得%ld积分",card.Integralnum];
     scoreLab.textColor = [UIColor colorFromHex:@"#ffffff"];
     scoreLab.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     [bannerView addSubview:scoreLab];
@@ -416,8 +438,22 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 }
 
 - (void)didScrollToPage:(NSInteger)pageNumber inFlowView:(NewPagedFlowView *)flowView {
+//    NSLog(@"%ld",pageNumber);
     
-    self.pageControl.currentPage = pageNumber;
+//    self.pageControl.currentPage = pageNumber;
+    
+    
+    
+//    NSLog(@"TestViewController 滚动到了第%ld页",pageNumber);
+    
+    _Xuhao = pageNumber;
+    
+    Card *card = (Card *)[_CardArray objectAtIndex:pageNumber];
+    
+    introLabelTwo.text = [NSString stringWithFormat:@"有效期%ld天",card.ExpiredDay];
+    introLabelThree.text = [NSString stringWithFormat:@"优质洗车%ld次",card.CardCount];
+    
+    
 }
 
 

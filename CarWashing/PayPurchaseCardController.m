@@ -170,7 +170,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     [self.view addSubview:payBottomView];
     
     UILabel *bottomPriceLab = [[UILabel alloc] init];
-    bottomPriceLab.text = @"¥54.00";
+    bottomPriceLab.text = [NSString stringWithFormat:@"￥%@元",self.choosecard.CardPrice];
     bottomPriceLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     bottomPriceLab.textColor = [UIColor colorFromHex:@"#ff525a"];
     [payBottomView addSubview:bottomPriceLab];
@@ -230,8 +230,11 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     if (section == 0) {
         return 3;
     }
+    if (section == 1) {
+        return 2;
+    }
     
-    return 2;
+    return 1;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -253,14 +256,60 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     cell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     cell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     
-    if (indexPath.section == 0 && indexPath.row == 1) {
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        
+        cell.textLabel.text  = @"卡名称";
+        cell.detailTextLabel.text = self.choosecard.CardName;
+        
+        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        
+        return cell;
+    }
+    
+    else if (indexPath.section == 0 && indexPath.row == 1) {
         
         payCardDetailCell *payCell = [tableView dequeueReusableCellWithIdentifier:id_payDetailCell];
-        
+        payCell.textLabel.text  = @"卡使用说明";
+        payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+        payCell.timesCardLabel.text = [NSString stringWithFormat:@"可免费洗车%ld次",self.choosecard.CardCount];
+        payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
         return payCell;
     }
     
-    if (indexPath.section == 2) {
+    else if (indexPath.section == 0 && indexPath.row == 2) {
+        
+        cell.textLabel.text  = @"有效期";
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"即日起至%@",self.choosecard.ExpiredTimes];
+        
+        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        
+        return cell;
+    }
+    
+    else if (indexPath.section == 1 && indexPath.row == 0) {
+        
+        cell.textLabel.text  = @"特惠活动";
+        cell.detailTextLabel.text = @"立减5元";
+        
+        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        
+        return cell;
+    }
+    else if (indexPath.section == 1 && indexPath.row == 1) {
+        
+        cell.textLabel.text  = @"实付";
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"￥%@元",self.choosecard.CardPrice];
+        
+        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#ff3645"];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        
+        return cell;
+    }
+    
+    if (indexPath.section == 2 ) {
         
         BusinessPayCell *paycell = [tableView dequeueReusableCellWithIdentifier:id_businessPaycell forIndexPath:indexPath];
         _seleCell = paycell;
@@ -297,11 +346,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         return paycell;
     }
     
-    cell.textLabel.text  = @"卡名称";
-    cell.detailTextLabel.text = @"洗车月卡";
     
-    cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
-    cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
     
     
     return cell;
@@ -310,9 +355,9 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 1 && indexPath.row == 0 ) {
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
+//    if (indexPath.section == 1 && indexPath.row == 0 ) {
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//    }
 }
 
 
@@ -348,13 +393,13 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
 #pragma mark - 点击cell
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 1 && indexPath.row == 0) {
-        
-        CashViewController *cashVC = [[CashViewController alloc] init];
-        
-        cashVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        [self presentViewController:cashVC animated:NO completion:nil];
-    }
+//    if (indexPath.section == 1 && indexPath.row == 0) {
+//        
+//        CashViewController *cashVC = [[CashViewController alloc] init];
+//        
+//        cashVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//        [self presentViewController:cashVC animated:NO completion:nil];
+//    }
     
     
     if (indexPath.section == 2) {

@@ -8,6 +8,10 @@
 
 #import "BaseController.h"
 
+#import "Card.h"
+
 @interface PayPurchaseCardController : BaseController
+
+@property(nonatomic,strong)Card *choosecard;
 
 @end
