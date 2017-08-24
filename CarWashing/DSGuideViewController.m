@@ -66,7 +66,7 @@
     intro.pageControlY          = 750;
 //    intro.pageControl.pageIndicatorTintColor = [UIColor colorFromHex:@"#4D4D4D"];
 //    intro.pageControl.currentPageIndicatorTintColor = [UIColor colorFromHex:@"#FFB700"];
-    _experienceBtn              = [UIUtil drawDefaultButton:page4.pageView title:@"开启洗车之旅" target:self action:@selector(experienceButtonClick:)];
+    _experienceBtn              = [UIUtil drawDefaultButton:page4.pageView title:@"马上去洗车" target:self action:@selector(experienceButtonClick:)];
     _experienceBtn.bottom       = self.contentView.bottom-Main_Screen_Height*73/667;
     _experienceBtn.width        = Main_Screen_Width*200/375;
     _experienceBtn.centerX      = Main_Screen_Width/2;
