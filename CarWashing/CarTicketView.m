@@ -7,12 +7,22 @@
 //
 
 #import "CarTicketView.h"
+#import "UIView+AutoSizeToDevice.h"
 
 @implementation CarTicketView
 
 + (instancetype)carTicketView {
     
     return [[NSBundle mainBundle] loadNibNamed:@"CarTicketView" owner:nil options:nil].lastObject;
+}
+
+
+
+- (void)awakeFromNib {
+    
+    [super awakeFromNib];
+    
+    self.dg_viewAutoSizeToDevice = YES;
 }
 
 @end

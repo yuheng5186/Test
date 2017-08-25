@@ -60,7 +60,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 - (void)setupUI {
     
     MemberView *memberShipView = [MemberView memberView];
-    memberShipView.frame = CGRectMake(0, 64, Main_Screen_Width, 120*Main_Screen_Height/667);
+   // memberShipView.frame = CGRectMake(0, 64, Main_Screen_Width, 120*Main_Screen_Height/667);
     
     
     [self.view addSubview:memberShipView];
@@ -89,6 +89,13 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     [self.exchangListView registerClass:[GoodsExchangeCell class] forCellReuseIdentifier:id_exchangeCell];
     
     //约束
+    
+    [memberShipView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).mas_offset(64);
+        make.left.right.equalTo(self.view);
+        make.height.mas_equalTo(120*Main_Screen_Height/667);
+    }];
+    
     [exchangeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(memberShipView.mas_bottom).mas_offset(10*Main_Screen_Height/667);
         make.left.right.equalTo(self.view);
