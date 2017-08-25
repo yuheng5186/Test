@@ -136,6 +136,7 @@
 		18A4B2301F4D832300C64978 /* ShareWechatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B22F1F4D832300C64978 /* ShareWechatView.m */; };
 		18A4B23A1F4E9F2200C64978 /* CLLocation+YCLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B2391F4E9F2200C64978 /* CLLocation+YCLocation.m */; };
 		18A4B23D1F4E9F3600C64978 /* JXMapNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B23C1F4E9F3600C64978 /* JXMapNavigationView.m */; };
+		18A6033A1F4FC06000CFA328 /* TggStarEvaluationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A603391F4FC06000CFA328 /* TggStarEvaluationView.m */; };
 		18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A11F21A44F009FF73A /* DSMessageDetailController.m */; };
 		18B697A51F21A87F009FF73A /* DSScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A41F21A87F009FF73A /* DSScanController.m */; };
 		18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B697A71F21D420009FF73A /* DSCardGroupController.m */; };
@@ -526,6 +527,8 @@
 		18A4B2391F4E9F2200C64978 /* CLLocation+YCLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+YCLocation.m"; sourceTree = "<group>"; };
 		18A4B23B1F4E9F3600C64978 /* JXMapNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXMapNavigationView.h; sourceTree = "<group>"; };
 		18A4B23C1F4E9F3600C64978 /* JXMapNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXMapNavigationView.m; sourceTree = "<group>"; };
+		18A603381F4FC06000CFA328 /* TggStarEvaluationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TggStarEvaluationView.h; sourceTree = "<group>"; };
+		18A603391F4FC06000CFA328 /* TggStarEvaluationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TggStarEvaluationView.m; sourceTree = "<group>"; };
 		18B697A01F21A44F009FF73A /* DSMessageDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMessageDetailController.h; path = Home/DSMessageDetailController.h; sourceTree = "<group>"; };
 		18B697A11F21A44F009FF73A /* DSMessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMessageDetailController.m; path = Home/DSMessageDetailController.m; sourceTree = "<group>"; };
 		18B697A31F21A87F009FF73A /* DSScanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSScanController.h; path = Home/DSScanController.h; sourceTree = "<group>"; };
@@ -1014,6 +1017,8 @@
 				5071B47D1F38099C009FFF67 /* OrderDetailView.xib */,
 				5071B47F1F381366009FFF67 /* OrderCommentController.h */,
 				5071B4801F381366009FFF67 /* OrderCommentController.m */,
+				18A603381F4FC06000CFA328 /* TggStarEvaluationView.h */,
+				18A603391F4FC06000CFA328 /* TggStarEvaluationView.m */,
 				181E92F31F2085B60006511E /* DSFavoritesController.h */,
 				181E92F41F2085B60006511E /* DSFavoritesController.m */,
 				181E92F61F2086620006511E /* DSExchangeController.h */,
@@ -1955,6 +1960,7 @@
 				1853BA031F28444000B98C7F /* DSFeedbackController.m in Sources */,
 				501672201F297F3100384186 /* HQSliderView.m in Sources */,
 				0401E9031F4ED6E900F0CA79 /* EARestrictedScrollView.m in Sources */,
+				18A6033A1F4FC06000CFA328 /* TggStarEvaluationView.m in Sources */,
 				1853BA461F28A04100B98C7F /* JFCityCollectionFlowLayout.m in Sources */,
 				50B26E641F300D60009B3B9F /* PayPurchaseCardController.m in Sources */,
 				18B69EAA1F32CB5B007DA0E4 /* ZFConst.m in Sources */,
