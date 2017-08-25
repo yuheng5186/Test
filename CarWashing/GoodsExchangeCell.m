@@ -37,6 +37,11 @@
     nameLab.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     [self.contentView addSubview:nameLab];
     
+    UILabel *brandLab = [[UILabel alloc] init];
+    brandLab.text = @"金顶洗车";
+    brandLab.font = [UIFont systemFontOfSize:11];
+    [self.contentView addSubview:brandLab];
+    
     UILabel *introLab = [[UILabel alloc] init];
     _introLab = introLab;
     //introLab.textColor = [UIColor colorFromHex:@"#ffffff"];
@@ -58,6 +63,11 @@
     [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).mas_offset(22*Main_Screen_Height/667);
         make.top.equalTo(self.contentView).mas_offset(21*Main_Screen_Height/667);
+    }];
+    
+    [brandLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(nameLab);
+        make.leading.equalTo(nameLab.mas_trailing).mas_offset(5*Main_Screen_Height/667);
     }];
     
     [introLab mas_makeConstraints:^(MASConstraintMaker *make) {
