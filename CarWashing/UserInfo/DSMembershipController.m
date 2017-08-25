@@ -1,4 +1,4 @@
-//
+ //
 //  DSMembershipController.m
 //  CarWashing
 //
@@ -16,10 +16,26 @@
 #import "EarnScoreController.h"
 #import "HowToUpGradeController.h"
 
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "MBProgressHUD.h"
+#import "UdStorage.h"
+#import "HTTPDefine.h"
+#import "UIImageView+WebCache.h"
+#import "Card.h"
+
 
 @interface DSMembershipController ()<UITableViewDelegate,UITableViewDataSource>
+{
+    MBProgressHUD *HUD;
+    MemberView *memberShipView;
+}
 
 @property (nonatomic, weak) UITableView *exchangListView;
+
+@property (nonatomic, strong) NSMutableDictionary *MembershipUserScore;
+
+@property (nonatomic, strong) NSMutableArray *MembershipUserScoreArray;
 
 @end
 
@@ -54,12 +70,21 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     self.contentView.backgroundColor = [UIColor whiteColor];
     
     [self setupUI];
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    _MembershipUserScore = [[NSMutableDictionary alloc]init];
+    _MembershipUserScoreArray = [[NSMutableArray alloc]init];
+    [self GetMembershipUserScore];
 }
 
 
 - (void)setupUI {
     
-    MemberView *memberShipView = [MemberView memberView];
+    memberShipView = [MemberView memberView];
    // memberShipView.frame = CGRectMake(0, 64, Main_Screen_Width, 120*Main_Screen_Height/667);
     
     
@@ -126,7 +151,65 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 }
 
 
+-(void)GetMembershipUserScore
+{
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"GetCardType":@5,
+                             
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardConfigList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            _MembershipUserScore = [dict objectForKey:@"JsonData"];
+            
+            
+            NSArray * arr = [_MembershipUserScore objectForKey:@"cardConfigList"];
+            
+            for(NSDictionary *dic in arr)
+            {
+                Card *card = [[Card alloc]init];
+                [card setValuesForKeysWithDictionary:dic];
+                [_MembershipUserScoreArray addObject:card];
+            }
 
+            [memberShipView.UserImgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,_MembershipUserScore[@"Headimg"]]] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
+            
+            memberShipView.phoneLabel.text = [NSString stringWithFormat:@"%@",_MembershipUserScore[@"Name"]];
+            
+            [memberShipView.ScoreBtn setTitle:[NSString stringWithFormat:@"%@分",_MembershipUserScore[@"UserScore"]] forState:UIControlStateNormal];
+            
+             NSArray *arr2 = @[@"",@"普通会员",@"白银会员",@"黄金会员",@"铂金会员",@"钻石会员",@"黑钻会员"];
+            
+            NSUInteger num = [[NSString stringWithFormat:@"%@",_MembershipUserScore[@"Level_id"]] integerValue];
+            
+           
+            
+            [memberShipView.LevelBtn setTitle:[arr2 objectAtIndex:num] forState:UIControlStateNormal];
+            
+            [_exchangListView reloadData];
+            
+            [HUD setHidden:YES];
+            
+            
+        }
+        else
+        {
+            [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }];
+
+}
 
 #pragma mark - 点击赚积分
 - (IBAction)clickEarnScoreBtn:(UIButton *)sender {
@@ -169,7 +252,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 3;
+    return [_MembershipUserScoreArray count];
 }
 
 
@@ -183,6 +266,10 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     changeCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    Card *newcard = (Card *)[_MembershipUserScoreArray objectAtIndex:indexPath.section];
+    
+    changeCell.nameLab.text = newcard.CardName;
+    changeCell.scoreLab.text = [NSString stringWithFormat:@"%ld分",newcard.Integralnum];
     
     return changeCell;
 }
@@ -190,9 +277,10 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    Card *newcard = (Card *)[_MembershipUserScoreArray objectAtIndex:indexPath.section];
     WashCarTicketController *ticketVC = [[WashCarTicketController alloc] init];
     ticketVC.hidesBottomBarWhenPushed = YES;
+    ticketVC.card = newcard;
     [self.navigationController pushViewController:ticketVC animated:YES];
 }
 

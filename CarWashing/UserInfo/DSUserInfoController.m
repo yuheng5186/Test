@@ -100,7 +100,7 @@
             return 1;
             break;
         case 1:
-            return 4;
+            return 3;
             break;
         default:
             break;

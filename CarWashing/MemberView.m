@@ -22,6 +22,9 @@
     
     self.dg_viewAutoSizeToDevice = YES;
     
+    self.UserImgView.layer.masksToBounds = YES;
+    self.UserImgView.layer.cornerRadius = 26*Main_Screen_Height/667;
+    
     self.topContainView.backgroundColor = [UIColor colorFromHex:@"#293754"];
     
     self.bottomContainView.backgroundColor = [UIColor colorFromHex:@"#febb02"];

@@ -86,6 +86,8 @@
 		18322AC01F4D950C003ABB7B /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322ABF1F4D950C003ABB7B /* Card.m */; };
 		18322AC31F4EC157003ABB7B /* CardBag.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AC21F4EC157003ABB7B /* CardBag.m */; };
 		18322AC61F4FF077003ABB7B /* CardConfigGrade.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AC51F4FF077003ABB7B /* CardConfigGrade.m */; };
+		18322AC91F501271003ABB7B /* Mylabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AC81F501271003ABB7B /* Mylabel.m */; };
+		18322ACC1F502F9E003ABB7B /* DSCheckPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322ACB1F502F9E003ABB7B /* DSCheckPhoneViewController.m */; };
 		183997651F2586D300702071 /* ActivityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183997631F2586D300702071 /* ActivityListCell.m */; };
 		183997661F2586D300702071 /* ActivityListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183997641F2586D300702071 /* ActivityListCell.xib */; };
 		1839979F1F25E69100702071 /* DSPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1839979E1F25E69100702071 /* DSPasswordController.m */; };
@@ -431,6 +433,10 @@
 		18322AC21F4EC157003ABB7B /* CardBag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardBag.m; sourceTree = "<group>"; };
 		18322AC41F4FF077003ABB7B /* CardConfigGrade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardConfigGrade.h; sourceTree = "<group>"; };
 		18322AC51F4FF077003ABB7B /* CardConfigGrade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardConfigGrade.m; sourceTree = "<group>"; };
+		18322AC71F501271003ABB7B /* Mylabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mylabel.h; sourceTree = "<group>"; };
+		18322AC81F501271003ABB7B /* Mylabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mylabel.m; sourceTree = "<group>"; };
+		18322ACA1F502F9E003ABB7B /* DSCheckPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCheckPhoneViewController.h; sourceTree = "<group>"; };
+		18322ACB1F502F9E003ABB7B /* DSCheckPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSCheckPhoneViewController.m; sourceTree = "<group>"; };
 		183997621F2586D300702071 /* ActivityListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityListCell.h; path = Find/CustomCell/ActivityListCell.h; sourceTree = "<group>"; };
 		183997631F2586D300702071 /* ActivityListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityListCell.m; path = Find/CustomCell/ActivityListCell.m; sourceTree = "<group>"; };
 		183997641F2586D300702071 /* ActivityListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActivityListCell.xib; path = Find/CustomCell/ActivityListCell.xib; sourceTree = "<group>"; };
@@ -953,6 +959,8 @@
 				1853BA111F288D9800B98C7F /* DSChangeNameController.m */,
 				1853BA0D1F28854D00B98C7F /* DSChangePhoneController.h */,
 				1853BA0E1F28854D00B98C7F /* DSChangePhoneController.m */,
+				18322ACA1F502F9E003ABB7B /* DSCheckPhoneViewController.h */,
+				18322ACB1F502F9E003ABB7B /* DSCheckPhoneViewController.m */,
 				181E92E71F207FF60006511E /* DSSettingController.h */,
 				181E92E81F207FF60006511E /* DSSettingController.m */,
 				1839979D1F25E69100702071 /* DSPasswordController.h */,
@@ -1132,6 +1140,8 @@
 			children = (
 				18322AB11F4AD6DC003ABB7B /* MyCar.h */,
 				18322AB21F4AD6DC003ABB7B /* MyCar.m */,
+				18322AC71F501271003ABB7B /* Mylabel.h */,
+				18322AC81F501271003ABB7B /* Mylabel.m */,
 			);
 			name = Model;
 			path = UserInfo/Model;
@@ -2045,6 +2055,7 @@
 				501672281F297FDD00384186 /* AnswerCell.m in Sources */,
 				50E2EE611F1F4D2D00FAF130 /* YZCover.m in Sources */,
 				501672371F29808600384186 /* HQTableViewCell.m in Sources */,
+				18322AC91F501271003ABB7B /* Mylabel.m in Sources */,
 				180E432F1F41921E00013D2D /* PhoneHelper.m in Sources */,
 				1853BA0F1F28854D00B98C7F /* DSChangePhoneController.m in Sources */,
 				50E2EE861F1F4D3C00FAF130 /* YZSortCell.m in Sources */,
@@ -2147,6 +2158,7 @@
 				1853BA491F28A04100B98C7F /* JFCityTableViewCell.m in Sources */,
 				180E42D81F39B8C200013D2D /* DSUserRightDetailController.m in Sources */,
 				185090531F4558AC00795E0A /* UIImage+ImageEffects.m in Sources */,
+				18322ACC1F502F9E003ABB7B /* DSCheckPhoneViewController.m in Sources */,
 				181E92D81F1F3BAE0006511E /* FindViewController.m in Sources */,
 				18A4B22A1F4D6CAB00C64978 /* README.md in Sources */,
 				180E42E71F3AB37D00013D2D /* UIWindow+YzdHUD.m in Sources */,

@@ -7,7 +7,10 @@
 //
 
 #import "BaseController.h"
+#import "Card.h"
 
 @interface WashCarTicketController : BaseController
+
+@property(nonatomic,strong)Card *card;
 
 @end

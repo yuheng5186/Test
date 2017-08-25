@@ -29,6 +29,7 @@
 @property (copy, nonatomic)NSString *usermemo;
 @property (copy, nonatomic)NSString *useroccupation;
 
+
 +(User *)getInstanceByDic:(NSDictionary *)dic;
 
 @end

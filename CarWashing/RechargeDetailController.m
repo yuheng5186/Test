@@ -42,8 +42,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"%@",self.card);
-    
     [self setupUI];
 }
 
