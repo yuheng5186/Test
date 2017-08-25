@@ -377,7 +377,7 @@
     
     
     
-    NSCharacterSet *doNotWant = [NSCharacterSet characterSetWithCharactersInString:@"[]（#%-*+=）\\|~(＜＞$%^&*)+ "];
+    NSCharacterSet *doNotWant = [NSCharacterSet characterSetWithCharactersInString:@"[]（#%*+=）\\|~(＜＞$%^&*)+ "];
     NSRange range = {0,mutStr.length};
     [mutStr replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:range];
     

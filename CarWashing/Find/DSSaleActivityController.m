@@ -15,6 +15,7 @@
 #import "LCMD5Tool.h"
 #import "AFNetworkingTool.h"
 #import "MBProgressHUD.h"
+#import "UIImageView+WebCache.h"
 
 @interface DSSaleActivityController ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
@@ -23,6 +24,8 @@
 @property (nonatomic, strong) NSMutableArray *CouponListData;
 
 @property (nonatomic)NSInteger page;
+
+@property (nonatomic, strong) NSString *area;
 
 @end
 
@@ -61,6 +64,7 @@
 //    self.tableView.backgroundColor  = [UIColor blueColor];
     [self.contentView addSubview:self.tableView];
     _CouponListData = [[NSMutableArray alloc]init];
+     self.area = @"上海市";
     [self GetCouponList];
 //    [self setupRefresh];
     
@@ -133,7 +137,8 @@
 -(void)GetCouponList
 {
     NSDictionary *mulDic = @{
-                             @"GetCardType":@2
+                             @"GetCardType":@2,
+                             @"Area":self.area
                              };
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
@@ -246,20 +251,10 @@
         make.leading.equalTo(introLab.mas_trailing).mas_offset(20*Main_Screen_Height/667);
     }];
     
- 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,[[_CouponListData objectAtIndex:indexPath.section] objectForKey:@"Img"]];
-        NSURL *url=[NSURL URLWithString:ImageURL];
-        NSData *data=[NSData dataWithContentsOfURL:url];
-        UIImage *img=[UIImage imageWithData:data];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            backV.image = img;
-            if(backV.image == nil)
-            {
-                backV.image = [UIImage imageNamed:@"yonghuzhuanxiangditu"];
-            }
-        });
-    });
+    
+    NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,[[_CouponListData objectAtIndex:indexPath.section] objectForKey:@"Img"]];
+    NSURL *url=[NSURL URLWithString:ImageURL];
+    [backV sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"yonghuzhuanxiangditu"]];
     
     titleLab.text = [[_CouponListData objectAtIndex:indexPath.section] objectForKey:@"Description"];
     introLab.text = [NSString stringWithFormat:@"免费获得洗车%@一张",[[_CouponListData objectAtIndex:indexPath.section] objectForKey:@"CardName"]];

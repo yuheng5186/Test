@@ -755,7 +755,6 @@
 //    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void) tapCardBagButtonClick:(id)sender {
-    
     DSCardGroupController *cardGroupController      = [[DSCardGroupController alloc]init];
     cardGroupController.hidesBottomBarWhenPushed    = YES;
     [self.navigationController pushViewController:cardGroupController animated:YES];

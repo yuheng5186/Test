@@ -16,6 +16,8 @@
 #import "MBProgressHUD.h"
 #import "UdStorage.h"
 #import "HTTPDefine.h"
+#import "UIImageView+WebCache.h"
+
 @interface DSMemberRightsController ()<UITableViewDelegate, UITableViewDataSource>
 {
     UITableView *memberRightsView;
@@ -27,6 +29,10 @@
 
 @property (nonatomic, strong) NSMutableArray *MembershipprivilegesArray;
 @property (nonatomic, strong) NSMutableDictionary *MembershipprivilegesDic;
+@property (nonatomic, strong) NSMutableArray *NextMembershipprivilegesArr;
+@property (nonatomic, strong) NSMutableArray *CurrentMembershipprivilegesArr;
+@property (nonatomic, strong) NSString *area;
+
 
 @end
 
@@ -45,10 +51,14 @@ static NSString *id_rightsCell = @"id_rightsCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self createSubView];
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(noticeupdateCardNum:) name:@"receivesuccess" object:nil];
     
+    [self createSubView];
+    self.area = @"上海市";
     _MembershipprivilegesArray = [[NSMutableArray alloc]init];
-    _MembershipprivilegesDic = [[NSMutableDictionary alloc]init];
+    _NextMembershipprivilegesArr = [[NSMutableArray alloc]init];
+    _CurrentMembershipprivilegesArr = [[NSMutableArray alloc]init];
     [self GetMembershipprivileges];
     
 }
@@ -127,7 +137,8 @@ static NSString *id_rightsCell = @"id_rightsCell";
 {
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                             @"GetCardType":@3
+                             @"GetCardType":@3,
+                            
                              };
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
@@ -138,18 +149,27 @@ static NSString *id_rightsCell = @"id_rightsCell";
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             _MembershipprivilegesDic = [dict objectForKey:@"JsonData"];
-//            for(NSDictionary *dic in arr)
-//            {
-//                CardBag *model = [CardBag new];
-//                [model setValuesForKeysWithDictionary:dic];
-//                [_CardbagData addObject:model];
-//            }
+            
+            
+            NSArray * arr = [_MembershipprivilegesDic objectForKey:@"cardConfigList"];
+            
+            for(NSDictionary *dic in arr)
+            {
+                if([dic[@"CurrentOrNextLevel"] integerValue] == 1)
+                {
+                    [_CurrentMembershipprivilegesArr addObject:dic];
+                }
+                else
+                {
+                     [_NextMembershipprivilegesArr addObject:dic];
+                }
+            }
             
             [self UpdateUI];
             
             
             
-            [memberRightsView reloadData];
+            
         }
         else
         {
@@ -167,17 +187,21 @@ static NSString *id_rightsCell = @"id_rightsCell";
 -(void)UpdateUI
 {
     
-    NSLog(@"%@",_MembershipprivilegesDic);
+//    NSLog(@"%@",_MembershipprivilegesDic);
+//    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,_MembershipprivilegesDic[@"Headimg"]];
+//        NSURL *url=[NSURL URLWithString:ImageURL];
+//        NSData *data=[NSData dataWithContentsOfURL:url];
+//        UIImage *img=[UIImage imageWithData:data];
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+//            membershipImageView.image = img;
+//        });
+//    });
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,_MembershipprivilegesDic[@"Headimg"]];
-        NSURL *url=[NSURL URLWithString:ImageURL];
-        NSData *data=[NSData dataWithContentsOfURL:url];
-        UIImage *img=[UIImage imageWithData:data];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            membershipImageView.image = img;
-        });
-    });
+    [membershipImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,_MembershipprivilegesDic[@"Headimg"]]] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
+    
+    
     
     if([_MembershipprivilegesDic[@"Level_id"] integerValue] == 1)
     {
@@ -210,6 +234,8 @@ static NSString *id_rightsCell = @"id_rightsCell";
         [gradeBtn setTitle:@"您已经是黑钻会员" forState:UIControlStateNormal];
     }
     
+    [memberRightsView reloadData];
+    
 }
 
 - (void)clickHowToIncreaseGradeBtn {
@@ -227,8 +253,16 @@ static NSString *id_rightsCell = @"id_rightsCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if(section == 0)
+    {
+        
+        return [_CurrentMembershipprivilegesArr count];
+    }
+    else
+    {
+        return [_NextMembershipprivilegesArr count];
+    }
     
-    return 1;
 }
 
 
@@ -251,11 +285,26 @@ static NSString *id_rightsCell = @"id_rightsCell";
     NSString    *string;
     NSString    *detailString;
     if (indexPath.section == 0) {
-        string = @"10元洗车券";
-        detailString    = @"自动扫码洗车可使用，达到该等级当月可领取";
+        if(_CurrentMembershipprivilegesArr.count != 0)
+        {
+            string = [NSString stringWithFormat:@"%@X%@",[[_CurrentMembershipprivilegesArr objectAtIndex:indexPath.row] objectForKey:@"CardName"],[[_CurrentMembershipprivilegesArr objectAtIndex:indexPath.row] objectForKey:@"CardQuantity"]];
+            detailString    = @"自动扫码洗车可使用，达到该等级当月可领取";
+        }
+        else
+        {
+            
+        }
+        
     }else {
-        string = @"15元洗车券";
-        detailString    = @"门店吸尘是可抵扣相应金额,每月领取一次";
+        if(_NextMembershipprivilegesArr.count == 0)
+        {
+            
+        }else
+        {
+            string = [NSString stringWithFormat:@"%@X%@",[[_NextMembershipprivilegesArr objectAtIndex:indexPath.row] objectForKey:@"CardName"],[[_NextMembershipprivilegesArr objectAtIndex:indexPath.row] objectForKey:@"CardQuantity"]];
+            detailString    = @"门店吸尘是可抵扣相应金额,每月领取一次";
+        }
+        
     }
     UILabel *titleLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 20*Main_Screen_Height/667) font:[UIFont systemFontOfSize:14] text:string isCenter:NO];
     titleLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
@@ -320,14 +369,27 @@ static NSString *id_rightsCell = @"id_rightsCell";
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     MemberRightsDetailController *VC = [[MemberRightsDetailController alloc] init];
     VC.hidesBottomBarWhenPushed = YES;
-    
+    if(indexPath.section == 0)
+    {
+        VC.ConfigCode = [[_CurrentMembershipprivilegesArr objectAtIndex:indexPath.row] objectForKey:@"ConfigCode"];
+        VC.nextUseLevel = [[_CurrentMembershipprivilegesArr objectAtIndex:indexPath.row] objectForKey:@"UseLevel"];
+        
+    }
+    else
+    {
+        VC.ConfigCode = [[_NextMembershipprivilegesArr objectAtIndex:indexPath.row] objectForKey:@"ConfigCode"];
+        VC.nextUseLevel = [[_NextMembershipprivilegesArr objectAtIndex:indexPath.row] objectForKey:@"UseLevel"];
+        VC.nextdic = [_NextMembershipprivilegesArr objectAtIndex:indexPath.row];
+    }
+    VC.currentUseLevel =_MembershipprivilegesDic[@"Level_id"];
     [self.navigationController pushViewController:VC animated:YES];
 }
 
-
+-(void)noticeupdateCardNum:(NSNotification *)sender{
+    
+}
 
 #pragma mark -------button click------
 

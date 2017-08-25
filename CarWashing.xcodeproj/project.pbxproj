@@ -85,6 +85,7 @@
 		18322ABD1F4D7D8B003ABB7B /* UILabel+StringFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322ABC1F4D7D8B003ABB7B /* UILabel+StringFrame.m */; };
 		18322AC01F4D950C003ABB7B /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322ABF1F4D950C003ABB7B /* Card.m */; };
 		18322AC31F4EC157003ABB7B /* CardBag.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AC21F4EC157003ABB7B /* CardBag.m */; };
+		18322AC61F4FF077003ABB7B /* CardConfigGrade.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AC51F4FF077003ABB7B /* CardConfigGrade.m */; };
 		183997651F2586D300702071 /* ActivityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183997631F2586D300702071 /* ActivityListCell.m */; };
 		183997661F2586D300702071 /* ActivityListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183997641F2586D300702071 /* ActivityListCell.xib */; };
 		1839979F1F25E69100702071 /* DSPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1839979E1F25E69100702071 /* DSPasswordController.m */; };
@@ -427,6 +428,8 @@
 		18322ABF1F4D950C003ABB7B /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
 		18322AC11F4EC157003ABB7B /* CardBag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardBag.h; sourceTree = "<group>"; };
 		18322AC21F4EC157003ABB7B /* CardBag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardBag.m; sourceTree = "<group>"; };
+		18322AC41F4FF077003ABB7B /* CardConfigGrade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardConfigGrade.h; sourceTree = "<group>"; };
+		18322AC51F4FF077003ABB7B /* CardConfigGrade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardConfigGrade.m; sourceTree = "<group>"; };
 		183997621F2586D300702071 /* ActivityListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityListCell.h; path = Find/CustomCell/ActivityListCell.h; sourceTree = "<group>"; };
 		183997631F2586D300702071 /* ActivityListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityListCell.m; path = Find/CustomCell/ActivityListCell.m; sourceTree = "<group>"; };
 		183997641F2586D300702071 /* ActivityListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActivityListCell.xib; path = Find/CustomCell/ActivityListCell.xib; sourceTree = "<group>"; };
@@ -1112,6 +1115,8 @@
 				18322AAE1F4AD1C7003ABB7B /* Carcircle.m */,
 				18322AC11F4EC157003ABB7B /* CardBag.h */,
 				18322AC21F4EC157003ABB7B /* CardBag.m */,
+				18322AC41F4FF077003ABB7B /* CardConfigGrade.h */,
+				18322AC51F4FF077003ABB7B /* CardConfigGrade.m */,
 			);
 			name = model;
 			path = Home/model;
@@ -1964,6 +1969,7 @@
 				5097FE131F2F4173002EF8F8 /* JPCityViewController.m in Sources */,
 				185090461F4557E100795E0A /* TYAlertFadeAnimation.m in Sources */,
 				180E42E91F3AB37D00013D2D /* YzdHUDImageView.m in Sources */,
+				18322AC61F4FF077003ABB7B /* CardConfigGrade.m in Sources */,
 				181E92EF1F2081840006511E /* DSMembershipController.m in Sources */,
 				5094A6251F3447CD00407808 /* BusinessEstimateCell.m in Sources */,
 				18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */,

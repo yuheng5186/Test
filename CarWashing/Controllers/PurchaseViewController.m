@@ -41,6 +41,8 @@
 /** 城市数据管理器*/
 @property (nonatomic, strong) JFAreaDataManager *manager;
 
+@property (nonatomic, strong) NSString *area;
+
 /**
  *  图片数组
  */
@@ -99,7 +101,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     //定位按钮
     self.locationManager = [[JFLocation alloc] init];
     _locationManager.delegate = self;
-    
+    self.area = @"上海市";
     
     UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#293754"]];
     upView.top                      = 0;
@@ -145,7 +147,8 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 -(void)getMyCardData
 {
     NSDictionary *mulDic = @{
-                             @"GetCardType":@1
+                             @"GetCardType":@1,
+                             @"Area":self.area
                              };
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
