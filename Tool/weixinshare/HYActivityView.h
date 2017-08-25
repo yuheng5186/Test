@@ -11,9 +11,18 @@
 @class ButtonView;
 @class HYActivityView;
 
+@protocol SetTabBarDelegate <NSObject>
+
+- (void)setTabBarIsHide:(UIViewController *)VC;
+
+@end
+
+
 typedef void(^ButtonViewHandler)(ButtonView *buttonView);
 
 @interface ButtonView : UIView
+
+@property (nonatomic, weak) id<SetTabBarDelegate> delegate;
 
 @property (nonatomic, strong) UILabel *textLabel;
 
@@ -26,6 +35,8 @@ typedef void(^ButtonViewHandler)(ButtonView *buttonView);
 @end
 
 @interface HYActivityView : UIView
+
+@property (nonatomic, weak) id<SetTabBarDelegate> delegate;
 
 //背景颜色, 默认是透明度0.95的白色
 @property (nonatomic, strong) UIColor *bgColor;

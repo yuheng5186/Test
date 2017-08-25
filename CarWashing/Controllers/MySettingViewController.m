@@ -28,10 +28,21 @@
 #import "ShareWeChatController.h"
 #import "HTTPDefine.h"
 #import "AppDelegate.h"
+#import "HYActivityView.h"
 
 
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,SetTabBarDelegate>
 
+{
+    
+    NSString *title;
+    UIImage *image;
+    NSURL *url;
+    enum WXScene scene;
+    
+    NSArray *activity;
+}
+@property (nonatomic, strong) HYActivityView *activityView;
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UILabel *userNameLabel;
@@ -385,12 +396,60 @@
 //            [self.navigationController pushViewController:myCardController animated:YES];
         }
     }else{
-        ShareWeChatController *shareVC = [[ShareWeChatController alloc] init];
-        shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        shareVC.delegate = self;
-        
+//        ShareWeChatController *shareVC = [[ShareWeChatController alloc] init];
+//        shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//        shareVC.delegate = self;
+//        
+//        self.tabBarController.tabBar.hidden = YES;
+//        [self presentViewController:shareVC animated:NO completion:nil];
+        if (!self.activityView)
+        {
+            self.activityView = [[HYActivityView alloc]initWithTitle:@"" referView:self.view];
+            self.activityView.delegate = self;
+            //横屏会变成一行6个, 竖屏无法一行同时显示6个, 会自动使用默认一行4个的设置.
+            self.activityView.numberOfButtonPerLine = 6;
+            
+            ButtonView *bv ;
+            
+            bv = [[ButtonView alloc]initWithText:@"微信" image:[UIImage imageNamed:@"btn_share_weixin"] handler:^(ButtonView *buttonView){
+                NSLog(@"点击微信");
+                SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+                req.text                = @"简单文本分享测试";
+                req.bText               = YES;
+                // 目标场景
+                // 发送到聊天界面  WXSceneSession
+                // 发送到朋友圈    WXSceneTimeline
+                // 发送到微信收藏  WXSceneFavorite
+                req.scene               = WXSceneSession;
+                [WXApi sendReq:req];
+                
+                self.tabBarController.tabBar.hidden = NO;
+
+            }];
+            [self.activityView addButtonView:bv];
+            
+            bv = [[ButtonView alloc]initWithText:@"微信朋友圈" image:[UIImage imageNamed:@"btn_share_pengyouquan"] handler:^(ButtonView *buttonView){
+                NSLog(@"点击微信朋友圈");
+                SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+                req.text                = @"简单文本分享测试";
+                req.bText               = YES;
+                // 目标场景
+                // 发送到聊天界面  WXSceneSession
+                // 发送到朋友圈    WXSceneTimeline
+                // 发送到微信收藏  WXSceneFavorite
+                req.scene               = WXSceneTimeline;
+                [WXApi sendReq:req];
+                self.tabBarController.tabBar.hidden = NO;
+
+            }];
+            [self.activityView addButtonView:bv];
+            
+            
+        }
         self.tabBarController.tabBar.hidden = YES;
-        [self presentViewController:shareVC animated:NO completion:nil];
+
+        [self.activityView show];
+        
     }
 
 }

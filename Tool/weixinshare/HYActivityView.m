@@ -81,7 +81,7 @@
     [self addConstraints:constraints];
     
     //竖直方向imageView和textLabel在一条直线上, 并且挨着, imageView的高为50
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[imageButton(50)][textLabel]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views];
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[imageButton(50)][textLabel(10)]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views];
     [self addConstraints:constraints];
     
 }
@@ -96,6 +96,11 @@
     if (self.activityView) {
         [self.activityView hide];
         
+        if ([self.delegate respondsToSelector:@selector(setTabBarIsHide:)]) {
+            
+            UIViewController *vc = [[UIViewController alloc] init];
+            [self.delegate setTabBarIsHide:vc];
+        }
     }
     
 }
@@ -177,13 +182,13 @@
 
 - (void)calculateButtonSpaceWithNumberOfButtonPerLine:(int)number
 {
-    self.buttonSpace = (self.referView.bounds.size.width - BUTTON_VIEW_SIDE * number) / (number + 1);
+    self.buttonSpace = (self.referView.bounds.size.width - BUTTON_VIEW_SIDE * 2) / (2 + 1);
     
     if (self.buttonSpace < 0) {
-        [self calculateButtonSpaceWithNumberOfButtonPerLine:4];
+        [self calculateButtonSpaceWithNumberOfButtonPerLine:2];
         
     } else {
-        self.workingNumberOfButtonPerLine = number;
+        self.workingNumberOfButtonPerLine = 2;
         
     }
     
@@ -200,7 +205,7 @@
     self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3f];
     
     self.contentView = [[UIView alloc]init];
-    self.bgColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.95f];
+    self.bgColor = [UIColor whiteColor];
     [self addSubview:self.contentView];
     
     self.closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -216,7 +221,8 @@
     
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.cancelButton setTitle:@"取 消" forState:UIControlStateNormal];
-    [self.cancelButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    [self.cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.cancelButton setBackgroundColor:[UIColor colorFromHex:@"#fafafa"]];
     [self.cancelButton addTarget:self action:@selector(closeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.cancelButton];
     
@@ -293,7 +299,7 @@
     [self.iconView addConstraint:self.iconViewHeightConstraint];
     
     //垂直方向titleLabel挨着iconView挨着cancelButton
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-8-[titleLabel(==30)]-[iconView]-[cancelButton(==30)]-8-|" options:0 metrics:nil views:views];
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-8-[titleLabel(==30)]-[iconView]-[cancelButton(==50)]-0-|" options:0 metrics:nil views:views];
     [self.contentView addConstraints:constraints];
     
     
@@ -321,11 +327,11 @@
         NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:buttonView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.iconView attribute:NSLayoutAttributeTop multiplier:1 constant:(y + 1) * ICON_VIEW_HEIGHT_SPACE + y * BUTTON_VIEW_SIDE];
         [self.iconView addConstraint:constraint];
         [self.buttonConstraintsArray addObject:constraint];
-
+        
         constraint = [NSLayoutConstraint constraintWithItem:buttonView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.iconView attribute:NSLayoutAttributeLeading multiplier:1 constant:(x + 1) * self.buttonSpace + x * BUTTON_VIEW_SIDE];
         [self.iconView addConstraint:constraint];
         [self.buttonConstraintsArray addObject:constraint];
-
+        
     }
     
     [self layoutIfNeeded];
@@ -417,6 +423,11 @@
 - (void)closeButtonClicked:(UIButton *)button
 {
     [self hide];
+    if ([self.delegate respondsToSelector:@selector(setTabBarIsHide:)]) {
+        
+        UIViewController *vc = [[UIViewController alloc] init];
+        [self.delegate setTabBarIsHide:vc];
+    }
     
 }
 
@@ -425,18 +436,23 @@
     if (self.useGesturer) {
         [self hide];
         
+        if ([self.delegate respondsToSelector:@selector(setTabBarIsHide:)]) {
+            
+            UIViewController *vc = [[UIViewController alloc] init];
+            [self.delegate setTabBarIsHide:vc];
+        }
     }
     
 }
 
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect
+ {
+ // Drawing code
+ }
+ */
 
 @end
