@@ -148,7 +148,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         make.top.equalTo(titleView.mas_bottom).mas_offset(0);
         make.left.equalTo(self.view).mas_offset(Main_Screen_Width*37.5/375);
         make.right.equalTo(self.view).mas_offset(-Main_Screen_Width*37.5/375);
-        make.height.mas_equalTo(self.view.height);
+        make.height.mas_equalTo(self.view.height-Main_Screen_Height*60/667-64);
     }];
     
     self.rechargeView.delegate = self;
@@ -158,7 +158,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     self.rechargeView.rowHeight = Main_Screen_Height*192/667;
     self.rechargeView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //self.rechargeView.backgroundColor = [UIColor whiteColor];
-    
+     self.rechargeView.showsVerticalScrollIndicator = NO;
     UIView *blankView = [[UIView alloc] initWithFrame:CGRectMake(_activateTF.frame.origin.x,_activateTF.frame.origin.y,15.0, _activateTF.frame.size.height)];
     _activateTF.leftView = blankView;
     _activateTF.leftViewMode =UITextFieldViewModeAlways;
