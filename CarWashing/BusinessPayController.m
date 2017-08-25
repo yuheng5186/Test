@@ -145,7 +145,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
     
     //底部支付栏
-    UIView *payBottomView = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 60, Main_Screen_Width, 60*Main_Screen_Height/667)];
+    UIView *payBottomView = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 60*Main_Screen_Height/667, Main_Screen_Width, 60*Main_Screen_Height/667)];
     payBottomView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:payBottomView];
     
