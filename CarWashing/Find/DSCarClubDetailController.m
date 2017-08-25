@@ -124,11 +124,11 @@
 
 - (void) createSubView {
 
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height-64-Main_Screen_Height*60/667)];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height-Main_Screen_Height*100/667)];
     self.tableView.top              = 0;
 
     if (Main_Screen_Height == 568) {
-        self.tableView.top              = 20;
+        self.tableView.top              = 0;
 
     }
 
@@ -390,7 +390,8 @@
     
     
     self.downView = [UIView new];
-    self.downView .frame = CGRectMake(0, Main_Screen_Height -Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*60/667);
+    self.downView .frame = CGRectMake(0, Main_Screen_Height -
+                                      Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*60/667);
     self.downView .backgroundColor  = [UIColor whiteColor];
     
     
@@ -405,7 +406,7 @@
     self.userSayTextField.layer.borderWidth     = 1;
     self.userSayTextField.layer.borderColor     = [UIColor colorFromHex:@"#b4b4b4"].CGColor;
     self.userSayTextField.left           = Main_Screen_Width*10/375 ;
-    self.userSayTextField.top            = Main_Screen_Height*10/667;
+    self.userSayTextField.top            = Main_Screen_Height*5/667;
     [self.userSayTextField addTarget:self action:@selector(userSayTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.downView  addSubview:self.userSayTextField];
     
@@ -1176,8 +1177,21 @@
 #pragma mark-监听键盘的done事件
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     NSLog(@"%@",textField.text);
-    [self addCommentariesData];
+    if(textField.text.length == 0)
+    {
+        
+    }else
+    {
+        [self addCommentariesData];
+    }
+    
     textField.text = @"";
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter]postNotification:notice];
 }
 
 #pragma mark - 无数据占位

@@ -60,6 +60,9 @@
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
     
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(noticeupdate:) name:@"update" object:nil];
+    
     [self setupRefresh];
     
 }
@@ -362,6 +365,13 @@
         [self.tableView.mj_header endRefreshing];
     }];
     
+}
+
+-(void)noticeupdate:(NSNotification *)sender{
+    _NewsArray = [[NSMutableArray alloc]init];
+    _otherArray = [[NSMutableArray alloc]init];
+    self.page = 0 ;
+    [self requesetCarClubNews];
 }
 
 

@@ -24,5 +24,6 @@
 @property(nonatomic,copy)NSString *ExpEndDates;
 @property(nonatomic)NSInteger GetCardType;
 @property(nonatomic)NSInteger Integralnum;
+@property(nonatomic)NSInteger CardType;
 
 @end

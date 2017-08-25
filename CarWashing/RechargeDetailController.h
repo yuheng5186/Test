@@ -8,6 +8,10 @@
 
 #import "BaseController.h"
 
+#import "CardBag.h"
+
 @interface RechargeDetailController : BaseController
+
+@property(nonatomic,strong)CardBag *card;
 
 @end
