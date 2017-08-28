@@ -13,6 +13,8 @@
 #import "DSGetScoreController.h"
 #import "LoginViewController.h"
 
+#import "UdStorage.h"
+
 @interface DSSettingController ()<UITableViewDelegate,UITableViewDataSource,LKAlertViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -239,10 +241,13 @@
         if (buttonIndex == 0) {
             
         }else{
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults removeObjectForKey:@"Account_Id"];
+                [defaults synchronize];
+            
                 LoginViewController *loginViewControler     = [[LoginViewController alloc] init];
                 UINavigationController *navController       = [[UINavigationController alloc] initWithRootViewController:loginViewControler];
                 navController.navigationBar.hidden          = YES;
-        
                 [self presentViewController: navController animated: YES completion:nil];
             
         }

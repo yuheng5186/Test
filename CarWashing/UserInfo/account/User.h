@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface User : NSObject
+@interface User : JSONModel
 
-@property NSUInteger Account_Id;
-@property NSUInteger Level_id;
-
-
+@property (nonatomic)NSInteger Account_Id;
+@property (nonatomic)NSInteger Level_id;
+@property (nonatomic)NSInteger UserScore;
+@property (nonatomic)NSInteger ModifyType;
+@property (nonatomic)NSInteger VerCode;
 @property (copy, nonatomic)NSString *userName;
 @property (copy, nonatomic)NSString *Accountname;
 
@@ -28,6 +29,7 @@
 @property (copy, nonatomic)NSString *userhobby;
 @property (copy, nonatomic)NSString *usermemo;
 @property (copy, nonatomic)NSString *useroccupation;
+
 
 
 +(User *)getInstanceByDic:(NSDictionary *)dic;

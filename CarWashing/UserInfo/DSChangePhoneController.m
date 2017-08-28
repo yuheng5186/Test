@@ -11,6 +11,7 @@
 #import "AFNetworkingTool.h"
 #import "HTTPDefine.h"
 #import "LCMD5Tool.h"
+#import "AppDelegate.h"
 @interface DSChangePhoneController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UITextField *phoneNumberText;
@@ -102,7 +103,7 @@
     if (indexPath.row == 0) {
         self.phoneNumberText                = [[UITextField alloc]initWithFrame:CGRectMake(Main_Screen_Width*10/375, Main_Screen_Height*45/667, Main_Screen_Width-Main_Screen_Width*240/375, Main_Screen_Height*40/667)];
 //        self.phoneNumberText.placeholder    = @"输入验证码";
-        self.phoneNumberText.placeholder    = @"15800781856";
+        self.phoneNumberText.text           = APPDELEGATE.currentUser.userPhone;
         self.phoneNumberText.delegate       = self;
         self.phoneNumberText.returnKeyType  = UIReturnKeyDone;
         self.phoneNumberText.keyboardType   = UIKeyboardTypeNumberPad;

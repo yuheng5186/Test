@@ -15,8 +15,44 @@
     User *u = [[User alloc]init];
     u.Account_Id = [[dic valueForKey:@"Account_Id"] integerValue];
     u.Level_id = [[dic valueForKey:@"Level_id"] integerValue];
-    u.userName = [dic valueForKey:@"Name"];
-    u.Accountname = [dic valueForKey:@"UserName"];
+    u.UserScore = [[dic valueForKey:@"UserScore"] integerValue];
+    
+    if([NSNull null] != [dic objectForKey:@"ModifyType"]) {
+        u.ModifyType = [[dic objectForKey:@"ModifyType"] integerValue];
+    }
+    else
+    {
+        u.ModifyType = 0;
+    }
+    if([NSNull null] != [dic objectForKey:@"VerCode"]) {
+        u.VerCode = [[dic valueForKey:@"VerCode"] integerValue];
+    }
+    else
+    {
+        u.VerCode = 0;
+    }
+    
+    if([NSNull null] != [dic objectForKey:@"Name"])
+    {
+        u.userName = [dic valueForKey:@"Name"];
+    }
+    else
+    {
+        
+        u.userName = [dic valueForKey:@"Mobile"];
+    }
+    
+    if([NSNull null] != [dic objectForKey:@"UserName"])
+    {
+        u.Accountname = [dic valueForKey:@"UserName"];
+    }
+    else
+    {
+        
+        u.Accountname = [dic valueForKey:@"Mobile"];
+    }
+    
+    
     u.userImagePath = [dic valueForKey:@"Headimg"];
     u.userPhone = [dic valueForKey:@"Mobile"];
     u.userSex = [dic valueForKey:@"Sex"];
