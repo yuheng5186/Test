@@ -13,6 +13,10 @@
 		0401E9021F4ED6E900F0CA79 /* EAIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0401E8FE1F4ED6E900F0CA79 /* EAIntroView.m */; };
 		0401E9031F4ED6E900F0CA79 /* EARestrictedScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0401E9001F4ED6E900F0CA79 /* EARestrictedScrollView.m */; };
 		0401E9091F4ED95000F0CA79 /* DSGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0401E9081F4ED95000F0CA79 /* DSGuideViewController.m */; };
+		0415739C1F53C4E9004514E3 /* DSInputCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0415739B1F53C4E9004514E3 /* DSInputCodeController.m */; };
+		041573A41F53C522004514E3 /* TFGridInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0415739F1F53C522004514E3 /* TFGridInputView.m */; };
+		041573A51F53C522004514E3 /* TFGridInputViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041573A11F53C522004514E3 /* TFGridInputViewCell.m */; };
+		041573A61F53C522004514E3 /* TFGridInputViewCellStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 041573A31F53C522004514E3 /* TFGridInputViewCellStyle.m */; };
 		1805AC831F38090D00FD0844 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC821F38090D00FD0844 /* LoginViewController.m */; };
 		1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC851F385C8600FD0844 /* DSAgreementController.m */; };
 		1805AC901F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC891F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.m */; };
@@ -286,6 +290,14 @@
 		0401E9001F4ED6E900F0CA79 /* EARestrictedScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EARestrictedScrollView.m; sourceTree = "<group>"; };
 		0401E9071F4ED95000F0CA79 /* DSGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSGuideViewController.h; sourceTree = "<group>"; };
 		0401E9081F4ED95000F0CA79 /* DSGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSGuideViewController.m; sourceTree = "<group>"; };
+		0415739A1F53C4E9004514E3 /* DSInputCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSInputCodeController.h; path = Home/DSInputCodeController.h; sourceTree = "<group>"; };
+		0415739B1F53C4E9004514E3 /* DSInputCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSInputCodeController.m; path = Home/DSInputCodeController.m; sourceTree = "<group>"; };
+		0415739E1F53C522004514E3 /* TFGridInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFGridInputView.h; sourceTree = "<group>"; };
+		0415739F1F53C522004514E3 /* TFGridInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFGridInputView.m; sourceTree = "<group>"; };
+		041573A01F53C522004514E3 /* TFGridInputViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFGridInputViewCell.h; sourceTree = "<group>"; };
+		041573A11F53C522004514E3 /* TFGridInputViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFGridInputViewCell.m; sourceTree = "<group>"; };
+		041573A21F53C522004514E3 /* TFGridInputViewCellStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFGridInputViewCellStyle.h; sourceTree = "<group>"; };
+		041573A31F53C522004514E3 /* TFGridInputViewCellStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFGridInputViewCellStyle.m; sourceTree = "<group>"; };
 		06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CarWashing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1805AC811F38090D00FD0844 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = UserInfo/LoginViewController.h; sourceTree = "<group>"; };
 		1805AC821F38090D00FD0844 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = UserInfo/LoginViewController.m; sourceTree = "<group>"; };
@@ -787,6 +799,20 @@
 			path = Tool/EAIntroView;
 			sourceTree = "<group>";
 		};
+		0415739D1F53C522004514E3 /* TFGridInputView */ = {
+			isa = PBXGroup;
+			children = (
+				0415739E1F53C522004514E3 /* TFGridInputView.h */,
+				0415739F1F53C522004514E3 /* TFGridInputView.m */,
+				041573A01F53C522004514E3 /* TFGridInputViewCell.h */,
+				041573A11F53C522004514E3 /* TFGridInputViewCell.m */,
+				041573A21F53C522004514E3 /* TFGridInputViewCellStyle.h */,
+				041573A31F53C522004514E3 /* TFGridInputViewCellStyle.m */,
+			);
+			name = TFGridInputView;
+			path = Tool/TFGridInputView;
+			sourceTree = "<group>";
+		};
 		1805AC801F3808DB00FD0844 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -881,6 +907,7 @@
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				0415739D1F53C522004514E3 /* TFGridInputView */,
 				0401E8FA1F4ED6E900F0CA79 /* EAIntroView */,
 				18A4B2371F4E9F0400C64978 /* MapNavigationView */,
 				18A4B2241F4D6CAB00C64978 /* AutoSizeToDevice-master */,
@@ -1074,6 +1101,8 @@
 				18B697A11F21A44F009FF73A /* DSMessageDetailController.m */,
 				18B697A31F21A87F009FF73A /* DSScanController.h */,
 				18B697A41F21A87F009FF73A /* DSScanController.m */,
+				0415739A1F53C4E9004514E3 /* DSInputCodeController.h */,
+				0415739B1F53C4E9004514E3 /* DSInputCodeController.m */,
 				18B697A61F21D420009FF73A /* DSCardGroupController.h */,
 				18B697A71F21D420009FF73A /* DSCardGroupController.m */,
 				50B26E6F1F302E17009B3B9F /* DiscountCategoryView.h */,
@@ -1997,6 +2026,7 @@
 				5097FE1A1F2F4335002EF8F8 /* MyCarViewCell.m in Sources */,
 				188907121F2730F4009E20B0 /* DSUpdateRuleController.m in Sources */,
 				181E92CB1F1F39CC0006511E /* UIColor+Additions.m in Sources */,
+				0415739C1F53C4E9004514E3 /* DSInputCodeController.m in Sources */,
 				0401E8CD1F4E67AE00F0CA79 /* DSCompleteWashingController.m in Sources */,
 				50E2EE851F1F4D3C00FAF130 /* YZSortViewController.m in Sources */,
 				18B697A51F21A87F009FF73A /* DSScanController.m in Sources */,
@@ -2101,6 +2131,7 @@
 				181E93071F208D560006511E /* DSRecommendController.m in Sources */,
 				1850904B1F4557E100795E0A /* UIView+TYAlertView.m in Sources */,
 				18A4B23D1F4E9F3600C64978 /* JXMapNavigationView.m in Sources */,
+				041573A61F53C522004514E3 /* TFGridInputViewCellStyle.m in Sources */,
 				180E43041F3B471100013D2D /* UIView+BFSToastInfo.m in Sources */,
 				500C6BF51F3B5B13007D34A1 /* BusinessMapController.m in Sources */,
 				50B26EA01F30819D009B3B9F /* RechargeDetailController.m in Sources */,
@@ -2133,6 +2164,7 @@
 				5042E3561F33165C00CD140F /* NewPagedFlowView.m in Sources */,
 				5097FDFC1F2ECE0B002EF8F8 /* TicketCashView.m in Sources */,
 				1853BA451F28A04100B98C7F /* JFButton.m in Sources */,
+				041573A51F53C522004514E3 /* TFGridInputViewCell.m in Sources */,
 				50B26EC91F31AFA7009B3B9F /* IcreaseCarController.m in Sources */,
 				18B69EA31F32CB48007DA0E4 /* UIImage+Zirkfied.m in Sources */,
 				18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */,
@@ -2147,6 +2179,7 @@
 				50B26E931F307AE5009B3B9F /* DiscountController.m in Sources */,
 				5097FE161F2F42F0002EF8F8 /* MyCarPortController.m in Sources */,
 				180E43211F3D836F00013D2D /* HYActivityView.m in Sources */,
+				041573A41F53C522004514E3 /* TFGridInputView.m in Sources */,
 				181E92FB1F2086ED0006511E /* DSServiceController.m in Sources */,
 				50769F521F3D52C500DDFCC7 /* ProvinceShortController.m in Sources */,
 				1853BA4B1F28A04100B98C7F /* JFSearchView.m in Sources */,

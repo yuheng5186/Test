@@ -11,6 +11,7 @@
 #import "PopHelpView.h"
 #import "LewPopupViewAnimationDrop.h"
 #import "DSStartWashingController.h"
+#import "DSInputCodeController.h"
 
 @interface DSScanQRCodeController ()<AVCaptureMetadataOutputObjectsDelegate>
 
@@ -116,9 +117,9 @@
 }
 - (void) inputButtonClcik:(UIButton *)sender {
 
-    DSStartWashingController *startVC           = [[DSStartWashingController alloc]init];
-    startVC.hidesBottomBarWhenPushed            = YES;
-    [self.navigationController pushViewController:startVC animated:YES];
+    DSInputCodeController    *inputCodeVC     = [[DSInputCodeController alloc]init];
+    inputCodeVC.hidesBottomBarWhenPushed         = YES;
+    [self.navigationController pushViewController:inputCodeVC animated:YES];
 }
 - (void) flashlightButtonClcik:(UIButton *)sender {
     
