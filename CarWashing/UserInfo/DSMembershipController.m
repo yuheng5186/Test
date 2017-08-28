@@ -99,6 +99,12 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     exchangeLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     [exchangeView addSubview:exchangeLabel];
     
+    UIView *separateView = [[UIView alloc] init];
+    [self.view addSubview:separateView];
+    
+    UIView *lineView = [[UIView alloc] init];
+    [self.view addSubview:lineView];
+    
     //    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     //    UICollectionView *goodsView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     //    goodsView.backgroundColor = [UIColor whiteColor];
@@ -131,18 +137,20 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
         make.center.equalTo(exchangeView);
     }];
     
-    //    [goodsView mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.top.equalTo(exchangeView.mas_bottom);
-    //        make.left.right.bottom.equalTo(self.view);
-    //    }];
-    //
-    //    goodsView.delegate = self;
-    //    goodsView.dataSource = self;
-    //
-    //    [goodsView registerClass:[GoodsViewCell class] forCellWithReuseIdentifier:id_goodsCell];
+    [separateView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(memberShipView.mas_bottom);
+        make.left.right.equalTo(self.view);
+        make.height.mas_equalTo(10*Main_Screen_Height/667);
+    }];
+    
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(exchangeView.mas_bottom);
+        make.left.right.equalTo(self.view);
+        make.height.mas_equalTo(1);
+    }];
     
     [_exchangListView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(exchangeView.mas_bottom);
+        make.top.equalTo(lineView.mas_bottom);
         make.bottom.equalTo(self.view);
         make.left.equalTo(self.view).mas_equalTo(30*Main_Screen_Height/667);
         make.right.equalTo(self.view).mas_equalTo(-30*Main_Screen_Height/667);
