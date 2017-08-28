@@ -32,6 +32,7 @@
     self.scrollView.backgroundColor         = [UIColor whiteColor];
     self.scrollView.contentSize             = CGSizeMake(self.contentView.size.width, self.contentView.size.height*1.2);
     [self.scrollView flashScrollIndicators];
+    self.scrollView.contentInset     = UIEdgeInsetsMake(0, 0, 60, 0);
     self.scrollView.directionalLockEnabled  = YES;
     [self.view addSubview:self.scrollView];
     
