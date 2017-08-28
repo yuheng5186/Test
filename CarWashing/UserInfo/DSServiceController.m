@@ -16,6 +16,7 @@
 
 @interface DSServiceController ()<UITableViewDelegate, UITableViewDataSource, HQSliderViewDelegate, HeadViewDelegate>
 
+
 @property (nonatomic, weak) UITableView *serviceListView;
 
 @property (nonatomic, weak) HQSliderView *serviceSliderView;
@@ -78,7 +79,7 @@
     [self.view addSubview:serviceListView];
     self.serviceListView = serviceListView;
     self.serviceListView.sectionHeaderHeight = 50*Main_Screen_Height/667;
-    
+    self.serviceListView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     //底部电话客服
     UIView *bottomPhoneView = [[UIView alloc] init];
@@ -195,9 +196,33 @@
     //    }  else{
     //        serviceCell.textLabel.text = [NSString stringWithFormat:@"待评价 --- 第%ld行", indexPath.row];
     //    }
+//    [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     
     return serviceCell;
 }
+
+//-(void)viewDidLayoutSubviews
+//{
+//    if ([serviceListView respondsToSelector:@selector(setSeparatorInset:)]) {
+//        [serviceListView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+//    }
+//    
+//    if ([serviceListView respondsToSelector:@selector(setLayoutMargins:)]) {
+//        [serviceListView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
+//    }
+//}
+//
+//-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+//        [cell setSeparatorInset:UIEdgeInsetsZero];
+//    }
+//    
+//    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+//        [cell setLayoutMargins:UIEdgeInsetsZero];
+//    }
+//}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     

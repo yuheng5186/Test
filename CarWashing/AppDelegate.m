@@ -28,6 +28,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
+    myDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+
+    
     
     if(Main_Screen_Height > 568)
     {
