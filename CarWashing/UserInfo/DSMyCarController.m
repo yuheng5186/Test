@@ -76,7 +76,7 @@ static NSString * HeaderId = @"header";
     
     if (_carInfoView == nil) {
         
-        UITableView *carInfoView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height) style:UITableViewStyleGrouped];
+        UITableView *carInfoView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height)];
         carInfoView.contentInset     = UIEdgeInsetsMake(0, 0, 80, 0);
         _carInfoView = carInfoView;
         [self.view addSubview:_carInfoView];
@@ -395,7 +395,7 @@ static NSString * HeaderId = @"header";
             [provinceBtn setTitle:@"沪" forState:UIControlStateNormal];
             [provinceBtn setTitleColor:[UIColor colorFromHex:@"#868686"] forState:UIControlStateNormal];
             provinceBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-            [provinceBtn addTarget:self action:@selector(didClickProvinceBtn) forControlEvents:UIControlEventTouchUpInside];
+//            [provinceBtn addTarget:self action:@selector(didClickProvinceBtn) forControlEvents:UIControlEventTouchUpInside];
             [carCell.contentView addSubview:provinceBtn];
             
             UIImageView *provinceImgV = [[UIImageView alloc] init];
@@ -580,18 +580,33 @@ static NSString * HeaderId = @"header";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    MyCarInfosHeaderView *headView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderId];
-    headView.infosLabel.textColor = [UIColor colorFromHex:@"#868686"];
-    headView.infosLabel.font = [UIFont systemFontOfSize:15];
+    UIView *hederview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 40)];
+    hederview.backgroundColor=[UIColor colorWithHex:0xf0f0f0];
+    UIView *hederviews=[[UIView alloc]initWithFrame:CGRectMake(0, 10, Main_Screen_Width, 29)];
+    hederviews.backgroundColor=[UIColor whiteColor];
+    
+    UIImageView *infoimage = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 15, 15)];
+    infoimage.contentMode=UIViewContentModeScaleAspectFill;
+    
+    
+    UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(infoimage.frame.origin.x+infoimage.frame.size.width, 0, Main_Screen_Width, 29)];
+    
+    infoLabel.textColor = [UIColor colorFromHex:@"#868686"];
+    infoLabel.font = [UIFont systemFontOfSize:15];
     
     if (section == 0) {
-        headView.infosLabel.text = @"基本信息";
-        headView.imgV.image = [UIImage imageNamed:@"xinxi"];
-    }else {
-        headView.infosLabel.text = @"其他信息";
-        headView.imgV.image = [UIImage imageNamed:@"qitaxinxi"];
+        infoimage.image=[UIImage imageNamed:@"xinxi"];
+        infoLabel.text = @"  基本信息";
+        
+    }else{
+        infoimage.image=[UIImage imageNamed:@"qitaxinxi"];
+        infoLabel.text = @"  其他信息";
     }
-    return headView;
+    [hederviews addSubview:infoimage];
+    [hederviews addSubview:infoLabel];
+    [hederview addSubview:hederviews];
+    
+    return hederview;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -633,20 +648,20 @@ static NSString * HeaderId = @"header";
 
 
 #pragma mark - 弹出省份简称
-- (void)didClickProvinceBtn {
-    
-    ProvinceShortController *provinceVC = [[ProvinceShortController alloc] init];
-    
-    typeof(self) weakSelf = self;
-    
-    provinceVC.provinceBlock = ^(NSString *nameText) {
-        
-        [weakSelf.provinceBtn setTitle:nameText forState:UIControlStateNormal];
-    };
-    
-    provinceVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self presentViewController:provinceVC animated:NO completion:nil];
-}
+//- (void)didClickProvinceBtn {
+//    
+//    ProvinceShortController *provinceVC = [[ProvinceShortController alloc] init];
+//    
+//    typeof(self) weakSelf = self;
+//    
+//    provinceVC.provinceBlock = ^(NSString *nameText) {
+//        
+//        [weakSelf.provinceBtn setTitle:nameText forState:UIControlStateNormal];
+//    };
+//    
+//    provinceVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    [self presentViewController:provinceVC animated:NO completion:nil];
+//}
 
 
 #pragma mark - 键盘
