@@ -100,9 +100,11 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     [exchangeView addSubview:exchangeLabel];
     
     UIView *separateView = [[UIView alloc] init];
+    separateView.backgroundColor = [UIColor colorFromHex:@"#fafafa"];
     [self.view addSubview:separateView];
     
     UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor colorFromHex:@"#fafafa"];
     [self.view addSubview:lineView];
     
     //    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -124,7 +126,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     [memberShipView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).mas_offset(64);
         make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(120*Main_Screen_Height/667);
+        make.height.mas_equalTo(113*Main_Screen_Height/667);
     }];
     
     [exchangeView mas_makeConstraints:^(MASConstraintMaker *make) {
