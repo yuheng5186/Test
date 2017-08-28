@@ -52,15 +52,53 @@
         u.Accountname = [dic valueForKey:@"Mobile"];
     }
     
+    if([NSNull null] != [dic objectForKey:@"Headimg"])
+    {
+        u.userImagePath = [dic valueForKey:@"Headimg"];
+    }
+    else
+    {
+        
+        u.userImagePath = @"";
+    }
     
-    u.userImagePath = [dic valueForKey:@"Headimg"];
     u.userPhone = [dic valueForKey:@"Mobile"];
-    u.userSex = [dic valueForKey:@"Sex"];
-    u.userAge = [dic valueForKey:@"Age"];
     
-    u.userhobby = [dic valueForKey:@"Hobby"];
-    u.usermemo = [dic valueForKey:@"Memo"];
-    u.useroccupation = [dic valueForKey:@"Occupation"];
+    if([NSNull null] != [dic objectForKey:@"Sex"])
+    {
+        u.userSex = [dic valueForKey:@"Sex"];
+    }
+    else
+    {
+        
+        u.userSex = 0;
+    }
+    
+    if([NSNull null] != [dic objectForKey:@"Age"])
+    {
+        u.userAge = [dic valueForKey:@"Age"];
+    }
+    else
+    {
+        
+        u.userAge = 0;
+    }
+    
+    
+    if([NSNull null] != [dic objectForKey:@"Hobby"] || [NSNull null] != [dic objectForKey:@"Memo"]||[NSNull null] != [dic objectForKey:@"Occupation"])
+    {
+        u.userhobby = [dic valueForKey:@"Hobby"];
+        u.usermemo = [dic valueForKey:@"Memo"];
+        u.useroccupation = [dic valueForKey:@"Occupation"];
+    }
+    else
+    {
+        u.userhobby = @"0";
+        u.usermemo = @"0";
+        u.useroccupation = @"0";
+    }
+    
+    
 //    u.token = [dic valueForKey:@"token"];
     return u;
 }
