@@ -49,7 +49,7 @@
     
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateUserName:) name:@"updatenamesuccess" object:nil];
-    
+    [center addObserver:self selector:@selector(noticeupdateUserName:) name:@"updatephonesuccess" object:nil];
     self.sexString = @"未填写";
     [self createSubView];
 

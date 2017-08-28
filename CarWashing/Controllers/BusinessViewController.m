@@ -149,9 +149,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.salerListView.dataSource = self;
     self.salerListView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    UINib *nib = [UINib nibWithNibName:@"SalerListViewCell" bundle:nil];
     
-    [self.salerListView registerNib:nib forCellReuseIdentifier:id_salerListCell];
     
     
     [self setupRefresh];
@@ -262,16 +260,16 @@ static NSString *id_salerListCell = @"salerListViewCell";
     {
         cell = [[QWMclistTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    else
-    {
-        //删除cell的所有子视图
-        while ([cell.contentView.subviews lastObject] != nil)
-        {
-            [(UIView*)[cell.contentView.subviews lastObject] removeFromSuperview];
-        }
-    }
+//    else
+//    {
+//        //删除cell的所有子视图
+//        while ([cell.contentView.subviews lastObject] != nil)
+//        {
+//            [(UIView*)[cell.contentView.subviews lastObject] removeFromSuperview];
+//        }
+//    }
     [cell setlayoutCell];
-    
+    cell.backgroundColor = [UIColor redColor];
     
     NSDictionary *dic=[self.MerchantData objectAtIndex:indexPath.row];
     [cell setUpCellWithDic:dic];

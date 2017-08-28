@@ -8,8 +8,16 @@
 
 #import "DSExchangeController.h"
 #import <Masonry.h>
+#import "HTTPDefine.h"
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "MBProgressHUD.h"
+#import "UdStorage.h"
 
 @interface DSExchangeController ()
+{
+    UITextField *exchangeTF;
+}
 
 @end
 
@@ -31,7 +39,7 @@
 
 - (void)setupUI {
     
-    UITextField *exchangeTF = [[UITextField alloc] init];
+    exchangeTF = [[UITextField alloc] init];
     exchangeTF.placeholder = @"请输入激活码";
     exchangeTF.textAlignment = NSTextAlignmentCenter;
     exchangeTF.layer.cornerRadius = Main_Screen_Height*24/667;
@@ -58,7 +66,59 @@
  }
                              
 - (void)didClickExchangeScoreBtn:(UIButton *)button {
-    
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"ActivationCode":exchangeTF.text
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/ActivationCard",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            
+            if([[[dict objectForKey:@"JsonData"] objectForKey:@"Activationstate"] integerValue] == 3)
+            {
+                [self.view showInfo:@"对不起，该卡不存在" autoHidden:YES interval:2];
+            }
+            else if([[[dict objectForKey:@"JsonData"] objectForKey:@"Activationstate"] integerValue] == 1)
+            {
+                [self.view showInfo:@"激活成功,你可以在我的卡包中进行查看" autoHidden:YES interval:2];
+
+            }
+            else if([[[dict objectForKey:@"JsonData"]objectForKey:@"Activationstate"] integerValue] == 2)
+            {
+                if([[[dict objectForKey:@"JsonData"] objectForKey:@"CardUseState"] integerValue] == 1)
+                {
+                    [self.view showInfo:@"对不起，该卡已被激活" autoHidden:YES interval:2];
+                }
+                else if([[[dict objectForKey:@"JsonData"] objectForKey:@"CardUseState"] integerValue] == 2)
+                {
+                    [self.view showInfo:@"对不起，该卡已被使用" autoHidden:YES interval:2];
+                }
+                else{
+                    [self.view showInfo:@"对不起，该卡已失效" autoHidden:YES interval:2];
+                }
+                
+                
+            }
+            else
+            {
+                [self.view showInfo:@"激活失败" autoHidden:YES interval:2];
+            }
+            
+            
+        }
+        else
+        {
+            [self.view showInfo:@"激活失败" autoHidden:YES interval:2];
+        }
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"激活失败" autoHidden:YES interval:2];
+        
+    }];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

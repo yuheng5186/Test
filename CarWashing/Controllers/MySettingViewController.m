@@ -29,6 +29,9 @@
 #import "HTTPDefine.h"
 #import "AppDelegate.h"
 #import "HYActivityView.h"
+#import "UdStorage.h"
+#import "AFNetworkingTool.h"
+#import "LCMD5Tool.h"
 
 
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,SetTabBarDelegate>
@@ -64,6 +67,8 @@
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.hidden = YES;
     
+    NSLog(@"%@",APPDELEGATE.currentUser.Accountname);
+    
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateUserName:) name:@"updatenamesuccess" object:nil];
     
@@ -94,17 +99,19 @@
     self.editButton.centerX              = titleNameLabel.centerX;
     self.editButton.layer.masksToBounds = YES;
     self.editButton.layer.cornerRadius = Main_Screen_Height*40/667;
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    if(APPDELEGATE.currentUser.userImagePath.length > 0)
+    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
         NSURL *url=[NSURL URLWithString:ImageURL];
         NSData *data=[NSData dataWithContentsOfURL:url];
         UIImage *img=[UIImage imageWithData:data];
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self.editButton setImage:img forState:UIControlStateNormal];
+            });
         });
-    });
-    
+    }
+
 
     UIImage *settingImage           = [UIImage imageNamed:@"shezhi"];
     UIButton  *settingButton        = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, settingImage.size.width, settingImage.size.height) iconName:@"shezhi" target:self action:@selector(settingButtonClick:)];
@@ -248,12 +255,111 @@
 
 - (void) signButtonClick:(id)sender {
     
-    PopupView *view = [PopupView defaultPopupView];
-    view.parentVC = self;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYYMMdd"];
+    NSDate *datenow = [NSDate date];
+    NSString *currentTimeString = [formatter stringFromDate:datenow];
     
-    [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{
+    if([UdStorage getObjectforKey:@"SignTime"])
+    {
+        if([[UdStorage getObjectforKey:@"SignTime"] intValue]<[currentTimeString intValue])
+        {
+            NSDictionary *mulDic = @{
+                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                                     };
+            NSDictionary *params = @{
+                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                     };
+            
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/AddUserSign",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                
+                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                {
+                    
+                    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+                    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+                    [inputFormatter setDateFormat:@"yyyy/MM/dd"];
+                    NSDate* inputDate = [inputFormatter dateFromString:[[dict objectForKey:@"JsonData"] objectForKey:@"SignTime"]];
+                    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+                    [outputFormatter setLocale:[NSLocale currentLocale]];
+                    [outputFormatter setDateFormat:@"yyyyMMdd"];
+                    NSString *targetTime = [outputFormatter stringFromDate:inputDate];
+                    
+                    [UdStorage storageObject:targetTime forKey:@"SignTime"];
+                    
+                    PopupView *view = [PopupView defaultPopupView];
+                    view.parentVC = self;
+                    
+                    [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{
+                        
+                    }];
+                }
+                
+                else
+                {
+                    [self.view showInfo:@"签到失败" autoHidden:YES interval:2];
+                }
+                
+                
+                
+            } fail:^(NSError *error) {
+                [self.view showInfo:@"签到失败" autoHidden:YES interval:2];
+            }];
+            
+        }
+        else
+        {
+            [self.view showInfo:@"今天已经签过到了" autoHidden:YES interval:2];
+        }
+    }
+    else
+    {
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
         
-    }];
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/AddUserSign",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+                
+                NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+                [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+                [inputFormatter setDateFormat:@"yyyy/MM/dd"];
+                NSDate* inputDate = [inputFormatter dateFromString:[[dict objectForKey:@"JsonData"] objectForKey:@"SignTime"]];
+                NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+                [outputFormatter setLocale:[NSLocale currentLocale]];
+                [outputFormatter setDateFormat:@"yyyyMMdd"];
+                NSString *targetTime = [outputFormatter stringFromDate:inputDate];
+                
+                [UdStorage storageObject:targetTime forKey:@"SignTime"];
+                
+                PopupView *view = [PopupView defaultPopupView];
+                view.parentVC = self;
+                
+                [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{
+                    
+                }];
+            }
+            
+            else
+            {
+                [self.view showInfo:@"签到失败" autoHidden:YES interval:2];
+            }
+            
+            
+            
+        } fail:^(NSError *error) {
+            [self.view showInfo:@"签到失败" autoHidden:YES interval:2];
+        }];
+        
+    }
+
 
     
 }
@@ -345,7 +451,7 @@
     if (indexPath.section == 0) {
         cell.imageView.image            = [UIImage imageNamed:@"jindinghuiyuan"];
         cell.textLabel.text             = @"金顶会员";
-        cell.detailTextLabel.text       = @"2600积分";
+        cell.detailTextLabel.text       = [NSString stringWithFormat:@"%ld积分",APPDELEGATE.currentUser.UserScore];
         cell.detailTextLabel.textColor  = [UIColor colorFromHex:@"#ffd55e"];
         
     }else if (indexPath.section == 1){

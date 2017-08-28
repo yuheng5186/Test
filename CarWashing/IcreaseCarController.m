@@ -310,22 +310,33 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *hederview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 40)];
+    hederview.backgroundColor=[UIColor colorWithHex:0xf0f0f0];
+    UIView *hederviews=[[UIView alloc]initWithFrame:CGRectMake(0, 10, Main_Screen_Width, 29)];
+    hederviews.backgroundColor=[UIColor whiteColor];
     
-    UILabel *infoLabel = [[UILabel alloc] init];
+    UIImageView *infoimage = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 15, 15)];
+    infoimage.contentMode=UIViewContentModeScaleAspectFill;
+    
+    
+    UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(infoimage.frame.origin.x+infoimage.frame.size.width, 0, Main_Screen_Width, 29)];
+    
     infoLabel.textColor = [UIColor colorFromHex:@"#868686"];
-    infoLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+    infoLabel.font = [UIFont systemFontOfSize:15];
     
     if (section == 0) {
-        
+        infoimage.image=[UIImage imageNamed:@"xinxi"];
         infoLabel.text = @"  基本信息";
         
     }else{
-        
+        infoimage.image=[UIImage imageNamed:@"qitaxinxi"];
         infoLabel.text = @"  其他信息";
     }
+    [hederviews addSubview:infoimage];
+    [hederviews addSubview:infoLabel];
+    [hederview addSubview:hederviews];
     
-    
-    return infoLabel;
+    return hederview;
 }
 
 

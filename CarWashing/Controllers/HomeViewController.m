@@ -140,6 +140,12 @@
     
     UIImage *logeImage              = [UIImage imageNamed:@"xichebaidi"];
     UIImageView *logoImageView      = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, logeImage.size.width,logeImage.size.height) imageName:@"xichebaidi"];
+    
+    [logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[UdStorage getObjectforKey:UserHead]]] placeholderImage:[UIImage imageNamed:@"xichebaidi"]];
+    logoImageView.layer.masksToBounds = YES;
+    logoImageView.layer.cornerRadius = logeImage.size.width/2;
+    
+    
     logoImageView.left              = Main_Screen_Width*12/375;
     logoImageView.centerY           = titleNameLabel.centerY;
     

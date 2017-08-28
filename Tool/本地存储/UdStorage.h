@@ -14,4 +14,5 @@
 +(void)storageObject:(id)object forKey:(NSString*)key;
 
 +(id)getObjectforKey:(NSString*)key;
+
 @end

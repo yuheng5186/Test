@@ -30,6 +30,17 @@
 #import "WXApi.h"
 #import "WXApiObject.h"
 
+//NSUserDefaults 保存数据
+#define IsNotFirstOpen   @"isNotFirstOpen"       //不是第一次打开
+#define Userid           @"Account_Id"           //用户id
+#define UserLevelid      @"Level_id"             //用户id
+#define UserNamer        @"UserName"             //用户名
+#define UserPhone        @"Mobile"               //用户手机号码
+#define UserType         @"userType"             //用户类型
+#define UserHead         @"Headimg"              //用户头像
+#define UserSex          @"Sex"              //用户性别
+#define UserAge          @"Age"              //用户年龄
+
 #import "TFGridInputView.h"
 #import<AVFoundation/AVFoundation.h>
 

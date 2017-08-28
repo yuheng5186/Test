@@ -228,7 +228,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
         membershipNameLabel.text = @"钻石会员";
         [gradeBtn setTitle:@"如何升级到黑钻会员" forState:UIControlStateNormal];
     }
-    else
+    else if([_MembershipprivilegesDic[@"Level_id"] integerValue] == 6)
     {
         membershipNameLabel.text = @"黑钻会员";
         [gradeBtn setTitle:@"您已经是黑钻会员" forState:UIControlStateNormal];

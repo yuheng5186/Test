@@ -11,11 +11,19 @@
 #import "WayToUpGradeCell.h"
 #import "ScoreDetailController.h"
 
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "HTTPDefine.h"
+#import "MBProgressHUD.h"
+#import "UdStorage.h"
+
 @interface EarnScoreController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) UIImageView *adverView;
 
 @property (nonatomic, weak) UITableView *earnWayView;
+
+@property (nonatomic, strong) NSMutableArray *ScoreData;
 
 @end
 
@@ -64,6 +72,49 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
     self.earnWayView.rowHeight = 90*Main_Screen_Height/667;
     [self.earnWayView registerClass:[WayToUpGradeCell class] forCellReuseIdentifier:id_earnViewCell];
     
+    self.ScoreData = [[NSMutableArray alloc]init];
+    [self requestGetScore];
+    
+    
+    
+}
+
+-(void)requestGetScore
+{
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Integral/EarnIntegral",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+            if(arr.count == 0)
+            {
+                [self.view showInfo:@"暂无数据" autoHidden:YES interval:2];
+            }
+            else
+            {
+                [self.ScoreData addObjectsFromArray:arr];
+                [self.earnWayView reloadData];
+            }
+            
+        }
+        else
+        {
+            [self.view showInfo:@"数据请求失败" autoHidden:YES interval:2];
+        }
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+    }];
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -72,38 +123,20 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+    return [self.ScoreData count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WayToUpGradeCell *earnScoreCell = [tableView dequeueReusableCellWithIdentifier:id_earnViewCell forIndexPath:indexPath];
     
-    if (indexPath.row == 0) {
+   
         
-        earnScoreCell.iconV.image = [UIImage imageNamed:@"xinyonghuzhuce"];
-        earnScoreCell.waysLab.text = @"新用户注册";
-        earnScoreCell.wayToLab.text = @"完成手机号绑定注册";
-        earnScoreCell.valuesLab.text = @"+20积分";
-    }else if (indexPath.row == 1) {
-        
-        earnScoreCell.iconV.image = [UIImage imageNamed:@"yaoqinghaoyou"];
-        earnScoreCell.waysLab.text = @"邀请好友";
-        earnScoreCell.wayToLab.text = @"邀请好友并完成注册";
-        earnScoreCell.valuesLab.text = @"+200积分";
-    }else if (indexPath.row == 2) {
-        
-        earnScoreCell.iconV.image = [UIImage imageNamed:@"wanshancheliangxinxi"];
-        earnScoreCell.waysLab.text = @"完善车辆信息";
-        earnScoreCell.wayToLab.text = @"完成车辆绑定,填写车辆信息";
-        earnScoreCell.valuesLab.text = @"+50积分";
-    }else {
-        
-        earnScoreCell.iconV.image = [UIImage imageNamed:@"wanshangerenxinxi"];
-        earnScoreCell.waysLab.text = @"完善隔个人信息";
-        earnScoreCell.wayToLab.text = @"填写个人姓名完善个人信息";
-        earnScoreCell.valuesLab.text = @"+20积分";
-    }
+    earnScoreCell.iconV.image = [UIImage imageNamed:@"wanshangerenxinxi"];
+    earnScoreCell.waysLab.text = @"完善隔个人信息";
+    earnScoreCell.wayToLab.text = @"填写个人姓名完善个人信息";
+    earnScoreCell.valuesLab.text = @"+20积分";
+    
     
     return earnScoreCell;
 }
