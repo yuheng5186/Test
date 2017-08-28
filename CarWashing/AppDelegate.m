@@ -11,6 +11,8 @@
 #import "LoginViewController.h"
 #import "IQKeyboardManager.h"
 #import "DSGuideViewController.h"
+#import "UdStorage.h"
+#import "HTTPDefine.h"
 
 
 @interface AppDelegate ()
@@ -26,7 +28,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
-    myDelegate = [[UIApplication sharedApplication] delegate];
     
     if(Main_Screen_Height > 568)
     {
@@ -55,7 +56,41 @@
     
     DSGuideViewController *guideControl = [[DSGuideViewController alloc]init];
     UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:guideControl];
-    self.window.rootViewController      = nav;
+    
+    
+    
+    if([UdStorage getObjectforKey:Userid])
+    {
+        
+        
+        APPDELEGATE.currentUser = [[User alloc]init];
+        
+        APPDELEGATE.currentUser.Account_Id = [[UdStorage getObjectforKey:Userid] integerValue];
+        APPDELEGATE.currentUser.Level_id = [[UdStorage getObjectforKey:@"Level_id"] integerValue];
+        APPDELEGATE.currentUser.UserScore = [[UdStorage getObjectforKey:@"UserScore"] integerValue];
+        APPDELEGATE.currentUser.ModifyType = [[UdStorage getObjectforKey:@"ModifyType"] integerValue];
+        APPDELEGATE.currentUser.VerCode = [[UdStorage getObjectforKey:@"VerCode"] integerValue];
+        APPDELEGATE.currentUser.userName = [UdStorage getObjectforKey:@"Name"];
+        APPDELEGATE.currentUser.Accountname = [UdStorage getObjectforKey:@"UserName"];
+        APPDELEGATE.currentUser.userImagePath = [UdStorage getObjectforKey:@"Headimg"];
+        APPDELEGATE.currentUser.userPhone = [UdStorage getObjectforKey:@"Mobile"];
+        APPDELEGATE.currentUser.userSex = [UdStorage getObjectforKey:@"Sex"];
+        APPDELEGATE.currentUser.userAge = [UdStorage getObjectforKey:@"Age"];
+        APPDELEGATE.currentUser.userhobby = [UdStorage getObjectforKey:@"Hobby"];
+        APPDELEGATE.currentUser.usermemo = [UdStorage getObjectforKey:@"Memo"];
+        APPDELEGATE.currentUser.useroccupation = [UdStorage getObjectforKey:@"Occupation"];
+        
+        
+        MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
+        self.window.rootViewController  = menuTabBarController;
+        
+    }
+    
+    else{
+        self.window.rootViewController      = nav;
+    }
+    
+    
     
     
     

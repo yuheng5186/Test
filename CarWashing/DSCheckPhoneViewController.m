@@ -138,11 +138,12 @@
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             
-            [UdStorage storageObject:Userphone forKey:@"userPhone"];
+            [UdStorage storageObject:Userphone forKey:@"Mobile"];
+            APPDELEGATE.currentUser.userPhone = Userphone;
             NSNotification * notice = [NSNotification notificationWithName:@"updatephonesuccess" object:nil userInfo:@{@"userphone":Userphone}];
             [[NSNotificationCenter defaultCenter]postNotification:notice];
-            DSUserInfoController *root=[[DSUserInfoController alloc]init];
-            [self.navigationController pushViewController:root animated:YES];
+            int index=[[self.navigationController viewControllers]indexOfObject:self];
+            [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-2]animated:YES];
         }
         else
         {

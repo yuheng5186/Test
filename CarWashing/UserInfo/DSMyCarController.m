@@ -239,45 +239,50 @@ static NSString * HeaderId = @"header";
     UIImageView *iconImageView = [[UIImageView alloc] init];
     iconImageView.image = [UIImage imageNamed:@"aichemoren"];
     [containImageView addSubview:iconImageView];
-    MyCar *car = [[MyCar alloc]init];
-    car = [_CarArray objectAtIndex:index];
-    if(car.IsDefaultFav == 0)
-    {
-        iconImageView.hidden = YES;
-    }
-    else
-    {
-        iconImageView.hidden = NO;
-    }
+    
+   
+        MyCar *car = [[MyCar alloc]init];
+        car = [_CarArray objectAtIndex:index];
+        if(car.IsDefaultFav == 0)
+        {
+            iconImageView.hidden = YES;
+        }
+        else
+        {
+            iconImageView.hidden = NO;
+        }
+        
+        
+        
+        UIImageView *carImageView = [[UIImageView alloc] init];
+        carImageView.image = [UIImage imageNamed:@"aiche1"];
+        [containImageView addSubview:carImageView];
+        
+        UILabel *carpinpai = [[UILabel alloc]initWithFrame:CGRectMake(115*Main_Screen_Height/667, 40*Main_Screen_Height/667, containImageView.frame.size.width - 130*Main_Screen_Height/667, 20)];
+        carpinpai.text = car.CarBrand;
+        carpinpai.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+        [containImageView addSubview:carpinpai];
+        
+        UILabel *carpro = [[UILabel alloc]initWithFrame:CGRectMake(115*Main_Screen_Height/667, 40*Main_Screen_Height/667 + carpinpai.frame.size.height , containImageView.frame.size.width - 130*Main_Screen_Height/667, 20)];
+        carpro.text = [NSString stringWithFormat:@"%ld年产",car.Manufacture];
+        carpro.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+        [containImageView addSubview:carpro];
+        
+        [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.equalTo(containImageView);
+            make.width.height.mas_equalTo(30*Main_Screen_Height/667);
+        }];
+        
+        [carImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(containImageView);
+            make.left.equalTo(containImageView).mas_equalTo(24*Main_Screen_Height/667);
+            make.width.height.mas_equalTo(67*Main_Screen_Height/667);
+        }];
+        
+        bannerView.mainImageView = containImageView;
+
     
     
-    
-    UIImageView *carImageView = [[UIImageView alloc] init];
-    carImageView.image = [UIImage imageNamed:@"aiche1"];
-    [containImageView addSubview:carImageView];
-    
-    UILabel *carpinpai = [[UILabel alloc]initWithFrame:CGRectMake(115*Main_Screen_Height/667, 40*Main_Screen_Height/667, containImageView.frame.size.width - 130*Main_Screen_Height/667, 20)];
-    carpinpai.text = car.CarBrand;
-    carpinpai.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
-    [containImageView addSubview:carpinpai];
-    
-    UILabel *carpro = [[UILabel alloc]initWithFrame:CGRectMake(115*Main_Screen_Height/667, 40*Main_Screen_Height/667 + carpinpai.frame.size.height , containImageView.frame.size.width - 130*Main_Screen_Height/667, 20)];
-    carpro.text = [NSString stringWithFormat:@"%ld年产",car.Manufacture];
-    carpro.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
-    [containImageView addSubview:carpro];
-    
-    [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(containImageView);
-        make.width.height.mas_equalTo(30*Main_Screen_Height/667);
-    }];
-    
-    [carImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(containImageView);
-        make.left.equalTo(containImageView).mas_equalTo(24*Main_Screen_Height/667);
-        make.width.height.mas_equalTo(67*Main_Screen_Height/667);
-    }];
-    
-    bannerView.mainImageView = containImageView;
     
     return bannerView;
 }
@@ -288,43 +293,53 @@ static NSString * HeaderId = @"header";
     NSLog(@"%ld",pageNumber);
     _Xuhao = pageNumber;
     MyCar *car = [[MyCar alloc]init];
-    car = [_CarArray objectAtIndex:_Xuhao];
-   
     
-    self.carNum.text = car.PlateNumber;
-    self.carBrand.text = car.CarBrand;
-    self.ChassisNum.text = car.ChassisNum;
-    self.Mileage.text = [NSString stringWithFormat:@"%ld",car.Mileage];
-    
-    
-    
-    
-   
-    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-    [inputFormatter setDateFormat:@"yyyyMM"];
-    NSDate* inputDate = [inputFormatter dateFromString:car.DepartureTime];
-    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
-    [outputFormatter setLocale:[NSLocale currentLocale]];
-    [outputFormatter setDateFormat:@"yyyy-MM"];
-    NSString *targetTime = [outputFormatter stringFromDate:inputDate];
-    _lbl2.text  = targetTime;
-    
-    if(targetTime == 0)
-    {
+//    if(_CarArray.count == 0)
+//    {
+//        
+//    }
+//    else
+//    {
+        car = [_CarArray objectAtIndex:_Xuhao];
+        
+        
+        self.carNum.text = car.PlateNumber;
+        self.carBrand.text = car.CarBrand;
+        self.ChassisNum.text = car.ChassisNum;
+        self.Mileage.text = [NSString stringWithFormat:@"%ld",car.Mileage];
+        
+        
+        
+        
+        
         NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
         [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-        [inputFormatter setDateFormat:@"yyyyM"];
+        [inputFormatter setDateFormat:@"yyyyMM"];
         NSDate* inputDate = [inputFormatter dateFromString:car.DepartureTime];
         NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
         [outputFormatter setLocale:[NSLocale currentLocale]];
-        [outputFormatter setDateFormat:@"yyyy-M"];
+        [outputFormatter setDateFormat:@"yyyy-MM"];
         NSString *targetTime = [outputFormatter stringFromDate:inputDate];
         _lbl2.text  = targetTime;
-    }
         
+        if(targetTime == 0)
+        {
+            NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+            [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+            [inputFormatter setDateFormat:@"yyyyM"];
+            NSDate* inputDate = [inputFormatter dateFromString:car.DepartureTime];
+            NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+            [outputFormatter setLocale:[NSLocale currentLocale]];
+            [outputFormatter setDateFormat:@"yyyy-M"];
+            NSString *targetTime = [outputFormatter stringFromDate:inputDate];
+            _lbl2.text  = targetTime;
+        }
+        
+        
+        _lbl.text = [NSString stringWithFormat:@"%ld",car.Manufacture];
+//    }
     
-    _lbl.text = [NSString stringWithFormat:@"%ld",car.Manufacture];
+    
     
     
     
@@ -351,7 +366,18 @@ static NSString * HeaderId = @"header";
     carCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:id_carCell];
     
     MyCar *car = [[MyCar alloc]init];
-    car = [_CarArray objectAtIndex:_Xuhao];
+    
+    if(_CarArray.count == 0)
+    {
+        
+    }
+    
+    else
+    {
+        car = [_CarArray objectAtIndex:_Xuhao];
+    }
+
+    
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
