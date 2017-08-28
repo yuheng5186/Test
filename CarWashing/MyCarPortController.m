@@ -192,10 +192,9 @@ static NSString *id_carListCell = @"id_carListCell";
         return [self.mycararray count];
     }
 
-    
+//    return 0;
     
 }
-
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if([_myDefaultcararray count] != 0)
@@ -519,7 +518,7 @@ static NSString *id_carListCell = @"id_carListCell";
  */
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return -64.f-105;
+    return -64;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
