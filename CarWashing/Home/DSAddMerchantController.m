@@ -134,7 +134,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     }
     cell.backgroundColor    = [UIColor whiteColor];
-    cell.textLabel.textColor    = [UIColor colorFromHex:@"#999999"];
+//    cell.textLabel.textColor    = [UIColor colorFromHex:@"#999999"];
     
     if (indexPath.section == 0) {
         
@@ -147,7 +147,7 @@
             self.merchantFieldText.textAlignment  = NSTextAlignmentLeft;
             self.merchantFieldText.font           = [UIFont systemFontOfSize:14];
             self.merchantFieldText.backgroundColor= [UIColor whiteColor];
-            self.merchantFieldText.centerY        = cell.centerY +Main_Screen_Height*5/667;
+            self.merchantFieldText.top            = Main_Screen_Height*5/667;
             self.merchantFieldText.left           = Main_Screen_Width*120/375 ;
             
             [self.merchantFieldText addTarget:self action:@selector(merchantFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
@@ -165,7 +165,7 @@
             self.phoneFieldText.textAlignment  = NSTextAlignmentLeft;
             self.phoneFieldText.font           = [UIFont systemFontOfSize:14];
             self.phoneFieldText.backgroundColor= [UIColor whiteColor];
-            self.phoneFieldText.centerY        = cell.centerY +Main_Screen_Height*5/667;
+            self.phoneFieldText.top            = Main_Screen_Height*5/667;
             self.phoneFieldText.left           = Main_Screen_Width*120/375 ;
             
             [self.phoneFieldText addTarget:self action:@selector(phoneFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
@@ -179,7 +179,7 @@
             self.addressFieldText.textAlignment  = NSTextAlignmentLeft;
             self.addressFieldText.font           = [UIFont systemFontOfSize:14];
             self.addressFieldText.backgroundColor= [UIColor whiteColor];
-            self.addressFieldText.centerY        = cell.centerY +Main_Screen_Height*5/667;
+            self.addressFieldText.top            = Main_Screen_Height*5/667;
             self.addressFieldText.left           = Main_Screen_Width*120/375 ;
             
             [self.addressFieldText addTarget:self action:@selector(addressFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
