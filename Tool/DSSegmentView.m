@@ -59,14 +59,14 @@
     
     _singleLine = singleLine;
     
-    singleLine.backgroundColor = [UIColor orangeColor];
+    singleLine.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     
     [self addSubview:singleLine];
     
     [singleLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.centerX.equalTo(_firstButton);
         make.width.mas_equalTo(100);
-        make.height.mas_equalTo(5);
+        make.height.mas_equalTo(3);
     }];
 }
 
