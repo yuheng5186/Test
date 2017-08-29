@@ -57,14 +57,14 @@
     titleView.top                      = 0;
     
     NSString *titleName              = @"扫码洗车";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:16*Main_Screen_Height/667];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:20*Main_Screen_Height/667];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = titleView.centerX;
     titleNameLabel.centerY           = titleView.centerY +8;
     
     NSString  *helpString     = @"使用帮助";
-    UIFont    *helpStringFont = [UIFont systemFontOfSize:Main_Screen_Width*14/375];
+    UIFont    *helpStringFont = [UIFont systemFontOfSize:Main_Screen_Width*18/375];
     UIButton   *helpButton      = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) text:helpString font:helpStringFont color:[UIColor whiteColor] target:self action:@selector(helpButtonClick:)];
     helpButton.tintColor = [UIColor whiteColor];
     helpButton.centerY   = titleNameLabel.centerY;
