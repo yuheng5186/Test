@@ -101,7 +101,7 @@
     UIFont    *openStringFont = [UIFont systemFontOfSize:Main_Screen_Height*15/667];
     self.flashlightSwitch     = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*20/667) font:openStringFont text:openString isCenter:NO];
     self.flashlightSwitch.textColor = [UIColor whiteColor];
-    self.flashlightSwitch.top = self.flashlight.bottom;
+    self.flashlightSwitch.top = self.flashlight.bottom +Main_Screen_Height*10/667;
     self.flashlightSwitch.left  = self.flashlight.left+Main_Screen_Height*10/667;
     
     self.inputButton        = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*50/667) iconName:@"shurubianhao" target:self action:@selector(inputButtonClcik:)];
@@ -112,7 +112,7 @@
     UIFont    *inputStringFont   = [UIFont systemFontOfSize:Main_Screen_Height*15/667];
     self.inputLabel             = [UIUtil drawLabelInView:self.contentView frame:[UIUtil textRect:inpotString font:inputStringFont]font:inputStringFont text:inpotString isCenter:NO];
     self.inputLabel.textColor   = [UIColor whiteColor];
-    self.inputLabel.top         = self.inputButton.bottom;
+    self.inputLabel.top         = self.inputButton.bottom +Main_Screen_Height*10/667;
     self.inputLabel.centerX     = self.inputButton.centerX;
 }
 - (void) inputButtonClcik:(UIButton *)sender {
