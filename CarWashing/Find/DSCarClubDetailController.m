@@ -101,9 +101,9 @@
 
     if (self.userSayTextField.text.length ==0) {//键盘弹出
         
-        self.downView.frame = CGRectMake(0, Main_Screen_Height -Main_Screen_Height*100/667-height, Main_Screen_Width, Main_Screen_Height*60/667);
+        self.downView.frame = CGRectMake(0, Main_Screen_Height -Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*60/667);
     }else{
-        CGRect rect =CGRectMake(0, Main_Screen_Height -Main_Screen_Height*100/667-height, Main_Screen_Width, Main_Screen_Height*60/667);
+        CGRect rect =CGRectMake(0, Main_Screen_Height -Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*60/667);
         self.downView.frame = rect;
     }
 }
@@ -510,6 +510,7 @@
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
+    //
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/GetActivityInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
