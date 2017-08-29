@@ -20,4 +20,7 @@
 
 @property(nonatomic)NSInteger ShowType; //类型(1.优惠活动;2.消费记录)
 
+@property(nonatomic)NSInteger ConsumptionType; //1.自动扫码支付;2.门店在线支付(当返回类型为2时用到)
+@property(nonatomic)NSInteger IntegralNumber; 
+
 @end

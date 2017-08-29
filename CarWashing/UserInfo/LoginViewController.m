@@ -184,6 +184,10 @@
 
 - (void) loginButtonClick:(id)sender {
     
+    [self.verifyFieldText resignFirstResponder];
+    
+    [self.userMobileFieldText resignFirstResponder];
+    
     [_indicatorView startAnimating];
     [loginButton setTitle:@"" forState:UIControlStateNormal];
     loginButton.enabled = NO;

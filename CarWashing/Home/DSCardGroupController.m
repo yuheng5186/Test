@@ -562,7 +562,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 }
 //是否允许点击，默认YES
 - (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView {
-    return NO;
+    return YES;
 }
 //是否允许滚动，默认NO
 - (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
@@ -578,7 +578,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 }
 //空白页按钮点击事件
 - (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView {
-    return NSLog(@"空白页按钮点击事件");
+    self.tabBarController.selectedIndex = 3;
 }
 /**
  *  调整垂直位置

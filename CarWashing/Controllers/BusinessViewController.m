@@ -194,17 +194,12 @@ static NSString *id_salerListCell = @"salerListViewCell";
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        if(_MerchantData.count == 0)
-        {
-            [self setData];
-        }
-        else
-        {
+        
             self.page++;
             _otherArray = [NSMutableArray new];
             [self setDatamore];
             
-        }
+        
 //
 //        
 //        
@@ -510,6 +505,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
                 [self.MerchantData addObjectsFromArray:arr];
                 [self.salerListView reloadData];
                 [self.salerListView.mj_footer endRefreshing];
+                self.page--;
             }
             
         }
@@ -517,11 +513,13 @@ static NSString *id_salerListCell = @"salerListViewCell";
         {
             [self.view showInfo:@"数据请求失败" autoHidden:YES interval:2];
             [self.salerListView.mj_footer endRefreshing];
+            self.page--;
         }
         
     } fail:^(NSError *error) {
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
         [self.salerListView.mj_header endRefreshing];
+        self.page--;
     }];
     
 }
