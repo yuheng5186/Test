@@ -631,16 +631,49 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     Record *record = (Record *)[self.GetUserRecordData objectAtIndex:indexPath.section];
+    NSString *imageString;
+    NSString *titleString;
+    NSString *vipString;
+    NSString *contentShowString;
+    NSString *remindShowString;
+    NSString *getString;
     
-    NSString *imageString               = @"xiaofeijilu";
-    NSString *titleString               = @"消费记录";
-    NSString *vipString                 = @"";
-    NSString *contentShowString         = @"¥ 18.00";
-    NSString *remindShowString          = @"金雷快修车店";
-    NSString *getString                 = @"查看详情";
-    
+    if(record.ShowType == 2)
+    {
+        imageString               = @"xiaofeijilu";
+        titleString               = @"消费记录";
+        vipString                 = @"";
+        
+        
+        if(record.ConsumptionType == 1)
+        {
+            contentShowString         = [NSString stringWithFormat:@"￥%@",record.MiddleDes];
+            remindShowString          = record.BottomDes;
+        }
+        else if(record.ConsumptionType == 2)
+        {
+            contentShowString         = record.MiddleDes;
+            remindShowString          = [NSString stringWithFormat:@"剩余%@次免费洗车",record.BottomDes];
+        }
+        else if(record.ConsumptionType == 3)
+        {
+            contentShowString         = record.MiddleDes;
+            remindShowString          = [NSString stringWithFormat:@"支付金额: %@元",record.BottomDes];
+        }
+        else if(record.ConsumptionType == 4)
+        {
+            contentShowString         = [NSString stringWithFormat:@"您购买%@",record.MiddleDes];
+            remindShowString          = [NSString stringWithFormat:@"支付金额: %@元",record.BottomDes];
+        }
+        
+        
+        
+        
+        
+        getString                 = @"查看详情";
+    }
 
-    if(record.ShowType == 1)
+    else if(record.ShowType == 1)
     {
         
         imageString         = @"quanyi";
@@ -648,6 +681,7 @@
         vipString           = @"zhuanxiang";
         contentShowString   = record.MiddleDes;
         remindShowString    = record.BottomDes;
+        getString           = @"查看详情";
 //        vipString   = @"huiyuanzhuanxiang";
     }
     
@@ -668,10 +702,6 @@
     timeStringLabel.textColor         = [UIColor colorFromHex:@"#999999"];
     timeStringLabel.left              = recordimageView.right +Main_Screen_Width*13/375;
     timeStringLabel.top               = titleStringLabel.bottom +Main_Screen_Height*3/667;
-    
-    
-    
-    
     
     NSString *contentString              = record.RightDes;
     UIFont *contentStringFont            = [UIFont systemFontOfSize:12];
