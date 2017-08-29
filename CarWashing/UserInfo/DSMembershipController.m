@@ -232,8 +232,22 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 #pragma mark - 点击升级
 - (IBAction)clickUpgradeBtn:(UIButton *)sender {
     
+    
+    NSArray *arr2 = @[@"",@"普通会员",@"白银会员",@"黄金会员",@"铂金会员",@"钻石会员",@"黑钻会员"];
+    
+    NSUInteger num = [[NSString stringWithFormat:@"%@",_MembershipUserScore[@"Level_id"]] integerValue];
+    
+    NSUInteger num2 = [[NSString stringWithFormat:@"%@",_MembershipUserScore[@"NextLevel"]] integerValue];
+    
+    
     HowToUpGradeController *upGradeVC = [[HowToUpGradeController alloc] init];
     upGradeVC.hidesBottomBarWhenPushed = YES;
+    
+    upGradeVC.currentLevel = arr2[num];
+    upGradeVC.nextLevel = arr2[num2];
+    upGradeVC.NextLevelScore = [NSString stringWithFormat:@"%@",_MembershipUserScore[@"NextLevelScore"]];
+    upGradeVC.CurrentScore = [NSString stringWithFormat:@"%@",_MembershipUserScore[@"UserScore"]];
+    
     
     [self.navigationController pushViewController:upGradeVC animated:YES];
     
@@ -255,6 +269,8 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     ScoreDetailController *scoreVC = [[ScoreDetailController alloc] init];
     scoreVC.hidesBottomBarWhenPushed = YES;
+    scoreVC.CurrentScore = [NSString stringWithFormat:@"%@",_MembershipUserScore[@"UserScore"]];
+
     [self.navigationController pushViewController:scoreVC animated:YES];
 }
 
@@ -291,6 +307,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     WashCarTicketController *ticketVC = [[WashCarTicketController alloc] init];
     ticketVC.hidesBottomBarWhenPushed = YES;
     ticketVC.card = newcard;
+    ticketVC.CurrentScore = [NSString stringWithFormat:@"%@",_MembershipUserScore[@"UserScore"]];
     [self.navigationController pushViewController:ticketVC animated:YES];
 }
 

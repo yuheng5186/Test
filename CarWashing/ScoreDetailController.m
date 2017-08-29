@@ -145,7 +145,7 @@
     
     [self setupRefresh];
     
-    self.scoreLabel.text = @"1680";
+    self.scoreLabel.text = self.CurrentScore;
     
     [self.earnButton addTarget:self action:@selector(didClickEarnScoreBtn) forControlEvents:UIControlEventTouchUpInside];
     

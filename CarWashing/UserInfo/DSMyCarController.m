@@ -24,7 +24,9 @@
 #import "MyCar.h"
 #import "UdStorage.h"
 
-@interface DSMyCarController ()<UITableViewDelegate, UITableViewDataSource, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource, UITextFieldDelegate,UIGestureRecognizerDelegate>
+#import "UIScrollView+EmptyDataSet.h"//第三方空白页
+
+@interface DSMyCarController ()<UITableViewDelegate, UITableViewDataSource, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource, UITextFieldDelegate,UIGestureRecognizerDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic, weak) UIImageView *carImageView;
 
@@ -201,6 +203,13 @@ static NSString * HeaderId = @"header";
     self.carInfoView.delegate = self;
     self.carInfoView.dataSource = self;
     
+#pragma maek-空白页
+    self.carInfoView.emptyDataSetSource = self;
+    self.carInfoView.emptyDataSetDelegate = self;
+    
+    //可以去除tableView的多余的线，否则会影响美观
+    self.carInfoView.tableFooterView = [UIView new];
+    
     [self.carInfoView registerClass:[MyCarInfosHeaderView class] forHeaderFooterViewReuseIdentifier:HeaderId];
     
     self.carInfoView.tableHeaderView = pageFlowView;
@@ -347,15 +356,37 @@ static NSString * HeaderId = @"header";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    
+    if(_CarArray.count == 0)
+    {
+         return 0;
+    }
+    
+    else
+    {
+        return 2;
+    }
+
+    
+   
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 2;
+    
+    if(_CarArray.count == 0)
+    {
+        return 0;
     }
     
-    return 4;
+    else
+    {
+        if (section == 0) {
+            return 2;
+        }
+        
+        return 4;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -392,7 +423,8 @@ static NSString * HeaderId = @"header";
 //            provinceLabel.font = [UIFont systemFontOfSize:14];
             UIButton *provinceBtn = [[UIButton alloc] init];
             _provinceBtn = provinceBtn;
-            [provinceBtn setTitle:@"沪" forState:UIControlStateNormal];
+            NSString *platenumbertype=[car.PlateNumber substringToIndex:1];
+            [provinceBtn setTitle:platenumbertype forState:UIControlStateNormal];
             [provinceBtn setTitleColor:[UIColor colorFromHex:@"#868686"] forState:UIControlStateNormal];
             provinceBtn.titleLabel.font = [UIFont systemFontOfSize:14];
 //            [provinceBtn addTarget:self action:@selector(didClickProvinceBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -404,7 +436,8 @@ static NSString * HeaderId = @"header";
             
             UITextField *numTF = [[UITextField alloc] init];
             numTF.placeholder = @"请输入车牌号";
-            numTF.text = car.PlateNumber;
+            
+            numTF.text = [car.PlateNumber substringFromIndex:1];
             numTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
             numTF.font = [UIFont systemFontOfSize:12];
             numTF.delegate = self;
@@ -526,28 +559,28 @@ static NSString * HeaderId = @"header";
                 _lbl2 = lbl2;
                 
                 
-                NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-                [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-                [inputFormatter setDateFormat:@"yyyyMM"];
-                NSDate* inputDate = [inputFormatter dateFromString:car.DepartureTime];
-                NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
-                [outputFormatter setLocale:[NSLocale currentLocale]];
-                [outputFormatter setDateFormat:@"yyyy-MM"];
-                NSString *targetTime = [outputFormatter stringFromDate:inputDate];
-                lbl2.text  = targetTime;
+//                NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+//                [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+//                [inputFormatter setDateFormat:@"yyyy-MM"];
+//                NSDate* inputDate = [inputFormatter dateFromString:car.DepartureTime];
+//                NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+//                [outputFormatter setLocale:[NSLocale currentLocale]];
+//                [outputFormatter setDateFormat:@"yyyy-MM"];
+//                NSString *targetTime = [outputFormatter stringFromDate:inputDate];
+//                lbl2.text  = targetTime;
                 
-                if(targetTime == 0)
-                {
-                    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-                    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-                    [inputFormatter setDateFormat:@"yyyyM"];
-                    NSDate* inputDate = [inputFormatter dateFromString:car.DepartureTime];
-                    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
-                    [outputFormatter setLocale:[NSLocale currentLocale]];
-                    [outputFormatter setDateFormat:@"yyyy-M"];
-                    NSString *targetTime = [outputFormatter stringFromDate:inputDate];
-                    lbl2.text  = targetTime;
-                }
+//                if(targetTime == 0)
+//                {
+//                    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+//                    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+//                    [inputFormatter setDateFormat:@"yyyyM"];
+//                    NSDate* inputDate = [inputFormatter dateFromString:car.DepartureTime];
+//                    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+//                    [outputFormatter setLocale:[NSLocale currentLocale]];
+//                    [outputFormatter setDateFormat:@"yyyy-M"];
+//                    NSString *targetTime = [outputFormatter stringFromDate:inputDate];
+                    lbl2.text  = car.DepartureTime;
+//                }
                 
                 
                 lbl2.textColor = [UIColor colorFromHex:@"#868686"];
@@ -821,6 +854,87 @@ static NSString * HeaderId = @"header";
 //- (void)keyboardDidChangeFrame:(NSNotification *)noti
 //{
 //}
+
+#pragma mark - 无数据占位
+//无数据占位
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+    return [UIImage imageNamed:@"cheku_kongbai"];
+}
+
+- (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView{
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath: @"cheku_kongbai"];
+    animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+    animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI_2, 0.0, 0.0,   1.0)];
+    animation.duration = 0.25;
+    animation.cumulative = YES;
+    animation.repeatCount = MAXFLOAT;
+    return animation;
+}
+//设置文字（上图下面的文字，我这个图片默认没有这个文字的）是富文本样式，扩展性很强！
+
+//这个是设置标题文字的
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+    
+    
+    NSString *text = @"您暂未添加爱车哦";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:13.0f],
+                                 NSForegroundColorAttributeName: [UIColor colorFromHex: @"#4a4a4a"]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+//设置按钮的文本和按钮的背景图片
+
+//- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state  {
+////    NSLog(@"buttonTitleForEmptyDataSet:点击上传照片");
+////    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f]};
+////    return [[NSAttributedString alloc] initWithString:@"点击上传照片" attributes:attributes];
+//}
+// 返回可以点击的按钮 上面带文字
+- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f]};
+    return [[NSAttributedString alloc] initWithString:@"" attributes:attribute];
+}
+
+//- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
+//    return [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
+//}
+
+- (UIImage *)buttonImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
+    return [UIImage imageNamed:@"button_image"];
+}
+//是否显示空白页，默认YES
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
+    return YES;
+}
+//是否允许点击，默认YES
+- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView {
+    return NO;
+}
+//是否允许滚动，默认NO
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
+    return YES;
+}
+//图片是否要动画效果，默认NO
+- (BOOL) emptyDataSetShouldAllowImageViewAnimate:(UIScrollView *)scrollView {
+    return YES;
+}
+//空白页点击事件
+- (void)emptyDataSetDidTapView:(UIScrollView *)scrollView {
+    NSLog(@"空白页点击事件");
+}
+//空白页按钮点击事件
+- (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView {
+    return NSLog(@"空白页按钮点击事件");
+}
+/**
+ *  调整垂直位置
+ */
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return -64;
+}
+
 
 - (void)endEditing
 {

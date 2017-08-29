@@ -163,6 +163,10 @@
 		18B803851F1DA2A300B52432 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18B803831F1DA2A300B52432 /* LaunchScreen.storyboard */; };
 		18B803901F1DA2A300B52432 /* CarWashingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B8038F1F1DA2A300B52432 /* CarWashingTests.m */; };
 		18B8039B1F1DA2A300B52432 /* CarWashingUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B8039A1F1DA2A300B52432 /* CarWashingUITests.m */; };
+		18E702761F5503BC007A9777 /* KPIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E702721F5503BC007A9777 /* KPIndicatorView.m */; };
+		18E702771F5503BC007A9777 /* KPIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E702731F5503BC007A9777 /* KPIndicatorView.xib */; };
+		18E702781F5503BC007A9777 /* RoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E702751F5503BC007A9777 /* RoundView.m */; };
+		18E7027B1F5537B3007A9777 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E7027A1F5537B3007A9777 /* Record.m */; };
 		374B966A10F9B5E6D74241BF /* libPods-CarWashing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */; };
 		500C6BA41F3AE619007D34A1 /* QFDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 500C6BA31F3AE619007D34A1 /* QFDatePickerView.m */; };
 		500C6BF51F3B5B13007D34A1 /* BusinessMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 500C6BF41F3B5B13007D34A1 /* BusinessMapController.m */; };
@@ -588,6 +592,13 @@
 		18B803961F1DA2A300B52432 /* CarWashingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarWashingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B8039A1F1DA2A300B52432 /* CarWashingUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarWashingUITests.m; sourceTree = "<group>"; };
 		18B8039C1F1DA2A300B52432 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18E702711F5503BC007A9777 /* KPIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPIndicatorView.h; sourceTree = "<group>"; };
+		18E702721F5503BC007A9777 /* KPIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPIndicatorView.m; sourceTree = "<group>"; };
+		18E702731F5503BC007A9777 /* KPIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KPIndicatorView.xib; sourceTree = "<group>"; };
+		18E702741F5503BC007A9777 /* RoundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundView.h; sourceTree = "<group>"; };
+		18E702751F5503BC007A9777 /* RoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundView.m; sourceTree = "<group>"; };
+		18E702791F5537B3007A9777 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
+		18E7027A1F5537B3007A9777 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
 		1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarWashing.release.xcconfig"; path = "Pods/Target Support Files/Pods-CarWashing/Pods-CarWashing.release.xcconfig"; sourceTree = "<group>"; };
 		500C6BA21F3AE619007D34A1 /* QFDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFDatePickerView.h; sourceTree = "<group>"; };
 		500C6BA31F3AE619007D34A1 /* QFDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFDatePickerView.m; sourceTree = "<group>"; };
@@ -907,6 +918,7 @@
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				18E702701F5503BC007A9777 /* KPIndicatorView */,
 				0415739D1F53C522004514E3 /* TFGridInputView */,
 				0401E8FA1F4ED6E900F0CA79 /* EAIntroView */,
 				18A4B2371F4E9F0400C64978 /* MapNavigationView */,
@@ -1159,6 +1171,8 @@
 				18322AC21F4EC157003ABB7B /* CardBag.m */,
 				18322AC41F4FF077003ABB7B /* CardConfigGrade.h */,
 				18322AC51F4FF077003ABB7B /* CardConfigGrade.m */,
+				18E702791F5537B3007A9777 /* Record.h */,
+				18E7027A1F5537B3007A9777 /* Record.m */,
 			);
 			name = model;
 			path = Home/model;
@@ -1459,6 +1473,19 @@
 				18B8039C1F1DA2A300B52432 /* Info.plist */,
 			);
 			path = CarWashingUITests;
+			sourceTree = "<group>";
+		};
+		18E702701F5503BC007A9777 /* KPIndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				18E702711F5503BC007A9777 /* KPIndicatorView.h */,
+				18E702721F5503BC007A9777 /* KPIndicatorView.m */,
+				18E702731F5503BC007A9777 /* KPIndicatorView.xib */,
+				18E702741F5503BC007A9777 /* RoundView.h */,
+				18E702751F5503BC007A9777 /* RoundView.m */,
+			);
+			name = KPIndicatorView;
+			path = Tool/KPIndicatorView;
 			sourceTree = "<group>";
 		};
 		39EAED5D8DBADAE8DF2E358D /* Frameworks */ = {
@@ -1896,6 +1923,7 @@
 				180E43291F414A7900013D2D /* PopHelpView.xib in Resources */,
 				50E2EE871F1F4D3C00FAF130 /* YZSortCell.xib in Resources */,
 				50E2EE7F1F1F4D3C00FAF130 /* YZAllCourseViewController.xib in Resources */,
+				18E702771F5503BC007A9777 /* KPIndicatorView.xib in Resources */,
 				50B26EC61F31A0A7009B3B9F /* CarTicketView.xib in Resources */,
 				18B803851F1DA2A300B52432 /* LaunchScreen.storyboard in Resources */,
 				5094A63F1F34852600407808 /* ShopInfoHeadView.xib in Resources */,
@@ -2026,6 +2054,7 @@
 				5097FE1A1F2F4335002EF8F8 /* MyCarViewCell.m in Sources */,
 				188907121F2730F4009E20B0 /* DSUpdateRuleController.m in Sources */,
 				181E92CB1F1F39CC0006511E /* UIColor+Additions.m in Sources */,
+				18E702781F5503BC007A9777 /* RoundView.m in Sources */,
 				0415739C1F53C4E9004514E3 /* DSInputCodeController.m in Sources */,
 				0401E8CD1F4E67AE00F0CA79 /* DSCompleteWashingController.m in Sources */,
 				50E2EE851F1F4D3C00FAF130 /* YZSortViewController.m in Sources */,
@@ -2153,6 +2182,7 @@
 				50B26E6D1F301B60009B3B9F /* RechargeCell.m in Sources */,
 				50B26EC41F31A048009B3B9F /* CarTicketView.m in Sources */,
 				5042E3521F33165600CD140F /* PGIndexBannerSubiew.m in Sources */,
+				18E7027B1F5537B3007A9777 /* Record.m in Sources */,
 				507FECF71F2AC8D7009CC505 /* BusinessPayController.m in Sources */,
 				5016722A1F297FDD00384186 /* HeadView.m in Sources */,
 				180E42FA1F3AD7EB00013D2D /* LewPopupBackgroundView.m in Sources */,
@@ -2169,6 +2199,7 @@
 				18B69EA31F32CB48007DA0E4 /* UIImage+Zirkfied.m in Sources */,
 				18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */,
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
+				18E702761F5503BC007A9777 /* KPIndicatorView.m in Sources */,
 				5071B47C1F380987009FFF67 /* OrderDetailView.m in Sources */,
 				180E430A1F3C741100013D2D /* DSShareGetMoneyController.m in Sources */,
 				501672411F29D16C00384186 /* MemberView.m in Sources */,

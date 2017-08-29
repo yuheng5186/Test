@@ -130,13 +130,45 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WayToUpGradeCell *earnScoreCell = [tableView dequeueReusableCellWithIdentifier:id_earnViewCell forIndexPath:indexPath];
     
-   
-        
-    earnScoreCell.iconV.image = [UIImage imageNamed:@"wanshangerenxinxi"];
-    earnScoreCell.waysLab.text = @"完善隔个人信息";
-    earnScoreCell.wayToLab.text = @"填写个人姓名完善个人信息";
-    earnScoreCell.valuesLab.text = @"+20积分";
     
+    
+    NSArray *arr2 = @[@"wanshangerenxinxi",@"xinyonghuzhuce",@"wanshangerenxinxi",@"wanshancheliangxinxi",@"wanshangerenxinxi"];
+    
+    NSInteger num = [[[self.ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegType"] integerValue];
+    
+    
+    
+    earnScoreCell.iconV.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",arr2[num]]];
+    earnScoreCell.waysLab.text = [[self.ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegName"];
+    
+    if([NSNull null] != [[self.ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegDesc"])
+    {
+        earnScoreCell.wayToLab.text = [NSString stringWithFormat:@"%@",[[self.ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegDesc"]];
+    }
+    else
+    {
+        earnScoreCell.wayToLab.text = @"";
+    }
+    
+    
+    
+    earnScoreCell.valuesLab.text = [NSString stringWithFormat:@"+%d积分",[[[self.ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegralNum"] intValue]];
+    
+    if([[[self.ScoreData objectAtIndex:indexPath.row] objectForKey:@"IsComplete"] intValue] == 1)
+    {
+        
+        [earnScoreCell.goButton setTitle:@"已完成" forState:UIControlStateNormal];
+        earnScoreCell.goButton.enabled = NO;
+        
+    }
+    else
+    {
+        earnScoreCell.goButton.tag = indexPath.row;
+        [earnScoreCell.goButton addTarget:self action:@selector(gotoearnScore:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    
+    earnScoreCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return earnScoreCell;
 }
@@ -154,6 +186,11 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
     scoreController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:scoreController animated:YES];
     
+}
+
+-(void)gotoearnScore:(UIButton *)btn
+{
+    NSLog(@"去赚积分啦");
 }
 
 

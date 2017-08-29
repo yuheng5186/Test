@@ -10,4 +10,6 @@
 
 @interface ScoreDetailController : BaseController
 
+@property(nonatomic,copy)NSString *CurrentScore;
+
 @end
