@@ -31,6 +31,10 @@
     self.qualityProtectedLabel.clipsToBounds = YES;
     self.qualityProtectedLabel.backgroundColor = [UIColor colorFromHex:@"#f85460"];
     
+    self.separateView.backgroundColor = [UIColor colorFromHex:@"#f0f0f0"];
+    self.separateView2.backgroundColor = [UIColor colorFromHex:@"#f0f0f0"];
+    self.separate3.backgroundColor = [UIColor colorFromHex:@"#f0f0f0"];
+    
 }
 
 @end
