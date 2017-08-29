@@ -7,8 +7,15 @@
 //
 
 #import "DSDownloadController.h"
+#import "HYActivityView.h"
 
 @interface DSDownloadController ()
+
+{
+    enum WXScene scene;
+    
+}
+@property (nonatomic, strong) HYActivityView *activityView;
 
 @end
 
@@ -17,6 +24,52 @@
 - (void) drawNavigation {
 
     [self drawTitle:@"下载金顶洗车"];
+    [self drawRightImageButton:@"fenxiang" action:@selector(shareButtonClick:)];
+}
+
+- (void) shareButtonClick:(id)sender {
+
+    if (!self.activityView) {
+        self.activityView = [[HYActivityView alloc]initWithTitle:@"" referView:self.view];
+        
+        //横屏会变成一行6个, 竖屏无法一行同时显示6个, 会自动使用默认一行4个的设置.
+        self.activityView.numberOfButtonPerLine = 6;
+        
+        ButtonView *bv ;
+        
+        bv = [[ButtonView alloc]initWithText:@"微信" image:[UIImage imageNamed:@"btn_share_weixin"] handler:^(ButtonView *buttonView){
+            NSLog(@"点击微信");
+            SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+            req.text                = @"简单文本分享测试";
+            req.bText               = YES;
+            // 目标场景
+            // 发送到聊天界面  WXSceneSession
+            // 发送到朋友圈    WXSceneTimeline
+            // 发送到微信收藏  WXSceneFavorite
+            req.scene               = WXSceneSession;
+            [WXApi sendReq:req];
+            
+        }];
+        [self.activityView addButtonView:bv];
+        
+        bv = [[ButtonView alloc]initWithText:@"微信朋友圈" image:[UIImage imageNamed:@"btn_share_pengyouquan"] handler:^(ButtonView *buttonView){
+            NSLog(@"点击微信朋友圈");
+            SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+            req.text                = @"简单文本分享测试";
+            req.bText               = YES;
+            // 目标场景
+            // 发送到聊天界面  WXSceneSession
+            // 发送到朋友圈    WXSceneTimeline
+            // 发送到微信收藏  WXSceneFavorite
+            req.scene               = WXSceneTimeline;
+            [WXApi sendReq:req];
+            
+        }];
+        [self.activityView addButtonView:bv];
+        
+    }
+    
+    [self.activityView show];
 }
 
 - (void) drawContent {

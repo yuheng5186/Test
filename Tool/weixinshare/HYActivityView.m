@@ -324,7 +324,7 @@
         int x = i % self.workingNumberOfButtonPerLine;
         
         //排列buttonView的位置
-        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:buttonView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.iconView attribute:NSLayoutAttributeTop multiplier:1 constant:(y + 1) * ICON_VIEW_HEIGHT_SPACE + y * BUTTON_VIEW_SIDE];
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:buttonView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.iconView attribute:NSLayoutAttributeTop multiplier:1 constant:(y - 1) * ICON_VIEW_HEIGHT_SPACE + y * BUTTON_VIEW_SIDE];
         [self.iconView addConstraint:constraint];
         [self.buttonConstraintsArray addObject:constraint];
         
