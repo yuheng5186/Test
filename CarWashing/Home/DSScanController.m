@@ -128,7 +128,7 @@
     self.inputButton.top    = lbl.bottom +Main_Screen_Height*50/667;
     self.inputButton.left   = scanImageView.left;
     
-    NSString  *inpotString       = @"输入机器编号开锁";
+    NSString  *inpotString       = @"输入编号开锁";
     UIFont    *inputStringFont   = [UIFont systemFontOfSize:Main_Screen_Height*15/667];
     self.inputLabel             = [UIUtil drawLabelInView:self.contentView frame:[UIUtil textRect:inpotString font:inputStringFont]font:inputStringFont text:inpotString isCenter:NO];
     self.inputLabel.textColor   = [UIColor whiteColor];
