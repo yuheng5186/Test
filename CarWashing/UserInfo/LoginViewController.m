@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "DSAgreementController.h"
 #import "TPKeyboardAvoidingScrollView.h"
+#import "KPIndicatorView.h"
 
 
 #import "LCMD5Tool.h"
@@ -22,6 +23,10 @@
 #import "IQKeyboardManager.h"
 
 @interface LoginViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+{
+    KPIndicatorView *_indicatorView;
+    UIButton  *loginButton;
+}
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UITextField *userMobileFieldText;
@@ -112,10 +117,11 @@
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width*280/375,Main_Screen_Height*95/667) style:UITableViewStyleGrouped];
     self.tableView.top              = backgroundImageView.top +Main_Screen_Height*100/667;
-    self.tableView.centerX          = backgroundImageView.centerX;
+    self.tableView.centerX          = backgroundImageView.centerX-Main_Screen_Width*10/375;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     self.tableView.scrollEnabled    = NO;
+    self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor  = [UIColor whiteColor];
     self.tableView.tableFooterView  = [UIView new];
     [self.contentView addSubview:self.tableView];
@@ -135,12 +141,17 @@
     
     NSString *buttonString        = @"登录";
     UIFont   *buttonFont          = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
-    UIButton  *loginButton        = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*280/375, Main_Screen_Height*45/667) text:buttonString font:buttonFont color:[UIColor colorFromHex:@"#ffffff"] target:self action:@selector(loginButtonClick:)];
+    loginButton        = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*280/375, Main_Screen_Height*45/667) text:buttonString font:buttonFont color:[UIColor colorFromHex:@"#ffffff"] target:self action:@selector(loginButtonClick:)];
     loginButton.backgroundColor   = [UIColor colorFromHex:@"#febb02"];
     loginButton.tintColor         = [UIColor whiteColor];
     loginButton.layer.cornerRadius  = Main_Screen_Height*5/667;
     loginButton.bottom            = backgroundImageView.bottom -Main_Screen_Height*65/667;
     loginButton.centerX           = Main_Screen_Width/2;
+    
+    _indicatorView = [[KPIndicatorView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Height*35/667, Main_Screen_Height*35/667)];
+    _indicatorView.bottom            = backgroundImageView.bottom -Main_Screen_Height*70/667;
+    _indicatorView.centerX           = Main_Screen_Width/2;
+    [self.contentView addSubview:_indicatorView];
     
     
     UIButton *updateRuleButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*320/375, Main_Screen_Height*30/667)];
@@ -172,6 +183,14 @@
 }
 
 - (void) loginButtonClick:(id)sender {
+    
+    [self.verifyFieldText resignFirstResponder];
+    
+    [self.userMobileFieldText resignFirstResponder];
+    
+    [_indicatorView startAnimating];
+    [loginButton setTitle:@"" forState:UIControlStateNormal];
+    loginButton.enabled = NO;
 
     if (self.userMobileFieldText.text.length == 11) {
         if (self.verifyFieldText.text.length == 4) {
@@ -215,10 +234,16 @@
                 else
                 {
                     [self.view showInfo:@"验证码不正确" autoHidden:YES interval:2];
+                    [_indicatorView stopAnimating];
+                    [loginButton setTitle:@"登录" forState:UIControlStateNormal];
+                    loginButton.enabled = YES;
                 }
                 
             } fail:^(NSError *error) {
                 [self.view showInfo:@"登录失败" autoHidden:YES interval:2];
+                [_indicatorView stopAnimating];
+                [loginButton setTitle:@"登录" forState:UIControlStateNormal];
+                loginButton.enabled = YES;
             }];
     
             
@@ -227,10 +252,16 @@
             
         }else{
             [self.view showInfo:@"请输入4位验证码！" autoHidden:YES interval:2];
+            [_indicatorView stopAnimating];
+            [loginButton setTitle:@"登录" forState:UIControlStateNormal];
+            loginButton.enabled = YES;
         }
 
     }else {
         [self.view showInfo:@"请输入正确的11位手机号码" autoHidden:YES];
+        [_indicatorView stopAnimating];
+        [loginButton setTitle:@"登录" forState:UIControlStateNormal];
+        loginButton.enabled = YES;
     }
 
 }
@@ -294,6 +325,10 @@
         [self.userMobileFieldText addTarget:self action:@selector(userPhoneFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
         [cell.contentView addSubview:self.userMobileFieldText];
         
+        UIView          *lineView       = [UIUtil drawLineInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 1) color:[UIColor colorFromHex:@"#e6e6e6"]];
+        lineView.top                    = Main_Screen_Height*46/667;
+        lineView.left                   = cell.imageView.left +Main_Screen_Width*20/375;
+
     }else
     {
         cell.imageView.image                = [UIImage imageNamed:@"mimayanzheng"];
@@ -321,6 +356,10 @@
         self.getVeriifyStringButton.right          = self.tableView.width;
         self.getVeriifyStringButton.centerY        = self.verifyFieldText.centerY;
         
+        UIView          *lineView       = [UIUtil drawLineInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 1) color:[UIColor colorFromHex:@"#e6e6e6"]];
+        lineView.top                    = Main_Screen_Height*46/667;
+        lineView.left                   = cell.imageView.left +Main_Screen_Width*20/375;
+
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

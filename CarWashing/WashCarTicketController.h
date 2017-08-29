@@ -13,4 +13,8 @@
 
 @property(nonatomic,strong)Card *card;
 
+@property(nonatomic,copy)NSString *CurrentScore;
+
+
+
 @end

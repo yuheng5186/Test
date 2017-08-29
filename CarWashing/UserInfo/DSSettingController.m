@@ -245,10 +245,11 @@
                 [defaults removeObjectForKey:@"Account_Id"];
                 [defaults synchronize];
             
-                LoginViewController *loginViewControler     = [[LoginViewController alloc] init];
-                UINavigationController *navController       = [[UINavigationController alloc] initWithRootViewController:loginViewControler];
-                navController.navigationBar.hidden          = YES;
-                [self presentViewController: navController animated: YES completion:nil];
+                LoginViewController *loginControl = [[LoginViewController alloc]init];
+                UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:loginControl];
+                nav.navigationBar.hidden      = YES;
+            
+                self.view.window.rootViewController      = nav;
             
         }
     }else{

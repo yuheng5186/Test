@@ -72,7 +72,7 @@
     UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*50/667) color:[UIColor whiteColor]];
     upView.top                      = 10;
     
-    self.userNameText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-240, 40*Main_Screen_Height/667)];
+    self.userNameText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 40*Main_Screen_Height/667)];
     //        self.phoneNumberText.placeholder    = @"输入验证码";
     self.userNameText.placeholder    = APPDELEGATE.currentUser.userName;
 //    self.userNameText.text           = @"15800781856";

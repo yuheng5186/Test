@@ -138,7 +138,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     titleView.top                      = 0;
     
     NSString *titleName              = @"商家";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:Main_Screen_Height*16/667];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:Main_Screen_Height*20/667];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = titleView.centerX;
@@ -149,9 +149,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.salerListView.dataSource = self;
     self.salerListView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    UINib *nib = [UINib nibWithNibName:@"SalerListViewCell" bundle:nil];
     
-    [self.salerListView registerNib:nib forCellReuseIdentifier:id_salerListCell];
     
     
     [self setupRefresh];
@@ -196,17 +194,12 @@ static NSString *id_salerListCell = @"salerListViewCell";
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        if(_MerchantData.count == 0)
-        {
-            [self setData];
-        }
-        else
-        {
+        
             self.page++;
             _otherArray = [NSMutableArray new];
             [self setDatamore];
             
-        }
+        
 //
 //        
 //        
@@ -262,16 +255,16 @@ static NSString *id_salerListCell = @"salerListViewCell";
     {
         cell = [[QWMclistTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    else
-    {
-        //删除cell的所有子视图
-        while ([cell.contentView.subviews lastObject] != nil)
-        {
-            [(UIView*)[cell.contentView.subviews lastObject] removeFromSuperview];
-        }
-    }
+//    else
+//    {
+//        //删除cell的所有子视图
+//        while ([cell.contentView.subviews lastObject] != nil)
+//        {
+//            [(UIView*)[cell.contentView.subviews lastObject] removeFromSuperview];
+//        }
+//    }
     [cell setlayoutCell];
-    
+    cell.backgroundColor = [UIColor redColor];
     
     NSDictionary *dic=[self.MerchantData objectAtIndex:indexPath.row];
     [cell setUpCellWithDic:dic];
@@ -512,6 +505,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
                 [self.MerchantData addObjectsFromArray:arr];
                 [self.salerListView reloadData];
                 [self.salerListView.mj_footer endRefreshing];
+                self.page--;
             }
             
         }
@@ -519,11 +513,13 @@ static NSString *id_salerListCell = @"salerListViewCell";
         {
             [self.view showInfo:@"数据请求失败" autoHidden:YES interval:2];
             [self.salerListView.mj_footer endRefreshing];
+            self.page--;
         }
         
     } fail:^(NSError *error) {
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
         [self.salerListView.mj_header endRefreshing];
+        self.page--;
     }];
     
 }

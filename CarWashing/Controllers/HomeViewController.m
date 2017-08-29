@@ -45,6 +45,7 @@
 #import "AFNetworkingTool.h"
 #import "HTTPDefine.h"
 #import "UdStorage.h"
+#import "Record.h"
 
 @interface HomeViewController ()<JFLocationDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -59,6 +60,8 @@
 @property (nonatomic,strong) UITableView *tableView;
 
 @property (nonatomic,assign) NSInteger IsSign;
+
+@property (nonatomic, strong) NSMutableArray *GetUserRecordData;
 
 @end
 
@@ -121,8 +124,46 @@
     
     [self createHeaderView];
     
+    
+    [self setupRefresh];
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
+-(void)setupRefresh
+{
+    self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        
+        [self headerRereshing];
+        
+    }];
+    
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    
+    [self.tableView.mj_header beginRefreshing];
+    
+   
+}
+
+- (void)headerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        _GetUserRecordData = [[NSMutableArray alloc]init];
+        
+        
+        [self setData];
+        
+    });
+}
 
 
 - (void) createNavTitleView {
@@ -131,7 +172,7 @@
     titleView.top                      = 0;
     
     NSString *titleName              = @"金顶洗车";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:Main_Screen_Height*16/667];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:Main_Screen_Height*20/667];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = titleView.centerX;
@@ -179,7 +220,9 @@
     self.locationButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -80);
     [self.locationButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -60, 0, 0)];
     
-//    [titleView addSubview:self.locationButton];
+    [titleView addSubview:self.locationButton];
+    self.locationButton.hidden = YES;
+    NSLog(@"------------------%@",self.locationButton.titleLabel.text);
 }
 
 - (void) createHeaderView {
@@ -494,17 +537,70 @@
 //    [newBagView addGestureRecognizer:tapNewGesture];
 }
 
+-(void)setData
+{
+    
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"Area":self.locationButton.titleLabel.text
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetUserRecord",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+            if(arr.count == 0)
+            {
+                //                [self.view showInfo:@"暂无更多数据" autoHidden:YES interval:2];
+                [self.tableView.mj_header endRefreshing];
+            }
+            else
+            {
+                
+                
+                NSArray *arr = [NSArray array];
+                arr = [dict objectForKey:@"JsonData"];
+                for(NSDictionary *dic in arr)
+                {
+                    Record *newrc = [[Record alloc]init];
+                    [newrc setValuesForKeysWithDictionary:dic];
+                    [self.GetUserRecordData addObject:newrc];
+                }
+        
+                [self.tableView reloadData];
+                [self.tableView.mj_header endRefreshing];
+            }
+            
+        }
+        else
+        {
+            [self.view showInfo:@"数据请求失败" autoHidden:YES interval:2];
+            [self.tableView.mj_header endRefreshing];
+        }
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.tableView.mj_header endRefreshing];
+    }];
+    
+}
+
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return [self.GetUserRecordData count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    
     return 1;
 }
 
@@ -532,28 +628,31 @@
     cell.backgroundColor    = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    Record *record = (Record *)[self.GetUserRecordData objectAtIndex:indexPath.section];
+    
     NSString *imageString               = @"xiaofeijilu";
+    NSString *titleString               = @"消费记录";
+    NSString *vipString                 = @"";
+    NSString *contentShowString         = @"¥ 18.00";
+    NSString *remindShowString          = @"金雷快修车店";
+    NSString *getString                 = @"查看详情";
     
-    if (indexPath.section == 1) {
+
+    if(record.ShowType == 1)
+    {
+        
         imageString         = @"quanyi";
+        titleString         = @"优惠活动";
+        vipString           = @"zhuanxiang";
+        contentShowString   = record.MiddleDes;
+        remindShowString    = record.BottomDes;
+//        vipString   = @"huiyuanzhuanxiang";
     }
     
-    if (indexPath.section == 2) {
-        imageString         = @"zensong";
-    }
     
-//    UIImage *recordImage                = [UIImage imageNamed:imageString];
     UIImageView  *recordimageView       = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*30/375, Main_Screen_Height*30/667) imageName:imageString];
     recordimageView.left                = Main_Screen_Width*12/375;
     recordimageView.top                 = Main_Screen_Height*10/667;
-    
-    NSString *titleString              = @"消费记录";
-    if (indexPath.section == 1) {
-        titleString     = @"用户权益";
-    }
-    if (indexPath.section == 2) {
-        titleString     = @"洗车赠送";
-    }
     
     UIFont *titleStringFont            = [UIFont systemFontOfSize:14];
     UILabel *titleStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:titleString font:titleStringFont] font:titleStringFont text:titleString isCenter:NO];
@@ -561,29 +660,23 @@
     titleStringLabel.left              = recordimageView.right +Main_Screen_Width*13/375;
     titleStringLabel.top               = recordimageView.top;
     
-    NSString *timeString              = @"2017-7-27 15:30";
+    NSString *timeString              = record.CreateDate;
     UIFont *timeStringFont            = [UIFont systemFontOfSize:12];
     UILabel *timeStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:timeString font:timeStringFont] font:timeStringFont text:timeString isCenter:NO];
     timeStringLabel.textColor         = [UIColor colorFromHex:@"#999999"];
     timeStringLabel.left              = recordimageView.right +Main_Screen_Width*13/375;
     timeStringLabel.top               = titleStringLabel.bottom +Main_Screen_Height*3/667;
     
-    NSString *contentString              = @"线下扫码支付";
+    
+    
+    
+    
+    NSString *contentString              = record.RightDes;
     UIFont *contentStringFont            = [UIFont systemFontOfSize:12];
     UILabel *contentStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:contentString font:contentStringFont] font:contentStringFont text:contentString isCenter:NO];
     contentStringLabel.textColor         = [UIColor colorFromHex:@"#868686"];
     contentStringLabel.right             = Main_Screen_Width -Main_Screen_Width*12/375;
     contentStringLabel.top               = Main_Screen_Height*9/667;
-    
-    NSString    *vipString           = @"";
-    if (indexPath.section == 1) {
-        vipString   = @"zhuanxiang";
-
-    }
-    if (indexPath.section == 2) {
-        vipString   = @"huiyuanzhuanxiang";
-
-    }
     
     UIImage *vipImage                = [UIImage imageNamed:vipString];
     UIImageView  *vipImageView       = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, 0, vipImage.size.width, vipImage.size.height) imageName:vipString];
@@ -591,38 +684,11 @@
     vipImageView.top                 = Main_Screen_Height*12/667;
     vipImageView.hidden              = YES;
     
-    NSString *contentShowString              = @"¥ 18.00";
-    
-    if (indexPath.section == 1) {
-        contentShowString   = @"您有一张现金券可使用";
-        contentStringLabel.hidden   = YES;
-        vipImageView.hidden         = NO;
-    }
-    
-    if (indexPath.section == 2) {
-        contentShowString   = @"恭喜您获得洗车月卡一张";
-        contentStringLabel.hidden   = YES;
-        vipImageView.hidden         = NO;
-    }
-    
     UIFont *contentShowStringFont            = [UIFont systemFontOfSize:Main_Screen_Height*20/667];
     UILabel *contentShowStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:contentShowString font:contentShowStringFont] font:contentShowStringFont text:contentShowString isCenter:NO];
     contentShowStringLabel.textColor         = [UIColor colorFromHex:@"#3a3a3a"];
     contentShowStringLabel.centerX           = Main_Screen_Width/2;
     contentShowStringLabel.top               = Main_Screen_Height*58/667;
-    
-    
-    NSString *remindShowString              = @"金雷快修车店";
-    
-    if (indexPath.section == 0) {
-        remindShowString    = @"金雷快修车店";
-    }else if (indexPath.section == 1){
-    
-        remindShowString    = @"平台商家下单洗车可抵扣";
-    }else if (indexPath.section == 2){
-    
-        remindShowString    = @"当月可免费洗车4次";
-    }
     
     UIFont *remindShowStringFont            = [UIFont systemFontOfSize:12];
     UILabel *remindShowStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:remindShowString font:remindShowStringFont] font:remindShowStringFont text:remindShowString isCenter:NO];
@@ -634,24 +700,13 @@
     backgroundView.left             = 0;
     backgroundView.top              = Main_Screen_Height*170/667 - backgroundView.height;
     
-    
-    NSString *getString              = @"查看详情";
-    
-    if (indexPath.section == 1) {
-        getString   = @"立即领取";
-    }
-    if (indexPath.section == 2) {
-        getString   = @"立即领取";
-
-    }
-    
     UIFont *getStringFont            = [UIFont systemFontOfSize:14];
     UILabel *getStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:getString font:getStringFont] font:getStringFont text:getString isCenter:NO];
     getStringLabel.textColor         = [UIColor colorFromHex:@"#868686"];
     getStringLabel.centerX           = backgroundView.centerX;
     getStringLabel.centerY           = backgroundView.centerY;
+
     
-//    cell.height = backgroundView.bottom;
     return cell;
 }
 
@@ -659,24 +714,22 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 1) {
-        
+    Record *record = (Record *)[self.GetUserRecordData objectAtIndex:indexPath.section];
+    
+    if(record.ShowType == 1)
+    {
         DSUserRightDetailController *rightController    = [[DSUserRightDetailController alloc]init];
         rightController.hidesBottomBarWhenPushed        = YES;
+        rightController.ConfigCode                      = record.UniqueNumber;
         [self.navigationController pushViewController:rightController animated:YES];
-
-    }else if (indexPath.section == 2){
-        
-        DSCarWashingActivityController *activityController  = [[DSCarWashingActivityController alloc]init];
-        activityController.hidesBottomBarWhenPushed         = YES;
-        [self.navigationController pushViewController:activityController animated:YES];
-
-    }else{
-        
+    }
+    
+    else{
         DSConsumerDetailController *detaleController    = [[DSConsumerDetailController alloc]init];
         detaleController.hidesBottomBarWhenPushed       = YES;
         [self.navigationController pushViewController:detaleController animated:YES];
     }
+    
 }
 
 

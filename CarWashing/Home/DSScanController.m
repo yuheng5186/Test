@@ -57,14 +57,14 @@
     titleView.top                      = 0;
     
     NSString *titleName              = @"扫码洗车";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:16*Main_Screen_Height/667];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:20*Main_Screen_Height/667];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = titleView.centerX;
     titleNameLabel.centerY           = titleView.centerY +8;
     
     NSString  *helpString     = @"使用帮助";
-    UIFont    *helpStringFont = [UIFont systemFontOfSize:Main_Screen_Width*14/375];
+    UIFont    *helpStringFont = [UIFont systemFontOfSize:Main_Screen_Width*18/375];
     UIButton   *helpButton      = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) text:helpString font:helpStringFont color:[UIColor whiteColor] target:self action:@selector(helpButtonClick:)];
     helpButton.tintColor = [UIColor whiteColor];
     helpButton.centerY   = titleNameLabel.centerY;
@@ -121,18 +121,18 @@
     UIFont    *openStringFont = [UIFont systemFontOfSize:Main_Screen_Height*15/667];
     self.flashlightSwitch     = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*20/667) font:openStringFont text:openString isCenter:NO];
     self.flashlightSwitch.textColor = [UIColor whiteColor];
-    self.flashlightSwitch.top = self.flashlight.bottom;
+    self.flashlightSwitch.top = self.flashlight.bottom +Main_Screen_Height*10/667;
     self.flashlightSwitch.left  = self.flashlight.left+Main_Screen_Height*10/667;
     
     self.inputButton        = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*50/667) iconName:@"shurubianhao" target:self action:@selector(inputButtonClcik:)];
     self.inputButton.top    = lbl.bottom +Main_Screen_Height*50/667;
     self.inputButton.left   = scanImageView.left;
     
-    NSString  *inpotString       = @"输入机器编号开锁";
+    NSString  *inpotString       = @"输入编号开锁";
     UIFont    *inputStringFont   = [UIFont systemFontOfSize:Main_Screen_Height*15/667];
     self.inputLabel             = [UIUtil drawLabelInView:self.contentView frame:[UIUtil textRect:inpotString font:inputStringFont]font:inputStringFont text:inpotString isCenter:NO];
     self.inputLabel.textColor   = [UIColor whiteColor];
-    self.inputLabel.top         = self.inputButton.bottom;
+    self.inputLabel.top         = self.inputButton.bottom +Main_Screen_Height*10/667;
     self.inputLabel.centerX     = self.inputButton.centerX;
 }
 - (void) inputButtonClcik:(UIButton *)sender {

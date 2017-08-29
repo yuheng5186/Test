@@ -23,26 +23,26 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一键扫码,快速开启" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0e-aq-6yE">
-                    <rect key="frame" x="21" y="63" width="298" height="32.5"/>
+                    <rect key="frame" x="21" y="55" width="298" height="32.5"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在金顶洗车的自动洗车机上都有对应的二维码，只需用手机扫码，便可以启动机器" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1G-A4-0cV">
-                    <rect key="frame" x="21.5" y="105.5" width="298" height="100"/>
+                    <rect key="frame" x="21.5" y="87.5" width="298" height="100"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="l1G-A4-0cV" secondAttribute="height" multiplier="303:61" constant="-198.72131147540989" id="ipi-4T-Fr6"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="W0e-aq-6yE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="63" id="9d9-4N-zMZ"/>
+                <constraint firstItem="W0e-aq-6yE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="55" id="9d9-4N-zMZ"/>
                 <constraint firstItem="l1G-A4-0cV" firstAttribute="width" secondItem="W0e-aq-6yE" secondAttribute="width" id="BwS-So-qDb"/>
-                <constraint firstItem="l1G-A4-0cV" firstAttribute="top" secondItem="W0e-aq-6yE" secondAttribute="bottom" constant="10" id="JaJ-ol-TNL"/>
+                <constraint firstItem="l1G-A4-0cV" firstAttribute="top" secondItem="W0e-aq-6yE" secondAttribute="bottom" id="JaJ-ol-TNL"/>
                 <constraint firstItem="l1G-A4-0cV" firstAttribute="centerX" secondItem="W0e-aq-6yE" secondAttribute="centerX" id="lOX-Of-jbD"/>
                 <constraint firstItem="W0e-aq-6yE" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="tHh-pq-nCq"/>
                 <constraint firstItem="W0e-aq-6yE" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="149:123" id="to4-He-0zj"/>
