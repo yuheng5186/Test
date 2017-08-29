@@ -73,7 +73,6 @@
     [center addObserver:self selector:@selector(noticeupdateUserName:) name:@"updatenamesuccess" object:nil];
     
     [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];
-    
     [self createSubView];
 }
 
@@ -590,6 +589,8 @@
         });
     });
 }
+
+
 
 
 

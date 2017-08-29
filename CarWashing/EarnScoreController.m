@@ -186,6 +186,7 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
     
     ScoreDetailController *scoreController = [[ScoreDetailController alloc] init];
     scoreController.hidesBottomBarWhenPushed = YES;
+    scoreController.CurrentScore = self.CurrentScore;
     [self.navigationController pushViewController:scoreController animated:YES];
     
 }

@@ -88,6 +88,8 @@
     self.title = @"首页";
     self.navigationController.navigationBar.hidden = YES;
     
+    
+    
     _IsSign = 0;
     
     [self createSubView];
@@ -1035,6 +1037,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 /*
  #pragma mark - Navigation

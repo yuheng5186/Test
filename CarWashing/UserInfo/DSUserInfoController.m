@@ -298,9 +298,13 @@
                     
                     
                     
-                    NSLog(@"%@",dict);
+                
                     APPDELEGATE.currentUser.userSex = @"0";
                     [self.tableView reloadData];
+                    
+                
+                    [UdStorage storageObject:APPDELEGATE.currentUser.userSex forKey:@"Sex"];
+                    
                     
                     
                     
@@ -333,8 +337,10 @@
                     
                     
                     APPDELEGATE.currentUser.userSex = @"1";
-                    NSLog(@"%@",dict);
+                
                     [self.tableView reloadData];
+                    
+                    [UdStorage storageObject:APPDELEGATE.currentUser.userSex forKey:@"Sex"];
                     
                     
                 } fail:^(NSError *error) {
@@ -384,6 +390,13 @@
             
             NSNotification * notice = [NSNotification notificationWithName:@"updateheadimgsuccess" object:nil userInfo:nil];
             [[NSNotificationCenter defaultCenter]postNotification:notice];
+            
+            
+            
+            [UdStorage storageObject:APPDELEGATE.currentUser.userImagePath forKey:@"Headimg"];
+            
+            
+            
             
         }
         else

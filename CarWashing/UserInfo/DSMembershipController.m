@@ -23,6 +23,7 @@
 #import "HTTPDefine.h"
 #import "UIImageView+WebCache.h"
 #import "Card.h"
+#import "AppDelegate.h"
 
 
 @interface DSMembershipController ()<UITableViewDelegate,UITableViewDataSource>
@@ -207,6 +208,11 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
             [HUD setHidden:YES];
             
             
+            
+            APPDELEGATE.currentUser.UserScore = [[NSString stringWithFormat:@"%@",_MembershipUserScore[@"UserScore"]] integerValue];
+            
+            [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
+            
         }
         else
         {
@@ -226,6 +232,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     EarnScoreController *earnScoreVC    = [[EarnScoreController alloc] init];
     earnScoreVC.hidesBottomBarWhenPushed  = YES;
+    earnScoreVC.CurrentScore = [NSString stringWithFormat:@"%@",_MembershipUserScore[@"UserScore"]];
     [self.navigationController pushViewController:earnScoreVC animated:YES];
 }
 

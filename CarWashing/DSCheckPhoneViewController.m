@@ -144,6 +144,15 @@
             [[NSNotificationCenter defaultCenter]postNotification:notice];
             int index=[[self.navigationController viewControllers]indexOfObject:self];
             [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-2]animated:YES];
+            
+            [UdStorage storageObject:APPDELEGATE.currentUser.userName forKey:@"Name"];
+            [UdStorage storageObject:APPDELEGATE.currentUser.Accountname forKey:@"UserName"];
+            [UdStorage storageObject:APPDELEGATE.currentUser.userImagePath forKey:@"Headimg"];
+            [UdStorage storageObject:APPDELEGATE.currentUser.userSex forKey:@"Sex"];
+            [UdStorage storageObject:APPDELEGATE.currentUser.userAge forKey:@"Age"];
+            [UdStorage storageObject:APPDELEGATE.currentUser.userPhone forKey:@"Mobile"];
+            
+            
         }
         else
         {
