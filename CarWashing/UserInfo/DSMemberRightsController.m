@@ -240,7 +240,21 @@ static NSString *id_rightsCell = @"id_rightsCell";
 
 - (void)clickHowToIncreaseGradeBtn {
     
+    NSArray *arr2 = @[@"",@"普通会员",@"白银会员",@"黄金会员",@"铂金会员",@"钻石会员",@"黑钻会员"];
+    
+    NSUInteger num = [[NSString stringWithFormat:@"%@",_MembershipprivilegesDic[@"Level_id"]] integerValue];
+    
+    NSUInteger num2 = [[NSString stringWithFormat:@"%@",_MembershipprivilegesDic[@"NextLevel"]] integerValue];
+    
+    
     HowToUpGradeController *upGradeVC = [[HowToUpGradeController alloc] init];
+    upGradeVC.hidesBottomBarWhenPushed = YES;
+    
+    upGradeVC.currentLevel = arr2[num];
+    upGradeVC.nextLevel = arr2[num2];
+    upGradeVC.NextLevelScore = [NSString stringWithFormat:@"%@",_MembershipprivilegesDic[@"NextLevelScore"]];
+    upGradeVC.CurrentScore = [NSString stringWithFormat:@"%@",_MembershipprivilegesDic[@"UserScore"]];
+    
     
     [self.navigationController pushViewController:upGradeVC animated:YES];
     
@@ -398,6 +412,8 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
 }
 - (void) updateRuleClick:(id)sender {
+    
+    
     
     DSUpdateRuleController *updateRuleController  = [[DSUpdateRuleController alloc]init];
     updateRuleController.hidesBottomBarWhenPushed = YES;

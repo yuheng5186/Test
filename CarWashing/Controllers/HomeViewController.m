@@ -667,6 +667,10 @@
     timeStringLabel.left              = recordimageView.right +Main_Screen_Width*13/375;
     timeStringLabel.top               = titleStringLabel.bottom +Main_Screen_Height*3/667;
     
+    
+    
+    
+    
     NSString *contentString              = record.RightDes;
     UIFont *contentStringFont            = [UIFont systemFontOfSize:12];
     UILabel *contentStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:contentString font:contentStringFont] font:contentStringFont text:contentString isCenter:NO];

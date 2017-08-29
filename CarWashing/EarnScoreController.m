@@ -10,6 +10,8 @@
 //#import "MemberRegualrController.h"
 #import "WayToUpGradeCell.h"
 #import "ScoreDetailController.h"
+#import "DSMyCarController.h"
+#import "DSUserInfoController.h"
 
 #import "LCMD5Tool.h"
 #import "AFNetworkingTool.h"
@@ -190,7 +192,22 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
 
 -(void)gotoearnScore:(UIButton *)btn
 {
-    NSLog(@"去赚积分啦");
+    if([[[self.ScoreData objectAtIndex:btn.tag] objectForKey:@"IntegType"] intValue] == 2)
+    {
+        self.tabBarController.selectedIndex = 4;
+    }
+    else if([[[self.ScoreData objectAtIndex:btn.tag] objectForKey:@"IntegType"] intValue] == 3)
+    {
+        DSMyCarController *myCarController                  = [[DSMyCarController alloc]init];
+        myCarController.hidesBottomBarWhenPushed            = YES;
+        [self.navigationController pushViewController:myCarController animated:YES];
+    }
+    else if([[[self.ScoreData objectAtIndex:btn.tag] objectForKey:@"IntegType"] intValue] == 4)
+    {
+        DSUserInfoController *userInfoController    = [[DSUserInfoController alloc]init];
+        userInfoController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:userInfoController animated:YES];
+    }
 }
 
 

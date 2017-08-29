@@ -12,6 +12,8 @@
 #import "WayToUpGradeCell.h"
 #import "EarnScoreController.h"
 #import "DSUpdateRuleController.h"
+#import "DSMyCarController.h"
+#import "DSUserInfoController.h"
 
 #import "LCMD5Tool.h"
 #import "AFNetworkingTool.h"
@@ -94,7 +96,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     slider.backgroundColor=[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
     
     slider.currentValueColor = [UIColor colorFromHex:@"#febb02"];
-    slider.maxValue = 100;
+    slider.maxValue = [self.NextLevelScore integerValue];
     slider.currentSliderValue = [self.CurrentScore integerValue];
     slider.showTextColor = [UIColor colorFromHex:@"#febb02"];
     slider.showTouchView = YES;
@@ -314,7 +316,28 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
 
 -(void)gotoearnScore:(UIButton *)btn
 {
-    NSLog(@"去赚积分啦");
+ 
+    
+    
+    if([[[self.ScoreData objectAtIndex:btn.tag] objectForKey:@"IntegType"] intValue] == 2)
+    {
+        self.tabBarController.selectedIndex = 4;
+    }
+    else if([[[self.ScoreData objectAtIndex:btn.tag] objectForKey:@"IntegType"] intValue] == 3)
+    {
+        DSMyCarController *myCarController                  = [[DSMyCarController alloc]init];
+        myCarController.hidesBottomBarWhenPushed            = YES;
+        [self.navigationController pushViewController:myCarController animated:YES];
+    }
+    else if([[[self.ScoreData objectAtIndex:btn.tag] objectForKey:@"IntegType"] intValue] == 4)
+    {
+        DSUserInfoController *userInfoController    = [[DSUserInfoController alloc]init];
+        userInfoController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:userInfoController animated:YES];
+    }
+    
+    
+    
 }
 
 
