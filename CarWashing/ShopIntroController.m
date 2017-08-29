@@ -10,6 +10,7 @@
 #import "ShopInfoHeadView.h"
 #import "BusinessMapController.h"
 #import "HTTPDefine.h"
+#import <Masonry.h>
 
 @interface ShopIntroController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -44,6 +45,7 @@ static NSString *id_infoCell = @"id_infoCell";
 - (void)setupUI {
     
     self.infoHeadView.frame = CGRectMake(0, 0, Main_Screen_Width, 280*Main_Screen_Height/667);
+    
     self.infoHeadView.namelabel.text = self.dic[@"MerName"];
     self.infoHeadView.addresslabel.text = self.dic[@"MerAddress"];
     if([self.dic[@"ShopType"] intValue] == 1)
@@ -58,15 +60,15 @@ static NSString *id_infoCell = @"id_infoCell";
     NSArray *lab = [[self.dic objectForKey:@"MerFlag"] componentsSeparatedByString:@","];
     UILabel *MerflagsLabel;
     for (int i = 0; i < [lab count]; i++) {
-        MerflagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(12 + i % 3 * 67,  199, 60, 15)];
+        MerflagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(12*Main_Screen_Height/667 + i % 3 * 67*Main_Screen_Height/667,  199*Main_Screen_Height/667, 60*Main_Screen_Height/667, 15*Main_Screen_Height/667)];
         MerflagsLabel.text = lab[i];
         MerflagsLabel.backgroundColor = [UIColor redColor];
-        [MerflagsLabel setFont:[UIFont fontWithName:@"Helvetica" size:11 ]];
+        [MerflagsLabel setFont:[UIFont fontWithName:@"Helvetica" size:11*Main_Screen_Height/667]];
         MerflagsLabel.textColor = [UIColor colorFromHex:@"#fefefe"];
         MerflagsLabel.backgroundColor = [UIColor colorFromHex:@"#ff7556"];
         MerflagsLabel.textAlignment = NSTextAlignmentCenter;
         MerflagsLabel.layer.masksToBounds = YES;
-        MerflagsLabel.layer.cornerRadius = 7.5;
+        MerflagsLabel.layer.cornerRadius = 7.5*Main_Screen_Height/667;
         [self.infoHeadView addSubview:MerflagsLabel];
     }
 

@@ -7,6 +7,7 @@
 //
 
 #import "ShopInfoHeadView.h"
+#import "UIView+AutoSizeToDevice.h"
 
 @implementation ShopInfoHeadView
 
@@ -19,6 +20,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.dg_viewAutoSizeToDevice = YES;
     
     self.freeCheckLabel.layer.cornerRadius = 7.5*Main_Screen_Height/667;
     self.freeCheckLabel.clipsToBounds = YES;
