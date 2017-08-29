@@ -446,9 +446,9 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 #pragma mark - 点击拨打客服
 - (void)didClickServiceBtn:(UIButton *)button {
-    NSString *message = @"是否拨打商家电话";
-    NSString *title = @"";
-    [self showAlertWithTitle:title message:message];
+//    NSString *message = @"是否拨打商家电话";
+//    NSString *title = @"";
+//    [self showAlertWithTitle:title message:message];
     [PhoneHelper dial: self.dic[@"MerPhone"]];
 }
 
@@ -712,9 +712,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        
-        
-
+        [PhoneHelper dial: self.dic[@"MerPhone"]];
         
     }];
     [alertController addAction:OKAction];
@@ -730,6 +728,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     NSString *message = @"是否拨打商家电话";
     NSString *title = @"";
     [self showAlertWithTitle:title message:message];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {

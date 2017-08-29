@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *namelabel;
 @property (weak, nonatomic) IBOutlet UILabel *addresslabel;
 @property (weak, nonatomic) IBOutlet UILabel *typelabel;
+@property (weak, nonatomic) IBOutlet UIView *separateView2;
+@property (weak, nonatomic) IBOutlet UIView *separate3;
 
 
 
