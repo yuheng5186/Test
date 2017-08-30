@@ -8,9 +8,10 @@
 
 #import "ShopIntroController.h"
 #import "ShopInfoHeadView.h"
-#import "BusinessMapController.h"
+//#import "BusinessMapController.h"
 #import "HTTPDefine.h"
 #import <Masonry.h>
+#import "JXMapNavigationView.h"
 
 @interface ShopIntroController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -18,11 +19,21 @@
 
 @property (nonatomic, weak) UITableView *infoTableView;
 
+#pragma mark - map
+@property (nonatomic, strong)JXMapNavigationView *mapNavigationView;
+
 @end
 
 static NSString *id_infoCell = @"id_infoCell";
 
 @implementation ShopIntroController
+
+- (JXMapNavigationView *)mapNavigationView{
+    if (_mapNavigationView == nil) {
+        _mapNavigationView = [[JXMapNavigationView alloc]init];
+    }
+    return _mapNavigationView;
+}
 
 - (ShopInfoHeadView *)infoHeadView {
     
@@ -123,10 +134,13 @@ static NSString *id_infoCell = @"id_infoCell";
 
 - (IBAction)skipToMapView:(id)sender {
     
-    BusinessMapController *mapVC = [[BusinessMapController alloc] init];
-    mapVC.hidesBottomBarWhenPushed = YES;
+//    BusinessMapController *mapVC = [[BusinessMapController alloc] init];
+//    mapVC.hidesBottomBarWhenPushed = YES;
+//    
+//    [self.navigationController pushViewController:mapVC animated:YES];
     
-    [self.navigationController pushViewController:mapVC animated:YES];
+    [self.mapNavigationView showMapNavigationViewWithtargetLatitude:22.488260 targetLongitute:113.915049 toName:@"中海油华英加油站"];
+    [self.view addSubview:_mapNavigationView];
     
 }
 
