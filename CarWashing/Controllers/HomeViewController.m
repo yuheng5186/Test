@@ -173,7 +173,7 @@
     UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#293754"]];
     titleView.top                      = 0;
     
-    NSString *titleName              = @"金顶洗车";
+    NSString *titleName              = @"蔷薇爱车";
     UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:Main_Screen_Height*20/667];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
@@ -193,7 +193,7 @@
     logoImageView.centerY           = titleNameLabel.centerY;
     
     
-//    NSString *logoName              = @"金顶洗车";
+//    NSString *logoName              = @"蔷薇爱车";
 //    UIFont *logoNameFont            = [UIFont boldSystemFontOfSize:14];
 //    UILabel *logoNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:logoName font:logoNameFont] font:logoNameFont text:logoName isCenter:NO];
 //    logoNameLabel.textColor         = [UIColor whiteColor];

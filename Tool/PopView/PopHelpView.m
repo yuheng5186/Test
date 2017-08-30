@@ -31,7 +31,7 @@
         
         _helpTitleLabel.text          = string;
         _contentLabel.textColor       = [UIColor colorFromHex:@"#999999"];
-        _contentLabel.text            = @"在金顶洗车的自动洗车机上都有对应的二维码，只需用手机扫码，便可以启动机器";
+        _contentLabel.text            = @"在蔷薇爱车的自动洗车机上都有对应的二维码，只需用手机扫码，便可以启动机器";
         
         UITapGestureRecognizer  *tapShopGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapShopButtonClick:)];
         [_helpView addGestureRecognizer:tapShopGesture];

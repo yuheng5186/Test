@@ -87,7 +87,7 @@
     logoImageView.top           = deaderLabel.bottom +Main_Screen_Height*30/667;
     logoImageView.centerX       = Main_Screen_Width/2;
     
-    NSString   *titleString     = @"金顶洗车";
+    NSString   *titleString     = @"蔷薇爱车";
     NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc]initWithString:titleString];
     CGAffineTransform matrix = CGAffineTransformMake(1, 0, tanf(-20 * (CGFloat)M_PI / 180), 1, 0, 0);
     UIFont     *titleFont       = [UIFont boldSystemFontOfSize:Main_Screen_Height*25/667];
@@ -100,7 +100,7 @@
     titleLabel.centerX          = Main_Screen_Width/2;
     titleLabel.top              = logoImageView.bottom +Main_Screen_Height*20/667;
     
-    NSString   *welcomeString     = @"欢迎登录金顶洗车APP";
+    NSString   *welcomeString     = @"欢迎登录蔷薇爱车APP";
     UIFont     *welcomeFont       = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
     UILabel *welcomeLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*200/375, Main_Screen_Height*30/667) font:welcomeFont text:welcomeString isCenter:NO];
     welcomeLabel.textColor        = [UIColor colorFromHex:@"#febb02"];
@@ -156,7 +156,7 @@
     
     UIButton *updateRuleButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*320/375, Main_Screen_Height*30/667)];
     [updateRuleButton setTitleColor:[UIColor colorFromHex:@"#293754"] forState:UIControlStateNormal];
-    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"注册即为同意《金顶洗车用户服务协议》"];
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"注册即为同意《蔷薇爱车用户服务协议》"];
     NSRange titleRange = {0,[title length]};
     [title addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleNone] range:titleRange];
     [title addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, 6)];

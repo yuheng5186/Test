@@ -38,7 +38,7 @@
     [self.contentView addSubview:nameLab];
     
     UILabel *brandLab = [[UILabel alloc] init];
-    brandLab.text = @"金顶洗车";
+    brandLab.text = @"蔷薇爱车";
     brandLab.font = [UIFont systemFontOfSize:11];
     [self.contentView addSubview:brandLab];
     

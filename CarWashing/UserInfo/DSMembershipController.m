@@ -60,7 +60,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"金顶会员"];
+    [self drawTitle:@"蔷薇会员"];
     
     
 }
