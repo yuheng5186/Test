@@ -681,7 +681,7 @@
         vipString           = @"zhuanxiang";
         contentShowString   = record.MiddleDes;
         remindShowString    = record.BottomDes;
-        getString           = @"查看详情";
+        getString           = @"立即领取";
 //        vipString   = @"huiyuanzhuanxiang";
     }
     
@@ -757,8 +757,10 @@
     }
     
     else{
+        Record *record = (Record *)[self.GetUserRecordData objectAtIndex:indexPath.section];
         DSConsumerDetailController *detaleController    = [[DSConsumerDetailController alloc]init];
         detaleController.hidesBottomBarWhenPushed       = YES;
+        detaleController.record                         = record;
         [self.navigationController pushViewController:detaleController animated:YES];
     }
     

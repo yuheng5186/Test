@@ -20,6 +20,7 @@
 @interface DSUserRightDetailController ()
 {
     CardConfigGrade *card;
+    MBProgressHUD *HUD;
 }
 
 @property (nonatomic,strong) NSDictionary *dic;
@@ -41,6 +42,14 @@
     card = [[CardConfigGrade alloc]init];
     // Do any additional setup after loading the view.
     _dic = [[NSDictionary alloc]init];
+    
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
     [self GetCouponDetail];
     
 }
@@ -181,16 +190,20 @@
             [card setValuesForKeysWithDictionary:_dic];
 //            [_CouponListData addObjectsFromArray:arr];
 //            [self.tableView reloadData];
-            NSLog(@"%@",card);
+//            NSLog(@"%@",card);
             
             [self createSubView];
+            
+            [HUD setHidden:YES];
         }
         else
         {
+            [HUD setHidden:YES];
             [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
             [self.navigationController popViewControllerAnimated:YES];
         }
     } fail:^(NSError *error) {
+        [HUD setHidden:YES];
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
         [self.navigationController popViewControllerAnimated:YES];
         

@@ -7,7 +7,11 @@
 //
 
 #import "BaseController.h"
+#import "Record.h"
 
 @interface DSConsumerDetailController : BaseController
+
+@property(nonatomic,copy)Record *record;
+
 
 @end

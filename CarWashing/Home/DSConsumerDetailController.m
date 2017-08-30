@@ -30,13 +30,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    
+    NSLog(@"%@",self.record);
+    
+    
     // Do any additional setup after loading the view.
     [self createSubView];
 }
 - (void) createSubView {
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStyleGrouped];
-    self.tableView.top              = -Main_Screen_Height*10/667;
+//    self.tableView.top              = -Main_Screen_Height*10/667;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     self.tableView.scrollEnabled    = NO;
@@ -95,9 +101,28 @@
     cell.backgroundColor    = [UIColor whiteColor];
     cell.textLabel.textColor    = [UIColor colorFromHex:@"#4a4a4a"];
     if (indexPath.section == 0) {
+        
         cell.textLabel.text     = @"付款金额";
-        cell.detailTextLabel.text   = @"¥18.00";
         cell.detailTextLabel.textColor = [UIColor blackColor];
+       
+        if(self.record.ConsumptionType == 2)
+        {
+            cell.textLabel.text = @"付款方式";
+            [cell.detailTextLabel setNumberOfLines:2];//可以显示3行
+            cell.detailTextLabel.text   = [NSString stringWithFormat:@"%@\n%@",self.record.MiddleDes,self.record.BottomDes];
+            
+            
+        }
+        else if(self.record.ConsumptionType == 1)
+        {
+            cell.detailTextLabel.text   = [NSString stringWithFormat:@"￥%@",self.record.MiddleDes];
+        }
+        else        {
+            cell.detailTextLabel.text   = [NSString stringWithFormat:@"￥%@",self.record.BottomDes];
+        }
+        
+      
+        
 
     }else {
         cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#999999"];
@@ -105,23 +130,24 @@
         if (indexPath.row == 0) {
             
             cell.textLabel.text     = @"消费说明";
-            cell.detailTextLabel.text   = @"金雷快修车店-25元五座标准洗车";
+            cell.detailTextLabel.text   = self.record.ConsumerDescrip;
             
         }else if (indexPath.row == 1){
             cell.textLabel.text     = @"订单时间";
-            cell.detailTextLabel.text   = @"2017-7-31 14:30:20";
+            cell.detailTextLabel.text   = self.record.CreateDate;
             
         }else if (indexPath.row == 2){
+            NSArray *arr = @[@"",@"微信支付",@"支付宝支付",@"洗车卡抵扣"];
             cell.textLabel.text     = @"支付方式";
-            cell.detailTextLabel.text   = @"支付宝支付";
+            cell.detailTextLabel.text   = [arr objectAtIndex:self.record.PayMathod];
             
         }else if (indexPath.row == 3){
             cell.textLabel.text     = @"积分奖励";
-            cell.detailTextLabel.text   = @"10积分";
+            cell.detailTextLabel.text   = [NSString stringWithFormat:@"%ld积分",self.record.IntegralNumber];
             
         }else {
             cell.textLabel.text     = @"订单编号";
-            cell.detailTextLabel.text   = @"3687461972390000";
+            cell.detailTextLabel.text   = self.record.UniqueNumber;
             
         }
 
