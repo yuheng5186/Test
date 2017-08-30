@@ -2,10 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDisplayName</key>
-	<string>蔷薇洗车</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>蔷薇爱车</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict/>
@@ -31,7 +31,7 @@
 			<string>weixin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wxcb207ec4f5991a99</string>
+				<string>wx36260a82ad0e51bb</string>
 			</array>
 		</dict>
 	</array>
