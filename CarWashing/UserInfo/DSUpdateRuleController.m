@@ -72,7 +72,7 @@
 //    rightView.centerY                    = growUpStringLabel.centerY;
 //
 //
-//    NSString *growUpString1              = @"金顶会员等级有获得积分数和商品消费次数共同决定，每一次等级的提升需要改等级的积分数以及购买次数。累计积分数和购买次数决定会员等级";
+//    NSString *growUpString1              = @"蔷薇会员等级有获得积分数和商品消费次数共同决定，每一次等级的提升需要改等级的积分数以及购买次数。累计积分数和购买次数决定会员等级";
 //    UIFont *growUpString1Font            = [UIFont systemFontOfSize:16];
 //    UILabel *growUpString1Label          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:growUpString1 font:growUpString1Font] font:growUpString1Font text:growUpString1 isCenter:NO];
 //    growUpString1Label.numberOfLines     = 0;
@@ -120,7 +120,7 @@
 //    rightStringLabel2.left              = Main_Screen_Width*10/375;
 //    rightStringLabel2.top               = Main_Screen_Height*20/667 +rightStringLabel.bottom;
 //
-//    NSString *contentString              = @"金顶会员每提升一个会员等级，可获得不等数量的优惠券，以及相对应的商品折扣";
+//    NSString *contentString              = @"蔷薇会员每提升一个会员等级，可获得不等数量的优惠券，以及相对应的商品折扣";
 //    UIFont *contentStringFont            = [UIFont systemFontOfSize:16];
 //    UILabel *contentStringLabel          = [UIUtil drawLabelInView:downView frame:[UIUtil textRect:contentString font:contentStringFont] font:contentStringFont text:contentString isCenter:NO];
 //    contentStringLabel.numberOfLines     = 0;

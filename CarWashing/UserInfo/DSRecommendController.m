@@ -16,7 +16,7 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"推荐金顶APP"];
+    [self drawTitle:@"推荐蔷薇APP"];
     
 }
 

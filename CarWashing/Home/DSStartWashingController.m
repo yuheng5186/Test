@@ -17,7 +17,7 @@
 
 - (void) drawNavigation {
 
-    [self drawTitle:@"金顶洗车"];
+    [self drawTitle:@"蔷薇爱车"];
 }
 
 - (void) drawContent {
