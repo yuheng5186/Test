@@ -78,7 +78,13 @@
         
         [sender setImage:[UIImage imageNamed:@"shoucang2"] forState:UIControlStateSelected];
         
+        [self showInfo:@"取消收藏" autoHidden:YES];
+    }else{
+     
+        [self showInfo:@"收藏成功" autoHidden:YES];
     }
+    
+    
     
     sender.selected = !sender.selected;
     
