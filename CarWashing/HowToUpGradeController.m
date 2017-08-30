@@ -23,7 +23,9 @@
 
 
 @interface HowToUpGradeController ()<UITableViewDelegate, UITableViewDataSource,HYSliderDelegate>
-
+{
+    MBProgressHUD *HUD;
+}
 @property (nonatomic, weak) UITableView *wayToEarnScoreView;
 
 @property (nonatomic, strong) NSMutableArray *ScoreData;
@@ -209,6 +211,13 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     [self.wayToEarnScoreView registerClass:[WayToUpGradeCell class] forCellReuseIdentifier:id_wayToUpCell];
     
     self.ScoreData = [[NSMutableArray alloc]init];
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
     [self requestGetScore];
     
 }
@@ -235,18 +244,22 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
             }
             else
             {
+               
                 [self.ScoreData addObjectsFromArray:arr];
                 [self.wayToEarnScoreView reloadData];
+                [HUD setHidden:YES];
             }
             
         }
         else
         {
             [self.view showInfo:@"数据请求失败" autoHidden:YES interval:2];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         
     } fail:^(NSError *error) {
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+         [self.navigationController popViewControllerAnimated:YES];
     }];
     
 }
@@ -347,6 +360,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     
     EarnScoreController *earnScoreVC = [[EarnScoreController alloc] init];
     earnScoreVC.hidesBottomBarWhenPushed = YES;
+    earnScoreVC.CurrentScore = self.CurrentScore;
     
     [self.navigationController pushViewController:earnScoreVC animated:YES];
 }

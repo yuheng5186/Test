@@ -21,6 +21,9 @@
 #import "CardBag.h"
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
 @interface DSCardGroupController ()<UITableViewDelegate, UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
+{
+    MBProgressHUD *HUD;
+}
 
 //@property (nonatomic, weak) UIView *containerView;
 //
@@ -108,6 +111,12 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 
     [self setupUI];
     
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
     _CardbagData = [[NSMutableArray alloc]init];
     [self GetCardbagList];
     
@@ -190,6 +199,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
                 [_CardbagData addObject:model];
             }
             [_rechargeView reloadData];
+            [HUD setHidden:YES];
         }
         else
         {

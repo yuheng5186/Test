@@ -27,9 +27,11 @@
 
 #import "JXMapNavigationView.h"
 #import "HYActivityView.h"
+#import "MBProgressHUD.h"
 
 @interface BusinessDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, CLLocationManagerDelegate>
 {
+    MBProgressHUD *HUD;
     UILabel *lblPrice;
     UILabel *formerPriceLab;
     UILabel *lblCarType;
@@ -96,6 +98,12 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     self.MerchantDetailData = [[NSMutableArray alloc]init];
     
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
     [self setMerChantDetailData];
     
     
@@ -121,6 +129,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
             //        [self.MerchantDetailData addObjectsFromArray:arr];
             
             [self setupUI];
+            [HUD setHidden:YES];
         }
         else
         {
@@ -133,6 +142,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
         
     } fail:^(NSError *error) {
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.navigationController popViewControllerAnimated:YES];
     }];
 }
 

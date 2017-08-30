@@ -182,7 +182,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
         else
         {
             [HUD setHidden:YES];
-            [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+            [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
             
         }
         
@@ -191,7 +191,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
         
     } fail:^(NSError *error) {
         [HUD setHidden:YES];
-        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
     }];
     
 }
