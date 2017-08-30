@@ -78,7 +78,6 @@
         
         [sender setImage:[UIImage imageNamed:@"shoucang2"] forState:UIControlStateSelected];
         
-        
     }
     
     sender.selected = !sender.selected;

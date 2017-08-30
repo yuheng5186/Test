@@ -560,7 +560,7 @@
 //                             @"Area":self.LocCity
                              };
     NSDictionary *params = @{
-                             @"JsonData" : [NSS tring stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     
