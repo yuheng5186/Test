@@ -17,6 +17,7 @@
 #import "UdStorage.h"
 #import "HTTPDefine.h"
 #import "UIImageView+WebCache.h"
+#import "AppDelegate.h"
 
 @interface DSMemberRightsController ()<UITableViewDelegate, UITableViewDataSource>
 {
@@ -168,7 +169,9 @@ static NSString *id_rightsCell = @"id_rightsCell";
             [self UpdateUI];
             
             
+            APPDELEGATE.currentUser.UserScore = [[NSString stringWithFormat:@"%@",_MembershipprivilegesDic[@"UserScore"]] integerValue];
             
+            [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
             
         }
         else

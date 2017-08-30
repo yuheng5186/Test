@@ -46,6 +46,13 @@
              NSNotification * notice = [NSNotification notificationWithName:@"updatenamesuccess" object:nil userInfo:@{@"username":self.userNameText.text}];
              [[NSNotificationCenter defaultCenter]postNotification:notice];
              [self.navigationController popViewControllerAnimated:YES];
+             
+             
+             
+             [UdStorage storageObject:APPDELEGATE.currentUser.userName forKey:@"Name"];
+             
+             
+             
          }
          else
          {

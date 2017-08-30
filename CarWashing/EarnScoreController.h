@@ -10,4 +10,6 @@
 
 @interface EarnScoreController : BaseController
 
+@property(nonatomic,copy)NSString *CurrentScore;
+
 @end

@@ -9,6 +9,9 @@
 #import "DSActivityDetailCell.h"
 #import "UIView+SDAutoLayout.h"
 #import "UITableView+SDAutoTableViewCellHeight.h"
+#import "HTTPDefine.h"
+#import "UIImageView+WebCache.h"
+
 
 
 @implementation DSActivityDetailCell
@@ -136,6 +139,11 @@
     
     _model  = model;
     _iconImageView.image    = [UIImage imageNamed:model.CommentUserImg];
+    
+    NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,model.CommentUserImg];
+    NSURL *url=[NSURL URLWithString:ImageURL];
+    [_iconImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"gerenxinxitou"]];
+    
     _nameLabel.text         = model.CommentUserName;
     _contentLabel.text      = model.Comment;
     _sayTimeLabel.text      = model.CommentDate;
