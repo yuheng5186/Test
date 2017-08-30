@@ -919,6 +919,10 @@
                 self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount];
                 [self.downGoodButton setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
                 self.downGoodButton.selected = YES;
+                
+               
+                
+                
             }
             else
             {
