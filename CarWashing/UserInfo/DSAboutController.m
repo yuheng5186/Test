@@ -40,7 +40,12 @@
     appImageView.top               = Main_Screen_Height*20/667;
     appImageView.centerX           = upView.centerX;
     
-    NSString *showName              = @"蔷薇爱车V1.0";
+    NSDictionary *infoDic           = [[NSBundle mainBundle] infoDictionary];
+    NSString *appVersion            = [infoDic objectForKey: @"CFBundleShortVersionString"];
+    NSString *string                = [NSString stringWithFormat: @"%@ %@",NSLocalizedString (@"V", nil), appVersion];
+    
+    
+    NSString *showName              = [NSString stringWithFormat:@"蔷薇爱车%@",string];
     UIFont *showNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
     UILabel *showNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:showName font:showNameFont] font:showNameFont text:showName isCenter:NO];
     showNameLabel.textColor         = [UIColor colorFromHex:@"#8B8B8B"];
