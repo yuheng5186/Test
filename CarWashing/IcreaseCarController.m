@@ -464,11 +464,6 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                         [self.view showInfo:@"新增失败" autoHidden:YES interval:2];
                     }
                     
-                    
-                    
-                    
-                    
-                    
                 } fail:^(NSError *error) {
                     [self.view showInfo:@"新增失败" autoHidden:YES interval:2];
                 }];

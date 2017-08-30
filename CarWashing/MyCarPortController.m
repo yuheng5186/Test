@@ -17,8 +17,12 @@
 #import "AFNetworkingTool.h"
 #import "MyCar.h"
 #import "UdStorage.h"
+#import "MBProgressHUD.h"
 
 @interface MyCarPortController ()<UITableViewDataSource, UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
+{
+    MBProgressHUD *HUD;
+}
 
 
 @property (nonatomic, weak) UIView *increaseView;
@@ -77,6 +81,12 @@ static NSString *id_carListCell = @"id_carListCell";
     
     _myDefaultcararray = [[NSMutableArray alloc]init];
     
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
     [self getMyCarData];
     
 //    [self setupUI];
@@ -92,7 +102,7 @@ static NSString *id_carListCell = @"id_carListCell";
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/GetCarList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"%@",dict);
+        
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             NSArray *arr = [NSArray array];
@@ -116,6 +126,8 @@ static NSString *id_carListCell = @"id_carListCell";
             [self setupUI];
             
             [_carListView reloadData];
+            
+            [HUD setHidden:YES];
             
         }
         else
@@ -443,6 +455,13 @@ static NSString *id_carListCell = @"id_carListCell";
 -(void)noticeincreaseMyCar:(NSNotification *)sender{
     _mycararray = [[NSMutableArray alloc]init];
     _myDefaultcararray = [[NSMutableArray alloc]init];
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
     [self getMyCarData];
 }
 

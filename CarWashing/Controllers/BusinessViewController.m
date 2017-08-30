@@ -20,10 +20,11 @@
 #import "AFNetworkingTool.h"
 #import "HTTPDefine.h"
 #import "MBProgressHUD.h"
+#import "UdStorage.h"
 
+#import "CoreLocation/CoreLocation.h"
 
-
-@interface BusinessViewController ()<UITableViewDelegate, UITableViewDataSource,YZPullDownMenuDataSource>
+@interface BusinessViewController ()<UITableViewDelegate, UITableViewDataSource,YZPullDownMenuDataSource,CLLocationManagerDelegate>
 {
     
 }
@@ -39,6 +40,7 @@
 @property (nonatomic,strong) NSMutableArray *otherArray;
 
 @property (nonatomic)NSInteger page;
+
 
 
 @end
@@ -73,13 +75,19 @@ static NSString *id_salerListCell = @"salerListViewCell";
     [super viewDidLoad];
     
     //self.title = @"商家";
+    
+    
 
     self.navigationController.navigationBar.hidden = YES;
     
     [self setSearchMenu];
     
+    
+    
+    
+    
     self.pramsDic = [[NSMutableDictionary alloc]init];
-    NSArray *array1 = [[NSArray alloc] initWithObjects:@"上海市",@"浦东新区", nil];
+    NSArray *array1 = [[NSArray alloc] initWithObjects:[UdStorage getObjectforKey:@"City"],[UdStorage getObjectforKey:@"Quyu"], nil];
     NSDictionary *dic = @{@"0":array1,@"1":@"普洗-5座轿车",@"2":@"默认排序"};
     self.pramsDic  = [NSMutableDictionary dictionaryWithDictionary:dic];
     self.MerchantData = [[NSMutableArray alloc]init];
@@ -282,6 +290,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     BusinessDetailViewController *detailController = [[BusinessDetailViewController alloc] init];
     detailController.hidesBottomBarWhenPushed      = YES;
     detailController.MerCode                       = [[[self.MerchantData objectAtIndex:indexPath.row] objectForKey:@"MerCode"] integerValue];
+    detailController.distance                      = [[self.MerchantData objectAtIndex:indexPath.row] objectForKey:@"Distance"];
     [self.navigationController pushViewController:detailController animated:YES];
 }
 
@@ -303,8 +312,12 @@ static NSString *id_salerListCell = @"salerListViewCell";
 //    NSArray *array1 = [[NSArray alloc] initWithObjects:@"上海市",@"浦东新区", nil];
 //    NSDictionary *dic = @{@"0":array1,@"1":@"普洗-5座轿车",@"2":@"默认排序"};
     
+    
+  
+    
+    
     // 初始化标题
-    _titles = @[@"浦东新区",@"普洗-5座轿车",@"默认排序"];
+    _titles = @[[UdStorage getObjectforKey:@"Quyu"],@"普洗-5座轿车",@"默认排序"];
     
 //    NSLog(@"%@",self.pramsDic);
     
@@ -401,8 +414,8 @@ static NSString *id_salerListCell = @"salerListViewCell";
                              @"ShopType":@1,
                              @"ServiceCode":@101,
                              @"DefaultSort":DefaultSort,
-                             @"Ym":@31.192255,
-                             @"Xm":@121.52334,
+                             @"Ym":[UdStorage getObjectforKey:@"Ym"],
+                             @"Xm":[UdStorage getObjectforKey:@"Xm"],
                              @"PageIndex":@0,
                              @"PageSize":@10
                              };

@@ -22,7 +22,7 @@
 @interface DSMemberRightsController ()<UITableViewDelegate, UITableViewDataSource>
 {
     UITableView *memberRightsView;
-    
+    MBProgressHUD *HUD;
     UILabel *membershipNameLabel;
     UIButton *gradeBtn;
     UIImageView *membershipImageView;
@@ -60,6 +60,13 @@ static NSString *id_rightsCell = @"id_rightsCell";
     _MembershipprivilegesArray = [[NSMutableArray alloc]init];
     _NextMembershipprivilegesArr = [[NSMutableArray alloc]init];
     _CurrentMembershipprivilegesArr = [[NSMutableArray alloc]init];
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
     [self GetMembershipprivileges];
     
 }
@@ -168,6 +175,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
             
             [self UpdateUI];
             
+            [HUD setHidden:YES];
             
             APPDELEGATE.currentUser.UserScore = [[NSString stringWithFormat:@"%@",_MembershipprivilegesDic[@"UserScore"]] integerValue];
             

@@ -20,6 +20,9 @@
 #import "UdStorage.h"
 
 @interface EarnScoreController ()<UITableViewDelegate, UITableViewDataSource>
+{
+     MBProgressHUD *HUD;
+}
 
 @property (nonatomic, weak) UIImageView *adverView;
 
@@ -75,6 +78,14 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
     [self.earnWayView registerClass:[WayToUpGradeCell class] forCellReuseIdentifier:id_earnViewCell];
     
     self.ScoreData = [[NSMutableArray alloc]init];
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
+    
     [self requestGetScore];
     
     
@@ -105,16 +116,19 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
             {
                 [self.ScoreData addObjectsFromArray:arr];
                 [self.earnWayView reloadData];
+                [HUD setHidden:YES];
             }
             
         }
         else
         {
             [self.view showInfo:@"数据请求失败" autoHidden:YES interval:2];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         
     } fail:^(NSError *error) {
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.navigationController popViewControllerAnimated:YES];
     }];
 
 }
