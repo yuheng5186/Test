@@ -390,11 +390,11 @@
     timeStringLabel.top               = titleStringLabel.bottom +Main_Screen_Height*5/667;
     
     NSString *contentString              = [NSString stringWithFormat:@"+%@",[[_ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegralNum"]];
-    UIFont *contentStringFont            = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+    UIFont *contentStringFont            = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     UILabel *contentStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:contentString font:contentStringFont] font:contentStringFont text:contentString isCenter:NO];
     contentStringLabel.textColor         = [UIColor redColor];
     contentStringLabel.right             = Main_Screen_Width -Main_Screen_Width*12/375;
-    contentStringLabel.top               = Main_Screen_Height*9/667;
+    contentStringLabel.centerY           = cell.contentView.centerY;
     
     
     

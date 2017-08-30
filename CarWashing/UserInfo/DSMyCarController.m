@@ -23,10 +23,14 @@
 #import "AFNetworkingTool.h"
 #import "MyCar.h"
 #import "UdStorage.h"
+#import "MBProgressHUD.h"
 
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
 
 @interface DSMyCarController ()<UITableViewDelegate, UITableViewDataSource, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource, UITextFieldDelegate,UIGestureRecognizerDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
+{
+    MBProgressHUD *HUD;
+}
 
 @property (nonatomic, weak) UIImageView *carImageView;
 
@@ -108,6 +112,12 @@ static NSString * HeaderId = @"header";
     _Xuhao = 0;
     _CarArray = [NSMutableArray array];
     
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
     [self getMyCarData];
     
     
@@ -158,17 +168,19 @@ static NSString * HeaderId = @"header";
             
             [_carInfoView reloadData];
             
+             [HUD setHidden:YES];
+            
         }
         else
         {
-            [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+            [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
         }
         
         
         
         
     } fail:^(NSError *error) {
-        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
     }];
 
 }

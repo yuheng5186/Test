@@ -13,4 +13,6 @@
 
 @property (nonatomic,assign) NSInteger MerCode;
 
+@property (nonatomic,copy) NSString *distance;
+
 @end

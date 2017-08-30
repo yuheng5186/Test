@@ -22,6 +22,7 @@
     UILabel *cardNameLab;
     UILabel *invalidLab;
     CardConfigGrade *card;
+    MBProgressHUD *HUD;
 }
 
 @property(nonatomic,strong)UITableView *noticeView;
@@ -48,6 +49,15 @@
     if(self.nextdic == nil)
     {
         self.GradeDetailDic = [[NSMutableDictionary alloc]init];
+        
+        
+        HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        HUD.removeFromSuperViewOnHide =YES;
+        HUD.mode = MBProgressHUDModeIndeterminate;
+        HUD.labelText = @"加载中";
+        HUD.minSize = CGSizeMake(132.f, 108.0f);
+        
+        
         [self requestCardConfigGradeDetail];
     }
     else
@@ -189,6 +199,8 @@
             [card setValuesForKeysWithDictionary:self.GradeDetailDic];
     
             [self UpdateUI];
+            
+            [HUD setHidden:YES];
             
         }
         else

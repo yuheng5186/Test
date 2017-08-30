@@ -47,21 +47,27 @@
 #import "UdStorage.h"
 #import "Record.h"
 
-@interface HomeViewController ()<JFLocationDelegate,UITableViewDelegate,UITableViewDataSource>
+#import "CoreLocation/CoreLocation.h"
+
+@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate>
 
 /** 选择的结果*/
 @property (strong, nonatomic) UILabel *resultLabel;
 @property (nonatomic, strong) UIButton  *locationButton;
 /** 城市定位管理器*/
-@property (nonatomic, strong) JFLocation *locationManager;
-/** 城市数据管理器*/
-@property (nonatomic, strong) JFAreaDataManager *manager;
+//@property (nonatomic, strong) JFLocation *locationManager;
+///** 城市数据管理器*/
+//@property (nonatomic, strong) JFAreaDataManager *manager;
 
 @property (nonatomic,strong) UITableView *tableView;
 
 @property (nonatomic,assign) NSInteger IsSign;
 
 @property (nonatomic, strong) NSMutableArray *GetUserRecordData;
+
+@property (strong, nonatomic) CLLocationManager* locationManager;
+
+@property (strong, nonatomic)NSString *LocCity;
 
 @end
 
@@ -94,17 +100,17 @@
     
     [self createSubView];
     
-    self.locationManager = [[JFLocation alloc] init];
-    _locationManager.delegate = self;
+//    self.locationManager = [[JFLocation alloc] init];
+//    _locationManager.delegate = self;
     
 }
-- (JFAreaDataManager *)manager {
-    if (!_manager) {
-        _manager = [JFAreaDataManager shareManager];
-        [_manager areaSqliteDBData];
-    }
-    return _manager;
-}
+//- (JFAreaDataManager *)manager {
+//    if (!_manager) {
+//        _manager = [JFAreaDataManager shareManager];
+//        [_manager areaSqliteDBData];
+//    }
+//    return _manager;
+//}
 
 - (void) createSubView {
     
@@ -159,9 +165,11 @@
 - (void)headerRereshing
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [self startLocation];
+        
+        
         _GetUserRecordData = [[NSMutableArray alloc]init];
-        
-        
         [self setData];
         
     });
@@ -209,22 +217,21 @@
     
     
     
-    self.locationButton        = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.locationButton.frame             = CGRectMake(0, 0, 100, 30);
-    self.locationButton.backgroundColor   = [UIColor whiteColor];
-    [self.locationButton setTitle:@"上海市" forState:UIControlStateNormal];
-    [self.locationButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.locationButton.titleLabel.font   = [UIFont systemFontOfSize:16];
-    self.locationButton.left              = 10;
-    self.locationButton.centerY           = titleNameLabel.centerY;
-    [self.locationButton addTarget:self action:@selector(locationButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.locationButton setImage:[UIImage imageNamed:@"icon_arrow_down"] forState:UIControlStateNormal];
-    self.locationButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -80);
-    [self.locationButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -60, 0, 0)];
-    
-    [titleView addSubview:self.locationButton];
-    self.locationButton.hidden = YES;
-    NSLog(@"------------------%@",self.locationButton.titleLabel.text);
+//    self.locationButton        = [UIButton buttonWithType:UIButtonTypeCustom];
+//    self.locationButton.frame             = CGRectMake(0, 0, 100, 30);
+//    self.locationButton.backgroundColor   = [UIColor whiteColor];
+//    [self.locationButton setTitle:@"上海市" forState:UIControlStateNormal];
+//    [self.locationButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    self.locationButton.titleLabel.font   = [UIFont systemFontOfSize:16];
+//    self.locationButton.left              = 10;
+//    self.locationButton.centerY           = titleNameLabel.centerY;
+//    [self.locationButton addTarget:self action:@selector(locationButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.locationButton setImage:[UIImage imageNamed:@"icon_arrow_down"] forState:UIControlStateNormal];
+//    self.locationButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -80);
+//    [self.locationButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -60, 0, 0)];
+//    
+//    [titleView addSubview:self.locationButton];
+//    self.locationButton.hidden = YES;
 }
 
 - (void) createHeaderView {
@@ -542,9 +549,15 @@
 -(void)setData
 {
     
+    if(self.LocCity == nil)
+    {
+        self.LocCity = @"";
+    }
+    
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                             @"Area":self.locationButton.titleLabel.text
+                             @"Area":@"上海市"
+//                             @"Area":self.LocCity
                              };
     NSDictionary *params = @{
                              @"JsonData" : [NSS tring stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
@@ -582,7 +595,7 @@
         }
         else
         {
-            [self.view showInfo:@"数据请求失败" autoHidden:YES interval:2];
+            [self.view showInfo:@"数据请求失败,请检查定位" autoHidden:YES interval:2];
             [self.tableView.mj_header endRefreshing];
         }
         
@@ -774,58 +787,58 @@
     [self.navigationController pushViewController:downController animated:YES];
 }
 
-- (void) locationButtonClick:(id)sender {
-    
-    JFCityViewController *cityViewController = [[JFCityViewController alloc] init];
-    cityViewController.title = @"城市";
-    __weak typeof(self) weakSelf = self;
-    [cityViewController choseCityBlock:^(NSString *cityName) {
-        
-        [weakSelf.locationButton setTitle:cityName forState:UIControlStateNormal];
-        
-        weakSelf.resultLabel.text = cityName;
-    }];
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:cityViewController];
-    [self presentViewController:navigationController animated:YES completion:nil];
-    
-}
-#pragma mark --- JFLocationDelegate
+//- (void) locationButtonClick:(id)sender {
+//    
+//    JFCityViewController *cityViewController = [[JFCityViewController alloc] init];
+//    cityViewController.title = @"城市";
+//    __weak typeof(self) weakSelf = self;
+//    [cityViewController choseCityBlock:^(NSString *cityName) {
+//        
+//        [weakSelf.locationButton setTitle:cityName forState:UIControlStateNormal];
+//        
+//        weakSelf.resultLabel.text = cityName;
+//    }];
+//    
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:cityViewController];
+//    [self presentViewController:navigationController animated:YES completion:nil];
+//    
+//}
+//#pragma mark --- JFLocationDelegate
 
-//定位中...
-- (void)locating {
-    NSLog(@"定位中...");
-}
+////定位中...
+//- (void)locating {
+//    NSLog(@"定位中...");
+//}
+//
+////定位成功
+//- (void)currentLocation:(NSDictionary *)locationDictionary {
+//    NSString *city = [locationDictionary valueForKey:@"City"];
+//    if (![_resultLabel.text isEqualToString:city]) {
+//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"您定位到%@，确定切换城市吗？",city] preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+//        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            _resultLabel.text = city;
+//            [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"locationCity"];
+//            [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"currentCity"];
+//            [self.manager cityNumberWithCity:city cityNumber:^(NSString *cityNumber) {
+//                [KCURRENTCITYINFODEFAULTS setObject:cityNumber forKey:@"cityNumber"];
+//            }];
+//        }];
+//        [alertController addAction:cancelAction];
+//        [alertController addAction:okAction];
+//        [self presentViewController:alertController animated:YES completion:nil];
+//    }
+//}
+//
+///// 拒绝定位
+//- (void)refuseToUsePositioningSystem:(NSString *)message {
+//    NSLog(@"%@",message);
+//}
 
-//定位成功
-- (void)currentLocation:(NSDictionary *)locationDictionary {
-    NSString *city = [locationDictionary valueForKey:@"City"];
-    if (![_resultLabel.text isEqualToString:city]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"您定位到%@，确定切换城市吗？",city] preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            _resultLabel.text = city;
-            [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"locationCity"];
-            [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"currentCity"];
-            [self.manager cityNumberWithCity:city cityNumber:^(NSString *cityNumber) {
-                [KCURRENTCITYINFODEFAULTS setObject:cityNumber forKey:@"cityNumber"];
-            }];
-        }];
-        [alertController addAction:cancelAction];
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-    }
-}
-
-/// 拒绝定位
-- (void)refuseToUsePositioningSystem:(NSString *)message {
-    NSLog(@"%@",message);
-}
-
-/// 定位失败
-- (void)locateFailure:(NSString *)message {
-    NSLog(@"%@",message);
-}
+///// 定位失败
+//- (void)locateFailure:(NSString *)message {
+//    NSLog(@"%@",message);
+//}
 
 - (void) tapPayButtonClick:(id)sender {
     DSExchangeController *exchangeVC        = [[DSExchangeController alloc]init];
@@ -1070,6 +1083,131 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)startLocation{
+    
+    if ([CLLocationManager locationServicesEnabled]) {//判断定位操作是否被允许
+        
+        self.locationManager = [[CLLocationManager alloc] init];
+        
+        self.locationManager.delegate = self;//遵循代理
+        
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        
+        self.locationManager.distanceFilter = 10.0f;
+        
+        [_locationManager requestWhenInUseAuthorization];//使用程序其间允许访问位置数据（iOS8以上版本定位需要）
+        
+        [self.locationManager startUpdatingLocation];//开始定位
+        
+    }else{//不能定位用户的位置的情况再次进行判断，并给与用户提示
+        
+        //1.提醒用户检查当前的网络状况
+        
+        //2.提醒用户打开定位开关
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无法进行定位" message:@"请检查您的设备是否开启定位功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    
+    //当前所在城市的坐标值
+    CLLocation *currLocation = [locations lastObject];
+    
+//    NSLog(@"经度=%f 纬度=%f 高度=%f", currLocation.coordinate.latitude, currLocation.coordinate.longitude, currLocation.altitude);
+    
+    [UdStorage storageObject:@"上海市" forKey:@"City"];
+    [UdStorage storageObject:@"黄浦区" forKey:@"Quyu"];
+    [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.latitude] forKey:@"Ym"];
+    [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.longitude]  forKey:@"Xm"];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //根据经纬度反向地理编译出地址信息
+    CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
+    
+    [geoCoder reverseGeocodeLocation:currLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        
+        for (CLPlacemark * placemark in placemarks) {
+            
+            NSDictionary *address = [placemark addressDictionary];
+            
+            //  Country(国家)  State(省)  City（市）
+//            NSLog(@"#####%@",address);
+//            
+//            NSLog(@"%@", [address objectForKey:@"Country"]);
+//            
+//            NSLog(@"%@", [address objectForKey:@"State"]);
+//            
+//            NSLog(@"%@", [address objectForKey:@"City"]);
+            
+            NSString *subLocality=[address objectForKey:@"SubLocality"];
+            
+            self.LocCity = [address objectForKey:@"City"];
+            
+            [UdStorage storageObject:subLocality forKey:@"subLocality"];
+            
+            
+        }
+        
+    }];
+    
+}
+
+//- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+//    
+//    
+//    
+//    CLLocation *location = [locations lastObject];
+//    
+//    NSLog(@"latitude === %g  longitude === %g",location.coordinate.latitude, location.coordinate.longitude);
+//    
+//    
+//    
+//    //反向地理编码
+//    
+//    CLGeocoder *clGeoCoder = [[CLGeocoder alloc] init];
+//    
+//    CLLocation *cl = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
+//    
+//    [clGeoCoder reverseGeocodeLocation:cl completionHandler: ^(NSArray *placemarks,NSError *error) {
+//        
+//        for (CLPlacemark *placeMark in placemarks) {
+//            
+//            
+//            
+//            NSDictionary *addressDic = placeMark.addressDictionary;
+//            
+//            
+//            
+//            NSString *state=[addressDic objectForKey:@"State"];
+//            
+//            NSString *city=[addressDic objectForKey:@"City"];
+//            
+//            NSString *subLocality=[addressDic objectForKey:@"SubLocality"];
+//            
+//            NSString *street=[addressDic objectForKey:@"Street"];
+//            
+//            
+//            
+//            NSLog(@"所在城市====%@ %@ %@ %@", state, city, subLocality, street);
+//            
+//            [_locationManager stopUpdatingLocation];
+//            
+//        }
+//        
+//    }];
+//    
+//}
 
 
 /*

@@ -18,6 +18,9 @@
 #import "UIImageView+WebCache.h"
 
 @interface DSSaleActivityController ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
+{
+    MBProgressHUD *HUD;
+}
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -65,6 +68,15 @@
     [self.contentView addSubview:self.tableView];
     _CouponListData = [[NSMutableArray alloc]init];
      self.area = @"上海市";
+    
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
+    
     [self GetCouponList];
 //    [self setupRefresh];
     
@@ -152,6 +164,7 @@
             arr = [dict objectForKey:@"JsonData"];
             [_CouponListData addObjectsFromArray:arr];
             [self.tableView reloadData];
+             [HUD setHidden:YES];
         }
         else
         {

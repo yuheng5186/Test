@@ -34,6 +34,8 @@
 #import "LCMD5Tool.h"
 
 
+
+
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,SetTabBarDelegate>
 
 {
@@ -50,6 +52,9 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UILabel *userNameLabel;
 @property (nonatomic, strong) UIButton  *editButton;
+
+
+
 @end
 
 @implementation MySettingViewController
@@ -66,8 +71,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.hidden = YES;
-    
-    NSLog(@"%@",APPDELEGATE.currentUser.Accountname);
     
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateUserName:) name:@"updatenamesuccess" object:nil];

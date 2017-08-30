@@ -45,10 +45,10 @@
                     <rect key="frame" x="0.0" y="68" width="375" height="45"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="huiyuandianjitiaozhuan" translatesAutoresizingMaskIntoConstraints="NO" id="4w4-6s-WBe">
-                            <rect key="frame" x="84" y="16" width="13" height="13"/>
+                            <rect key="frame" x="89" y="17" width="13" height="13"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="13" id="2Xs-H4-68k"/>
-                                <constraint firstAttribute="height" constant="13" id="Olx-bH-WfN"/>
+                                <constraint firstAttribute="width" constant="13" id="i8O-Vc-P2j"/>
+                                <constraint firstAttribute="height" constant="13" id="wDm-E5-gih"/>
                             </constraints>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="avn-Xs-7uj">
@@ -60,7 +60,8 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UlI-cd-vcN">
-                            <rect key="frame" x="20" y="8" width="62" height="30"/>
+                            <rect key="frame" x="16" y="7" width="66" height="32"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="黄金会员">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -69,7 +70,8 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0O-fD-QVH">
-                            <rect key="frame" x="204" y="8" width="50" height="30"/>
+                            <rect key="frame" x="204" y="7" width="54" height="32"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="1680分">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -77,21 +79,14 @@
                                 <action selector="clickMemberScoreBtn:" destination="-1" eventType="touchUpInside" id="ntc-Lx-T7g"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="huiyuandianjitiaozhuan" translatesAutoresizingMaskIntoConstraints="NO" id="jgh-Pq-8Rg">
-                            <rect key="frame" x="268" y="16" width="13" height="13"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="13" id="E6n-EL-3Hk"/>
-                                <constraint firstAttribute="width" constant="13" id="Nib-fr-HF6"/>
-                            </constraints>
-                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Da5-xF-kll">
-                            <rect key="frame" x="310" y="14.5" width="45" height="16"/>
+                            <rect key="frame" x="295" y="12.5" width="60" height="20"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="16" id="J3h-uv-vhK"/>
-                                <constraint firstAttribute="width" constant="45" id="O6v-WP-BBp"/>
+                                <constraint firstAttribute="width" constant="60" id="2RQ-Mv-JIW"/>
+                                <constraint firstAttribute="height" constant="20" id="ACM-wd-pFp"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                            <state key="normal" title="去赚积分">
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="赚积分">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -99,33 +94,40 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6y-hM-H7p">
-                            <rect key="frame" x="126" y="15" width="45" height="16"/>
+                            <rect key="frame" x="111" y="13" width="60" height="20"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="45" id="J8k-jC-ast"/>
-                                <constraint firstAttribute="height" constant="16" id="YMV-pE-5vC"/>
+                                <constraint firstAttribute="width" constant="60" id="MXU-KL-mhX"/>
+                                <constraint firstAttribute="height" constant="20" id="UsQ-Mx-OIC"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                            <state key="normal" title="去升等级">
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="升等级">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="clickUpgradeBtn:" destination="-1" eventType="touchUpInside" id="EAQ-7f-MDI"/>
                             </connections>
                         </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="huiyuandianjitiaozhuan" translatesAutoresizingMaskIntoConstraints="NO" id="jgh-Pq-8Rg">
+                            <rect key="frame" x="265" y="16" width="13" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="13" id="E6n-EL-3Hk"/>
+                                <constraint firstAttribute="width" constant="13" id="Nib-fr-HF6"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.67869665670000001" blue="0.093383055830000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
+                        <constraint firstItem="4w4-6s-WBe" firstAttribute="leading" secondItem="UlI-cd-vcN" secondAttribute="trailing" constant="7" id="4Xh-yl-PEx"/>
+                        <constraint firstItem="4w4-6s-WBe" firstAttribute="centerY" secondItem="UlI-cd-vcN" secondAttribute="centerY" id="Cct-Bo-c0v"/>
                         <constraint firstItem="jgh-Pq-8Rg" firstAttribute="centerY" secondItem="gHF-Li-SsL" secondAttribute="centerY" id="E6p-UP-LgD"/>
                         <constraint firstItem="u0O-fD-QVH" firstAttribute="leading" secondItem="avn-Xs-7uj" secondAttribute="trailing" constant="16" id="FTp-fS-6g3"/>
-                        <constraint firstItem="UlI-cd-vcN" firstAttribute="leading" secondItem="gHF-Li-SsL" secondAttribute="leading" constant="20" id="Fdz-PM-2Ou"/>
                         <constraint firstItem="c6y-hM-H7p" firstAttribute="centerY" secondItem="gHF-Li-SsL" secondAttribute="centerY" id="JNK-Re-Im1"/>
                         <constraint firstItem="Da5-xF-kll" firstAttribute="centerY" secondItem="gHF-Li-SsL" secondAttribute="centerY" id="ayT-tN-lRk"/>
-                        <constraint firstItem="c6y-hM-H7p" firstAttribute="leading" secondItem="4w4-6s-WBe" secondAttribute="trailing" constant="29" id="dEc-be-sfB"/>
+                        <constraint firstItem="UlI-cd-vcN" firstAttribute="leading" secondItem="gHF-Li-SsL" secondAttribute="leading" constant="16" id="bWO-8Q-Qun"/>
                         <constraint firstAttribute="height" constant="45" id="dau-Ea-4iX"/>
                         <constraint firstItem="avn-Xs-7uj" firstAttribute="centerX" secondItem="gHF-Li-SsL" secondAttribute="centerX" id="eTW-5k-teL"/>
+                        <constraint firstItem="jgh-Pq-8Rg" firstAttribute="leading" secondItem="u0O-fD-QVH" secondAttribute="trailing" constant="7" id="jAl-O0-h0C"/>
                         <constraint firstItem="avn-Xs-7uj" firstAttribute="centerY" secondItem="gHF-Li-SsL" secondAttribute="centerY" id="mck-gj-KVR"/>
-                        <constraint firstItem="4w4-6s-WBe" firstAttribute="centerY" secondItem="gHF-Li-SsL" secondAttribute="centerY" id="nav-0p-0EJ"/>
-                        <constraint firstItem="Da5-xF-kll" firstAttribute="leading" secondItem="jgh-Pq-8Rg" secondAttribute="trailing" constant="29" id="tIU-qN-o7I"/>
                         <constraint firstAttribute="trailing" secondItem="Da5-xF-kll" secondAttribute="trailing" constant="20" id="tmG-M3-mfE"/>
                         <constraint firstItem="u0O-fD-QVH" firstAttribute="centerY" secondItem="gHF-Li-SsL" secondAttribute="centerY" id="vbr-ox-999"/>
                         <constraint firstItem="UlI-cd-vcN" firstAttribute="centerY" secondItem="gHF-Li-SsL" secondAttribute="centerY" id="x9X-XP-Vly"/>

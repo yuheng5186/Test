@@ -30,12 +30,12 @@
     self.bottomContainView.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     
     //self.increaseButton.backgroundColor = [UIColor colorFromHex:@"ff9041"];
-    self.increaseButton.layer.cornerRadius = 8;
+    self.increaseButton.layer.cornerRadius = 10;
     self.increaseButton.layer.borderWidth = 1;
     self.increaseButton.layer.borderColor = [UIColor whiteColor].CGColor;
     
     //self.ernScoreButton.backgroundColor = [UIColor colorFromHex:@"ff9041"];
-    self.ernScoreButton.layer.cornerRadius = 8;
+    self.ernScoreButton.layer.cornerRadius = 10;
     self.ernScoreButton.layer.borderWidth = 1;
     self.ernScoreButton.layer.borderColor = [UIColor whiteColor].CGColor;
     
