@@ -65,11 +65,11 @@
 //    [self.view addSubview:noticeLabel];
 //    
 //    UILabel *noticeLabelOne = [[UILabel alloc] init];
-//    noticeLabelOne.text = @"1、本洗车卡由金顶洗车APP发放,仅限金顶洗车店和与金顶合作商家使用";
+//    noticeLabelOne.text = @"1、本洗车卡由蔷薇爱车APP发放,仅限蔷薇爱车店和与蔷薇合作商家使用";
 //    [self.view addSubview:noticeLabelOne];
 //    
 //    UILabel *noticeLabelTwo = [[UILabel alloc] init];
-//    noticeLabelTwo.text = @"2、有任何问题,可咨询金顶客服";
+//    noticeLabelTwo.text = @"2、有任何问题,可咨询蔷薇客服";
 //    [self.view addSubview:noticeLabelTwo];
     
 //    self.titleView                          = [UIUtil drawLineInView:self.view frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*50/667) color:[UIColor whiteColor]];
@@ -185,7 +185,7 @@
     
     if (!_noticeLabelOne) {
         UILabel *noticeLabelOne = [[UILabel alloc] init];
-        noticeLabelOne.text = @"1、本洗车卡由金顶洗车APP发放,仅限金顶洗车店和与金顶合作商家使用";
+        noticeLabelOne.text = @"1、本洗车卡由蔷薇爱车APP发放,仅限蔷薇爱车店和与蔷薇合作商家使用";
         noticeLabelOne.numberOfLines = 0;
         noticeLabelOne.textColor = [UIColor colorFromHex:@"#999999"];
         noticeLabelOne.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
@@ -199,7 +199,7 @@
     
     if (!_noticeLabeTwo) {
         UILabel *noticeLabelTwo = [[UILabel alloc] init];
-        noticeLabelTwo.text = @"2、有任何问题,可咨询金顶客服";
+        noticeLabelTwo.text = @"2、有任何问题,可咨询蔷薇客服";
         noticeLabelTwo.textColor = [UIColor colorFromHex:@"#999999"];
         noticeLabelTwo.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         _noticeLabeTwo = noticeLabelTwo;

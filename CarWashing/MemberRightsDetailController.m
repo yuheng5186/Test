@@ -72,7 +72,7 @@
     [cardImgV addSubview:cardNameLab];
     
     UILabel *cardtagLab = [[UILabel alloc] init];
-    cardtagLab.text = @"金顶洗车";
+    cardtagLab.text = @"蔷薇爱车";
     cardtagLab.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     [cardImgV addSubview:cardtagLab];
     
@@ -394,9 +394,9 @@
         [cell.contentView addSubview:infosLab3];
         
         titleLab.text = @"使用须知";
-        infosLab.text = @"1、本代金券由金顶洗车APP开发，仅限金顶洗车店和与金顶合作商家使用";
+        infosLab.text = @"1、本代金券由蔷薇爱车APP开发，仅限蔷薇爱车店和与蔷薇合作商家使用";
         infosLab2.text = @"2、如果代金券购买服务时发生了退服务行为，代金券不予退还";
-        infosLab3.text = @"3、有任何问题，可咨询金顶客服";
+        infosLab3.text = @"3、有任何问题，可咨询蔷薇客服";
         
         [infosLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(infosLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);

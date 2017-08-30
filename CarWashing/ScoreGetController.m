@@ -33,7 +33,7 @@
     signIntroLab.textColor = [UIColor colorFromHex:@"#999999"];
     signIntroLab.font = [UIFont systemFontOfSize:13];
     signIntroLab.numberOfLines = 0;
-    signIntroLab.text = @"1、金顶会员在: '我的-每日签到'中签到获得积分,每人每天仅可签到一次";
+    signIntroLab.text = @"1、蔷薇会员在: '我的-每日签到'中签到获得积分,每人每天仅可签到一次";
     [self.view addSubview:signIntroLab];
     
     UILabel *shareLab = [[UILabel alloc] init];
@@ -65,7 +65,7 @@
     recommendOneLab.textColor = [UIColor colorFromHex:@"#999999"];
     recommendOneLab.font = [UIFont systemFontOfSize:13];
     recommendOneLab.numberOfLines = 0;
-    recommendOneLab.text = @"1、推荐好友下载金顶APP,每注册完成一个好友即可获得积分奖励";
+    recommendOneLab.text = @"1、推荐好友下载蔷薇APP,每注册完成一个好友即可获得积分奖励";
     [self.view addSubview:recommendOneLab];
     
     UILabel *scoreBackLab = [[UILabel alloc] init];

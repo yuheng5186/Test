@@ -393,7 +393,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     [bannerView addSubview:cardNameLab];
     
     UILabel *cardtagLab = [[UILabel alloc] init];
-    cardtagLab.text = @"金顶洗车";
+    cardtagLab.text = @"蔷薇爱车";
     cardtagLab.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     [bannerView addSubview:cardtagLab];
     

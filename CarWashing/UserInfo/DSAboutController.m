@@ -17,7 +17,7 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"关于金顶"];
+    [self drawTitle:@"关于蔷薇"];
     
 }
 
@@ -40,7 +40,7 @@
     appImageView.top               = Main_Screen_Height*20/667;
     appImageView.centerX           = upView.centerX;
     
-    NSString *showName              = @"金顶洗车V1.0";
+    NSString *showName              = @"蔷薇爱车V1.0";
     UIFont *showNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
     UILabel *showNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:showName font:showNameFont] font:showNameFont text:showName isCenter:NO];
     showNameLabel.textColor         = [UIColor colorFromHex:@"#8B8B8B"];
@@ -56,7 +56,7 @@
     contentNameLabel.top                = upView.bottom +Main_Screen_Height*20/667;
     contentNameLabel.centerX            = appImageView.centerX;
     
-//    NSString *serviceProtocolName              = @"金顶洗车服务协议";
+//    NSString *serviceProtocolName              = @"蔷薇爱车服务协议";
 //    UIFont *serviceProtocolNameFont            = [UIFont boldSystemFontOfSize:16];
 //    UILabel *serviceProtocolNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:serviceProtocolName font:serviceProtocolNameFont] font:serviceProtocolNameFont text:serviceProtocolName isCenter:NO];
 //    serviceProtocolNameLabel.textColor         = [UIColor colorFromHex:@"#3868ce"];
@@ -65,7 +65,7 @@
     
     UIButton *updateRuleButton          = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*320/375, Main_Screen_Height*30/667)];
     [updateRuleButton setTitleColor:[UIColor colorFromHex:@"#293754"] forState:UIControlStateNormal];
-    NSMutableAttributedString *title    = [[NSMutableAttributedString alloc] initWithString:@"金顶洗车服务协议"];
+    NSMutableAttributedString *title    = [[NSMutableAttributedString alloc] initWithString:@"蔷薇爱车服务协议"];
     NSRange titleRange = {0,[title length]};
     [title addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleNone] range:titleRange];
     [title addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"3869ce"] range:NSMakeRange(0, 8)];
@@ -80,7 +80,7 @@
     
     
     
-    NSString *copyrightlName              = @"Copyright2014-2017金顶版权所有  沪ICP备";
+    NSString *copyrightlName              = @"Copyright2014-2017蔷薇版权所有  沪ICP备";
     UIFont *copyrightlNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
     UILabel *copyrightlNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:copyrightlName font:copyrightlNameFont] font:copyrightlNameFont text:copyrightlName isCenter:NO];
     copyrightlNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];

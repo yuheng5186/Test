@@ -180,9 +180,9 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
     
     if (self.lastPath.row == 0) {
-        message = @"金顶洗车想要打开微信";
+        message = @"蔷薇爱车想要打开微信";
     }else {
-        message = @"金顶洗车想要打开支付宝";
+        message = @"蔷薇爱车想要打开支付宝";
     }
     
     

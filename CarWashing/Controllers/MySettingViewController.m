@@ -449,7 +449,7 @@
 
     if (indexPath.section == 0) {
         cell.imageView.image            = [UIImage imageNamed:@"jindinghuiyuan"];
-        cell.textLabel.text             = @"金顶会员";
+        cell.textLabel.text             = @"蔷薇会员";
         cell.detailTextLabel.text       = [NSString stringWithFormat:@"%ld积分",APPDELEGATE.currentUser.UserScore];
         cell.detailTextLabel.textColor  = [UIColor colorFromHex:@"#ffd55e"];
         
@@ -466,7 +466,7 @@
         }
     }else{
         cell.imageView.image            = [UIImage imageNamed:@"tuijianjinding"];
-        cell.textLabel.text             = @"推荐金顶APP";
+        cell.textLabel.text             = @"推荐蔷薇APP";
 //        cell.detailTextLabel.text       = @"奖励300元";
     }
     

@@ -28,7 +28,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在金顶洗车的自动洗车机上都有对应的二维码，只需用手机扫码，便可以启动机器" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1G-A4-0cV">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在蔷薇爱车的自动洗车机上都有对应的二维码，只需用手机扫码，便可以启动机器" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1G-A4-0cV">
                     <rect key="frame" x="21.5" y="87.5" width="298" height="100"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="l1G-A4-0cV" secondAttribute="height" multiplier="303:61" constant="-198.72131147540989" id="ipi-4T-Fr6"/>
