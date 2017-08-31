@@ -278,12 +278,12 @@
         
         UILabel *titleLab = [[UILabel alloc] init];
         titleLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-        titleLab.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+        titleLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
         [cell.contentView addSubview:titleLab];
         
         UILabel *infosLab = [[UILabel alloc] init];
         infosLab.textColor = [UIColor colorFromHex:@"#999999"];
-        infosLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        infosLab.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         infosLab.numberOfLines = 0;
         titleLab.text = @"特权介绍";
         infosLab.text = [_GradeDetailDic objectForKey:@"Description"];
@@ -305,12 +305,12 @@
     }else if (indexPath.section == 1) {
         UILabel *titleLab = [[UILabel alloc] init];
         titleLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-        titleLab.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+        titleLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
         [cell.contentView addSubview:titleLab];
         
         UILabel *infosLab = [[UILabel alloc] init];
         infosLab.textColor = [UIColor colorFromHex:@"#999999"];
-        infosLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        infosLab.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         infosLab.numberOfLines = 0;
         titleLab.text = @"领取对象";
         
@@ -362,12 +362,12 @@
     }else {
         UILabel *titleLab = [[UILabel alloc] init];
         titleLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-        titleLab.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+        titleLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
         [cell.contentView addSubview:titleLab];
         
         UILabel *infosLab = [[UILabel alloc] init];
         infosLab.textColor = [UIColor colorFromHex:@"#999999"];
-        infosLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        infosLab.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         infosLab.numberOfLines = 0;
         [cell.contentView addSubview:infosLab];
         
@@ -384,13 +384,13 @@
         
         UILabel *infosLab2 = [[UILabel alloc] init];
         infosLab2.textColor = [UIColor colorFromHex:@"#999999"];
-        infosLab2.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        infosLab2.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         infosLab2.numberOfLines = 0;
         [cell.contentView addSubview:infosLab2];
         
         UILabel *infosLab3 = [[UILabel alloc] init];
         infosLab3.textColor = [UIColor colorFromHex:@"#999999"];
-        infosLab3.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        infosLab3.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         infosLab3.numberOfLines = 0;
         [cell.contentView addSubview:infosLab3];
         
