@@ -88,6 +88,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdate:) name:@"updatenamesuccess" object:nil];
     [center addObserver:self selector:@selector(noticeupdate:) name:@"updateheadimgsuccess" object:nil];
+    [center addObserver:self selector:@selector(noticeupdate:) name:@"updatecard" object:nil];
     self.contentView.backgroundColor = [UIColor whiteColor];
     
     [self setupUI];
@@ -488,11 +489,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 //}
 
 -(void)noticeupdate:(NSNotification *)sender{
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    HUD.removeFromSuperViewOnHide =YES;
-    HUD.mode = MBProgressHUDModeIndeterminate;
-    HUD.labelText = @"加载中";
-    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
     _MembershipUserScore = [[NSMutableDictionary alloc]init];
     _MembershipUserScoreArray = [[NSMutableArray alloc]init];
     [self GetMembershipUserScore];

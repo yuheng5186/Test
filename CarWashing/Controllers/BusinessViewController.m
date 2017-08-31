@@ -52,8 +52,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 - (UITableView *)salerListView {
     if (nil == _salerListView) {
-        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height*108/667, Main_Screen_Width, Main_Screen_Height-Main_Screen_Height*108/667-49) style:UITableViewStylePlain];
+        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + Main_Screen_Height*44/667, Main_Screen_Width, Main_Screen_Height-64 - Main_Screen_Height*44/667-49) style:UITableViewStylePlain];
         _salerListView = salerListView;
+        salerListView.backgroundColor   = [UIColor colorFromHex:@"#fafafa"];
         [self.view addSubview:salerListView];
         
     }
@@ -67,7 +68,6 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.navigationView.hidden  = YES;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
-    
     
 }
 
@@ -268,12 +268,12 @@ static NSString *id_salerListCell = @"salerListViewCell";
         }
     }
     [cell setlayoutCell];
-    cell.backgroundColor = [UIColor redColor];
+    cell.contentView.backgroundColor = [UIColor whiteColor];
     
     NSDictionary *dic=[self.MerchantData objectAtIndex:indexPath.row];
     [cell setUpCellWithDic:dic];
     [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
-    [cell setBackgroundColor:[UIColor clearColor]];
+//    [cell setBackgroundColor:[UIColor clearColor]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     

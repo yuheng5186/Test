@@ -577,6 +577,10 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+    
+    NSLog(@"%ld",APPDELEGATE.currentUser.UserScore);
+    
     [self.tableView reloadData];
     
 }

@@ -29,6 +29,8 @@
 #import "HYActivityView.h"
 #import "MBProgressHUD.h"
 
+#import "UIImageView+WebCache.h"
+
 @interface BusinessDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, CLLocationManagerDelegate>
 {
     MBProgressHUD *HUD;
@@ -243,7 +245,8 @@ static NSString *businessCommentCell = @"businessCommentCell";
     [headerView addTarget:self action:@selector(clickDetailView) forControlEvents:UIControlEventTouchUpInside];
     
     
-    UITableView *detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 124*Main_Screen_Height/667) style:UITableViewStyleGrouped];
+    UITableView *detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 64 - 60*Main_Screen_Height/667) style:UITableViewStyleGrouped];
+    detailTableView.contentInset = UIEdgeInsetsMake(0, 0, 5, 0);
     self.detailTableView = detailTableView;
     
     detailTableView.delegate = self;
@@ -546,15 +549,9 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     BusinessEstimateCell *estimateCell = [tableView dequeueReusableCellWithIdentifier:businessCommentCell forIndexPath:indexPath];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserImg"]];
-        NSURL *url=[NSURL URLWithString:ImageURL];
-        NSData *data=[NSData dataWithContentsOfURL:url];
-        UIImage *img=[UIImage imageWithData:data];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-             estimateCell.headImageView.image = img;
-        });
-    });
+    
+    
+    [estimateCell.headImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserImg"]]] placeholderImage:[UIImage imageNamed:@"xichebaidi"]];
     
     estimateCell.phoneLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserName"];
     [estimateCell.userScoreLabel setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",self.dic[@"Score"]] substringToIndex:1]]]];
