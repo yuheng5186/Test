@@ -180,7 +180,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         make.left.equalTo(payBottomView).mas_offset(30*Main_Screen_Height/667);
     }];
     
-    UIButton *bottomPayButton = [[UIButton alloc] initWithFrame:CGRectMake(Main_Screen_Width - 136, 0, 136, 60)];
+    UIButton *bottomPayButton = [[UIButton alloc] initWithFrame:CGRectMake(Main_Screen_Width - 136, 0, 136*Main_Screen_Height/667, 60*Main_Screen_Height/667)];
     bottomPayButton.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     [bottomPayButton setTitle:@"立即付款" forState:UIControlStateNormal];
     bottomPayButton.titleLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
@@ -325,7 +325,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         paycell.imageView.image = [UIImage imageNamed:self.payImageNameArr[indexPath.row]];
         paycell.textLabel.text = self.payNameArray[indexPath.row];
         paycell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-        paycell.textLabel.font = [UIFont systemFontOfSize:15];
+        paycell.textLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
         
         NSInteger row = [indexPath row];
         NSInteger oldRow = [self.lastPath row];
