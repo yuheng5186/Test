@@ -15,6 +15,8 @@
 #import "HTTPDefine.h"
 
 
+#import "WXApi.h"
+
 @interface AppDelegate ()
 {
     AppDelegate *myDelegate;

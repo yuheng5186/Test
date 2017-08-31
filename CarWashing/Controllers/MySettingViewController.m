@@ -290,8 +290,15 @@
                     
                     [UdStorage storageObject:targetTime forKey:@"SignTime"];
                     
+                    APPDELEGATE.currentUser.UserScore = APPDELEGATE.currentUser.UserScore + 10;
+                    
+                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
+                    
+                    
                     PopupView *view = [PopupView defaultPopupView];
                     view.parentVC = self;
+                    
+                    [self.tableView reloadData];
                     
                     [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{
                         
@@ -340,6 +347,12 @@
                 NSString *targetTime = [outputFormatter stringFromDate:inputDate];
                 
                 [UdStorage storageObject:targetTime forKey:@"SignTime"];
+                
+                APPDELEGATE.currentUser.UserScore = APPDELEGATE.currentUser.UserScore + 10;
+                
+                [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
+                
+                [self.tableView reloadData];
                 
                 PopupView *view = [PopupView defaultPopupView];
                 view.parentVC = self;

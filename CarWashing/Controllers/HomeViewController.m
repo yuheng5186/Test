@@ -46,10 +46,13 @@
 #import "HTTPDefine.h"
 #import "UdStorage.h"
 #import "Record.h"
-
+#import "AppDelegate.h"
 #import "CoreLocation/CoreLocation.h"
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate>
+{
+    UIImageView *logoImageView;
+}
 
 /** 选择的结果*/
 @property (strong, nonatomic) UILabel *resultLabel;
@@ -90,6 +93,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];
+    
+    
     // Do any additional setup after loading the view.
     self.title = @"首页";
     self.navigationController.navigationBar.hidden = YES;
@@ -190,7 +197,10 @@
     
     
     UIImage *logeImage              = [UIImage imageNamed:@"xichebaidi"];
-    UIImageView *logoImageView      = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, logeImage.size.width,logeImage.size.height) imageName:@"xichebaidi"];
+    logoImageView      = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, logeImage.size.width,logeImage.size.height) imageName:@"xichebaidi"];
+    
+    NSLog(@"%@",[UdStorage getObjectforKey:UserHead]);
+    
     
     [logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[UdStorage getObjectforKey:UserHead]]] placeholderImage:[UIImage imageNamed:@"xichebaidi"]];
     logoImageView.layer.masksToBounds = YES;
@@ -916,6 +926,13 @@
                     
                     [UdStorage storageObject:targetTime forKey:@"SignTime"];
                     
+                    
+                    APPDELEGATE.currentUser.UserScore = APPDELEGATE.currentUser.UserScore + 10;
+                    
+                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
+                    
+                    
+                    
                     PopupView *view = [PopupView defaultPopupView];
                     view.parentVC = self;
                     
@@ -966,6 +983,10 @@
                 NSString *targetTime = [outputFormatter stringFromDate:inputDate];
                 
                 [UdStorage storageObject:targetTime forKey:@"SignTime"];
+                
+                APPDELEGATE.currentUser.UserScore = APPDELEGATE.currentUser.UserScore + 10;
+                
+                [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
                 
                 PopupView *view = [PopupView defaultPopupView];
                 view.parentVC = self;
@@ -1208,6 +1229,15 @@
 //    }];
 //    
 //}
+
+-(void)noticeupdateUserheadimg:(NSNotification *)sender{
+    //    UIImageView *imageV = [[UIImageView alloc]init];
+    //    NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
+    //    NSURL *url=[NSURL URLWithString:ImageURL];
+    //    [imageV sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"touxiang"]];
+    
+    [logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[UdStorage getObjectforKey:UserHead]]] placeholderImage:[UIImage imageNamed:@"xichebaidi"]];
+}
 
 
 /*

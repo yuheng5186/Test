@@ -103,8 +103,8 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     //定位按钮
     self.locationManager = [[JFLocation alloc] init];
     _locationManager.delegate = self;
-    self.area = @"上海市";
     
+    self.area = [UdStorage getObjectforKey:@"City"];
     UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#293754"]];
     upView.top                      = 0;
     
@@ -118,7 +118,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     self.locationButton        = [UIButton buttonWithType:UIButtonTypeCustom];
     self.locationButton.frame             = CGRectMake(0, 0, Main_Screen_Width*70/375, Main_Screen_Height*30/667);
     self.locationButton.backgroundColor   = [UIColor clearColor];
-    [self.locationButton setTitle:@"上海" forState:UIControlStateNormal];
+    [self.locationButton setTitle:@"上海市" forState:UIControlStateNormal];
     [self.locationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.locationButton.titleLabel.font   = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
     self.locationButton.left              = Main_Screen_Width*14/375;
@@ -174,7 +174,26 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
                 [self.imageArray addObject:image];
             }
             
-            [self setupUI];
+            if(arr.count == 0)
+            {
+                UIImageView *imgV = [[UIImageView alloc]initWithFrame:CGRectMake((375-120)/2*Main_Screen_Height/667, 110*Main_Screen_Height/667, 120*Main_Screen_Height/667, 120*Main_Screen_Height/667)];
+                imgV.image = [UIImage imageNamed:@"kabao_kongbai"];
+                imgV.contentMode = UIViewContentModeScaleAspectFill;
+                [_middleview addSubview:imgV];
+                UILabel *tagLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, imgV.frame.origin.y+137*Main_Screen_Height/667, Main_Screen_Width, 20*Main_Screen_Height/667)];
+                tagLabel.text = @"该城市暂未发售购卡";
+                tagLabel.textAlignment = NSTextAlignmentCenter;
+                tagLabel.font = [UIFont boldSystemFontOfSize:13.0f*Main_Screen_Height/667];
+                tagLabel.textColor = [UIColor colorFromHex: @"#4a4a4a"];
+                [_middleview addSubview:tagLabel];
+                
+            }
+            else
+            {
+                [self setupUI];
+            }
+            
+            
             
             [HUD setHidden:YES];
             
@@ -507,6 +526,20 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
         [weakSelf.locationButton setTitle:cityName forState:UIControlStateNormal];
         
         weakSelf.resultLabel.text = cityName;
+        
+        NSString *b = [cityName substringFromIndex:cityName.length-1];
+        
+        if([b isEqualToString:@"市"])
+        {
+            self.area = [NSString stringWithFormat:@"%@",cityName];
+        }
+        else
+        {
+            self.area = [NSString stringWithFormat:@"%@市",cityName];
+        }
+        
+        
+        
     }];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:cityViewController];
@@ -527,6 +560,8 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             _resultLabel.text = city;
+            
+            
             [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"locationCity"];
             [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"currentCity"];
             [self.manager cityNumberWithCity:city cityNumber:^(NSString *cityNumber) {

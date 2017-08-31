@@ -54,7 +54,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateCardNum:) name:@"receivesuccess" object:nil];
-    
+    [center addObserver:self selector:@selector(noticeupdate:) name:@"Earnsuccess" object:nil];
     [self createSubView];
     self.area = @"上海市";
     _MembershipprivilegesArray = [[NSMutableArray alloc]init];
@@ -414,6 +414,20 @@ static NSString *id_rightsCell = @"id_rightsCell";
 
 -(void)noticeupdateCardNum:(NSNotification *)sender{
     
+}
+
+-(void)noticeupdate:(NSNotification *)sender{
+    _MembershipprivilegesArray = [NSMutableArray new];
+    _NextMembershipprivilegesArr = [NSMutableArray new];
+    _CurrentMembershipprivilegesArr = [NSMutableArray new];
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
+    [self GetMembershipprivileges];
 }
 
 #pragma mark -------button click------

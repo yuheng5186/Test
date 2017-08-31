@@ -217,8 +217,8 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-//    return [_CardbagData count];
-    return 0;
+    return [_CardbagData count];
+//    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

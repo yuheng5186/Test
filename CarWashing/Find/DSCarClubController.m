@@ -379,7 +379,7 @@
     _NewsArray = [[NSMutableArray alloc]init];
     _otherArray = [[NSMutableArray alloc]init];
     self.page = 0 ;
-    [self.tableView.mj_header beginRefreshing];
+    [self requesetCarClubNews];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -263,14 +263,14 @@ static NSString *id_salerListCell = @"salerListViewCell";
     {
         cell = [[QWMclistTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-//    else
-//    {
-//        //删除cell的所有子视图
-//        while ([cell.contentView.subviews lastObject] != nil)
-//        {
-//            [(UIView*)[cell.contentView.subviews lastObject] removeFromSuperview];
-//        }
-//    }
+    else
+    {
+        //删除cell的所有子视图
+        while ([cell.contentView.subviews lastObject] != nil)
+        {
+            [(UIView*)[cell.contentView.subviews lastObject] removeFromSuperview];
+        }
+    }
     [cell setlayoutCell];
     cell.backgroundColor = [UIColor redColor];
     
