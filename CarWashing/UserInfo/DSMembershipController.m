@@ -130,7 +130,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     [self.containView addSubview:separateView];
     
     UIView *lineView = [[UIView alloc] init];
-    lineView.backgroundColor = [UIColor colorFromHex:@"#fafafa"];
+    lineView.backgroundColor = [UIColor colorFromHex:@"#eaeaea"];
     [self.containView addSubview:lineView];
     
     //    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
