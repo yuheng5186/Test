@@ -103,7 +103,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     _locationManager.delegate = self;
     
     self.area = [UdStorage getObjectforKey:@"City"];
-    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#293754"]];
+    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#0161a1"]];
     upView.top                      = 0;
     
     NSString *titleName              = @"购卡";
@@ -268,7 +268,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     UIButton *buyButton = [[UIButton alloc] init];
     [buyButton setTitle:@"现在购买" forState:UIControlStateNormal];
     [buyButton setTintColor:[UIColor colorFromHex:@"#ffffff"]];
-    buyButton.backgroundColor = [UIColor colorFromHex:@"#293754"];
+    buyButton.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
     buyButton.titleLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     buyButton.layer.cornerRadius = 15*Main_Screen_Height/667;
     [buyButton addTarget:self action:@selector(didSelectCell:withSubViewIndex:) forControlEvents:UIControlEventTouchUpInside];

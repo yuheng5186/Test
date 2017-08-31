@@ -50,7 +50,7 @@
     
     application.statusBarHidden                     = NO;
     [[UITabBar appearance] setBarTintColor: [UIColor whiteColor]];
-    [[UITabBar appearance] setTintColor: [UIColor colorFromHex:@"#293754"]];
+    [[UITabBar appearance] setTintColor: [UIColor colorFromHex:@"#0161a1"]];
     
     application.statusBarStyle                      = UIStatusBarStyleLightContent;
     application.applicationIconBadgeNumber          = 0;
