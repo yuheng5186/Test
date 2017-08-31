@@ -17,6 +17,8 @@
     
     self.dg_viewAutoSizeToDevice = YES;
     
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     self.orderLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     
     self.washTypeLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];

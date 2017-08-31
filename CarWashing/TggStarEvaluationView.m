@@ -71,8 +71,8 @@ typedef void(^EvaluateViewDidChooseStarBlock)(NSUInteger count);
 
 /**************重写*************/
 - (void)drawRect:(CGRect)rect {
-    UIImage *norImage = [UIImage imageNamed:@"huixingxing"];
-    UIImage *selImage = [UIImage imageNamed:@"huangxingxing"];
+    UIImage *norImage = [UIImage imageNamed:@"dahui"];
+    UIImage *selImage = [UIImage imageNamed:@"dahuang"];
     // 图片没间隙自己画
     CGContextRef context = UIGraphicsGetCurrentContext();
     // 默认间隙为星星一半
