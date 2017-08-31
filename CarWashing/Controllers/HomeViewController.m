@@ -185,7 +185,7 @@
 
 - (void) createNavTitleView {
     
-    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#293754"]];
+    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#0161a1"]];
     titleView.top                      = 0;
     
     NSString *titleName              = @"蔷薇爱车";
@@ -255,7 +255,7 @@
     UIView *backgroudView           = [UIView new];
     backgroudView.width             = [UIScreen mainScreen].bounds.size.width;
     backgroudView.height            = Main_Screen_Height*150/667;
-    backgroudView.backgroundColor   = [UIColor colorFromHex:@"#293754"];
+    backgroudView.backgroundColor   = [UIColor colorFromHex:@"#0161a1"];
     backgroudView.top               = 0;
     backgroudView.left              = 0;
     [headerView addSubview:backgroudView];

@@ -17,8 +17,10 @@
 
 #import "LoginViewController.h"
 #import "DSScanController.h"
-
+#import "UdStorage.h"
 @interface MenuTabBarController ()
+
+@property (nonatomic, strong)     UIImageView *imageView;
 
 @end
 
@@ -41,7 +43,37 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self createNavigationControllers];
+    
+
+
+    BOOL firstRun = [[[NSUserDefaults standardUserDefaults]valueForKey:@"firstRun"] boolValue];
+
+    if (!firstRun) {
+        [self addGuideView];
+
+        [[NSUserDefaults standardUserDefaults]setValue:@YES forKey:@"firstRun"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
 }
+
+- (void)addGuideView {
+    NSString *imageName = @"qw";
+    
+    UIImage *image = [UIImage imageNamed:imageName];
+    self.imageView = [[UIImageView alloc] initWithImage:image];
+    self.imageView.frame = self.view.bounds;
+    self.imageView.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissGuideView)];
+    [self.imageView addGestureRecognizer:tap];
+    
+    [self.view addSubview:self.imageView];
+}
+- (void) dismissGuideView{
+    
+    [self.imageView removeFromSuperview];
+}
+
 
 //- (void) viewDidAppear:(BOOL)animated
 //{
