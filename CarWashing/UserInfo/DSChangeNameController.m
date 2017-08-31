@@ -62,14 +62,14 @@
              NSInteger vcCount = vcsArray.count;
              UIViewController *lastVC = vcsArray[vcCount-3];
              UIViewController *lasttwoVC = vcsArray[vcCount-4];
-             
+             int index=[[self.navigationController viewControllers]indexOfObject:self];
+
              if([lastVC isKindOfClass:[HowToUpGradeController class]])
              {
                  
                  NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
                  [[NSNotificationCenter defaultCenter]postNotification:notice];
                  
-                 int index=[[self.navigationController viewControllers]indexOfObject:self];
                  [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-3]animated:YES];
              }
              else if([lastVC isKindOfClass:[EarnScoreController class]])
@@ -78,12 +78,10 @@
                  {
                      NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
                      [[NSNotificationCenter defaultCenter]postNotification:notice];
-                     int index=[[self.navigationController viewControllers]indexOfObject:self];
                      [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-3]animated:YES];
                  }
                  NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
                  [[NSNotificationCenter defaultCenter]postNotification:notice];
-                 int index=[[self.navigationController viewControllers]indexOfObject:self];
                  [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
              }
              else

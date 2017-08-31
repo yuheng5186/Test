@@ -93,6 +93,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
+    
+    
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];
     
@@ -198,9 +200,7 @@
     
     UIImage *logeImage              = [UIImage imageNamed:@"xichebaidi"];
     logoImageView      = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, logeImage.size.width,logeImage.size.height) imageName:@"xichebaidi"];
-    
-    NSLog(@"%@",[UdStorage getObjectforKey:UserHead]);
-    
+
     
     [logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[UdStorage getObjectforKey:UserHead]]] placeholderImage:[UIImage imageNamed:@"xichebaidi"]];
     logoImageView.layer.masksToBounds = YES;
@@ -558,7 +558,8 @@
 
 -(void)setData
 {
-    
+//    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+
     if(self.LocCity == nil)
     {
         self.LocCity = @"";
@@ -601,6 +602,8 @@
                 [self.tableView reloadData];
                 [self.tableView.mj_header endRefreshing];
             }
+            
+//            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             
         }
         else

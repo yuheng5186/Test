@@ -15,6 +15,7 @@
 #import "UIImageView+WebCache.h"
 #import "HowToUpGradeController.h"
 #import "EarnScoreController.h"
+#import "DSMembershipController.h"
 
 #import "LCMD5Tool.h"
 #import "AFNetworkingTool.h"
@@ -389,7 +390,7 @@
             
             NSNotification * notice = [NSNotification notificationWithName:@"updateheadimgsuccess" object:nil userInfo:nil];
             [[NSNotificationCenter defaultCenter]postNotification:notice];
-            
+    
             
             
             
@@ -399,24 +400,44 @@
             NSArray *vcsArray = [NSArray array];
             vcsArray= [self.navigationController viewControllers];
             NSInteger vcCount = vcsArray.count;
-            UIViewController *lastVC = vcsArray[vcCount-2];
-            
-            if([lastVC isKindOfClass:[HowToUpGradeController class]])
+    
+            if(vcsArray.count == 2)
             {
                 
-                int index=[[self.navigationController viewControllers]indexOfObject:self];
-                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-2]animated:YES];
-            }
-            else if([lastVC isKindOfClass:[EarnScoreController class]])
-            {
-                
-                int index=[[self.navigationController viewControllers]indexOfObject:self];
-                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-3]animated:YES];
             }
             else
             {
+                UIViewController *lastVC = vcsArray[vcCount-2];
+                UIViewController *lasttwoVC = vcsArray[vcCount-3];
+                int index=[[self.navigationController viewControllers]indexOfObject:self];
                 
+                if([lastVC isKindOfClass:[HowToUpGradeController class]])
+                {
+                                    NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                    [[NSNotificationCenter defaultCenter]postNotification:notice];
+                    
+                    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-2]animated:YES];
+                }
+                else if([lastVC isKindOfClass:[EarnScoreController class]])
+                {
+                    if([lasttwoVC isKindOfClass:[DSMembershipController class]])
+                    {
+                                            NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                            [[NSNotificationCenter defaultCenter]postNotification:notice];
+                        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-2]animated:YES];
+                        
+                    }
+                                    NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                    [[NSNotificationCenter defaultCenter]postNotification:notice];
+                    
+                    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-3]animated:YES];
+                }
+
             }
+    
+    
+    
+    
  
             
         }
