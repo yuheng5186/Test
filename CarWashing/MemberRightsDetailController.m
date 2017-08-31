@@ -274,6 +274,8 @@
     
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:id_noticeCell];
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     if (indexPath.section == 0) {
         
         UILabel *titleLab = [[UILabel alloc] init];
