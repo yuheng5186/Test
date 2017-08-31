@@ -84,7 +84,7 @@
     self.navigationView.hidden  = YES;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
-    self.contentView.backgroundColor    = [UIColor colorFromHex:@"#293754"];
+    self.contentView.backgroundColor    = [UIColor colorFromHex:@"#0161a1"];
     
 }
 

@@ -138,7 +138,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 - (void)setupUI {
     
-    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#293754"]];
+    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#0161a1"]];
     titleView.top                      = 0;
     
     NSString *titleName              = @"商家";
