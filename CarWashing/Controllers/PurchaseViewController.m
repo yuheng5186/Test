@@ -501,8 +501,13 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     __weak typeof(self) weakSelf = self;
     [cityViewController choseCityBlock:^(NSString *cityName) {
         
-        [weakSelf.locationButton setTitle:cityName forState:UIControlStateNormal];
-        
+        NSString    *cityString  = cityName;
+        if (cityName.length > 3) {
+            NSString    *city     = [cityName substringToIndex:2];
+            cityString = [NSString stringWithFormat:@"%@...",city];
+        }
+        weakSelf.locationButton.width   = Main_Screen_Width*80/375;
+        [weakSelf.locationButton setTitle:cityString forState:UIControlStateNormal];
         weakSelf.resultLabel.text = cityName;
     }];
     
