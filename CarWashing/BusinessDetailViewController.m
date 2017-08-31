@@ -243,7 +243,8 @@ static NSString *businessCommentCell = @"businessCommentCell";
     [headerView addTarget:self action:@selector(clickDetailView) forControlEvents:UIControlEventTouchUpInside];
     
     
-    UITableView *detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 124*Main_Screen_Height/667) style:UITableViewStyleGrouped];
+    UITableView *detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 64 - 60*Main_Screen_Height/667) style:UITableViewStyleGrouped];
+    detailTableView.contentInset = UIEdgeInsetsMake(0, 0, 5, 0);
     self.detailTableView = detailTableView;
     
     detailTableView.delegate = self;
