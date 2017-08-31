@@ -15,6 +15,7 @@
 #import "MBProgressHUD.h"
 #import "UdStorage.h"
 #import "HTTPDefine.h"
+#import "AppDelegate.h"
 
 @interface WashCarTicketController ()
 
@@ -104,6 +105,17 @@
             {
                 
                 [self.view showInfo:@"兑换成功" autoHidden:YES interval:2];
+                
+                
+                APPDELEGATE.currentUser.UserScore = APPDELEGATE.currentUser.UserScore - self.card.Integralnum;
+                
+                [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
+                
+                
+                NSNotification * notice = [NSNotification notificationWithName:@"updatecard" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter]postNotification:notice];
+                
+                
                 
             }
             else
