@@ -48,9 +48,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-//    self.title = @"扫码洗车";
-    //    self.navigationView.backgroundColor = [UIColor whiteColor];
+
     //1.扫描区域
     [self setupScanWindowView];
     //2.开始动画

@@ -74,10 +74,6 @@ static NSString *id_salerListCell = @"salerListViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //self.title = @"商家";
-    
-    
-
     self.navigationController.navigationBar.hidden = YES;
     
     [self setSearchMenu];
@@ -146,7 +142,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     titleView.top                      = 0;
     
     NSString *titleName              = @"商家";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:Main_Screen_Height*20/667];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = titleView.centerX;
@@ -302,7 +298,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     // 创建下拉菜单
     YZPullDownMenu *menu = [[YZPullDownMenu alloc] init];
-    menu.frame = CGRectMake(0, Main_Screen_Height*64/667, Main_Screen_Width, Main_Screen_Height*44/667);
+    menu.frame = CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height*44/667);
     [self.view addSubview:menu];
     
     

@@ -93,10 +93,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 
 
 }
-//-(void) drawNavigation {
-//
-//    [self drawTitle:@"购卡"];
-//}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -110,7 +107,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     upView.top                      = 0;
     
     NSString *titleName              = @"购卡";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:20*Main_Screen_Height/667];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = upView.centerX;
