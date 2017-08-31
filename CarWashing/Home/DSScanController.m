@@ -57,7 +57,7 @@
     titleView.top                      = 0;
     
     NSString *titleName              = @"扫码洗车";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:20*Main_Screen_Height/667];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = titleView.centerX;
