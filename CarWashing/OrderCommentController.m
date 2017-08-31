@@ -84,9 +84,9 @@
     
     [_tggStarEvaView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(containStarView);
-        make.top.equalTo(gradeLabel.mas_bottom).mas_offset(0);
-        make.height.mas_equalTo(52*Main_Screen_Height/667);
-        make.width.mas_equalTo(260*Main_Screen_Height/667);
+        make.top.equalTo(gradeLabel.mas_bottom);
+        make.height.mas_equalTo(60*Main_Screen_Height/667);
+        make.width.mas_equalTo(300*Main_Screen_Height/667);
     }];
     
 //    _firstButton = self.buttonArray[0];
@@ -139,7 +139,7 @@
     [signinButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view).mas_offset(-25*Main_Screen_Height/667);
         make.width.mas_equalTo(350*Main_Screen_Height/667);
-        make.height.mas_equalTo(38*Main_Screen_Height/667);
+        make.height.mas_equalTo(48*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
     }];
 }

@@ -603,7 +603,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
  */
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return -64.f-49;
+    return (-64.f-49)*Main_Screen_Height/667;
 }
 
 - (void)didReceiveMemoryWarning {

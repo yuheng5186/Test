@@ -189,7 +189,7 @@
     titleView.top                      = 0;
     
     NSString *titleName              = @"蔷薇爱车";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:Main_Screen_Height*20/667];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = titleView.centerX;
@@ -221,7 +221,7 @@
     
     
     UIImage *downloadImage           = [UIImage imageNamed:@"xiazai"];
-    UIButton  *downloadButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, downloadImage.size.width, downloadImage.size.height) iconName:@"xiazai" target:self action:@selector(downloadButtonClick:)];
+    UIButton  *downloadButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, 30, 30) iconName:@"xiazai" target:self action:@selector(downloadButtonClick:)];
     downloadButton.right             = Main_Screen_Width -Main_Screen_Width*12/375;
     downloadButton.centerY           = logoImageView.centerY;
     

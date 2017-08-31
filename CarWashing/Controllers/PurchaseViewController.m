@@ -27,6 +27,7 @@
 #define KCURRENTCITYINFODEFAULTS [NSUserDefaults standardUserDefaults]
 @interface PurchaseViewController ()<JFLocationDelegate, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource, UIScrollViewDelegate>
 {
+    
     MBProgressHUD *HUD;
     UILabel *introLabelTwo;
     UILabel *introLabelThree;
@@ -92,10 +93,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 
 
 }
-//-(void) drawNavigation {
-//
-//    [self drawTitle:@"购卡"];
-//}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -109,7 +107,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     upView.top                      = 0;
     
     NSString *titleName              = @"购卡";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:20*Main_Screen_Height/667];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = upView.centerX;
@@ -137,10 +135,6 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     _middleview = [[UIView alloc]initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height-64)];
     _middleview.backgroundColor = [UIColor colorFromHex:@"#fafafa"];
     [self.contentView addSubview:_middleview];
-//    for (int index = 0; index < 3; index++) {
-//        UIImage *image = [UIImage imageNamed:@"kabeijing"];
-//        [self.imageArray addObject:image];
-//    }
     
     
     
@@ -523,8 +517,13 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     __weak typeof(self) weakSelf = self;
     [cityViewController choseCityBlock:^(NSString *cityName) {
         
-        [weakSelf.locationButton setTitle:cityName forState:UIControlStateNormal];
-        
+        NSString    *cityString  = cityName;
+        if (cityName.length > 3) {
+            NSString    *city     = [cityName substringToIndex:2];
+            cityString = [NSString stringWithFormat:@"%@...",city];
+        }
+        weakSelf.locationButton.width   = Main_Screen_Width*80/375;
+        [weakSelf.locationButton setTitle:cityString forState:UIControlStateNormal];
         weakSelf.resultLabel.text = cityName;
         
         NSString *b = [cityName substringFromIndex:cityName.length-1];
