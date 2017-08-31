@@ -138,7 +138,7 @@
     membershipButton.centerX        = self.editButton.centerX-Main_Screen_Width*50/375;
     membershipButton.top            = self.userNameLabel.bottom +Main_Screen_Height*10/667;
     
-    NSString *signString      = @"会员签到";
+    NSString *signString      = @"每日签到";
     UIFont *signFont          = [UIFont boldSystemFontOfSize:Main_Screen_Height*15/667];
     UIButton *signButton      = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*25/667) text:signString font:signFont color:[UIColor whiteColor] target:self action:@selector(signButtonClick:)];
     signButton.backgroundColor= [UIColor colorFromHex:@"#5AB2F1"];
