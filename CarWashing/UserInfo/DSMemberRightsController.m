@@ -339,12 +339,12 @@ static NSString *id_rightsCell = @"id_rightsCell";
     titleLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
 
     titleLabel.top       = 16*Main_Screen_Height/667;
-    titleLabel.left      = 60*Main_Screen_Height/667;
+    titleLabel.left      = 70*Main_Screen_Height/667;
     
     UILabel *detailLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 20*Main_Screen_Height/667) font:[UIFont systemFontOfSize:12] text:detailString isCenter:NO];
     detailLabel.textColor = [UIColor colorFromHex:@"#999999"];
     detailLabel.top       = titleLabel.bottom +10*Main_Screen_Height/667;
-    detailLabel.left      = 60*Main_Screen_Height/667;
+    detailLabel.left      = 70*Main_Screen_Height/667;
     return cell;
 }
 
