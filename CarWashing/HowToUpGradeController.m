@@ -74,7 +74,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
 - (void)setupUI {
     
     UIView *headContainView = [[UIView alloc] init];
-    headContainView.backgroundColor = [UIColor colorFromHex:@"#293754"];
+    headContainView.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
     [self.view addSubview:headContainView];
     
     UILabel *gradeLab = [[UILabel alloc] init];

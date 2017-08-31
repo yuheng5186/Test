@@ -32,7 +32,7 @@
 {
     if (!_statusView) {
         _statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
-        _statusView.backgroundColor = [UIColor colorFromHex:@"#293754"];
+        _statusView.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
         
     }
     return _statusView;

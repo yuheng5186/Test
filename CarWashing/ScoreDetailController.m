@@ -76,7 +76,7 @@
         [earnButton setTitleColor:[UIColor colorFromHex:@"#4a4a4a"] forState:UIControlStateNormal];
         earnButton.layer.cornerRadius = 20*Main_Screen_Height/667;
         earnButton.layer.borderWidth = 1;
-        earnButton.layer.borderColor = [UIColor blackColor].CGColor;
+        earnButton.layer.borderColor = [UIColor colorFromHex:@"febb02"].CGColor;
         _earnButton = earnButton;
         [self.headView addSubview:_earnButton];
     }
@@ -93,7 +93,7 @@
         [exchangeButton setTitleColor:[UIColor colorFromHex:@"#4a4a4a"] forState:UIControlStateNormal];
         exchangeButton.layer.cornerRadius = 20*Main_Screen_Height/667;
         exchangeButton.layer.borderWidth = 1;
-        exchangeButton.layer.borderColor = [UIColor blackColor].CGColor;
+        exchangeButton.layer.borderColor = [UIColor colorFromHex:@"febb02"].CGColor;
         _exchangeButton = exchangeButton;
         [self.headView addSubview:_exchangeButton];
     }
@@ -139,7 +139,7 @@
     
     self.scoreListView.delegate = self;
     self.scoreListView.dataSource = self;
-    self.scoreListView.rowHeight = 60*Main_Screen_Height/667;
+    self.scoreListView.rowHeight = 65*Main_Screen_Height/667;
     self.scoreListView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
     
@@ -374,7 +374,7 @@
 //    cell.detailTextLabel.font       = [UIFont systemFontOfSize:12];
 //    cell.detailTextLabel.textColor  = [UIColor colorFromHex:@"#999999"];
 
-    UIFont *titleStringFont            = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    UIFont *titleStringFont            = [UIFont systemFontOfSize:15];
     
     UILabel *titleStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:[[_ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegName"] font:titleStringFont] font:titleStringFont text:[[_ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegName"] isCenter:NO];
                                           
@@ -383,14 +383,14 @@
     titleStringLabel.top               = Main_Screen_Height*10/667;
     
     NSString *timeString              = [[_ScoreData objectAtIndex:indexPath.row] objectForKey:@"GetIntegralTime"];
-    UIFont *timeStringFont            = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+    UIFont *timeStringFont            = [UIFont systemFontOfSize:15];
     UILabel *timeStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:timeString font:timeStringFont] font:timeStringFont text:timeString isCenter:NO];
     timeStringLabel.textColor         = [UIColor colorFromHex:@"#999999"];
     timeStringLabel.left              = titleStringLabel.left;
     timeStringLabel.top               = titleStringLabel.bottom +Main_Screen_Height*5/667;
     
     NSString *contentString              = [NSString stringWithFormat:@"+%@",[[_ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegralNum"]];
-    UIFont *contentStringFont            = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
+    UIFont *contentStringFont            = [UIFont systemFontOfSize:15];
     UILabel *contentStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:contentString font:contentStringFont] font:contentStringFont text:contentString isCenter:NO];
     contentStringLabel.textColor         = [UIColor redColor];
     contentStringLabel.right             = Main_Screen_Width -Main_Screen_Width*12/375;
