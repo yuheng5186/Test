@@ -139,7 +139,7 @@
     
     self.scoreListView.delegate = self;
     self.scoreListView.dataSource = self;
-    self.scoreListView.rowHeight = 60*Main_Screen_Height/667;
+    self.scoreListView.rowHeight = 65*Main_Screen_Height/667;
     self.scoreListView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
     
@@ -383,7 +383,7 @@
     titleStringLabel.top               = Main_Screen_Height*10/667;
     
     NSString *timeString              = [[_ScoreData objectAtIndex:indexPath.row] objectForKey:@"GetIntegralTime"];
-    UIFont *timeStringFont            = [UIFont systemFontOfSize:14];
+    UIFont *timeStringFont            = [UIFont systemFontOfSize:15];
     UILabel *timeStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:timeString font:timeStringFont] font:timeStringFont text:timeString isCenter:NO];
     timeStringLabel.textColor         = [UIColor colorFromHex:@"#999999"];
     timeStringLabel.left              = titleStringLabel.left;
