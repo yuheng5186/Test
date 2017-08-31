@@ -60,7 +60,7 @@
     
     //    return [[PopupView alloc]initWithFrame:CGRectMake(0, 0, 195, 210)];
     
-    PopupView *popView  = [[PopupView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*214/375, Main_Screen_Height*164/667)];
+    PopupView *popView  = [[PopupView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*230/375, Main_Screen_Height*164/667)];
 //    popView.layer.cornerRadius  = 5;
     //    popView.backgroundColor = [UIColor whiteColor];
     //    UILabel *label  = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 30)];

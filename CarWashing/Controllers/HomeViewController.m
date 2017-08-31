@@ -221,7 +221,7 @@
     
     
     UIImage *downloadImage           = [UIImage imageNamed:@"xiazai"];
-    UIButton  *downloadButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, 30, 30) iconName:@"xiazai" target:self action:@selector(downloadButtonClick:)];
+    UIButton  *downloadButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, downloadImage.size.width, downloadImage.size.height) iconName:@"xiazai" target:self action:@selector(downloadButtonClick:)];
     downloadButton.right             = Main_Screen_Width -Main_Screen_Width*12/375;
     downloadButton.centerY           = logoImageView.centerY;
     
