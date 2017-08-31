@@ -112,6 +112,7 @@
     {
         string        = @"已领取";
         _getButton  = [UIUtil drawDefaultButton:upView title:string target:self action:nil];
+        [_getButton setBackgroundImage:[UIImage createImageWithColor:[UIColor colorFromHex:@"#e6e6e6"]] forState:UIControlStateNormal];
         _getButton.enabled = NO;
     }
     
@@ -250,6 +251,8 @@
 //            [_dic setObject:[NSString stringWithFormat:@"%ld",num] forKey:@"IsReceive"];
             
             [_getButton setTitle:@"已领取" forState:UIControlStateNormal];
+            [_getButton setBackgroundImage:[UIImage createImageWithColor:[UIColor colorFromHex:@"#e6e6e6"]] forState:UIControlStateNormal];
+
             _getButton.enabled = NO;
             
             

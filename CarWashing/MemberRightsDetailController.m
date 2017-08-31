@@ -110,7 +110,7 @@
     UIButton *checkCardBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [checkCardBtn setTitle:@"查看卡包" forState:UIControlStateNormal];
     [checkCardBtn setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
-    checkCardBtn.titleLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+    checkCardBtn.titleLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [checkCardBtn setImage:[UIImage imageNamed:@"chakandaijinquan-jiantou"] forState:UIControlStateNormal];
     checkCardBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -100*Main_Screen_Height/667);
     [checkCardBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -50*Main_Screen_Height/667, 0, 0)];
@@ -235,6 +235,7 @@
     if([self.currentUseLevel intValue] < [self.nextUseLevel intValue])
     {
         [_getBtn setTitle:[NSString stringWithFormat:@"升级到%@可以获取",[arr objectAtIndex:[self.nextUseLevel intValue]]] forState:UIControlStateNormal];
+        [_getBtn setBackgroundImage:[UIImage createImageWithColor:[UIColor colorFromHex:@"#e6e6e6"]] forState:UIControlStateNormal];
         _getBtn.enabled = NO;
     }
     else
@@ -246,6 +247,8 @@
         else
         {
             [_getBtn setTitle:@"该卡已领取完毕" forState:UIControlStateNormal];
+            [_getBtn setBackgroundImage:[UIImage createImageWithColor:[UIColor colorFromHex:@"#e6e6e6"]] forState:UIControlStateNormal];
+
             _getBtn.enabled = NO;
         }
     }
@@ -292,15 +295,15 @@
         [cell.contentView addSubview:infosLab];
         
         [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(cell.contentView).mas_offset(8*Main_Screen_Height/667);
+            make.top.equalTo(cell.contentView).mas_offset(12*Main_Screen_Height/667);
             make.left.equalTo(cell.contentView).mas_offset(12*Main_Screen_Height/667);
         }];
         
         [infosLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(titleLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);
+            make.top.equalTo(titleLab.mas_bottom).mas_offset(12*Main_Screen_Height/667);
             make.leading.equalTo(titleLab);
             make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
-            make.bottom.equalTo(cell.contentView).mas_offset(-8*Main_Screen_Height/667);
+            make.bottom.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
         }];
         
         
@@ -349,15 +352,15 @@
         [cell.contentView addSubview:infosLab];
         
         [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(cell.contentView).mas_offset(8*Main_Screen_Height/667);
+            make.top.equalTo(cell.contentView).mas_offset(12*Main_Screen_Height/667);
             make.left.equalTo(cell.contentView).mas_offset(12*Main_Screen_Height/667);
         }];
         
         [infosLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(titleLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);
+            make.top.equalTo(titleLab.mas_bottom).mas_offset(12*Main_Screen_Height/667);
             make.leading.equalTo(titleLab);
             make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
-            make.bottom.equalTo(cell.contentView).mas_offset(-8*Main_Screen_Height/667);
+            make.bottom.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
         }];
         
         
@@ -374,12 +377,12 @@
         [cell.contentView addSubview:infosLab];
         
         [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(cell.contentView).mas_offset(8*Main_Screen_Height/667);
+            make.top.equalTo(cell.contentView).mas_offset(12*Main_Screen_Height/667);
             make.left.equalTo(cell.contentView).mas_offset(12*Main_Screen_Height/667);
         }];
         
         [infosLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(titleLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);
+            make.top.equalTo(titleLab.mas_bottom).mas_offset(12*Main_Screen_Height/667);
             make.leading.equalTo(titleLab);
             make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
         }];
@@ -402,16 +405,16 @@
         infosLab3.text = @"3、有任何问题，可咨询蔷薇客服";
         
         [infosLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(infosLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);
+            make.top.equalTo(infosLab.mas_bottom).mas_offset(12*Main_Screen_Height/667);
             make.leading.equalTo(infosLab);
             make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
         }];
         
         [infosLab3 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(infosLab2.mas_bottom).mas_offset(8*Main_Screen_Height/667);
+            make.top.equalTo(infosLab2.mas_bottom).mas_offset(12*Main_Screen_Height/667);
             make.leading.equalTo(infosLab2);
             make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
-            make.bottom.equalTo(cell.contentView).mas_offset(-8*Main_Screen_Height/667);
+            make.bottom.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
         }];
         
         
