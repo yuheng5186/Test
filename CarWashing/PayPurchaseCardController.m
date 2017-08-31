@@ -190,7 +190,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     [bottomPayButton setTintColor:[UIColor whiteColor]];
     
     //方法子
-    [bottomPayButton addTarget:self action:@selector(showAlertWithTitle:message:) forControlEvents:UIControlEventTouchUpInside];
+//    [bottomPayButton addTarget:self action:@selector(showAlertWithTitle:message:) forControlEvents:UIControlEventTouchUpInside];
     
     [payBottomView addSubview:bottomPayButton];
 }
