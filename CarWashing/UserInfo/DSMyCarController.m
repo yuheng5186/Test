@@ -109,8 +109,7 @@ static NSString * HeaderId = @"header";
 
 //    [IQKeyboardManager sharedManager].enable = YES;
     //self.carImageView.image = [UIImage imageNamed:@"02"];
-    _Xuhao = 0;
-    _CarArray = [NSMutableArray array];
+    
     
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.removeFromSuperViewOnHide =YES;
@@ -144,6 +143,11 @@ static NSString * HeaderId = @"header";
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            _Xuhao = 0;
+            _CarArray = [NSMutableArray array];
+            self.imageArray  = [NSMutableArray array];
+
+            
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
             for(NSDictionary *dic in arr)
@@ -969,9 +973,7 @@ static NSString * HeaderId = @"header";
 }
 
 -(void)noticeupdateMyCar:(NSNotification *)sender{
-    _Xuhao = 0;
-    _CarArray = [NSMutableArray array];
-    self.imageArray  = [NSMutableArray array];
+    
     [self getMyCarData];
 }
 

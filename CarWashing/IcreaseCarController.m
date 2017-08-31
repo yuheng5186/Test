@@ -456,7 +456,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                     
                     if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                     {
-                        [self.view showInfo:@"新增成功" autoHidden:YES interval:2];
+                        //[self.view showInfo:@"新增成功" autoHidden:YES interval:2];
                         NSNotification * notice = [NSNotification notificationWithName:@"increasemycarsuccess" object:nil userInfo:nil];
                         [[NSNotificationCenter defaultCenter]postNotification:notice];
         
