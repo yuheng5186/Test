@@ -57,9 +57,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     [center addObserver:self selector:@selector(noticeupdate:) name:@"Earnsuccess" object:nil];
     [self createSubView];
     self.area = @"上海市";
-    _MembershipprivilegesArray = [[NSMutableArray alloc]init];
-    _NextMembershipprivilegesArr = [[NSMutableArray alloc]init];
-    _CurrentMembershipprivilegesArr = [[NSMutableArray alloc]init];
+    
     
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.removeFromSuperViewOnHide =YES;
@@ -156,6 +154,12 @@ static NSString *id_rightsCell = @"id_rightsCell";
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            
+            _MembershipprivilegesArray = [[NSMutableArray alloc]init];
+            _NextMembershipprivilegesArr = [[NSMutableArray alloc]init];
+            _CurrentMembershipprivilegesArr = [[NSMutableArray alloc]init];
+            
+            
             _MembershipprivilegesDic = [dict objectForKey:@"JsonData"];
             
             
@@ -417,16 +421,6 @@ static NSString *id_rightsCell = @"id_rightsCell";
 }
 
 -(void)noticeupdate:(NSNotification *)sender{
-    _MembershipprivilegesArray = [NSMutableArray new];
-    _NextMembershipprivilegesArr = [NSMutableArray new];
-    _CurrentMembershipprivilegesArr = [NSMutableArray new];
-    
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    HUD.removeFromSuperViewOnHide =YES;
-    HUD.mode = MBProgressHUDModeIndeterminate;
-    HUD.labelText = @"加载中";
-    HUD.minSize = CGSizeMake(132.f, 108.0f);
-    
     [self GetMembershipprivileges];
 }
 
@@ -437,9 +431,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
 }
 - (void) updateRuleClick:(id)sender {
-    
-    
-    
+
     DSUpdateRuleController *updateRuleController  = [[DSUpdateRuleController alloc]init];
     updateRuleController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:updateRuleController animated:YES];
