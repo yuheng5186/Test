@@ -253,7 +253,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     cell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     
