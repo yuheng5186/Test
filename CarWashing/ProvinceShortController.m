@@ -31,7 +31,7 @@
     [self.view addSubview:dissmissBtn];
     
     UIView *containView = [[UIView alloc] init];
-    containView.frame = CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 195);
+    containView.frame = CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 195*Main_Screen_Height/667);
     containView.backgroundColor = [UIColor whiteColor];
     self.containView = containView;
     [self.view addSubview:containView];
@@ -59,13 +59,13 @@
         NSInteger col = i % 8;
         
         //间距
-        CGFloat margin = (Main_Screen_Width - (30 * 8)) / (8 + 1);
+        CGFloat margin = (Main_Screen_Width - (30*Main_Screen_Height/667 * 8)) / (8 + 1);
         
         //x
-        CGFloat btnX = margin + (30 + margin) * col;
-        CGFloat btnY = margin + (30 + margin) * row;
+        CGFloat btnX = margin + (30*Main_Screen_Height/667 + margin) * col;
+        CGFloat btnY = margin + (30*Main_Screen_Height/667 + margin) * row;
         
-        btn.frame = CGRectMake(btnX, btnY, 30, 30);
+        btn.frame = CGRectMake(btnX, btnY, 30*Main_Screen_Height/667, 30*Main_Screen_Height/667);
     }
 }
 
@@ -78,7 +78,7 @@
     }
     
     //更改视图
-    self.containView.frame = CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 195);
+    self.containView.frame = CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 195*Main_Screen_Height/667);
     
     [UIView animateWithDuration:0.25 animations:^{
         
@@ -97,7 +97,7 @@
     [super viewDidAppear:animated];
     
     //更改视图
-    self.containView.frame = CGRectMake(0, Main_Screen_Height - 195, Main_Screen_Width, 195);
+    self.containView.frame = CGRectMake(0, Main_Screen_Height - 195*Main_Screen_Height/667, Main_Screen_Width, 195*Main_Screen_Height/667);
     
     [UIView animateWithDuration:0.25 animations:^{
         [self.view layoutIfNeeded];
@@ -108,7 +108,7 @@
 - (void)clickDissmissButton{
     
     //更改视图
-    self.containView.frame = CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 195);
+    self.containView.frame = CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 195*Main_Screen_Height/667);
     
     [UIView animateWithDuration:0.25 animations:^{
         

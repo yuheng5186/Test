@@ -16,6 +16,9 @@
 #import "AFNetworkingTool.h"
 #import "MyCar.h"
 #import "UdStorage.h"
+#import "HowToUpGradeController.h"
+#import "EarnScoreController.h"
+#import "DSMembershipController.h"
 
 @interface IcreaseCarController ()<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 
@@ -453,10 +456,64 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                     
                     if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                     {
-                        [self.view showInfo:@"新增成功" autoHidden:YES interval:2];
+                        //[self.view showInfo:@"新增成功" autoHidden:YES interval:2];
                         NSNotification * notice = [NSNotification notificationWithName:@"increasemycarsuccess" object:nil userInfo:nil];
                         [[NSNotificationCenter defaultCenter]postNotification:notice];
-                        [self.navigationController popViewControllerAnimated:YES];
+        
+                        
+            
+                        
+                        NSArray *vcsArray = [NSArray array];
+                        vcsArray= [self.navigationController viewControllers];
+                        NSInteger vcCount = vcsArray.count;
+                        
+                        
+                        if(vcCount <5)
+                        {
+                            [self.navigationController popViewControllerAnimated:YES];
+                        }
+                        else
+                        {
+                            
+                        
+                            UIViewController *lastVC = vcsArray[vcCount-4];
+                            UIViewController *lasttwoVC = vcsArray[vcCount-5];
+                            
+                            
+                            
+                            int index=[[self.navigationController viewControllers]indexOfObject:self];
+                            
+                            if([lastVC isKindOfClass:[HowToUpGradeController class]])
+                            {
+                                
+                                NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                [[NSNotificationCenter defaultCenter]postNotification:notice];
+                                
+                                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
+                            }
+                            else if([lastVC isKindOfClass:[EarnScoreController class]])
+                            {
+                                if([lasttwoVC isKindOfClass:[DSMembershipController class]])
+                                {
+                                    NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                    [[NSNotificationCenter defaultCenter]postNotification:notice];
+                                    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
+                                }
+                                NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                [[NSNotificationCenter defaultCenter]postNotification:notice];
+                                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-5]animated:YES];
+                            }
+                            else
+                            {
+                                
+                            }
+
+                        
+                        
+                        }
+
+                        
+                    
                     }
                     
                     else
@@ -476,7 +533,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
 
         }
         
-        
+
         
     }
     else

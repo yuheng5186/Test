@@ -88,7 +88,6 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdate:) name:@"updatenamesuccess" object:nil];
     [center addObserver:self selector:@selector(noticeupdate:) name:@"updateheadimgsuccess" object:nil];
-    [center addObserver:self selector:@selector(noticeupdate:) name:@"Earnsuccess" object:nil];
     self.contentView.backgroundColor = [UIColor whiteColor];
     
     [self setupUI];
@@ -243,12 +242,15 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
         }
         else
         {
+             [HUD setHidden:YES];
             [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
-            [self.navigationController popViewControllerAnimated:YES];
+            
+//            [self.navigationController popViewControllerAnimated:YES];
         }
     } fail:^(NSError *error) {
+         [HUD setHidden:YES];
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
-        [self.navigationController popViewControllerAnimated:YES];
+//        [self.navigationController popViewControllerAnimated:YES];
         
     }];
 
