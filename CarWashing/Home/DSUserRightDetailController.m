@@ -198,12 +198,10 @@
         }
         else
         {
-            [HUD setHidden:YES];
             [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
             [self.navigationController popViewControllerAnimated:YES];
         }
     } fail:^(NSError *error) {
-        [HUD setHidden:YES];
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
         [self.navigationController popViewControllerAnimated:YES];
         
@@ -233,9 +231,6 @@
                              @"ExpEndDates":[NSString stringWithFormat:@"%@",_dic[@"ExpiredTimes"]],
                              @"Integralnum": @1
                              };
-    
-    
-    NSLog(@"%@",mulDic);
     
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],

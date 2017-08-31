@@ -33,7 +33,7 @@
     
     
     
-    NSLog(@"%@",self.record);
+//    NSLog(@"%@",self.record);
     
     
     // Do any additional setup after loading the view.
@@ -87,7 +87,10 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+     if(self.record.ConsumptionType == 2)
+     {
+         return 60*Main_Screen_Height/667;
+     }
     return 50*Main_Screen_Height/667;
 }
 
@@ -108,8 +111,20 @@
         if(self.record.ConsumptionType == 2)
         {
             cell.textLabel.text = @"付款方式";
-            [cell.detailTextLabel setNumberOfLines:2];//可以显示3行
-            cell.detailTextLabel.text   = [NSString stringWithFormat:@"%@\n%@",self.record.MiddleDes,self.record.BottomDes];
+//            [cell.detailTextLabel setNumberOfLines:2];
+//            cell.detailTextLabel.text   = [NSString stringWithFormat:@"%@\n%@",self.record.MiddleDes,self.record.BottomDes];
+            
+            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 5*Main_Screen_Height/667, Main_Screen_Width - 15*Main_Screen_Width/375, 30*Main_Screen_Height/667)];
+            [label setText:self.record.MiddleDes];
+            label.font = [UIFont boldSystemFontOfSize:19*Main_Screen_Width/375];
+            label.textAlignment = NSTextAlignmentRight;
+            [cell.contentView addSubview:label];
+            
+            UILabel *label2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 35*Main_Screen_Height/667, Main_Screen_Width - 15*Main_Screen_Width/375, 20*Main_Screen_Height/667)];
+            [label2 setText:[NSString stringWithFormat:@"剩余%@次",self.record.BottomDes]];
+            label2.font = [UIFont boldSystemFontOfSize:12*Main_Screen_Width/375];
+            label2.textAlignment = NSTextAlignmentRight;
+            [cell.contentView addSubview:label2];
             
             
         }

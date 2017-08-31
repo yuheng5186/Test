@@ -27,9 +27,11 @@
 
 #import "JXMapNavigationView.h"
 #import "HYActivityView.h"
+#import "MBProgressHUD.h"
 
 @interface BusinessDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, CLLocationManagerDelegate>
 {
+    MBProgressHUD *HUD;
     UILabel *lblPrice;
     UILabel *formerPriceLab;
     UILabel *lblCarType;
@@ -96,6 +98,12 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     self.MerchantDetailData = [[NSMutableArray alloc]init];
     
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
     [self setMerChantDetailData];
     
     
@@ -121,6 +129,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
             //        [self.MerchantDetailData addObjectsFromArray:arr];
             
             [self setupUI];
+            [HUD setHidden:YES];
         }
         else
         {
@@ -133,6 +142,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
         
     } fail:^(NSError *error) {
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.navigationController popViewControllerAnimated:YES];
     }];
 }
 
@@ -290,7 +300,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     
     //底部支付栏
-    UIView *payToolBar = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 60*Main_Screen_Height/667, Main_Screen_Width, 60)];
+    UIView *payToolBar = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 60*Main_Screen_Height/667, Main_Screen_Width, 60*Main_Screen_Height/667)];
     payToolBar.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:payToolBar];
@@ -321,7 +331,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     {
         lblPrice = [[UILabel alloc] init];
         lblPrice.text = [NSString stringWithFormat:@"¥%@",[[self.dic[@"MerSerList"] objectAtIndex:0] objectForKey:@"CurrentPrice"]];
-        lblPrice.font = [UIFont systemFontOfSize:18];
+        lblPrice.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
         lblPrice.textColor = [UIColor colorFromHex:@"#ff525a"];
         [payToolBar addSubview:lblPrice];
         
@@ -333,7 +343,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
         
         lblCarType = [[UILabel alloc] init];
         lblCarType.text = [[self.dic[@"MerSerList"] objectAtIndex:0] objectForKey:@"SerName"];
-        lblCarType.font = [UIFont systemFontOfSize:13];
+        lblCarType.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         lblCarType.textColor = [UIColor colorFromHex:@"#999999"];
         [payToolBar addSubview:lblCarType];
     }
@@ -405,6 +415,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
 {
 //    if (button.selected)
 //    {
+    
     
         
         NSDictionary *mulDic = @{

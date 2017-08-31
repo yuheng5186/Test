@@ -224,8 +224,19 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
     payCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     
+    NSArray *shopTypeArr = @[@"服务商家",@"服务项目",@"订单金额"];
+    NSArray *cashTypeArr = @[@"代金券",@"实付"];
+    
     if (indexPath.section == 0 || indexPath.section == 1) {
-        payCell.textLabel.text = @"服务商家";
+        
+        if (indexPath.section == 0) {
+            
+            payCell.textLabel.text = shopTypeArr[indexPath.row];
+        }else {
+            
+            payCell.textLabel.text = cashTypeArr[indexPath.row];
+        }
+        
         payCell.detailTextLabel.text = @"上海金雷洗车";
         payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
         payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];

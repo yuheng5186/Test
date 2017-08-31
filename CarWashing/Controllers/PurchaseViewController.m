@@ -27,6 +27,7 @@
 #define KCURRENTCITYINFODEFAULTS [NSUserDefaults standardUserDefaults]
 @interface PurchaseViewController ()<JFLocationDelegate, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource, UIScrollViewDelegate>
 {
+    
     MBProgressHUD *HUD;
     UILabel *introLabelTwo;
     UILabel *introLabelThree;
@@ -137,10 +138,6 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     _middleview = [[UIView alloc]initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height-64)];
     _middleview.backgroundColor = [UIColor colorFromHex:@"#fafafa"];
     [self.contentView addSubview:_middleview];
-//    for (int index = 0; index < 3; index++) {
-//        UIImage *image = [UIImage imageNamed:@"kabeijing"];
-//        [self.imageArray addObject:image];
-//    }
     
     
     
@@ -182,7 +179,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
         else
         {
             [HUD setHidden:YES];
-            [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+            [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
             
         }
         
@@ -191,7 +188,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
         
     } fail:^(NSError *error) {
         [HUD setHidden:YES];
-        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
     }];
     
 }

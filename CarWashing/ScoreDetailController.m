@@ -394,7 +394,7 @@
     UILabel *contentStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:contentString font:contentStringFont] font:contentStringFont text:contentString isCenter:NO];
     contentStringLabel.textColor         = [UIColor redColor];
     contentStringLabel.right             = Main_Screen_Width -Main_Screen_Width*12/375;
-    contentStringLabel.centerY           = cell.contentView.centerY;
+    contentStringLabel.centerY           = Main_Screen_Height*30/667;
     
     
     

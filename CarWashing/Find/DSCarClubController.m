@@ -300,11 +300,13 @@
         {
             [self.view showInfo:@"获取数据失败" autoHidden:YES interval:2];
             [self.tableView.mj_header endRefreshing];
+            [_tableView reloadData];
         }
         
     } fail:^(NSError *error) {
         [self.view showInfo:@"获取数据失败" autoHidden:YES interval:2];
         [self.tableView.mj_header endRefreshing];
+        [_tableView reloadData];
     }];
 
 }
@@ -377,7 +379,7 @@
     _NewsArray = [[NSMutableArray alloc]init];
     _otherArray = [[NSMutableArray alloc]init];
     self.page = 0 ;
-    [self requesetCarClubNews];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -22,6 +22,7 @@
     UILabel *cardNameLab;
     UILabel *invalidLab;
     CardConfigGrade *card;
+    MBProgressHUD *HUD;
 }
 
 @property(nonatomic,strong)UITableView *noticeView;
@@ -48,6 +49,15 @@
     if(self.nextdic == nil)
     {
         self.GradeDetailDic = [[NSMutableDictionary alloc]init];
+        
+        
+        HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        HUD.removeFromSuperViewOnHide =YES;
+        HUD.mode = MBProgressHUDModeIndeterminate;
+        HUD.labelText = @"加载中";
+        HUD.minSize = CGSizeMake(132.f, 108.0f);
+        
+        
         [self requestCardConfigGradeDetail];
     }
     else
@@ -62,9 +72,12 @@
 
 - (void)setupUI {
     
+    UIView *containView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 310*Main_Screen_Height/667)];
+    [self.view addSubview:containView];
+    
     UIImageView *cardImgV = [[UIImageView alloc] init];
     cardImgV.image = [UIImage imageNamed:@"bg_card"];
-    [self.view addSubview:cardImgV];
+    [containView addSubview:cardImgV];
     
     cardNameLab = [[UILabel alloc] init];
     cardNameLab.text = @"体验卡";
@@ -87,12 +100,12 @@
     invalidLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
     [cardImgV addSubview:invalidLab];
     
-    UILabel *brandLab = [[UILabel alloc] init];
-    brandLab.text = @"";
-    brandLab.font = [UIFont systemFontOfSize:11];
-    [cardImgV addSubview:brandLab];
+//    UILabel *brandLab = [[UILabel alloc] init];
+//    brandLab.text = @"蔷薇爱车";
+//    brandLab.font = [UIFont systemFontOfSize:11*Main_Screen_Height/667];
+//    [cardImgV addSubview:brandLab];
     
-    self.getBtn = [UIUtil drawDefaultButton:self.view title:@"立即领取" target:self action:@selector(didClickGetBtn)];
+    self.getBtn = [UIUtil drawDefaultButton:containView title:@"立即领取" target:self action:@selector(didClickGetBtn)];
     
     UIButton *checkCardBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [checkCardBtn setTitle:@"查看卡包" forState:UIControlStateNormal];
@@ -103,14 +116,14 @@
     [checkCardBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -50*Main_Screen_Height/667, 0, 0)];
     
     [checkCardBtn addTarget:self action:@selector(didClickCheckCardBtn) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:checkCardBtn];
+    [containView addSubview:checkCardBtn];
     
     
     //约束
     [cardImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).mas_offset(64 + 10*Main_Screen_Height/667);
-        make.left.equalTo(self.view).mas_offset(37.5*Main_Screen_Height/667);
-        make.right.equalTo(self.view).mas_offset(-37.5*Main_Screen_Height/667);
+        make.top.equalTo(containView).mas_offset(10*Main_Screen_Height/667);
+        make.left.equalTo(containView).mas_offset(37.5*Main_Screen_Height/667);
+        make.right.equalTo(containView).mas_offset(-37.5*Main_Screen_Height/667);
         make.height.mas_equalTo(192*Main_Screen_Height/667);
     }];
     
@@ -124,10 +137,10 @@
         make.bottom.equalTo(cardNameLab);
     }];
     
-    [brandLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(cardNameLab);
-        make.leading.equalTo(cardNameLab.mas_trailing).mas_offset(5*Main_Screen_Height/667);
-    }];
+//    [brandLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(cardNameLab);
+//        make.leading.equalTo(cardNameLab.mas_trailing).mas_offset(5*Main_Screen_Height/667);
+//    }];
     
     [introLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(cardNameLab.mas_bottom).mas_offset(10*Main_Screen_Height/667);
@@ -141,32 +154,33 @@
     
     [self.getBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(cardImgV.mas_bottom).mas_offset(15*Main_Screen_Height/667);
-        make.centerX.equalTo(self.view);
+        make.centerX.equalTo(containView);
         make.width.mas_equalTo(351*Main_Screen_Height/667);
         make.height.mas_equalTo(48*Main_Screen_Height/667);
     }];
     
     [checkCardBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.getBtn.mas_bottom);
-        make.centerX.equalTo(self.view);
+        make.centerX.equalTo(containView);
         make.height.mas_equalTo(45*Main_Screen_Height/667);
         make.width.mas_equalTo(100*Main_Screen_Height/667);
     }];
     
-    self.noticeView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    self.noticeView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 64) style:UITableViewStyleGrouped];
     //noticeView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.noticeView];
     
-    [self.noticeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(checkCardBtn.mas_bottom);
-        make.bottom.equalTo(self.view);
-        make.width.mas_equalTo(Main_Screen_Width);
-    }];
+//    [self.noticeView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(checkCardBtn.mas_bottom);
+//        make.bottom.equalTo(self.view);
+//        make.width.mas_equalTo(Main_Screen_Width);
+//    }];
     self.noticeView.delegate = self;
     self.noticeView.dataSource = self;
     self.noticeView.estimatedRowHeight = 80;
     self.noticeView.rowHeight = UITableViewAutomaticDimension;
     
+    self.noticeView.tableHeaderView = containView;
 }
 
 -(void)requestCardConfigGradeDetail
@@ -189,6 +203,8 @@
             [card setValuesForKeysWithDictionary:self.GradeDetailDic];
     
             [self UpdateUI];
+            
+            [HUD setHidden:YES];
             
         }
         else
@@ -257,21 +273,6 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id_noticeCell];
     
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:id_noticeCell];
-//    UILabel *titleLab = [[UILabel alloc] init];
-//    titleLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-//    titleLab.font = [UIFont systemFontOfSize:14];
-//    [cell.contentView addSubview:titleLab];
-//    
-//    UILabel *infosLab = [[UILabel alloc] init];
-//    infosLab.textColor = [UIColor colorFromHex:@"#999999"];
-//    infosLab.font = [UIFont systemFontOfSize:13];
-//    infosLab.numberOfLines = 0;
-//    [cell.contentView addSubview:infosLab];
-//    
-//    [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(cell.contentView).mas_offset(15);
-//        make.left.equalTo(cell.contentView).mas_offset(12);
-//    }];
     
     if (indexPath.section == 0) {
         
