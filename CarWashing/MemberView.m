@@ -40,7 +40,7 @@
     self.ernScoreButton.layer.borderColor = [UIColor whiteColor].CGColor;
     
     
-    NSString *phoneNum = @"13661682431";
+    NSString *phoneNum = @"11111111111";
     NSString *phoneText = [phoneNum stringByReplacingOccurrencesOfString:[phoneNum substringWithRange:NSMakeRange(3, 4)] withString:@"****"];
     self.phoneLabel.text = phoneText;
     

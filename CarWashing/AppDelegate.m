@@ -56,11 +56,24 @@
     application.applicationIconBadgeNumber          = 0;
     
     self.window									= [[UIWindow alloc] initWithFrame: UIScreen.mainScreen.bounds];
+    
+    
 
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+    }
+    else{
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        // 这里判断是否第一次
+        DSGuideViewController *guideControl = [[DSGuideViewController alloc]init];
+        UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:guideControl];//为假表示没有文件，没有进入过主页
+    }
     
     
-    DSGuideViewController *guideControl = [[DSGuideViewController alloc]init];
-    UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:guideControl];
     
     
     
@@ -92,7 +105,10 @@
     }
     
     else{
+        LoginViewController *loginControl = [[LoginViewController alloc]init];
+        UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:loginControl];
         self.window.rootViewController      = nav;
+        nav.navigationBar.hidden      = YES;
     }
     
     
