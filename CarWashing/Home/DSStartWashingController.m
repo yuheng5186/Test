@@ -13,13 +13,14 @@
 
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic,assign) int second;
+@property (nonatomic, strong) UILabel *timeNumLabel;
 
 @end
 
 @implementation DSStartWashingController
 
 - (void) drawNavigation {
-
+    
     [self drawTitle:@"蔷薇爱车"];
 }
 
@@ -40,8 +41,7 @@
     // Do any additional setup after loading the view.
     [self createSubView];
     
-    [self startTimer];
-
+    
 }
 - (void)startTimer
 {
@@ -57,23 +57,30 @@
 
 - (void)onTimer
 {
+    NSLog(@"================ %d",self.second);
     if (self.second == 0) {
         
         DSCompleteWashingController     *completeVC     = [[DSCompleteWashingController alloc]init];
         completeVC.hidesBottomBarWhenPushed             = YES;
         [self.navigationController pushViewController:completeVC animated:YES];
-       
+        
+        [self.timer invalidate];
+    }else {
+        
+        NSString *text  = [NSString stringWithFormat:@"%d%@",self.second--,@"分钟"];
+        
+        self.timeNumLabel.text  = text;
     }
 }
 
 
 - (void) createSubView {
-
+    
     UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*80/667) color:[UIColor whiteColor]];
     titleView.top                      = Main_Screen_Height*10/667;
     titleView.centerX                  = Main_Screen_Width/2;
     
-
+    
     NSString   *titleString     = @"精洗";
     
     UIFont     *titleFont       = [UIFont systemFontOfSize:18];
@@ -93,13 +100,13 @@
     modeLabel.textAlignment    = NSTextAlignmentCenter;
     modeLabel.centerX          = titleLabel.centerX;
     modeLabel.top              = titleLabel.bottom+Main_Screen_Height*10/667;
-
+    
     
     
     NSString   *scoreString     = [NSString stringWithFormat:@"+%d积分",10];
     UILabel *scoreLabel         = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667)];
     scoreLabel.textColor        = [UIColor colorFromHex:@"#ff525a"];
-
+    
     NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:scoreString];
     [AttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange([scoreString length]-2, 2)];
     [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#4a4a4a"] range:NSMakeRange([scoreString length]-2, 2)];
@@ -125,21 +132,21 @@
     
     NSString   *timeNumString     = @"5分钟";
     
-    UILabel *timeNumLabel         = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667)];
-    timeNumLabel.textColor        = [UIColor colorFromHex:@"#ff525a"];
+    self.timeNumLabel         = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667)];
+    self.timeNumLabel.textColor        = [UIColor colorFromHex:@"#ff525a"];
     
     NSMutableAttributedString *AttributedStrTime = [[NSMutableAttributedString alloc]initWithString:timeNumString];
     [AttributedStrTime addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange([timeNumString length]-2, 2)];
     [AttributedStrTime addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#4a4a4a"] range:NSMakeRange([timeNumString length]-2, 2)];
     
-    timeNumLabel.attributedText   = AttributedStrTime;
+    self.timeNumLabel.attributedText   = AttributedStrTime;
     
-    timeNumLabel.textAlignment    = NSTextAlignmentCenter;
-    timeNumLabel.centerX          = Main_Screen_Width*3/4 +Main_Screen_Width*20/375;;
-    timeNumLabel.top              = Main_Screen_Height*16/667;
+    self.timeNumLabel.textAlignment    = NSTextAlignmentCenter;
+    self.timeNumLabel.centerX          = Main_Screen_Width*3/4 +Main_Screen_Width*20/375;;
+    self.timeNumLabel.top              = Main_Screen_Height*16/667;
     
-    [titleView addSubview:timeNumLabel];
-
+    [titleView addSubview:self.timeNumLabel];
+    
     
     NSString   *timeString     = @"洗车时间";
     
@@ -148,8 +155,8 @@
     timeLabel.text             = timeString;
     timeLabel.textColor        = [UIColor colorFromHex:@"#868686"];
     timeLabel.textAlignment    = NSTextAlignmentCenter;
-    timeLabel.centerX          = timeNumLabel.centerX;
-    timeLabel.top              = timeNumLabel.bottom+Main_Screen_Height*10/667;
+    timeLabel.centerX          = self.timeNumLabel.centerX;
+    timeLabel.top              = self.timeNumLabel.bottom+Main_Screen_Height*10/667;
     
     
     UIView *downView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*60/667) color:[UIColor whiteColor]];
@@ -205,7 +212,7 @@
     
     adButton.centerX       = titleView.size.width/2;
     [self.contentView addSubview:adButton];
-
+    
     
     UIButton    *adPageButton       = [UIButton buttonWithType:UIButtonTypeCustom];
     adPageButton.frame              = CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*100/667);
@@ -215,6 +222,8 @@
     adPageButton.bottom        = adButton.top -Main_Screen_Height*10/667;
     adPageButton.centerX       = titleView.size.width/2;
     [self.contentView addSubview:adPageButton];
+    
+    [self startTimer];
     
 }
 
@@ -226,7 +235,7 @@
 }
 
 - (void) adPageButtonClick:(id)sender {
-
+    
     
 }
 
@@ -236,13 +245,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -32,14 +32,14 @@
     UILabel *timesCardLabel = [[UILabel alloc] init];
     timesCardLabel.text = @"可免费洗车10次";
     timesCardLabel.textAlignment = NSTextAlignmentRight;
-    timesCardLabel.textColor = [UIColor colorFromHex:@"#febb02"];
+    timesCardLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     timesCardLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
     self.timesCardLabel = timesCardLabel;
     [self.contentView addSubview:timesCardLabel];
     
     UILabel *brandCardLabel = [[UILabel alloc] init];
     brandCardLabel.text = @"蔷薇自动洗车可用";
-    brandCardLabel.textColor = [UIColor colorFromHex:@"#febb02"];
+    brandCardLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     brandCardLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
     brandCardLabel.textAlignment = NSTextAlignmentRight;
     [self.contentView addSubview:brandCardLabel];

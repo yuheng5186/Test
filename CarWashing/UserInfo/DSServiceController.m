@@ -97,7 +97,7 @@
     [phoneBtn setTitleColor:[UIColor colorFromHex:@"#4a4a4a"] forState:UIControlStateNormal];
    
     phoneBtn.titleLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
-    [phoneBtn setImage:[UIImage imageNamed:@"kefuzixun"] forState:UIControlStateNormal];
+    [phoneBtn setImage:[UIImage imageNamed:@"kefu_service"] forState:UIControlStateNormal];
     [bottomPhoneView addSubview:phoneBtn];
     
 //    [serviceListView mas_makeConstraints:^(MASConstraintMaker *make) {
