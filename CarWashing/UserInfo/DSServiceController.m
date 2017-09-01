@@ -87,7 +87,7 @@
     [self.view addSubview:bottomPhoneView];
 
     UIView *lineView = [[UIView alloc] init];
-    lineView.backgroundColor = [UIColor colorFromHex:@"#fafafa"];
+    lineView.backgroundColor = [UIColor colorFromHex:@"#e6e6e6"];
     [self.view addSubview:lineView];
     
     UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];

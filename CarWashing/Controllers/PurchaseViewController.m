@@ -116,7 +116,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     self.locationButton        = [UIButton buttonWithType:UIButtonTypeCustom];
     self.locationButton.frame             = CGRectMake(0, 0, Main_Screen_Width*70/375, Main_Screen_Height*30/667);
     self.locationButton.backgroundColor   = [UIColor clearColor];
-    [self.locationButton setTitle:@"上海市" forState:UIControlStateNormal];
+    [self.locationButton setTitle:@"上海" forState:UIControlStateNormal];
     [self.locationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.locationButton.titleLabel.font   = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
     self.locationButton.left              = Main_Screen_Width*14/375;
