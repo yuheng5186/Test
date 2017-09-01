@@ -17,6 +17,7 @@
 #import "UdStorage.h"
 #import "QWMclistTableViewCell.h"
 #import "MBProgressHUD.h"
+#import "BusinessDetailViewController.h"
 
 @interface DSFavoritesController ()<UITableViewDelegate, UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
@@ -74,6 +75,7 @@ static NSString *id_salerListCell = @"salerListCell";
                              };
     
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetFavouriteMerchant",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             NSArray *arr = [NSArray array];
@@ -126,7 +128,7 @@ static NSString *id_salerListCell = @"salerListCell";
                              };
     
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetFavouriteMerchant",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+        NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             NSArray *arr = [NSArray array];
@@ -339,7 +341,18 @@ static NSString *id_salerListCell = @"salerListCell";
     
 }
 
+#pragma mark-跳转到商家详情
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //跳转商家详情
+    BusinessDetailViewController *detailController = [[BusinessDetailViewController alloc] init];
+    detailController.hidesBottomBarWhenPushed      = YES;
+     NSDictionary *dic=[self.MyFavouriteMerchantData objectAtIndex:indexPath.row];
+    detailController.MerCode                       = [[dic objectForKey:@"MerCode"] integerValue];
+    detailController.distance                      = [dic objectForKey:@"Distance"];
+    [self.navigationController pushViewController:detailController animated:YES];
 
+}
 #pragma mark - 无数据占位
 //无数据占位
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
