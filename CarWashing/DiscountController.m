@@ -160,7 +160,7 @@ static NSString *id_discountCell = @"id_discountCell";
  */
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return -64.f-44-55;
+    return -64.f-44;
 }
 
 
