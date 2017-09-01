@@ -13,7 +13,13 @@
 #import "HTTPDefine.h"
 #import "AppDelegate.h"
 #import "DSUserInfoController.h"
+
+#import "MBProgressHUD.h"
+
 @interface DSCheckPhoneViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+{
+    MBProgressHUD *HUD;
+}
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UITextField *phoneNumberText;
 @property (nonatomic, strong) UITextField *verifyNumberFieldText;
@@ -122,6 +128,14 @@
 
 #pragma mark-修改手机号
 -(void)updateUserphone:(NSString *)Userphone andverifyNumberStr:(NSString *)verifyNumberstr{
+    
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
+    
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                              @"ModifyType":@"3",
@@ -134,7 +148,7 @@
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/UserInfoEdit",Khttp] success:^(NSDictionary *dict, BOOL success) {
         
-        NSLog(@"==%@==",dict);
+        
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             
@@ -142,25 +156,32 @@
             APPDELEGATE.currentUser.userPhone = Userphone;
             NSNotification * notice = [NSNotification notificationWithName:@"updatephonesuccess" object:nil userInfo:@{@"userphone":Userphone}];
             [[NSNotificationCenter defaultCenter]postNotification:notice];
-            int index=[[self.navigationController viewControllers]indexOfObject:self];
-            [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-2]animated:YES];
             
-            [UdStorage storageObject:APPDELEGATE.currentUser.userName forKey:@"Name"];
-            [UdStorage storageObject:APPDELEGATE.currentUser.Accountname forKey:@"UserName"];
-            [UdStorage storageObject:APPDELEGATE.currentUser.userImagePath forKey:@"Headimg"];
-            [UdStorage storageObject:APPDELEGATE.currentUser.userSex forKey:@"Sex"];
-            [UdStorage storageObject:APPDELEGATE.currentUser.userAge forKey:@"Age"];
-            [UdStorage storageObject:APPDELEGATE.currentUser.userPhone forKey:@"Mobile"];
             
+            HUD.mode = MBProgressHUDModeCustomView;
+            HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"success"]];
+            HUD.mode = MBProgressHUDModeCustomView;
+            HUD.animationType = MBProgressHUDAnimationZoom;
+            HUD.removeFromSuperViewOnHide = YES;
+            HUD.completionBlock = ^(){
+                
+                int index=[[self.navigationController viewControllers]indexOfObject:self];
+                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-2]animated:YES];
+            };
+            
+            [HUD hide:YES afterDelay:1.f];
+            
+
             
         }
         else
         {
+            [HUD hide:YES];
             [self.view showInfo:@"修改失败" autoHidden:YES interval:1];
         }
         
     } fail:^(NSError *error) {
-        NSLog(@"==+++%@+++",error);
+        [HUD hide:YES];
         [self.view showInfo:@"修改失败" autoHidden:YES interval:1];
     }];
     

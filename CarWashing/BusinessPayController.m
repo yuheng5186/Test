@@ -150,7 +150,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     [self.view addSubview:payBottomView];
     
     UILabel *bottomPriceLab = [[UILabel alloc] init];
-    bottomPriceLab.text = @"¥54.00";
+    bottomPriceLab.text = self.Xprice;
     bottomPriceLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     bottomPriceLab.textColor = [UIColor colorFromHex:@"#ff525a"];
     [payBottomView addSubview:bottomPriceLab];
@@ -195,6 +195,95 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
+        
+        
+        NSString *urlPath = [NSString stringWithFormat:@"http://119.23.53.225/WeixinPay.ashx?op=GetUnifiedorder"];
+        
+        //    NSString *parasStr = [NSString stringWithFormat:@"uid=%ld&body=%@&fee=%@00&type=0&cid=%@",APPDELEGATE.currentUser.userID,body.text,self.money,self.nsstring];
+        
+        //    NSData *data = [parasStr dataUsingEncoding:NSUTF8StringEncoding];
+        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
+        
+        [request setURL:[NSURL URLWithString:urlPath]];
+        
+        [request setTimeoutInterval:10];
+        
+        [request setCachePolicy:NSURLRequestUseProtocolCachePolicy];
+        
+        [request setHTTPMethod:@"POST"];
+        
+        [request setHTTPBody:nil];
+        
+        NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+        
+        
+        
+        NSError *error;
+        
+        
+        if (received != nil)
+        {
+            NSMutableDictionary *dict = NULL;
+            //IOS5自带解析类NSJSONSerialization从response中解析出数据放到字典中
+            dict = [NSJSONSerialization JSONObjectWithData:received
+                                                   options:NSJSONReadingMutableLeaves error:&error];
+            
+            NSLog(@"url:%@",urlPath);
+            if(dict!= nil)
+            {
+                NSMutableString *retcode = [dict objectForKey:@"retcode"];
+                if (retcode.intValue == 0)
+                {
+                    NSMutableString *stamp = [dict objectForKey:@"timestamp"];
+                    //调起微信支付
+                    PayReq *req= [[PayReq alloc] init];
+                    req.partnerId
+                    = [dict objectForKey:@"partnerid"];
+                    req.prepayId
+                    = [dict objectForKey:@"prepayid"];
+                    req.nonceStr
+                    = [dict objectForKey:@"noncestr"];
+                    req.timeStamp
+                    = stamp.intValue;
+                    req.package
+                    = [dict objectForKey:@"package"];
+                    req.sign = [dict objectForKey:@"sign"];
+                    BOOL result = [WXApi sendReq:req];
+                    
+                    NSLog(@"-=-=-=-=-%d", result);
+                    //日志输出
+                    NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict
+                                                                                                                objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign
+                          );
+                }
+                else
+                {
+                    NSLog(@"-=-=-=-=-%@", [dict objectForKey:@"retmsg"]);
+                }
+            }
+            else
+            {
+                NSLog( @"服务器返回错误，未获取到json对象");
+            }
+        }
+        else
+        {
+            NSLog( @"服务器返回错误");
+        }
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }];
     [alertController addAction:OKAction];
     
@@ -213,6 +302,10 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     if (section == 0) {
         return 3;
     }
+    else if(section == 2)
+    {
+        return 1;
+    }
     
     return 2;
 }
@@ -226,25 +319,60 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     payCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     NSArray *shopTypeArr = @[@"服务商家",@"服务项目",@"订单金额"];
-    NSArray *cashTypeArr = @[@"代金券",@"实付"];
+    NSArray *cashTypeArr = @[@"特惠活动",@"实付"];
     
-    if (indexPath.section == 0 || indexPath.section == 1) {
+    if (indexPath.section == 0) {
         
-        if (indexPath.section == 0) {
+        if (indexPath.section == 0 && indexPath.row == 0) {
             
             payCell.textLabel.text = shopTypeArr[indexPath.row];
-        }else {
+            payCell.detailTextLabel.text = self.SerMerChant;
+            payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+            payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+            payCell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+            payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#999999"];
+        }else if (indexPath.section == 0 && indexPath.row == 1){
             
-            payCell.textLabel.text = cashTypeArr[indexPath.row];
+            payCell.textLabel.text = shopTypeArr[indexPath.row];
+            payCell.detailTextLabel.text = self.SerProject;
+            payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+            payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+            payCell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+            payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#999999"];
+        }
+        else
+        {
+            payCell.textLabel.text = shopTypeArr[indexPath.row];
+            payCell.detailTextLabel.text = self.Jprice;
+            payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+            payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+            payCell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+            payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
         }
         
-        payCell.detailTextLabel.text = @"上海金雷洗车";
-        payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-        payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
-        payCell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
-        payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#999999"];
         
-    }else {
+        
+    }else if(indexPath.section == 1){
+        payCell.textLabel.text = cashTypeArr[indexPath.row];
+        if(indexPath.row == 0)
+        {
+            payCell.detailTextLabel.text = [NSString stringWithFormat:@"立减%.2f元",[[self.Jprice substringFromIndex:1] doubleValue] - [[self.Xprice substringFromIndex:1] doubleValue]];
+            payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+            payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+            payCell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+            payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
+        }
+        else
+        {
+            payCell.detailTextLabel.text = self.Xprice;
+            payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+            payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+            payCell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+            payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
+        }
+        
+    }
+    else{
         BusinessPayCell *cell = [tableView dequeueReusableCellWithIdentifier:id_paySelectCell forIndexPath:indexPath];
         _seleCell = cell;
         //cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -288,7 +416,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section == 1 && indexPath.row == 0 ) {
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 }
 

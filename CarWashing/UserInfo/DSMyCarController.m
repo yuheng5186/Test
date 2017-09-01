@@ -103,21 +103,15 @@ static NSString * HeaderId = @"header";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(noticeupdateMyCar:) name:@"updatemycarsuccess" object:nil];
-    [center addObserver:self selector:@selector(noticeupdateMyCar:) name:@"increasemycarsuccess" object:nil];
+//    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+//    [center addObserver:self selector:@selector(noticeupdateMyCar:) name:@"updatemycarsuccess" object:nil];
+//    [center addObserver:self selector:@selector(noticeupdateMyCar:) name:@"increasemycarsuccess" object:nil];
 
 //    [IQKeyboardManager sharedManager].enable = YES;
     //self.carImageView.image = [UIImage imageNamed:@"02"];
     
     
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    HUD.removeFromSuperViewOnHide =YES;
-    HUD.mode = MBProgressHUDModeIndeterminate;
-    HUD.labelText = @"加载中";
-    HUD.minSize = CGSizeMake(132.f, 108.0f);
     
-    [self getMyCarData];
     
     
     
@@ -972,7 +966,18 @@ static NSString * HeaderId = @"header";
     [self.carInfoView endEditing:YES];
 }
 
--(void)noticeupdateMyCar:(NSNotification *)sender{
+//-(void)noticeupdateMyCar:(NSNotification *)sender{
+//    
+//    [self getMyCarData];
+//}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
     
     [self getMyCarData];
 }

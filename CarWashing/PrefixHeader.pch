@@ -43,7 +43,7 @@
 
 #import "TFGridInputView.h"
 #import<AVFoundation/AVFoundation.h>
-
+#define kColorTableBG [UIColor colorWithHexString:@"0xf0f0f0"]
 
 
 

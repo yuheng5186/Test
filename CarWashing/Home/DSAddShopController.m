@@ -38,7 +38,10 @@
     
     
     UIImage *adImage            = [UIImage imageNamed:@"shangjiaruzhutu"];
-    UIImageView *adImageView    = [UIUtil drawCustomImgViewInView:self.scrollView frame:CGRectMake(0, 0, adImage.size.width, adImage.size.height) imageName:@"shangjiaruzhutu"];
+    UIImageView *adImageView    = [UIUtil drawCustomImgViewInView:self.scrollView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height) imageName:@"shangjiaruzhutu"];
+    
+    adImageView.contentMode=UIViewContentModeScaleAspectFill;
+    adImageView.image=adImage;
     adImageView.centerX         = Main_Screen_Width/2;
     adImageView.top             = Main_Screen_Height*0/667;
     
