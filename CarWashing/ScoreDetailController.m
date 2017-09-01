@@ -428,8 +428,6 @@
     [self.scoreListView.mj_header beginRefreshing];
 //    [self.scoreListView reloadData];
 }
-
-
 #pragma mark - 点击赚积分按钮和兑换按钮
 - (void)didClickEarnScoreBtn {
     

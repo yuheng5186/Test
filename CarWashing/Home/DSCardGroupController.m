@@ -121,7 +121,42 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     [self GetCardbagList];
     
 }
-
+-(void)GetCardbagList
+{
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardInfoList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+            for(NSDictionary *dic in arr)
+            {
+                CardBag *model = [CardBag new];
+                [model setValuesForKeysWithDictionary:dic];
+                [_CardbagData addObject:model];
+            }
+            [_rechargeView reloadData];
+            [HUD setHidden:YES];
+        }
+        else
+        {
+            [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }];
+    
+}
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
     [self.activateTF resignFirstResponder];
@@ -177,42 +212,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
 }
 
--(void)GetCardbagList
-{
-    NSDictionary *mulDic = @{
-                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
-                             };
-    NSDictionary *params = @{
-                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                             };
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardInfoList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
-        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-        {
-            NSArray *arr = [NSArray array];
-            arr = [dict objectForKey:@"JsonData"];
-            for(NSDictionary *dic in arr)
-            {
-                CardBag *model = [CardBag new];
-                [model setValuesForKeysWithDictionary:dic];
-                [_CardbagData addObject:model];
-            }
-            [_rechargeView reloadData];
-            [HUD setHidden:YES];
-        }
-        else
-        {
-            [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-    } fail:^(NSError *error) {
-        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
-        [self.navigationController popViewControllerAnimated:YES];
-        
-    }];
 
-}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
