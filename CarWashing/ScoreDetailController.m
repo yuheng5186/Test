@@ -441,12 +441,28 @@
     
     //DSMembershipController *memberVC = [[DSMembershipController alloc] init];
     
+    int i = 0 ;
+    
     for (UIViewController *controller in self.navigationController.viewControllers) {
         if ([controller isKindOfClass:[DSMembershipController class]]) {
             DSMembershipController *memberVC =(DSMembershipController *)controller;
             [self.navigationController popToViewController:memberVC animated:YES];
         }
+        i++;
     }
+    
+    if(i == [self.navigationController.viewControllers count])
+    {
+        DSMembershipController *memberVC = [[DSMembershipController alloc]init];
+        memberVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:memberVC animated:YES];
+    }
+    
+    
+    
+    
+    
+    
     
     
 }

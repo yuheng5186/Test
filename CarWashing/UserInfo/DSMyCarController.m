@@ -281,7 +281,7 @@ static NSString * HeaderId = @"header";
         
         
         UIImageView *carImageView = [[UIImageView alloc] init];
-        carImageView.image = [UIImage imageNamed:@"aiche1"];
+        carImageView.image = [UIImage imageNamed:@"aicheditu"];
         [containImageView addSubview:carImageView];
         
         UILabel *carpinpai = [[UILabel alloc]initWithFrame:CGRectMake(115*Main_Screen_Height/667, 40*Main_Screen_Height/667, containImageView.frame.size.width - 130*Main_Screen_Height/667, 20)];
@@ -307,7 +307,7 @@ static NSString * HeaderId = @"header";
         
         bannerView.mainImageView = containImageView;
 
-    
+
     
     
     return bannerView;

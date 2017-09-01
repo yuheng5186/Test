@@ -59,7 +59,7 @@
     upView.top                      = 0;
     
 //    UIImage *backgroundImage              = [UIImage imageNamed:@"saomaxichetiyanquan"];
-    UIImageView *backgroundImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(37.5*Main_Screen_Height/667, 0, Main_Screen_Width-75*Main_Screen_Height/667, 192*Main_Screen_Height/667) imageName:@"bg_card"];
+    UIImageView *backgroundImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(37.5*Main_Screen_Height/667, 0, Main_Screen_Width-75*Main_Screen_Height/667, 192*Main_Screen_Height/667) imageName:@"qw_tiyanka"];
     backgroundImageView.top               = Main_Screen_Height*25/667;
     backgroundImageView.centerX           = upView.centerX;
     

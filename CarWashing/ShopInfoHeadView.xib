@@ -141,8 +141,8 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnI-hl-S6i">
-                    <rect key="frame" x="244" y="93" width="20" height="22"/>
-                    <state key="normal" image="kefuzixun"/>
+                    <rect key="frame" x="240" y="92" width="24" height="24"/>
+                    <state key="normal" image="kefu_service"/>
                     <connections>
                         <action selector="didClickShopPhone:" destination="-1" eventType="touchUpInside" id="WlT-24-tWG"/>
                     </connections>
@@ -216,7 +216,7 @@
     </objects>
     <resources>
         <image name="juli" width="10" height="10"/>
-        <image name="kefuzixun" width="20" height="20"/>
+        <image name="kefu_service" width="24" height="24"/>
         <image name="lansedaohang" width="20" height="20"/>
     </resources>
 </document>
