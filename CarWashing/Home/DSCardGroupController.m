@@ -251,7 +251,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         cell.CardnameLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
         cell.tagLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
         cell.CarddesLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
-        cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yishiyong"];
+        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_cika"];
         
     }
     else if(card.CardUseState == 3)
@@ -259,11 +259,11 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         cell.CardnameLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
         cell.tagLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
         cell.CarddesLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
-        cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yiguoqi"];
+        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_cika"];
     }
     
     
-    
+
     
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
