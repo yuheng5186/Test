@@ -7,6 +7,7 @@
 //
 
 #import "DSCompleteWashingController.h"
+#import "DSScanController.h"
 
 @interface DSCompleteWashingController ()
 
@@ -17,8 +18,16 @@
 - (void) drawNavigation {
     
     [self drawTitle:@"洗车结束"];
+    [self drawBackButtonWithAction:@selector(backButtonClick:)];
 }
 
+- (void) backButtonClick:(id)sender {
+        
+    NSArray     *array  = self.navigationController.viewControllers;
+    DSScanController  *scanVC = [array objectAtIndex:0];
+    [self.navigationController popToViewController:scanVC animated:YES];
+    
+}
 - (void) drawContent {
     
     self.contentView.top                = self.navigationView.bottom;
@@ -29,7 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-     [self createSubView];
+    [self createSubView];
     
 }
 
@@ -178,7 +187,7 @@
     [adButton addTarget:self action:@selector(adButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     adButton.bottom        = self.view.height -Main_Screen_Height*80/667;
-
+    
     if (Main_Screen_Height == 568) {
         adButton.bottom        = self.contentView.height -Main_Screen_Height*85/667;
     }
@@ -191,7 +200,7 @@
     
     adButton.centerX       = titleView.size.width/2;
     [self.contentView addSubview:adButton];
-
+    
     
     UIButton    *adPageButton       = [UIButton buttonWithType:UIButtonTypeCustom];
     adPageButton.frame              = CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*100/667);
@@ -221,13 +230,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
