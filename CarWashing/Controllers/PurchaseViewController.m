@@ -239,9 +239,9 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     //关于卡片的label
     functionLabel = [[UILabel alloc] init];
     functionLabel.text = card.CardName;
-    functionLabel.font = [UIFont systemFontOfSize:17*Main_Screen_Height/667];
+    functionLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     functionLabel.textAlignment = NSTextAlignmentCenter;
-    functionLabel.textColor = [UIColor colorFromHex:@"#868686"];
+    functionLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     [_middleview addSubview:functionLabel];
     
     introLabelOne = [[UILabel alloc] init];

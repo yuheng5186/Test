@@ -347,7 +347,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
             payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
             payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             payCell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
-            payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
+            payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#ff3645"];
         }
         
         
@@ -368,7 +368,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
             payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
             payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             payCell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
-            payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
+            payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#ff3645"];
         }
         
     }
@@ -454,14 +454,14 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    if (indexPath.section == 1 && indexPath.row == 0) {
-        
-        CashViewController *cashVC = [[CashViewController alloc] init];
-        //cashVC.providesPresentationContextTransitionStyle = YES;
-        //cashVC.definesPresentationContext = YES;
-        cashVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        [self presentViewController:cashVC animated:NO completion:nil];
-    }
+//    if (indexPath.section == 1 && indexPath.row == 0) {
+//        
+//        CashViewController *cashVC = [[CashViewController alloc] init];
+//        //cashVC.providesPresentationContextTransitionStyle = YES;
+//        //cashVC.definesPresentationContext = YES;
+//        cashVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//        [self presentViewController:cashVC animated:NO completion:nil];
+//    }
     
     if (indexPath.section == 2) {
         
