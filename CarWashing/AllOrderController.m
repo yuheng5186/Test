@@ -198,7 +198,7 @@ static NSString *id_cancelCell = @"id_cancelCell";
  */
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return -64.f-44-55;
+    return -64.f-44;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
