@@ -98,8 +98,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     HUD.mode = MBProgressHUDModeIndeterminate;
     HUD.labelText = @"加载中";
     HUD.minSize = CGSizeMake(132.f, 108.0f);
-    _MembershipUserScore = [[NSMutableDictionary alloc]init];
-    _MembershipUserScoreArray = [[NSMutableArray alloc]init];
+    
     [self GetMembershipUserScore];
 }
 
@@ -204,6 +203,10 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            _MembershipUserScore = [[NSMutableDictionary alloc]init];
+            _MembershipUserScoreArray = [[NSMutableArray alloc]init];
+            
+            
             _MembershipUserScore = [dict objectForKey:@"JsonData"];
             
             
@@ -490,8 +493,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 
 -(void)noticeupdate:(NSNotification *)sender{
     
-    _MembershipUserScore = [[NSMutableDictionary alloc]init];
-    _MembershipUserScoreArray = [[NSMutableArray alloc]init];
+    
     [self GetMembershipUserScore];
 }
 
