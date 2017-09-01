@@ -19,8 +19,12 @@
 #import "HowToUpGradeController.h"
 #import "EarnScoreController.h"
 #import "DSMembershipController.h"
+#import "MBProgressHUD.h"
 
 @interface IcreaseCarController ()<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
+{
+    MBProgressHUD *HUD;
+}
 
 @property (nonatomic, weak) UITableView *carInfoView;
 
@@ -414,10 +418,16 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
 
 - (void)didClickSaveButton {
     
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
+    
+    
     if(self.mycar == nil)
     {
-        
-        
         if(_brandTF.text.length == 0 || _numTF.text.length == 0 || _text1.text.length == 0 || _lbl2.text.length == 0 || _lbl.text.length == 0 || _text2.text.length == 0)
         {
             [self.view showInfo:@"请将信息填写完整" autoHidden:YES interval:2];
@@ -456,78 +466,78 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                     
                     if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                     {
-                        //[self.view showInfo:@"新增成功" autoHidden:YES interval:2];
+                        
                         NSNotification * notice = [NSNotification notificationWithName:@"increasemycarsuccess" object:nil userInfo:nil];
                         [[NSNotificationCenter defaultCenter]postNotification:notice];
-        
                         
-            
+                        __weak typeof (self) weakSelf = self;
+
                         
-                        NSArray *vcsArray = [NSArray array];
-                        vcsArray= [self.navigationController viewControllers];
-                        NSInteger vcCount = vcsArray.count;
-                        
-                        
-                        if(vcCount <5)
-                        {
-                            [self.navigationController popViewControllerAnimated:YES];
-                        }
-                        else
-                        {
-                            
-                        
-                            UIViewController *lastVC = vcsArray[vcCount-4];
-                            UIViewController *lasttwoVC = vcsArray[vcCount-5];
-                            
-                            
-                            
-                            int index=[[self.navigationController viewControllers]indexOfObject:self];
-                            
-                            if([lastVC isKindOfClass:[HowToUpGradeController class]])
+                        HUD.completionBlock = ^(){
+                            NSArray *vcsArray = [NSArray array];
+                            vcsArray= [self.navigationController viewControllers];
+                            NSInteger vcCount = vcsArray.count;
+
+                            if(vcCount <5)
                             {
                                 
-                                NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
-                                [[NSNotificationCenter defaultCenter]postNotification:notice];
-                                
-                                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
-                            }
-                            else if([lastVC isKindOfClass:[EarnScoreController class]])
-                            {
-                                if([lasttwoVC isKindOfClass:[DSMembershipController class]])
-                                {
-                                    NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
-                                    [[NSNotificationCenter defaultCenter]postNotification:notice];
-                                    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
-                                }
-                                NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
-                                [[NSNotificationCenter defaultCenter]postNotification:notice];
-                                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-5]animated:YES];
+                                [weakSelf.view showInfo:@"新增成功" autoHidden:YES interval:2];
+                                [weakSelf.navigationController popViewControllerAnimated:YES];
                             }
                             else
                             {
+                                UIViewController *lastVC = vcsArray[vcCount-4];
+                                UIViewController *lasttwoVC = vcsArray[vcCount-5];
                                 
+                                int index=[[weakSelf.navigationController viewControllers]indexOfObject:weakSelf];
+                                
+                                if([lastVC isKindOfClass:[HowToUpGradeController class]])
+                                {
+                                    
+                                    NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                    [[NSNotificationCenter defaultCenter]postNotification:notice];
+                                    
+                                    [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
+                                }
+                                else if([lastVC isKindOfClass:[EarnScoreController class]])
+                                {
+                                    if([lasttwoVC isKindOfClass:[DSMembershipController class]])
+                                    {
+                                        NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                        [[NSNotificationCenter defaultCenter]postNotification:notice];
+                                        [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
+                                    }
+                                    NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                    [[NSNotificationCenter defaultCenter]postNotification:notice];
+                                    [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:index-5]animated:YES];
+                                }
+
                             }
 
+                        };
                         
-                        
-                        }
 
+        
+                        [HUD hide:YES afterDelay:1];
                         
                     
                     }
                     
                     else
                     {
+                        [HUD setHidden:YES];
                         [self.view showInfo:@"新增失败" autoHidden:YES interval:2];
                     }
                     
                 } fail:^(NSError *error) {
+                    [HUD setHidden:YES];
                     [self.view showInfo:@"新增失败" autoHidden:YES interval:2];
                 }];
                 
             }
             else
             {
+                [HUD setHidden:YES];
                 [self.view showInfo:@"请将信息填写完整" autoHidden:YES interval:2];
             }
 
@@ -536,55 +546,77 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
 
         
     }
-//    else
-//    {
-//        if(_brandTF.text.length == 0 || _numTF.text.length == 0 || _text1.text.length == 0 || _lbl2.text.length == 0 || _lbl.text.length == 0 || _text2.text.length == 0)
-//        {
-//            [self.view showInfo:@"请将信息填写完整" autoHidden:YES interval:2];
-//        }
-//        else
-//        {
-//            NSDictionary *mulDic = @{
-//                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-//                                     @"CarCode":[NSString stringWithFormat:@"%ld",self.mycar.CarCode],
-//                                     @"ModifyType":@1,
-//                                     @"CarBrand":_brandTF.text,
-//                                     @"PlateNumber":[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,_numTF.text],
-//                                     @"ChassisNum":_text1.text,
-//                                     @"EngineNum":@"",
-//                                     @"Manufacture":[_lbl.text substringWithRange:NSMakeRange(0,4)],
-//                                     @"DepartureTime":_lbl2.text,
-//                                     @"Mileage":_text2.text
-//                                     };
-//            NSDictionary *params = @{
-//                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-//                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-//                                     };
-//            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/ModifyCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
-//                
-//                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-//                {
-//                    [self.view showInfo:@"修改成功" autoHidden:YES interval:2];
-//                    NSNotification * notice = [NSNotification notificationWithName:@"updatemycarsuccess" object:nil userInfo:nil];
-//                    [[NSNotificationCenter defaultCenter]postNotification:notice];
-//                    [self.navigationController popViewControllerAnimated:YES];
-//                    
-//                }
-//                else
-//                {
-//                    [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
-//                }
-//                
-//            } fail:^(NSError *error) {
-//                [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
-//            }];
-//        }
-//        
-//        
-//        
-//        
-//
-//    }
+    else
+    {
+        if(_brandTF.text.length == 0 || _numTF.text.length == 0 || _text1.text.length == 0 || _lbl2.text.length == 0 || _lbl.text.length == 0 || _text2.text.length == 0)
+        {
+            [self.view showInfo:@"请将信息填写完整" autoHidden:YES interval:2];
+        }
+        else
+        {
+            NSDictionary *mulDic = @{
+                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                     @"CarCode":[NSString stringWithFormat:@"%ld",self.mycar.CarCode],
+                                     @"ModifyType":@1,
+                                     @"CarBrand":_brandTF.text,
+                                     @"PlateNumber":[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,_numTF.text],
+                                     @"ChassisNum":_text1.text,
+                                     @"EngineNum":@"",
+                                     @"Manufacture":[_lbl.text substringWithRange:NSMakeRange(0,4)],
+                                     @"DepartureTime":_lbl2.text,
+                                     @"Mileage":_text2.text
+                                     };
+            NSDictionary *params = @{
+                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                     };
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/ModifyCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                
+                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                {
+                    
+                    
+                    
+                    HUD.mode = MBProgressHUDModeCustomView;
+                    
+                    HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"success"]];
+                    HUD.mode = MBProgressHUDModeCustomView;
+                    HUD.animationType = MBProgressHUDAnimationZoom;
+                    HUD.removeFromSuperViewOnHide = YES;
+                    
+                    
+                    NSNotification * notice = [NSNotification notificationWithName:@"updatemycarsuccess" object:nil userInfo:nil];
+                    [[NSNotificationCenter defaultCenter]postNotification:notice];
+                    
+                    HUD.completionBlock = ^(){
+                        [self.navigationController popViewControllerAnimated:YES];
+                        
+                    };
+                    
+                    [HUD hide:YES afterDelay:1.f];
+                    
+                    
+                    
+                    
+                    
+                }
+                else
+                {
+                    [HUD hide:YES];
+                    [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+                }
+                
+            } fail:^(NSError *error) {
+                [HUD hide:YES];
+                [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+            }];
+        }
+        
+        
+        
+        
+
+    }
     
     
     

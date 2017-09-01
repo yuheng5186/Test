@@ -48,6 +48,7 @@
 #import "Record.h"
 #import "AppDelegate.h"
 #import "CoreLocation/CoreLocation.h"
+#import "MBProgressHUD.h"
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate>
 {
@@ -93,8 +94,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    
-    
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];
     

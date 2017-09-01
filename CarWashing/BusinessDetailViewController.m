@@ -490,6 +490,11 @@ static NSString *businessCommentCell = @"businessCommentCell";
 - (void)clickPayButton {
     
     BusinessPayController *payController = [[BusinessPayController alloc] init];
+
+    payController.SerMerChant = self.dic[@"MerName"];
+    payController.SerProject = lblCarType.text;
+    payController.Jprice = formerPriceLab.text;
+    payController.Xprice = lblPrice.text;
     
     [self.navigationController pushViewController:payController animated:YES];
 }
