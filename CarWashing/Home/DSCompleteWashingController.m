@@ -8,6 +8,7 @@
 
 #import "DSCompleteWashingController.h"
 #import "DSScanController.h"
+#import "DSScanQRCodeController.h"
 
 @interface DSCompleteWashingController ()
 

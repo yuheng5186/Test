@@ -67,7 +67,7 @@
         [self.timer invalidate];
     }else {
         
-        NSString *text  = [NSString stringWithFormat:@"%d%@",self.second--,@"分钟"];
+        NSString *text  = [NSString stringWithFormat:@"%d%@",self.second--,@"秒钟"];
         
         self.timeNumLabel.text  = text;
     }
