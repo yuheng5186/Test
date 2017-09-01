@@ -27,7 +27,7 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"门店"];
+    [self drawTitle:self.dic[@"MerName"]];
     
 }
 
@@ -125,7 +125,7 @@
     //容器视图
     UIView *containerView = [[UIView alloc] init];
     _containerView = containerView;
-    containerView.backgroundColor = [UIColor lightGrayColor];
+    containerView.backgroundColor =[UIColor colorWithHex:0xf0f0f0];
     
     [shopScrollView addSubview:containerView];
     

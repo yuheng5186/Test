@@ -12,7 +12,7 @@
 #import "HTTPDefine.h"
 #import <Masonry.h>
 #import "JXMapNavigationView.h"
-
+#define kColorTableBG [UIColor colorWithHex:0xf0f0f0]
 @interface ShopIntroController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) ShopInfoHeadView *infoHeadView;
@@ -50,6 +50,10 @@ static NSString *id_infoCell = @"id_infoCell";
     [super viewDidLoad];
     
     [self setupUI];
+    
+    self.infoTableView.backgroundColor=kColorTableBG;
+    self.infoHeadView.backgroundColor=[UIColor whiteColor];
+    self.infoTableView.backgroundColor=kColorTableBG;
     
 }
 

@@ -83,46 +83,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CarWashing/UserInfo/DSFavoritesController.m"
-            timestampString = "525937366.346313"
+            filePath = "CarWashing/BusinessDetailViewController.m"
+            timestampString = "525938023.323991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "-getMyFavouriteMC"
+            startingLineNumber = "434"
+            endingLineNumber = "434"
+            landmarkName = "-BtnClickCollect:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[DSFavoritesController getMyFavouriteMC]"
-                  moduleName = "CarWashing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Test/CarWashing/UserInfo/DSFavoritesController.m"
-                  timestampString = "525937367.469058"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "77"
-                  endingLineNumber = "77"
-                  offsetFromSymbolStart = "977">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__41-[DSFavoritesController getMyFavouriteMC]_block_invoke"
-                  moduleName = "CarWashing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Test/CarWashing/UserInfo/DSFavoritesController.m"
-                  timestampString = "525937367.47037"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "78"
-                  endingLineNumber = "78"
-                  offsetFromSymbolStart = "67">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -131,13 +99,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CarWashing/UserInfo/DSFavoritesController.m"
-            timestampString = "525937357.714831"
+            filePath = "CarWashing/BusinessDetailViewController.m"
+            timestampString = "525938552.658678"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "-getMyFavouriteMC"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "-setMerChantDetailData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CarWashing/ShopViewController.m"
+            timestampString = "525938798.445927"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "-setupScrollView"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
