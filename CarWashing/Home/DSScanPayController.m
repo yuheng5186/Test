@@ -14,6 +14,7 @@
 #import "BusinessPayCell.h"
 
 
+
 @interface DSScanPayController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) UITableView *payTableView;
@@ -523,7 +524,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 -(void)goBack
 {
     DSStartWashingController *start = [[DSStartWashingController alloc]init];
-    [self.navigationController popToViewController:start animated:YES];
+    [self.navigationController pushViewController:start animated:YES];
 }
 
 /*
