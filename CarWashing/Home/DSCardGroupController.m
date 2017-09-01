@@ -117,7 +117,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     HUD.labelText = @"加载中";
     HUD.minSize = CGSizeMake(132.f, 108.0f);
     
-    _CardbagData = [[NSMutableArray alloc]init];
+    
     [self GetCardbagList];
     
 }
@@ -134,6 +134,9 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            _CardbagData = [[NSMutableArray alloc]init];
+            
+            
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
             for(NSDictionary *dic in arr)
@@ -327,7 +330,6 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
                 else if([[[dict objectForKey:@"JsonData"] objectForKey:@"Activationstate"] integerValue] == 1)
                 {
                     [self.view showInfo:@"激活成功" autoHidden:YES interval:2];
-                    _CardbagData = [[NSMutableArray alloc]init];
                     [self GetCardbagList];
                 }
                 else if([[[dict objectForKey:@"JsonData"]objectForKey:@"Activationstate"] integerValue] == 2)
