@@ -76,7 +76,7 @@
     [self.view addSubview:containView];
     
     UIImageView *cardImgV = [[UIImageView alloc] init];
-    cardImgV.image = [UIImage imageNamed:@"bg_card"];
+    cardImgV.image = [UIImage imageNamed:@"qw_tiyanka"];
     [containView addSubview:cardImgV];
     
     cardNameLab = [[UILabel alloc] init];

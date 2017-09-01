@@ -164,7 +164,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
             }
             
             for (int index = 0; index < [_CardArray count]; index++) {
-                UIImage *image = [UIImage imageNamed:@"bg_card"];
+                UIImage *image = [UIImage imageNamed:@"qw_tiyanka"];
                 [self.imageArray addObject:image];
             }
             
@@ -231,8 +231,8 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     pageControl.numberOfPages = self.imageArray.count;
     pageControl.userInteractionEnabled = NO;
     pageControl.currentPage = 0;
-    [pageControl setValue:[UIImage imageNamed:@"sel_lunbo"] forKey:@"currentPageImage"];
-    [pageControl setValue:[UIImage imageNamed:@"nor_lunbo"] forKey:@"pageImage"];
+    [pageControl setValue:[UIImage imageNamed:@"aichexuanzhong"] forKey:@"currentPageImage"];
+    [pageControl setValue:[UIImage imageNamed:@"aicheweixuanzhong"] forKey:@"pageImage"];
     pageFlowView.pageControl = pageControl;
     [_middleview addSubview:pageControl];
     
@@ -391,7 +391,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     
     UIImageView *containImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 300*Main_Screen_Height/667, 192*Main_Screen_Height/667)];
 //    containImageView.image = [UIImage imageNamed:@"kabeijing"];
-    containImageView.image = [UIImage imageNamed:@"bg_card"];
+    containImageView.image = [UIImage imageNamed:@"qw_tiyanka"];
     [containImageView setContentScaleFactor:[[UIScreen mainScreen] scale]];
     containImageView.contentMode =  UIViewContentModeScaleAspectFill;
     containImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
