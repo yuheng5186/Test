@@ -25,14 +25,14 @@
     
     self.timesLabel.textColor = [UIColor colorFromHex:@"#999999"];
     
-    self.stateLabel.textColor = [UIColor colorFromHex:@"#ff525a"];
+    self.stateLabel.textColor = [UIColor colorFromHex:@"#0161a1"];
     
     self.priceLabel.textColor = [UIColor colorFromHex:@"#ff525a"];
     
-    [self.stateButton setTintColor:[UIColor colorFromHex:@"#ff525a"]];
+    [self.stateButton setTitleColor:[UIColor colorFromHex:@"#0161a1"] forState:UIControlStateNormal];
     self.stateButton.layer.cornerRadius = 12.5*Main_Screen_Height/667;
     self.stateButton.layer.borderWidth = 1;
-    self.stateButton.layer.borderColor = [UIColor colorFromHex:@"#ff525a"].CGColor;
+    self.stateButton.layer.borderColor = [UIColor colorFromHex:@"#0161a1"].CGColor;
 }
 
 
