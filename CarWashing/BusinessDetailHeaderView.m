@@ -7,6 +7,7 @@
 //
 
 #import "BusinessDetailHeaderView.h"
+#import "UIView+AutoSizeToDevice.h"
 
 
 @interface BusinessDetailHeaderView ()
@@ -31,11 +32,20 @@
 //    return self;
 //}
 
-- (void)layoutSubviews{
+//- (void)layoutSubviews{
+//    [self setupUI];
+//}
+
+- (void)awakeFromNib {
+    
+    [super awakeFromNib];
+    
     [self setupUI];
 }
 
 - (void)setupUI {
+    
+    self.dg_viewAutoSizeToDevice = YES;
     
     self.nameLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     
