@@ -77,7 +77,7 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
     self.earnWayView.rowHeight = 90*Main_Screen_Height/667;
     [self.earnWayView registerClass:[WayToUpGradeCell class] forCellReuseIdentifier:id_earnViewCell];
     
-    self.ScoreData = [[NSMutableArray alloc]init];
+    
     
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.removeFromSuperViewOnHide =YES;
@@ -106,6 +106,8 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            self.ScoreData = [[NSMutableArray alloc]init];
+            
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
             if(arr.count == 0)
@@ -122,12 +124,12 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
         }
         else
         {
-            [self.view showInfo:@"数据请求失败" autoHidden:YES interval:2];
+            [self.view showInfo:@"数据请求失败请重试" autoHidden:YES interval:2];
             [self.navigationController popViewControllerAnimated:YES];
         }
         
     } fail:^(NSError *error) {
-        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.view showInfo:@"获取失败请重试" autoHidden:YES interval:2];
         [self.navigationController popViewControllerAnimated:YES];
     }];
 
