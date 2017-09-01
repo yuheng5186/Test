@@ -359,7 +359,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     [payBtn setTintColor:[UIColor colorFromHex:@"#ffffff"]];
     payBtn.titleLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     //payBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    payBtn.backgroundColor = [UIColor colorFromHex:@"#febb02"];
+    payBtn.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
     [payToolBar addSubview:payBtn];
     
     //跳转支付页面
@@ -389,7 +389,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
      */
     
     UIButton *serviceBtn = [[UIButton alloc] init];
-    [serviceBtn setImage:[UIImage imageNamed:@"kefuzixun"] forState:UIControlStateNormal];
+    [serviceBtn setImage:[UIImage imageNamed:@"kefu_service"] forState:UIControlStateNormal];
     [serviceBtn addTarget:self action:@selector(didClickServiceBtn:) forControlEvents:UIControlEventTouchUpInside];
     [payToolBar addSubview:serviceBtn];
     
