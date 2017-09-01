@@ -145,7 +145,10 @@
     
     [self setupRefresh];
     
-    self.scoreLabel.text = self.CurrentScore;
+    self.scoreLabel.text = @"0";
+    if (self.CurrentScore.length > 0) {
+        self.scoreLabel.text = self.CurrentScore;
+    }
     
     [self.earnButton addTarget:self action:@selector(didClickEarnScoreBtn) forControlEvents:UIControlEventTouchUpInside];
     
