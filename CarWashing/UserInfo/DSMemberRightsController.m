@@ -97,7 +97,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
     memberRightsView.delegate = self;
     memberRightsView.dataSource = self;
-    memberRightsView.rowHeight = 60*Main_Screen_Height/667;
+    memberRightsView.rowHeight = 70*Main_Screen_Height/667;
     
     //底部
     UIView *containView = [[UIView alloc] init];
@@ -338,12 +338,12 @@ static NSString *id_rightsCell = @"id_rightsCell";
     UILabel *titleLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 20*Main_Screen_Height/667) font:[UIFont systemFontOfSize:14] text:string isCenter:NO];
     titleLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
 
-    titleLabel.top       = 16*Main_Screen_Height/667;
+    titleLabel.top       = 10;
     titleLabel.left      = 70*Main_Screen_Height/667;
     
-    UILabel *detailLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 20*Main_Screen_Height/667) font:[UIFont systemFontOfSize:12] text:detailString isCenter:NO];
+    UILabel *detailLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 20*Main_Screen_Height/667) font:[UIFont systemFontOfSize:13] text:detailString isCenter:NO];
     detailLabel.textColor = [UIColor colorFromHex:@"#999999"];
-    detailLabel.top       = titleLabel.bottom +10*Main_Screen_Height/667;
+    detailLabel.top       = titleLabel.bottom +5;
     detailLabel.left      = 70*Main_Screen_Height/667;
     return cell;
 }
