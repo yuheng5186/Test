@@ -391,19 +391,35 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     
     UIImageView *containImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 300*Main_Screen_Height/667, 192*Main_Screen_Height/667)];
 //    containImageView.image = [UIImage imageNamed:@"kabeijing"];
-    containImageView.image = [UIImage imageNamed:@"qw_tiyanka"];
+    Card *card = (Card *)[_CardArray objectAtIndex:index];
+    if(card.CardType == 1)
+    {
+       containImageView.image = [UIImage imageNamed:@"qw_tiyanka"];
+    }else if(card.CardType == 2)
+    {
+        containImageView.image = [UIImage imageNamed:@"qw_yueka"];
+    }else if(card.CardType == 3)
+    {
+        containImageView.image = [UIImage imageNamed:@"qw_cika"];
+    }else
+    {
+        containImageView.image = [UIImage imageNamed:@"qw_nianka"];
+    }
+    
+    
     [containImageView setContentScaleFactor:[[UIScreen mainScreen] scale]];
     containImageView.contentMode =  UIViewContentModeScaleAspectFill;
     containImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     containImageView.clipsToBounds  = YES;
     [bannerView addSubview:containImageView];
     
-    Card *card = (Card *)[_CardArray objectAtIndex:index];
+    
     
     UILabel *cardNameLab = [[UILabel alloc] init];
     cardNameLab.text = card.CardName;
     cardNameLab.font = [UIFont boldSystemFontOfSize:18*Main_Screen_Height/667];
     [bannerView addSubview:cardNameLab];
+    cardNameLab.hidden = YES;
     
     UILabel *cardtagLab = [[UILabel alloc] init];
     cardtagLab.text = @"蔷薇爱车";
@@ -412,7 +428,8 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     
     UILabel *timesLab = [[UILabel alloc] init];
     timesLab.text = [NSString stringWithFormat:@"持卡洗车次数%ld次",card.CardCount];
-    timesLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
+    timesLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    timesLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [bannerView addSubview:timesLab];
     
     UILabel *scoreLab = [[UILabel alloc] init];
@@ -435,17 +452,18 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     priceLab.text = [NSString stringWithFormat:@"￥%@",card.CardPrice];
     priceLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [bannerView addSubview:priceLab];
+    priceLab.hidden = YES;
     
     UILabel *invalidLab2 = [[UILabel alloc] init];
     invalidLab2.text = [NSString stringWithFormat:@"有效期%ld天",card.ExpiredDay];
-    invalidLab2.textColor = [UIColor colorFromHex:@"#999999"];
-    invalidLab2.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+    invalidLab2.textColor = [UIColor colorFromHex:@"#ffffff"];
+    invalidLab2.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [bannerView addSubview:invalidLab2];
     
     //约束
     [cardNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(containImageView).mas_offset(20*Main_Screen_Height/667);
-        make.left.equalTo(containImageView).mas_offset(18*Main_Screen_Height/667);
+        make.right.equalTo(containImageView).mas_offset(12*Main_Screen_Height/667);
     }];
     
     [cardtagLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -453,11 +471,11 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
         make.bottom.equalTo(cardNameLab);
     }];
     
-//    [timesLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(cardNameLab.mas_bottom).mas_offset(16*Main_Screen_Height/667);
-//        make.leading.equalTo(cardNameLab);
-//    }];
-//    
+    [timesLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(cardNameLab.mas_bottom).mas_offset(16*Main_Screen_Height/667);
+        make.leading.equalTo(cardNameLab);
+    }];
+//
 //    [scoreLab mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(timesLab.mas_bottom).mas_offset(12*Main_Screen_Height/667);
 //        make.leading.equalTo(cardNameLab);
@@ -479,8 +497,13 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     }];
     
     [invalidLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(cardNameLab);
+        make.leading.equalTo(containImageView).mas_offset(containImageView.right - 50);
         make.bottom.equalTo(containImageView).mas_offset(-18*Main_Screen_Height/667);
+    }];
+    
+    [timesLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(invalidLab2.mas_top).mas_offset(6*Main_Screen_Height/667);
+        make.leading.equalTo(containImageView).mas_offset(containImageView.right - 50);
     }];
     
     return bannerView;
