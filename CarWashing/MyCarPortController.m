@@ -78,23 +78,18 @@ static NSString *id_carListCell = @"id_carListCell";
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeincreaseMyCar:) name:@"increasemycarsuccess" object:nil];
     
-    
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    HUD.removeFromSuperViewOnHide =YES;
-    HUD.mode = MBProgressHUDModeIndeterminate;
-    HUD.labelText = @"加载中";
-    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    [self setupUI];
     
     
-    
-    
-    [self getMyCarData];
-     [self setupUI];
+
    
 }
 
 -(void)getMyCarData
 {
+    
+    
+    
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
                              };
@@ -129,9 +124,20 @@ static NSString *id_carListCell = @"id_carListCell";
             
             
             
-            [_carListView reloadData];
             
-            [HUD setHidden:YES];
+            
+            __block __weak typeof (self)weakSelf = self;
+
+            HUD.completionBlock = ^()
+            {
+                [weakSelf.carListView reloadData];
+                
+            };
+
+            
+            
+            
+            [HUD hide:YES afterDelay:1];
             
         }
         else
@@ -171,6 +177,19 @@ static NSString *id_carListCell = @"id_carListCell";
         make.centerX.equalTo(self.view);
         make.bottom.equalTo(self.view).mas_offset(-25*Main_Screen_Height/667);
     }];
+    
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
+    
+    [self getMyCarData];
+    
+    
+    
 }
 
 #pragma mark - 数据源代理
@@ -316,6 +335,12 @@ static NSString *id_carListCell = @"id_carListCell";
     //记录当下的indexpath
 //    self.nowPath = path;
     
+    MBProgressHUD *HUD1 = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD1.removeFromSuperViewOnHide =YES;
+    HUD1.mode = MBProgressHUDModeIndeterminate;
+    HUD1.minSize = CGSizeMake(132.f, 108.0f);
+//        [HUD hide:NO afterDelay:0];
+    
     
         NSDictionary *mulDic = @{
                                  @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
@@ -330,21 +355,53 @@ static NSString *id_carListCell = @"id_carListCell";
             
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
-                [self.view showInfo:@"修改成功" autoHidden:YES interval:2];
-                _mycararray = [[NSMutableArray alloc]init];
-                _myDefaultcararray = [[NSMutableArray alloc]init];
-                [self getMyCarData];
-//                [self.carListView reloadData];
-                NSNotification * notice = [NSNotification notificationWithName:@"updatemycarsuccess" object:nil userInfo:nil];
-                [[NSNotificationCenter defaultCenter]postNotification:notice];
+                
+
+                __weak typeof (self)weakSelf = self;
+                
+                HUD1.completionBlock = ^(){
+                    
+                    [self.view showInfo:@"设置成功" autoHidden:YES interval:2];
+                    
+                    if(_myDefaultcararray.count == 0)
+                    {
+                        NSDictionary *dic =  [weakSelf.mycararray objectAtIndex:button.tag];
+                        [dic setValue:@"1" forKey:@"IsDefaultFav"];
+                        [weakSelf.mycararray removeObjectAtIndex:button.tag];
+                        [weakSelf.myDefaultcararray addObject:dic];
+                        
+                        
+                    }
+                    else
+                    {
+                        NSDictionary *dic = [weakSelf.mycararray objectAtIndex:button.tag];
+                        [dic setValue:@"1" forKey:@"IsDefaultFav"];
+                        NSDictionary *dic2 = [weakSelf.myDefaultcararray objectAtIndex:0];
+                        [dic2 setValue:@"2" forKey:@"IsDefaultFav"];
+                        [weakSelf.myDefaultcararray replaceObjectAtIndex:0 withObject:dic];
+                        [weakSelf.mycararray replaceObjectAtIndex:button.tag withObject:dic2];
+                        
+                    }
+                    
+                    
+                    
+                    [weakSelf.carListView reloadData];
+                    
+                };
+                
+                [HUD1 hide:YES afterDelay:1];
+                
+    
                 
             }
             else
             {
+                [HUD1 hide:YES];
                 [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
             }
             
         } fail:^(NSError *error) {
+            [HUD1 hide:YES];
             [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
         }];
 
@@ -369,7 +426,13 @@ static NSString *id_carListCell = @"id_carListCell";
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         
-            
+        MBProgressHUD *HUD1 = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        HUD1.removeFromSuperViewOnHide =YES;
+        HUD1.mode = MBProgressHUDModeIndeterminate;
+        HUD1.minSize = CGSizeMake(132.f, 108.0f);
+       
+//        [HUD show:YES];
+        
             if(sender.tag >= 10000)
             {
                 NSDictionary *mulDic = @{
@@ -385,19 +448,37 @@ static NSString *id_carListCell = @"id_carListCell";
                     
                     if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                     {
-                        [self.view showInfo:@"删除成功" autoHidden:YES interval:2];
-                        _mycararray = [[NSMutableArray alloc]init];
-                        _myDefaultcararray = [[NSMutableArray alloc]init];
-                        [self getMyCarData];
+                        
                         NSNotification * notice = [NSNotification notificationWithName:@"updatemycarsuccess" object:nil userInfo:nil];
                         [[NSNotificationCenter defaultCenter]postNotification:notice];
+                        __weak typeof (self)weakSelf = self;
+                        
+                        HUD1.completionBlock = ^(){
+                            [weakSelf.view showInfo:@"删除成功" autoHidden:YES interval:2];
+                            
+                            
+                            
+                            [weakSelf.myDefaultcararray removeAllObjects];
+                            
+                            
+                            
+                            [weakSelf.carListView reloadData];
+                            
+                            
+                            
+                        };
+                        
+                        [HUD1 hide:YES afterDelay:1];
+                        
                     }
                     else
                     {
+                        [HUD1 hide:YES];
                         [self.view showInfo:@"删除失败" autoHidden:YES interval:2];
                     }
                     
                 } fail:^(NSError *error) {
+                    [HUD1 hide:YES];
                     [self.view showInfo:@"删除失败" autoHidden:YES interval:2];
                 }];
             }
@@ -416,29 +497,40 @@ static NSString *id_carListCell = @"id_carListCell";
                     
                     if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                     {
-                        [self.view showInfo:@"删除成功" autoHidden:YES interval:2];
-                        _mycararray = [[NSMutableArray alloc]init];
-                        _myDefaultcararray = [[NSMutableArray alloc]init];
-                        [self getMyCarData];
                         NSNotification * notice = [NSNotification notificationWithName:@"updatemycarsuccess" object:nil userInfo:nil];
                         [[NSNotificationCenter defaultCenter]postNotification:notice];
+                        
+                        __weak typeof (self)weakSelf = self;
+                        
+                        HUD1.completionBlock = ^(){
+                            [weakSelf.view showInfo:@"删除成功" autoHidden:YES interval:2];
+                         
+                            
+                            
+                            [weakSelf.mycararray removeObjectAtIndex:sender.tag];
+                            
+                            
+                            
+                            [weakSelf.carListView reloadData];
+                            
+                            
+                            
+                        };
+                        
+                        [HUD1 hide:YES afterDelay:1];
                     }
                     else
                     {
+                        [HUD1 hide:YES];
                         [self.view showInfo:@"删除失败" autoHidden:YES interval:2];
                     }
                     
                 } fail:^(NSError *error) {
+                    [HUD1 hide:YES];
                     [self.view showInfo:@"删除失败" autoHidden:YES interval:2];
                 }];
             }
 
-        
-            
-            
-//        NSLog(@"%ld",sender.tag);
-        
-        
     }];
     [alertController addAction:OKAction];
     
@@ -459,14 +551,6 @@ static NSString *id_carListCell = @"id_carListCell";
 }
 
 -(void)noticeincreaseMyCar:(NSNotification *)sender{
-  
-    
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    HUD.removeFromSuperViewOnHide =YES;
-    HUD.mode = MBProgressHUDModeIndeterminate;
-    HUD.labelText = @"加载中";
-    HUD.minSize = CGSizeMake(132.f, 108.0f);
-    
     [self getMyCarData];
 }
 

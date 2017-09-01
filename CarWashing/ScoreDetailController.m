@@ -130,6 +130,7 @@
     self.ScoreData = [[NSMutableArray alloc]init];
     self.page = 0;
     [self setupUI];
+    self.scoreLabel.text=[NSString stringWithFormat:@"%@积分",[UdStorage getObjectforKey:@"UserScore"]];
 }
 
 
