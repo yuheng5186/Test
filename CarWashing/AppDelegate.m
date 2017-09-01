@@ -71,6 +71,8 @@
         // 这里判断是否第一次
         DSGuideViewController *guideControl = [[DSGuideViewController alloc]init];
         UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:guideControl];//为假表示没有文件，没有进入过主页
+        self.window.rootViewController      = nav;
+        nav.navigationBar.hidden      = YES;
     }
     
     
