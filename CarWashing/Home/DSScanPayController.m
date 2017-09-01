@@ -44,6 +44,18 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
     //self.view.backgroundColor = [UIColor lightGrayColor];
     
+    
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(goBack:) name:@"paysuccess" object:nil];
+    
+    
+    
+    self.SerMerChant = @"上海金龙";
+    self.SerProject = @"水洗";
+    self.Jprice = @"￥88.88";
+    self.Xprice = @"￥55.33";
+    
+    
     NSArray *payNameArray = @[@"微信支付",@"支付宝支付"];
     NSArray *payImageNameArr = @[@"weixin",@"zhifubao"];
     self.payNameArray = payNameArray;
@@ -198,9 +210,9 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        DSStartWashingController    *startVC    = [[DSStartWashingController alloc]init];
-        startVC.hidesBottomBarWhenPushed        = YES;
-        [self.navigationController pushViewController:startVC animated:YES];
+//        DSStartWashingController    *startVC    = [[DSStartWashingController alloc]init];
+//        startVC.hidesBottomBarWhenPushed        = YES;
+//        [self.navigationController pushViewController:startVC animated:YES];
         
         
         
@@ -263,6 +275,11 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
                     NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict
                                                                                                                 objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign
                           );
+                    
+                    
+                    
+                    
+                    
                 }
                 else
                 {
@@ -501,6 +518,12 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)goBack
+{
+    DSStartWashingController *start = [[DSStartWashingController alloc]init];
+    [self.navigationController popToViewController:start animated:YES];
 }
 
 /*
