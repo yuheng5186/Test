@@ -48,7 +48,7 @@
     
     if(self.nextdic == nil)
     {
-        self.GradeDetailDic = [[NSMutableDictionary alloc]init];
+        
         
         
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -198,6 +198,10 @@
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            
+            self.GradeDetailDic = [[NSMutableDictionary alloc]init];
+            
+            
             self.GradeDetailDic = [dict objectForKey:@"JsonData"];
             
             [card setValuesForKeysWithDictionary:self.GradeDetailDic];
@@ -209,11 +213,11 @@
         }
         else
         {
-            [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
+            [self.view showInfo:@"信息获取失败请重试" autoHidden:YES interval:2];
             [self.navigationController popViewControllerAnimated:YES];
         }
     } fail:^(NSError *error) {
-        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.view showInfo:@"获取失败请重试" autoHidden:YES interval:2];
         [self.navigationController popViewControllerAnimated:YES];
         
     }];
@@ -443,7 +447,6 @@
     NSDate *datenow = [NSDate date];
     NSDate *newDate = [datenow dateByAddingTimeInterval:60 * 60 * 24 * [[_GradeDetailDic objectForKey:@"ExpiredDay"] intValue]];
     
-    NSLog(@"%@",card);
     
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
@@ -462,7 +465,6 @@
                              };
     
     
-    NSLog(@"%@",mulDic);
     
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],

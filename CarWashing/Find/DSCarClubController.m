@@ -40,8 +40,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _NewsArray = [[NSMutableArray alloc]init];
-    self.page = 0;
+    
+    
     // Do any additional setup after loading the view.
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height-44*Main_Screen_Height/667-64) style:UITableViewStyleGrouped];
     self.tableView.delegate         = self;
@@ -283,6 +283,7 @@
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            _NewsArray = [[NSMutableArray alloc]init];
 //            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
