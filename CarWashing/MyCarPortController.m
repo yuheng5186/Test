@@ -77,9 +77,7 @@ static NSString *id_carListCell = @"id_carListCell";
     
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeincreaseMyCar:) name:@"increasemycarsuccess" object:nil];
-    _mycararray = [[NSMutableArray alloc]init];
     
-    _myDefaultcararray = [[NSMutableArray alloc]init];
     
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.removeFromSuperViewOnHide =YES;
@@ -87,9 +85,12 @@ static NSString *id_carListCell = @"id_carListCell";
     HUD.labelText = @"加载中";
     HUD.minSize = CGSizeMake(132.f, 108.0f);
     
-    [self getMyCarData];
     
-//    [self setupUI];
+    
+    
+    [self getMyCarData];
+     [self setupUI];
+   
 }
 
 -(void)getMyCarData
@@ -105,6 +106,10 @@ static NSString *id_carListCell = @"id_carListCell";
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            _mycararray = [[NSMutableArray alloc]init];
+            
+            _myDefaultcararray = [[NSMutableArray alloc]init];
+            
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
             for(NSDictionary *dic in arr)
@@ -123,7 +128,6 @@ static NSString *id_carListCell = @"id_carListCell";
             }
             
             
-            [self setupUI];
             
             [_carListView reloadData];
             
@@ -132,16 +136,18 @@ static NSString *id_carListCell = @"id_carListCell";
         }
         else
         {
+            [HUD setHidden:YES];
             [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
-            [self setupUI];
+//            [self setupUI];
         }
         
         
         
         
     } fail:^(NSError *error) {
-        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
-        [self setupUI];
+        [HUD setHidden:YES];
+        [self.view showInfo:@"网络异常" autoHidden:YES interval:2];
+//        [self setupUI];
     }];
     
 }
@@ -379,7 +385,7 @@ static NSString *id_carListCell = @"id_carListCell";
                     
                     if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                     {
-                        [self.view showInfo:@"修改成功" autoHidden:YES interval:2];
+                        [self.view showInfo:@"删除成功" autoHidden:YES interval:2];
                         _mycararray = [[NSMutableArray alloc]init];
                         _myDefaultcararray = [[NSMutableArray alloc]init];
                         [self getMyCarData];
@@ -388,11 +394,11 @@ static NSString *id_carListCell = @"id_carListCell";
                     }
                     else
                     {
-                        [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+                        [self.view showInfo:@"删除失败" autoHidden:YES interval:2];
                     }
                     
                 } fail:^(NSError *error) {
-                    [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+                    [self.view showInfo:@"删除失败" autoHidden:YES interval:2];
                 }];
             }
             else
@@ -410,7 +416,7 @@ static NSString *id_carListCell = @"id_carListCell";
                     
                     if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                     {
-                        [self.view showInfo:@"修改成功" autoHidden:YES interval:2];
+                        [self.view showInfo:@"删除成功" autoHidden:YES interval:2];
                         _mycararray = [[NSMutableArray alloc]init];
                         _myDefaultcararray = [[NSMutableArray alloc]init];
                         [self getMyCarData];
@@ -419,11 +425,11 @@ static NSString *id_carListCell = @"id_carListCell";
                     }
                     else
                     {
-                        [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+                        [self.view showInfo:@"删除失败" autoHidden:YES interval:2];
                     }
                     
                 } fail:^(NSError *error) {
-                    [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+                    [self.view showInfo:@"删除失败" autoHidden:YES interval:2];
                 }];
             }
 
@@ -453,8 +459,7 @@ static NSString *id_carListCell = @"id_carListCell";
 }
 
 -(void)noticeincreaseMyCar:(NSNotification *)sender{
-    _mycararray = [[NSMutableArray alloc]init];
-    _myDefaultcararray = [[NSMutableArray alloc]init];
+  
     
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.removeFromSuperViewOnHide =YES;

@@ -15,6 +15,8 @@
 #import "HTTPDefine.h"
 
 
+#import "WXApi.h"
+
 @interface AppDelegate ()
 {
     AppDelegate *myDelegate;
@@ -48,17 +50,30 @@
     
     application.statusBarHidden                     = NO;
     [[UITabBar appearance] setBarTintColor: [UIColor whiteColor]];
-    [[UITabBar appearance] setTintColor: [UIColor colorFromHex:@"#293754"]];
+    [[UITabBar appearance] setTintColor: [UIColor colorFromHex:@"#0161a1"]];
     
     application.statusBarStyle                      = UIStatusBarStyleLightContent;
     application.applicationIconBadgeNumber          = 0;
     
     self.window									= [[UIWindow alloc] initWithFrame: UIScreen.mainScreen.bounds];
+    
+    
 
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+    }
+    else{
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        // 这里判断是否第一次
+        DSGuideViewController *guideControl = [[DSGuideViewController alloc]init];
+        UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:guideControl];//为假表示没有文件，没有进入过主页
+    }
     
     
-    DSGuideViewController *guideControl = [[DSGuideViewController alloc]init];
-    UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:guideControl];
     
     
     
@@ -90,7 +105,10 @@
     }
     
     else{
+        LoginViewController *loginControl = [[LoginViewController alloc]init];
+        UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:loginControl];
         self.window.rootViewController      = nav;
+        nav.navigationBar.hidden      = YES;
     }
     
     
@@ -108,7 +126,6 @@
 //    self.window.rootViewController				= menuTabBarController;
     
     
-//    [WXApi registerApp:@"wxcb207ec4f5991a99"];  //个人测试
     [WXApi registerApp:@"wx36260a82ad0e51bb"];      //公司
 
 
@@ -130,6 +147,83 @@
     
     return [WXApi handleOpenURL:url delegate:self];
 }
+
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
+{
+    
+  
+    if ([options[UIApplicationOpenURLOptionsSourceApplicationKey] isEqualToString:@"com.tencent.xin"]){
+        
+        return [WXApi handleOpenURL:url delegate:self];
+    }
+    
+    
+
+    return YES;
+    
+    
+    
+}
+
+- (void)onResp:(BaseResp *)resp
+{
+    NSString *payResoult = [NSString stringWithFormat:@"%d", resp.errCode];
+    if([resp isKindOfClass:[PayResp class]]){
+        //支付返回结果，实际支付结果需要去微信服务器端查询
+        if([payResoult isEqualToString:@"0"])
+        {
+            NSNotification * notice = [NSNotification notificationWithName:@"paysuccess" object:nil userInfo:nil];
+            [[NSNotificationCenter defaultCenter]postNotification:notice];
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"支付结果：成功！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+            [alertview show];
+            
+        }
+        else if([payResoult isEqualToString:@"-1"])
+        {
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"支付结果：失败！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+            [alertview show];
+        }
+        else if([payResoult isEqualToString:@"-2"])
+        {
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"用户已经退出支付！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+            [alertview show];
+        }
+        else
+        {
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"支付结果：失败！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+            [alertview show];
+        }
+        
+    }
+    
+    else if([resp isKindOfClass:[SendMessageToWXResp class]]){
+        
+        
+        
+        if([payResoult isEqualToString:@"0"])
+        {
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"回调信息" message:@"分享成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+            [alertview show];
+        }
+        if([payResoult isEqualToString:@"-2"])
+        {
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"回调信息" message:@"分享已取消" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+            [alertview show];
+        }
+        else
+        {
+            
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"回调信息" message:@"分享失败" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+            [alertview show];
+            
+        }
+        
+    }
+}
+
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

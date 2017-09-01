@@ -38,6 +38,8 @@
 
 @property (nonatomic, strong) NSMutableArray *MembershipUserScoreArray;
 
+@property (nonatomic, weak) UIView *containView;
+
 @end
 
 static NSString *id_exchangeCell = @"id_exchangeCell";
@@ -48,12 +50,25 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     if (!_exchangListView) {
         
-        UITableView *exchangeListView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        UITableView *exchangeListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height) style:UITableViewStyleGrouped];
         _exchangListView = exchangeListView;
         [self.view addSubview:_exchangListView];
     }
     
     return _exchangListView;
+}
+
+
+- (UIView *)containView {
+    
+    if (!_containView) {
+        
+        UIView *containView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 173*Main_Screen_Height/667)];
+        _containView = containView;
+        [self.view addSubview:_containView];
+    }
+    
+    return _containView;
 }
 
 
@@ -68,6 +83,12 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(noticeupdate:) name:@"updatenamesuccess" object:nil];
+    [center addObserver:self selector:@selector(noticeupdate:) name:@"updateheadimgsuccess" object:nil];
+    [center addObserver:self selector:@selector(noticeupdate:) name:@"updatecard" object:nil];
     self.contentView.backgroundColor = [UIColor whiteColor];
     
     [self setupUI];
@@ -85,28 +106,33 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 
 - (void)setupUI {
     
+    
+    self.containView.backgroundColor = [UIColor whiteColor];
+    
     memberShipView = [MemberView memberView];
    // memberShipView.frame = CGRectMake(0, 64, Main_Screen_Width, 120*Main_Screen_Height/667);
     
     
-    [self.view addSubview:memberShipView];
+    [self.containView addSubview:memberShipView];
+    
+    
     UIView *exchangeView = [[UIView alloc] init];
     
-    [self.view addSubview:exchangeView];
+    [self.containView addSubview:exchangeView];
     
     UILabel *exchangeLabel = [[UILabel alloc] init];
     exchangeLabel.text = @"精品兑换";
-    exchangeLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    exchangeLabel.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     exchangeLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     [exchangeView addSubview:exchangeLabel];
     
     UIView *separateView = [[UIView alloc] init];
     separateView.backgroundColor = [UIColor colorFromHex:@"#fafafa"];
-    [self.view addSubview:separateView];
+    [self.containView addSubview:separateView];
     
     UIView *lineView = [[UIView alloc] init];
-    lineView.backgroundColor = [UIColor colorFromHex:@"#fafafa"];
-    [self.view addSubview:lineView];
+    lineView.backgroundColor = [UIColor colorFromHex:@"#eaeaea"];
+    [self.containView addSubview:lineView];
     
     //    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     //    UICollectionView *goodsView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
@@ -125,14 +151,14 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     //约束
     
     [memberShipView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).mas_offset(64);
-        make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(113*Main_Screen_Height/667);
+        make.top.equalTo(self.containView);
+        make.left.right.equalTo(self.containView);
+        make.height.mas_equalTo(123*Main_Screen_Height/667);
     }];
     
     [exchangeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(memberShipView.mas_bottom).mas_offset(10*Main_Screen_Height/667);
-        make.left.right.equalTo(self.view);
+        make.left.right.equalTo(self.containView);
         make.height.mas_equalTo(40*Main_Screen_Height/667);
     }];
     
@@ -142,23 +168,24 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     [separateView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(memberShipView.mas_bottom);
-        make.left.right.equalTo(self.view);
+        make.left.right.equalTo(self.containView);
         make.height.mas_equalTo(10*Main_Screen_Height/667);
     }];
     
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(exchangeView.mas_bottom);
-        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(_containView.mas_bottom);
+        make.left.right.equalTo(self.containView);
         make.height.mas_equalTo(1);
     }];
     
-    [_exchangListView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(lineView.mas_bottom);
-        make.bottom.equalTo(self.view);
-        make.left.equalTo(self.view).mas_equalTo(30*Main_Screen_Height/667);
-        make.right.equalTo(self.view).mas_equalTo(-30*Main_Screen_Height/667);
-    }];
+//    [_exchangListView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(lineView.mas_bottom);
+//        make.bottom.equalTo(self.view);
+//        make.left.equalTo(self.view).mas_equalTo(30*Main_Screen_Height/667);
+//        make.right.equalTo(self.view).mas_equalTo(-30*Main_Screen_Height/667);
+//    }];
     
+    _exchangListView.tableHeaderView = _containView;
 }
 
 
@@ -216,12 +243,15 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
         }
         else
         {
+             [HUD setHidden:YES];
             [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
-            [self.navigationController popViewControllerAnimated:YES];
+            
+//            [self.navigationController popViewControllerAnimated:YES];
         }
     } fail:^(NSError *error) {
+         [HUD setHidden:YES];
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
-        [self.navigationController popViewControllerAnimated:YES];
+//        [self.navigationController popViewControllerAnimated:YES];
         
     }];
 
@@ -458,7 +488,12 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 //    return UIEdgeInsetsMake(18, 23.75, 18, 23.75);
 //}
 
-
+-(void)noticeupdate:(NSNotification *)sender{
+    
+    _MembershipUserScore = [[NSMutableDictionary alloc]init];
+    _MembershipUserScoreArray = [[NSMutableArray alloc]init];
+    [self GetMembershipUserScore];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

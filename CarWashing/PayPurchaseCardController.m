@@ -12,6 +12,8 @@
 #import "CashViewController.h"
 #import "BusinessPayCell.h"
 
+#import "HTTPDefine.h"
+
 
 @interface PayPurchaseCardController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -180,14 +182,15 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         make.left.equalTo(payBottomView).mas_offset(30*Main_Screen_Height/667);
     }];
     
-    UIButton *bottomPayButton = [[UIButton alloc] initWithFrame:CGRectMake(Main_Screen_Width - 136, 0, 136*Main_Screen_Height/667, 60*Main_Screen_Height/667)];
+    UIButton *bottomPayButton = [[UIButton alloc] initWithFrame:CGRectMake(Main_Screen_Width - 136*Main_Screen_Height/667, 0, 136*Main_Screen_Height/667, 60*Main_Screen_Height/667)];
     bottomPayButton.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     [bottomPayButton setTitle:@"立即付款" forState:UIControlStateNormal];
+    [bottomPayButton addTarget:self action:@selector(lijizhifu) forControlEvents:UIControlEventTouchUpInside];
     bottomPayButton.titleLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     [bottomPayButton setTintColor:[UIColor whiteColor]];
     
     //方法子
-    [bottomPayButton addTarget:self action:@selector(showAlertWithTitle:message:) forControlEvents:UIControlEventTouchUpInside];
+//    [bottomPayButton addTarget:self action:@selector(showAlertWithTitle:message:) forControlEvents:UIControlEventTouchUpInside];
     
     [payBottomView addSubview:bottomPayButton];
 }
@@ -252,7 +255,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     cell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     
@@ -443,6 +446,85 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)lijizhifu
+{
+    NSString *urlPath = [NSString stringWithFormat:@"http://119.23.53.225/WeixinPay.ashx?op=GetUnifiedorder"];
+    
+//    NSString *parasStr = [NSString stringWithFormat:@"uid=%ld&body=%@&fee=%@00&type=0&cid=%@",APPDELEGATE.currentUser.userID,body.text,self.money,self.nsstring];
+    
+//    NSData *data = [parasStr dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
+    
+    [request setURL:[NSURL URLWithString:urlPath]];
+    
+    [request setTimeoutInterval:10];
+    
+    [request setCachePolicy:NSURLRequestUseProtocolCachePolicy];
+    
+    [request setHTTPMethod:@"POST"];
+    
+    [request setHTTPBody:nil];
+    
+    NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    
+    
+    
+    NSError *error;
+    
+    
+    if (received != nil)
+    {
+        NSMutableDictionary *dict = NULL;
+        //IOS5自带解析类NSJSONSerialization从response中解析出数据放到字典中
+        dict = [NSJSONSerialization JSONObjectWithData:received
+                                               options:NSJSONReadingMutableLeaves error:&error];
+        
+        NSLog(@"url:%@",urlPath);
+        if(dict!= nil)
+        {
+            NSMutableString *retcode = [dict objectForKey:@"retcode"];
+            if (retcode.intValue == 0)
+            {
+                NSMutableString *stamp = [dict objectForKey:@"timestamp"];
+                //调起微信支付
+                PayReq *req= [[PayReq alloc] init];
+                req.partnerId
+                = [dict objectForKey:@"partnerid"];
+                req.prepayId
+                = [dict objectForKey:@"prepayid"];
+                req.nonceStr
+                = [dict objectForKey:@"noncestr"];
+                req.timeStamp
+                = stamp.intValue;
+                req.package
+                = [dict objectForKey:@"package"];
+                req.sign = [dict objectForKey:@"sign"];
+                BOOL result = [WXApi sendReq:req];
+                
+                NSLog(@"-=-=-=-=-%d", result);
+                //日志输出
+                NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict
+                                                                                                            objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign
+                      );
+            }
+            else
+            {
+                NSLog(@"-=-=-=-=-%@", [dict objectForKey:@"retmsg"]);
+            }
+        }
+        else
+        {
+            NSLog( @"服务器返回错误，未获取到json对象");
+        }
+    }
+    else
+    {
+        NSLog( @"服务器返回错误");
+    }
+
 }
 
 /*

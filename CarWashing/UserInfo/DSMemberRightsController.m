@@ -54,12 +54,10 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateCardNum:) name:@"receivesuccess" object:nil];
-    
+    [center addObserver:self selector:@selector(noticeupdate:) name:@"Earnsuccess" object:nil];
     [self createSubView];
     self.area = @"上海市";
-    _MembershipprivilegesArray = [[NSMutableArray alloc]init];
-    _NextMembershipprivilegesArr = [[NSMutableArray alloc]init];
-    _CurrentMembershipprivilegesArr = [[NSMutableArray alloc]init];
+    
     
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.removeFromSuperViewOnHide =YES;
@@ -71,7 +69,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
 }
 - (void) createSubView {
-    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*130/667) color:[UIColor colorFromHex:@"#293754"]];
+    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*130/667) color:[UIColor colorFromHex:@"#0161a1"]];
     upView.top                      = 0;
     
     
@@ -156,6 +154,12 @@ static NSString *id_rightsCell = @"id_rightsCell";
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            
+            _MembershipprivilegesArray = [[NSMutableArray alloc]init];
+            _NextMembershipprivilegesArr = [[NSMutableArray alloc]init];
+            _CurrentMembershipprivilegesArr = [[NSMutableArray alloc]init];
+            
+            
             _MembershipprivilegesDic = [dict objectForKey:@"JsonData"];
             
             
@@ -335,12 +339,12 @@ static NSString *id_rightsCell = @"id_rightsCell";
     titleLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
 
     titleLabel.top       = 16*Main_Screen_Height/667;
-    titleLabel.left      = 60*Main_Screen_Height/667;
+    titleLabel.left      = 70*Main_Screen_Height/667;
     
     UILabel *detailLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 20*Main_Screen_Height/667) font:[UIFont systemFontOfSize:12] text:detailString isCenter:NO];
     detailLabel.textColor = [UIColor colorFromHex:@"#999999"];
     detailLabel.top       = titleLabel.bottom +10*Main_Screen_Height/667;
-    detailLabel.left      = 60*Main_Screen_Height/667;
+    detailLabel.left      = 70*Main_Screen_Height/667;
     return cell;
 }
 
@@ -416,6 +420,10 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
 }
 
+-(void)noticeupdate:(NSNotification *)sender{
+    [self GetMembershipprivileges];
+}
+
 #pragma mark -------button click------
 
 - (void) updateMemberClick:(id)sender {
@@ -423,9 +431,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
 }
 - (void) updateRuleClick:(id)sender {
-    
-    
-    
+
     DSUpdateRuleController *updateRuleController  = [[DSUpdateRuleController alloc]init];
     updateRuleController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:updateRuleController animated:YES];

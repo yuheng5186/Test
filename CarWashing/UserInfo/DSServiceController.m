@@ -73,7 +73,7 @@
     
     [self setupTopServiceSliderView];
     
-    UITableView *serviceListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 44, Main_Screen_Width, Main_Screen_Height - 64 - (44+61)*Main_Screen_Height/667)];
+    UITableView *serviceListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 44*Main_Screen_Height/667, Main_Screen_Width, Main_Screen_Height - 64 - (44+61)*Main_Screen_Height/667)];
     serviceListView.delegate = self;
     serviceListView.dataSource = self;
     [self.view addSubview:serviceListView];
@@ -87,7 +87,7 @@
     [self.view addSubview:bottomPhoneView];
 
     UIView *lineView = [[UIView alloc] init];
-    lineView.backgroundColor = [UIColor colorFromHex:@"#4a4a4a"];
+    lineView.backgroundColor = [UIColor colorFromHex:@"#e6e6e6"];
     [self.view addSubview:lineView];
     
     UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];

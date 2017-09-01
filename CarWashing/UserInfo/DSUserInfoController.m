@@ -13,6 +13,9 @@
 #import<AVFoundation/AVMediaFormat.h>
 #import <AVFoundation/AVCaptureDevice.h>
 #import "UIImageView+WebCache.h"
+#import "HowToUpGradeController.h"
+#import "EarnScoreController.h"
+#import "DSMembershipController.h"
 
 #import "LCMD5Tool.h"
 #import "AFNetworkingTool.h"
@@ -146,7 +149,7 @@
         
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
-            cell.textLabel.text         = @"昵称";
+            cell.textLabel.text         = @"姓名";
             cell.detailTextLabel.text   = APPDELEGATE.currentUser.userName;
             
         }else if (indexPath.row == 1){
@@ -307,7 +310,6 @@
                     
                     
                     
-                    
                 } fail:^(NSError *error) {
                     [self.view showInfo:@"设置失败" autoHidden:YES interval:2];
                 }];
@@ -365,9 +367,6 @@
 - (void)processImage:(UIImage *)image
 {
     
-    
-    NSLog(@"%@",[UdStorage getObjectforKey:@"Account_Id"]);
-    
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                              @"ModifyType":@"1",
@@ -379,7 +378,7 @@
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/UserInfoEdit",Khttp] success:^(NSDictionary *dict, BOOL success) {
 
-        NSLog(@"%@",dict);
+        
         
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
@@ -387,16 +386,59 @@
             
             APPDELEGATE.currentUser.userImagePath = [[dict objectForKey:@"JsonData"] objectForKey:@"Headimg"];
             self.userImageView.image = image;
+            [UdStorage storageObject:APPDELEGATE.currentUser.userImagePath forKey:@"Headimg"];
             
             NSNotification * notice = [NSNotification notificationWithName:@"updateheadimgsuccess" object:nil userInfo:nil];
             [[NSNotificationCenter defaultCenter]postNotification:notice];
+    
             
             
             
-            [UdStorage storageObject:APPDELEGATE.currentUser.userImagePath forKey:@"Headimg"];
             
             
             
+            NSArray *vcsArray = [NSArray array];
+            vcsArray= [self.navigationController viewControllers];
+            NSInteger vcCount = vcsArray.count;
+    
+            if(vcsArray.count == 2)
+            {
+                
+            }
+            else
+            {
+                UIViewController *lastVC = vcsArray[vcCount-2];
+                UIViewController *lasttwoVC = vcsArray[vcCount-3];
+                int index=[[self.navigationController viewControllers]indexOfObject:self];
+                
+                if([lastVC isKindOfClass:[HowToUpGradeController class]])
+                {
+                                    NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                    [[NSNotificationCenter defaultCenter]postNotification:notice];
+                    
+                    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-2]animated:YES];
+                }
+                else if([lastVC isKindOfClass:[EarnScoreController class]])
+                {
+                    if([lasttwoVC isKindOfClass:[DSMembershipController class]])
+                    {
+                                            NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                            [[NSNotificationCenter defaultCenter]postNotification:notice];
+                        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-2]animated:YES];
+                        
+                    }
+                                    NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                    [[NSNotificationCenter defaultCenter]postNotification:notice];
+                    
+                    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-3]animated:YES];
+                }
+
+            }
+    
+    
+    
+    
+ 
             
         }
         else

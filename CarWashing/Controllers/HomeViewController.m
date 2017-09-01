@@ -27,6 +27,8 @@
 #import "ScanController.h"
 #import "DSScanQRCodeController.h"
 #import "DSAddMerchantController.h"
+#import "ScoreDetailController.h"
+
 
 #import "DSConsumerDetailController.h"
 #import "DSUserRightDetailController.h"
@@ -46,10 +48,13 @@
 #import "HTTPDefine.h"
 #import "UdStorage.h"
 #import "Record.h"
-
+#import "AppDelegate.h"
 #import "CoreLocation/CoreLocation.h"
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate>
+{
+    UIImageView *logoImageView;
+}
 
 /** 选择的结果*/
 @property (strong, nonatomic) UILabel *resultLabel;
@@ -81,7 +86,7 @@
     self.navigationView.hidden  = YES;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
-    self.contentView.backgroundColor    = [UIColor colorFromHex:@"#293754"];
+    self.contentView.backgroundColor    = [UIColor colorFromHex:@"#0161a1"];
     
 }
 
@@ -90,6 +95,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
+    
+    
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];
+    
+    
     // Do any additional setup after loading the view.
     self.title = @"首页";
     self.navigationController.navigationBar.hidden = YES;
@@ -178,11 +189,11 @@
 
 - (void) createNavTitleView {
     
-    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#293754"]];
+    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#0161a1"]];
     titleView.top                      = 0;
     
     NSString *titleName              = @"蔷薇爱车";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:Main_Screen_Height*20/667];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = titleView.centerX;
@@ -190,7 +201,8 @@
     
     
     UIImage *logeImage              = [UIImage imageNamed:@"xichebaidi"];
-    UIImageView *logoImageView      = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, logeImage.size.width,logeImage.size.height) imageName:@"xichebaidi"];
+    logoImageView      = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, logeImage.size.width,logeImage.size.height) imageName:@"xichebaidi"];
+
     
     [logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[UdStorage getObjectforKey:UserHead]]] placeholderImage:[UIImage imageNamed:@"xichebaidi"]];
     logoImageView.layer.masksToBounds = YES;
@@ -245,7 +257,7 @@
     UIView *backgroudView           = [UIView new];
     backgroudView.width             = [UIScreen mainScreen].bounds.size.width;
     backgroudView.height            = Main_Screen_Height*150/667;
-    backgroudView.backgroundColor   = [UIColor colorFromHex:@"#293754"];
+    backgroudView.backgroundColor   = [UIColor colorFromHex:@"#0161a1"];
     backgroudView.top               = 0;
     backgroudView.left              = 0;
     [headerView addSubview:backgroudView];
@@ -548,7 +560,8 @@
 
 -(void)setData
 {
-    
+//    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+
     if(self.LocCity == nil)
     {
         self.LocCity = @"";
@@ -591,6 +604,8 @@
                 [self.tableView reloadData];
                 [self.tableView.mj_header endRefreshing];
             }
+            
+//            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             
         }
         else
@@ -876,9 +891,9 @@
 
 - (void) tapScoreButtonClick:(id)sender {
     
-    DSMembershipController *membershipController        = [[DSMembershipController alloc]init];
-    membershipController.hidesBottomBarWhenPushed       = YES;
-    [self.navigationController pushViewController: membershipController animated: YES];
+    ScoreDetailController *scoreController        = [[ScoreDetailController alloc]init];
+    scoreController.hidesBottomBarWhenPushed      = YES;
+    [self.navigationController pushViewController: scoreController animated: YES];
 }
 
 - (void) tapSignButtonClick:(id)sender {
@@ -915,6 +930,13 @@
                     NSString *targetTime = [outputFormatter stringFromDate:inputDate];
                     
                     [UdStorage storageObject:targetTime forKey:@"SignTime"];
+                    
+                    
+                    APPDELEGATE.currentUser.UserScore = APPDELEGATE.currentUser.UserScore + 10;
+                    
+                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
+                    
+                    
                     
                     PopupView *view = [PopupView defaultPopupView];
                     view.parentVC = self;
@@ -966,6 +988,10 @@
                 NSString *targetTime = [outputFormatter stringFromDate:inputDate];
                 
                 [UdStorage storageObject:targetTime forKey:@"SignTime"];
+                
+                APPDELEGATE.currentUser.UserScore = APPDELEGATE.currentUser.UserScore + 10;
+                
+                [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
                 
                 PopupView *view = [PopupView defaultPopupView];
                 view.parentVC = self;
@@ -1208,6 +1234,15 @@
 //    }];
 //    
 //}
+
+-(void)noticeupdateUserheadimg:(NSNotification *)sender{
+    //    UIImageView *imageV = [[UIImageView alloc]init];
+    //    NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
+    //    NSURL *url=[NSURL URLWithString:ImageURL];
+    //    [imageV sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"touxiang"]];
+    
+    [logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[UdStorage getObjectforKey:UserHead]]] placeholderImage:[UIImage imageNamed:@"xichebaidi"]];
+}
 
 
 /*

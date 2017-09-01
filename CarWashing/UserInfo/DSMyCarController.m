@@ -107,10 +107,9 @@ static NSString * HeaderId = @"header";
     [center addObserver:self selector:@selector(noticeupdateMyCar:) name:@"updatemycarsuccess" object:nil];
     [center addObserver:self selector:@selector(noticeupdateMyCar:) name:@"increasemycarsuccess" object:nil];
 
-    [IQKeyboardManager sharedManager].enable = YES;
+//    [IQKeyboardManager sharedManager].enable = YES;
     //self.carImageView.image = [UIImage imageNamed:@"02"];
-    _Xuhao = 0;
-    _CarArray = [NSMutableArray array];
+    
     
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.removeFromSuperViewOnHide =YES;
@@ -124,18 +123,12 @@ static NSString * HeaderId = @"header";
     
   
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEditing)];
-    tap.delegate = self;
-    [self.view addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEditing)];
+//    tap.delegate = self;
+//    [self.view addGestureRecognizer:tap];
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    
-    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {//判断如果点击的是tableView的cell，就把手势给关闭了
-        return NO;//关闭手势
-    }//否则手势存在
-    return YES;
-}
+
 
 -(void)getMyCarData
 {
@@ -150,6 +143,11 @@ static NSString * HeaderId = @"header";
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            _Xuhao = 0;
+            _CarArray = [NSMutableArray array];
+            self.imageArray  = [NSMutableArray array];
+
+            
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
             for(NSDictionary *dic in arr)
@@ -173,14 +171,27 @@ static NSString * HeaderId = @"header";
         }
         else
         {
-            [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+            [HUD setHidden:YES];
+            
+            [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES];
+            [self.navigationController popViewControllerAnimated:YES];
+            
         }
         
         
         
         
     } fail:^(NSError *error) {
+        [HUD setHidden:YES];
         [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+        
+        
+////        [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES];
+//        [self.view showInfo:@"信息获取失败,请检查网络"];
+//        
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
     }];
 
 }
@@ -323,8 +334,14 @@ static NSString * HeaderId = @"header";
 //    {
         car = [_CarArray objectAtIndex:_Xuhao];
         
-        
-        self.carNum.text = car.PlateNumber;
+    
+        NSString *platenumbertype=[car.PlateNumber substringToIndex:1];
+        [self.provinceBtn setTitle:platenumbertype forState:UIControlStateNormal];
+    
+    
+    
+    
+        self.carNum.text =  [car.PlateNumber substringFromIndex:1];
         self.carBrand.text = car.CarBrand;
         self.ChassisNum.text = car.ChassisNum;
         self.Mileage.text = [NSString stringWithFormat:@"%ld",car.Mileage];
@@ -333,29 +350,31 @@ static NSString * HeaderId = @"header";
         
         
         
-        NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-        [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-        [inputFormatter setDateFormat:@"yyyyMM"];
-        NSDate* inputDate = [inputFormatter dateFromString:car.DepartureTime];
-        NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
-        [outputFormatter setLocale:[NSLocale currentLocale]];
-        [outputFormatter setDateFormat:@"yyyy-MM"];
-        NSString *targetTime = [outputFormatter stringFromDate:inputDate];
-        _lbl2.text  = targetTime;
-        
-        if(targetTime == 0)
-        {
-            NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-            [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-            [inputFormatter setDateFormat:@"yyyyM"];
-            NSDate* inputDate = [inputFormatter dateFromString:car.DepartureTime];
-            NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
-            [outputFormatter setLocale:[NSLocale currentLocale]];
-            [outputFormatter setDateFormat:@"yyyy-M"];
-            NSString *targetTime = [outputFormatter stringFromDate:inputDate];
-            _lbl2.text  = targetTime;
-        }
-        
+//        NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+//        [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+//        [inputFormatter setDateFormat:@"yyyyMM"];
+//        NSDate* inputDate = [inputFormatter dateFromString:car.DepartureTime];
+//        NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+//        [outputFormatter setLocale:[NSLocale currentLocale]];
+//        [outputFormatter setDateFormat:@"yyyy-MM"];
+//        NSString *targetTime = [outputFormatter stringFromDate:inputDate];
+//        _lbl2.text  = targetTime;
+//        
+//        if(targetTime == 0)
+//        {
+//            NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+//            [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+//            [inputFormatter setDateFormat:@"yyyyM"];
+//            NSDate* inputDate = [inputFormatter dateFromString:car.DepartureTime];
+//            NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+//            [outputFormatter setLocale:[NSLocale currentLocale]];
+//            [outputFormatter setDateFormat:@"yyyy-M"];
+//            NSString *targetTime = [outputFormatter stringFromDate:inputDate];
+//            _lbl2.text  = targetTime;
+//        }
+    
+        _lbl2.text  = car.DepartureTime;
+    
         
         _lbl.text = [NSString stringWithFormat:@"%ld",car.Manufacture];
 //    }
@@ -954,9 +973,7 @@ static NSString * HeaderId = @"header";
 }
 
 -(void)noticeupdateMyCar:(NSNotification *)sender{
-    _Xuhao = 0;
-    _CarArray = [NSMutableArray array];
-    self.imageArray  = [NSMutableArray array];
+    
     [self getMyCarData];
 }
 

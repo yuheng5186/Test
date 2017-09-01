@@ -92,7 +92,7 @@
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *datenow = [NSDate date];
     
-    NSString *showString3             =  [NSString stringWithFormat:@"有效期: %@-%@",[self DateZhuan:[formatter stringFromDate:datenow]],[self DateZhuan:_dic[@"ExpiredTimes"]]];
+    NSString *showString3             =  [NSString stringWithFormat:@"有效期至: %@",[self DateZhuan:_dic[@"ExpiredTimes"]]];
     UIFont    *showFont3              = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
     UILabel     *showlabel3           = [UIUtil drawLabelInView:backgroundImageView frame:[UIUtil textRect:showString3 font:showFont3] font:showFont3 text:showString3 isCenter:NO];
     showlabel3.textColor =               [UIColor colorFromHex:@"#999999"];
@@ -112,6 +112,7 @@
     {
         string        = @"已领取";
         _getButton  = [UIUtil drawDefaultButton:upView title:string target:self action:nil];
+        [_getButton setBackgroundImage:[UIImage createImageWithColor:[UIColor colorFromHex:@"#e6e6e6"]] forState:UIControlStateNormal];
         _getButton.enabled = NO;
     }
     
@@ -250,6 +251,8 @@
 //            [_dic setObject:[NSString stringWithFormat:@"%ld",num] forKey:@"IsReceive"];
             
             [_getButton setTitle:@"已领取" forState:UIControlStateNormal];
+            [_getButton setBackgroundImage:[UIImage createImageWithColor:[UIColor colorFromHex:@"#e6e6e6"]] forState:UIControlStateNormal];
+
             _getButton.enabled = NO;
             
             

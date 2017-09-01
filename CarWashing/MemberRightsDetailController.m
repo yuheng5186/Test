@@ -110,7 +110,7 @@
     UIButton *checkCardBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [checkCardBtn setTitle:@"查看卡包" forState:UIControlStateNormal];
     [checkCardBtn setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
-    checkCardBtn.titleLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+    checkCardBtn.titleLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [checkCardBtn setImage:[UIImage imageNamed:@"chakandaijinquan-jiantou"] forState:UIControlStateNormal];
     checkCardBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -100*Main_Screen_Height/667);
     [checkCardBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -50*Main_Screen_Height/667, 0, 0)];
@@ -235,6 +235,7 @@
     if([self.currentUseLevel intValue] < [self.nextUseLevel intValue])
     {
         [_getBtn setTitle:[NSString stringWithFormat:@"升级到%@可以获取",[arr objectAtIndex:[self.nextUseLevel intValue]]] forState:UIControlStateNormal];
+        [_getBtn setBackgroundImage:[UIImage createImageWithColor:[UIColor colorFromHex:@"#e6e6e6"]] forState:UIControlStateNormal];
         _getBtn.enabled = NO;
     }
     else
@@ -246,6 +247,8 @@
         else
         {
             [_getBtn setTitle:@"该卡已领取完毕" forState:UIControlStateNormal];
+            [_getBtn setBackgroundImage:[UIImage createImageWithColor:[UIColor colorFromHex:@"#e6e6e6"]] forState:UIControlStateNormal];
+
             _getBtn.enabled = NO;
         }
     }
@@ -274,43 +277,45 @@
     
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:id_noticeCell];
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     if (indexPath.section == 0) {
         
         UILabel *titleLab = [[UILabel alloc] init];
         titleLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-        titleLab.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+        titleLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
         [cell.contentView addSubview:titleLab];
         
         UILabel *infosLab = [[UILabel alloc] init];
         infosLab.textColor = [UIColor colorFromHex:@"#999999"];
-        infosLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        infosLab.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         infosLab.numberOfLines = 0;
         titleLab.text = @"特权介绍";
         infosLab.text = [_GradeDetailDic objectForKey:@"Description"];
         [cell.contentView addSubview:infosLab];
         
         [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(cell.contentView).mas_offset(8*Main_Screen_Height/667);
+            make.top.equalTo(cell.contentView).mas_offset(12*Main_Screen_Height/667);
             make.left.equalTo(cell.contentView).mas_offset(12*Main_Screen_Height/667);
         }];
         
         [infosLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(titleLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);
+            make.top.equalTo(titleLab.mas_bottom).mas_offset(12*Main_Screen_Height/667);
             make.leading.equalTo(titleLab);
             make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
-            make.bottom.equalTo(cell.contentView).mas_offset(-8*Main_Screen_Height/667);
+            make.bottom.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
         }];
         
         
     }else if (indexPath.section == 1) {
         UILabel *titleLab = [[UILabel alloc] init];
         titleLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-        titleLab.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+        titleLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
         [cell.contentView addSubview:titleLab];
         
         UILabel *infosLab = [[UILabel alloc] init];
         infosLab.textColor = [UIColor colorFromHex:@"#999999"];
-        infosLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        infosLab.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         infosLab.numberOfLines = 0;
         titleLab.text = @"领取对象";
         
@@ -347,50 +352,50 @@
         [cell.contentView addSubview:infosLab];
         
         [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(cell.contentView).mas_offset(8*Main_Screen_Height/667);
+            make.top.equalTo(cell.contentView).mas_offset(12*Main_Screen_Height/667);
             make.left.equalTo(cell.contentView).mas_offset(12*Main_Screen_Height/667);
         }];
         
         [infosLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(titleLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);
+            make.top.equalTo(titleLab.mas_bottom).mas_offset(12*Main_Screen_Height/667);
             make.leading.equalTo(titleLab);
             make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
-            make.bottom.equalTo(cell.contentView).mas_offset(-8*Main_Screen_Height/667);
+            make.bottom.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
         }];
         
         
     }else {
         UILabel *titleLab = [[UILabel alloc] init];
         titleLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-        titleLab.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+        titleLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
         [cell.contentView addSubview:titleLab];
         
         UILabel *infosLab = [[UILabel alloc] init];
         infosLab.textColor = [UIColor colorFromHex:@"#999999"];
-        infosLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        infosLab.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         infosLab.numberOfLines = 0;
         [cell.contentView addSubview:infosLab];
         
         [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(cell.contentView).mas_offset(8*Main_Screen_Height/667);
+            make.top.equalTo(cell.contentView).mas_offset(12*Main_Screen_Height/667);
             make.left.equalTo(cell.contentView).mas_offset(12*Main_Screen_Height/667);
         }];
         
         [infosLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(titleLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);
+            make.top.equalTo(titleLab.mas_bottom).mas_offset(12*Main_Screen_Height/667);
             make.leading.equalTo(titleLab);
             make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
         }];
         
         UILabel *infosLab2 = [[UILabel alloc] init];
         infosLab2.textColor = [UIColor colorFromHex:@"#999999"];
-        infosLab2.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        infosLab2.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         infosLab2.numberOfLines = 0;
         [cell.contentView addSubview:infosLab2];
         
         UILabel *infosLab3 = [[UILabel alloc] init];
         infosLab3.textColor = [UIColor colorFromHex:@"#999999"];
-        infosLab3.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        infosLab3.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         infosLab3.numberOfLines = 0;
         [cell.contentView addSubview:infosLab3];
         
@@ -400,16 +405,16 @@
         infosLab3.text = @"3、有任何问题，可咨询蔷薇客服";
         
         [infosLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(infosLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);
+            make.top.equalTo(infosLab.mas_bottom).mas_offset(12*Main_Screen_Height/667);
             make.leading.equalTo(infosLab);
             make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
         }];
         
         [infosLab3 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(infosLab2.mas_bottom).mas_offset(8*Main_Screen_Height/667);
+            make.top.equalTo(infosLab2.mas_bottom).mas_offset(12*Main_Screen_Height/667);
             make.leading.equalTo(infosLab2);
             make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
-            make.bottom.equalTo(cell.contentView).mas_offset(-8*Main_Screen_Height/667);
+            make.bottom.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
         }];
         
         

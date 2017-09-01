@@ -12,6 +12,9 @@
 #import "UdStorage.h"
 #import "HTTPDefine.h"
 #import "AppDelegate.h"
+#import "HowToUpGradeController.h"
+#import "EarnScoreController.h"
+#import "DSMembershipController.h"
 
 @interface DSChangeNameController ()<UITextFieldDelegate>
 
@@ -45,11 +48,51 @@
              APPDELEGATE.currentUser.userName = self.userNameText.text;
              NSNotification * notice = [NSNotification notificationWithName:@"updatenamesuccess" object:nil userInfo:@{@"username":self.userNameText.text}];
              [[NSNotificationCenter defaultCenter]postNotification:notice];
-             [self.navigationController popViewControllerAnimated:YES];
+             
              
              
              
              [UdStorage storageObject:APPDELEGATE.currentUser.userName forKey:@"Name"];
+             
+             
+             
+             
+             NSArray *vcsArray = [NSArray array];
+             vcsArray= [self.navigationController viewControllers];
+             NSInteger vcCount = vcsArray.count;
+             UIViewController *lastVC = vcsArray[vcCount-3];
+             UIViewController *lasttwoVC = vcsArray[vcCount-4];
+             int index=[[self.navigationController viewControllers]indexOfObject:self];
+
+             if([lastVC isKindOfClass:[HowToUpGradeController class]])
+             {
+                 
+                 NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                 [[NSNotificationCenter defaultCenter]postNotification:notice];
+                 
+                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-3]animated:YES];
+             }
+             else if([lastVC isKindOfClass:[EarnScoreController class]])
+             {
+                 if([lasttwoVC isKindOfClass:[DSMembershipController class]])
+                 {
+                     NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                     [[NSNotificationCenter defaultCenter]postNotification:notice];
+                     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-3]animated:YES];
+                 }
+                 NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                 [[NSNotificationCenter defaultCenter]postNotification:notice];
+                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
+             }
+             else
+             {
+                 [self.navigationController popViewControllerAnimated:YES];
+             }
+
+             
+             
+             
+             
              
              
              

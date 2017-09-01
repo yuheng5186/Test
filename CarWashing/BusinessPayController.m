@@ -223,6 +223,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     UITableViewCell *payCell = [tableView dequeueReusableCellWithIdentifier:payViewCell];
     
     payCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+    payCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     NSArray *shopTypeArr = @[@"服务商家",@"服务项目",@"订单金额"];
     NSArray *cashTypeArr = @[@"代金券",@"实付"];

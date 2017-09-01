@@ -43,7 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _NewsArray = [[NSMutableArray alloc]init];
-    _area = @"上海市";
+    _area = [UdStorage getObjectforKey:@"City"];
     // Do any additional setup after loading the view.
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height-44*Main_Screen_Height/667-64) style:UITableViewStyleGrouped];
     self.tableView.delegate         = self;
@@ -237,17 +237,12 @@
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        if(_NewsArray.count == 0)
-        {
-            [self requesetCarClubNews];
-        }
-        else
-        {
+       
             self.page++;
             _otherArray = [NSMutableArray new];
             [self requesetCarClubNewsmore];
             
-        }
+        
         
         
         
@@ -265,7 +260,7 @@
 {
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                             @"Area":_area,
+                             @"Area":[UdStorage getObjectforKey:@"City"],
                              @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
                              @"PageSize":@10
                              };
@@ -363,6 +358,7 @@
     } fail:^(NSError *error) {
         [self.view showInfo:@"获取数据失败" autoHidden:YES interval:2];
         [self.tableView.mj_header endRefreshing];
+         self.page--;
     }];
     
 }

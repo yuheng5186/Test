@@ -52,8 +52,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 - (UITableView *)salerListView {
     if (nil == _salerListView) {
-        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height*108/667, Main_Screen_Width, Main_Screen_Height-Main_Screen_Height*108/667-49) style:UITableViewStylePlain];
+        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + Main_Screen_Height*44/667, Main_Screen_Width, Main_Screen_Height-64 - Main_Screen_Height*44/667-49) style:UITableViewStylePlain];
         _salerListView = salerListView;
+        salerListView.backgroundColor   = [UIColor colorFromHex:@"#fafafa"];
         [self.view addSubview:salerListView];
         
     }
@@ -68,16 +69,11 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
     
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //self.title = @"商家";
-    
-    
-
     self.navigationController.navigationBar.hidden = YES;
     
     [self setSearchMenu];
@@ -142,11 +138,11 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 - (void)setupUI {
     
-    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#293754"]];
+    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#0161a1"]];
     titleView.top                      = 0;
     
     NSString *titleName              = @"商家";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:Main_Screen_Height*20/667];
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
     UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = titleView.centerX;
@@ -263,21 +259,21 @@ static NSString *id_salerListCell = @"salerListViewCell";
     {
         cell = [[QWMclistTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-//    else
-//    {
-//        //删除cell的所有子视图
-//        while ([cell.contentView.subviews lastObject] != nil)
-//        {
-//            [(UIView*)[cell.contentView.subviews lastObject] removeFromSuperview];
-//        }
-//    }
+    else
+    {
+        //删除cell的所有子视图
+        while ([cell.contentView.subviews lastObject] != nil)
+        {
+            [(UIView*)[cell.contentView.subviews lastObject] removeFromSuperview];
+        }
+    }
     [cell setlayoutCell];
-    cell.backgroundColor = [UIColor redColor];
+    cell.contentView.backgroundColor = [UIColor whiteColor];
     
     NSDictionary *dic=[self.MerchantData objectAtIndex:indexPath.row];
     [cell setUpCellWithDic:dic];
     [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
-    [cell setBackgroundColor:[UIColor clearColor]];
+//    [cell setBackgroundColor:[UIColor clearColor]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     
@@ -302,7 +298,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     // 创建下拉菜单
     YZPullDownMenu *menu = [[YZPullDownMenu alloc] init];
-    menu.frame = CGRectMake(0, Main_Screen_Height*64/667, Main_Screen_Width, Main_Screen_Height*44/667);
+    menu.frame = CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height*44/667);
     [self.view addSubview:menu];
     
     

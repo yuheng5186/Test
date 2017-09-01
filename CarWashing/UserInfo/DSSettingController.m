@@ -243,6 +243,7 @@
         }else{
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 [defaults removeObjectForKey:@"Account_Id"];
+                [defaults setValue:@NO forKey:@"firstRun"];
                 [defaults synchronize];
             
                 LoginViewController *loginControl = [[LoginViewController alloc]init];
