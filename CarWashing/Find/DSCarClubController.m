@@ -69,7 +69,13 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [_NewsArray count];
+    
+    if([_NewsArray count] == 0)
+    {
+       return 0;
+    }
+    else
+        return [_NewsArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -97,6 +103,7 @@
     ActivityListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ActivityListCell" forIndexPath:indexPath];
     
     CarClubNews *news = [[CarClubNews alloc]init];
+    
     news = [_NewsArray objectAtIndex:indexPath.section];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -377,7 +384,6 @@
 }
 
 -(void)noticeupdate:(NSNotification *)sender{
-    _NewsArray = [[NSMutableArray alloc]init];
     _otherArray = [[NSMutableArray alloc]init];
     self.page = 0 ;
     [self requesetCarClubNews];
@@ -387,6 +393,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 /*
 #pragma mark - Navigation

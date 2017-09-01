@@ -406,7 +406,7 @@
     self.userSayTextField.layer.borderWidth     = 1;
     self.userSayTextField.layer.borderColor     = [UIColor colorFromHex:@"#b4b4b4"].CGColor;
     self.userSayTextField.left           = Main_Screen_Width*10/375 ;
-    self.userSayTextField.top            = Main_Screen_Height*5/667;
+    self.userSayTextField.top            = Main_Screen_Height*10/667;
     [self.userSayTextField addTarget:self action:@selector(userSayTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.downView  addSubview:self.userSayTextField];
     
@@ -488,8 +488,26 @@
         [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
         self.downGoodButton.selected = NO;
     }
-    self.sayShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.CommentCount];
-    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount];
+    
+    if(newsDetail.CommentCount > 99)
+    {
+        self.sayShowLabel.text = @"99+";
+    }
+    else
+    {
+        self.sayShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.CommentCount];
+    }
+    
+    if(newsDetail.GiveCount>99)
+    {
+        self.goodShowLabel.text = @"99+";
+    }
+    else
+    {
+        self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount];
+    }
+    
+    
     
     [self.downView  layoutSubviews];
 
@@ -822,6 +840,10 @@
             
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
+                
+                NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter]postNotification:notice];
+                
                 [self.view showInfo:@"点赞成功" autoHidden:YES interval:2];
                 
                 [self.downGoodButton setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
@@ -862,6 +884,10 @@
             
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
+                
+                NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter]postNotification:notice];
+                
                 [self.view showInfo:@"取消点赞成功" autoHidden:YES interval:2];
                 self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount-1];
                 [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
@@ -911,6 +937,10 @@
             
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
+                
+                NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter]postNotification:notice];
+                
                 [self.view showInfo:@"点赞成功" autoHidden:YES interval:2];
                 
                 [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
@@ -955,6 +985,10 @@
             
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
+                
+                NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter]postNotification:notice];
+                
                 [self.view showInfo:@"取消点赞成功" autoHidden:YES interval:2];
                 
                 [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
@@ -1158,6 +1192,8 @@
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];
+            [[NSNotificationCenter defaultCenter]postNotification:notice];
             [self.view showInfo:@"评论添加成功" autoHidden:YES interval:2];
             //            self.dic = [dict objectForKey:@"JsonData"];
             //        [self.MerchantDetailData addObjectsFromArray:arr];
@@ -1193,11 +1229,7 @@
     textField.text = @"";
 }
 
--(void)viewWillDisappear:(BOOL)animated
-{
-    NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];
-    [[NSNotificationCenter defaultCenter]postNotification:notice];
-}
+
 
 #pragma mark - 无数据占位
 //无数据占位
