@@ -63,7 +63,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     if (!_containView) {
         
-        UIView *containView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 163*Main_Screen_Height/667)];
+        UIView *containView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 173*Main_Screen_Height/667)];
         _containView = containView;
         [self.view addSubview:_containView];
     }
@@ -122,7 +122,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     UILabel *exchangeLabel = [[UILabel alloc] init];
     exchangeLabel.text = @"精品兑换";
-    exchangeLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    exchangeLabel.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     exchangeLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     [exchangeView addSubview:exchangeLabel];
     
@@ -153,7 +153,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     [memberShipView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.containView);
         make.left.right.equalTo(self.containView);
-        make.height.mas_equalTo(113*Main_Screen_Height/667);
+        make.height.mas_equalTo(123*Main_Screen_Height/667);
     }];
     
     [exchangeView mas_makeConstraints:^(MASConstraintMaker *make) {
