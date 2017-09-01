@@ -46,7 +46,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
     
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(goBack:) name:@"paysuccess" object:nil];
+    [center addObserver:self selector:@selector(goBack) name:@"paysuccess" object:nil];
     
     
     

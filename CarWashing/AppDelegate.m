@@ -59,21 +59,6 @@
     
     
 
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
-    }
-    else{
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
-    }
-    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
-        // 这里判断是否第一次
-        DSGuideViewController *guideControl = [[DSGuideViewController alloc]init];
-        UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:guideControl];//为假表示没有文件，没有进入过主页
-        self.window.rootViewController      = nav;
-        nav.navigationBar.hidden      = YES;
-    }
     
     
     
@@ -112,6 +97,23 @@
         self.window.rootViewController      = nav;
         nav.navigationBar.hidden      = YES;
     }
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+    }
+    else{
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        // 这里判断是否第一次
+        DSGuideViewController *guideControl = [[DSGuideViewController alloc]init];
+        UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:guideControl];//为假表示没有文件，没有进入过主页
+        self.window.rootViewController      = nav;
+        nav.navigationBar.hidden      = YES;
+    }
+
     
     
     
@@ -177,8 +179,8 @@
         {
             NSNotification * notice = [NSNotification notificationWithName:@"paysuccess" object:nil userInfo:nil];
             [[NSNotificationCenter defaultCenter]postNotification:notice];
-            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"支付结果：成功！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
-            [alertview show];
+//            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"支付结果：成功！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+//            [alertview show];
             
         }
         else if([payResoult isEqualToString:@"-1"])

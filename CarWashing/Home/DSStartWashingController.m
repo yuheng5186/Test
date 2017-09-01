@@ -49,7 +49,7 @@
         [self.timer invalidate];
         self.timer = nil;
     }
-    self.second = 10;
+    self.second = 30;
     self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
     [self.timer fire];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];

@@ -23,9 +23,10 @@
 
 - (void) backButtonClick:(id)sender {
         
-    NSArray     *array  = self.navigationController.viewControllers;
-    DSScanController  *scanVC = [array objectAtIndex:0];
-    [self.navigationController popToViewController:scanVC animated:YES];
+//    NSArray     *array  = self.navigationController.viewControllers;
+//    DSScanController  *scanVC = [array objectAtIndex:0];
+//    [self.navigationController popToViewController:scanVC animated:YES];
+    self.tabBarController.selectedIndex = 0;
     
 }
 - (void) drawContent {
