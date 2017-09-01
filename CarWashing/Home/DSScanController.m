@@ -11,8 +11,10 @@
 #import "PopHelpView.h"
 #import "LewPopupViewAnimationDrop.h"
 
-#import "DSStartWashingController.h"
 #import "DSInputCodeController.h"
+
+#import "DSScanPayController.h"
+
 
 @interface DSScanController ()<AVCaptureMetadataOutputObjectsDelegate>
 
@@ -229,9 +231,9 @@
     NSString *imei                          = outMessage;
     
     if (imei != nil) {
-        DSStartWashingController *startVC           = [[DSStartWashingController alloc]init];
-        startVC.hidesBottomBarWhenPushed            = YES;
-        [self.navigationController pushViewController:startVC animated:YES];
+        DSScanPayController *payVC           = [[DSScanPayController alloc]init];
+        payVC.hidesBottomBarWhenPushed            = YES;
+        [self.navigationController pushViewController:payVC animated:YES];
     }
 }
 

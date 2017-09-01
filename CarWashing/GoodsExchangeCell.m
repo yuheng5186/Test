@@ -27,7 +27,7 @@
     
     UIImageView *backImgV = [[UIImageView alloc] init];
     _backImgV = backImgV;
-    backImgV.image = [UIImage imageNamed:@"bg_card"];
+    backImgV.image = [UIImage imageNamed:@"qw_tiyanka"];
     [self.contentView addSubview:backImgV];
     
     UILabel *nameLab = [[UILabel alloc] init];

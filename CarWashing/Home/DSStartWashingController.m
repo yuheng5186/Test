@@ -11,6 +11,9 @@
 
 @interface DSStartWashingController ()
 
+@property (nonatomic,strong) NSTimer *timer;
+@property (nonatomic,assign) int second;
+
 @end
 
 @implementation DSStartWashingController
@@ -18,6 +21,11 @@
 - (void) drawNavigation {
 
     [self drawTitle:@"蔷薇爱车"];
+}
+
+- (void) dealloc
+{
+    [self.timer invalidate];
 }
 
 - (void) drawContent {
@@ -31,7 +39,33 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self createSubView];
+    
+    [self startTimer];
+
 }
+- (void)startTimer
+{
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+    self.second = 10;
+    self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
+    [self.timer fire];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+}
+
+- (void)onTimer
+{
+    if (self.second == 0) {
+        
+        DSCompleteWashingController     *completeVC     = [[DSCompleteWashingController alloc]init];
+        completeVC.hidesBottomBarWhenPushed             = YES;
+        [self.navigationController pushViewController:completeVC animated:YES];
+       
+    }
+}
+
 
 - (void) createSubView {
 

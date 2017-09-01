@@ -481,8 +481,8 @@
         
             [_GradeDetailDic setObject:[NSString stringWithFormat:@"%d",num-1] forKey:@"CardQuantity"];
             
-            NSNotification * notice = [NSNotification notificationWithName:@"receivesuccess" object:nil userInfo:nil];
-            [[NSNotificationCenter defaultCenter]postNotification:notice];
+//            NSNotification * notice = [NSNotification notificationWithName:@"receivesuccess" object:nil userInfo:nil];
+//            [[NSNotificationCenter defaultCenter]postNotification:notice];
         
 //            self.GradeDetailDic = [dict objectForKey:@"JsonData"];
             if([[_GradeDetailDic objectForKey:@"CardQuantity"] intValue] != 0)

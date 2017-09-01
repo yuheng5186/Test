@@ -163,6 +163,7 @@ static NSString *id_carListCell = @"id_carListCell";
     
     self.carListView.delegate = self;
     self.carListView.dataSource = self;
+    self.carListView.backgroundColor = [UIColor clearColor];
 #pragma maek-空白页
     self.carListView.emptyDataSetSource = self;
     self.carListView.emptyDataSetDelegate = self;
@@ -267,6 +268,9 @@ static NSString *id_carListCell = @"id_carListCell";
             carCell.defaultButton.enabled = NO;
             carCell.deleteButton.tag = indexPath.row+10000;
             [carCell.defaultButton setTitle:@"已默认" forState:UIControlStateNormal];
+            
+            [carCell.defaultButton setTitleColor:[UIColor grayColor] forState:UIControlStateSelected];
+
         }
         else
         {

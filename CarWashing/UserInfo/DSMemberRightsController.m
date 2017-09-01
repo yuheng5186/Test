@@ -53,7 +53,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     // Do any additional setup after loading the view.
     
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(noticeupdateCardNum:) name:@"receivesuccess" object:nil];
+//    [center addObserver:self selector:@selector(noticeupdateCardNum:) name:@"receivesuccess" object:nil];
     [center addObserver:self selector:@selector(noticeupdate:) name:@"Earnsuccess" object:nil];
     [self createSubView];
     self.area = @"上海市";
@@ -188,12 +188,12 @@ static NSString *id_rightsCell = @"id_rightsCell";
         }
         else
         {
-            [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.view showInfo:@"信息获取失败，请重试" autoHidden:YES interval:2];
+//            [self.navigationController popViewControllerAnimated:YES];
         }
     } fail:^(NSError *error) {
-        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.view showInfo:@"获取失败，请重试" autoHidden:YES interval:2];
+//        [self.navigationController popViewControllerAnimated:YES];
         
     }];
 
@@ -416,9 +416,9 @@ static NSString *id_rightsCell = @"id_rightsCell";
     [self.navigationController pushViewController:VC animated:YES];
 }
 
--(void)noticeupdateCardNum:(NSNotification *)sender{
-    
-}
+//-(void)noticeupdateCardNum:(NSNotification *)sender{
+//    
+//}
 
 -(void)noticeupdate:(NSNotification *)sender{
     [self GetMembershipprivileges];

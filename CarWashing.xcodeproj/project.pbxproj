@@ -17,6 +17,7 @@
 		041573A41F53C522004514E3 /* TFGridInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0415739F1F53C522004514E3 /* TFGridInputView.m */; };
 		041573A51F53C522004514E3 /* TFGridInputViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041573A11F53C522004514E3 /* TFGridInputViewCell.m */; };
 		041573A61F53C522004514E3 /* TFGridInputViewCellStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 041573A31F53C522004514E3 /* TFGridInputViewCellStyle.m */; };
+		04443F501F5944450032BA5E /* DSScanPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04443F4F1F5944450032BA5E /* DSScanPayController.m */; };
 		1805AC831F38090D00FD0844 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC821F38090D00FD0844 /* LoginViewController.m */; };
 		1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC851F385C8600FD0844 /* DSAgreementController.m */; };
 		1805AC901F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC891F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.m */; };
@@ -302,6 +303,8 @@
 		041573A11F53C522004514E3 /* TFGridInputViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFGridInputViewCell.m; sourceTree = "<group>"; };
 		041573A21F53C522004514E3 /* TFGridInputViewCellStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFGridInputViewCellStyle.h; sourceTree = "<group>"; };
 		041573A31F53C522004514E3 /* TFGridInputViewCellStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFGridInputViewCellStyle.m; sourceTree = "<group>"; };
+		04443F4E1F5944450032BA5E /* DSScanPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSScanPayController.h; path = Home/DSScanPayController.h; sourceTree = "<group>"; };
+		04443F4F1F5944450032BA5E /* DSScanPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSScanPayController.m; path = Home/DSScanPayController.m; sourceTree = "<group>"; };
 		06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CarWashing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1805AC811F38090D00FD0844 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = UserInfo/LoginViewController.h; sourceTree = "<group>"; };
 		1805AC821F38090D00FD0844 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = UserInfo/LoginViewController.m; sourceTree = "<group>"; };
@@ -1158,6 +1161,8 @@
 				0401E8C91F4E674700F0CA79 /* DSStartWashingController.m */,
 				0401E8CB1F4E67AE00F0CA79 /* DSCompleteWashingController.h */,
 				0401E8CC1F4E67AE00F0CA79 /* DSCompleteWashingController.m */,
+				04443F4E1F5944450032BA5E /* DSScanPayController.h */,
+				04443F4F1F5944450032BA5E /* DSScanPayController.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -2103,6 +2108,7 @@
 				5061A43F1F3AAECE003939A4 /* UIView+Uitls.m in Sources */,
 				181E92E31F2054C50006511E /* DSUserInfoController.m in Sources */,
 				180E43031F3B471100013D2D /* MBProgressHUD.m in Sources */,
+				04443F501F5944450032BA5E /* DSScanPayController.m in Sources */,
 				181E92CD1F1F39CC0006511E /* UIImage+BFS.m in Sources */,
 				1805AC831F38090D00FD0844 /* LoginViewController.m in Sources */,
 				50B26E711F302E17009B3B9F /* DiscountCategoryView.m in Sources */,

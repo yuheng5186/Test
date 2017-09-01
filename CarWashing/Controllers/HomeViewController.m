@@ -179,7 +179,7 @@
         [self startLocation];
         
         
-        _GetUserRecordData = [[NSMutableArray alloc]init];
+       
         [self setData];
         
     });
@@ -580,6 +580,8 @@
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+             self.GetUserRecordData = [[NSMutableArray alloc]init];
+            
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
             if(arr.count == 0)
@@ -890,9 +892,9 @@
 
 - (void) tapScoreButtonClick:(id)sender {
     
-    ScoreDetailController *scoreController        = [[ScoreDetailController alloc]init];
-    scoreController.hidesBottomBarWhenPushed      = YES;
-    [self.navigationController pushViewController: scoreController animated: YES];
+    DSMembershipController *membershipController        = [[DSMembershipController alloc]init];
+    membershipController.hidesBottomBarWhenPushed       = YES;
+    [self.navigationController pushViewController: membershipController animated: YES];
 }
 
 - (void) tapSignButtonClick:(id)sender {
