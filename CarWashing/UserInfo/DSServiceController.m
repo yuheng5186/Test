@@ -87,7 +87,7 @@
     [self.view addSubview:bottomPhoneView];
 
     UIView *lineView = [[UIView alloc] init];
-    lineView.backgroundColor = [UIColor colorFromHex:@"#fafafa"];
+    lineView.backgroundColor = [UIColor colorFromHex:@"#e6e6e6"];
     [self.view addSubview:lineView];
     
     UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -142,6 +142,7 @@
     
     HQSliderView *serviceSliderView = [[HQSliderView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 44*Main_Screen_Height/667)];
     _serviceSliderView = serviceSliderView;
+    serviceSliderView.backgroundColor   = [UIColor whiteColor];
     serviceSliderView.titleArr = @[@"常见问题",@"车型疑问",@"APP使用"];
     serviceSliderView.delegate = self;
     [self.view addSubview:serviceSliderView];

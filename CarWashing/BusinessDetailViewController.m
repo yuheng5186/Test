@@ -124,7 +124,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetStoreDetail",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+        NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             self.dic = [dict objectForKey:@"JsonData"];
@@ -150,7 +150,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 - (void)setupUI {
     
-    UIView *containHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Width/2 + 196)];
+    UIView *containHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Width/2 + 196*Main_Screen_Height/667)];
     [self.view addSubview:containHeadView];
     
     UIImageView *detaiImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Width/2)];
@@ -173,7 +173,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     BusinessDetailHeaderView *headerView = [BusinessDetailHeaderView businessDetailHeaderView];
     
-    headerView.frame = CGRectMake(0, Main_Screen_Width/2, Main_Screen_Width, 196);
+    headerView.frame = CGRectMake(0, Main_Screen_Width/2, Main_Screen_Width, 196*Main_Screen_Height/667);
     
     self.headerView = headerView;
     
@@ -197,7 +197,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     NSArray *lab = [[self.dic objectForKey:@"MerFlag"] componentsSeparatedByString:@","];
     UILabel *MerflagsLabel;
     for (int i = 0; i < [lab count]; i++) {
-        MerflagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20 + i % 3 * 67,  i / 3 * 25 + 83, 60, 15)];
+        MerflagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20*Main_Screen_Height/667 + i % 3 * 67*Main_Screen_Height/667,  i / 3 * 25*Main_Screen_Height/667 + 83*Main_Screen_Height/667, 60*Main_Screen_Height/667, 15*Main_Screen_Height/667)];
         MerflagsLabel.text = lab[i];
         MerflagsLabel.backgroundColor = [UIColor redColor];
         [MerflagsLabel setFont:[UIFont fontWithName:@"Helvetica" size:11 ]];
@@ -431,7 +431,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
         [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/AddFavouriteMerchant",Khttp] success:^(NSDictionary *dict, BOOL success) {
-            
+            NSLog(@"%@",dict);
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
 //               [self.view showInfo:@"收藏成功" autoHidden:YES interval:2];
@@ -713,34 +713,36 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 }
 
-//方法子
-- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
-    
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    [alertController addAction:cancelAction];
-    
-    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        [PhoneHelper dial: self.dic[@"MerPhone"]];
-        
-    }];
-    [alertController addAction:OKAction];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
-    
-}
+////方法子
+//- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
+//    
+//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+//    
+//    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        
+//    }];
+//    [alertController addAction:cancelAction];
+//    
+//    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        
+//        [PhoneHelper dial: self.dic[@"MerPhone"]];
+//        
+//    }];
+//    [alertController addAction:OKAction];
+//    
+//    [self presentViewController:alertController animated:YES completion:nil];
+//    
+//}
 
 
 #pragma mark - 拨打商家电话
 - (IBAction)didClickShopPhoneBtn:(UIButton *)sender {
     
-    NSString *message = @"是否拨打商家电话";
-    NSString *title = @"";
-    [self showAlertWithTitle:title message:message];
+//    NSString *message = @"是否拨打商家电话";
+//    NSString *title = @"";
+//    [self showAlertWithTitle:title message:message];
+    
+    [PhoneHelper dial: self.dic[@"MerPhone"]];
 
 }
 

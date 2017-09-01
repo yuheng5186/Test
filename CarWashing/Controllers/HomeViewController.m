@@ -27,6 +27,8 @@
 #import "ScanController.h"
 #import "DSScanQRCodeController.h"
 #import "DSAddMerchantController.h"
+#import "ScoreDetailController.h"
+
 
 #import "DSConsumerDetailController.h"
 #import "DSUserRightDetailController.h"
@@ -888,9 +890,9 @@
 
 - (void) tapScoreButtonClick:(id)sender {
     
-    DSMembershipController *membershipController        = [[DSMembershipController alloc]init];
-    membershipController.hidesBottomBarWhenPushed       = YES;
-    [self.navigationController pushViewController: membershipController animated: YES];
+    ScoreDetailController *scoreController        = [[ScoreDetailController alloc]init];
+    scoreController.hidesBottomBarWhenPushed      = YES;
+    [self.navigationController pushViewController: scoreController animated: YES];
 }
 
 - (void) tapSignButtonClick:(id)sender {

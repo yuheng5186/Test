@@ -130,6 +130,7 @@
     self.ScoreData = [[NSMutableArray alloc]init];
     self.page = 0;
     [self setupUI];
+    self.scoreLabel.text=[NSString stringWithFormat:@"%@积分",[UdStorage getObjectforKey:@"UserScore"]];
 }
 
 
@@ -145,7 +146,10 @@
     
     [self setupRefresh];
     
-    self.scoreLabel.text = self.CurrentScore;
+    self.scoreLabel.text = @"0";
+    if (self.CurrentScore.length > 0) {
+        self.scoreLabel.text = self.CurrentScore;
+    }
     
     [self.earnButton addTarget:self action:@selector(didClickEarnScoreBtn) forControlEvents:UIControlEventTouchUpInside];
     
@@ -425,8 +429,6 @@
     [self.scoreListView.mj_header beginRefreshing];
 //    [self.scoreListView reloadData];
 }
-
-
 #pragma mark - 点击赚积分按钮和兑换按钮
 - (void)didClickEarnScoreBtn {
     
