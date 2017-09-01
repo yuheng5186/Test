@@ -47,7 +47,7 @@
     
     [self setupButton];
     [self setupSingleLine];
-    self.backgroundColor=[UIColor clearColor];
+    self.backgroundColor=[UIColor whiteColor];
     
 }
 
