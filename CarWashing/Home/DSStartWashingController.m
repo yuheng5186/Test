@@ -229,9 +229,9 @@
 
 - (void) adButtonClick:(id)sender {
     
-    DSCompleteWashingController     *completeVC     = [[DSCompleteWashingController alloc]init];
-    completeVC.hidesBottomBarWhenPushed             = YES;
-    [self.navigationController pushViewController:completeVC animated:YES];
+//    DSCompleteWashingController     *completeVC     = [[DSCompleteWashingController alloc]init];
+//    completeVC.hidesBottomBarWhenPushed             = YES;
+//    [self.navigationController pushViewController:completeVC animated:YES];
 }
 
 - (void) adPageButtonClick:(id)sender {
