@@ -390,7 +390,18 @@
     timeStringLabel.left              = titleStringLabel.left;
     timeStringLabel.top               = titleStringLabel.bottom +10;
     
-    NSString *contentString              = [NSString stringWithFormat:@"+%@",[[_ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegralNum"]];
+    NSString *contentString;
+    
+    if([[[_ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegWhereabouts"] intValue] == 1)
+    {
+        contentString              = [NSString stringWithFormat:@"+%@",[[_ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegralNum"]];
+    }
+    else if([[[_ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegWhereabouts"] intValue] == 2)
+    {
+        contentString              = [NSString stringWithFormat:@"-%@",[[_ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegralNum"]];
+    }
+    
+   
     UIFont *contentStringFont            = [UIFont systemFontOfSize:15];
     UILabel *contentStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:contentString font:contentStringFont] font:contentStringFont text:contentString isCenter:NO];
     contentStringLabel.textColor         = [UIColor redColor];
