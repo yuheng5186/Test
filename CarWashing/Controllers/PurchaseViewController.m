@@ -270,7 +270,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     [buyButton setTintColor:[UIColor colorFromHex:@"#ffffff"]];
     buyButton.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
     buyButton.titleLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
-    buyButton.layer.cornerRadius = 15*Main_Screen_Height/667;
+    buyButton.layer.cornerRadius = 20*Main_Screen_Height/667;
     [buyButton addTarget:self action:@selector(didSelectCell:withSubViewIndex:) forControlEvents:UIControlEventTouchUpInside];
     [_middleview addSubview:buyButton];
     
@@ -283,30 +283,30 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     }];
     
     [functionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(pageFlowView.pageControl.mas_bottom).mas_offset(25*Main_Screen_Height/667);
+        make.top.equalTo(pageFlowView.pageControl.mas_bottom).mas_offset(18*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
     }];
     
     [introLabelOne mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(functionLabel.mas_bottom).mas_offset(25*Main_Screen_Height/667);
+        make.top.equalTo(functionLabel.mas_bottom).mas_offset(18*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
     }];
     
     [introLabelTwo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(introLabelOne.mas_bottom).mas_offset(12*Main_Screen_Height/667);
+        make.top.equalTo(introLabelOne.mas_bottom).mas_offset(10*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
     }];
     
     [introLabelThree mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(introLabelTwo.mas_bottom).mas_offset(12*Main_Screen_Height/667);
+        make.top.equalTo(introLabelTwo.mas_bottom).mas_offset(10*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
     }];
     
     [buyButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(introLabelThree.mas_bottom).mas_offset(40*Main_Screen_Height/667);
+        make.top.equalTo(introLabelThree.mas_bottom).mas_offset(35*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
         make.width.mas_equalTo(120*Main_Screen_Height/667);
-        make.height.mas_equalTo(30*Main_Screen_Height/667);
+        make.height.mas_equalTo(40*Main_Screen_Height/667);
     }];
     
 }
@@ -350,7 +350,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 
 #pragma mark NewPagedFlowView Delegate
 - (CGSize)sizeForPageInFlowView:(NewPagedFlowView *)flowView {
-    return CGSizeMake(300*Main_Screen_Height/667, 192*Main_Screen_Height/667);
+    return CGSizeMake(330*Main_Screen_Height/667, 190*Main_Screen_Height/667);
 }
 
 - (void)didSelectCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex {
@@ -372,7 +372,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 - (UIView *)flowView:(NewPagedFlowView *)flowView cellForPageAtIndex:(NSInteger)index{
     PGIndexBannerSubiew *bannerView = (PGIndexBannerSubiew *)[flowView dequeueReusableCell];
     if (!bannerView) {
-        bannerView = [[PGIndexBannerSubiew alloc] initWithFrame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 192*Main_Screen_Height/667)];
+        bannerView = [[PGIndexBannerSubiew alloc] initWithFrame:CGRectMake(0, 0, 330*Main_Screen_Height/667, 190*Main_Screen_Height/667)];
         bannerView.layer.cornerRadius = 4*Main_Screen_Height/667;
         bannerView.layer.masksToBounds = YES;
     }
@@ -389,16 +389,17 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     
 //    bannerView.mainImageView.image = self.imageArray[index];
     
-    UIImageView *containImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 300*Main_Screen_Height/667, 192*Main_Screen_Height/667)];
+    UIImageView *containImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 330*Main_Screen_Height/667, 190*Main_Screen_Height/667)];
+//    containImageView.contentMode = UIViewContentModeScaleAspectFit;
 //    containImageView.image = [UIImage imageNamed:@"kabeijing"];
     Card *card = (Card *)[_CardArray objectAtIndex:index];
-    if(card.CardType == 1)
+    if(card.GetCardType == 1)
     {
        containImageView.image = [UIImage imageNamed:@"qw_tiyanka"];
-    }else if(card.CardType == 2)
+    }else if(card.GetCardType == 2)
     {
         containImageView.image = [UIImage imageNamed:@"qw_yueka"];
-    }else if(card.CardType == 3)
+    }else if(card.GetCardType == 3)
     {
         containImageView.image = [UIImage imageNamed:@"qw_cika"];
     }else
@@ -407,10 +408,10 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     }
     
     
-    [containImageView setContentScaleFactor:[[UIScreen mainScreen] scale]];
-    containImageView.contentMode =  UIViewContentModeScaleAspectFill;
-    containImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    containImageView.clipsToBounds  = YES;
+//    [containImageView setContentScaleFactor:[[UIScreen mainScreen] scale]];
+    containImageView.contentMode =  UIViewContentModeScaleToFill;
+//    containImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+//    containImageView.clipsToBounds  = YES;
     [bannerView addSubview:containImageView];
     
     
@@ -497,13 +498,13 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     }];
     
     [invalidLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(containImageView).mas_offset(containImageView.right - 50);
+        make.right.equalTo(containImageView.mas_right).mas_offset(-12*Main_Screen_Height/667);
         make.bottom.equalTo(containImageView).mas_offset(-18*Main_Screen_Height/667);
     }];
     
     [timesLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(invalidLab2.mas_top).mas_offset(6*Main_Screen_Height/667);
-        make.leading.equalTo(containImageView).mas_offset(containImageView.right - 50);
+        make.bottom.equalTo(invalidLab2.mas_top).mas_offset(0*Main_Screen_Height/667);
+        make.right.equalTo(containImageView.mas_right).mas_offset(-12*Main_Screen_Height/667);
     }];
     
     return bannerView;
