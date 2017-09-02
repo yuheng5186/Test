@@ -66,7 +66,7 @@
     titleNameLabel.centerY           = titleView.centerY +8;
     
     NSString  *helpString     = @"使用帮助";
-    UIFont    *helpStringFont = [UIFont systemFontOfSize:Main_Screen_Width*18/375];
+    UIFont    *helpStringFont = [UIFont systemFontOfSize:Main_Screen_Width*14/375];
     UIButton   *helpButton      = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) text:helpString font:helpStringFont color:[UIColor whiteColor] target:self action:@selector(helpButtonClick:)];
     helpButton.tintColor = [UIColor whiteColor];
     helpButton.centerY   = titleNameLabel.centerY;
@@ -148,7 +148,7 @@
     
     sender.selected = !sender.selected;
     if (sender.selected) {
-        [sender setImage:[UIImage imageNamed:@"Flashlight_H"] forState:UIControlStateSelected];
+        [sender setImage:[UIImage imageNamed:@"kaishoudiantong"] forState:UIControlStateSelected];
         self.flashlightSwitch.text  = @"关闭手电筒";
         //打开闪光灯
         AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];

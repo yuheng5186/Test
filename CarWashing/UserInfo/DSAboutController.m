@@ -35,9 +35,9 @@
     upView.top                      = 0;
     
     
-    UIImage *appImage              = [UIImage imageNamed:@"WechatIMG3"];
-    UIImageView *appImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(0, 0, appImage.size.width/2, appImage.size.height/2) imageName:@"WechatIMG3"];
-    appImageView.top               = Main_Screen_Height*20/667;
+    UIImage *appImage              = [UIImage imageNamed:@"loginIcon"];
+    UIImageView *appImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(0, 0, appImage.size.width, appImage.size.height) imageName:@"loginIcon"];
+    appImageView.top               = Main_Screen_Height*50/667;
     appImageView.centerX           = upView.centerX;
     
     NSDictionary *infoDic           = [[NSBundle mainBundle] infoDictionary];

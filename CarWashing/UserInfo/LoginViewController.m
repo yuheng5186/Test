@@ -83,7 +83,7 @@
     deaderLabel.top              = Main_Screen_Height*20/667;
     
 //    UIImage *logoImage          = [UIImage imageNamed:@"WechatIMG3"];
-    UIImageView *logoImageView  = [UIUtil drawCustomImgViewInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*100/667) imageName:@"WechatIMG3"];
+    UIImageView *logoImageView  = [UIUtil drawCustomImgViewInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*100/667) imageName:@"loginIcon"];
     logoImageView.top           = deaderLabel.bottom +Main_Screen_Height*30/667;
     logoImageView.centerX       = Main_Screen_Width/2;
     
@@ -103,7 +103,7 @@
     NSString   *welcomeString     = @"欢迎登录蔷薇爱车APP";
     UIFont     *welcomeFont       = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
     UILabel *welcomeLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*200/375, Main_Screen_Height*30/667) font:welcomeFont text:welcomeString isCenter:NO];
-    welcomeLabel.textColor        = [UIColor colorFromHex:@"#febb02"];
+    welcomeLabel.textColor        = [UIColor colorFromHex:@"#0161a1"];
     welcomeLabel.textAlignment    = NSTextAlignmentCenter;
     welcomeLabel.centerX          = Main_Screen_Width/2;
     welcomeLabel.top              = titleLabel.bottom +Main_Screen_Height*10/667;
@@ -142,7 +142,7 @@
     NSString *buttonString        = @"登录";
     UIFont   *buttonFont          = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
     loginButton        = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*280/375, Main_Screen_Height*45/667) text:buttonString font:buttonFont color:[UIColor colorFromHex:@"#ffffff"] target:self action:@selector(loginButtonClick:)];
-    loginButton.backgroundColor   = [UIColor colorFromHex:@"#febb02"];
+    loginButton.backgroundColor   = [UIColor colorFromHex:@"#0161a1"];
     loginButton.tintColor         = [UIColor whiteColor];
     loginButton.layer.cornerRadius  = Main_Screen_Height*5/667;
     loginButton.bottom            = backgroundImageView.bottom -Main_Screen_Height*65/667;
@@ -349,8 +349,8 @@
         
         NSString *getVeriifyString      = @"获取验证码";
         UIFont *getVeriifyStringFont          = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
-         self.getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*28/667) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyByButtonClick:)];
-        self.getVeriifyStringButton.backgroundColor=  [UIColor colorWithHex:0xFFB500 alpha:1.0];
+         self.getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*90/375, Main_Screen_Height*28/667) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyByButtonClick:)];
+        self.getVeriifyStringButton.backgroundColor=  [UIColor colorFromHex:@"#0161a1"];
         self.getVeriifyStringButton.layer.masksToBounds  = YES;
         self.getVeriifyStringButton.layer.cornerRadius = Main_Screen_Height*14/667;
         self.getVeriifyStringButton.right          = self.tableView.width;
@@ -444,7 +444,7 @@
         [self.timer invalidate];
         self.timer = nil;
     }
-    self.second = 10;
+    self.second = 60;
     self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
     [self.timer fire];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];

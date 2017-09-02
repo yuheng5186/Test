@@ -59,7 +59,7 @@
     
     _singleLine = singleLine;
     
-    singleLine.backgroundColor = [UIColor colorFromHex:@"#febb02"];
+    singleLine.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
     
     [self addSubview:singleLine];
     
@@ -148,7 +148,7 @@
     [button setTitle:title forState:UIControlStateNormal];
     
     //设置文字的颜色
-    [button setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
+    [button setTitleColor:[UIColor colorFromHex:@"#0161a1"] forState:UIControlStateSelected];
     
     [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     
