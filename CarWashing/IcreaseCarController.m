@@ -104,7 +104,8 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     UITableViewCell *carCell = [tableView dequeueReusableCellWithIdentifier:id_carInfoCell];
     
     carCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:id_carInfoCell];
-    
+    // 禁止cell点击事件
+    carCell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             
@@ -242,6 +243,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         }
         else if (indexPath.row == 3) {
                 UITextField *textTF2 = [[UITextField alloc] init];
+            textTF2.keyboardType = UIKeyboardTypeNumberPad;
                 _text2 = textTF2;
                 textTF2.placeholder = @"请填写";
             
@@ -389,6 +391,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     {
         
         if (indexPath.row == 1) {
+            [_text1 resignFirstResponder];
             QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
                 
                 self.lbl.text = str;
@@ -397,6 +400,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         }
         
         if (indexPath.row == 2) {
+            [_text1 resignFirstResponder];
             QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
                 
                 self.lbl2.text = str;
