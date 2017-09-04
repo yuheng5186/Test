@@ -978,7 +978,6 @@
 				1805AC801F3808DB00FD0844 /* Login */,
 				18B697A91F21DA60009FF73A /* Find */,
 				181E93081F2094420006511E /* Home */,
-				181E92E01F20532B0006511E /* UserInfo */,
 				501671FF1F29786C00384186 /* Purchase */,
 				501671FE1F29781E00384186 /* Business */,
 				181E92D01F1F3B180006511E /* HomeViewController.h */,
@@ -987,6 +986,7 @@
 				181E92D71F1F3BAE0006511E /* FindViewController.m */,
 				181E92DC1F1F3BE40006511E /* MySettingViewController.h */,
 				181E92DD1F1F3BE40006511E /* MySettingViewController.m */,
+				181E92E01F20532B0006511E /* UserInfo */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
