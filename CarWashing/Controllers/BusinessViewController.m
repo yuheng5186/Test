@@ -637,8 +637,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
  */
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
-   
-    return -64.f;
+    NSLog(@"kjjkklll;;';");
+    return 0.f;
+
 }
 
 
