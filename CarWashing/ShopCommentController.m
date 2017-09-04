@@ -207,6 +207,7 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
     } fail:^(NSError *error) {
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
         [_commentListView.mj_header endRefreshing];
+        self.page--;
     }];
     
 }

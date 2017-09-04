@@ -63,7 +63,7 @@
     
     self.buttonView.backgroundColor = [UIColor colorFromHex:@"#64affa"];
     
-    self.separateView.backgroundColor = [UIColor colorFromHex:@"#dfdfdf"];
+    self.separateView.backgroundColor = [UIColor colorFromHex:@"#f0f0f0"];
     
     self.adressLabel2.textColor = [UIColor colorFromHex:@"#999999"];
     self.ServiceNumLabel.textColor = [UIColor colorFromHex:@"#999999"];

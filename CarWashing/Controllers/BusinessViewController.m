@@ -190,7 +190,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 - (void)headerRereshing
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_MerchantData removeAllObjects];
+     
 //
         self.page = 0 ;
         [self setData];
@@ -385,7 +385,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 -(void)setData
 {
-    [self.MerchantData removeAllObjects];
+    
 //    NSLog(@"%@",self.pramsDic);
     
     NSString *DefaultSort;
@@ -428,6 +428,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            [self.MerchantData removeAllObjects];
+            
+            
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
             if(arr.count == 0)
@@ -518,7 +521,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
                 [self.MerchantData addObjectsFromArray:arr];
                 [self.salerListView reloadData];
                 [self.salerListView.mj_footer endRefreshing];
-                self.page--;
+                
             }
             
         }
@@ -566,7 +569,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 #pragma mark - 无数据占位
 //无数据占位
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
-    return [UIImage imageNamed:@"Store"];
+    return [UIImage imageNamed:@""];
 }
 
 - (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView{
@@ -591,9 +594,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
 }
 //设置占位图空白页的背景色( 图片优先级高于文字)
 
-- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
-    return [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
-}
+//- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
+//    return [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
+//}
 ////设置按钮的文本和按钮的背景图片
 //- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state  {
 //    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],NSForegroundColorAttributeName:[UIColor whiteColor]};
