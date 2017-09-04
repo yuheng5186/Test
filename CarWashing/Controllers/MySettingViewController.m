@@ -219,7 +219,7 @@
     self.tableView.dataSource       = self;
     self.tableView.scrollEnabled    = NO;
     self.tableView.tableFooterView  = [UIView new];
-    
+    self.tableView.backgroundColor  = [UIColor clearColor];
     [self.contentView addSubview:self.tableView];
     
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
