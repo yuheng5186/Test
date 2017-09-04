@@ -335,6 +335,15 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     if([[[self.ScoreData objectAtIndex:btn.tag] objectForKey:@"IntegType"] intValue] == 2)
     {
         self.tabBarController.selectedIndex = 4;
+        
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+        
+        
+        
+        
+        
     }
     else if([[[self.ScoreData objectAtIndex:btn.tag] objectForKey:@"IntegType"] intValue] == 3)
     {

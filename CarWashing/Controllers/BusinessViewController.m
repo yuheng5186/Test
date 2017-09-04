@@ -56,7 +56,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
         UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + Main_Screen_Height*44/667, Main_Screen_Width, Main_Screen_Height-64 - Main_Screen_Height*44/667-49)];
         salerListView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _salerListView = salerListView;
-        salerListView.backgroundColor   = [UIColor clearColor];
+
         [self.view addSubview:salerListView];
         
     }
@@ -156,6 +156,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.salerListView.emptyDataSetSource=self;
     self.salerListView.emptyDataSetDelegate=self;
     self.salerListView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    
 //    self.salerListView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     
@@ -189,7 +190,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 - (void)headerRereshing
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_MerchantData removeAllObjects];
+     
 //
         self.page = 0 ;
         [self setData];
@@ -370,21 +371,21 @@ static NSString *id_salerListCell = @"salerListViewCell";
 {
     // 第1列 高度
     if (index == 0) {
-        return 270;
+        return 270*Main_Screen_Height/667;
     }
     
     // 第2列 高度
     if (index == 1) {
-        return 180;
+        return 180*Main_Screen_Height/667;
     }
     
     // 第3列 高度
-    return 180;
+    return 180*Main_Screen_Height/667;
 }
 
 -(void)setData
 {
-    [self.MerchantData removeAllObjects];
+    
 //    NSLog(@"%@",self.pramsDic);
     
     NSString *DefaultSort;
@@ -427,6 +428,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            [self.MerchantData removeAllObjects];
+            
+            
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
             if(arr.count == 0)
@@ -517,7 +521,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
                 [self.MerchantData addObjectsFromArray:arr];
                 [self.salerListView reloadData];
                 [self.salerListView.mj_footer endRefreshing];
-                self.page--;
+                
             }
             
         }
@@ -565,7 +569,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 #pragma mark - 无数据占位
 //无数据占位
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
-    return [UIImage imageNamed:@"Store"];
+    return [UIImage imageNamed:@""];
 }
 
 - (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView{
@@ -635,6 +639,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 {
     NSLog(@"kjjkklll;;';");
     return 0.f;
+
 }
 
 

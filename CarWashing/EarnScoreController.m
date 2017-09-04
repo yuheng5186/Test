@@ -212,6 +212,7 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
     if([[[self.ScoreData objectAtIndex:btn.tag] objectForKey:@"IntegType"] intValue] == 2)
     {
         self.tabBarController.selectedIndex = 4;
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
     else if([[[self.ScoreData objectAtIndex:btn.tag] objectForKey:@"IntegType"] intValue] == 3)
     {

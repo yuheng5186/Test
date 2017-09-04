@@ -641,8 +641,28 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section==self.GetUserRecordData.count-1) {
+         return 40.1f;
+    }else{
+        return 0;
+    }
+    
+   
+}
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+     if (section==self.GetUserRecordData.count-1) {
+    UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 40)];
+    footerview.textColor         = [UIColor colorFromHex:@"#999999"];
+    footerview.textAlignment=NSTextAlignmentCenter;
+    footerview.text=@"没有更多啦!";
+    return footerview;
+     }else{
+         return [UILabel new];
+     
+     }
+    
 
-    return 0.1f;
+
 }
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
