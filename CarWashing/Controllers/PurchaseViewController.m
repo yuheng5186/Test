@@ -133,7 +133,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     
     
     _middleview = [[UIView alloc]initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height-64)];
-    _middleview.backgroundColor = [UIColor colorFromHex:@"#fafafa"];
+//    _middleview.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:241/255.0 alpha:1];
     [self.contentView addSubview:_middleview];
     
     

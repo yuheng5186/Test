@@ -8,6 +8,14 @@
 
 #import "ShareView.h"
 #import "UIView+TYAlertView.h"
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "HTTPDefine.h"
+#import "UdStorage.h"
+#import "Record.h"
+#import "AppDelegate.h"
+#import "CoreLocation/CoreLocation.h"
+#import "MBProgressHUD.h"
 
 @implementation ShareView
 
@@ -235,6 +243,20 @@
     
 //    创建分享参数
     [self hideView];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];

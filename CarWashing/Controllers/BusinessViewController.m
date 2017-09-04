@@ -53,9 +53,10 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 - (UITableView *)salerListView {
     if (nil == _salerListView) {
-        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + Main_Screen_Height*44/667, Main_Screen_Width, Main_Screen_Height-64 - Main_Screen_Height*44/667-49) style:UITableViewStylePlain];
+        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + Main_Screen_Height*44/667, Main_Screen_Width, Main_Screen_Height-64 - Main_Screen_Height*44/667-49)];
+        salerListView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _salerListView = salerListView;
-        salerListView.backgroundColor   = [UIColor colorFromHex:@"#fafafa"];
+        salerListView.backgroundColor   = [UIColor clearColor];
         [self.view addSubview:salerListView];
         
     }
@@ -154,9 +155,8 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.salerListView.dataSource = self;
     self.salerListView.emptyDataSetSource=self;
     self.salerListView.emptyDataSetDelegate=self;
-    self.salerListView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    
+    self.salerListView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+//    self.salerListView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     
     [self setupRefresh];
@@ -276,7 +276,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     NSDictionary *dic=[self.MerchantData objectAtIndex:indexPath.row];
     [cell setUpCellWithDic:dic];
     [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
-//    [cell setBackgroundColor:[UIColor clearColor]];
+    [cell setBackgroundColor:[UIColor grayColor]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     
@@ -633,6 +633,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
  */
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
+    NSLog(@"kjjkklll;;';");
     return -64.f-44;
 }
 
