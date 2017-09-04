@@ -402,7 +402,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     }else if(card.GetCardType == 3)
     {
         containImageView.image = [UIImage imageNamed:@"qw_cika"];
-    }else
+    }else if(card.GetCardType == 4)
     {
         containImageView.image = [UIImage imageNamed:@"qw_nianka"];
     }
