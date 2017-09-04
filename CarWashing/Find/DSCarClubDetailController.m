@@ -89,6 +89,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:)name:UIKeyboardWillHideNotification object:nil];
     
      [self createSubView];
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
 }
 // 当键盘出现或改变时调用
 - (void)keyboardWillShow:(NSNotification *)aNotification
@@ -139,7 +142,7 @@
     //    self.tableView.tableFooterView  = [UIView new];
 //    self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 180, 0);
     [self.contentView addSubview:self.tableView];
-    self.tableView.backgroundColor=[UIColor clearColor];
+
     
     [self setupRefresh];
 }
@@ -241,6 +244,7 @@
     UIView *backgroudView               = [UIView new];
     backgroudView.width                 = [UIScreen mainScreen].bounds.size.width;
     backgroudView.backgroundColor       = [UIColor colorFromHex:@"#f6f6f6"];
+    
     [header addSubview:backgroudView];
     
     backgroudView.sd_layout
@@ -334,6 +338,7 @@
     
     UILabel *sayNumberLab                   = [UILabel new];
     sayNumberLab.textColor                  = [UIColor blackColor];
+//    sayNumberLab.backgroundColor       = [UIColor greenColor];
     sayNumberLab.font                       = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     sayNumberLab.text                       = @"评论（0）";
     self.sayNumberLab                       = sayNumberLab;
@@ -358,8 +363,9 @@
     
     
 
-    [header setupAutoHeightWithBottomView:bottomLine bottomMargin:10*Main_Screen_Height/667];
+    [header setupAutoHeightWithBottomView:bottomLine bottomMargin:1*Main_Screen_Height/667];
     [header layoutSubviews];
+    
     self.tableView.tableHeaderView  = header;
     
     if(_modelsArray.count == 0)
@@ -392,7 +398,7 @@
     self.downView .backgroundColor  = [UIColor whiteColor];
     
     
-    self.userSayTextField                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-150, Main_Screen_Height*40/667)];
+    self.userSayTextField                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-150*Main_Screen_Width/375, Main_Screen_Height*40/667)];
     self.userSayTextField.placeholder    = @"    我来说两句...";
     self.userSayTextField.delegate       = self;
     self.userSayTextField.returnKeyType  = UIReturnKeyDone;
@@ -412,15 +418,17 @@
     self.userSayTextField.leftViewMode =UITextFieldViewModeAlways;
     
     
+    
     UIButton    *sayButton = [UIButton new];
     [sayButton setImage:[UIImage imageNamed:@"huodongxiangqingxiaoxi"] forState:UIControlStateNormal];
-    sayButton.backgroundColor  = [UIColor whiteColor];
+//    sayButton.backgroundColor  = [UIColor whiteColor];
     [sayButton addTarget:self action:@selector(sayButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
     self.sayButton         = sayButton;
     [self.downView  addSubview:sayButton];
     
     sayButton.sd_layout
-    .leftSpaceToView(self.userSayTextField, 10*Main_Screen_Height/667)
+    .leftSpaceToView(self.userSayTextField, 15*Main_Screen_Height/667)
     .centerYEqualToView(self.userSayTextField)
     .heightIs(20*Main_Screen_Height/667)
     .widthIs(20*Main_Screen_Height/667);
@@ -430,24 +438,24 @@
     sayShowLabel.textColor                  = [UIColor colorFromHex:@"#999999"];
     sayShowLabel.font                       = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     sayShowLabel.text                       = @"369";
+//    sayShowLabel.backgroundColor=[UIColor whiteColor];
     self.sayShowLabel                       = sayShowLabel;
     [self.downView  addSubview:sayShowLabel];
     
     sayShowLabel.sd_layout
     .leftSpaceToView(sayButton, 5)
     .topSpaceToView(self.downView , 12*Main_Screen_Height/667)
-    .widthIs(40*Main_Screen_Height/667)
+    .widthIs(25*Main_Screen_Height/667)
     .heightIs(20*Main_Screen_Height/667);
     
     UIButton    *downGoodButton = [UIButton new];
     [downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
-    downGoodButton.backgroundColor  = [UIColor whiteColor];
     [downGoodButton addTarget:self action:@selector(downGoodButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     self.downGoodButton         = downGoodButton;
     [self.downView  addSubview:downGoodButton];
     
     downGoodButton.sd_layout
-    .leftSpaceToView(self.sayShowLabel, 5*Main_Screen_Height/667)
+    .leftSpaceToView(self.sayShowLabel, 10*Main_Screen_Height/667)
     .centerYEqualToView(self.userSayTextField)
     .heightIs(20*Main_Screen_Height/667)
     .widthIs(20*Main_Screen_Height/667);
@@ -457,13 +465,14 @@
     goodShowLabel.textColor                  = [UIColor colorFromHex:@"#999999"];
     goodShowLabel.font                       = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     goodShowLabel.text                       = @"369";
+//    goodShowLabel.backgroundColor=[UIColor whiteColor];
     self.goodShowLabel                       = goodShowLabel;
     [self.downView  addSubview:goodShowLabel];
     
     goodShowLabel.sd_layout
-    .leftSpaceToView(downGoodButton, 0)
-    .topSpaceToView(self.downView , 12*Main_Screen_Height/667)
-    .widthIs(40*Main_Screen_Height/667)
+    .leftSpaceToView(downGoodButton, 5)
+    .topSpaceToView(self.downView , 10*Main_Screen_Height/667)
+    .widthIs(25*Main_Screen_Height/667)
     .heightIs(20*Main_Screen_Height/667);
     
     self.goodNumberLabel.text = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount];
@@ -1095,6 +1104,7 @@
     
     static NSString *cellStatic = @"cellStatic";
     DSActivityDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStatic];
+  
     if (!cell) {
         cell = [[DSActivityDetailCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellStatic];
     }
@@ -1324,7 +1334,7 @@
     }
     else
     {
-        return [self.tableView cellHeightForIndexPath:indexPath model:self.modelsArray[indexPath.row] keyPath:@"model" cellClass:[DSActivityDetailCell class] contentViewWidth:[self cellContentViewWith]];
+        return [self.tableView cellHeightForIndexPath:indexPath model:self.modelsArray[indexPath.row] keyPath:@"model" cellClass:[DSActivityDetailCell class] contentViewWidth:[self cellContentViewWith]]+23*Main_Screen_Height/667;
     }
     
 }

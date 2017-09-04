@@ -20,12 +20,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CarWashing/Find/DSCarClubDetailController.m"
-            timestampString = "525688019.520225"
+            timestampString = "526208355.071494"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "690"
-            endingLineNumber = "690"
-            landmarkName = "-footerRereshing"
+            startingLineNumber = "699"
+            endingLineNumber = "699"
+            landmarkName = "-requestCommentList"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

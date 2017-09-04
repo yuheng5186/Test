@@ -29,8 +29,10 @@
 - (instancetype) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        
+        // 禁止cell点击事件
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self createSubView];
+//        self.backgroundColor=[UIColor redColor];
     }
     return self;
 }
@@ -44,19 +46,19 @@
     
     UILabel *lab1           = [UILabel new];
     lab1.textColor          = [UIColor colorFromHex:@"#4a4a4a"];
-    lab1.font               = [UIFont systemFontOfSize:16];
+    lab1.font               = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     _nameLabel              = lab1;
     
     
     UILabel *lab2           = [UILabel new];
-    lab2.textColor          = [UIColor colorFromHex:@"#999999"];
-    lab2.font               = [UIFont systemFontOfSize:14];
+    lab2.textColor          = [UIColor colorFromHex:@"#4a4a4a"];
+    lab2.font               = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     lab2.numberOfLines      = 0;
     _contentLabel           = lab2;
     
     UILabel *lab3           = [UILabel new];
     lab3.textColor          = [UIColor colorFromHex:@"#999999"];
-    lab3.font               = [UIFont systemFontOfSize:12];
+    lab3.font               = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     _sayTimeLabel           = lab3;
     
     UIImageView     *view4 = [UIImageView new];
@@ -70,12 +72,12 @@
 //    thumbupvie.titleLabel.backgroundColor=[UIColor yellowColor];
     thumbupvie.titleLabel.textColor=[UIColor colorFromHex:@"#868686"];
     [thumbupvie setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    thumbupvie.titleLabel.font               = [UIFont systemFontOfSize:12];
+    thumbupvie.titleLabel.font               = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     [thumbupvie setTitle:@"0" forState:UIControlStateNormal];
     [thumbupvie setImage:[UIImage imageNamed:@"pinglundianzan"] forState:UIControlStateNormal];
     [thumbupvie setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateSelected];
-     [thumbupvie setTitleEdgeInsets:UIEdgeInsetsMake(10, -thumbupvie.imageView.image.size.width, 0, thumbupvie.imageView.image.size.width)];
-    [thumbupvie setImageEdgeInsets:UIEdgeInsetsMake(10, thumbupvie.titleLabel.bounds.size.width, 0, -thumbupvie.titleLabel.bounds.size.width)];
+     [thumbupvie setTitleEdgeInsets:UIEdgeInsetsMake(10*Main_Screen_Height/667, -thumbupvie.imageView.image.size.width, 0, thumbupvie.imageView.image.size.width)];
+    [thumbupvie setImageEdgeInsets:UIEdgeInsetsMake(10*Main_Screen_Height/667, thumbupvie.titleLabel.bounds.size.width, 0, -thumbupvie.titleLabel.bounds.size.width)];
      [thumbupvie addTarget:self action:@selector(ThumbOclick:) forControlEvents:UIControlEventTouchUpInside];
    
     
@@ -86,44 +88,46 @@
     
     
     _iconImageView.sd_layout
-    .widthIs(40)
-    .heightIs(40)
-    .topSpaceToView(self.contentView, 10)
-    .leftSpaceToView(self.contentView, 10);
+    .widthIs(40*Main_Screen_Height/667)
+    .heightIs(40*Main_Screen_Height/667)
+    .topSpaceToView(self.contentView, 10*Main_Screen_Height/667)
+    .leftSpaceToView(self.contentView, 10*Main_Screen_Height/667);
     
     _nameLabel.sd_layout
-    .topEqualToView(_iconImageView)
-    .leftSpaceToView(_iconImageView, 10)
+    .centerYEqualToView(_iconImageView)
+    .leftSpaceToView(_iconImageView, 10*Main_Screen_Height/667)
     .heightRatioToView(_iconImageView, 0.4);
     
-//    _starImageView.sd_layout
-//    .topSpaceToView(_nameLabel, 5)
-//    .leftEqualToView(_nameLabel)
-//    .heightIs(15)
-//    .widthIs(80);
-    
+
     _contentLabel.sd_layout
-    .topSpaceToView(_nameLabel, 10)
+    .topSpaceToView(_nameLabel, 10*Main_Screen_Height/667)
     .leftEqualToView(_nameLabel)
     .autoHeightRatio(0);
     
-    _sayTimeLabel.sd_layout
-    .rightSpaceToView(self.contentView, 10)
-    .centerYEqualToView(_nameLabel)
-    .heightIs(20);
-    
     _ThumbUpBtn.sd_layout
-    .rightSpaceToView(self.contentView,12)
-    .bottomSpaceToView(self.contentView,8)
-    .widthIs(34)
-    .heightIs(34);
+    .rightSpaceToView(self.contentView, 15*Main_Screen_Height/667)
+    .topSpaceToView(self.contentView, 5*Main_Screen_Height/667)
+    .widthIs(34*Main_Screen_Height/667)
+    .heightIs(34*Main_Screen_Height/667);
+    
+    
+    _sayTimeLabel.sd_layout
+    .topSpaceToView(_contentLabel, 10*Main_Screen_Height/667)
+    .leftEqualToView(_contentLabel)
+    .autoHeightRatio(0);
+    
+//    _sayTimeLabel.sd_layout
+//    .rightSpaceToView(self.contentView,12)
+//    .bottomSpaceToView(self.contentView,8)
+//    .widthIs(34)
+//    .heightIs(34);
     
     _iconImageView.sd_cornerRadiusFromWidthRatio = @(0.5);
     
-    [_contentLabel setSingleLineAutoResizeWithMaxWidth:200];
-    [_nameLabel setSingleLineAutoResizeWithMaxWidth:150];
+    [_contentLabel setSingleLineAutoResizeWithMaxWidth:300*Main_Screen_Height/667];
+    [_nameLabel setSingleLineAutoResizeWithMaxWidth:150*Main_Screen_Height/667];
     
-    [_sayTimeLabel setSingleLineAutoResizeWithMaxWidth:150];
+    [_sayTimeLabel setSingleLineAutoResizeWithMaxWidth:150*Main_Screen_Height/667];
     
     
 }
@@ -163,7 +167,7 @@
     
     
 
-    CGFloat bottomMargin = 10;
+    CGFloat bottomMargin = 10*Main_Screen_Height/667;
     
     
     [self setupAutoHeightWithBottomView:_contentLabel bottomMargin:bottomMargin];
