@@ -16,6 +16,7 @@
 #import "HTTPDefine.h"
 #import "MBProgressHUD.h"
 #import "UdStorage.h"
+#import "EarnScoreController.h"
 
 @interface ScoreDetailController ()<UITableViewDelegate, UITableViewDataSource, HQSliderViewDelegate>
 
@@ -444,7 +445,35 @@
 #pragma mark - 点击赚积分按钮和兑换按钮
 - (void)didClickEarnScoreBtn {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    // push将控制器压到栈中，栈是先进后出；pop是出栈：即将控制器从栈中取出。
+    
+    NSArray * a = self.navigationController.viewControllers;
+    
+    NSMutableArray *arrController = [NSMutableArray arrayWithArray:a];
+    
+    NSInteger VcCount = arrController.count;
+    
+    //最后一个vc是自己，(-2)是倒数第二个是上一个控制器。
+    
+    UIViewController *lastVC = arrController[VcCount - 2];
+    
+    // 返回到倒数第三个控制器
+    
+    if([lastVC isKindOfClass:[EarnScoreController class]]) {
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }
+    
+    else
+    {
+        
+        EarnScoreController *earnVC = [[EarnScoreController alloc]init];
+        earnVC.CurrentScore = self.CurrentScore;
+        [arrController replaceObjectAtIndex:(VcCount - 1) withObject:earnVC];
+        self.navigationController.viewControllers = arrController;
+    }
 }
 
 
