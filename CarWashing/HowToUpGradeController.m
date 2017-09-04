@@ -280,7 +280,6 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     WayToUpGradeCell *wayCell = [tableView dequeueReusableCellWithIdentifier:id_wayToUpCell forIndexPath:indexPath];
     
     NSArray *arr2 = @[@"wanshangerenxinxi",@"xinyonghuzhuce",@"wanshangerenxinxi",@"wanshancheliangxinxi",@"wanshangerenxinxi"];
-    
     NSInteger num = [[[self.ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegType"] integerValue];
     
     
