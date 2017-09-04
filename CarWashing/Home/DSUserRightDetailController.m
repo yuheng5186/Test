@@ -17,6 +17,8 @@
 #import "Mylabel.h"
 #import "CardConfigGrade.h"
 
+#import <Masonry.h>
+
 @interface DSUserRightDetailController ()
 {
     CardConfigGrade *card;
@@ -123,39 +125,124 @@
     upView.height           = _getButton.bottom +Main_Screen_Height*50/667;
     
     
-    UIView *downView                = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*170/667) color:[UIColor whiteColor]];
+    UIView *downView                = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*270/667) color:[UIColor whiteColor]];
     downView.top                    = upView.bottom;
+    //
+    UILabel *noticeLabel = [[UILabel alloc] init];
+    noticeLabel.text = @"使用须知";
+    noticeLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+    noticeLabel.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
+    [downView addSubview:noticeLabel];
     
-    NSString *useString             = @"使用须知";
-    UIFont    *useFont              = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
-    UILabel     *uselabel           = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*20/667) font:useFont text:useString isCenter:NO];
-    uselabel.textColor              = [UIColor colorFromHex:@"#4a4a4a"];
-    uselabel.left                   = Main_Screen_Width*10/375;
-    uselabel.top                    = Main_Screen_Height*10/667;
     
-    NSString *useString1             = @"1. 本代金券由蔷薇爱车APP开发，仅限蔷薇爱车店和与蔷薇合作商家使用";
-    UIFont    *useFont1              = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
-    UILabel     *uselabel1           = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*20/375, Main_Screen_Height*40/667) font:useFont1 text:useString1 isCenter:NO];
-    uselabel1.textColor              = [UIColor colorFromHex:@"#999999"];
-    uselabel1.numberOfLines          = 0;
-    uselabel1.centerX                = downView.width/2;
-    uselabel1.top                    = uselabel.bottom +Main_Screen_Height*10/667;
+    UILabel *noticeLabel1 = [[UILabel alloc] init];
+    noticeLabel1.text = @"1、此卡仅限清洗汽车外观，不得购买其它服务项目";
+    noticeLabel1.textColor = [UIColor colorFromHex:@"#999999"];
+    noticeLabel1.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    noticeLabel1.numberOfLines = 0;
+    [downView addSubview:noticeLabel1];
     
-    NSString *useString2             = @"2. 如果使用代金券购买服务时发生退服务行为，代金券不予退还";
-    UIFont    *useFont2              = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
-    UILabel     *uselabel2           = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*20/375, Main_Screen_Height*40/667) font:useFont2 text:useString2 isCenter:NO];
-    uselabel2.textColor              = [UIColor colorFromHex:@"#999999"];
-    uselabel2.numberOfLines          = 0;
-    uselabel2.centerX                = Main_Screen_Width/2;
-    uselabel2.top                    = uselabel1.bottom +Main_Screen_Height*5/667;
     
-    NSString *useString3             = @"3. 有任何问题，可咨询蔷薇客服";
-    UIFont    *useFont3              = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
-    UILabel     *uselabel3           = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*20/375, Main_Screen_Height*40/667) font:useFont3 text:useString3 isCenter:NO];
-    uselabel3.textColor              = [UIColor colorFromHex:@"#999999"];
-    uselabel3.numberOfLines          = 0;
-    uselabel3.centerX                = Main_Screen_Width/2;
-    uselabel3.top                    = uselabel2.bottom +Main_Screen_Height*0/667;
+    UILabel *noticeLabel2 = [[UILabel alloc] init];
+    noticeLabel2.text = @"2、洗车卡不能兑换现金和转赠与其他人使用";
+    noticeLabel2.textColor = [UIColor colorFromHex:@"#999999"];
+    noticeLabel2.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    noticeLabel2.numberOfLines = 0;
+    [downView addSubview:noticeLabel2];
+    
+    
+    UILabel *noticeLabel3 = [[UILabel alloc] init];
+    noticeLabel3.text = @"3、此卡一经售出，概不兑现。不记名，不挂失，不退卡，不补办";
+    noticeLabel3.textColor = [UIColor colorFromHex:@"#999999"];
+    noticeLabel3.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    noticeLabel3.numberOfLines = 0;
+    [downView addSubview:noticeLabel3];
+    
+    
+    UILabel *noticeLabel4 = [[UILabel alloc] init];
+    noticeLabel4.text = @"4、此卡可在蔷薇服务点享受会员优惠待遇，不得与其它优惠同时使用";
+    noticeLabel4.textColor = [UIColor colorFromHex:@"#999999"];
+    noticeLabel4.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    noticeLabel4.numberOfLines = 0;
+    [downView addSubview:noticeLabel4];
+    
+    
+    UILabel *noticeLabel5 = [[UILabel alloc] init];
+    noticeLabel5.text = @"5、由青岛蔷薇汽车服务有限公司保留此卡法律范围内的最终解释权。VIP热线：4006979558";
+    noticeLabel5.textColor = [UIColor colorFromHex:@"#999999"];
+    noticeLabel5.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    noticeLabel5.numberOfLines = 0;
+    [downView addSubview:noticeLabel5];
+    
+    [noticeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.equalTo(downView).mas_offset(10*Main_Screen_Height/667);
+    }];
+    
+    [noticeLabel1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(noticeLabel);
+        make.top.equalTo(noticeLabel.mas_bottom).mas_offset(10*Main_Screen_Height/667);
+        make.right.equalTo(downView).mas_offset(-10*Main_Screen_Height/667);
+    }];
+    
+    [noticeLabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(noticeLabel);
+        make.top.equalTo(noticeLabel1.mas_bottom).mas_offset(10*Main_Screen_Height/667);
+        make.right.equalTo(downView).mas_offset(-10*Main_Screen_Height/667);
+}];
+    
+    [noticeLabel3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(noticeLabel);
+        make.top.equalTo(noticeLabel2.mas_bottom).mas_offset(10*Main_Screen_Height/667);
+        make.right.equalTo(downView).mas_offset(-10*Main_Screen_Height/667);
+    }];
+    
+    [noticeLabel4 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(noticeLabel);
+        make.top.equalTo(noticeLabel3.mas_bottom).mas_offset(10*Main_Screen_Height/667);
+        make.right.equalTo(downView).mas_offset(-10*Main_Screen_Height/667);
+    }];
+    
+    [noticeLabel5 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(noticeLabel);
+        make.top.equalTo(noticeLabel4.mas_bottom).mas_offset(10*Main_Screen_Height/667);
+        make.right.equalTo(downView).mas_offset(-10*Main_Screen_Height/667);
+    }];
+    
+    
+    
+//    NSString *useString             = @"使用须知";
+//    UIFont    *useFont              = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
+//    UILabel     *uselabel           = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*20/667) font:useFont text:useString isCenter:NO];
+//    uselabel.backgroundColor = [UIColor redColor];
+//    uselabel.textColor              = [UIColor colorFromHex:@"#4a4a4a"];
+//    uselabel.left                   = Main_Screen_Width*10/375;
+//    uselabel.top                    = Main_Screen_Height*10/667;
+//    
+//    NSString *useString1             = @"1、此卡仅限清洗汽车外观，不得购买其它服务项目";
+//    UIFont    *useFont1              = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+//    UILabel     *uselabel1           = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*20/375, Main_Screen_Height*40/667) font:useFont1 text:useString1 isCenter:NO];
+//    uselabel1.textColor              = [UIColor colorFromHex:@"#999999"];
+//    uselabel1.numberOfLines          = 0;
+//    uselabel1.centerX                = downView.width/2;
+//    uselabel1.top                    = uselabel.bottom +Main_Screen_Height*10/667;
+//    
+//    NSString *useString2             = @"2、洗车卡不能兑换现金和转赠与其他人使用";
+//    UIFont    *useFont2              = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+//    UILabel     *uselabel2           = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*20/375, Main_Screen_Height*40/667) font:useFont2 text:useString2 isCenter:NO];
+//    uselabel2.textColor              = [UIColor colorFromHex:@"#999999"];
+//    uselabel2.backgroundColor = [UIColor blueColor];
+//    uselabel2.numberOfLines          = 0;
+//    uselabel2.centerX                = Main_Screen_Width/2;
+//    uselabel2.top                    = uselabel1.bottom +Main_Screen_Height*5/667;
+//    
+//    NSString *useString3             = @"3、此卡一经售出，概不兑现。不记名，不挂失，不退卡，不补办";
+//    UIFont    *useFont3              = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+//    UILabel     *uselabel3           = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*20/375, Main_Screen_Height*40/667) font:useFont3 text:useString3 isCenter:NO];
+//    uselabel3.backgroundColor = [UIColor redColor];
+//    uselabel3.textColor              = [UIColor colorFromHex:@"#999999"];
+//    uselabel3.numberOfLines          = 0;
+//    uselabel3.centerX                = Main_Screen_Width/2;
+//    uselabel3.top                    = uselabel2.bottom +Main_Screen_Height*5/667;
 }
 
 -(NSString *)DateZhuan:(NSString *)string
