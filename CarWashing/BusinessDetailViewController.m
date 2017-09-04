@@ -258,6 +258,8 @@ static NSString *businessCommentCell = @"businessCommentCell";
     [detailTableView registerNib:[UINib nibWithNibName:@"BusinessEstimateCell" bundle:nil] forCellReuseIdentifier:businessCommentCell];
     
     //detailTableView.rowHeight = 100;
+    detailTableView.estimatedRowHeight = 100;
+    detailTableView.rowHeight = UITableViewAutomaticDimension;
     
     detailTableView.tableHeaderView = containHeadView;
     
@@ -581,14 +583,14 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if (indexPath.section == 0) {
-        return 100*Main_Screen_Height/667;
-    }
-    
-    return 110*Main_Screen_Height/667;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    if (indexPath.section == 0) {
+//        return 100*Main_Screen_Height/667;
+//    }
+//    
+//    return 110*Main_Screen_Height/667;
+//}
 
 
 - (void)didReceiveMemoryWarning {
