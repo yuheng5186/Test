@@ -298,7 +298,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         
     }
     
-    cell.CardnameLabel.text = [NSString stringWithFormat:@"本月免费洗车%ld次",card.CardCount];
+    cell.CardnameLabel.text = [NSString stringWithFormat:@"免费洗车%ld次",card.CardCount];
     
     cell.CardTimeLabel.text = [NSString stringWithFormat:@"有效期: %@-%@",[self DateZhuan:card.ExpStartDates],[self DateZhuan:card.ExpEndDates]];
     

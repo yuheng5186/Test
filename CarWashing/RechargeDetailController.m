@@ -21,6 +21,8 @@
 @property (nonatomic, weak) UILabel *noticeLabelThree;
 @property (nonatomic, weak) UILabel *noticeLabelFour;
 @property (nonatomic, weak) UILabel *noticeLabelFive;
+@property (nonatomic, weak) UILabel *leaveWashLabel;
+@property (nonatomic, weak) UILabel *leaveTimesLabel;
 
 
 @property (nonatomic, weak) UIView  *titleView;
@@ -57,25 +59,64 @@
     self.validityLabel.text = [NSString stringWithFormat:@"有效期至%@",self.card.ExpEndDates];
     self.timesLabel.text = [NSString stringWithFormat:@"免费洗车次数%ld次",self.card.CardCount];
     
+    self.leaveWashLabel.text = [NSString stringWithFormat:@"%@剩余",self.card.CardName];
+    self.leaveTimesLabel.text = [NSString stringWithFormat:@"免费洗车剩余%ld次",self.card.CardCount - self.card.UsedCount];
+    
+    UIView *lineView1 = [[UIView alloc] init];
+    lineView1.backgroundColor = [UIColor colorFromHex:@"#f0f0f0"];
+    [self.containView addSubview:lineView1];
+    
+    UIView *lineView2 = [[UIView alloc] init];
+    lineView2.backgroundColor = [UIColor colorFromHex:@"#f0f0f0"];
+    [self.containView addSubview:lineView2];
+    
+    
+    UIView *lineView3 = [[UIView alloc] init];
+    lineView3.backgroundColor = [UIColor colorFromHex:@"#f0f0f0"];
+    [self.containView addSubview:lineView3];
+    
     
     [self.washCarLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.containView).mas_offset(20*Main_Screen_Height/667);
         make.left.equalTo(self.containView).mas_offset(10*Main_Screen_Height/667);
     }];
     
-    [self.validityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.timesLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.washCarLabel);
         make.top.equalTo(self.washCarLabel.mas_bottom).mas_offset(15*Main_Screen_Height/667);
     }];
     
-    [self.timesLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.washCarLabel);
-        make.top.equalTo(self.validityLabel.mas_bottom).mas_offset(15*Main_Screen_Height/667);
+    [self.validityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.timesLabel);
+        make.right.equalTo(self.containView).mas_offset(-10*Main_Screen_Height/667);
     }];
+    
+    [lineView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.timesLabel.mas_bottom).mas_offset(20*Main_Screen_Height/667);
+        make.left.right.equalTo(self.containView);
+        make.height.mas_equalTo(10*Main_Screen_Height/667);
+    }];
+    
+    [self.leaveWashLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.washCarLabel);
+        make.top.equalTo(lineView1.mas_bottom).mas_offset(20*Main_Screen_Height/667);
+    }];
+    
+    [self.leaveTimesLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.washCarLabel);
+        make.top.equalTo(self.leaveWashLabel.mas_bottom).mas_offset(15*Main_Screen_Height/667);
+    }];
+    
+    [lineView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.leaveTimesLabel.mas_bottom).mas_offset(20*Main_Screen_Height/667);
+        make.left.right.equalTo(self.containView);
+        make.height.mas_equalTo(10*Main_Screen_Height/667);
+    }];
+    
     
     [self.noticeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.washCarLabel);
-        make.top.equalTo(self.timesLabel.mas_bottom).mas_offset(35*Main_Screen_Height/667);
+        make.top.equalTo(lineView2.mas_bottom).mas_offset(20*Main_Screen_Height/667);
     }];
     
     [self.noticeLabelOne mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -106,6 +147,13 @@
         make.leading.equalTo(self.washCarLabel);
         make.top.equalTo(self.noticeLabelFour.mas_bottom).mas_offset(15*Main_Screen_Height/667);
         make.right.equalTo(self.containView).mas_offset(-10*Main_Screen_Height/667);
+    }];
+    
+    
+    [lineView3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.noticeLabelFive.mas_bottom).mas_offset(20*Main_Screen_Height/667);
+        make.left.right.equalTo(self.containView);
+        make.bottom.equalTo(self.containView);
     }];
     
 }
@@ -252,6 +300,38 @@
     }
     
     return _noticeLabelFive;
+}
+
+
+- (UILabel *)leaveWashLabel {
+    
+    if (!_leaveWashLabel) {
+        
+        UILabel *leaveWashLabel = [[UILabel alloc] init];
+        leaveWashLabel.text = @"";
+        leaveWashLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+        leaveWashLabel.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
+        _leaveWashLabel = leaveWashLabel;
+        [self.containView addSubview:_leaveWashLabel];
+    }
+    
+    return _leaveWashLabel;
+}
+
+
+- (UILabel *)leaveTimesLabel {
+    
+    if (!_leaveTimesLabel) {
+        
+        UILabel *leaveTimesLabel = [[UILabel alloc] init];
+        leaveTimesLabel.text = @"";
+        leaveTimesLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+        leaveTimesLabel.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
+        _leaveTimesLabel = leaveTimesLabel;
+        [self.containView addSubview:_leaveTimesLabel];
+    }
+    
+    return _leaveTimesLabel;
 }
 
 

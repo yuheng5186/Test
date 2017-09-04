@@ -411,6 +411,17 @@ static NSString *businessCommentCell = @"businessCommentCell";
         make.top.equalTo(serviceBtn.mas_bottom).mas_offset(7*Main_Screen_Height/667);
     }];
     
+    UIButton *serviceAreaBtn = [[UIButton alloc] init];
+    [serviceAreaBtn addTarget:self action:@selector(didClickServiceBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [payToolBar addSubview:serviceAreaBtn];
+    
+    [serviceAreaBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.equalTo(payToolBar);
+        make.trailing.equalTo(payBtn.mas_leading).mas_equalTo(-37*Main_Screen_Height/667);
+        make.width.mas_equalTo(50*Main_Screen_Height/667);
+    }];
+    
+    
 }
 
 #pragma mark - 点击取消/收藏
