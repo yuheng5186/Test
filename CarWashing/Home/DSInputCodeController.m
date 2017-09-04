@@ -49,7 +49,7 @@
     style.font      = [UIFont systemFontOfSize:18];
     [_inputView setStyle:style forState:(TFGridInputViewCellStateEmpty)];
     
-    _inputView.DIVBorderColor = [UIColor colorFromHex:@"#ffce36"];
+    _inputView.DIVBorderColor = [UIColor colorFromHex:@"#0161a1"];
     _inputView.DIVBorderWidth = 0.5;
     
     
@@ -64,6 +64,8 @@
     
     
     UIButton    *washingButton  = [UIUtil drawDefaultButton:self.view title:@"立即洗车" target:self action:@selector(getInputViewText)];
+    washingButton.width         = Main_Screen_Width*280/375;
+    washingButton.layer.cornerRadius    = washingButton.height/2;
     washingButton.top           = inputLabel.bottom +Main_Screen_Height*40/667;
     washingButton.centerX       = Main_Screen_Width/2;
     
@@ -89,7 +91,7 @@
     
     sender.selected = !sender.selected;
     if (sender.selected) {
-        [sender setImage:[UIImage imageNamed:@"qw_shoudianton"] forState:UIControlStateSelected];
+        [sender setImage:[UIImage imageNamed:@"kaishoudiantong"] forState:UIControlStateSelected];
         self.flashlightLabel.text  = @"手电筒";
         //打开闪光灯
         AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];

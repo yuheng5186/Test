@@ -144,6 +144,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             
             
             UITextField *numTF1 = [[UITextField alloc] init];
+            numTF1.delegate=self;
             _numTF = numTF1;
             
             if(self.mycar == nil)
@@ -219,6 +220,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         
         if (indexPath.row == 0) {
             UITextField *textTF1 = [[UITextField alloc] init];
+            textTF1.delegate=self;
             _text1 = textTF1;
             
             
@@ -244,6 +246,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         else if (indexPath.row == 3) {
                 UITextField *textTF2 = [[UITextField alloc] init];
             textTF2.keyboardType = UIKeyboardTypeNumberPad;
+            textTF2.delegate=self;
                 _text2 = textTF2;
                 textTF2.placeholder = @"请填写";
             
@@ -343,7 +346,44 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     
     return carCell;
 }
-
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if (textField == _numTF) {
+        //这里的if时候为了获取删除操作,如果没有次if会造成当达到字数限制后删除键也不能使用的后果.
+        if (range.length == 1 && string.length == 0) {
+            return YES;
+        }
+        //so easy
+        else if (_numTF.text.length >= 6) {
+            _numTF.text = [textField.text substringToIndex:6];
+                       return NO;
+        }
+    }
+    if (textField==_text2) {
+        //这里的if时候为了获取删除操作,如果没有次if会造成当达到字数限制后删除键也不能使用的后果.
+        if (range.length == 1 && string.length == 0) {
+            return YES;
+        }
+        //so easy
+        else if (_text2.text.length>=6) {
+           
+            _text2.text = [textField.text substringToIndex:6];
+            
+            return NO;
+        }
+    }
+    if (textField==_text1) {
+        if (range.length == 1 && string.length == 0) {
+            return YES;
+        }
+        //so easy
+        else if (_text1.text.length>=17) {
+            _text1.text = [textField.text substringToIndex:17];
+            return NO;
+        }
+    }
+    return YES;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
     return 40*Main_Screen_Height/667;
@@ -391,7 +431,10 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     {
         
         if (indexPath.row == 1) {
+            [_numTF resignFirstResponder];
             [_text1 resignFirstResponder];
+            [_text2 resignFirstResponder];
+            [_brandTF resignFirstResponder];
             QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
                 
                 self.lbl.text = str;
@@ -400,7 +443,10 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         }
         
         if (indexPath.row == 2) {
+            [_numTF resignFirstResponder];
             [_text1 resignFirstResponder];
+            [_text2 resignFirstResponder];
+            [_brandTF resignFirstResponder];
             QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
                 
                 self.lbl2.text = str;
@@ -432,7 +478,8 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     
     if(self.mycar == nil)
     {
-        if(_brandTF.text.length == 0 || _numTF.text.length == 0 || _text1.text.length == 0 || _lbl2.text.length == 0 || _lbl.text.length == 0 || _text2.text.length == 0)
+        
+        if(_brandTF.text.length == 0 || _numTF.text.length == 0 || _text1.text.length == 0 || _lbl2.text.length <= 3 || _lbl.text.length <= 3 || _text2.text.length == 0)
         {
             [HUD hide:YES];
             [self.view showInfo:@"请将信息填写完整" autoHidden:YES interval:2];
@@ -440,6 +487,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         
         else
         {
+            NSLog(@"%@===%@",_lbl2.text,_lbl.text);
             NSDictionary *mulDic = @{
                                      @"CarBrand":_brandTF.text,
                                      @"PlateNumber":[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,_numTF.text],

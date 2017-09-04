@@ -183,7 +183,7 @@
 - (void)flashlightAction:(UIButton *)sender{
     sender.selected = !sender.selected;
     if (sender.selected) {
-        [sender setImage:[UIImage imageNamed:@"Flashlight_H"] forState:UIControlStateSelected];
+        [sender setImage:[UIImage imageNamed:@"kaishoudiantong"] forState:UIControlStateSelected];
         self.flashlightHintLabel.textColor = ZFColor(133*Main_Screen_Height/667, 235*Main_Screen_Height/667, 0, 1);
         
         //打开闪光灯

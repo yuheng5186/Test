@@ -264,7 +264,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         cell.textLabel.text  = @"卡名称";
         cell.detailTextLabel.text = self.choosecard.CardName;
         
-        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#0161a1"];
+        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         
         return cell;
@@ -293,7 +293,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         NSDate *newDate = [datenow dateByAddingTimeInterval:60 * 60 * 24 * self.choosecard.ExpiredDay];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"即日起至%@",[formatter stringFromDate:newDate]];
         
-        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#0161a1"];
+        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         
         return cell;
@@ -304,7 +304,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         cell.textLabel.text  = @"特惠活动";
         cell.detailTextLabel.text = @"立减5元";
         
-        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#0161a1"];
+        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         
         return cell;
