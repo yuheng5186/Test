@@ -37,13 +37,13 @@
     self.CardnameLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     
     [self.CardTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.backgroundImgV.mas_right).mas_offset(-12*Main_Screen_Height/667);
+        make.right.equalTo(self.backgroundImgV).mas_offset(-12*Main_Screen_Height/667);
         make.bottom.equalTo(self.backgroundImgV).mas_offset(-20*Main_Screen_Height/667);
     }];
     
     [self.CardnameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.CardTimeLabel.mas_top).mas_offset(-1*Main_Screen_Height/667);
-        make.right.equalTo(self.backgroundImgV.mas_right).mas_offset(-12*Main_Screen_Height/667);
+        make.bottom.equalTo(self.CardTimeLabel.mas_top);
+        make.right.equalTo(self.backgroundImgV).mas_offset(-12*Main_Screen_Height/667);
     }];
     
     

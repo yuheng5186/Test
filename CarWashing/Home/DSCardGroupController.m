@@ -195,7 +195,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
     
     [self.rechargeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleView.mas_bottom).mas_offset(0);
+        make.top.equalTo(titleView.mas_bottom);
         make.left.equalTo(self.view).mas_offset(Main_Screen_Width*22.5/375);
         make.right.equalTo(self.view).mas_offset(-Main_Screen_Width*22.5/375);
         make.height.mas_equalTo(self.view.height-Main_Screen_Height*60/667-64);
@@ -203,6 +203,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
     self.rechargeView.delegate = self;
     self.rechargeView.dataSource = self;
+    self.rechargeView.contentInset = UIEdgeInsetsMake(0, 0, 30, 0);
     
     [self.rechargeView registerNib:[UINib nibWithNibName:@"RechargeCell" bundle:nil] forCellReuseIdentifier:id_rechargeCell];
     self.rechargeView.rowHeight = Main_Screen_Height*190/667;

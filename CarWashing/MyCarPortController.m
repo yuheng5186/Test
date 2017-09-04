@@ -420,7 +420,7 @@ static NSString *id_carListCell = @"id_carListCell";
 
 - (IBAction)didClickDeleteButton:(UIButton *)sender {
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"是否删除车辆信息" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"删除车辆后，车辆数据将不再保存，您确认删除吗？" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -630,7 +630,7 @@ static NSString *id_carListCell = @"id_carListCell";
  */
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return -64;
+    return 0;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -20,6 +20,7 @@
 #import "EarnScoreController.h"
 #import "DSMembershipController.h"
 #import "MBProgressHUD.h"
+#import "DSMemberRightsController.h"
 
 @interface IcreaseCarController ()<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 {
@@ -473,7 +474,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     HUD.removeFromSuperViewOnHide =YES;
     HUD.mode = MBProgressHUDModeIndeterminate;
     HUD.minSize = CGSizeMake(132.f, 108.0f);
-    
+
     
     
     if(self.mycar == nil)
@@ -522,7 +523,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                         
                         NSNotification * notice = [NSNotification notificationWithName:@"increasemycarsuccess" object:nil userInfo:nil];
                         [[NSNotificationCenter defaultCenter]postNotification:notice];
-                        
+
                         __weak typeof (self) weakSelf = self;
 
                         
@@ -539,41 +540,79 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                             }
                             else
                             {
-                                UIViewController *lastVC = vcsArray[vcCount-4];
-                                UIViewController *lasttwoVC = vcsArray[vcCount-5];
+//                                UIViewController *lastVC = vcsArray[vcCount-4];
+//                                UIViewController *lasttwoVC = vcsArray[vcCount-5];
+//                                
+//                                int index=[[weakSelf.navigationController viewControllers]indexOfObject:weakSelf];
+//                                
+//                                if([lastVC isKindOfClass:[HowToUpGradeController class]])
+//                                {
                                 
-                                int index=[[weakSelf.navigationController viewControllers]indexOfObject:weakSelf];
+//                                    NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+//                                    [[NSNotificationCenter defaultCenter]postNotification:notice];
+//
+//                                    [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
                                 
-                                if([lastVC isKindOfClass:[HowToUpGradeController class]])
-                                {
+                                NSInteger m = 0;
+                                
+                                NSInteger n = 0;
+                                
                                     
-                                    NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
-                                    [[NSNotificationCenter defaultCenter]postNotification:notice];
-                                    
-                                    [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
-                                }
-                                else if([lastVC isKindOfClass:[EarnScoreController class]])
-                                {
-                                    if([lasttwoVC isKindOfClass:[DSMembershipController class]])
-                                    {
-                                        NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
-                                        [[NSNotificationCenter defaultCenter]postNotification:notice];
-                                        [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
+                                    for (UIViewController *controller in weakSelf.navigationController.viewControllers) {
+                                        if ([controller isKindOfClass:[DSMembershipController class]]) {
+                                            DSMembershipController *memberVC =(DSMembershipController *)controller;
+                                            [weakSelf.navigationController popToViewController:memberVC animated:YES];
+                                            m++;
+                                        }
+                                        else if ([controller isKindOfClass:[DSMemberRightsController class]]) {
+                                            DSMemberRightsController *memberVC =(DSMemberRightsController *)controller;
+                                            [weakSelf.navigationController popToViewController:memberVC animated:YES];
+                                            n++;
+                                        }
                                     }
+                                if(m != 0)
+                                {
                                     NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
                                     [[NSNotificationCenter defaultCenter]postNotification:notice];
-                                    [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:index-5]animated:YES];
+                                    UIViewController *controller;
+                                    DSMembershipController *memberVC =(DSMembershipController *)controller;
+                                    [weakSelf.navigationController popToViewController:memberVC animated:YES];
                                 }
-
+                                else
+                                {
+                                    NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                    [[NSNotificationCenter defaultCenter]postNotification:notice];
+                                    UIViewController *controller;
+                                    DSMemberRightsController *memberVC =(DSMemberRightsController *)controller;
+                                    [weakSelf.navigationController popToViewController:memberVC animated:YES];
+                                }
+                                    
+                                    
+                                    
+                                    
+//                                }
+//                                else if([lastVC isKindOfClass:[EarnScoreController class]])
+//                                {
+//                                    if([lasttwoVC isKindOfClass:[DSMembershipController class]])
+//                                    {
+//                                        NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+//                                        [[NSNotificationCenter defaultCenter]postNotification:notice];
+//                                        [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
+//                                    }
+//                                    NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+//                                    [[NSNotificationCenter defaultCenter]postNotification:notice];
+//                                    [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:index-5]animated:YES];
+//                                }
+//
                             }
 
                         };
-                        
-
-        
+//
+//
+//        
                         [HUD hide:YES afterDelay:1];
-                        
-                    
+//
+//                    
                     }
                     
                     else

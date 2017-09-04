@@ -194,7 +194,12 @@ static NSString * HeaderId = @"header";
     
     //无限轮播图
     NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, (Main_Screen_Width - 60*Main_Screen_Height/667) * 9*Main_Screen_Height/667 / 16*Main_Screen_Height/667+ 24*Main_Screen_Height/667)];
-    pageFlowView.backgroundColor = [UIColor whiteColor];
+    
+    if(self.imageArray.count == 0)
+    {
+        pageFlowView.backgroundColor = [UIColor clearColor];
+    }
+    
     pageFlowView.delegate = self;
     pageFlowView.dataSource = self;
     pageFlowView.minimumPageAlpha = 0.85;
@@ -917,8 +922,8 @@ static NSString * HeaderId = @"header";
 //}
 // 返回可以点击的按钮 上面带文字
 - (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-    NSDictionary *attribute = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f]};
-    return [[NSAttributedString alloc] initWithString:@"" attributes:attribute];
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],NSForegroundColorAttributeName:[UIColor whiteColor],NSBackgroundColorAttributeName:[UIColor blueColor],};
+    return [[NSAttributedString alloc] initWithString:@"新增车辆" attributes:attributes];
 }
 
 //- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
@@ -926,7 +931,7 @@ static NSString * HeaderId = @"header";
 //}
 
 - (UIImage *)buttonImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-    return [UIImage imageNamed:@"button_image"];
+    return [UIImage imageNamed:@"xinzeng"];
 }
 //是否显示空白页，默认YES
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
@@ -934,7 +939,7 @@ static NSString * HeaderId = @"header";
 }
 //是否允许点击，默认YES
 - (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView {
-    return NO;
+    return YES;
 }
 //是否允许滚动，默认NO
 - (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
@@ -950,7 +955,10 @@ static NSString * HeaderId = @"header";
 }
 //空白页按钮点击事件
 - (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView {
-    return NSLog(@"空白页按钮点击事件");
+    IcreaseCarController *increaseVC = [[IcreaseCarController alloc] init];
+    increaseVC.hidesBottomBarWhenPushed = YES;
+    increaseVC.titlename = @"新增车辆";
+    [self.navigationController pushViewController:increaseVC animated:YES];
 }
 /**
  *  调整垂直位置
