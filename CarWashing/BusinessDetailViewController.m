@@ -623,21 +623,40 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 
 #pragma mark - 设置组头视图
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    UILabel *textLab = [[UILabel alloc] init];
-    
-    //textLab.backgroundColor = [UIColor colorFromHex:@"#dfdfdf"];
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *v = [[UIView alloc]initWithFrame:CGRectMake(12*Main_Screen_Width/667, 0, Main_Screen_Width, 40*Main_Screen_Height/667)];
+
+    UILabel *textLab = [[UILabel alloc] initWithFrame:CGRectMake(12*Main_Screen_Width/667, 0, Main_Screen_Width, 40*Main_Screen_Height/667)];
     textLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-    textLab.font = [UIFont systemFontOfSize:14];
+    textLab.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     
     if (section == 0) {
         textLab.text = @"服务活动";
     }else{
         textLab.text = [NSString stringWithFormat:@"评论 (%@)",self.dic[@"CommentCount"]];
     }
-    
-    return textLab.text;
+    [v addSubview:textLab];
+    return v;
 }
+
+
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+//    UILabel *textLab = [[UILabel alloc] init];
+//    
+//    //textLab.backgroundColor = [UIColor colorFromHex:@"#dfdfdf"];
+//    textLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+//    textLab.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+//    
+//    if (section == 0) {
+//        textLab.text = @"服务活动";
+//    }else{
+//        textLab.text = [NSString stringWithFormat:@"评论 (%@)",self.dic[@"CommentCount"]];
+//    }
+//    
+//    return textLab.text;
+//}
 
 //- (NSString *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 //    
