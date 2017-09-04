@@ -23,6 +23,7 @@
     UILabel *invalidLab;
     CardConfigGrade *card;
     MBProgressHUD *HUD;
+    UIImageView *cardImgV;
 }
 
 @property(nonatomic,strong)UITableView *noticeView;
@@ -75,13 +76,14 @@
     UIView *containView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 310*Main_Screen_Height/667)];
     [self.view addSubview:containView];
     
-    UIImageView *cardImgV = [[UIImageView alloc] init];
+    cardImgV = [[UIImageView alloc] init];
     cardImgV.image = [UIImage imageNamed:@"qw_tiyanka"];
     [containView addSubview:cardImgV];
     
     cardNameLab = [[UILabel alloc] init];
     cardNameLab.text = @"体验卡";
-    cardNameLab.font = [UIFont boldSystemFontOfSize:18*Main_Screen_Height/667];
+    cardNameLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    cardNameLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [cardImgV addSubview:cardNameLab];
     
     UILabel *cardtagLab = [[UILabel alloc] init];
@@ -91,13 +93,14 @@
     
     UILabel *introLab = [[UILabel alloc] init];
     introLab.text = @"扫码洗车服务中使用";
-    introLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+    introLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    introLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [cardImgV addSubview:introLab];
     
     invalidLab = [[UILabel alloc] init];
     invalidLab.text = @"截止日期：2017-8-10";
-    invalidLab.textColor = [UIColor colorFromHex:@"#999999"];
-    invalidLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+    invalidLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    invalidLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [cardImgV addSubview:invalidLab];
     
 //    UILabel *brandLab = [[UILabel alloc] init];
@@ -122,34 +125,34 @@
     //约束
     [cardImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(containView).mas_offset(10*Main_Screen_Height/667);
-        make.left.equalTo(containView).mas_offset(37.5*Main_Screen_Height/667);
-        make.right.equalTo(containView).mas_offset(-37.5*Main_Screen_Height/667);
-        make.height.mas_equalTo(192*Main_Screen_Height/667);
+        make.left.equalTo(containView).mas_offset(22.5*Main_Screen_Height/667);
+        make.right.equalTo(containView).mas_offset(-22.5*Main_Screen_Height/667);
+        make.height.mas_equalTo(190*Main_Screen_Height/667);
     }];
     
-    [cardNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(cardImgV).mas_offset(20*Main_Screen_Height/667);
-        make.left.equalTo(cardImgV).mas_offset(20*Main_Screen_Height/667);
-    }];
-    
-    [cardtagLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(cardNameLab.mas_trailing).mas_offset(10*Main_Screen_Height/667);
-        make.bottom.equalTo(cardNameLab);
-    }];
+//    [cardNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(cardImgV).mas_offset(20*Main_Screen_Height/667);
+//        make.left.equalTo(cardImgV).mas_offset(20*Main_Screen_Height/667);
+//    }];
+//    
+//    [cardtagLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.leading.equalTo(cardNameLab.mas_trailing).mas_offset(10*Main_Screen_Height/667);
+//        make.bottom.equalTo(cardNameLab);
+//    }];
     
 //    [brandLab mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.bottom.equalTo(cardNameLab);
 //        make.leading.equalTo(cardNameLab.mas_trailing).mas_offset(5*Main_Screen_Height/667);
 //    }];
     
-    [introLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(cardNameLab.mas_bottom).mas_offset(10*Main_Screen_Height/667);
-        make.leading.equalTo(cardNameLab);
+    [invalidLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(cardImgV.mas_right).mas_offset(-12*Main_Screen_Height/667);
+        make.bottom.equalTo(cardImgV).mas_offset(-20*Main_Screen_Height/667);
     }];
     
-    [invalidLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(cardNameLab);
-        make.bottom.equalTo(cardImgV).mas_offset(-18*Main_Screen_Height/667);
+    [cardNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(invalidLab.mas_top).mas_offset(-1*Main_Screen_Height/667);
+        make.right.equalTo(cardImgV.mas_right).mas_offset(-12*Main_Screen_Height/667);
     }];
     
     [self.getBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -226,7 +229,28 @@
 
 -(void)UpdateUI
 {
-    cardNameLab.text = [_GradeDetailDic objectForKey:@"CardName"];
+    
+    
+    
+    if([[_GradeDetailDic objectForKey:@"CardType"] intValue] == 1)
+    {
+        cardImgV.image = [UIImage imageNamed:@"qw_tiyanka"];
+    }else if([[_GradeDetailDic objectForKey:@"CardType"] intValue] == 2)
+    {
+        cardImgV.image = [UIImage imageNamed:@"qw_yueka"];
+    }else if([[_GradeDetailDic objectForKey:@"CardType"] intValue] == 3)
+    {
+        cardImgV.image = [UIImage imageNamed:@"qw_cika"];
+    }else if([[_GradeDetailDic objectForKey:@"CardType"] intValue] == 4)
+    {
+        cardImgV.image = [UIImage imageNamed:@"qw_nianka"];
+    }
+    
+    
+    
+    
+    
+    cardNameLab.text = [NSString stringWithFormat:@"本月免费洗车%@次",[_GradeDetailDic objectForKey:@"CardCount"]];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];

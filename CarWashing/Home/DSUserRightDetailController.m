@@ -59,47 +59,65 @@
     upView.top                      = 0;
     
 //    UIImage *backgroundImage              = [UIImage imageNamed:@"saomaxichetiyanquan"];
-    UIImageView *backgroundImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(37.5*Main_Screen_Height/667, 0, Main_Screen_Width-75*Main_Screen_Height/667, 192*Main_Screen_Height/667) imageName:@"qw_tiyanka"];
+    
+    UIImageView *backgroundImageView;
+    
+    if([_dic[@"CardType"] intValue] == 1)
+    {
+        backgroundImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(22.5*Main_Screen_Height/667, 0, Main_Screen_Width-45*Main_Screen_Height/667, 190*Main_Screen_Height/667) imageName:@"qw_tiyanka"];
+    }else if([_dic[@"CardType"] intValue] == 2)
+    {
+        backgroundImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(22.5*Main_Screen_Height/667, 0, Main_Screen_Width-45*Main_Screen_Height/667, 190*Main_Screen_Height/667) imageName:@"qw_yueka"];
+    }else if([_dic[@"CardType"] intValue] == 3)
+    {
+        backgroundImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(22.5*Main_Screen_Height/667, 0, Main_Screen_Width-45*Main_Screen_Height/667, 190*Main_Screen_Height/667) imageName:@"qw_cika"];
+    }else if([_dic[@"CardType"] intValue] == 4)
+    {
+        backgroundImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(22.5*Main_Screen_Height/667, 0, Main_Screen_Width-45*Main_Screen_Height/667, 190*Main_Screen_Height/667) imageName:@"qw_nianka"];
+    }
+    
     backgroundImageView.top               = Main_Screen_Height*25/667;
     backgroundImageView.centerX           = upView.centerX;
     
-    NSString *showString             = _dic[@"CardName"];
-    UIFont    *showFont              = [UIFont boldSystemFontOfSize:18*Main_Screen_Height/667];
-    UILabel     *showlabel           = [UIUtil drawLabelInView:backgroundImageView frame:[UIUtil textRect:showString font:showFont] font:showFont text:showString isCenter:NO];
-    showlabel.left                   = Main_Screen_Width*20/375;
-    showlabel.top                    = Main_Screen_Height*20/667;
-    
-    
-    NSString *showString33             = @"扫码洗车服务中使用";
-    UIFont    *showFont33             = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
-    UILabel     *showlabel33           = [UIUtil drawLabelInView:backgroundImageView frame:[UIUtil textRect:showString33 font:showFont33] font:showFont33 text:showString33 isCenter:NO];
-    showlabel33.left                   = Main_Screen_Width*20/375;
-    showlabel33.top                    = showlabel.bottom + Main_Screen_Height*5/667;
+//    NSString *showString             = _dic[@"CardName"];
+//    UIFont    *showFont              = [UIFont boldSystemFontOfSize:18*Main_Screen_Height/667];
+//    UILabel     *showlabel           = [UIUtil drawLabelInView:backgroundImageView frame:[UIUtil textRect:showString font:showFont] font:showFont text:showString isCenter:NO];
+//    showlabel.left                   = Main_Screen_Width*20/375;
+//    showlabel.top                    = Main_Screen_Height*20/667;
     
     
     
-    NSString *showString2             = @"蔷薇洗车";
-    UIFont    *showFont2              = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
-    Mylabel     *showlabel2           = [[Mylabel alloc]initWithFrame:CGRectMake(0, Main_Screen_Height*20/667, Main_Screen_Width*200/375, Main_Screen_Height*50/667)];
-    showlabel2.font = showFont2;
-    showlabel2.text = showString2;
-    [showlabel2 setVerticalAlignment:VerticalAlignmentBottom];
-    showlabel2.bottom   = showlabel.bottom;
-    showlabel2.left     = showlabel.right +Main_Screen_Width*10/375;
-    [backgroundImageView addSubview:showlabel2];
+    
+    
+    
+//    NSString *showString2             = @"蔷薇洗车";
+//    UIFont    *showFont2              = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+//    Mylabel     *showlabel2           = [[Mylabel alloc]initWithFrame:CGRectMake(0, Main_Screen_Height*20/667, Main_Screen_Width*200/375, Main_Screen_Height*50/667)];
+//    showlabel2.font = showFont2;
+//    showlabel2.text = showString2;
+//    [showlabel2 setVerticalAlignment:VerticalAlignmentBottom];
+//    showlabel2.bottom   = showlabel.bottom;
+//    showlabel2.left     = showlabel.right +Main_Screen_Width*10/375;
+//    [backgroundImageView addSubview:showlabel2];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *datenow = [NSDate date];
     
     NSString *showString3             =  [NSString stringWithFormat:@"有效期至: %@",[self DateZhuan:_dic[@"ExpiredTimes"]]];
-    UIFont    *showFont3              = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+    
+    UIFont    *showFont3              = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     UILabel     *showlabel3           = [UIUtil drawLabelInView:backgroundImageView frame:[UIUtil textRect:showString3 font:showFont3] font:showFont3 text:showString3 isCenter:NO];
-    showlabel3.textColor =               [UIColor colorFromHex:@"#999999"];
-    showlabel3.left                   = Main_Screen_Width*20/375;
-    showlabel3.bottom                    = backgroundImageView.height -showlabel3.height -Main_Screen_Height*5/667;
+    showlabel3.textColor =               [UIColor colorFromHex:@"#ffffff"];
+    showlabel3.right                   =  backgroundImageView.width + Main_Screen_Width*-12/375;
+    showlabel3.bottom                    = backgroundImageView.height - Main_Screen_Height*18/667;
     
-    
+    NSString *showString33             = [NSString stringWithFormat:@"持卡洗车次数%@次",_dic[@"CardCount"]];;
+    UIFont    *showFont33             = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+    UILabel     *showlabel33           = [UIUtil drawLabelInView:backgroundImageView frame:[UIUtil textRect:showString33 font:showFont33] font:showFont33 text:showString33 isCenter:NO];
+    showlabel33.textColor =               [UIColor colorFromHex:@"#ffffff"];
+    showlabel33.right                   =  backgroundImageView.width + Main_Screen_Width*-12/375;
+    showlabel33.top                    = showlabel3.top - showlabel3.height;
     
     NSString *string;
     if([_dic[@"IsReceive"] intValue] == 1)

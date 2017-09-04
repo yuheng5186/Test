@@ -26,7 +26,7 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"体验卡"];
+    [self drawTitle:self.card.CardName];
     
 }
 
@@ -39,7 +39,24 @@
 //    ticketView.frame = CGRectMake(37.5*Main_Screen_Height/667, 64 + 25*Main_Screen_Height/667, Main_Screen_Width - 75*Main_Screen_Height/667, 192*Main_Screen_Height/667);
     ticketView.backgroundColor = self.view.backgroundColor;
     
-    ticketView.CardName.text = self.card.CardName;
+//    ticketView.CardName.text = self.card.CardName;
+    
+    if(self.card.CardType == 1)
+    {
+        ticketView.BackImgV.image = [UIImage imageNamed:@"qw_tiyanka"];
+    }else if(self.card.CardType == 2)
+    {
+        ticketView.BackImgV.image = [UIImage imageNamed:@"qw_yueka"];
+    }else if(self.card.CardType == 3)
+    {
+        ticketView.BackImgV.image = [UIImage imageNamed:@"qw_cika"];
+    }else if(self.card.CardType == 4)
+    {
+        ticketView.BackImgV.image = [UIImage imageNamed:@"qw_nianka"];
+    }
+    
+    
+    
     ticketView.ScoreLabel.text = [NSString stringWithFormat:@"%ld积分",self.card.Integralnum];
     
     [self.view addSubview:ticketView];
@@ -48,9 +65,9 @@
     
     [ticketView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).mas_offset(64 + 25*Main_Screen_Height/667);
-        make.left.equalTo(self.view).mas_offset(37*Main_Screen_Height/667);
-        make.right.equalTo(self.view).mas_offset(-37*Main_Screen_Height/667);
-        make.height.mas_equalTo(192*Main_Screen_Height/667);
+        make.left.equalTo(self.view).mas_offset(22.5*Main_Screen_Height/667);
+        make.right.equalTo(self.view).mas_offset(-22.5*Main_Screen_Height/667);
+        make.height.mas_equalTo(190*Main_Screen_Height/667);
     }];
     
     [exchangeButton mas_makeConstraints:^(MASConstraintMaker *make) {
