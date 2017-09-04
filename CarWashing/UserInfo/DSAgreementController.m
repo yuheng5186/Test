@@ -19,7 +19,7 @@
 
 - (void) drawNavigation {
 
-//    [self drawTitle:@"《蔷薇爱车》用户服务协议"];
+    [self drawTitle:@"《蔷薇爱车》用户服务协议"];
 }
 
 - (void)viewDidLoad {
@@ -43,7 +43,7 @@
     
     [self showBlackLoading];
 
-    NSURL * url                     = [NSURL URLWithString: @"http://115.159.97.191/jingding/index.html"];
+    NSURL * url                     = [NSURL URLWithString: @"http://www.honglisale.cn/qw/index.html"];
     NSURLRequest* request           = [NSURLRequest requestWithURL: url];
     
     [self.webView loadRequest:request];

@@ -199,12 +199,12 @@
     titleNameLabel.centerY           = titleView.centerY +8;
     
     
-    UIImage *logeImage              = [UIImage imageNamed:@"xichebaidi"];
-    logoImageView      = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, logeImage.size.width,logeImage.size.height) imageName:@"xichebaidi"];
+    UIImage *logeImage              = [UIImage imageNamed:@"sy_icon"];
+    logoImageView      = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, logeImage.size.width,logeImage.size.height) imageName:@"sy_icon"];
 
     
-    [logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[UdStorage getObjectforKey:UserHead]]] placeholderImage:[UIImage imageNamed:@"xichebaidi"]];
-    logoImageView.layer.masksToBounds = YES;
+//    [logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[UdStorage getObjectforKey:UserHead]]] placeholderImage:[UIImage imageNamed:@"sy_icon"]];
+//    logoImageView.layer.masksToBounds = YES;
     logoImageView.layer.cornerRadius = logeImage.size.width/2;
     
     
