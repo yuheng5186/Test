@@ -55,7 +55,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     if (nil == _salerListView) {
         UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + Main_Screen_Height*44/667, Main_Screen_Width, Main_Screen_Height-64 - Main_Screen_Height*44/667-49) style:UITableViewStylePlain];
         _salerListView = salerListView;
-//        salerListView.backgroundColor   = [UIColor grayColor];
+        salerListView.backgroundColor   = [UIColor clearColor];
         [self.view addSubview:salerListView];
         
     }
@@ -276,7 +276,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     NSDictionary *dic=[self.MerchantData objectAtIndex:indexPath.row];
     [cell setUpCellWithDic:dic];
     [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
-//    [cell setBackgroundColor:[UIColor clearColor]];
+    [cell setBackgroundColor:[UIColor grayColor]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     
