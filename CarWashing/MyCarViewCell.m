@@ -7,6 +7,7 @@
 //
 
 #import "MyCarViewCell.h"
+#import "UIView+AutoSizeToDevice.h"
 
 @implementation MyCarViewCell
 
@@ -22,6 +23,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.dg_viewAutoSizeToDevice = YES;
     
     self.defaultButton.backgroundColor = [UIColor whiteColor];
     self.brandLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
