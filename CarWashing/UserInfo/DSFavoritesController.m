@@ -156,6 +156,7 @@ static NSString *id_salerListCell = @"salerListCell";
         {
             [self.view showInfo:@"数据请求失败" autoHidden:YES interval:2];
             [self.favoriteListView.mj_footer endRefreshing];
+            self.page--;
         }
         
        
@@ -165,6 +166,7 @@ static NSString *id_salerListCell = @"salerListCell";
     } fail:^(NSError *error) {
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
         [self.favoriteListView.mj_footer endRefreshing];
+        self.page--;
     }];
     
 }

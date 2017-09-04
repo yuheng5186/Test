@@ -803,6 +803,7 @@
     } fail:^(NSError *error) {
         [self.view showInfo:@"获取数据失败" autoHidden:YES interval:2];
         [self.tableView.mj_footer endRefreshing];
+        self.page--;
     }];
     
 }
