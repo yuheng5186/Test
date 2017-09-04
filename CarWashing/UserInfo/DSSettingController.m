@@ -56,7 +56,7 @@
     
     upView.height                   = showNameLabel.bottom +Main_Screen_Height*10/667;
     
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*200/667) style:UITableViewStyleGrouped];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*150/667) style:UITableViewStyleGrouped];
     self.tableView.top              = upView.bottom;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
@@ -118,7 +118,7 @@
 //        default:
 //            break;
 //    }
-    return 3;
+    return 2;
     
 }
 
@@ -140,11 +140,13 @@
     cell.textLabel.font         = [UIFont systemFontOfSize:15];
     
     if (indexPath.row == 0) {
-        cell.textLabel.text     = @"密码管理";
+        cell.textLabel.text     = @"关于蔷薇";
 
     }else if (indexPath.row == 1){
     
-        cell.textLabel.text     = @"关于蔷薇";
+//        cell.textLabel.text     = @"关于蔷薇";
+        cell.textLabel.text     = @"给我评分";
+
 
     }else {
     
@@ -182,19 +184,24 @@
     
     if (indexPath.row == 0) {
         
-        DSPasswordController *passwordController        = [[DSPasswordController alloc]init];
-        passwordController.hidesBottomBarWhenPushed      = YES;
-        [self.navigationController pushViewController:passwordController animated:YES];
-        
-    }else if (indexPath.row == 1){
-    
+//        DSPasswordController *passwordController        = [[DSPasswordController alloc]init];
+//        passwordController.hidesBottomBarWhenPushed      = YES;
+//        [self.navigationController pushViewController:passwordController animated:YES];
         DSAboutController *aboutController             = [[DSAboutController alloc]init];
         aboutController.hidesBottomBarWhenPushed        = YES;
         [self.navigationController pushViewController:aboutController animated:YES];
+        
+    }else if (indexPath.row == 1){
+    
+//        DSAboutController *aboutController             = [[DSAboutController alloc]init];
+//        aboutController.hidesBottomBarWhenPushed        = YES;
+//        [self.navigationController pushViewController:aboutController animated:YES];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/qq/id451108668?mt=12"]];
+
     
     }else {
     
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/qq/id451108668?mt=12"]];
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/qq/id451108668?mt=12"]];
 
     }
     
