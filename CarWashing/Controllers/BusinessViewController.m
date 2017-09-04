@@ -569,7 +569,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 #pragma mark - 无数据占位
 //无数据占位
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
-    return [UIImage imageNamed:@""];
+    return [UIImage imageNamed:@"Store"];
 }
 
 - (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView{
@@ -638,7 +638,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
    
-    return -64.f-44;
+    return -64.f;
 }
 
 
