@@ -475,7 +475,6 @@ static NSString *businessCommentCell = @"businessCommentCell";
 //    NSString *title = @"";
 //    [self showAlertWithTitle:title message:message];
     [PhoneHelper dial: self.dic[@"MerPhone"]];
-    NSLog(@"110");
 }
 
 #pragma mark - 点击查看全部评价
