@@ -393,16 +393,16 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 //    containImageView.contentMode = UIViewContentModeScaleAspectFit;
 //    containImageView.image = [UIImage imageNamed:@"kabeijing"];
     Card *card = (Card *)[_CardArray objectAtIndex:index];
-    if(card.GetCardType == 1)
+    if(card.CardType == 1)
     {
        containImageView.image = [UIImage imageNamed:@"qw_tiyanka"];
-    }else if(card.GetCardType == 2)
+    }else if(card.CardType == 2)
     {
         containImageView.image = [UIImage imageNamed:@"qw_yueka"];
-    }else if(card.GetCardType == 3)
+    }else if(card.CardType == 3)
     {
         containImageView.image = [UIImage imageNamed:@"qw_cika"];
-    }else
+    }else if(card.CardType == 4)
     {
         containImageView.image = [UIImage imageNamed:@"qw_nianka"];
     }

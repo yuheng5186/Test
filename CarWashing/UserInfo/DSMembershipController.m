@@ -141,7 +141,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     self.exchangListView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.exchangListView.delegate = self;
     self.exchangListView.dataSource = self;
-    self.exchangListView.rowHeight = 192*Main_Screen_Height/667;
+    self.exchangListView.rowHeight = 190*Main_Screen_Height/667;
     self.exchangListView.backgroundColor = [UIColor whiteColor];
     self.exchangListView.showsVerticalScrollIndicator = NO;
     
@@ -334,8 +334,22 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     Card *newcard = (Card *)[_MembershipUserScoreArray objectAtIndex:indexPath.section];
     
+    if(newcard.CardType == 1)
+    {
+        changeCell.backImgV.image = [UIImage imageNamed:@"qw_tiyanka"];
+    }else if(newcard.CardType == 2)
+    {
+        changeCell.backImgV.image = [UIImage imageNamed:@"qw_yueka"];
+    }else if(newcard.CardType == 3)
+    {
+        changeCell.backImgV.image = [UIImage imageNamed:@"qw_cika"];
+    }else if(newcard.CardType == 4)
+    {
+        changeCell.backImgV.image = [UIImage imageNamed:@"qw_nianka"];
+    }
+    
     changeCell.nameLab.text = newcard.CardName;
-    changeCell.scoreLab.text = [NSString stringWithFormat:@"%ld分",newcard.Integralnum];
+    changeCell.scoreLab.text = [NSString stringWithFormat:@"%ld积分",newcard.Integralnum];
     
     return changeCell;
 }
@@ -353,7 +367,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10*Main_Screen_Height/667;
+    return 23*Main_Screen_Height/667;
 }
 
 

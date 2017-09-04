@@ -124,20 +124,17 @@
 
 - (void) createSubView {
 
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height-Main_Screen_Height*100/667)];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height-Main_Screen_Height*60/667-44)];
     self.tableView.top              = 0;
 
-    if (Main_Screen_Height == 568) {
-        self.tableView.top              = 0;
-
-    }
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
 
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
 #pragma maek-空白页
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
-    //    self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
+//        self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
     //    self.tableView.scrollEnabled    = NO;
     //    self.tableView.tableFooterView  = [UIView new];
 //    self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 180, 0);
@@ -391,7 +388,7 @@
     
     self.downView = [UIView new];
     self.downView .frame = CGRectMake(0, Main_Screen_Height -
-                                      Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*60/667);
+                                      Main_Screen_Height*60/667-44, Main_Screen_Width, Main_Screen_Height*60/667);
     self.downView .backgroundColor  = [UIColor whiteColor];
     
     
@@ -693,6 +690,7 @@
 -(void)requestCommentList
 {
     NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                              @"ActivityCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
                              @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
                              @"PageSize":@10
@@ -734,6 +732,7 @@
 -(void)requestCommentList2
 {
     NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                              @"ActivityCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
                              @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
                              @"PageSize":@10

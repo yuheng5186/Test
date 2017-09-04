@@ -37,6 +37,8 @@
     nameLab.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     [backImgV addSubview:nameLab];
     
+    nameLab.hidden = YES;
+    
     UILabel *brandLab = [[UILabel alloc] init];
     brandLab.text = @"蔷薇爱车";
     brandLab.font = [UIFont systemFontOfSize:11];
@@ -46,40 +48,52 @@
     _introLab = introLab;
     //introLab.textColor = [UIColor colorFromHex:@"#ffffff"];
     introLab.text = @"商家洗车自动抵扣";
-    introLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+    introLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    introLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [backImgV addSubview:introLab];
     
     UILabel *scoreLab = [[UILabel alloc] init];
     _scoreLab = scoreLab;
     scoreLab.text = @"1000积分";
-    scoreLab.textColor = [UIColor redColor];
-    scoreLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
+    scoreLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    scoreLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [backImgV addSubview:scoreLab];
     
     [backImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.contentView);
-        make.left.equalTo(self.contentView).mas_offset(30*Main_Screen_Height/667);
-        make.right.equalTo(self.contentView).mas_offset(-30*Main_Screen_Height/667);
+        make.left.equalTo(self.contentView).mas_offset(22.5*Main_Screen_Height/667);
+        make.right.equalTo(self.contentView).mas_offset(-22.5*Main_Screen_Height/667);
     }];
+//    
+//    [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(backImgV).mas_offset(22*Main_Screen_Height/667);
+//        make.top.equalTo(backImgV).mas_offset(21*Main_Screen_Height/667);
+//    }];
     
-    [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(backImgV).mas_offset(22*Main_Screen_Height/667);
-        make.top.equalTo(backImgV).mas_offset(21*Main_Screen_Height/667);
-    }];
+//    [brandLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(nameLab);
+//        make.leading.equalTo(nameLab.mas_trailing).mas_offset(5*Main_Screen_Height/667);
+//    }];
     
-    [brandLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(nameLab);
-        make.leading.equalTo(nameLab.mas_trailing).mas_offset(5*Main_Screen_Height/667);
-    }];
+//    [introLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.leading.equalTo(nameLab);
+//        make.top.equalTo(nameLab.mas_bottom).mas_offset(10*Main_Screen_Height/667);
+//    }];
+//    
+//    [scoreLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(backImgV).mas_offset(22*Main_Screen_Height/667);
+//        make.bottom.equalTo(backImgV).mas_offset(-18*Main_Screen_Height/667);
+//    }];
     
-    [introLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(nameLab);
-        make.top.equalTo(nameLab.mas_bottom).mas_offset(10*Main_Screen_Height/667);
-    }];
     
     [scoreLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(backImgV).mas_offset(22*Main_Screen_Height/667);
-        make.bottom.equalTo(backImgV).mas_offset(-18*Main_Screen_Height/667);
+        make.right.equalTo(backImgV.mas_right).mas_offset(-12*Main_Screen_Height/667);
+        make.bottom.equalTo(backImgV).mas_offset(-20*Main_Screen_Height/667);
+    }];
+
+    [introLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(scoreLab.mas_top).mas_offset(-1*Main_Screen_Height/667);
+        make.right.equalTo(backImgV.mas_right).mas_offset(-12*Main_Screen_Height/667);
     }];
     
 }
