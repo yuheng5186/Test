@@ -590,9 +590,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
 }
 //设置占位图空白页的背景色( 图片优先级高于文字)
 
-- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
-    return [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
-}
+//- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
+//    return [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
+//}
 ////设置按钮的文本和按钮的背景图片
 //- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state  {
 //    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],NSForegroundColorAttributeName:[UIColor whiteColor]};
@@ -634,7 +634,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
     NSLog(@"kjjkklll;;';");
-    return -64.f-44;
+    return 0.f;
 }
 
 
