@@ -276,7 +276,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     NSDictionary *dic=[self.MerchantData objectAtIndex:indexPath.row];
     [cell setUpCellWithDic:dic];
     [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
-//    [cell setBackgroundColor:[UIColor clearColor]];
+    [cell setBackgroundColor:[UIColor grayColor]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     

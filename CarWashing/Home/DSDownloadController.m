@@ -91,7 +91,7 @@
     titleView.top                      = Main_Screen_Height*64/375;
     titleView.centerX                  = Main_Screen_Width/2;
     
-    UIImageView *logoImageView  = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*40/375, Main_Screen_Height*40/667) imageName:@"WechatIMG3"];
+    UIImageView *logoImageView  = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*60/667) imageName:@"denglu_icon"];
     logoImageView.top           = Main_Screen_Height*23/667;
     logoImageView.centerX       = titleView.size.width/2;
     
