@@ -373,7 +373,7 @@ static NSString *id_salerListCell = @"salerListCell";
 
 //这个是设置标题文字的
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
-    NSString *text = @"客管你还没有收藏";
+    NSString *text = @"客官你还没收藏";
     
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:13.0f],
                                  NSForegroundColorAttributeName: [UIColor colorFromHex:@"#4a4a4a"]};
