@@ -36,7 +36,7 @@
     
     UIImageView *imageV =[[UIImageView alloc]initWithFrame:CGRectMake1(12,12,80,80)];
     imageV.opaque = YES;
-    imageV.image = [UIImage imageNamed:@"aiche1"];
+//    imageV.image = [UIImage imageNamed:@"aiche1"];
     [self.contentView addSubview:imageV];
     self.McImageView = imageV;
     
