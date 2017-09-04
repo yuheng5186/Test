@@ -89,6 +89,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     [center addObserver:self selector:@selector(noticeupdate:) name:@"updatenamesuccess" object:nil];
     [center addObserver:self selector:@selector(noticeupdate:) name:@"updateheadimgsuccess" object:nil];
     [center addObserver:self selector:@selector(noticeupdate:) name:@"updatecard" object:nil];
+    [center addObserver:self selector:@selector(noticeupdate:) name:@"Earnsuccess" object:nil];
     self.contentView.backgroundColor = [UIColor whiteColor];
     
     [self setupUI];
