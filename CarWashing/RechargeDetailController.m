@@ -18,6 +18,10 @@
 @property (nonatomic, weak) UILabel *noticeLabel;
 @property (nonatomic, weak) UILabel *noticeLabelOne;
 @property (nonatomic, weak) UILabel *noticeLabeTwo;
+@property (nonatomic, weak) UILabel *noticeLabelThree;
+@property (nonatomic, weak) UILabel *noticeLabelFour;
+@property (nonatomic, weak) UILabel *noticeLabelFive;
+
 
 @property (nonatomic, weak) UIView  *titleView;
 
@@ -47,34 +51,6 @@
 
 
 - (void)setupUI {
-    
-//    UILabel *washCarLabel = [[UILabel alloc] init];
-//    washCarLabel.text = @"洗车月卡";
-//    [self.view addSubview:washCarLabel];
-//    
-//    UILabel *validityLabel = [[UILabel alloc] init];
-//    validityLabel.text = @"有效期至: 2017-8-1";
-//    [self.view addSubview:validityLabel];
-//    
-//    UILabel *timesLabel = [[UILabel alloc] init];
-//    timesLabel.text = @"免费洗车次数6次";
-//    [self.view addSubview:timesLabel];
-//    
-//    UILabel *noticeLabel = [[UILabel alloc] init];
-//    noticeLabel.text = @"使用须知";
-//    [self.view addSubview:noticeLabel];
-//    
-//    UILabel *noticeLabelOne = [[UILabel alloc] init];
-//    noticeLabelOne.text = @"1、本洗车卡由蔷薇爱车APP发放,仅限蔷薇爱车店和与蔷薇合作商家使用";
-//    [self.view addSubview:noticeLabelOne];
-//    
-//    UILabel *noticeLabelTwo = [[UILabel alloc] init];
-//    noticeLabelTwo.text = @"2、有任何问题,可咨询蔷薇客服";
-//    [self.view addSubview:noticeLabelTwo];
-    
-//    self.titleView                          = [UIUtil drawLineInView:self.view frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*50/667) color:[UIColor whiteColor]];
-//    self.titleView.top                      = 64*Main_Screen_Height/667;
-//    self.titleView.height                   = self.noticeLabel.bottom +Main_Screen_Height*10/667;
     
     
     self.washCarLabel.text = self.card.CardName;
@@ -111,6 +87,25 @@
     [self.noticeLabeTwo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.washCarLabel);
         make.top.equalTo(self.noticeLabelOne.mas_bottom).mas_offset(15*Main_Screen_Height/667);
+        make.right.equalTo(self.containView).mas_offset(-10*Main_Screen_Height/667);
+    }];
+    
+    [self.noticeLabelThree mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.washCarLabel);
+        make.top.equalTo(self.noticeLabeTwo.mas_bottom).mas_offset(15*Main_Screen_Height/667);
+        make.right.equalTo(self.containView).mas_offset(-10*Main_Screen_Height/667);
+    }];
+    
+    [self.noticeLabelFour mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.washCarLabel);
+        make.top.equalTo(self.noticeLabelThree.mas_bottom).mas_offset(15*Main_Screen_Height/667);
+        make.right.equalTo(self.containView).mas_offset(-10*Main_Screen_Height/667);
+    }];
+    
+    [self.noticeLabelFive mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.washCarLabel);
+        make.top.equalTo(self.noticeLabelFour.mas_bottom).mas_offset(15*Main_Screen_Height/667);
+        make.right.equalTo(self.containView).mas_offset(-10*Main_Screen_Height/667);
     }];
     
 }
@@ -118,7 +113,7 @@
 - (UIView *)containView {
     
     if (!_containView) {
-        UIView *containView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 300*Main_Screen_Height/667)];
+        UIView *containView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height)];
         containView.backgroundColor = [UIColor whiteColor];
         _containView = containView;
         [self.view addSubview:_containView];
@@ -185,7 +180,7 @@
     
     if (!_noticeLabelOne) {
         UILabel *noticeLabelOne = [[UILabel alloc] init];
-        noticeLabelOne.text = @"1、本洗车卡由蔷薇爱车APP发放,仅限蔷薇爱车店和与蔷薇合作商家使用";
+        noticeLabelOne.text = @"1、此卡仅限清洗汽车外观，不得购买其它服务项目";
         noticeLabelOne.numberOfLines = 0;
         noticeLabelOne.textColor = [UIColor colorFromHex:@"#999999"];
         noticeLabelOne.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
@@ -199,7 +194,7 @@
     
     if (!_noticeLabeTwo) {
         UILabel *noticeLabelTwo = [[UILabel alloc] init];
-        noticeLabelTwo.text = @"2、有任何问题,可咨询蔷薇客服";
+        noticeLabelTwo.text = @"2、洗车卡不能兑换现金和转赠与其他人使用";
         noticeLabelTwo.textColor = [UIColor colorFromHex:@"#999999"];
         noticeLabelTwo.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         _noticeLabeTwo = noticeLabelTwo;
@@ -207,6 +202,60 @@
     }
     return _noticeLabeTwo;
 }
+
+
+- (UILabel *)noticeLabelThree {
+    
+    if (!_noticeLabelThree) {
+        
+        UILabel *noticeLabelThree = [[UILabel alloc] init];
+        noticeLabelThree.text = @"3、此卡一经售出，概不兑现。不记名，不挂失，不退卡，不补办";
+        noticeLabelThree.textColor = [UIColor colorFromHex:@"#999999"];
+        noticeLabelThree.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        noticeLabelThree.numberOfLines = 0;
+        _noticeLabelThree = noticeLabelThree;
+        [self.containView addSubview:_noticeLabelThree];
+    }
+    
+    return _noticeLabelThree;
+}
+
+
+- (UILabel *)noticeLabelFour {
+    
+    if (!_noticeLabelFour) {
+        
+        UILabel *noticeLabelFour = [[UILabel alloc] init];
+        noticeLabelFour.text = @"4、此卡可在蔷薇服务点享受会员优惠待遇，不得与其它优惠同时使用";
+        noticeLabelFour.textColor = [UIColor colorFromHex:@"#999999"];
+        noticeLabelFour.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        noticeLabelFour.numberOfLines = 0;
+        _noticeLabelFour = noticeLabelFour;
+        [self.containView addSubview:_noticeLabelFour];
+    }
+    
+    return _noticeLabelFour;
+}
+
+
+- (UILabel *)noticeLabelFive {
+    
+    if (!_noticeLabelFive) {
+        
+        UILabel *noticeLabelFive = [[UILabel alloc] init];
+        noticeLabelFive.text = @"5、由青岛蔷薇汽车服务有限公司保留此卡法律范围内的最终解释权。VIP热线：4006979558";
+        noticeLabelFive.textColor = [UIColor colorFromHex:@"#999999"];
+        noticeLabelFive.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        noticeLabelFive.numberOfLines = 0;
+        _noticeLabelFive = noticeLabelFive;
+        [self.containView addSubview:_noticeLabelFive];
+    }
+    
+    return _noticeLabelFive;
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
