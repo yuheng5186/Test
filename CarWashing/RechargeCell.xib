@@ -1,74 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="Jb6-Yx-gfM" customClass="RechargeCell">
-            <rect key="frame" x="0.0" y="0.0" width="300" height="192"/>
+            <rect key="frame" x="0.0" y="0.0" width="330" height="190"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qw_cika" translatesAutoresizingMaskIntoConstraints="NO" id="9X1-yH-34i">
-                    <rect key="frame" x="0.0" y="0.0" width="300" height="192"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="qw_cika" translatesAutoresizingMaskIntoConstraints="NO" id="9X1-yH-34i">
+                    <rect key="frame" x="0.0" y="0.0" width="330" height="190"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="体验卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQE-nH-RDl">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="体验卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQE-nH-RDl">
                     <rect key="frame" x="22" y="21" width="62" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商家洗车自动抵扣" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sL4-e8-XQ3">
-                    <rect key="frame" x="22" y="55" width="115" height="17"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000积分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mO2-03-Pzk">
-                    <rect key="frame" x="22" y="154" width="262" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000积分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mO2-03-Pzk">
+                    <rect key="frame" x="214.5" y="154" width="69.5" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="蔷薇爱车" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PXN-Mu-eDe">
-                    <rect key="frame" x="89" y="31" width="45" height="14"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstItem="PXN-Mu-eDe" firstAttribute="leading" secondItem="TQE-nH-RDl" secondAttribute="trailing" constant="5" id="2RN-4O-Nhd"/>
-                <constraint firstAttribute="trailing" secondItem="mO2-03-Pzk" secondAttribute="trailing" constant="16" id="545-Jw-WQd"/>
-                <constraint firstItem="9X1-yH-34i" firstAttribute="top" secondItem="Jb6-Yx-gfM" secondAttribute="top" id="AAP-bf-deU"/>
-                <constraint firstItem="9X1-yH-34i" firstAttribute="leading" secondItem="Jb6-Yx-gfM" secondAttribute="leading" id="HSc-SI-XZH"/>
-                <constraint firstItem="mO2-03-Pzk" firstAttribute="leading" secondItem="sL4-e8-XQ3" secondAttribute="leading" id="I1t-Kw-Jml"/>
-                <constraint firstAttribute="bottom" secondItem="mO2-03-Pzk" secondAttribute="bottom" constant="18" id="IjT-HE-BTX"/>
-                <constraint firstAttribute="bottom" secondItem="9X1-yH-34i" secondAttribute="bottom" id="SAO-N7-v3Z"/>
-                <constraint firstItem="TQE-nH-RDl" firstAttribute="top" secondItem="Jb6-Yx-gfM" secondAttribute="top" constant="21" id="a6Q-cL-PkW"/>
-                <constraint firstItem="sL4-e8-XQ3" firstAttribute="leading" secondItem="TQE-nH-RDl" secondAttribute="leading" id="agd-jh-IJx"/>
-                <constraint firstItem="sL4-e8-XQ3" firstAttribute="top" secondItem="TQE-nH-RDl" secondAttribute="bottom" constant="10" id="cz0-Nk-MTj"/>
-                <constraint firstAttribute="trailing" secondItem="9X1-yH-34i" secondAttribute="trailing" id="dZZ-qD-dXJ"/>
-                <constraint firstItem="PXN-Mu-eDe" firstAttribute="bottom" secondItem="TQE-nH-RDl" secondAttribute="bottom" id="lCr-lj-W09"/>
-                <constraint firstItem="TQE-nH-RDl" firstAttribute="leading" secondItem="Jb6-Yx-gfM" secondAttribute="leading" constant="22" id="lVo-DC-HG1"/>
-            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="CardTimeLabel" destination="mO2-03-Pzk" id="NhY-sZ-ffy"/>
-                <outlet property="CarddesLabel" destination="sL4-e8-XQ3" id="Wb2-xd-q7k"/>
                 <outlet property="CardnameLabel" destination="TQE-nH-RDl" id="Y16-BK-KdX"/>
                 <outlet property="backgroundImgV" destination="9X1-yH-34i" id="4ng-gO-bDe"/>
-                <outlet property="tagLabel" destination="PXN-Mu-eDe" id="UdS-7i-kC7"/>
             </connections>
-            <point key="canvasLocation" x="-18" y="-27"/>
+            <point key="canvasLocation" x="-3" y="-28"/>
         </view>
     </objects>
     <resources>

@@ -196,8 +196,8 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
     [self.rechargeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(titleView.mas_bottom).mas_offset(0);
-        make.left.equalTo(self.view).mas_offset(Main_Screen_Width*37.5/375);
-        make.right.equalTo(self.view).mas_offset(-Main_Screen_Width*37.5/375);
+        make.left.equalTo(self.view).mas_offset(Main_Screen_Width*22.5/375);
+        make.right.equalTo(self.view).mas_offset(-Main_Screen_Width*22.5/375);
         make.height.mas_equalTo(self.view.height-Main_Screen_Height*60/667-64);
     }];
     
@@ -205,7 +205,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     self.rechargeView.dataSource = self;
     
     [self.rechargeView registerNib:[UINib nibWithNibName:@"RechargeCell" bundle:nil] forCellReuseIdentifier:id_rechargeCell];
-    self.rechargeView.rowHeight = Main_Screen_Height*192/667;
+    self.rechargeView.rowHeight = Main_Screen_Height*190/667;
     self.rechargeView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //self.rechargeView.backgroundColor = [UIColor whiteColor];
      self.rechargeView.showsVerticalScrollIndicator = NO;
@@ -237,30 +237,85 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
     CardBag *card = (CardBag *)[_CardbagData objectAtIndex:indexPath.section];
     
-    cell.CardnameLabel.text = card.CardName;
-    cell.CarddesLabel.text = [NSString stringWithFormat:@"%@ 免费洗车%ld次",card.Description,card.CardCount];
     
+    if(card.CardType == 1)
+    {
+        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_tiyanka"];
+        
+        if(card.CardUseState == 2)
+        {
+            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_tiyanka"];
+            
+        }
+        else if(card.CardUseState == 3)
+        {
+            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_tiyanka"];
+        }
+        
+        
+    }else if(card.CardType == 2)
+    {
+        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yueka"];
+        
+        if(card.CardUseState == 2)
+        {
+            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_yueka"];
+            
+        }
+        else if(card.CardUseState == 3)
+        {
+            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_yueka"];
+        }
+        
+    }else if(card.CardType == 3)
+    {
+        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_cika"];
+        
+        if(card.CardUseState == 2)
+        {
+            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_cika"];
+            
+        }
+        else if(card.CardUseState == 3)
+        {
+            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_cika"];
+        }
+        
+    }else if(card.CardType == 4)
+    {
+        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_nianka"];
+        
+        if(card.CardUseState == 2)
+        {
+            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_nianka"];
+            
+        }
+        else if(card.CardUseState == 3)
+        {
+            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_nianka"];
+        }
+        
+    }
     
-    
-    
+    cell.CardnameLabel.text = [NSString stringWithFormat:@"本月免费洗车%ld次",card.CardCount];
     
     cell.CardTimeLabel.text = [NSString stringWithFormat:@"有效期: %@-%@",[self DateZhuan:card.ExpStartDates],[self DateZhuan:card.ExpEndDates]];
     
-    if(card.CardUseState == 2)
-    {
-        cell.CardnameLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
-        cell.tagLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
-        cell.CarddesLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
-        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_cika"];
-        
-    }
-    else if(card.CardUseState == 3)
-    {
-        cell.CardnameLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
-        cell.tagLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
-        cell.CarddesLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
-        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_cika"];
-    }
+//    if(card.CardUseState == 2)
+//    {
+//        cell.CardnameLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+//        cell.tagLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+//        cell.CarddesLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+//        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_cika"];
+//        
+//    }
+//    else if(card.CardUseState == 3)
+//    {
+//        cell.CardnameLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+//        cell.tagLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+//        cell.CarddesLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+//        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_cika"];
+//    }
     
     
 
@@ -285,7 +340,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10*Main_Screen_Height/667;
+    return 23*Main_Screen_Height/667;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
