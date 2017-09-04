@@ -56,7 +56,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
         UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + Main_Screen_Height*44/667, Main_Screen_Width, Main_Screen_Height-64 - Main_Screen_Height*44/667-49)];
         salerListView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _salerListView = salerListView;
-        salerListView.backgroundColor   = [UIColor clearColor];
+
         [self.view addSubview:salerListView];
         
     }
@@ -156,6 +156,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.salerListView.emptyDataSetSource=self;
     self.salerListView.emptyDataSetDelegate=self;
     self.salerListView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    
 //    self.salerListView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     
@@ -370,16 +371,16 @@ static NSString *id_salerListCell = @"salerListViewCell";
 {
     // 第1列 高度
     if (index == 0) {
-        return 270;
+        return 270*Main_Screen_Height/667;
     }
     
     // 第2列 高度
     if (index == 1) {
-        return 180;
+        return 180*Main_Screen_Height/667;
     }
     
     // 第3列 高度
-    return 180;
+    return 180*Main_Screen_Height/667;
 }
 
 -(void)setData
@@ -633,7 +634,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
  */
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSLog(@"kjjkklll;;';");
+   
     return -64.f-44;
 }
 
