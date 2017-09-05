@@ -306,8 +306,8 @@
     UITapGestureRecognizer  *tapMemberRightGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapMemberRightButtonClick:)];
     [memberRightView addGestureRecognizer:tapMemberRightGesture];
     
-    UIImage *memberImage                   = [UIImage imageNamed:@"youhui"];
-    UIImageView *memberRightImageView      = [UIUtil drawCustomImgViewInView:memberRightView frame:CGRectMake(0, 0, memberImage.size.width,memberImage.size.height) imageName:@"youhui"];
+    UIImage *memberImage                   = [UIImage imageNamed:@"huiyuan"];
+    UIImageView *memberRightImageView      = [UIUtil drawCustomImgViewInView:memberRightView frame:CGRectMake(0, 0, memberImage.size.width,memberImage.size.height) imageName:@"huiyuan"];
     memberRightImageView.centerX           = memberRightView.size.width/2;
     memberRightImageView.top               = Main_Screen_Height*10/667;
     
