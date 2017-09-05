@@ -403,9 +403,9 @@
     }
     
    
-    UIFont *contentStringFont            = [UIFont systemFontOfSize:15];
+    UIFont *contentStringFont            = [UIFont boldSystemFontOfSize:15];
     UILabel *contentStringLabel          = [UIUtil drawLabelInView:cell.contentView frame:[UIUtil textRect:contentString font:contentStringFont] font:contentStringFont text:contentString isCenter:NO];
-    contentStringLabel.textColor         = [UIColor redColor];
+    contentStringLabel.textColor         = [UIColor colorFromHex:@"#febb02"];
     contentStringLabel.right             = Main_Screen_Width -Main_Screen_Width*12/375;
     contentStringLabel.centerY           = 35;
     
