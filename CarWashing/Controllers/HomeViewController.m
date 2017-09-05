@@ -52,9 +52,11 @@
 #import "CoreLocation/CoreLocation.h"
 #import "MBProgressHUD.h"
 
-@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate>
+@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UIScrollViewDelegate>
 {
     UIImageView *logoImageView;
+    SXScrPageView * sxView;
+    UIView *titleView;
 }
 
 /** 选择的结果*/
@@ -127,7 +129,7 @@
     [self createNavTitleView];
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStyleGrouped];
-    self.tableView.top              = self.navigationView.bottom;
+    self.tableView.top              = 0;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     //    self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
@@ -142,14 +144,10 @@
     
     [self createHeaderView];
     
+    [self createNavTitleView];
+    
     
     [self setupRefresh];
-    
-    
-    
-    
-    
-    
     
     
     
@@ -188,7 +186,7 @@
 
 - (void) createNavTitleView {
     
-    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#0161a1"]];
+    titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor clearColor]];
     titleView.top                      = 0;
     
     NSString *titleName              = @"蔷薇爱车";
@@ -261,9 +259,36 @@
     backgroudView.left              = 0;
     [headerView addSubview:backgroudView];
     
+    NSMutableArray * images = [NSMutableArray array];
+    
+    for (NSInteger i = 0; i<4; i++)
+    {
+        [images addObject:[NSString stringWithFormat:@"%02ld.jpg",i+1]];
+    }
+    
+    sxView =   [SXScrPageView direcWithtFrame:CGRectMake(0, 0, Main_Screen_Width, 200) ImageArr:images AndImageClickBlock:^(NSInteger index) {
+        
+//        DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
+//        [self.navigationController pushViewController:viewVC animated:YES];
+        
+    }];
+    sxView.top  =   0;
+    sxView.width = Main_Screen_Width;
+    [backgroudView addSubview:sxView];
+    
+//    UIView *newBagView                  = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*120/667) color:[UIColor clearColor]];
+//    newBagView.top                      = sxView.bottom +Main_Screen_Height*10/667;
+//    
+//    UIImageView *newImageView           = [UIUtil drawCustomImgViewInView:newBagView frame:CGRectMake(0, 0, Main_Screen_Width,120) imageName:@"banka"];
+//    newImageView.top                    = 0;
+//    
+//    UITapGestureRecognizer  *tapNewGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapNewButtonClick:)];
+//    [newBagView addGestureRecognizer:tapNewGesture];
+
+    
     UIView *scanView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     scanView.centerX                   = Main_Screen_Width/8;
-    scanView.top                       = Main_Screen_Height*25/667;
+    scanView.top                       = Main_Screen_Height*25/667+sxView.bottom;
     
     UITapGestureRecognizer  *tapScanGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapScanButtonClick:)];
     [scanView addGestureRecognizer:tapScanGesture];
@@ -577,30 +602,7 @@
     
     headerView.height   = carClubView.bottom +Main_Screen_Height*10/667;
 
-//    NSMutableArray * images = [NSMutableArray array];
-//
-//    for (NSInteger i = 0; i<4; i++)
-//    {
-//        [images addObject:[NSString stringWithFormat:@"%02ld.jpg",i+1]];
-//    }
-//
-//    SXScrPageView * sxView =   [SXScrPageView direcWithtFrame:CGRectMake(0, 80, Main_Screen_Width, 200) ImageArr:images AndImageClickBlock:^(NSInteger index) {
-//
-//        DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
-//        [self.navigationController pushViewController:viewVC animated:YES];
-//
-//    }];
-//    sxView.top  =   carClubView.bottom +Main_Screen_Height*10/667;
-//    [headerView addSubview:sxView];
-    
-//    UIView *newBagView                  = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*120/667) color:[UIColor clearColor]];
-//    newBagView.top                      = sxView.bottom +Main_Screen_Height*10/667;
-//    
-//    UIImageView *newImageView           = [UIUtil drawCustomImgViewInView:newBagView frame:CGRectMake(0, 0, Main_Screen_Width,120) imageName:@"banka"];
-//    newImageView.top                    = 0;
-//    
-//    UITapGestureRecognizer  *tapNewGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapNewButtonClick:)];
-//    [newBagView addGestureRecognizer:tapNewGesture];
+
 }
 
 -(void)setData
@@ -1310,6 +1312,38 @@
     
 //    [logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[UdStorage getObjectforKey:UserHead]]] placeholderImage:[UIImage imageNamed:@"xichebaidi"]];
 }
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    //图片高度
+//    CGFloat imageHeight = _detaiview.frame.size.height;
+//    //图片宽度
+//    CGFloat imageWidth = QWScreenWidth;
+    //图片上下偏移量
+    CGFloat imageOffsetY = scrollView.contentOffset.y;
+    //    NSLog(@"图片上下偏移量 imageOffsetY:%f ->",imageOffsetY);
+//    //上移
+//    if (imageOffsetY < 0) {
+//        
+//        CGFloat totalOffset = imageHeight + ABS(imageOffsetY);
+//        CGFloat f = totalOffset / imageHeight;
+//        
+//        _detaiImgView.frame = CGRectMake(-(imageWidth * f - imageWidth) * 0.5, imageOffsetY, imageWidth * f, totalOffset);
+//    }
+    
+    //    //下移
+    if (imageOffsetY >= sxView.frame.size.height - 64)
+    {
+        titleView.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
+    }
+    else
+    {
+        titleView.backgroundColor = [UIColor clearColor];
+    }
+    
+    
+}
+
 
 
 /*

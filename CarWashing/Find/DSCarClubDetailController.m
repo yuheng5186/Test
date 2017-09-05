@@ -712,6 +712,7 @@
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            [_modelsArray removeAllObjects];
 //            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
@@ -779,6 +780,7 @@
                 [_modelsArray addObjectsFromArray:_moreArray];
                 [_tableView reloadData];
                 [self.tableView.mj_footer endRefreshing];
+                
             }
             
             
@@ -1208,7 +1210,10 @@
             //            self.dic = [dict objectForKey:@"JsonData"];
             //        [self.MerchantDetailData addObjectsFromArray:arr];
             
-            [self headerRereshing];
+            
+            
+            
+           [self requestCommentList];
         }
         else
         {

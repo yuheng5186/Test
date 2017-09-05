@@ -242,7 +242,7 @@
             [imgView sd_setImageWithURL:[NSURL URLWithString:name] placeholderImage:nil];
         }
         //让图片进行裁剪显示
-        imgView.contentMode = UIViewContentModeScaleAspectFit;
+        imgView.contentMode = UIViewContentModeScaleToFill;
         //添加手势
         UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageClick:)];
         
