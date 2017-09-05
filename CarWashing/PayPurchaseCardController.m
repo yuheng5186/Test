@@ -275,8 +275,9 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         payCardDetailCell *payCell = [tableView dequeueReusableCellWithIdentifier:id_payDetailCell];
         payCell.textLabel.text  = @"卡使用说明";
         payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+         payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
         payCell.timesCardLabel.text = [NSString stringWithFormat:@"可免费洗车%ld次",self.choosecard.CardCount];
-        payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+       
         return payCell;
     }
     
