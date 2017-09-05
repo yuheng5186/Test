@@ -641,11 +641,15 @@ static NSString *id_salerListCell = @"salerListViewCell";
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
    self.weiyi ++ ;
+   if(self.weiyi == 1)
+   {
+      return -64.f;
+   }
    if(self.weiyi == 2)
    {
       return -64.f;
    }
-   else 
+   else
    {
       return 0.f;
    }
