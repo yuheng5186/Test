@@ -13,8 +13,17 @@
 #import "OrderDetailController.h"
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
 
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "HTTPDefine.h"
+#import "MBProgressHUD.h"
+#import "UdStorage.h"
+
 @interface AllOrderController ()<UITableViewDelegate, UITableViewDataSource, PushVCDelegate,DelayPayCellPushVCDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 @property (nonatomic, weak) UITableView *allOrderListView;
+
+@property (nonatomic)NSInteger page;
+@property (nonatomic, strong) NSMutableArray *OrderDataArray;
 
 @end
 
@@ -27,7 +36,7 @@ static NSString *id_cancelCell = @"id_cancelCell";
 - (UITableView *)allOrderListView {
     
     if (!_allOrderListView) {
-        UITableView *allOrderListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height) style:UITableViewStyleGrouped];
+        UITableView *allOrderListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height  - 64 - 44) style:UITableViewStyleGrouped];
         _allOrderListView = allOrderListView;
         [self.view addSubview:_allOrderListView];
     }
@@ -54,15 +63,173 @@ static NSString *id_cancelCell = @"id_cancelCell";
     [self.allOrderListView registerNib:[UINib nibWithNibName:@"SuccessPayCell" bundle:nil] forCellReuseIdentifier:id_successPayCell];
     [self.allOrderListView registerNib:[UINib nibWithNibName:@"DelayPayCell" bundle:nil] forCellReuseIdentifier:id_delayPayCell];
     [self.allOrderListView registerNib:[UINib nibWithNibName:@"CancelPayCell" bundle:nil] forCellReuseIdentifier:id_cancelCell];
+    
+    
+    self.page = 0 ;
+    
+    [self setupRefresh];
+    
      
 }
+
+-(void)setupRefresh
+{
+    self.allOrderListView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        
+        [self headerRereshing];
+        
+    }];
+    
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    self.allOrderListView.mj_header.automaticallyChangeAlpha = YES;
+    
+    [self.allOrderListView.mj_header beginRefreshing];
+    
+    // 上拉刷新
+    self.allOrderListView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        
+        [self footerRereshing];
+        
+    }];
+}
+
+- (void)headerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+        [self setData];
+        
+    });
+}
+
+- (void)footerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        
+        self.page++;
+//        _otherarray = [NSMutableArray new];
+        [self setDataMore];
+        
+        
+        //
+        //
+        //
+        //
+        //        // 刷新表格
+        //
+        //        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        
+    });
+}
+
+-(void)setData
+{
+//    NSDictionary *mulDic = @{
+//                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+//                             @"PageIndex":@0,
+//                             @"PageSize":@10
+//                             };
+//    NSDictionary *params = @{
+//                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+//                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+//                             };
+//    
+//    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Integral/GetIntegralList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+//        
+//        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+//        {
+//            self.page = 0;
+//            self.OrderDataArray = [[NSMutableArray alloc]init];
+//            NSArray *arr = [NSArray array];
+//            arr = [[dict objectForKey:@"JsonData"] objectForKey:@"integList"];
+//            if(arr.count == 0)
+//            {
+//                //                [self.view showInfo:@"暂无更多数据" autoHidden:YES interval:2];
+//                [self.allOrderListView reloadData];
+//                [self.allOrderListView.mj_header endRefreshing];
+//            }
+//            else
+//            {
+//                [self.OrderDataArray addObjectsFromArray:arr];
+//                [self.allOrderListView reloadData];
+//                [self.allOrderListView.mj_header endRefreshing];
+//            }
+//            
+//        }
+//        else
+//        {
+//            [self.allOrderListView showInfo:@"数据请求失败" autoHidden:YES interval:2];
+//            [self.allOrderListView.mj_header endRefreshing];
+//        }
+//        
+//    } fail:^(NSError *error) {
+//        [self.allOrderListView showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.allOrderListView.mj_header endRefreshing];
+//    }];
+    
+}
+
+-(void)setDataMore
+{
+//    NSDictionary *mulDic = @{
+//                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+//                             @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
+//                             @"PageSize":@10
+//                             };
+//    NSDictionary *params = @{
+//                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+//                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+//                             };
+//    
+//    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Integral/GetIntegralList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+//        
+//        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+//        {
+//            
+//            NSArray *arr = [NSArray array];
+//            arr = [[dict objectForKey:@"JsonData"] objectForKey:@"integList"];
+//            if(arr.count == 0)
+//            {
+//                [self.allOrderListView showInfo:@"暂无更多数据" autoHidden:YES interval:2];
+//                self.page--;
+//                [self.allOrderListView reloadData];
+//                [self.allOrderListView.mj_footer endRefreshing];
+//            }
+//            else
+//            {
+//                [self.OrderDataArray addObjectsFromArray:arr];
+//                [self.allOrderListView reloadData];
+//                [self.allOrderListView.mj_footer endRefreshing];
+//            }
+//            
+//        }
+//        else
+//        {
+//            self.page--;
+//            [self.allOrderListView showInfo:@"数据请求失败" autoHidden:YES interval:2];
+//            [self.allOrderListView.mj_footer endRefreshing];
+//        }
+//        
+//    } fail:^(NSError *error) {
+//        self.page--;
+//        [self.allOrderListView showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.allOrderListView.mj_footer endRefreshing];
+//    }];
+    
+}
+
+
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 0;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -97,12 +264,7 @@ static NSString *id_cancelCell = @"id_cancelCell";
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.section == 2) {
-        return 100;
-    }
-    
-    return 150;
+    return 150*Main_Screen_Height/667;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

@@ -42,7 +42,7 @@
 
 @property (nonatomic)NSInteger page;
 
-
+@property (nonatomic)NSInteger weiyi;
 
 @end
 
@@ -90,6 +90,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.pramsDic  = [NSMutableDictionary dictionaryWithDictionary:dic];
     self.MerchantData = [[NSMutableArray alloc]init];
      self.page = 0;
+   
+   self.weiyi = 0;
+   
     self.otherArray = [[NSMutableArray alloc]init];
     
     
@@ -637,9 +640,15 @@ static NSString *id_salerListCell = @"salerListViewCell";
  */
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSLog(@"kjjkklll;;';");
-    return 0.f;
-
+   self.weiyi ++ ;
+   if(self.weiyi == 2)
+   {
+      return -64.f;
+   }
+   else 
+   {
+      return 0.f;
+   }
 }
 
 
