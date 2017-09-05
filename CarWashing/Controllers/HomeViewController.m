@@ -268,8 +268,9 @@
     
     sxView =   [SXScrPageView direcWithtFrame:CGRectMake(0, 0, Main_Screen_Width, 200) ImageArr:images AndImageClickBlock:^(NSInteger index) {
         
-//        DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
-//        [self.navigationController pushViewController:viewVC animated:YES];
+        DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
+        viewVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:viewVC animated:YES];
         
     }];
     sxView.top  =   0;
