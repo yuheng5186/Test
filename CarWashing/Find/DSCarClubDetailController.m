@@ -643,7 +643,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _modelsArray = [NSMutableArray new];
         self.page = 0 ;
-        
+        [self.downView removeFromSuperview];
         [self requestActivityDetail];
         
     });
@@ -701,7 +701,7 @@
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                              @"ActivityCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
-                             @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
+                             @"PageIndex":@0,
                              @"PageSize":@10
                              };
     NSDictionary *params = @{
@@ -712,6 +712,7 @@
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            [_modelsArray removeAllObjects];
 //            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
@@ -779,6 +780,7 @@
                 [_modelsArray addObjectsFromArray:_moreArray];
                 [_tableView reloadData];
                 [self.tableView.mj_footer endRefreshing];
+                
             }
             
             
@@ -856,7 +858,16 @@
                 [self.view showInfo:@"点赞成功" autoHidden:YES interval:2];
                 
                 [self.downGoodButton setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
-                self.goodShowLabel.text                     = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount+1];
+//                self.goodShowLabel.text                     = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount+1];
+                
+                if(newsDetail.GiveCount>99)
+                {
+                    self.goodShowLabel.text = @"99+";
+                }else
+                {
+                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount+1];
+                }
+                
                 newsDetail.GiveCount++;
                 self.goodNumberLabel.text = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount];
                 [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
@@ -898,7 +909,17 @@
                 [[NSNotificationCenter defaultCenter]postNotification:notice];
                 
                 [self.view showInfo:@"取消点赞成功" autoHidden:YES interval:2];
-                self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount-1];
+                
+                if(newsDetail.GiveCount>99)
+                {
+                    self.goodShowLabel.text = @"99+";
+                }else
+                {
+                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount-1];
+                }
+                
+                
+//                self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount-1];
                 [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
                
                 newsDetail.GiveCount--;
@@ -955,7 +976,17 @@
                 [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
                 self.goodNumberLabel.text                     = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount + 1];
                 newsDetail.GiveCount++;
-                self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount];
+                
+                if(newsDetail.GiveCount>99)
+                {
+                    self.goodShowLabel.text = @"99+";
+                }else
+                {
+                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount];
+                }
+                
+                
+                
                 [self.downGoodButton setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
                 self.downGoodButton.selected = YES;
                 
@@ -1003,7 +1034,16 @@
                 [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
                 self.goodNumberLabel.text                     = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount - 1];
                 newsDetail.GiveCount--;
-                self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount];
+                
+                if(newsDetail.GiveCount>99)
+                {
+                    self.goodShowLabel.text = @"99+";
+                }else
+                {
+                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount];
+                }
+                
+                
                 [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
                 self.downGoodButton.selected = NO;
             }
@@ -1208,7 +1248,10 @@
             //            self.dic = [dict objectForKey:@"JsonData"];
             //        [self.MerchantDetailData addObjectsFromArray:arr];
             
-            [self headerRereshing];
+            
+            
+            
+           [self headerRereshing];
         }
         else
         {
