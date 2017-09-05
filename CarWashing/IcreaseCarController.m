@@ -575,6 +575,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                                     NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
                                     [[NSNotificationCenter defaultCenter]postNotification:notice];
                                     UIViewController *controller;
+                                    //蔷薇会员
                                     DSMembershipController *memberVC =(DSMembershipController *)controller;
                                     [weakSelf.navigationController popToViewController:memberVC animated:YES];
                                 }
@@ -583,6 +584,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                                     NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
                                     [[NSNotificationCenter defaultCenter]postNotification:notice];
                                     UIViewController *controller;
+                                    //等级特权
                                     DSMemberRightsController *memberVC =(DSMemberRightsController *)controller;
                                     [weakSelf.navigationController popToViewController:memberVC animated:YES];
                                 }

@@ -443,7 +443,7 @@
     [self.downView  addSubview:sayShowLabel];
     
     sayShowLabel.sd_layout
-    .leftSpaceToView(sayButton, 5)
+    .leftSpaceToView(sayButton, 5*Main_Screen_Height/667)
     .topSpaceToView(self.downView , 12*Main_Screen_Height/667)
     .widthIs(25*Main_Screen_Height/667)
     .heightIs(20*Main_Screen_Height/667);
@@ -470,7 +470,7 @@
     [self.downView  addSubview:goodShowLabel];
     
     goodShowLabel.sd_layout
-    .leftSpaceToView(downGoodButton, 5)
+    .leftSpaceToView(downGoodButton, 5*Main_Screen_Height/667)
     .topSpaceToView(self.downView , 10*Main_Screen_Height/667)
     .widthIs(25*Main_Screen_Height/667)
     .heightIs(20*Main_Screen_Height/667);
