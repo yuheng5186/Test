@@ -16,14 +16,13 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"活动详情" Color:[UIColor blackColor]];
+    [self drawTitle:@"广告详情"];
     
 }
 
 - (void) drawContent
 {
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
+
     
 }
 
