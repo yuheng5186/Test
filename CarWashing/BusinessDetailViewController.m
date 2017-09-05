@@ -124,7 +124,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetStoreDetail",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"%@",dict);
+//        NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             self.dic = [dict objectForKey:@"JsonData"];
@@ -346,6 +346,14 @@ static NSString *businessCommentCell = @"businessCommentCell";
         formerPriceLab.font = [UIFont systemFontOfSize:13];
         [payToolBar addSubview:formerPriceLab];
         
+        
+        NSString *textStr = formerPriceLab.text;
+        NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+        NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:textStr attributes:attribtDic];
+        formerPriceLab.attributedText = attribtStr;
+        
+        
+        
         lblCarType = [[UILabel alloc] init];
         lblCarType.text = [[self.dic[@"MerSerList"] objectAtIndex:0] objectForKey:@"SerName"];
         lblCarType.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
@@ -444,7 +452,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
         [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/AddFavouriteMerchant",Khttp] success:^(NSDictionary *dict, BOOL success) {
-            NSLog(@"%@",dict);
+//            NSLog(@"%@",dict);
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
 //               [self.view showInfo:@"收藏成功" autoHidden:YES interval:2];
@@ -624,6 +632,13 @@ static NSString *businessCommentCell = @"businessCommentCell";
             
             lblPrice.text = [NSString stringWithFormat:@"¥%@",[[self.dic[@"MerSerList"] objectAtIndex:self.lastPath.row] objectForKey:@"CurrentPrice"]];
             formerPriceLab.text = [NSString stringWithFormat:@"¥%@",[[self.dic[@"MerSerList"] objectAtIndex:self.lastPath.row] objectForKey:@"OriginalPrice"]];
+            
+            NSString *textStr = formerPriceLab.text;
+            NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+            NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:textStr attributes:attribtDic];
+            formerPriceLab.attributedText = attribtStr;
+            
+            
             lblCarType.text = [[self.dic[@"MerSerList"] objectAtIndex:self.lastPath.row] objectForKey:@"SerName"];
             
             
