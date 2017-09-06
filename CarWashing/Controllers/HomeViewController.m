@@ -693,7 +693,7 @@
     if (section==self.GetUserRecordData.count-1) {
          return 40.1f;
     }else{
-        return 0;
+        return 0.01;
     }
     
    
