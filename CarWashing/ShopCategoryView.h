@@ -16,4 +16,7 @@ typedef void(^CategoryBlock)(NSInteger);
 
 @property (nonatomic, assign) CGFloat offsetX;
 
+@property (nonatomic, strong) NSMutableArray <UIButton *> *buttonArray;
+
+
 @end
