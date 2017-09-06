@@ -14,14 +14,14 @@
 #import "UdStorage.h"
 #import "AFNetworkingTool.h"
 
-@interface DSDownloadController ()
+@interface DSDownloadController ()<UIAlertViewDelegate>
 
 {
     enum WXScene scene;
     
 }
 @property (nonatomic, strong) HYActivityView *activityView;
-
+@property (nonatomic, strong) UIImageView *bigImageView;
 @end
 
 @implementation DSDownloadController
@@ -186,20 +186,64 @@
     titleLabel.centerX          = logoImageView.centerX;
     titleLabel.top              = logoImageView.bottom +Main_Screen_Height*12/667;
     
-    UIImageView *bigImageView   = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*160/375, Main_Screen_Height*160/667) imageName:@"WechatIMG54"];
-    bigImageView.top            = titleLabel.bottom +Main_Screen_Height*28/667;
-    bigImageView.centerX        = titleView.size.width/2;
+    self.bigImageView   = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*160/375, Main_Screen_Height*160/667) imageName:@"WechatIMG54"];
+    self.bigImageView.top            = titleLabel.bottom +Main_Screen_Height*28/667;
+    self.bigImageView.centerX        = titleView.size.width/2;
+    self.bigImageView.userInteractionEnabled    = YES;
     
+    UILongPressGestureRecognizer  *tapNewGesture    = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(tapbigImageViewGesture:)];
+    tapNewGesture.minimumPressDuration              = 1.0;
+    [self.bigImageView addGestureRecognizer:tapNewGesture];
     
-    NSString *showString              = @"扫一扫上面二维码，下载蔷薇爱车APP";
+    NSString *showString              = @"长按识别二维码";
     UIFont *showStringFont            = [UIFont systemFontOfSize:14];
     UILabel *showLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:showString font:showStringFont] font:showStringFont text:showString isCenter:NO];
     showLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
-    showLabel.top               = bigImageView.bottom +Main_Screen_Height*32/667;
-    showLabel.centerX           = bigImageView.centerX;
+    showLabel.top               = self.bigImageView.bottom +Main_Screen_Height*22/667;
+    showLabel.centerX           = self.bigImageView.centerX;
     
 }
+- (void) tapbigImageViewGesture:(UILongPressGestureRecognizer *)gesture {
 
+    if ([gesture state] == UIGestureRecognizerStateBegan) {
+        
+        CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:nil];
+        
+        //设置数组，放置识别完之后的数据
+        NSArray *features = [detector featuresInImage:[CIImage imageWithData:UIImagePNGRepresentation(self.bigImageView.image)]];
+        //判断是否有数据（即是否是二维码）
+        if (features.count >= 1) {
+            //取第一个元素就是二维码所存放的文本信息
+            CIQRCodeFeature *feature = features[0];
+            NSString *scannedResult = feature.messageString;
+            //通过对话框的形式呈现
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"扫描结果"
+                                                            message:scannedResult
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"确定", nil];
+            [self.view addSubview:alert];
+            [alert show];
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"扫描结果"
+                                                            message:@"不是二维码图片"
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"确定", nil];
+            [self.view addSubview:alert];
+            [alert show];
+        }
+    }
+    //获取选中的照片
+//    UIImage *image = info[UIImagePickerControllerEditedImage];
+    
+//    if (!image) {
+//        image = info[UIImagePickerControllerOriginalImage];
+//    }
+    //初始化  将类型设置为二维码
+    
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
