@@ -17,6 +17,8 @@
 #import "MBProgressHUD.h"
 #import "UIImageView+WebCache.h"
 
+#import "DSSalaActivityCell.h"
+
 @interface DSSaleActivityController ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
     MBProgressHUD *HUD;
@@ -31,6 +33,8 @@
 @property (nonatomic, strong) NSString *area;
 
 @end
+
+static NSString *cellStatic = @"cellStatic";
 
 @implementation DSSaleActivityController
 
@@ -64,7 +68,9 @@
     self.tableView.tableFooterView  = [UIView new];
     self.tableView.tableHeaderView  = [UIView new];
     self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
-//    self.tableView.backgroundColor  = [UIColor blueColor];
+
+    [self.tableView registerClass:[DSSalaActivityCell class] forCellReuseIdentifier:cellStatic];
+    
     [self.contentView addSubview:self.tableView];
     _CouponListData = [[NSMutableArray alloc]init];
      self.area = @"上海市";
@@ -220,11 +226,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *cellStatic = @"cellStatic";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStatic];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    }
+    
+    DSSalaActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStatic];
+//    if (!cell) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+//    }
     cell.backgroundColor    = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
