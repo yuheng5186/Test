@@ -10,4 +10,16 @@
 
 @interface OrderDetailController : BaseController
 
+@property (nonatomic,assign) NSInteger MerCode;
+
+@property (nonatomic,copy) NSString *MerChantService;
+
+@property (copy, nonatomic)  NSString *ShijiPrice;
+@property (copy, nonatomic)  NSString *Jprice;
+@property (copy, nonatomic)  NSString *youhuiprice;
+@property (copy, nonatomic)  NSString *shijiPrice1;
+@property (copy, nonatomic)  NSString *orderid;
+@property (copy, nonatomic)  NSString *ordertime;
+@property (copy, nonatomic)  NSString *paymethod;
+
 @end

@@ -28,6 +28,11 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *stateButton;
 
+@property(nonatomic ,copy)NSString *SerMerChant;
+
+@property(nonatomic ,copy)NSString *Jprice;
+@property(nonatomic ,copy)NSString *Xprice;
+
 
 @property (nonatomic, weak) id<DelayPayCellPushVCDelegate> delegate;
 

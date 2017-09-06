@@ -28,6 +28,11 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *stateButton;
 
+@property(nonatomic ,copy)NSString *SerMerCode;
+@property(nonatomic ,copy)NSString *SerCode;
+@property(nonatomic ,copy)NSString *orderid;
+
+
 
 //代理
 @property (nonatomic, weak) id<PushVCDelegate> delegate;

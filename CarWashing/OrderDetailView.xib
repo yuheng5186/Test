@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderDetailController"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="que-fh-20q">
+        <view contentMode="scaleToFill" id="que-fh-20q" customClass="OrderDetailView">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -25,19 +25,19 @@
                                 <constraint firstAttribute="height" constant="80" id="hD4-77-4B9"/>
                             </constraints>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="renzheng" translatesAutoresizingMaskIntoConstraints="NO" id="ipg-e6-xyu">
-                            <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="25" id="nXD-Bq-K46"/>
-                                <constraint firstAttribute="height" constant="25" id="nfK-w0-EWJ"/>
-                            </constraints>
-                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上海金雷快车洗车店" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCK-38-dwt">
                             <rect key="frame" x="110" y="30" width="147" height="19.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="renzheng" translatesAutoresizingMaskIntoConstraints="NO" id="ook-Tg-qLn">
+                            <rect key="frame" x="12" y="10" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="h41-8U-vqW"/>
+                                <constraint firstAttribute="width" constant="25" id="uQW-Va-RvV"/>
+                            </constraints>
+                        </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="juli" translatesAutoresizingMaskIntoConstraints="NO" id="TQ3-na-VmM">
                             <rect key="frame" x="110" y="61.5" width="10" height="10"/>
                             <constraints>
@@ -57,21 +57,31 @@
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEb-QS-kOB">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                            <connections>
+                                <action selector="GoMerChant:" destination="-1" eventType="touchUpInside" id="Frb-eB-osw"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="fEb-QS-kOB" firstAttribute="leading" secondItem="nf8-nB-PNm" secondAttribute="leading" id="5fF-h7-hx0"/>
+                        <constraint firstItem="fEb-QS-kOB" firstAttribute="top" secondItem="nf8-nB-PNm" secondAttribute="top" id="Gl5-nA-1eH"/>
                         <constraint firstItem="TQ3-na-VmM" firstAttribute="top" secondItem="WCK-38-dwt" secondAttribute="bottom" constant="12" id="KDm-yV-R2w"/>
                         <constraint firstItem="d1f-0V-bnB" firstAttribute="leading" secondItem="TQ3-na-VmM" secondAttribute="trailing" constant="3" id="Ptq-sS-JgI"/>
                         <constraint firstItem="aGC-zW-cgk" firstAttribute="leading" secondItem="nf8-nB-PNm" secondAttribute="leading" constant="12" id="RrH-n5-dQ8"/>
+                        <constraint firstItem="ook-Tg-qLn" firstAttribute="leading" secondItem="nf8-nB-PNm" secondAttribute="leading" constant="12" id="SOn-hJ-QoC"/>
                         <constraint firstItem="d1f-0V-bnB" firstAttribute="centerY" secondItem="TQ3-na-VmM" secondAttribute="centerY" id="U4y-9H-p5y"/>
                         <constraint firstItem="qCj-lI-2gt" firstAttribute="top" secondItem="nf8-nB-PNm" secondAttribute="top" constant="15" id="We3-0z-JIH"/>
                         <constraint firstItem="WCK-38-dwt" firstAttribute="leading" secondItem="aGC-zW-cgk" secondAttribute="trailing" constant="18" id="XQg-tq-Fv9"/>
                         <constraint firstAttribute="trailing" secondItem="qCj-lI-2gt" secondAttribute="trailing" constant="12" id="aZc-MR-O5R"/>
                         <constraint firstItem="aGC-zW-cgk" firstAttribute="top" secondItem="nf8-nB-PNm" secondAttribute="top" constant="10" id="cAC-QS-fgT"/>
-                        <constraint firstItem="ipg-e6-xyu" firstAttribute="top" secondItem="nf8-nB-PNm" secondAttribute="top" id="nZx-HF-BRb"/>
+                        <constraint firstItem="ook-Tg-qLn" firstAttribute="top" secondItem="nf8-nB-PNm" secondAttribute="top" constant="10" id="iYc-cz-JiA"/>
                         <constraint firstItem="TQ3-na-VmM" firstAttribute="leading" secondItem="WCK-38-dwt" secondAttribute="leading" id="q8l-Eg-gjt"/>
                         <constraint firstAttribute="height" constant="100" id="sOw-xw-iJ8"/>
-                        <constraint firstItem="ipg-e6-xyu" firstAttribute="leading" secondItem="nf8-nB-PNm" secondAttribute="leading" id="uYN-iW-8cc"/>
+                        <constraint firstAttribute="bottom" secondItem="fEb-QS-kOB" secondAttribute="bottom" id="v68-Ur-O74"/>
+                        <constraint firstAttribute="trailing" secondItem="fEb-QS-kOB" secondAttribute="trailing" id="wTL-q7-BWa"/>
                         <constraint firstItem="WCK-38-dwt" firstAttribute="top" secondItem="nf8-nB-PNm" secondAttribute="top" constant="30" id="zcd-9b-TNy"/>
                     </constraints>
                 </view>
@@ -91,6 +101,9 @@
                             <state key="normal" title="导航去门店">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="DaoHang:" destination="-1" eventType="touchUpInside" id="ilX-w4-MGC"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -267,7 +280,21 @@
                 <constraint firstItem="mTp-Hi-6JC" firstAttribute="top" secondItem="nf8-nB-PNm" secondAttribute="bottom" constant="8" id="pKM-I5-fYm"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <point key="canvasLocation" x="57.5" y="6.5"/>
+            <connections>
+                <outlet property="Jprice" destination="hRc-S0-ktL" id="0HN-M0-oRj"/>
+                <outlet property="MerChantAdress" destination="d1f-0V-bnB" id="8F7-O5-Mar"/>
+                <outlet property="MerChantImgV" destination="aGC-zW-cgk" id="OAi-5R-K5u"/>
+                <outlet property="MerChantName" destination="WCK-38-dwt" id="JP3-5X-kBJ"/>
+                <outlet property="MerChantService" destination="OGv-ij-WGZ" id="DHz-dn-LaT"/>
+                <outlet property="MerChantType" destination="qCj-lI-2gt" id="TcK-B2-cJs"/>
+                <outlet property="ShijiPrice" destination="mQh-2y-YoQ" id="ZWW-i5-UfO"/>
+                <outlet property="orderid" destination="xy8-MT-dAJ" id="bDF-rB-TkL"/>
+                <outlet property="ordertime" destination="Fab-R0-vJ4" id="f1b-1i-GBt"/>
+                <outlet property="paymethod" destination="tVw-gD-2Mf" id="ftm-EQ-PbI"/>
+                <outlet property="shijiPrice1" destination="788-Aa-FtQ" id="glw-6A-9Gi"/>
+                <outlet property="youhuiprice" destination="QrH-hf-H9a" id="phx-yo-Kd5"/>
+            </connections>
+            <point key="canvasLocation" x="-31.5" y="4.5"/>
         </view>
     </objects>
     <resources>

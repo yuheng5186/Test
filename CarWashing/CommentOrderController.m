@@ -10,11 +10,15 @@
 #import "SuccessPayCell.h"
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
 
+#import "OrderDetailController.h"
+
 #import "LCMD5Tool.h"
 #import "AFNetworkingTool.h"
 #import "HTTPDefine.h"
 #import "MBProgressHUD.h"
 #import "UdStorage.h"
+
+#import "Order.h"
 
 @interface CommentOrderController ()<UITableViewDataSource, UITableViewDelegate, PushVCDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
@@ -121,117 +125,183 @@ static NSString *id_successPayCell = @"id_successPayCell";
 
 -(void)setData
 {
-    //    NSDictionary *mulDic = @{
-    //                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-    //                             @"PageIndex":@0,
-    //                             @"PageSize":@10
-    //                             };
-    //    NSDictionary *params = @{
-    //                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-    //                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-    //                             };
-    //
-    //    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Integral/GetIntegralList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-    //
-    //        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-    //        {
-    //            self.page = 0;
-    //            self.OrderDataArray = [[NSMutableArray alloc]init];
-    //            NSArray *arr = [NSArray array];
-    //            arr = [[dict objectForKey:@"JsonData"] objectForKey:@"integList"];
-    //            if(arr.count == 0)
-    //            {
-    //                //                [self.view showInfo:@"暂无更多数据" autoHidden:YES interval:2];
-    //                [self.allOrderListView reloadData];
-    //                [self.allOrderListView.mj_header endRefreshing];
-    //            }
-    //            else
-    //            {
-    //                [self.OrderDataArray addObjectsFromArray:arr];
-    //                [self.allOrderListView reloadData];
-    //                [self.allOrderListView.mj_header endRefreshing];
-    //            }
-    //
-    //        }
-    //        else
-    //        {
-    //            [self.allOrderListView showInfo:@"数据请求失败" autoHidden:YES interval:2];
-    //            [self.allOrderListView.mj_header endRefreshing];
-    //        }
-    //
-    //    } fail:^(NSError *error) {
-    //        [self.allOrderListView showInfo:@"获取失败" autoHidden:YES interval:2];
-    [self.commentOrderView.mj_header endRefreshing];
-    //    }];
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"PageIndex":@0,
+                                 @"PageSize":@10,
+                                 @"PayState" :@2
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+    
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/GetOrderRecordsList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+    
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+                self.page = 0;
+                self.DelayCommentDataArray = [[NSMutableArray alloc]init];
+                NSArray *arr = [NSArray array];
+                arr = [dict objectForKey:@"JsonData"];
+                if(arr.count == 0)
+                {
+                    //                [self.view showInfo:@"暂无更多数据" autoHidden:YES interval:2];
+                    [self.commentOrderView reloadData];
+                    [self.commentOrderView.mj_header endRefreshing];
+                }
+                else
+                {
+                    
+                    for(NSDictionary *dic in arr)
+                    {
+                        Order *order = [[Order alloc]init];
+                        [order setValuesForKeysWithDictionary:dic];
+                        [self.DelayCommentDataArray addObject:order];
+                    }
+                    
+                    [self.commentOrderView reloadData];
+                    [self.commentOrderView.mj_header endRefreshing];
+                }
+    
+            }
+            else
+            {
+                [self.commentOrderView showInfo:@"数据请求失败" autoHidden:YES interval:2];
+                [self.commentOrderView.mj_header endRefreshing];
+            }
+    
+        } fail:^(NSError *error) {
+            [self.commentOrderView showInfo:@"获取失败" autoHidden:YES interval:2];
+            [self.commentOrderView.mj_header endRefreshing];
+        }];
     
 }
 
 -(void)setDataMore
 {
-    //    NSDictionary *mulDic = @{
-    //                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-    //                             @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
-    //                             @"PageSize":@10
-    //                             };
-    //    NSDictionary *params = @{
-    //                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-    //                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-    //                             };
-    //
-    //    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Integral/GetIntegralList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-    //
-    //        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-    //        {
-    //
-    //            NSArray *arr = [NSArray array];
-    //            arr = [[dict objectForKey:@"JsonData"] objectForKey:@"integList"];
-    //            if(arr.count == 0)
-    //            {
-    //                [self.allOrderListView showInfo:@"暂无更多数据" autoHidden:YES interval:2];
-    //                self.page--;
-    //                [self.allOrderListView reloadData];
-    //                [self.allOrderListView.mj_footer endRefreshing];
-    //            }
-    //            else
-    //            {
-    //                [self.OrderDataArray addObjectsFromArray:arr];
-    //                [self.allOrderListView reloadData];
-    //                [self.allOrderListView.mj_footer endRefreshing];
-    //            }
-    //
-    //        }
-    //        else
-    //        {
-    //            self.page--;
-    //            [self.allOrderListView showInfo:@"数据请求失败" autoHidden:YES interval:2];
-    //            [self.allOrderListView.mj_footer endRefreshing];
-    //        }
-    //        
-    //    } fail:^(NSError *error) {
-    //        self.page--;
-    //        [self.allOrderListView showInfo:@"获取失败" autoHidden:YES interval:2];
-    [self.commentOrderView.mj_footer endRefreshing];
-    //    }];
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
+                                 @"PageSize":@10,
+                                 @"PayState" :@2
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+    
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/GetOrderRecordsList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+    
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+    
+                NSArray *arr = [NSArray array];
+                arr = [dict objectForKey:@"JsonData"];
+                if(arr.count == 0)
+                {
+                    [self.commentOrderView showInfo:@"暂无更多数据" autoHidden:YES interval:2];
+                    self.page--;
+                    [self.commentOrderView reloadData];
+                    [self.commentOrderView.mj_footer endRefreshing];
+                }
+                else
+                {
+                    
+                    for(NSDictionary *dic in arr)
+                    {
+                        Order *order = [[Order alloc]init];
+                        [order setValuesForKeysWithDictionary:dic];
+                        [self.DelayCommentDataArray addObject:order];
+                    }
+                    
+                    [self.commentOrderView reloadData];
+                    [self.commentOrderView.mj_footer endRefreshing];
+                }
+    
+            }
+            else
+            {
+                self.page--;
+                [self.commentOrderView showInfo:@"数据请求失败" autoHidden:YES interval:2];
+                [self.commentOrderView.mj_footer endRefreshing];
+            }
+            
+        } fail:^(NSError *error) {
+            self.page--;
+            [self.commentOrderView showInfo:@"获取失败" autoHidden:YES interval:2];
+            [self.commentOrderView.mj_footer endRefreshing];
+        }];
     
 }
 
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 7;
+    return self.DelayCommentDataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 0;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    Order *order = (Order *)[self.DelayCommentDataArray objectAtIndex:indexPath.section];
+    
     SuccessPayCell *commentCell = [tableView dequeueReusableCellWithIdentifier:id_successPayCell forIndexPath:indexPath];
     commentCell.delegate = self;
     
+    commentCell.orderLabel.text = [NSString stringWithFormat:@"订单号: %@",order.OrderCode];
+    commentCell.priceLabel.text = [NSString stringWithFormat:@"￥%@",order.PaypriceAmount];
+    commentCell.washTypeLabel.text = order.SerName;
+    
+    commentCell.orderid = order.OrderCode;
+    commentCell.SerMerCode = [NSString stringWithFormat:@"%ld",order.MerCode];
+    commentCell.SerCode = [NSString stringWithFormat:@"%ld",order.SerCode];
+    
     return commentCell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    Order *order = (Order *)[self.DelayCommentDataArray objectAtIndex:indexPath.section];
+    //
+    //    if(order.PayState == 3)
+    //    {
+    OrderDetailController *orderDetailVC = [[OrderDetailController alloc] init];
+    orderDetailVC.hidesBottomBarWhenPushed = YES;
+    
+    
+    orderDetailVC.MerCode = order.MerCode;
+    
+    orderDetailVC.MerChantService = order.SerName;
+    
+    
+    orderDetailVC.ShijiPrice = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
+    orderDetailVC.Jprice = [NSString stringWithFormat:@"%@",order.PayableAmount];
+    orderDetailVC.youhuiprice = [NSString stringWithFormat:@"%@",order.DeductionAmount];
+    orderDetailVC.shijiPrice1 = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
+    orderDetailVC.orderid = order.OrderCode;
+    orderDetailVC.ordertime = order.PayTimes;
+    orderDetailVC.paymethod = @"微信支付";
+    if(order.PayMethod == 2)
+    {
+        orderDetailVC.paymethod = @"支付宝支付";
+    }
+    
+    
+    
+    [self.navigationController pushViewController:orderDetailVC animated:YES];
+    //    }
+    
+    
+    
+    
+    
+}
+
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 10*Main_Screen_Height/667;

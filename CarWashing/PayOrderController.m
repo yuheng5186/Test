@@ -10,13 +10,15 @@
 #import "DelayPayCell.h"
 
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
-
+#import "OrderDetailController.h"
 
 #import "LCMD5Tool.h"
 #import "AFNetworkingTool.h"
 #import "HTTPDefine.h"
 #import "MBProgressHUD.h"
 #import "UdStorage.h"
+
+#import "Order.h"
 
 @interface PayOrderController ()<UITableViewDelegate, UITableViewDataSource, DelayPayCellPushVCDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
@@ -115,117 +117,182 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
 
 -(void)setData
 {
-    //    NSDictionary *mulDic = @{
-    //                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-    //                             @"PageIndex":@0,
-    //                             @"PageSize":@10
-    //                             };
-    //    NSDictionary *params = @{
-    //                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-    //                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-    //                             };
-    //
-    //    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Integral/GetIntegralList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-    //
-    //        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-    //        {
-    //            self.page = 0;
-    //            self.OrderDataArray = [[NSMutableArray alloc]init];
-    //            NSArray *arr = [NSArray array];
-    //            arr = [[dict objectForKey:@"JsonData"] objectForKey:@"integList"];
-    //            if(arr.count == 0)
-    //            {
-    //                //                [self.view showInfo:@"暂无更多数据" autoHidden:YES interval:2];
-    //                [self.allOrderListView reloadData];
-    //                [self.allOrderListView.mj_header endRefreshing];
-    //            }
-    //            else
-    //            {
-    //                [self.OrderDataArray addObjectsFromArray:arr];
-    //                [self.allOrderListView reloadData];
-    //                [self.allOrderListView.mj_header endRefreshing];
-    //            }
-    //
-    //        }
-    //        else
-    //        {
-    //            [self.allOrderListView showInfo:@"数据请求失败" autoHidden:YES interval:2];
-    //            [self.allOrderListView.mj_header endRefreshing];
-    //        }
-    //
-    //    } fail:^(NSError *error) {
-    //        [self.allOrderListView showInfo:@"获取失败" autoHidden:YES interval:2];
-    [self.payOrderView.mj_header endRefreshing];
-    //    }];
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"PageIndex":@0,
+                                 @"PageSize":@10,
+                                 @"PayState" :@1
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+    
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/GetOrderRecordsList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+    
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+                self.page = 0;
+                self.DelayPayDataArray = [[NSMutableArray alloc]init];
+                NSArray *arr = [NSArray array];
+                arr = [dict objectForKey:@"JsonData"];
+                if(arr.count == 0)
+                {
+                    //                [self.view showInfo:@"暂无更多数据" autoHidden:YES interval:2];
+                    [self.payOrderView reloadData];
+                    [self.payOrderView.mj_header endRefreshing];
+                }
+                else
+                {
+                    
+                    for(NSDictionary *dic in arr)
+                    {
+                        Order *order = [[Order alloc]init];
+                        [order setValuesForKeysWithDictionary:dic];
+                        [self.DelayPayDataArray addObject:order];
+                    }
+                    
+                    [self.payOrderView reloadData];
+                    [self.payOrderView.mj_header endRefreshing];
+                }
+
+    
+            }
+            else
+            {
+                [self.payOrderView showInfo:@"数据请求失败" autoHidden:YES interval:2];
+                [self.payOrderView.mj_header endRefreshing];
+            }
+    
+        } fail:^(NSError *error) {
+            [self.payOrderView showInfo:@"获取失败" autoHidden:YES interval:2];
+            [self.payOrderView.mj_header endRefreshing];
+        }];
     
 }
 
 -(void)setDataMore
 {
-    //    NSDictionary *mulDic = @{
-    //                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-    //                             @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
-    //                             @"PageSize":@10
-    //                             };
-    //    NSDictionary *params = @{
-    //                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-    //                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-    //                             };
-    //
-    //    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Integral/GetIntegralList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-    //
-    //        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-    //        {
-    //
-    //            NSArray *arr = [NSArray array];
-    //            arr = [[dict objectForKey:@"JsonData"] objectForKey:@"integList"];
-    //            if(arr.count == 0)
-    //            {
-    //                [self.allOrderListView showInfo:@"暂无更多数据" autoHidden:YES interval:2];
-    //                self.page--;
-    //                [self.allOrderListView reloadData];
-    //                [self.allOrderListView.mj_footer endRefreshing];
-    //            }
-    //            else
-    //            {
-    //                [self.OrderDataArray addObjectsFromArray:arr];
-    //                [self.allOrderListView reloadData];
-    //                [self.allOrderListView.mj_footer endRefreshing];
-    //            }
-    //
-    //        }
-    //        else
-    //        {
-    //            self.page--;
-    //            [self.allOrderListView showInfo:@"数据请求失败" autoHidden:YES interval:2];
-    //            [self.allOrderListView.mj_footer endRefreshing];
-    //        }
-    //        
-    //    } fail:^(NSError *error) {
-    //        self.page--;
-    //        [self.allOrderListView showInfo:@"获取失败" autoHidden:YES interval:2];
-    [self.payOrderView.mj_footer endRefreshing];
-    //    }];
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
+                                 @"PageSize":@10,
+                                 @"PayState" :@1
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+    
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/GetOrderRecordsList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+    
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+    
+                NSArray *arr = [NSArray array];
+                arr = [dict objectForKey:@"JsonData"];
+                if(arr.count == 0)
+                {
+                    [self.payOrderView showInfo:@"暂无更多数据" autoHidden:YES interval:2];
+                    self.page--;
+                    [self.payOrderView reloadData];
+                    [self.payOrderView.mj_footer endRefreshing];
+                }
+                else
+                {
+                    for(NSDictionary *dic in arr)
+                    {
+                        Order *order = [[Order alloc]init];
+                        [order setValuesForKeysWithDictionary:dic];
+                        [self.DelayPayDataArray addObject:order];
+                    }
+                    
+                    [self.payOrderView reloadData];
+                    [self.payOrderView.mj_footer endRefreshing];
+                }
+    
+            }
+            else
+            {
+                self.page--;
+                [self.payOrderView showInfo:@"数据请求失败" autoHidden:YES interval:2];
+                [self.payOrderView.mj_footer endRefreshing];
+            }
+            
+        } fail:^(NSError *error) {
+            self.page--;
+            [self.payOrderView showInfo:@"获取失败" autoHidden:YES interval:2];
+            [self.payOrderView.mj_footer endRefreshing];
+        }];
     
 }
 
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return self.DelayPayDataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 0;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    Order *order = (Order *)[self.DelayPayDataArray objectAtIndex:indexPath.section];
+    
     DelayPayCell *delayCell = [tableView dequeueReusableCellWithIdentifier:id_delayPayCell forIndexPath:indexPath];
     delayCell.delegate = self;
     
+    delayCell.orderLabel.text = [NSString stringWithFormat:@"订单号: %@",order.OrderCode];
+    delayCell.priceLabel.text = [NSString stringWithFormat:@"￥%@",order.PaypriceAmount];
+    delayCell.washTypeLabel.text = order.SerName;
+    
+    delayCell.SerMerChant = order.SerName;
+    delayCell.Jprice = [NSString stringWithFormat:@"￥%@",order.PayableAmount];
+    delayCell.Xprice = [NSString stringWithFormat:@"￥%@",order.PaypriceAmount];
+    
     return delayCell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    Order *order = (Order *)[self.DelayPayDataArray objectAtIndex:indexPath.section];
+    //
+    //    if(order.PayState == 3)
+    //    {
+    OrderDetailController *orderDetailVC = [[OrderDetailController alloc] init];
+    orderDetailVC.hidesBottomBarWhenPushed = YES;
+    
+    
+    orderDetailVC.MerCode = order.MerCode;
+    
+    orderDetailVC.MerChantService = order.SerName;
+    
+    
+    orderDetailVC.ShijiPrice = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
+    orderDetailVC.Jprice = [NSString stringWithFormat:@"%@",order.PayableAmount];
+    orderDetailVC.youhuiprice = [NSString stringWithFormat:@"%@",order.DeductionAmount];
+    orderDetailVC.shijiPrice1 = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
+    orderDetailVC.orderid = order.OrderCode;
+    orderDetailVC.ordertime = order.PayTimes;
+    orderDetailVC.paymethod = @"微信支付";
+    if(order.PayMethod == 2)
+    {
+        orderDetailVC.paymethod = @"支付宝支付";
+    }
+    
+    
+    
+    [self.navigationController pushViewController:orderDetailVC animated:YES];
+    //    }
+    
+    
+    
+    
+    
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 10*Main_Screen_Height/667;

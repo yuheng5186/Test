@@ -10,7 +10,16 @@
 #import <Masonry.h>
 #import "TggStarEvaluationView.h"
 
+#import "HTTPDefine.h"
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "UdStorage.h"
+
 @interface OrderCommentController ()<UITextViewDelegate>
+{
+    UITextView *commentTextView;
+    NSInteger score;
+}
 
 //@property (nonatomic, strong) NSMutableArray <UIButton *> *buttonArray;
 //@property (nonatomic, weak) UIButton *firstButton;
@@ -66,6 +75,7 @@
     __weak __typeof(self)weakSelf = self;
     self.tggStarEvaView = [TggStarEvaluationView evaluationViewWithChooseStarBlock:^(NSUInteger count) {
         //几颗星的回调count
+        score = count;
         
     }];
     
@@ -122,7 +132,7 @@
 //    }];
     
     
-    UITextView *commentTextView = [[UITextView alloc] init];
+    commentTextView = [[UITextView alloc] init];
     commentTextView.text = @"亲,您的评价可以帮助到别人哦";
     commentTextView.textColor = [UIColor colorFromHex:@"#999999"];
     commentTextView.delegate = self;
@@ -146,6 +156,47 @@
 
 - (void)clickSigninButton:(UIButton *)button {
     
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"MerCode":self.SerMerCode,
+                             @"SerCode":self.SerCode,
+                             @"OrderId":self.orderid,
+                             @"CommentContent":commentTextView.text,
+                             @"Score":[NSString stringWithFormat:@"%ld",score]
+                             };
+    
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/AddOrderComment",Khttp] success:^(NSDictionary *dict, BOOL success) {
+       
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+//            NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];
+//            [[NSNotificationCenter defaultCenter]postNotification:notice];
+            [self.view showInfo:@"评价成功" autoHidden:YES interval:2];
+            //            self.dic = [dict objectForKey:@"JsonData"];
+            //        [self.MerchantDetailData addObjectsFromArray:arr];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            
+           
+        }
+        else
+        {
+            [self.view showInfo:@"评论添加失败" autoHidden:YES interval:2];
+            //            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+        
+        
+        
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"评论添加失败" autoHidden:YES interval:2];
+    }];
+
     
 }
 

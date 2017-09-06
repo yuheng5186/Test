@@ -10,6 +10,9 @@
 
 @implementation OrderDetailView
 
+- (IBAction)GotoMerChant:(id)sender {
+}
+
 + (instancetype)orderDetailView {
     
     return [[NSBundle mainBundle] loadNibNamed:@"OrderDetailView" owner:nil options:nil].lastObject;
