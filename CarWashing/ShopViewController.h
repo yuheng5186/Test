@@ -12,4 +12,6 @@
 
 @property (nonatomic,copy) NSDictionary *dic;
 
+@property (nonatomic, assign) BOOL isComment;
+
 @end

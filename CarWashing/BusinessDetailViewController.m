@@ -491,7 +491,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
 - (void)clickCommentButton {
     
     ShopViewController *commentVC = [[ShopViewController alloc] init];
-    
+    commentVC.isComment = YES;
     commentVC.dic = self.dic;
     
     [self.navigationController pushViewController:commentVC animated:YES];

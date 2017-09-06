@@ -46,6 +46,7 @@
     
     [self addChildViewControllers];
     
+    
 }
 
 - (void)addChildViewControllers{
@@ -83,7 +84,7 @@
 - (void)setupCategoryView {
     
     ShopCategoryView *categoryView = [[ShopCategoryView alloc] init];
-
+    
     _categoryView = categoryView;
     
     [self.view addSubview:categoryView];
@@ -100,6 +101,7 @@
         //修改scrollView的contentOffset
         [self.shopScrollView setContentOffset:CGPointMake(index * self.shopScrollView.width, 0) animated:YES];
     };
+    
     
     
 }
@@ -146,6 +148,16 @@
     }
 }
 
+
+- (void)viewWillLayoutSubviews {
+    
+    if (self.isComment) {
+        
+        [self.categoryView.buttonArray[1] sendActionsForControlEvents:UIControlEventTouchUpInside];
+
+    }
+
+}
 
 
 - (void)didReceiveMemoryWarning {
