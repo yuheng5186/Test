@@ -149,13 +149,17 @@
 }
 
 
-- (void)viewWillLayoutSubviews {
+- (void)viewDidLayoutSubviews {
     
     if (self.isComment) {
         
         [self.categoryView.buttonArray[1] sendActionsForControlEvents:UIControlEventTouchUpInside];
 
     }
+//    else
+//    {
+//        [self.categoryView.buttonArray[0] sendActionsForControlEvents:UIControlEventTouchUpInside];
+//    }
 
 }
 
