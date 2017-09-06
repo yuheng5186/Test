@@ -273,6 +273,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     else if (indexPath.section == 0 && indexPath.row == 1) {
         
         payCardDetailCell *payCell = [tableView dequeueReusableCellWithIdentifier:id_payDetailCell];
+        payCell.selectionStyle = UITableViewCellSelectionStyleNone;
         payCell.textLabel.text  = @"卡使用说明";
         payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
          payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
