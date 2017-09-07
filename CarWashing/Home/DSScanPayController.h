@@ -16,4 +16,11 @@
 @property(nonatomic ,copy)NSString *Jprice;
 @property(nonatomic ,copy)NSString *Xprice;
 
+@property(nonatomic ,copy)NSString *DeviceCode;
+
+@property(nonatomic,copy)NSString *RemainCount;
+@property(nonatomic,copy)NSString *CardType;
+@property(nonatomic,copy)NSString *CardName;
+@property(nonatomic,copy)NSString *IntegralNum;
+
 @end
