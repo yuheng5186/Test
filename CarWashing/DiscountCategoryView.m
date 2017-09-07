@@ -60,14 +60,14 @@
     
     _singleLine = singleLine;
     
-    singleLine.backgroundColor = [UIColor orangeColor];
+    singleLine.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     
     [self addSubview:singleLine];
     
     [singleLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.centerX.equalTo(_firstButton);
         make.width.mas_equalTo(60*Main_Screen_Height/667);
-        make.height.mas_equalTo(5*Main_Screen_Height/667);
+        make.height.mas_equalTo(3*Main_Screen_Height/667);
     }];
 }
 
@@ -151,7 +151,7 @@
     //设置文字的颜色
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
     
-    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
     
     button.titleLabel.font = [UIFont systemFontOfSize:15];
     
