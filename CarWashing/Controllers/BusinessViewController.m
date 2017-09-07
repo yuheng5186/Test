@@ -378,16 +378,16 @@ static NSString *id_salerListCell = @"salerListViewCell";
 {
     // 第1列 高度
     if (index == 0) {
-        return 270*Main_Screen_Height/667;
+        return 270;
     }
     
     // 第2列 高度
     if (index == 1) {
-        return 180*Main_Screen_Height/667;
+        return 180;
     }
     
     // 第3列 高度
-    return 180*Main_Screen_Height/667;
+    return 180;
 }
 
 -(void)setData
