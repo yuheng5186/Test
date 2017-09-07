@@ -210,14 +210,23 @@ NSString * const YZUpdateMenuTitleNote = @"YZUpdateMenuTitleNote";
 - (void)willMoveToWindow:(UIWindow *)newWindow
 {
     [super willMoveToWindow:newWindow];
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [self reload];
-    });
+
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        [self reload];
+//    });
     
     
 }
+
+//-(void)willMoveToSuperview:(UIView *)newSuperview
+//{
+//    [super willMoveToSuperview:newSuperview];
+//    
+//    //    static dispatch_once_t onceToken;
+//    //    dispatch_once(&onceToken, ^{
+//    [self reload];
+//}
 
 #pragma mark - 下拉菜单功能
 // 删除之前所有数据,移除之前所有子控件
