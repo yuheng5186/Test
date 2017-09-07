@@ -13,6 +13,8 @@
 #import "DSGetScoreController.h"
 #import "LoginViewController.h"
 
+#import "AppDelegate.h"
+
 #import "UdStorage.h"
 
 @interface DSSettingController ()<UITableViewDelegate,UITableViewDataSource,LKAlertViewDelegate>
@@ -248,16 +250,22 @@
         if (buttonIndex == 0) {
             
         }else{
-                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                [defaults removeObjectForKey:@"Account_Id"];
-                [defaults setValue:@NO forKey:@"firstRun"];
-                [defaults synchronize];
+//                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//                [defaults removeObjectForKey:@"Account_Id"];
+//                [defaults setValue:@NO forKey:@"firstRun"];
+//                [defaults synchronize];
             
                 LoginViewController *loginControl = [[LoginViewController alloc]init];
                 UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:loginControl];
                 nav.navigationBar.hidden      = YES;
             
+            
+//                AppDelegate *delete =  (AppDelegate *)[UIApplication sharedApplication].delegate;
+//                delete.window = [[UIWindow alloc] initWithFrame: UIScreen.mainScreen.bounds];
+//            
                 self.view.window.rootViewController      = nav;
+//
+//            [delete.window makeKeyAndVisible];
             
         }
     }else{

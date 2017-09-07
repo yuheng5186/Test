@@ -188,10 +188,12 @@ static NSString *id_rightsCell = @"id_rightsCell";
         }
         else
         {
+            [HUD setHidden:YES];
             [self.view showInfo:@"信息获取失败，请重试" autoHidden:YES interval:2];
 //            [self.navigationController popViewControllerAnimated:YES];
         }
     } fail:^(NSError *error) {
+        [HUD setHidden:YES];
         [self.view showInfo:@"获取失败，请重试" autoHidden:YES interval:2];
 //        [self.navigationController popViewControllerAnimated:YES];
         
