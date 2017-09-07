@@ -13,7 +13,10 @@
 #import "CashViewController.h"
 #import "BusinessPayCell.h"
 
-
+#import "UdStorage.h"
+#import "HTTPDefine.h"
+#import "AFNetworkingTool.h"
+#import "LCMD5Tool.h"
 
 @interface DSScanPayController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -217,85 +220,58 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
         
         
         
-        NSString *urlPath = [NSString stringWithFormat:@"http://119.23.53.225/WeixinPay.ashx?op=GetUnifiedorder"];
-        
-        //    NSString *parasStr = [NSString stringWithFormat:@"uid=%ld&body=%@&fee=%@00&type=0&cid=%@",APPDELEGATE.currentUser.userID,body.text,self.money,self.nsstring];
-        
-        //    NSData *data = [parasStr dataUsingEncoding:NSUTF8StringEncoding];
-        
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
-        
-        [request setURL:[NSURL URLWithString:urlPath]];
-        
-        [request setTimeoutInterval:10];
-        
-        [request setCachePolicy:NSURLRequestUseProtocolCachePolicy];
-        
-        [request setHTTPMethod:@"POST"];
-        
-        [request setHTTPBody:nil];
-        
-        NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-        
-        
-        
-        NSError *error;
-        
-        
-        if (received != nil)
-        {
-            NSMutableDictionary *dict = NULL;
-            //IOS5自带解析类NSJSONSerialization从response中解析出数据放到字典中
-            dict = [NSJSONSerialization JSONObjectWithData:received
-                                                   options:NSJSONReadingMutableLeaves error:&error];
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"DeviceCode":self.DeviceCode
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/ScanPayment",Khttp] success:^(NSDictionary *dict, BOOL success) {
             
-            NSLog(@"url:%@",urlPath);
-            if(dict!= nil)
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
-                NSMutableString *retcode = [dict objectForKey:@"retcode"];
-                if (retcode.intValue == 0)
-                {
-                    NSMutableString *stamp = [dict objectForKey:@"timestamp"];
-                    //调起微信支付
-                    PayReq *req= [[PayReq alloc] init];
-                    req.partnerId
-                    = [dict objectForKey:@"partnerid"];
-                    req.prepayId
-                    = [dict objectForKey:@"prepayid"];
-                    req.nonceStr
-                    = [dict objectForKey:@"noncestr"];
-                    req.timeStamp
-                    = stamp.intValue;
-                    req.package
-                    = [dict objectForKey:@"package"];
-                    req.sign = [dict objectForKey:@"sign"];
-                    BOOL result = [WXApi sendReq:req];
-                    
-                    NSLog(@"-=-=-=-=-%d", result);
-                    //日志输出
-                    NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict
-                                                                                                                objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign
-                          );
-                    
-                    
-                    
-                    
-                    
-                }
-                else
-                {
-                    NSLog(@"-=-=-=-=-%@", [dict objectForKey:@"retmsg"]);
-                }
+                NSDictionary *di = [NSDictionary dictionary];
+                di = [dict objectForKey:@"JsonData"];
+                
+                NSMutableString *stamp = [di objectForKey:@"timestamp"];
+                //调起微信支付
+                PayReq *req= [[PayReq alloc] init];
+                req.partnerId
+                = [dict objectForKey:@"partnerid"];
+                req.prepayId
+                = [dict objectForKey:@"prepayid"];
+                req.nonceStr
+                = [dict objectForKey:@"noncestr"];
+                req.timeStamp
+                = stamp.intValue;
+                req.package
+                = [dict objectForKey:@"packag"];
+                req.sign = [dict objectForKey:@"sign"];
+                BOOL result = [WXApi sendReq:req];
+                
+                NSLog(@"-=-=-=-=-%d", result);
+                //日志输出
+                NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[di
+                                                                                                            objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign
+                      );
+                
             }
             else
             {
-                NSLog( @"服务器返回错误，未获取到json对象");
+                
+                [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+                
             }
-        }
-        else
-        {
-            NSLog( @"服务器返回错误");
-        }
+            
+            
+            
+            
+        } fail:^(NSError *error) {
+            
+            [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+        }];
         
         
         

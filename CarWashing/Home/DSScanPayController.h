@@ -16,4 +16,6 @@
 @property(nonatomic ,copy)NSString *Jprice;
 @property(nonatomic ,copy)NSString *Xprice;
 
+@property(nonatomic ,copy)NSString *DeviceCode;
+
 @end

@@ -212,7 +212,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/PurchasePayment",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/ServicePayment",Khttp] success:^(NSDictionary *dict, BOOL success) {
             
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
