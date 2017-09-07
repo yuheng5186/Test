@@ -18,5 +18,9 @@
 @property (nonatomic,copy) id <Optional> Amt;//支付金额
 @property (nonatomic,copy) id <Optional> DiscountPrice;//优惠金额
 @property (nonatomic) NSInteger ScanCodeState;//(1.需要支付状态,2.扫描成功)
+@property (nonatomic) NSInteger RemainCount;
+@property (nonatomic) NSInteger CardType;
+@property (nonatomic) NSInteger IntegralNum;
+@property (nonatomic,copy) NSString *CardName;
 
 @end

@@ -44,7 +44,7 @@
     UILabel *valuesLab = [[UILabel alloc] init];
     _valuesLab = valuesLab;
     valuesLab.textColor = [UIColor colorFromHex:@"#ff525a"];
-    valuesLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
+    valuesLab.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     [self.contentView addSubview:valuesLab];
     
     UIButton *goButton = [[UIButton alloc] init];
@@ -63,24 +63,24 @@
     }];
     
     [waysLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView).mas_offset(21*Main_Screen_Height/667);
+        make.top.equalTo(self.contentView).mas_offset(20*Main_Screen_Height/667);
         make.leading.equalTo(iconV.mas_trailing).mas_offset(23*Main_Screen_Height/667);
     }];
     
     [wayToLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(waysLab.mas_bottom).mas_offset(20*Main_Screen_Height/667);
+        make.top.equalTo(waysLab.mas_bottom).mas_offset(15*Main_Screen_Height/667);
         make.leading.equalTo(waysLab);
     }];
     
     
     [valuesLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView).mas_offset(-12*Main_Screen_Height/667);
-        make.top.equalTo(self.contentView).mas_offset(24*Main_Screen_Height/667);
+        make.top.equalTo(self.contentView).mas_offset(20*Main_Screen_Height/667);
     }];
     
     [goButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView).mas_offset(-12*Main_Screen_Height/667);
-        make.top.equalTo(valuesLab.mas_bottom).mas_offset(13*Main_Screen_Height/667);
+        make.top.equalTo(valuesLab.mas_bottom).mas_offset(10*Main_Screen_Height/667);
         make.width.mas_equalTo(60*Main_Screen_Height/667);
         make.height.mas_equalTo(23*Main_Screen_Height/667);
     }];

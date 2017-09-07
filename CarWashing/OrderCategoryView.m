@@ -74,7 +74,7 @@
     
     _singleLine = singleLine;
     
-    singleLine.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
+    singleLine.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     
     [self addSubview:singleLine];
     
