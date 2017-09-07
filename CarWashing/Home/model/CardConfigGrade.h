@@ -15,7 +15,9 @@
 @property(nonatomic)NSInteger CardCount;
 @property(nonatomic,copy)NSString *CardName;
 @property(nonatomic)NSInteger CardQuantity;
-@property(nonatomic,copy)NSDecimalNumber *CardPrice;
+@property (nonatomic ,copy)id <Optional> CardPrice;
+@property (nonatomic ,copy)id <Optional> DiscountPrice;
+@property (nonatomic ,copy)id <Optional> PaymentPrice;
 @property(nonatomic)NSInteger CardType;
 @property(nonatomic)NSInteger ConfigCode;
 @property(nonatomic,copy)NSString *CreateTime;
