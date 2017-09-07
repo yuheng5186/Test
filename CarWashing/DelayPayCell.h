@@ -33,6 +33,10 @@
 @property(nonatomic ,copy)NSString *Jprice;
 @property(nonatomic ,copy)NSString *Xprice;
 
+@property(nonatomic ,copy)NSString *SCode;
+@property(nonatomic ,copy)NSString *MCode;
+@property(nonatomic ,copy)NSString *OrderCode;
+
 
 @property (nonatomic, weak) id<DelayPayCellPushVCDelegate> delegate;
 

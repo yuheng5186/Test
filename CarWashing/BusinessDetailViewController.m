@@ -517,6 +517,12 @@ static NSString *businessCommentCell = @"businessCommentCell";
     payController.Jprice = formerPriceLab.text;
     payController.Xprice = lblPrice.text;
     
+    payController.MCode = self.dic[@"MerCode"];
+    payController.SCode = [[self.dic[@"MerSerList"] objectAtIndex:self.lastPath.row] objectForKey:@"SerCode"];
+    
+    payController.OrderCode = @"";
+    
+    
     [self.navigationController pushViewController:payController animated:YES];
 }
 

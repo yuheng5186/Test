@@ -252,6 +252,11 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
     delayCell.Jprice = [NSString stringWithFormat:@"￥%@",order.PayableAmount];
     delayCell.Xprice = [NSString stringWithFormat:@"￥%@",order.PaypriceAmount];
     
+    delayCell.SCode = [NSString stringWithFormat:@"%ld",order.SerCode];
+    delayCell.MCode = [NSString stringWithFormat:@"%ld",order.MerCode];
+    delayCell.OrderCode = order.OrderCode;
+    
+    
     return delayCell;
 }
 
