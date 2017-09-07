@@ -66,7 +66,7 @@
     /** 创建滑块 */
     UIView *sliderView = [[UIView alloc] init];
     self.sliderView = sliderView;
-    sliderView.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
+    sliderView.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     
     /** 滑块高度 */
     CGFloat sliderHeight = 2.f;

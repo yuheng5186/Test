@@ -73,15 +73,18 @@
 //    _experienceBtn.hidden       = YES;
     
     
-    _NoExperienceBtn              = [UIUtil drawDefaultButton:intro title:@"跳过" target:self action:@selector(experienceButtonClick:)];
-    _NoExperienceBtn.titleLabel.font    = [UIFont systemFontOfSize:13];
+    _NoExperienceBtn              = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_NoExperienceBtn addTarget:self action:@selector(experienceButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    _NoExperienceBtn.titleLabel.font    = [UIFont systemFontOfSize:16];
     _NoExperienceBtn.top          = Main_Screen_Height*30/375;
     _NoExperienceBtn.width        = Main_Screen_Width*60/375;
     _NoExperienceBtn.height       = Main_Screen_Height*20/375;
-
+    _NoExperienceBtn.alpha        = 0.5;
+    [_NoExperienceBtn setTitle:@"跳过" forState:UIControlStateNormal];
+    [_NoExperienceBtn setBackgroundColor:[UIColor colorFromHex:@"#ffd037"]];
     _NoExperienceBtn.right        = Main_Screen_Width -Main_Screen_Width*12/375;
     _NoExperienceBtn.layer.cornerRadius   = _NoExperienceBtn.height/2;
-
+    [intro addSubview:_NoExperienceBtn];
     
     [intro setDelegate:self];
     [intro showInView:self.contentView animateDuration:0.3];

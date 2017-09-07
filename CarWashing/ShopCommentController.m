@@ -254,7 +254,7 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UILabel *commentTitleLabel = [[UILabel alloc] init];
     commentTitleLabel.text = [NSString stringWithFormat:@"  评论(%ld)",[self.MerchantCommentListData count]];
-    commentTitleLabel.backgroundColor = [UIColor colorFromHex:@"#dfdfdf"];
+    commentTitleLabel.backgroundColor = [UIColor whiteColor];
     commentTitleLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     commentTitleLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     

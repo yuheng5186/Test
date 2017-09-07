@@ -53,13 +53,13 @@
 
 - (void) createSubView {
     
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*180/667) style:UITableViewStyleGrouped];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*150/667) style:UITableViewStyleGrouped];
     self.tableView.top              = 0;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     self.tableView.scrollEnabled    = NO;
     self.tableView.tableFooterView  = [UIView new];
-    //    self.tableView.tableHeaderView  = [UIView new];
+    self.tableView.backgroundColor  = [UIColor clearColor];
     [self.contentView addSubview:self.tableView];
     
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -67,7 +67,7 @@
     }
     
     UIButton *nextButton      = [UIUtil drawDefaultButton:self.contentView title:@"保存" target:self action:@selector(nextButtonClick:)];
-    nextButton.top           = self.tableView.bottom +Main_Screen_Height*30/667;
+    nextButton.top           = self.tableView.bottom +Main_Screen_Height*60/667;
     nextButton.centerX       = Main_Screen_Width/2;
     
 }
@@ -185,6 +185,12 @@
         [self.view showInfo:@"修改失败" autoHidden:YES interval:1];
     }];
     
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    
+    [self.view endEditing:YES];
 }
 
 #pragma mark - UITableViewDataSource

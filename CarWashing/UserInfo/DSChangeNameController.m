@@ -37,108 +37,115 @@
 }
 - (void) buttonClick:(id)sender {
     
-    
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    HUD.removeFromSuperViewOnHide =YES;
-    HUD.mode = MBProgressHUDModeIndeterminate;
-    HUD.minSize = CGSizeMake(132.f, 108.0f);
-    
-    NSDictionary *mulDic = @{
-                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                             @"ModifyType":@"2",
-                             @"Name":self.userNameText.text
-                             };
-    NSDictionary *params = @{
-                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                             };
-    
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/UserInfoEdit",Khttp] success:^(NSDictionary *dict, BOOL success) {
+    if (self.userNameText.text.length > 0) {
+        HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        HUD.removeFromSuperViewOnHide =YES;
+        HUD.mode = MBProgressHUDModeIndeterminate;
+        HUD.minSize = CGSizeMake(132.f, 108.0f);
         
-         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-         {
-             
-             
-             HUD.mode = MBProgressHUDModeCustomView;
-             
-             HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"success"]];
-             HUD.mode = MBProgressHUDModeCustomView;
-             HUD.animationType = MBProgressHUDAnimationZoom;
-             HUD.removeFromSuperViewOnHide = YES;
-             
-             
-             
-             
-             HUD.completionBlock = ^(){
-                 
-                 
-                 APPDELEGATE.currentUser.userName = self.userNameText.text;
-                 
-                 [UdStorage storageObject:APPDELEGATE.currentUser.userName forKey:@"Name"];
-                 NSNotification * notice = [NSNotification notificationWithName:@"updatenamesuccess" object:nil userInfo:@{@"username":self.userNameText.text}];
-                 [[NSNotificationCenter defaultCenter]postNotification:notice];
-                 
-                 
-                 
-                 NSArray *vcsArray = [NSArray array];
-                 vcsArray= [self.navigationController viewControllers];
-                 NSInteger vcCount = vcsArray.count;
-                 
-                 
-                 
-                 if(vcCount <= 3)
-                 {
-                     [self.navigationController popViewControllerAnimated:YES];
-                 }
-                 
-                 else
-                 {
-                     UIViewController *lastVC = vcsArray[vcCount-3];
-                     UIViewController *lasttwoVC = vcsArray[vcCount-4];
-                     int index=[[self.navigationController viewControllers]indexOfObject:self];
-                     
-                     if([lastVC isKindOfClass:[HowToUpGradeController class]])
-                     {
-                         
-                         NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
-                         [[NSNotificationCenter defaultCenter]postNotification:notice];
-                         
-                         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-3]animated:YES];
-                     }
-                     else if([lastVC isKindOfClass:[EarnScoreController class]])
-                     {
-                         if([lasttwoVC isKindOfClass:[DSMembershipController class]])
-                         {
-                             NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
-                             [[NSNotificationCenter defaultCenter]postNotification:notice];
-                             [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-3]animated:YES];
-                         }
-                         NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
-                         [[NSNotificationCenter defaultCenter]postNotification:notice];
-                         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
-                     }
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"ModifyType":@"2",
+                                 @"Name":self.userNameText.text
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/UserInfoEdit",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+                
+                
+                HUD.mode = MBProgressHUDModeCustomView;
+                
+                HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"success"]];
+                HUD.mode = MBProgressHUDModeCustomView;
+                HUD.animationType = MBProgressHUDAnimationZoom;
+                HUD.removeFromSuperViewOnHide = YES;
+                
+                
+                
+                
+                HUD.completionBlock = ^(){
                     
-
-                 }
-                 
-                 
-                 
-                 
-             };
-             
-             [HUD hide:YES afterDelay:1.f];
-
-         }
-         else
-         {
+                    
+                    APPDELEGATE.currentUser.userName = self.userNameText.text;
+                    
+                    [UdStorage storageObject:APPDELEGATE.currentUser.userName forKey:@"Name"];
+                    NSNotification * notice = [NSNotification notificationWithName:@"updatenamesuccess" object:nil userInfo:@{@"username":self.userNameText.text}];
+                    [[NSNotificationCenter defaultCenter]postNotification:notice];
+                    
+                    
+                    
+                    NSArray *vcsArray = [NSArray array];
+                    vcsArray= [self.navigationController viewControllers];
+                    NSInteger vcCount = vcsArray.count;
+                    
+                    
+                    
+                    if(vcCount <= 3)
+                    {
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }
+                    
+                    else
+                    {
+                        UIViewController *lastVC = vcsArray[vcCount-3];
+                        UIViewController *lasttwoVC = vcsArray[vcCount-4];
+                        int index=[[self.navigationController viewControllers]indexOfObject:self];
+                        
+                        if([lastVC isKindOfClass:[HowToUpGradeController class]])
+                        {
+                            
+                            NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                            [[NSNotificationCenter defaultCenter]postNotification:notice];
+                            
+                            [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-3]animated:YES];
+                        }
+                        else if([lastVC isKindOfClass:[EarnScoreController class]])
+                        {
+                            if([lasttwoVC isKindOfClass:[DSMembershipController class]])
+                            {
+                                NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                [[NSNotificationCenter defaultCenter]postNotification:notice];
+                                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-3]animated:YES];
+                            }
+                            NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                            [[NSNotificationCenter defaultCenter]postNotification:notice];
+                            [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
+                        }
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                };
+                
+                [HUD hide:YES afterDelay:1.f];
+                
+            }
+            else
+            {
+                [HUD hide:YES];
+                [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+            }
+            
+        } fail:^(NSError *error) {
             [HUD hide:YES];
             [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
-         }
+        }];
+        
+    }else{
+    
+        [self.view showInfo:@"请输入内容，再点击确定" autoHidden:YES interval:2];
 
-    } fail:^(NSError *error) {
-        [HUD hide:YES];
-        [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
-    }];
+    }
+    
 }
 
 - (void) drawContent
@@ -173,11 +180,18 @@
 
 }
 - (void) userNameTextChanged:(UITextField *)sender {
-    
-    
-    
-    
 
+
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {

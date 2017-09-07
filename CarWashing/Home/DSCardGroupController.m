@@ -20,7 +20,7 @@
 #import "UdStorage.h"
 #import "CardBag.h"
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
-@interface DSCardGroupController ()<UITableViewDelegate, UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
+@interface DSCardGroupController ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
     MBProgressHUD *HUD;
 }
@@ -98,7 +98,10 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     return _rechargeView;
 }
 
-
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
 
 - (void)drawNavigation {
     
@@ -350,6 +353,9 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self.activateTF resignFirstResponder];
+
     CardBag *card = (CardBag *)[_CardbagData objectAtIndex:indexPath.section];
     RechargeDetailController *rechargeDetailVC = [[RechargeDetailController alloc] init];
     rechargeDetailVC.hidesBottomBarWhenPushed = YES;
