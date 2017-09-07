@@ -266,7 +266,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         cell.textLabel.text  = @"卡名称";
         cell.detailTextLabel.text = self.choosecard.CardName;
         
-        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
+        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#0161a1"];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         
         return cell;
@@ -297,7 +297,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         NSDate *newDate = [datenow dateByAddingTimeInterval:60 * 60 * 24 * self.choosecard.ExpiredDay];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"即日起至%@",[formatter stringFromDate:newDate]];
         
-        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
+        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#0161a1"];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         
         return cell;
@@ -308,7 +308,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         cell.textLabel.text  = @"特惠活动";
         cell.detailTextLabel.text = [NSString stringWithFormat:@"立减%@元",self.choosecard.DiscountPrice];
         
-        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
+        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#0161a1"];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         
         return cell;
@@ -454,6 +454,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
 
 -(void)lijizhifu
 {
+
     
     
     NSDictionary *mulDic = @{
@@ -508,88 +509,6 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
        
         [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
     }];
-
-    
-    
-    
-    
-    
-    
-    
-    NSString *urlPath = [NSString stringWithFormat:@"%@Payment/PurchasePayment",Khttp];
-    
-//    NSString *parasStr = [NSString stringWithFormat:@"uid=%ld&body=%@&fee=%@00&type=0&cid=%@",APPDELEGATE.currentUser.userID,body.text,self.money,self.nsstring];
-    
-//    NSData *data = [parasStr dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
-    
-    [request setURL:[NSURL URLWithString:urlPath]];
-    
-    [request setTimeoutInterval:10];
-    
-    [request setCachePolicy:NSURLRequestUseProtocolCachePolicy];
-    
-    [request setHTTPMethod:@"POST"];
-    
-    [request setHTTPBody:nil];
-    
-    NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    
-    
-    
-    NSError *error;
-    
-    
-    if (received != nil)
-    {
-        NSMutableDictionary *dict = NULL;
-        //IOS5自带解析类NSJSONSerialization从response中解析出数据放到字典中
-        dict = [NSJSONSerialization JSONObjectWithData:received
-                                               options:NSJSONReadingMutableLeaves error:&error];
-        
-        NSLog(@"url:%@",urlPath);
-        if(dict!= nil)
-        {
-            NSMutableString *retcode = [dict objectForKey:@"retcode"];
-            if (retcode.intValue == 0)
-            {
-                NSMutableString *stamp = [dict objectForKey:@"timestamp"];
-                //调起微信支付
-                PayReq *req= [[PayReq alloc] init];
-                req.partnerId
-                = [dict objectForKey:@"partnerid"];
-                req.prepayId
-                = [dict objectForKey:@"prepayid"];
-                req.nonceStr
-                = [dict objectForKey:@"noncestr"];
-                req.timeStamp
-                = stamp.intValue;
-                req.package
-                = [dict objectForKey:@"package"];
-                req.sign = [dict objectForKey:@"sign"];
-                BOOL result = [WXApi sendReq:req];
-                
-                NSLog(@"-=-=-=-=-%d", result);
-                //日志输出
-                NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict
-                                                                                                            objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign
-                      );
-            }
-            else
-            {
-                NSLog(@"-=-=-=-=-%@", [dict objectForKey:@"retmsg"]);
-            }
-        }
-        else
-        {
-            NSLog( @"服务器返回错误，未获取到json对象");
-        }
-    }
-    else
-    {
-        NSLog( @"服务器返回错误");
-    }
 
 }
 
