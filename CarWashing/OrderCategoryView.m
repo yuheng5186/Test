@@ -74,7 +74,7 @@
     
     _singleLine = singleLine;
     
-    singleLine.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
+    singleLine.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     
     [self addSubview:singleLine];
     
@@ -84,7 +84,7 @@
         
         make.bottom.centerX.equalTo(_firstButton);
         
-        make.width.mas_equalTo(40);
+        make.width.mas_equalTo(Main_Screen_Width*40/375);
         
         make.height.mas_equalTo(2);
     }];
