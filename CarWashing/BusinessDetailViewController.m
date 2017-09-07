@@ -183,8 +183,8 @@ static NSString *businessCommentCell = @"businessCommentCell";
     headerView.scoreLabel.text = [NSString stringWithFormat:@"%@分",self.dic[@"Score"]];
     headerView.adressLabel2.text = self.dic[@"MerAddress"];
     headerView.openTimeLabel.text = self.dic[@"ServiceTime"];
-    headerView.distanceLabel.text = [NSString stringWithFormat:@"%@km",self.dic[@"Distance"]];
-    
+//    headerView.distanceLabel.text = [NSString stringWithFormat:@"%@km",self.dic[@"Distance"]];
+    headerView.distanceLabel.text = [NSString stringWithFormat:@"%@km",self.distance];
     headerView.ServiceNumLabel.text = [NSString stringWithFormat:@"服务%@单",self.dic[@"ServiceCount"]];
     if([self.dic[@"ShopType"] intValue] == 1)
     {
@@ -841,7 +841,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
 - (IBAction)didClickSmallBtn:(UIButton *)sender {
     
 
-    [self.mapNavigationView showMapNavigationViewWithtargetLatitude:22.488260 targetLongitute:113.915049 toName:@"中海油华英加油站"];
+    [self.mapNavigationView showMapNavigationViewWithtargetLatitude:[self.dic[@"Ym"] doubleValue] targetLongitute:[self.dic[@"Xm"] doubleValue] toName:self.dic[@"MerName"]];
     [self.view addSubview:_mapNavigationView];
 
 }

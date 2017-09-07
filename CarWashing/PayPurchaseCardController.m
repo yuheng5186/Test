@@ -484,7 +484,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
             req.timeStamp
             = stamp.intValue;
             req.package
-            = [dict objectForKey:@"package"];
+            = [dict objectForKey:@"packag"];
             req.sign = [dict objectForKey:@"sign"];
             BOOL result = [WXApi sendReq:req];
             
