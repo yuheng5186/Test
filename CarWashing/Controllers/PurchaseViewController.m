@@ -122,7 +122,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     self.locationButton.left              = Main_Screen_Width*14/375;
     self.locationButton.centerY           = titleNameLabel.centerY;
     [self.locationButton addTarget:self action:@selector(clickLocationButton) forControlEvents:UIControlEventTouchUpInside];
-    [self.locationButton setImage:[UIImage imageNamed:@"dingwei"] forState:UIControlStateNormal];
+    [self.locationButton setImage:[UIImage imageNamed:@"dingwei1"] forState:UIControlStateNormal];
     self.locationButton.imageEdgeInsets = UIEdgeInsetsMake(0, -Main_Screen_Width*10/375, 0, 0);
     [self.locationButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     self.locationButton.layer.cornerRadius = Main_Screen_Height*15/667;

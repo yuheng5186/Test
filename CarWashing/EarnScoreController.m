@@ -150,7 +150,7 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
     
     
     
-    NSArray *arr2 = @[@"wanshangerenxinxi",@"xinyonghuzhuce",@"wanshangerenxinxi",@"wanshancheliangxinxi",@"wanshangerenxinxi"];
+    NSArray *arr2 = @[@"wanshangerenxinxi",@"xinyonghuzhuce",@"yaoqinghaoyou",@"wanshancheliangxinxi",@"wanshangerenxinxi"];
     
     NSInteger num = [[[self.ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegType"] integerValue];
     
@@ -176,6 +176,8 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
     {
         
         [earnScoreCell.goButton setTitle:@"已完成" forState:UIControlStateNormal];
+        [earnScoreCell.goButton setBackgroundColor:[UIColor colorFromHex:@"#e6e6e6"]];
+
         earnScoreCell.goButton.enabled = NO;
         
     }

@@ -279,7 +279,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WayToUpGradeCell *wayCell = [tableView dequeueReusableCellWithIdentifier:id_wayToUpCell forIndexPath:indexPath];
     
-    NSArray *arr2 = @[@"wanshangerenxinxi",@"xinyonghuzhuce",@"wanshangerenxinxi",@"wanshancheliangxinxi",@"wanshangerenxinxi"];
+    NSArray *arr2 = @[@"wanshangerenxinxi",@"xinyonghuzhuce",@"yaoqinghaoyou",@"wanshancheliangxinxi",@"wanshangerenxinxi"];
     NSInteger num = [[[self.ScoreData objectAtIndex:indexPath.row] objectForKey:@"IntegType"] integerValue];
     
     
@@ -304,6 +304,8 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     {
         
         [wayCell.goButton setTitle:@"已完成" forState:UIControlStateNormal];
+        [wayCell.goButton setBackgroundColor:[UIColor colorFromHex:@"#e6e6e6"]];
+
         wayCell.goButton.enabled = NO;
         
     }
