@@ -453,7 +453,6 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
 -(void)lijizhifu
 {
     NSString *urlPath = [NSString stringWithFormat:@"http://119.23.53.225/WeixinPay.ashx?op=GetUnifiedorder"];
-    
 //    NSString *parasStr = [NSString stringWithFormat:@"uid=%ld&body=%@&fee=%@00&type=0&cid=%@",APPDELEGATE.currentUser.userID,body.text,self.money,self.nsstring];
     
 //    NSData *data = [parasStr dataUsingEncoding:NSUTF8StringEncoding];
