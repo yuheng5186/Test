@@ -139,7 +139,7 @@
 //    self.tableView.tableHeaderView  = [UIView new];
     
 //    self.tableView.bounces  = NO;
-    self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 180, 0);
+    self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 70, 0);
     [self.contentView addSubview:self.tableView];
     
     [self createHeaderView];

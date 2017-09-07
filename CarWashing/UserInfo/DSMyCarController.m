@@ -286,17 +286,20 @@ static NSString * HeaderId = @"header";
         
         
         UIImageView *carImageView = [[UIImageView alloc] init];
-        carImageView.image = [UIImage imageNamed:@"aicheditu"];
+        carImageView.image = [UIImage imageNamed:@"aiche1"];
         [containImageView addSubview:carImageView];
         
         UILabel *carpinpai = [[UILabel alloc]initWithFrame:CGRectMake(115*Main_Screen_Height/667, 40*Main_Screen_Height/667, containImageView.frame.size.width - 130*Main_Screen_Height/667, 20)];
         carpinpai.text = car.CarBrand;
+        carpinpai.textColor = [UIColor whiteColor];
         carpinpai.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
         [containImageView addSubview:carpinpai];
         
         UILabel *carpro = [[UILabel alloc]initWithFrame:CGRectMake(115*Main_Screen_Height/667, 40*Main_Screen_Height/667 + carpinpai.frame.size.height , containImageView.frame.size.width - 130*Main_Screen_Height/667, 20)];
         carpro.text = [NSString stringWithFormat:@"%ld年产",car.Manufacture];
         carpro.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+        carpro.textColor = [UIColor whiteColor];
+
         [containImageView addSubview:carpro];
         
         [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -309,6 +312,18 @@ static NSString * HeaderId = @"header";
             make.left.equalTo(containImageView).mas_equalTo(24*Main_Screen_Height/667);
             make.width.height.mas_equalTo(67*Main_Screen_Height/667);
         }];
+    
+    [carpinpai mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(carImageView.mas_centerY).mas_offset(-10);
+        make.leading.equalTo(carImageView.mas_trailing).mas_offset(10);
+    
+    }];
+    
+    [carpro mas_makeConstraints:^(MASConstraintMaker *make) {
+         make.top.equalTo(carImageView.mas_centerY).mas_offset(10);
+        make.leading.equalTo(carImageView.mas_trailing).mas_offset(10);
+
+    }];
         
         bannerView.mainImageView = containImageView;
 
@@ -633,7 +648,7 @@ static NSString * HeaderId = @"header";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 40*Main_Screen_Height/667;
+    return 60*Main_Screen_Height/667;
     
 }
 
@@ -643,16 +658,16 @@ static NSString * HeaderId = @"header";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    UIView *hederview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 40)];
+    UIView *hederview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 60)];
     hederview.backgroundColor=[UIColor colorWithHex:0xf0f0f0];
-    UIView *hederviews=[[UIView alloc]initWithFrame:CGRectMake(0, 10, Main_Screen_Width, 29)];
+    UIView *hederviews=[[UIView alloc]initWithFrame:CGRectMake(0, 10, Main_Screen_Width, 49)];
     hederviews.backgroundColor=[UIColor whiteColor];
     
     UIImageView *infoimage = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 15, 15)];
     infoimage.contentMode=UIViewContentModeScaleAspectFill;
     
     
-    UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(infoimage.frame.origin.x+infoimage.frame.size.width, 0, Main_Screen_Width, 29)];
+    UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(infoimage.frame.origin.x+infoimage.frame.size.width, 0, Main_Screen_Width, 49)];
     
     infoLabel.textColor = [UIColor colorFromHex:@"#868686"];
     infoLabel.font = [UIFont systemFontOfSize:15];
