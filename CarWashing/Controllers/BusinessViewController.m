@@ -393,8 +393,20 @@ static NSString *id_salerListCell = @"salerListViewCell";
 -(void)setData
 {
     
-//    NSLog(@"%@",self.pramsDic);
-    
+   
+   NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"普洗-5座轿车",@"普洗-7座轿车",@"精洗-5座轿车",@"精洗-7座轿车",@"全车打蜡-5座轿车",@"全车打蜡-7座轿车",@"内饰清洗-5座轿车",@"内饰清洗-7座轿车", nil];
+   
+   NSInteger index;
+   
+   if ([array containsObject:[self.pramsDic objectForKey:@"1"]]) {
+      
+      index = [array indexOfObject:[self.pramsDic objectForKey:@"1"]];
+      
+   }
+   
+   
+   
+   
     NSString *DefaultSort;
     
     if([[self.pramsDic objectForKey:@"2"] isEqualToString:@"默认排序"])
@@ -419,7 +431,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
                              @"City":[[self.pramsDic objectForKey:@"0"] objectAtIndex:0],
                              @"Area":[[self.pramsDic objectForKey:@"0"] objectAtIndex:1],
                              @"ShopType":@1,
-                             @"ServiceCode":@101,
+                             @"ServiceCode":[NSString stringWithFormat:@"10%ld",index+1],
                              @"DefaultSort":DefaultSort,
                              @"Ym":[UdStorage getObjectforKey:@"Ym"],
                              @"Xm":[UdStorage getObjectforKey:@"Xm"],
@@ -469,7 +481,17 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 -(void)setDatamore
 {
-    
+   
+   NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"普洗-5座轿车",@"普洗-7座轿车",@"精洗-5座轿车",@"精洗-7座轿车",@"全车打蜡-5座轿车",@"全车打蜡-7座轿车",@"内饰清洗-5座轿车",@"内饰清洗-7座轿车", nil];
+   
+   NSInteger index;
+   
+   if ([array containsObject:[self.pramsDic objectForKey:@"1"]]) {
+      
+      index = [array indexOfObject:[self.pramsDic objectForKey:@"1"]];
+      
+   }
+   
     NSString *DefaultSort;
     
     if([[self.pramsDic objectForKey:@"2"] isEqualToString:@"默认排序"])
@@ -494,7 +516,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
                              @"City":[[self.pramsDic objectForKey:@"0"] objectAtIndex:0],
                              @"Area":[[self.pramsDic objectForKey:@"0"] objectAtIndex:1],
                              @"ShopType":@1,
-                             @"ServiceCode":@101,
+                             @"ServiceCode":[NSString stringWithFormat:@"10%ld",index+1],
                              @"DefaultSort":DefaultSort,
                              @"Ym":@31.192255,
                              @"Xm":@121.52334,

@@ -387,28 +387,31 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 40*Main_Screen_Height/667;
+    return 50*Main_Screen_Height/667;
     
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 50*Main_Screen_Height/667;
 
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 1;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *hederview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 40)];
+    UIView *hederview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50*Main_Screen_Height/667)];
     hederview.backgroundColor=[UIColor colorWithHex:0xf0f0f0];
-    UIView *hederviews=[[UIView alloc]initWithFrame:CGRectMake(0, 10, Main_Screen_Width, 29)];
+    UIView *hederviews=[[UIView alloc]initWithFrame:CGRectMake(0, 10*Main_Screen_Height/667, Main_Screen_Width, 39*Main_Screen_Height/667)];
     hederviews.backgroundColor=[UIColor whiteColor];
     
-    UIImageView *infoimage = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 15, 15)];
+    UIImageView *infoimage = [[UIImageView alloc] initWithFrame:CGRectMake((hederviews.bounds.size.height-15*Main_Screen_Height/667)/2, (hederviews.bounds.size.height-15*Main_Screen_Height/667)/2, 15*Main_Screen_Height/667, 15*Main_Screen_Height/667)];
     infoimage.contentMode=UIViewContentModeScaleAspectFill;
     
     
-    UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(infoimage.frame.origin.x+infoimage.frame.size.width, 0, Main_Screen_Width, 29)];
+    UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(infoimage.frame.origin.x+infoimage.frame.size.width, infoimage.frame.origin.y-6*Main_Screen_Height/667, Main_Screen_Width, 29*Main_Screen_Height/667)];
     
     infoLabel.textColor = [UIColor colorFromHex:@"#868686"];
-    infoLabel.font = [UIFont systemFontOfSize:15];
+    infoLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     
     if (section == 0) {
         infoimage.image=[UIImage imageNamed:@"xinxi"];

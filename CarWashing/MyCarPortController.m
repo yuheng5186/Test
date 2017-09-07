@@ -197,7 +197,7 @@ static NSString *id_carListCell = @"id_carListCell";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 150*Main_Screen_Height/667;
+    return 130*Main_Screen_Height/667;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -280,6 +280,8 @@ static NSString *id_carListCell = @"id_carListCell";
             carCell.defaultButton.tag = indexPath.row;
             carCell.deleteButton.tag = indexPath.row;
             [carCell.defaultButton setTitle:@"设置默认" forState:UIControlStateNormal];
+            
+            carCell.defaulLabel.hidden = YES;
         }
     }
     else
@@ -290,6 +292,8 @@ static NSString *id_carListCell = @"id_carListCell";
         carCell.defaultButton.tag = indexPath.row;
         carCell.deleteButton.tag = indexPath.row;
         [carCell.defaultButton setTitle:@"设置默认" forState:UIControlStateNormal];
+        
+        carCell.defaulLabel.hidden = YES;
     }
     
     
