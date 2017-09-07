@@ -26,7 +26,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="整车泡沫冲洗擦干、轮胎轮轴冲洗清洁、车内吸尘、内饰脚垫等简单除尘" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KCy-QW-Ha2">
-                        <rect key="frame" x="48" y="44.5" width="240" height="39"/>
+                        <rect key="frame" x="48" y="48" width="240" height="31.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="240" id="QKs-7s-0Ge"/>
                         </constraints>
@@ -41,7 +41,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标准洗车-五座轿车" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erF-d9-xKl">
-                        <rect key="frame" x="48" y="17" width="138" height="19.5"/>
+                        <rect key="frame" x="48" y="16" width="138" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -72,19 +72,19 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="KCy-QW-Ha2" secondAttribute="bottom" constant="12" id="0fO-aI-Pem"/>
                     <constraint firstItem="erF-d9-xKl" firstAttribute="leading" secondItem="70O-pf-Ha9" secondAttribute="trailing" constant="15" id="1LM-Jp-tka"/>
                     <constraint firstItem="70O-pf-Ha9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="4Jr-r5-hO5"/>
                     <constraint firstItem="4ha-62-ho9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="5TC-Fe-9fl"/>
+                    <constraint firstAttribute="bottom" secondItem="KCy-QW-Ha2" secondAttribute="bottom" constant="16" id="71w-tq-2Xy"/>
                     <constraint firstItem="70O-pf-Ha9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="ArU-WM-ABU"/>
                     <constraint firstAttribute="trailing" secondItem="4ha-62-ho9" secondAttribute="trailing" constant="12" id="CCe-6C-TIG"/>
                     <constraint firstItem="aoj-eK-0Qz" firstAttribute="centerX" secondItem="4ha-62-ho9" secondAttribute="centerX" id="Uyd-Wh-y4M"/>
-                    <constraint firstItem="KCy-QW-Ha2" firstAttribute="top" secondItem="erF-d9-xKl" secondAttribute="bottom" constant="8" id="XdR-ur-1vi"/>
                     <constraint firstItem="P9t-2t-UM1" firstAttribute="centerY" secondItem="aoj-eK-0Qz" secondAttribute="centerY" id="a4H-mg-kjO"/>
                     <constraint firstItem="P9t-2t-UM1" firstAttribute="centerX" secondItem="aoj-eK-0Qz" secondAttribute="centerX" id="alP-Nh-svo"/>
                     <constraint firstItem="KCy-QW-Ha2" firstAttribute="leading" secondItem="erF-d9-xKl" secondAttribute="leading" id="dUJ-ie-ghh"/>
-                    <constraint firstItem="erF-d9-xKl" firstAttribute="centerY" secondItem="70O-pf-Ha9" secondAttribute="centerY" id="mNH-3l-8nZ"/>
+                    <constraint firstItem="KCy-QW-Ha2" firstAttribute="top" secondItem="erF-d9-xKl" secondAttribute="bottom" constant="12.5" id="e3y-gR-h7m"/>
                     <constraint firstItem="aoj-eK-0Qz" firstAttribute="top" secondItem="4ha-62-ho9" secondAttribute="bottom" constant="8" id="pBj-uX-9Nc"/>
+                    <constraint firstItem="erF-d9-xKl" firstAttribute="top" secondItem="70O-pf-Ha9" secondAttribute="top" id="tx2-eN-Nfv"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
