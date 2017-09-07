@@ -17,6 +17,8 @@
 
 + (AppDelegate *) sharedInstance;
 
+
+
 @property (strong, nonatomic) User *currentUser;
 
 @property float autoSizeScaleX;

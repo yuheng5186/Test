@@ -326,6 +326,10 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     // 添加子控制器
     [self setupAllChildViewController];
+   
+   
+
+   
 }
 
 

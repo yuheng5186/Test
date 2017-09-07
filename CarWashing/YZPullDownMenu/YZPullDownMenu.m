@@ -12,6 +12,8 @@
 // 更新下拉菜单标题通知名称
 NSString * const YZUpdateMenuTitleNote = @"YZUpdateMenuTitleNote";
 
+dispatch_once_t onceToken;
+
 @interface YZPullDownMenu ()
 /**
  *  下拉菜单所有按钮
@@ -119,7 +121,15 @@ NSString * const YZUpdateMenuTitleNote = @"YZUpdateMenuTitleNote";
 #pragma mark - 初始化
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+        
+        
+     
         [self setup];
+        
+        
+        
+
+        
     }
     return self;
 }
@@ -163,14 +173,6 @@ NSString * const YZUpdateMenuTitleNote = @"YZUpdateMenuTitleNote";
             [btn setTitle:allValues.firstObject forState:UIControlStateNormal];
         }
         
-        
-        
-        
-        
-        
-        
-        
-        
     }];
 }
 
@@ -210,14 +212,17 @@ NSString * const YZUpdateMenuTitleNote = @"YZUpdateMenuTitleNote";
 - (void)willMoveToWindow:(UIWindow *)newWindow
 {
     [super willMoveToWindow:newWindow];
-
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        [self reload];
-//    });
+    
+    NSLog(@"%ld",onceToken);
+    
+    dispatch_once(&onceToken, ^{
+        [self reload];
+    });
     
     
 }
+
+
 
 //-(void)willMoveToSuperview:(UIView *)newSuperview
 //{

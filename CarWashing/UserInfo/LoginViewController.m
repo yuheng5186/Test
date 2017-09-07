@@ -187,85 +187,85 @@
 
 - (void) loginButtonClick:(id)sender {
     
-//    [self.verifyFieldText resignFirstResponder];
-//    
-//    [self.userMobileFieldText resignFirstResponder];
-//    
-//    [_indicatorView startAnimating];
-//    [loginButton setTitle:@"" forState:UIControlStateNormal];
-//    loginButton.enabled = NO;
-//
-//    if (self.userMobileFieldText.text.length == 11) {
-//        if (self.verifyFieldText.text.length == 4) {
-//    
-//            
-//            
-//            NSDictionary *mulDic = @{
-//                                     @"Mobile":self.userMobileFieldText.text,
-//                                     @"VerCode":self.verifyFieldText.text
-//                                     };
-//            NSDictionary *params = @{
-//                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-//                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-//                                     };
-//            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/Login",Khttp] success:^(NSDictionary *dict, BOOL success) {
-//             
-//                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-//                {
-//                    
-//    
-//                    APPDELEGATE.currentUser = [User getInstanceByDic:[dict objectForKey:@"JsonData"]];
-//    
-//                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.Account_Id] forKey:@"Account_Id"];
-//                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.Level_id] forKey:@"Level_id"];
-//                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
-//                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.ModifyType] forKey:@"ModifyType"];
-//                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.VerCode] forKey:@"VerCode"];
-//                    [UdStorage storageObject:APPDELEGATE.currentUser.userName forKey:@"Name"];
-//                    [UdStorage storageObject:APPDELEGATE.currentUser.Accountname forKey:@"UserName"];
-//                    [UdStorage storageObject:APPDELEGATE.currentUser.userImagePath forKey:@"Headimg"];
-//                    [UdStorage storageObject:APPDELEGATE.currentUser.userPhone forKey:@"Mobile"];
-//                    [UdStorage storageObject:APPDELEGATE.currentUser.userSex forKey:@"Sex"];
-//                    [UdStorage storageObject:APPDELEGATE.currentUser.userAge forKey:@"Age"];
-//                    [UdStorage storageObject:APPDELEGATE.currentUser.userhobby forKey:@"Hobby"];
-//                    [UdStorage storageObject:APPDELEGATE.currentUser.usermemo forKey:@"Memo"];
-//                    [UdStorage storageObject:APPDELEGATE.currentUser.useroccupation forKey:@"Occupation"];
+    [self.verifyFieldText resignFirstResponder];
+    
+    [self.userMobileFieldText resignFirstResponder];
+    
+    [_indicatorView startAnimating];
+    [loginButton setTitle:@"" forState:UIControlStateNormal];
+    loginButton.enabled = NO;
+
+    if (self.userMobileFieldText.text.length == 11) {
+        if (self.verifyFieldText.text.length == 4) {
+    
+            
+            
+            NSDictionary *mulDic = @{
+                                     @"Mobile":self.userMobileFieldText.text,
+                                     @"VerCode":self.verifyFieldText.text
+                                     };
+            NSDictionary *params = @{
+                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                     };
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/Login",Khttp] success:^(NSDictionary *dict, BOOL success) {
+             
+                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                {
+                    
+    
+                    APPDELEGATE.currentUser = [User getInstanceByDic:[dict objectForKey:@"JsonData"]];
+    
+                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.Account_Id] forKey:@"Account_Id"];
+                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.Level_id] forKey:@"Level_id"];
+                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
+                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.ModifyType] forKey:@"ModifyType"];
+                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.VerCode] forKey:@"VerCode"];
+                    [UdStorage storageObject:APPDELEGATE.currentUser.userName forKey:@"Name"];
+                    [UdStorage storageObject:APPDELEGATE.currentUser.Accountname forKey:@"UserName"];
+                    [UdStorage storageObject:APPDELEGATE.currentUser.userImagePath forKey:@"Headimg"];
+                    [UdStorage storageObject:APPDELEGATE.currentUser.userPhone forKey:@"Mobile"];
+                    [UdStorage storageObject:APPDELEGATE.currentUser.userSex forKey:@"Sex"];
+                    [UdStorage storageObject:APPDELEGATE.currentUser.userAge forKey:@"Age"];
+                    [UdStorage storageObject:APPDELEGATE.currentUser.userhobby forKey:@"Hobby"];
+                    [UdStorage storageObject:APPDELEGATE.currentUser.usermemo forKey:@"Memo"];
+                    [UdStorage storageObject:APPDELEGATE.currentUser.useroccupation forKey:@"Occupation"];
     
                     MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
                     [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
-//                }
-//                else
-//                {
-//                    [self.view showInfo:@"验证码不正确" autoHidden:YES interval:2];
-//                    [_indicatorView stopAnimating];
-//                    [loginButton setTitle:@"登录" forState:UIControlStateNormal];
-//                    loginButton.enabled = YES;
-//                }
-//                
-//            } fail:^(NSError *error) {
-//                [self.view showInfo:@"登录失败" autoHidden:YES interval:2];
-//                [_indicatorView stopAnimating];
-//                [loginButton setTitle:@"登录" forState:UIControlStateNormal];
-//                loginButton.enabled = YES;
-//            }];
-//    
-//            
-//            
-//            
-//            
-//        }else{
-//            [self.view showInfo:@"请输入4位验证码！" autoHidden:YES interval:2];
-//            [_indicatorView stopAnimating];
-//            [loginButton setTitle:@"登录" forState:UIControlStateNormal];
-//            loginButton.enabled = YES;
-//        }
-//
-//    }else {
-//        [self.view showInfo:@"请输入正确的11位手机号码" autoHidden:YES];
-//        [_indicatorView stopAnimating];
-//        [loginButton setTitle:@"登录" forState:UIControlStateNormal];
-//        loginButton.enabled = YES;
-//    }
+                }
+                else
+                {
+                    [self.view showInfo:@"验证码不正确" autoHidden:YES interval:2];
+                    [_indicatorView stopAnimating];
+                    [loginButton setTitle:@"登录" forState:UIControlStateNormal];
+                    loginButton.enabled = YES;
+                }
+                
+            } fail:^(NSError *error) {
+                [self.view showInfo:@"登录失败" autoHidden:YES interval:2];
+                [_indicatorView stopAnimating];
+                [loginButton setTitle:@"登录" forState:UIControlStateNormal];
+                loginButton.enabled = YES;
+            }];
+    
+            
+            
+            
+            
+        }else{
+            [self.view showInfo:@"请输入4位验证码！" autoHidden:YES interval:2];
+            [_indicatorView stopAnimating];
+            [loginButton setTitle:@"登录" forState:UIControlStateNormal];
+            loginButton.enabled = YES;
+        }
+
+    }else {
+        [self.view showInfo:@"请输入正确的11位手机号码" autoHidden:YES];
+        [_indicatorView stopAnimating];
+        [loginButton setTitle:@"登录" forState:UIControlStateNormal];
+        loginButton.enabled = YES;
+    }
 
 }
 
