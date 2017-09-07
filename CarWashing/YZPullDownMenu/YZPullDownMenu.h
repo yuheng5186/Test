@@ -84,7 +84,6 @@
  */
 extern NSString * const YZUpdateMenuTitleNote;
 
-extern dispatch_once_t onceToken;
 
 @interface YZPullDownMenu : UIView
 /**

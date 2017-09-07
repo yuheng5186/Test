@@ -11,8 +11,10 @@
 #import <Masonry.h>
 #import "CashViewController.h"
 #import "BusinessPayCell.h"
-
+#import "UdStorage.h"
 #import "HTTPDefine.h"
+#import "AFNetworkingTool.h"
+#import "LCMD5Tool.h"
 
 
 @interface PayPurchaseCardController ()<UITableViewDelegate, UITableViewDataSource>
@@ -452,7 +454,69 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
 
 -(void)lijizhifu
 {
-    NSString *urlPath = [NSString stringWithFormat:@"http://119.23.53.225/WeixinPay.ashx?op=GetUnifiedorder"];
+    
+    
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"ConfigCode":[NSString stringWithFormat:@"%ld",self.choosecard.ConfigCode]
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/PurchasePayment",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            NSDictionary *di = [NSDictionary dictionary];
+            di = [dict objectForKey:@"JsonData"];
+          
+            NSMutableString *stamp = [di objectForKey:@"timestamp"];
+            //调起微信支付
+            PayReq *req= [[PayReq alloc] init];
+            req.partnerId
+            = [dict objectForKey:@"partnerid"];
+            req.prepayId
+            = [dict objectForKey:@"prepayid"];
+            req.nonceStr
+            = [dict objectForKey:@"noncestr"];
+            req.timeStamp
+            = stamp.intValue;
+            req.package
+            = [dict objectForKey:@"package"];
+            req.sign = [dict objectForKey:@"sign"];
+            BOOL result = [WXApi sendReq:req];
+            
+            NSLog(@"-=-=-=-=-%d", result);
+            //日志输出
+            NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[di
+                                                                                                        objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign
+                  );
+            
+        }
+        else
+        {
+           
+            [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+            
+        }
+        
+        
+        
+        
+    } fail:^(NSError *error) {
+       
+        [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+    }];
+
+    
+    
+    
+    
+    
+    
+    
+    NSString *urlPath = [NSString stringWithFormat:@"%@Payment/PurchasePayment",Khttp];
     
 //    NSString *parasStr = [NSString stringWithFormat:@"uid=%ld&body=%@&fee=%@00&type=0&cid=%@",APPDELEGATE.currentUser.userID,body.text,self.money,self.nsstring];
     

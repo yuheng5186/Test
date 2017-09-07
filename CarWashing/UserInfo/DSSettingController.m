@@ -17,7 +17,6 @@
 
 #import "UdStorage.h"
 
-//static dispatch_once_t onceToken;
 
 @interface DSSettingController ()<UITableViewDelegate,UITableViewDataSource,LKAlertViewDelegate>
 
@@ -257,7 +256,7 @@
                 [defaults setValue:@NO forKey:@"firstRun"];
                 [defaults synchronize];
             
-            [self attempDealloc];
+        
             
                 LoginViewController *loginControl = [[LoginViewController alloc]init];
                 UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:loginControl];
@@ -287,15 +286,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)attempDealloc{
-    
-    
-//    NSLog(@"%ld",onceToken);
-//    
-//    
-//    onceToken = 0; // 只有置成0,GCD才会认为它从未执行过.它默认为0.这样才能保证下次再次调用shareInstance的时候,再次创建对象.
-    
-}
+
 
 
 /*

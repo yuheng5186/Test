@@ -12,8 +12,6 @@
 // 更新下拉菜单标题通知名称
 NSString * const YZUpdateMenuTitleNote = @"YZUpdateMenuTitleNote";
 
-dispatch_once_t onceToken;
-
 @interface YZPullDownMenu ()
 /**
  *  下拉菜单所有按钮
@@ -121,15 +119,7 @@ dispatch_once_t onceToken;
 #pragma mark - 初始化
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        
-        
-     
         [self setup];
-        
-        
-        
-
-        
     }
     return self;
 }
@@ -151,8 +141,19 @@ dispatch_once_t onceToken;
         // 获取列
         NSInteger col = [self.controllers indexOfObject:note.object];
         
-        // 获取对应按钮
-        UIButton *btn = self.menuButtons[col];
+        
+        UIButton *btn;
+        if(col != NSNotFound) //
+        {
+            // 获取对应按钮
+            btn = self.menuButtons[col];
+        }else{
+//            NSLog(@"==拿错了索引==");
+            return ;
+        }
+        
+        
+        
         
         // 隐藏下拉菜单
         [self dismiss];
@@ -172,6 +173,14 @@ dispatch_once_t onceToken;
             // 设置按钮标题
             [btn setTitle:allValues.firstObject forState:UIControlStateNormal];
         }
+        
+        
+        
+        
+        
+        
+        
+        
         
     }];
 }
@@ -213,25 +222,13 @@ dispatch_once_t onceToken;
 {
     [super willMoveToWindow:newWindow];
     
-    NSLog(@"%ld",onceToken);
-    
-    dispatch_once(&onceToken, ^{
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
         [self reload];
-    });
+//    });
     
     
 }
-
-
-
-//-(void)willMoveToSuperview:(UIView *)newSuperview
-//{
-//    [super willMoveToSuperview:newSuperview];
-//    
-//    //    static dispatch_once_t onceToken;
-//    //    dispatch_once(&onceToken, ^{
-//    [self reload];
-//}
 
 #pragma mark - 下拉菜单功能
 // 删除之前所有数据,移除之前所有子控件
@@ -251,7 +248,7 @@ dispatch_once_t onceToken;
 - (void)reload
 {
     // 删除之前所有数据,移除之前所有子控件
-    [self clear];
+//    [self clear];
     
     // 没有数据源，直接返回
     if (self.dataSource == nil) return;

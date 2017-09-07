@@ -1216,7 +1216,7 @@
 //    NSLog(@"经度=%f 纬度=%f 高度=%f", currLocation.coordinate.latitude, currLocation.coordinate.longitude, currLocation.altitude);
     
     [UdStorage storageObject:@"上海市" forKey:@"City"];
-    [UdStorage storageObject:@"黄浦区" forKey:@"Quyu"];
+    [UdStorage storageObject:@"闵行区" forKey:@"Quyu"];
     [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.latitude] forKey:@"Ym"];
     [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.longitude]  forKey:@"Xm"];
     
