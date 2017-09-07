@@ -257,7 +257,7 @@ static NSString *cellStatic = @"cellStatic";
     
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(cell.contentView).mas_offset(28*Main_Screen_Height/667);
-        make.top.equalTo(cell.contentView).mas_offset(24*Main_Screen_Height/667);
+        make.top.equalTo(cell.contentView).mas_offset(20*Main_Screen_Height/667);
     }];
     
     [introLab mas_makeConstraints:^(MASConstraintMaker *make) {
