@@ -305,12 +305,23 @@
                         NSString *result = [weakSelf.scan.DeviceCode substringWithRange:range];
                         payVC.DeviceCode = result;
                         
+                        payVC.RemainCount = [NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount];
+                        payVC.IntegralNum = [NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum];
+                        payVC.CardType = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
+                        payVC.CardName = weakSelf.scan.CardName;
+                        
                         [weakSelf.navigationController pushViewController:payVC animated:YES];
                     }
                     else
                     {
                         DSStartWashingController *start = [[DSStartWashingController alloc]init];
                         start.hidesBottomBarWhenPushed            = YES;
+                        
+                        start.RemainCount = [NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount];
+                        start.IntegralNum = [NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum];
+                        start.CardType = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
+                        start.CardName = weakSelf.scan.CardName;
+                        
                         [weakSelf.navigationController pushViewController:start animated:YES];
                     }
                 };

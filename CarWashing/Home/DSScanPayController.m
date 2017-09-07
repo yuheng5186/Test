@@ -54,10 +54,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
     
     
-    self.SerMerChant = @"上海金龙";
-    self.SerProject = @"水洗";
-    self.Jprice = @"￥88.88";
-    self.Xprice = @"￥55.33";
+    
     
     
     NSArray *payNameArray = @[@"微信支付",@"支付宝支付"];
@@ -500,6 +497,14 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 -(void)goBack
 {
     DSStartWashingController *start = [[DSStartWashingController alloc]init];
+    
+    
+    start.RemainCount = self.RemainCount;
+    start.IntegralNum = self.IntegralNum;
+    start.CardType = self.CardType;
+    start.CardName = self.CardName;
+    
+    
     [self.navigationController pushViewController:start animated:YES];
 }
 
