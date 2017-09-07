@@ -15,8 +15,21 @@
 
 #import "DSScanPayController.h"
 
+#import "HTTPDefine.h"
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "MBProgressHUD.h"
+#import "UdStorage.h"
+#import "ScanCode.h"
+
+#import "DSStartWashingController.h"
+
 
 @interface DSScanController ()<AVCaptureMetadataOutputObjectsDelegate>
+{
+    MBProgressHUD *HUD;
+    
+}
 
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, weak)   UIView *maskView;
@@ -27,6 +40,8 @@
 
 @property (nonatomic, strong) UIButton * inputButton;
 @property (nonatomic, strong) UILabel * inputLabel;
+
+@property (nonatomic, strong) ScanCode *scan;
 
 @end
 
@@ -231,9 +246,102 @@
     NSString *imei                          = outMessage;
     
     if (imei != nil) {
-        DSScanPayController *payVC           = [[DSScanPayController alloc]init];
-        payVC.hidesBottomBarWhenPushed            = YES;
-        [self.navigationController pushViewController:payVC animated:YES];
+        
+        HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        HUD.removeFromSuperViewOnHide =YES;
+        HUD.mode = MBProgressHUDModeIndeterminate;
+        HUD.labelText = @"加载中";
+        HUD.minSize = CGSizeMake(132.f, 108.0f);
+        
+        NSDictionary *mulDic = @{
+                                 @"DeviceCode":imei,
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@ScanCode/DeviceScanCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+                
+                
+                NSDictionary *arr = [NSDictionary dictionary];
+                arr = [dict objectForKey:@"JsonData"];
+                
+                self.scan = [[ScanCode alloc]init];
+                [self.scan setValuesForKeysWithDictionary:arr];
+                    
+
+                __weak typeof(self) weakSelf = self;
+                HUD.completionBlock = ^(){
+                    
+                    if(weakSelf.scan.ScanCodeState == 1)
+                    {
+                        DSScanPayController *payVC           = [[DSScanPayController alloc]init];
+                        payVC.hidesBottomBarWhenPushed            = YES;
+                        
+                        payVC.SerMerChant = weakSelf.scan.DeviceName;
+                        payVC.SerProject = weakSelf.scan.ServiceItems;
+                        payVC.Jprice = [NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt];
+                        payVC.Xprice = [NSString stringWithFormat:@"￥%@",weakSelf.scan.Amt];
+                        
+                        
+                        
+                        NSRange
+                        startRange = [weakSelf.scan.DeviceCode rangeOfString:@":"];
+                        
+                        NSRange
+                        endRange = [weakSelf.scan.DeviceCode rangeOfString:@":"];
+                        
+                        NSRange
+                        range = NSMakeRange(startRange.location
+                                            + startRange.length,
+                                            endRange.location
+                                            - startRange.location
+                                            - startRange.length);
+                        
+                        NSString *result = [weakSelf.scan.DeviceCode substringWithRange:range];
+                        payVC.DeviceCode = result;
+                        
+                        [weakSelf.navigationController pushViewController:payVC animated:YES];
+                    }
+                    else
+                    {
+                        DSStartWashingController *start = [[DSStartWashingController alloc]init];
+                        start.hidesBottomBarWhenPushed            = YES;
+                        [weakSelf.navigationController pushViewController:start animated:YES];
+                    }
+                };
+                
+                [HUD hide:YES afterDelay:1.f];
+            }
+            else
+            {
+                [HUD hide:YES];
+                [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
+//                [self.navigationController popViewControllerAnimated:YES];
+            }
+        } fail:^(NSError *error) {
+            [HUD hide:YES];
+            [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+//            [self.navigationController popViewControllerAnimated:YES];
+            
+        }];
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 }
 
