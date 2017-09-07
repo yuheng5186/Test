@@ -61,7 +61,7 @@
     
     
     
-    UILabel *catlabel = [[UILabel alloc]initWithFrame:CGRectMake1(250,12, 113, 10)];
+    UILabel *catlabel = [[UILabel alloc]initWithFrame:CGRectMake1(250,12, 103, 10)];
     [catlabel setFont:[UIFont fontWithName:@"Helvetica" size:12 * myDelegate.autoSizeScaleX]];
     catlabel.textColor = [UIColor colorFromHex:@"#868686"];
     catlabel.text = @"美容店";
@@ -82,13 +82,13 @@
     CGSize sizeaddlabel = [addlabel boundingRectWithSize:CGSizeMake(Main_Screen_Width,2000)];
     addlabel.lineBreakMode = NSLineBreakByWordWrapping;
     
-    UIImageView *imageV3 =[[UIImageView alloc]initWithFrame:CGRectMake(310 * myDelegate.autoSizeScaleX, 21* myDelegate.autoSizeScaleY+sizecatlabel.height,10 * myDelegate.autoSizeScaleX,10 * myDelegate.autoSizeScaleY)];
+    UIImageView *imageV3 =[[UIImageView alloc]initWithFrame:CGRectMake(300 * myDelegate.autoSizeScaleX, 21* myDelegate.autoSizeScaleY+sizecatlabel.height,10 * myDelegate.autoSizeScaleX,10 * myDelegate.autoSizeScaleY)];
     imageV3.opaque = YES;
     imageV3.image = [UIImage imageNamed:@"juli"];
     [self.contentView addSubview:imageV3];
     self.McImagelubiaoView = imageV3;
     
-    UILabel *julilabel = [[UILabel alloc]initWithFrame:CGRectMake(self.McImagelubiaoView.frame.origin.x + self.McImagelubiaoView.frame.size.width + 2 *myDelegate.autoSizeScaleX,self.McImagelubiaoView.frame.origin.y, 60*myDelegate.autoSizeScaleX, 10*myDelegate.autoSizeScaleY)];
+    UILabel *julilabel = [[UILabel alloc]initWithFrame:CGRectMake(self.McImagelubiaoView.frame.origin.x + self.McImagelubiaoView.frame.size.width + 2 *myDelegate.autoSizeScaleX,self.McImagelubiaoView.frame.origin.y, 50*myDelegate.autoSizeScaleX, 10*myDelegate.autoSizeScaleY)];
     [julilabel setFont:[UIFont fontWithName:@"Helvetica" size:11 * myDelegate.autoSizeScaleX]];
     julilabel.textColor = [UIColor colorFromHex:@"#868686"];
     julilabel.text = @"1.25km";
