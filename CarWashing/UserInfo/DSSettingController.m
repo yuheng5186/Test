@@ -17,6 +17,8 @@
 
 #import "UdStorage.h"
 
+//static dispatch_once_t onceToken;
+
 @interface DSSettingController ()<UITableViewDelegate,UITableViewDataSource,LKAlertViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -250,22 +252,22 @@
         if (buttonIndex == 0) {
             
         }else{
-//                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//                [defaults removeObjectForKey:@"Account_Id"];
-//                [defaults setValue:@NO forKey:@"firstRun"];
-//                [defaults synchronize];
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults removeObjectForKey:@"Account_Id"];
+                [defaults setValue:@NO forKey:@"firstRun"];
+                [defaults synchronize];
+            
+            [self attempDealloc];
             
                 LoginViewController *loginControl = [[LoginViewController alloc]init];
                 UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:loginControl];
                 nav.navigationBar.hidden      = YES;
             
             
-//                AppDelegate *delete =  (AppDelegate *)[UIApplication sharedApplication].delegate;
-//                delete.window = [[UIWindow alloc] initWithFrame: UIScreen.mainScreen.bounds];
-//            
+            
                 self.view.window.rootViewController      = nav;
-//
-//            [delete.window makeKeyAndVisible];
+
+
             
         }
     }else{
@@ -284,6 +286,17 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)attempDealloc{
+    
+    
+//    NSLog(@"%ld",onceToken);
+//    
+//    
+//    onceToken = 0; // 只有置成0,GCD才会认为它从未执行过.它默认为0.这样才能保证下次再次调用shareInstance的时候,再次创建对象.
+    
+}
+
 
 /*
 #pragma mark - Navigation
