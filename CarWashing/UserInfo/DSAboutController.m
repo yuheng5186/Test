@@ -30,8 +30,10 @@
 }
 
 - (void) craeteSubView {
-    self.contentView.backgroundColor    = [UIColor colorFromHex:@"#e5e5e5"];
+    self.view.backgroundColor           = [UIColor whiteColor];
+    self.contentView.backgroundColor    = [UIColor whiteColor];
     UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*200/667) color:[UIColor colorFromHex:@"#e5e5e5"]];
+    upView.backgroundColor          = [UIColor whiteColor];
     upView.top                      = 0;
     
     

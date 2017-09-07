@@ -84,7 +84,7 @@
 - (void)setupCategoryView {
     
     ShopCategoryView *categoryView = [[ShopCategoryView alloc] init];
-    
+    categoryView.backgroundColor    = [UIColor whiteColor];
     _categoryView = categoryView;
     
     [self.view addSubview:categoryView];
@@ -119,7 +119,7 @@
     [self.view addSubview:shopScrollView];
     
     [shopScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_categoryView.mas_bottom);
+        make.top.equalTo(_categoryView.mas_bottom).mas_offset(1);
         make.leading.trailing.bottom.equalTo(self.view);
     }];
     

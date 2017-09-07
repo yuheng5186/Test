@@ -54,10 +54,10 @@
     UIFont *showNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*13/667];
     UILabel *showNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:showName font:showNameFont] font:showNameFont text:showName isCenter:NO];
     showNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
-    showNameLabel.top               = appImageView.bottom +Main_Screen_Height*25/667;
+    showNameLabel.top               = appImageView.bottom +Main_Screen_Height*10/667;
     showNameLabel.centerX           = appImageView.centerX;
     
-    upView.height                   = showNameLabel.bottom +Main_Screen_Height*10/667;
+    upView.height                   = showNameLabel.bottom +Main_Screen_Height*20/667;
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*150/667) style:UITableViewStyleGrouped];
     self.tableView.top              = upView.bottom;
