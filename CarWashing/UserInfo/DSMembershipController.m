@@ -50,8 +50,9 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     if (!_exchangListView) {
         
-        UITableView *exchangeListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height) style:UITableViewStyleGrouped];
+        UITableView *exchangeListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 64) style:UITableViewStyleGrouped];
         _exchangListView = exchangeListView;
+        _exchangListView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
         [self.view addSubview:_exchangListView];
     }
     
