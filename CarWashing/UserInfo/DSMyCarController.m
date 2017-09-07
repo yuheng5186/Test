@@ -289,13 +289,13 @@ static NSString * HeaderId = @"header";
         carImageView.image = [UIImage imageNamed:@"aiche1"];
         [containImageView addSubview:carImageView];
         
-        UILabel *carpinpai = [[UILabel alloc]initWithFrame:CGRectMake(115*Main_Screen_Height/667, 40*Main_Screen_Height/667, containImageView.frame.size.width - 130*Main_Screen_Height/667, 20)];
+        UILabel *carpinpai = [[UILabel alloc]init];
         carpinpai.text = car.CarBrand;
         carpinpai.textColor = [UIColor whiteColor];
         carpinpai.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
         [containImageView addSubview:carpinpai];
         
-        UILabel *carpro = [[UILabel alloc]initWithFrame:CGRectMake(115*Main_Screen_Height/667, 40*Main_Screen_Height/667 + carpinpai.frame.size.height , containImageView.frame.size.width - 130*Main_Screen_Height/667, 20)];
+        UILabel *carpro = [[UILabel alloc]init];
         carpro.text = [NSString stringWithFormat:@"%ld年产",car.Manufacture];
         carpro.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
         carpro.textColor = [UIColor whiteColor];
@@ -314,14 +314,14 @@ static NSString * HeaderId = @"header";
         }];
     
     [carpinpai mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(carImageView.mas_centerY).mas_offset(-10);
-        make.leading.equalTo(carImageView.mas_trailing).mas_offset(10);
+        make.bottom.equalTo(carImageView.mas_centerY).mas_offset(-10*Main_Screen_Height/667);
+        make.leading.equalTo(carImageView.mas_trailing).mas_offset(20*Main_Screen_Height/667);
     
     }];
     
     [carpro mas_makeConstraints:^(MASConstraintMaker *make) {
-         make.top.equalTo(carImageView.mas_centerY).mas_offset(10);
-        make.leading.equalTo(carImageView.mas_trailing).mas_offset(10);
+         make.top.equalTo(carImageView.mas_centerY).mas_offset(10*Main_Screen_Height/667);
+        make.leading.equalTo(carImageView.mas_trailing).mas_offset(20*Main_Screen_Height/667);
 
     }];
         
