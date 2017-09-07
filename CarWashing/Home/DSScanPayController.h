@@ -18,4 +18,9 @@
 
 @property(nonatomic ,copy)NSString *DeviceCode;
 
+@property(nonatomic,copy)NSString *RemainCount;
+@property(nonatomic,copy)NSString *CardType;
+@property(nonatomic,copy)NSString *CardName;
+@property(nonatomic,copy)NSString *IntegralNum;
+
 @end
