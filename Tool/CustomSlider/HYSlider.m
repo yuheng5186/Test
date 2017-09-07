@@ -142,10 +142,10 @@
     [_scrollShowTextView addSubview:_imageView];
     
     /** 浮标数值显示label*/
-    _scrollShowTextLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0 , 35*Main_Screen_Width/375, 19*Main_Screen_Height/667)];
+    _scrollShowTextLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0 , 36*Main_Screen_Width/375, 17*Main_Screen_Height/667)];
     _scrollShowTextLabel.textAlignment = NSTextAlignmentCenter;
     _scrollShowTextLabel.textColor = [UIColor whiteColor];
-   _scrollShowTextLabel.adjustsFontSizeToFitWidth = YES;
+//   _scrollShowTextLabel.adjustsFontSizeToFitWidth = YES;
 //    _scrollShowTextLabel.backgroundColor=[UIColor yellowColor];
     [_scrollShowTextView addSubview:_scrollShowTextLabel];
     
