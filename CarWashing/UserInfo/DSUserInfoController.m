@@ -299,14 +299,20 @@
                                          };
                 [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/UserInfoEdit",Khttp] success:^(NSDictionary *dict, BOOL success) {
                     
-                    
+                    if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                    {
+                        APPDELEGATE.currentUser.userSex = @"0";
+                        [self.tableView reloadData];
+                        
+                        
+                        [UdStorage storageObject:APPDELEGATE.currentUser.userSex forKey:@"Sex"];
+                    }else
+                    {
+                        [self.view showInfo:@"设置失败" autoHidden:YES interval:2];
+                    }
                     
                 
-                    APPDELEGATE.currentUser.userSex = @"0";
-                    [self.tableView reloadData];
                     
-                
-                    [UdStorage storageObject:APPDELEGATE.currentUser.userSex forKey:@"Sex"];
                     
                     
                     
@@ -337,12 +343,19 @@
                                          };
                 [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/UserInfoEdit",Khttp] success:^(NSDictionary *dict, BOOL success) {
                     
+                    if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                    {
+                        APPDELEGATE.currentUser.userSex = @"1";
+                        
+                        [self.tableView reloadData];
+                        
+                        [UdStorage storageObject:APPDELEGATE.currentUser.userSex forKey:@"Sex"];
+                    }
+                    else
+                    {
+                        [self.view showInfo:@"设置失败" autoHidden:YES interval:2];
+                    }
                     
-                    APPDELEGATE.currentUser.userSex = @"1";
-                
-                    [self.tableView reloadData];
-                    
-                    [UdStorage storageObject:APPDELEGATE.currentUser.userSex forKey:@"Sex"];
                     
                     
                 } fail:^(NSError *error) {
