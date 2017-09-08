@@ -1888,7 +1888,7 @@
 				TargetAttributes = {
 					18B803711F1DA2A300B52432 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 6AWGM9A2YP;
+						DevelopmentTeam = W85DM2ZM4W;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -2421,11 +2421,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = 6AWGM9A2YP;
+				DEVELOPMENT_TEAM = W85DM2ZM4W;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing1;
 				PRODUCT_NAME = CarWashing;
 			};
 			name = Debug;
@@ -2436,11 +2437,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = 6AWGM9A2YP;
+				DEVELOPMENT_TEAM = W85DM2ZM4W;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashing1;
 				PRODUCT_NAME = CarWashing;
 			};
 			name = Release;

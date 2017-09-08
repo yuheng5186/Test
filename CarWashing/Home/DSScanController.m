@@ -43,6 +43,7 @@
 
 @property (nonatomic, strong) ScanCode *scan;
 
+
 @end
 
 @implementation DSScanController
@@ -65,6 +66,7 @@
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
 }
+#pragma mark-菜单栏扫码洗车
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -243,7 +245,23 @@
 }
 
 - (void)handleScanData:(NSString *)outMessage {
+    #pragma mark-获取设备编码
     NSString *imei                          = outMessage;
+    //处理设备编码
+    NSRange
+    startRange = [imei rangeOfString:@":"];
+    
+    NSRange
+    endRange = [imei rangeOfString:@":"];
+    
+    NSRange
+    range = NSMakeRange(startRange.location
+                        + startRange.length,
+                        endRange.location
+                        - startRange.location
+                        - startRange.length);
+    
+//    NSString *result = [imei substringWithRange:range];
     
     if (imei != nil) {
         
@@ -254,15 +272,16 @@
         HUD.minSize = CGSizeMake(132.f, 108.0f);
         
         NSDictionary *mulDic = @{
-                                 @"DeviceCode":imei,
+                                 @"DeviceCode":@"0005",
                                  @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
                                  };
         NSDictionary *params = @{
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
+         NSLog(@"====%@====",params);
         [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@ScanCode/DeviceScanCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
-            
+            NSLog(@"%@",dict);
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
                 
@@ -289,21 +308,21 @@
                         
                         
                         
-                        NSRange
-                        startRange = [weakSelf.scan.DeviceCode rangeOfString:@":"];
-                        
-                        NSRange
-                        endRange = [weakSelf.scan.DeviceCode rangeOfString:@":"];
-                        
-                        NSRange
-                        range = NSMakeRange(startRange.location
-                                            + startRange.length,
-                                            endRange.location
-                                            - startRange.location
-                                            - startRange.length);
-                        
-                        NSString *result = [weakSelf.scan.DeviceCode substringWithRange:range];
-                        payVC.DeviceCode = result;
+//                        NSRange
+//                        startRange = [weakSelf.scan.DeviceCode rangeOfString:@":"];
+//                        
+//                        NSRange
+//                        endRange = [weakSelf.scan.DeviceCode rangeOfString:@":"];
+//                        
+//                        NSRange
+//                        range = NSMakeRange(startRange.location
+//                                            + startRange.length,
+//                                            endRange.location
+//                                            - startRange.location
+//                                            - startRange.length);
+//                        
+//                        NSString *result = [weakSelf.scan.DeviceCode substringWithRange:range];
+                        payVC.DeviceCode = weakSelf.scan.DeviceCode;
                         
                         payVC.RemainCount = [NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount];
                         payVC.IntegralNum = [NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum];
@@ -335,6 +354,7 @@
 //                [self.navigationController popViewControllerAnimated:YES];
             }
         } fail:^(NSError *error) {
+            NSLog(@"%@",error);
             [HUD hide:YES];
             [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
 //            [self.navigationController popViewControllerAnimated:YES];

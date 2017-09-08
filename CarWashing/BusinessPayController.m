@@ -200,8 +200,8 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        
-        
+#pragma mark-购买商家服务支付,
+        //商家编号:MerCode,SerCode 服务编号,
         NSDictionary *mulDic = @{
                                  @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                                  @"MerCode":self.MCode,

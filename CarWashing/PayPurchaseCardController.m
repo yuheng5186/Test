@@ -451,12 +451,10 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+#pragma mark-购卡支付
 -(void)lijizhifu
 {
-
-    
-    
+    //卡编号ConfigCode
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                              @"ConfigCode":[NSString stringWithFormat:@"%ld",self.choosecard.ConfigCode]
@@ -465,8 +463,9 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
+      NSLog(@"%@",params);
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/PurchasePayment",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+        NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             NSDictionary *di = [NSDictionary dictionary];
@@ -511,15 +510,4 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     }];
 
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end
