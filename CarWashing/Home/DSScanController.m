@@ -276,7 +276,7 @@
 
                 __weak typeof(self) weakSelf = self;
                 HUD.completionBlock = ^(){
-                    
+                    //(1.需要支付状态,2.扫描成功)
                     if(weakSelf.scan.ScanCodeState == 1)
                     {
                         DSScanPayController *payVC           = [[DSScanPayController alloc]init];
