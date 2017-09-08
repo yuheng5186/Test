@@ -216,17 +216,18 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 //        [self.navigationController pushViewController:startVC animated:YES];
         
         
-        
+#pragma mark-扫码洗车 3.37自动扫码支付
         NSDictionary *mulDic = @{
-                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"Account_Id":[UdStorage getObjectforKey:Userid],
                                  @"DeviceCode":self.DeviceCode
                                  };
         NSDictionary *params = @{
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
+        NSLog(@"%@",params);
         [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/ScanPayment",Khttp] success:^(NSDictionary *dict, BOOL success) {
-            
+            NSLog(@"%@",dict);
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
                 NSDictionary *di = [NSDictionary dictionary];
@@ -258,6 +259,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
             else
             {
                 
+          
                 [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
                 
             }
@@ -266,7 +268,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
             
             
         } fail:^(NSError *error) {
-            
+            NSLog(@"%@",error);
             [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
         }];
         

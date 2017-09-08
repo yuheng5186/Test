@@ -426,11 +426,11 @@
 //            NSLog(@"请求失败---%@", error);
 //        }];
 
-
+        NSLog(@"%@",params);
         [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetVerCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
             NSLog(@"%@",dict);
         } fail:^(NSError *error) {
-            NSLog(@"%@",@"fail");
+            NSLog(@"%@",error);
         }];
         
     }else
@@ -447,7 +447,7 @@
         [self.timer invalidate];
         self.timer = nil;
     }
-    self.second = 60;
+    self.second = 10;
     self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
     [self.timer fire];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
