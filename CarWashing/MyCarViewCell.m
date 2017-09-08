@@ -29,6 +29,8 @@
     self.defaultButton.backgroundColor = [UIColor whiteColor];
     self.brandLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     
+    self.defaulLabel.backgroundColor = [UIColor colorFromHex:@"#febb02"];
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

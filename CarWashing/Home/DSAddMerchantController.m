@@ -11,8 +11,12 @@
 #import "LCMD5Tool.h"
 #import "AFNetworkingTool.h"
 #import "HTTPDefine.h"
+#import "MBProgressHUD.h"
 
 @interface DSAddMerchantController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+{
+    MBProgressHUD *HUD;
+}
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UITextField *merchantFieldText;
@@ -37,6 +41,12 @@
 }
 - (void) rightButtonClick:(id)sender {
     
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
     
     NSDictionary *mulDic = @{
                              @"Name":self.merchantFieldText.text,
@@ -49,14 +59,30 @@
                              };
     
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/AddMerchantSettledInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            __weak typeof(self) weakSelf = self;
+            
+            
+            HUD.completionBlock = ^(){
+                [weakSelf.view showInfo:@"入驻成功" autoHidden:YES interval:2];
+            };
+            
+            [HUD hide:YES afterDelay:1.f];
+        }
+        else
+        {
+            [HUD setHidden:YES];
+            [self.view showInfo:@"入驻失败" autoHidden:YES interval:2];
+        }
         
         
         
-        [self.view showInfo:@"入驻成功" autoHidden:YES interval:2];
         
         
         
     } fail:^(NSError *error) {
+        [HUD setHidden:YES];
         [self.view showInfo:@"入驻失败" autoHidden:YES interval:2];
     }];
 

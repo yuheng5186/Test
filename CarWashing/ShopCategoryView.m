@@ -150,7 +150,7 @@
     //设置文字的颜色
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
     
-    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
     
     button.titleLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     

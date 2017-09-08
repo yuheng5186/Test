@@ -18,6 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *manuLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *CarImageV;
+@property (weak, nonatomic) IBOutlet UILabel *defaulLabel;
 
 
 @end

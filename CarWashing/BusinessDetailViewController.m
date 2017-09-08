@@ -459,7 +459,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
             }
             else
             {
-//                [self.view showInfo:@"收藏失败" autoHidden:YES interval:2];
+                [self.view showInfo:@"收藏失败" autoHidden:YES interval:2];
 //                [self.navigationController popViewControllerAnimated:YES];
             }
             
@@ -467,7 +467,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
             
             
         } fail:^(NSError *error) {
-//            [self.view showInfo:@"收藏失败" autoHidden:YES interval:2];
+            [self.view showInfo:@"收藏失败" autoHidden:YES interval:2];
         }];
 
         

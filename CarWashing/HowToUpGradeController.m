@@ -248,6 +248,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
             arr = [dict objectForKey:@"JsonData"];
             if(arr.count == 0)
             {
+                [HUD setHidden:YES];
                 [self.view showInfo:@"暂无数据" autoHidden:YES interval:2];
             }
             else
@@ -260,11 +261,13 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
         }
         else
         {
+            [HUD setHidden:YES];
             [self.view showInfo:@"数据请求失败,请重试" autoHidden:YES interval:2];
 //            [self.navigationController popViewControllerAnimated:YES];
         }
         
     } fail:^(NSError *error) {
+        [HUD setHidden:YES];
         [self.view showInfo:@"获取失败,请重试" autoHidden:YES interval:2];
 //         [self.navigationController popViewControllerAnimated:YES];
     }];

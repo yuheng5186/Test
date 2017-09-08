@@ -168,7 +168,7 @@ static NSString * HeaderId = @"header";
             [HUD setHidden:YES];
             
             [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES];
-            [self.navigationController popViewControllerAnimated:YES];
+//            [self.navigationController popViewControllerAnimated:YES];
             
         }
         
@@ -184,7 +184,7 @@ static NSString * HeaderId = @"header";
 //        [self.view showInfo:@"信息获取失败,请检查网络"];
 //        
         
-        [self.navigationController popViewControllerAnimated:YES];
+//        [self.navigationController popViewControllerAnimated:YES];
         
     }];
 
@@ -460,7 +460,7 @@ static NSString * HeaderId = @"header";
             
             carCell.textLabel.text = @"车牌号";
             carCell.textLabel.textColor = [UIColor colorFromHex:@"#868686"];
-            carCell.textLabel.font = [UIFont systemFontOfSize:14];
+            carCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             
 //            UILabel *provinceLabel = [[UILabel alloc] init];
 //            provinceLabel.text = @"沪";
@@ -471,20 +471,20 @@ static NSString * HeaderId = @"header";
             NSString *platenumbertype=[car.PlateNumber substringToIndex:1];
             [provinceBtn setTitle:platenumbertype forState:UIControlStateNormal];
             [provinceBtn setTitleColor:[UIColor colorFromHex:@"#868686"] forState:UIControlStateNormal];
-            provinceBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+            provinceBtn.titleLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
 //            [provinceBtn addTarget:self action:@selector(didClickProvinceBtn) forControlEvents:UIControlEventTouchUpInside];
             [carCell.contentView addSubview:provinceBtn];
             
-            UIImageView *provinceImgV = [[UIImageView alloc] init];
-            provinceImgV.image = [UIImage imageNamed:@"xuanshengfen"];
-            [provinceBtn addSubview:provinceImgV];
+//            UIImageView *provinceImgV = [[UIImageView alloc] init];
+//            provinceImgV.image = [UIImage imageNamed:@"xuanshengfen"];
+//            [provinceBtn addSubview:provinceImgV];
             
             UITextField *numTF = [[UITextField alloc] init];
             numTF.placeholder = @"请输入车牌号";
             
             numTF.text = [car.PlateNumber substringFromIndex:1];
             numTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
-            numTF.font = [UIFont systemFontOfSize:12];
+            numTF.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
             numTF.delegate = self;
             numTF.tag = 100;
             self.carNum=numTF;
@@ -495,11 +495,11 @@ static NSString * HeaderId = @"header";
                 make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
             }];
             
-            [provinceImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.right.equalTo(provinceBtn);
-                make.bottom.equalTo(provinceBtn);
-                make.width.height.mas_equalTo(7*Main_Screen_Height/667);
-            }];
+//            [provinceImgV mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.right.equalTo(provinceBtn);
+//                make.bottom.equalTo(provinceBtn);
+//                make.width.height.mas_equalTo(7*Main_Screen_Height/667);
+//            }];
             
             [numTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(provinceBtn);
@@ -509,7 +509,7 @@ static NSString * HeaderId = @"header";
         }else{
             carCell.textLabel.text = @"品牌车系";
             carCell.textLabel.textColor = [UIColor colorFromHex:@"#868686"];
-            carCell.textLabel.font = [UIFont systemFontOfSize:14];
+            carCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             
             UITextField *brandTF = [[UITextField alloc] init];
             brandTF.placeholder = @"请填写";
@@ -546,14 +546,14 @@ static NSString * HeaderId = @"header";
             textTF.text = car.ChassisNum;
             textTF.placeholder = @"请填写";
             textTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
-            textTF.font = [UIFont systemFontOfSize:12];
+            textTF.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
             self.ChassisNum = textTF;
             [carCell.contentView addSubview:textTF];
             
             [textTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
                 make.centerY.equalTo(carCell);
-                make.right.equalTo(carCell.contentView).mas_offset(-12);
+                make.right.equalTo(carCell.contentView).mas_offset(-12*Main_Screen_Height/667);
             }];
         }
         
@@ -583,7 +583,7 @@ static NSString * HeaderId = @"header";
         else
         {
             
-            carCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            //carCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 1)
             {
                 UILabel *lbl = [[UILabel alloc] init];

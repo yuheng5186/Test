@@ -32,7 +32,7 @@
     CGFloat w = SCREEN_WIDTH / self.titleArr.count;
     CGFloat h = self.h;
     
-    self.sliderWidth = 40;
+    self.sliderWidth = 60;
     
     for (int i = 0; i < self.titleArr.count; i++) {
         
@@ -41,6 +41,19 @@
         UIButton *button = [[UIButton alloc] init];
         
         [button setTitle:self.titleArr[i] forState:UIControlStateNormal];
+        
+        NSString *string    = self.titleArr[i];
+        if (string.length == 2) {
+            
+            self.sliderWidth = 40;
+
+        }else if (string.length == 4){
+        
+            self.sliderWidth = 60;
+
+        }
+        
+        
         [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         //[button setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
         button.titleLabel.font = [UIFont systemFontOfSize:15.f];
