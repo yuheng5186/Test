@@ -32,7 +32,7 @@
     CGFloat w = SCREEN_WIDTH / self.titleArr.count;
     CGFloat h = self.h;
     
-    self.sliderWidth = 60;
+    self.sliderWidth = Main_Screen_Width*60/375;
     
     for (int i = 0; i < self.titleArr.count; i++) {
         
@@ -45,11 +45,11 @@
         NSString *string    = self.titleArr[i];
         if (string.length == 2) {
             
-            self.sliderWidth = 40;
+            self.sliderWidth = Main_Screen_Width*40/375;
 
         }else if (string.length == 4){
         
-            self.sliderWidth = 60;
+            self.sliderWidth = Main_Screen_Width*60/375;
 
         }
         
