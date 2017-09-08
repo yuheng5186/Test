@@ -71,7 +71,7 @@
     
     self.distanceLabel.textColor = [UIColor colorFromHex:@"#868686"];
     
-    self.distanceLabel.textColor = [UIColor colorFromHex:@"#868686"];
+    self.naviLabel.textColor = [UIColor colorFromHex:@"#868686"];
     
     self.shopTypeLabel.textColor = [UIColor colorFromHex:@"#868686"];
     

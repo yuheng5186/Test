@@ -184,7 +184,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     headerView.adressLabel2.text = self.dic[@"MerAddress"];
     headerView.openTimeLabel.text = self.dic[@"ServiceTime"];
 //    headerView.distanceLabel.text = [NSString stringWithFormat:@"%@km",self.dic[@"Distance"]];
-    headerView.distanceLabel.text = [NSString stringWithFormat:@"%@km",self.distance];
+    headerView.distanceLabel.text = [NSString stringWithFormat:@"%.2fkm",[self.distance doubleValue]];
     headerView.ServiceNumLabel.text = [NSString stringWithFormat:@"服务%@单",self.dic[@"ServiceCount"]];
     if([self.dic[@"ShopType"] intValue] == 1)
     {
@@ -316,19 +316,19 @@ static NSString *businessCommentCell = @"businessCommentCell";
     {
         lblPrice = [[UILabel alloc] init];
         lblPrice.text = @"0";
-        lblPrice.font = [UIFont systemFontOfSize:18];
+        lblPrice.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
         lblPrice.textColor = [UIColor colorFromHex:@"#ff525a"];
         [payToolBar addSubview:lblPrice];
         
         formerPriceLab = [[UILabel alloc] init];
         formerPriceLab.text = @"0";
         formerPriceLab.textColor = [UIColor colorFromHex:@"#999999"];
-        formerPriceLab.font = [UIFont systemFontOfSize:13];
+        formerPriceLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         [payToolBar addSubview:formerPriceLab];
         
         lblCarType = [[UILabel alloc] init];
         lblCarType.text = @"";
-        lblCarType.font = [UIFont systemFontOfSize:13];
+        lblCarType.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         lblCarType.textColor = [UIColor colorFromHex:@"#999999"];
         [payToolBar addSubview:lblCarType];
     }
@@ -343,7 +343,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
         formerPriceLab = [[UILabel alloc] init];
         formerPriceLab.text = [NSString stringWithFormat:@"¥%@",[[self.dic[@"MerSerList"] objectAtIndex:0] objectForKey:@"OriginalPrice"]];
         formerPriceLab.textColor = [UIColor colorFromHex:@"#999999"];
-        formerPriceLab.font = [UIFont systemFontOfSize:13];
+        formerPriceLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         [payToolBar addSubview:formerPriceLab];
         
         
@@ -377,7 +377,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     //约束
     [lblPrice mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(payToolBar).mas_offset(12*Main_Screen_Height/667);
+        make.top.mas_equalTo(payToolBar).mas_offset(10*Main_Screen_Height/667);
         make.left.equalTo(payToolBar).mas_offset(20*Main_Screen_Height/667);
     }];
     
@@ -388,7 +388,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     [lblCarType mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(lblPrice);
-        make.top.mas_equalTo(lblPrice.mas_bottom).mas_offset(6*Main_Screen_Height/667);
+        make.top.mas_equalTo(lblPrice.mas_bottom).mas_offset(4*Main_Screen_Height/667);
     }];
     
     /*[payBtn mas_makeConstraints:^(MASConstraintMaker *make) {
