@@ -9,5 +9,8 @@
 #import "Order.h"
 
 @implementation Order
-
+//如果不想每一条属性都添加，我们也可以在.m文件中重写方法
++(BOOL)propertyIsOptional:(NSString *)propertyName{
+    return  YES;
+}
 @end

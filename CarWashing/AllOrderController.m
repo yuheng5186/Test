@@ -144,6 +144,7 @@ static NSString *id_cancelCell = @"id_cancelCell";
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            NSLog(@"%@",dict);
             self.page = 0;
             self.OrderDataArray = [[NSMutableArray alloc]init];
             NSArray *arr = [NSArray array];
@@ -159,8 +160,8 @@ static NSString *id_cancelCell = @"id_cancelCell";
                 
                 for(NSDictionary *dic in arr)
                 {
-                    Order *order = [[Order alloc]init];
-                    [order setValuesForKeysWithDictionary:dic];
+                    Order *order = [[Order alloc]initWithDictionary:dic error:nil];
+                    
                     [self.OrderDataArray addObject:order];
                 }
 
@@ -288,10 +289,14 @@ static NSString *id_cancelCell = @"id_cancelCell";
         delayCell.orderLabel.text = [NSString stringWithFormat:@"订单号: %@",order.OrderCode];
         delayCell.priceLabel.text = [NSString stringWithFormat:@"￥%@",order.PaypriceAmount];
         delayCell.washTypeLabel.text = order.SerName;
-        
+       
         delayCell.SerMerChant = order.SerName;
         delayCell.Jprice = [NSString stringWithFormat:@"￥%@",order.PayableAmount];
         delayCell.Xprice = [NSString stringWithFormat:@"￥%@",order.PaypriceAmount];
+        delayCell.MCode = [NSString stringWithFormat:@"%ld",order.MerCode];
+        delayCell.SCode =[NSString stringWithFormat:@"%ld",order.SerCode];
+        delayCell.OrderCode = order.OrderCode;
+        
         return delayCell;
     }
     

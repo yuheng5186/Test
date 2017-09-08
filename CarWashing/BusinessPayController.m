@@ -180,7 +180,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
 }
 
-
+#pragma mark-商家详情去结算支付请求
 //方法子
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
     
@@ -202,18 +202,21 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
         
 #pragma mark-购买商家服务支付,
         //商家编号:MerCode,SerCode 服务编号,
+         NSLog(@"%@==%@==%@==%@",self.MCode,self.SCode,self.OrderCode,self.SerMerChant);
         NSDictionary *mulDic = @{
                                  @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                                  @"MerCode":self.MCode,
                                  @"SerCode":self.SCode,
-                                 @"OrderCode":self.OrderCode
+                                 @"OrderCode":self.OrderCode,
+                                 @"MerName":self.SerMerChant
                                  };
         NSDictionary *params = @{
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
+        NSLog(@"%@",params);
         [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/ServicePayment",Khttp] success:^(NSDictionary *dict, BOOL success) {
-            
+            NSLog(@"%@",dict);
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
                 NSDictionary *di = [NSDictionary dictionary];
@@ -223,16 +226,16 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
                 //调起微信支付
                 PayReq *req= [[PayReq alloc] init];
                 req.partnerId
-                = [dict objectForKey:@"partnerid"];
+                = [di objectForKey:@"partnerid"];
                 req.prepayId
-                = [dict objectForKey:@"prepayid"];
+                = [di objectForKey:@"prepayid"];
                 req.nonceStr
-                = [dict objectForKey:@"noncestr"];
+                = [di objectForKey:@"noncestr"];
                 req.timeStamp
                 = stamp.intValue;
                 req.package
-                = [dict objectForKey:@"packag"];
-                req.sign = [dict objectForKey:@"sign"];
+                = [di objectForKey:@"packag"];
+                req.sign = [di objectForKey:@"sign"];
                 BOOL result = [WXApi sendReq:req];
                 
                 NSLog(@"-=-=-=-=-%d", result);
@@ -253,7 +256,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
             
             
         } fail:^(NSError *error) {
-            
+            NSLog(@"%@",error);
             [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
         }];
 

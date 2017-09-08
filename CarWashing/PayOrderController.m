@@ -147,8 +147,8 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
                     
                     for(NSDictionary *dic in arr)
                     {
-                        Order *order = [[Order alloc]init];
-                        [order setValuesForKeysWithDictionary:dic];
+                        Order *order = [[Order alloc]initWithDictionary:dic error:nil];
+                        
                         [self.DelayPayDataArray addObject:order];
                     }
                     
