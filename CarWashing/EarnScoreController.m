@@ -112,7 +112,9 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
             arr = [dict objectForKey:@"JsonData"];
             if(arr.count == 0)
             {
+                [HUD setHidden:YES];
                 [self.view showInfo:@"暂无数据" autoHidden:YES interval:2];
+            
             }
             else
             {

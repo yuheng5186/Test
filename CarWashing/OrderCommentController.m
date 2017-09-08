@@ -15,10 +15,13 @@
 #import "AFNetworkingTool.h"
 #import "UdStorage.h"
 
+#import "MBProgressHUD.h"
+
 @interface OrderCommentController ()<UITextViewDelegate>
 {
     UITextView *commentTextView;
     NSInteger score;
+    MBProgressHUD *HUD1;
 }
 
 //@property (nonatomic, strong) NSMutableArray <UIButton *> *buttonArray;
@@ -156,6 +159,14 @@
 
 - (void)clickSigninButton:(UIButton *)button {
     
+    
+    HUD1 = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD1.removeFromSuperViewOnHide =YES;
+    HUD1.mode = MBProgressHUDModeIndeterminate;
+    HUD1.minSize = CGSizeMake(132.f, 108.0f);
+    
+    
+    
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                              @"MerCode":self.SerMerCode,
@@ -176,16 +187,25 @@
         {
 //            NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];
 //            [[NSNotificationCenter defaultCenter]postNotification:notice];
-            [self.view showInfo:@"评价成功" autoHidden:YES interval:2];
-            //            self.dic = [dict objectForKey:@"JsonData"];
-            //        [self.MerchantDetailData addObjectsFromArray:arr];
             
-            [self.navigationController popViewControllerAnimated:YES];
+            
+            __weak typeof (self)weakSelf = self;
+            
+            HUD1.completionBlock = ^(){
+                [weakSelf.view showInfo:@"评价成功" autoHidden:YES interval:2];
+                //            self.dic = [dict objectForKey:@"JsonData"];
+                //        [self.MerchantDetailData addObjectsFromArray:arr];
+                
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            };
+            
+            [HUD1 hide:YES afterDelay:1];
             
            
         }
         else
         {
+            [HUD1 hide:YES];
             [self.view showInfo:@"评论添加失败" autoHidden:YES interval:2];
             //            [self.navigationController popViewControllerAnimated:YES];
         }
@@ -194,6 +214,7 @@
         
         
     } fail:^(NSError *error) {
+        [HUD1 hide:YES];
         [self.view showInfo:@"评论添加失败" autoHidden:YES interval:2];
     }];
 

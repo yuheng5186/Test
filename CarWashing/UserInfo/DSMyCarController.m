@@ -168,7 +168,7 @@ static NSString * HeaderId = @"header";
             [HUD setHidden:YES];
             
             [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES];
-            [self.navigationController popViewControllerAnimated:YES];
+//            [self.navigationController popViewControllerAnimated:YES];
             
         }
         
@@ -184,7 +184,7 @@ static NSString * HeaderId = @"header";
 //        [self.view showInfo:@"信息获取失败,请检查网络"];
 //        
         
-        [self.navigationController popViewControllerAnimated:YES];
+//        [self.navigationController popViewControllerAnimated:YES];
         
     }];
 

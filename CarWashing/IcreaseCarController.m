@@ -685,9 +685,9 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                     
                     NSNotification * notice = [NSNotification notificationWithName:@"updatemycarsuccess" object:nil userInfo:nil];
                     [[NSNotificationCenter defaultCenter]postNotification:notice];
-                    
+                    __weak typeof (self) weakSelf = self;
                     HUD.completionBlock = ^(){
-                        [self.navigationController popViewControllerAnimated:YES];
+                        [weakSelf.navigationController popViewControllerAnimated:YES];
                         
                     };
                     
