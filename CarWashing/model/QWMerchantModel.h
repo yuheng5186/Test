@@ -1,22 +1,21 @@
 //
-//  MerSerListModel.h
-//  CarWashing
+//  QWMerchantModel.h
+//  QWCarWashing
 //
-//  Created by apple on 2017/9/11.
-//  Copyright © 2017年 DS. All rights reserved.
+//  Created by apple on 2017/8/24.
+//  Copyright © 2017年 apple. All rights reserved.
 //
 
-#import <JSONModel/JSONModel.h>
-#import "MerComList.h"
-@interface MerSerListModel : JSONModel
+#import <Foundation/Foundation.h>
+#import "QWMerComListModel.h"
+@interface QWMerSerListModel : JSONModel
 @property(nonatomic,strong)NSString<Optional> *CurrentPrice,*OriginalPrice,*SerComment,*SerName;
 @property(nonatomic,assign)int MerCode,SerCode;
 @end
-@interface MerchantModel : JSONModel
+@interface QWMerchantModel : JSONModel
 @property(nonatomic,strong)NSString<Optional> *Area,*City,*Img,*MerAddress,*MerFlag,*MerName,*MerPhone,*ServiceTime,*StoreProfile,*MerCode;
 @property(nonatomic,assign)CGFloat Distance,Score,Xm,Ym;//距离
 @property(nonatomic,assign)int Iscert,ServiceCount,ShopType,IsCollection;
-@property(nonatomic,strong)NSArray <MerComList *> *MerComList;
-@property(nonatomic,strong)NSArray <MerSerListModel *> *MerSerList;
+@property(nonatomic,strong)NSArray <QWMerComListModel *> *MerComList;
+@property(nonatomic,strong)NSArray <QWMerSerListModel *> *MerSerList;
 @end
-

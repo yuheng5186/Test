@@ -41,6 +41,13 @@
 #define UserSex          @"Sex"              //用户性别
 #define UserAge          @"Age"              //用户年龄
 
+//空值判断
+#define IsNullIsNull(__String) (__String==nil || [__String isEqualToString:@""]|| [__String isEqualToString:@"null"])
+#define IsNull(__Text) [__Text isKindOfClass:[NSNull class]]
+
+#define IsEquallString(_Str1,_Str2)  [_Str1 isEqualToString:_Str2]
+
+
 #import "TFGridInputView.h"
 #import<AVFoundation/AVFoundation.h>
 #define kColorTableBG [UIColor colorWithHexString:@"0xf0f0f0"]

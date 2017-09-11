@@ -233,11 +233,44 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
                 commentCell.headImageView.image = img;
             });
         });
+        if([[[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"FromuserName"]isKindOfClass:[NSNull class]])
+        {
+           commentCell.phoneLabel.text  = @"";
+        }else
+        {
+             commentCell.phoneLabel.text = [[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"FromuserName"];
+//            estimateCell.phoneLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserName"];
+        }
+
+//        commentCell.phoneLabel.text = [[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"FromuserName"];
+        if([[[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"Score"] isKindOfClass:[NSNull class]])
+        {
+            
+        }else
+        {
+            [commentCell.userScoreLabel setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",[[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"Score"]] substringToIndex:1]]]];
+        }
+
+//        [commentCell.userScoreLabel setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",[[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"Score"]] substringToIndex:1]]]];
+//        commentCell.commentLabel.text = [[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"CommentContent"];
         
-        commentCell.phoneLabel.text = [[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"FromuserName"];
-        [commentCell.userScoreLabel setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",[[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"Score"]] substringToIndex:1]]]];
-        commentCell.commentLabel.text = [[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"CommentContent"];
-        commentCell.dateLabel.text = [[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"CommentDate"];
+        if([[[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"CommentContent"] isKindOfClass:[NSNull class]])
+        {
+            commentCell.commentLabel.text = @"";
+        }else
+        {
+            commentCell.commentLabel.text = [[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"CommentContent"];
+        }
+
+        
+        if([[[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"CommentDate"] isKindOfClass:[NSNull class]])
+        {
+           commentCell.dateLabel.text = @"";
+        }else
+        {
+            commentCell.dateLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentDate"];
+        }
+//        commentCell.dateLabel.text = [[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"CommentDate"];
         commentCell.timeLabel.hidden = YES;
     }
     else

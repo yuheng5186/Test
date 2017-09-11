@@ -42,7 +42,32 @@
     
     [self setupUI];
 }
+#pragma mark-model赋值
+-(void)setMerchantModel:(QWMerchantModel *)merchantModel{
+    _merchantModel=merchantModel;
+    self.nameLabel.text = merchantModel.MerName;
+    self.adressLabel.text = merchantModel.MerAddress;
+    [self.starImageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%.2f",merchantModel.Score] substringToIndex:1]]]];
+    self.scoreLabel.text = [NSString stringWithFormat:@"%.2f分",merchantModel.Score];
+    self.adressLabel2.text = merchantModel.MerAddress;
+    self.openTimeLabel.text =merchantModel.ServiceTime;
+    //    self.distanceLabel.text = [NSString stringWithFormat:@"%@km",self.dic[@"Distance"]];
+//    self.distanceLabel.text = [NSString stringWithFormat:@"%.2fkm",[merchantModel..distance doubleValue]];
+    
+    //    self.ServiceNumLabel.text = [NSString stringWithFormat:@"服务%@单",self.dic[@"ServiceCount"]];
+    self.ServiceNumLabel.textColor  = [UIColor colorFromHex:@"#ff525a"];
+    NSString   *scoreString     = [NSString stringWithFormat:@"服务%d单",merchantModel.ServiceCount];
 
+        NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:scoreString];
+        [AttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange(0, 2)];
+        [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#4a4a4a"] range:NSMakeRange(0, 2)];
+        [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#4a4a4a"] range:NSMakeRange([scoreString length]-1, 1)];
+        
+        self.ServiceNumLabel.attributedText   = AttributedStr;
+
+    
+    
+}
 - (void)setupUI {
     
     self.dg_viewAutoSizeToDevice = YES;

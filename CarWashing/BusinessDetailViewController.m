@@ -30,7 +30,7 @@
 #import "MBProgressHUD.h"
 
 #import "UIImageView+WebCache.h"
-
+#import "QWMerchantModel.h"
 @interface BusinessDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, CLLocationManagerDelegate>
 {
     MBProgressHUD *HUD;
@@ -60,7 +60,9 @@
 @property (nonatomic, strong) NSMutableArray *MerchantDetailData;
 
 @property (nonatomic, strong) NSDictionary *dic;
-
+@property(nonatomic,strong)QWMerchantModel *MerChantmodel;
+@property(nonatomic,strong)QWMerComListModel *MerComListmodel;
+@property(nonatomic,strong)QWMerSerListModel *MerSerListmodel;
 #pragma mark - map
 @property (nonatomic, strong)JXMapNavigationView *mapNavigationView;
 
@@ -128,6 +130,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             self.dic = [dict objectForKey:@"JsonData"];
+               self.MerChantmodel=[[QWMerchantModel alloc]initWithDictionary:[dict objectForKey:@"JsonData"] error:nil];
             NSLog(@"%@",self.dic);
             //        [self.MerchantDetailData addObjectsFromArray:arr];
             
@@ -156,17 +159,20 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     UIImageView *detaiImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Width/2)];
     
-//    detaiImgView.image = [UIImage imageNamed:@"hangdiantu"];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,self.dic[@"Img"]];
-        NSURL *url=[NSURL URLWithString:ImageURL];
-        NSData *data=[NSData dataWithContentsOfURL:url];
-        UIImage *img=[UIImage imageWithData:data];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            detaiImgView.image = img;
-        });
-    });
+    detaiImgView.image = [UIImage imageNamed:@"hangdiantu"];
+    if (!IsNullIsNull(self.MerChantmodel.Img)) {
+        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,self.MerChantmodel.Img];
+        [detaiImgView sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@"shangjiadingwei"]];
+    }
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,self.dic[@"Img"]];
+//        NSURL *url=[NSURL URLWithString:ImageURL];
+//        NSData *data=[NSData dataWithContentsOfURL:url];
+//        UIImage *img=[UIImage imageWithData:data];
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+//            detaiImgView.image = img;
+//        });
+//    });
 
     
     [containHeadView addSubview:detaiImgView];
@@ -177,29 +183,32 @@ static NSString *businessCommentCell = @"businessCommentCell";
     headerView.frame = CGRectMake(0, Main_Screen_Width/2, Main_Screen_Width, 196*Main_Screen_Height/667);
     
     self.headerView = headerView;
-   
+    if (self.MerChantmodel!=nil) {
+         headerView.merchantModel=self.MerChantmodel;
+    }
+  
         
-    headerView.nameLabel.text = self.dic[@"MerName"];
-    headerView.adressLabel.text = self.dic[@"MerAddress"];
-    [headerView.starImageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",self.dic[@"Score"]] substringToIndex:1]]]];
-    headerView.scoreLabel.text = [NSString stringWithFormat:@"%@分",self.dic[@"Score"]];
-    headerView.adressLabel2.text = self.dic[@"MerAddress"];
-    headerView.openTimeLabel.text = self.dic[@"ServiceTime"];
-//    headerView.distanceLabel.text = [NSString stringWithFormat:@"%@km",self.dic[@"Distance"]];
+//    headerView.nameLabel.text = self.dic[@"MerName"];
+//    headerView.adressLabel.text = self.dic[@"MerAddress"];
+//    [headerView.starImageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",self.dic[@"Score"]] substringToIndex:1]]]];
+//    headerView.scoreLabel.text = [NSString stringWithFormat:@"%@分",self.dic[@"Score"]];
+//    headerView.adressLabel2.text = self.dic[@"MerAddress"];
+//    headerView.openTimeLabel.text = self.dic[@"ServiceTime"];
+////    headerView.distanceLabel.text = [NSString stringWithFormat:@"%@km",self.dic[@"Distance"]];
     headerView.distanceLabel.text = [NSString stringWithFormat:@"%.2fkm",[self.distance doubleValue]];
     
 //    headerView.ServiceNumLabel.text = [NSString stringWithFormat:@"服务%@单",self.dic[@"ServiceCount"]];
-    headerView.ServiceNumLabel.textColor  = [UIColor colorFromHex:@"#ff525a"];
-     NSString   *scoreString     = [NSString stringWithFormat:@"服务%@单",self.dic[@"ServiceCount"]];
-    if (self.dic[@"ServiceCount"]!=nil) {
-        NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:scoreString];
-        [AttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange(0, 2)];
-        [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#4a4a4a"] range:NSMakeRange(0, 2)];
-        [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#4a4a4a"] range:NSMakeRange([scoreString length]-1, 1)];
-        
-        headerView.ServiceNumLabel.attributedText   = AttributedStr;
-    }
-   
+//    headerView.ServiceNumLabel.textColor  = [UIColor colorFromHex:@"#ff525a"];
+//     NSString   *scoreString     = [NSString stringWithFormat:@"服务%@单",self.dic[@"ServiceCount"]];
+//    if (self.dic[@"ServiceCount"]!=nil) {
+//        NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:scoreString];
+//        [AttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange(0, 2)];
+//        [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#4a4a4a"] range:NSMakeRange(0, 2)];
+//        [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#4a4a4a"] range:NSMakeRange([scoreString length]-1, 1)];
+//        
+//        headerView.ServiceNumLabel.attributedText   = AttributedStr;
+//    }
+//   
     
     
     
@@ -230,7 +239,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     [headerView.favoriteButton addTarget:self
                           action:@selector(BtnClickCollect:)
                         forControlEvents:UIControlEventTouchUpInside];
-    headerView.favoriteButton.selected = ([[self.dic objectForKey:@"IsCollection"] intValue] == 1)?YES:NO;
+    headerView.favoriteButton.selected = (self.MerChantmodel.IsCollection == 1)?YES:NO;
     
 //    if([self.dic objectForKey:@"MerFlag"])
 //    {

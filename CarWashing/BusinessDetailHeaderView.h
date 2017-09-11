@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "QWMerchantModel.h"
 @interface BusinessDetailHeaderView : UIControl
 
 + (instancetype)businessDetailHeaderView;
@@ -47,4 +47,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *naviSmallBtn;
 @property (weak, nonatomic) IBOutlet UILabel *ServiceNumLabel;
 
+@property(nonatomic,strong)QWMerchantModel *merchantModel;
 @end
