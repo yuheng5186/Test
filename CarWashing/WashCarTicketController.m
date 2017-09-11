@@ -33,8 +33,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*328/667) color:[UIColor colorFromHex:@"#fafafa"]];
+    upView.top                      = 0;
     CarTicketView *ticketView = [CarTicketView carTicketView];
 //    ticketView.frame = CGRectMake(37.5*Main_Screen_Height/667, 64 + 25*Main_Screen_Height/667, Main_Screen_Width - 75*Main_Screen_Height/667, 192*Main_Screen_Height/667);
     ticketView.backgroundColor = self.view.backgroundColor;
@@ -59,22 +59,105 @@
     
     ticketView.ScoreLabel.text = [NSString stringWithFormat:@"%ld积分",self.card.Integralnum];
     
-    [self.view addSubview:ticketView];
+    [upView addSubview:ticketView];
     
-    UIButton *exchangeButton = [UIUtil drawDefaultButton:self.view title:[NSString stringWithFormat:@"%ld积分兑换",self.card.Integralnum] target:self action:@selector(didClickExhangeButton:)];
+    UIButton *exchangeButton = [UIUtil drawDefaultButton:upView title:[NSString stringWithFormat:@"%ld积分兑换",self.card.Integralnum] target:self action:@selector(didClickExhangeButton:)];
     
     [ticketView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).mas_offset(64 + 25*Main_Screen_Height/667);
-        make.left.equalTo(self.view).mas_offset(22.5*Main_Screen_Height/667);
-        make.right.equalTo(self.view).mas_offset(-22.5*Main_Screen_Height/667);
+        make.top.equalTo(upView).mas_offset(25*Main_Screen_Height/667);
+        make.left.equalTo(upView).mas_offset(22.5*Main_Screen_Height/667);
+        make.right.equalTo(upView).mas_offset(-22.5*Main_Screen_Height/667);
         make.height.mas_equalTo(190*Main_Screen_Height/667);
     }];
     
     [exchangeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(ticketView.mas_bottom).mas_offset(50*Main_Screen_Height/667);
-        make.centerX.equalTo(self.view);
+        make.centerX.equalTo(upView);
         make.height.mas_equalTo(48*Main_Screen_Height/667);
         make.width.mas_equalTo(350*Main_Screen_Height/667);
+    }];
+    
+    UIView *downView                = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*270/667) color:[UIColor whiteColor]];
+    downView.top                    = upView.bottom;
+    //
+    UILabel *noticeLabel = [[UILabel alloc] init];
+    noticeLabel.text = @"使用须知";
+    noticeLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+    noticeLabel.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
+    [downView addSubview:noticeLabel];
+    
+    
+    UILabel *noticeLabel1 = [[UILabel alloc] init];
+    noticeLabel1.text = @"1、此卡仅限清洗汽车外观，不得购买其它服务项目";
+    noticeLabel1.textColor = [UIColor colorFromHex:@"#999999"];
+    noticeLabel1.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    noticeLabel1.numberOfLines = 0;
+    [downView addSubview:noticeLabel1];
+    
+    
+    UILabel *noticeLabel2 = [[UILabel alloc] init];
+    noticeLabel2.text = @"2、洗车卡不能兑换现金和转赠与其他人使用";
+    noticeLabel2.textColor = [UIColor colorFromHex:@"#999999"];
+    noticeLabel2.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    noticeLabel2.numberOfLines = 0;
+    [downView addSubview:noticeLabel2];
+    
+    
+    UILabel *noticeLabel3 = [[UILabel alloc] init];
+    noticeLabel3.text = @"3、此卡一经售出，概不兑现。不记名，不挂失，不退卡，不补办";
+    noticeLabel3.textColor = [UIColor colorFromHex:@"#999999"];
+    noticeLabel3.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    noticeLabel3.numberOfLines = 0;
+    [downView addSubview:noticeLabel3];
+    
+    
+    UILabel *noticeLabel4 = [[UILabel alloc] init];
+    noticeLabel4.text = @"4、此卡可在蔷薇服务点享受会员优惠待遇，不得与其它优惠同时使用";
+    noticeLabel4.textColor = [UIColor colorFromHex:@"#999999"];
+    noticeLabel4.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    noticeLabel4.numberOfLines = 0;
+    [downView addSubview:noticeLabel4];
+    
+    
+    UILabel *noticeLabel5 = [[UILabel alloc] init];
+    noticeLabel5.text = @"5、由青岛蔷薇汽车服务有限公司保留此卡法律范围内的最终解释权。VIP热线：4006979558";
+    noticeLabel5.textColor = [UIColor colorFromHex:@"#999999"];
+    noticeLabel5.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    noticeLabel5.numberOfLines = 0;
+    [downView addSubview:noticeLabel5];
+    
+    [noticeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.equalTo(downView).mas_offset(10*Main_Screen_Height/667);
+    }];
+    
+    [noticeLabel1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(noticeLabel);
+        make.top.equalTo(noticeLabel.mas_bottom).mas_offset(10*Main_Screen_Height/667);
+        make.right.equalTo(downView).mas_offset(-10*Main_Screen_Height/667);
+    }];
+    
+    [noticeLabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(noticeLabel);
+        make.top.equalTo(noticeLabel1.mas_bottom).mas_offset(10*Main_Screen_Height/667);
+        make.right.equalTo(downView).mas_offset(-10*Main_Screen_Height/667);
+    }];
+    
+    [noticeLabel3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(noticeLabel);
+        make.top.equalTo(noticeLabel2.mas_bottom).mas_offset(10*Main_Screen_Height/667);
+        make.right.equalTo(downView).mas_offset(-10*Main_Screen_Height/667);
+    }];
+    
+    [noticeLabel4 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(noticeLabel);
+        make.top.equalTo(noticeLabel3.mas_bottom).mas_offset(10*Main_Screen_Height/667);
+        make.right.equalTo(downView).mas_offset(-10*Main_Screen_Height/667);
+    }];
+    
+    [noticeLabel5 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(noticeLabel);
+        make.top.equalTo(noticeLabel4.mas_bottom).mas_offset(10*Main_Screen_Height/667);
+        make.right.equalTo(downView).mas_offset(-10*Main_Screen_Height/667);
     }];
 }
                                 

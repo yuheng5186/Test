@@ -289,7 +289,7 @@
     
     UIView *scanView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     scanView.centerX                   = Main_Screen_Width/8;
-    scanView.top                       = Main_Screen_Height*25/667+sxView.bottom;
+    scanView.top                       = Main_Screen_Height*0/667+sxView.bottom;
     
     UITapGestureRecognizer  *tapScanGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapScanButtonClick:)];
     [scanView addGestureRecognizer:tapScanGesture];
