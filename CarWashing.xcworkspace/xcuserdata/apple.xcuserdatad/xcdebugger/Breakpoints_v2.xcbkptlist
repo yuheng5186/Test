@@ -132,7 +132,7 @@
                   moduleName = "CarWashing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Test/CarWashing/UserInfo/LoginViewController.m"
-                  timestampString = "526557711.083495"
+                  timestampString = "526791724.722349"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "430"
@@ -147,7 +147,7 @@
                   moduleName = "CarWashing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Test/CarWashing/UserInfo/LoginViewController.m"
-                  timestampString = "526557711.084751"
+                  timestampString = "526791724.723595"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "431"
@@ -330,6 +330,54 @@
             startingLineNumber = "205"
             endingLineNumber = "205"
             landmarkName = "-showAlertWithTitle:message:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CarWashing/BusinessPayController.m"
+            timestampString = "526787986.219048"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "-showAlertWithTitle:message:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CarWashing/BusinessPayController.m"
+            timestampString = "526788165.373914"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "-showAlertWithTitle:message:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CarWashing/BusinessPayController.m"
+            timestampString = "526788166.958205"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "-setupUI"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

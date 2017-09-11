@@ -105,7 +105,7 @@
     _showScrollTextView = showScrollTextView;
     
     self.scrollShowTextView.hidden = !showScrollTextView;
-    self.scrollShowTextView.frame = CGRectMake((self.touchView.frame.origin.x)>= 0 ? (self.touchView.frame.origin.x):(0) ,- 25*Main_Screen_Height/667, 36*Main_Screen_Width/375,20*Main_Screen_Height/667);
+    self.scrollShowTextView.frame = CGRectMake((self.touchView.frame.origin.x)>= 0 ? (self.touchView.frame.origin.x):(-23*Main_Screen_Width/375) ,- 27*Main_Screen_Height/667, 46*Main_Screen_Width/375,25*Main_Screen_Height/667);
     self.scrollShowTextLabel.text = [NSString stringWithFormat:@"%.f",self.currentSliderValue];
 }
 
@@ -137,7 +137,8 @@
     
     
     /** 浮标image*/
-    _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, -2*Main_Screen_Height/667,46*Main_Screen_Width/375,25*Main_Screen_Height/667)];
+    _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(-10*Main_Screen_Width/667, -3*Main_Screen_Height/667,46*Main_Screen_Width/375,25*Main_Screen_Height/667)];
+//    _imageView.contentMode=UIViewContentModeScaleAspectFill;
     _imageView.image = [UIImage imageNamed:@"huiyuanfenshukuang"];
 //    _imageView.backgroundColor=[UIColor blueColor];
     [_scrollShowTextView addSubview:_imageView];

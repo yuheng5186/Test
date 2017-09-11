@@ -426,7 +426,7 @@ static NSString *id_cancelCell = @"id_cancelCell";
 }
 //是否允许点击，默认YES
 - (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView {
-    return NO;
+    return YES;
 }
 //是否允许滚动，默认NO
 - (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
@@ -442,7 +442,9 @@ static NSString *id_cancelCell = @"id_cancelCell";
 }
 //空白页按钮点击事件
 - (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView {
-    return NSLog(@"空白页按钮点击事件");
+    NSLog(@"空白页按钮点击事件");
+    self.tabBarController.selectedIndex = 2;
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 /**
  *  调整垂直位置
