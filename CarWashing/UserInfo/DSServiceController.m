@@ -73,7 +73,7 @@
     
     [self setupTopServiceSliderView];
     
-    UITableView *serviceListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 44*Main_Screen_Height/667, Main_Screen_Width, Main_Screen_Height - 64 - (44+61)*Main_Screen_Height/667)];
+    UITableView *serviceListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 44*Main_Screen_Height/667, Main_Screen_Width, Main_Screen_Height - 64 - (44+51)*Main_Screen_Height/667)];
     serviceListView.delegate = self;
     serviceListView.dataSource = self;
     [self.view addSubview:serviceListView];
@@ -107,7 +107,7 @@
     
     [bottomPhoneView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
-        make.height.mas_equalTo(60*Main_Screen_Height/667);
+        make.height.mas_equalTo(50*Main_Screen_Height/667);
         
     }];
     
@@ -120,7 +120,7 @@
     [phoneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(bottomPhoneView);
         make.width.mas_equalTo(100*Main_Screen_Height/667);
-        make.height.mas_equalTo(60*Main_Screen_Height/667);
+        make.height.mas_equalTo(50*Main_Screen_Height/667);
     }];
     
     phoneBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);

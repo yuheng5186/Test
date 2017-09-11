@@ -185,7 +185,19 @@ static NSString *businessCommentCell = @"businessCommentCell";
     headerView.openTimeLabel.text = self.dic[@"ServiceTime"];
 //    headerView.distanceLabel.text = [NSString stringWithFormat:@"%@km",self.dic[@"Distance"]];
     headerView.distanceLabel.text = [NSString stringWithFormat:@"%.2fkm",[self.distance doubleValue]];
-    headerView.ServiceNumLabel.text = [NSString stringWithFormat:@"服务%@单",self.dic[@"ServiceCount"]];
+    
+//    headerView.ServiceNumLabel.text = [NSString stringWithFormat:@"服务%@单",self.dic[@"ServiceCount"]];
+    headerView.ServiceNumLabel.textColor  = [UIColor colorFromHex:@"#ff525a"];
+    NSString   *scoreString     = [NSString stringWithFormat:@"服务%@单",self.dic[@"ServiceCount"]];
+    NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:scoreString];
+    [AttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange(0, 2)];
+    [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#4a4a4a"] range:NSMakeRange(0, 2)];
+    [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#4a4a4a"] range:NSMakeRange([scoreString length]-1, 1)];
+
+    headerView.ServiceNumLabel.attributedText   = AttributedStr;
+    
+    
+    
     if([self.dic[@"ShopType"] intValue] == 1)
     {
         headerView.shopTypeLabel.text = @"洗车服务";
