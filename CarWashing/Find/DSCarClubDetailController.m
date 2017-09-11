@@ -70,8 +70,9 @@
 
 - (void) drawContent
 {
-    self.contentView.top                = 44;
-    self.contentView.height             = self.view.height;
+    self.contentView.top                 = 44;
+    self.contentView.height              = self.view.height;
+    self.contentView.backgroundColor     = [UIColor whiteColor];
 }
 
 
@@ -202,8 +203,8 @@
     [header addSubview:seeNumberLabel];
     
     seeNumberLabel.sd_layout
-    .rightSpaceToView(header, 10*Main_Screen_Height/667)
-    .topSpaceToView(header, 10*Main_Screen_Height/667)
+    .rightSpaceToView(header, 0*Main_Screen_Height/667)
+    .topSpaceToView(header, 25*Main_Screen_Height/667)
     .heightIs(20*Main_Screen_Height/667)
     .widthIs(40*Main_Screen_Height/667);
     
@@ -216,7 +217,7 @@
     
     seeImageView.sd_layout
     .rightSpaceToView(seeNumberLabel, 5*Main_Screen_Height/667)
-    .topSpaceToView(header, 12*Main_Screen_Height/667)
+    .topSpaceToView(header, 27*Main_Screen_Height/667)
     .heightIs(15*Main_Screen_Height/667)
     .widthIs(15*Main_Screen_Height/667);
     
