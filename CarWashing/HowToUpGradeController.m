@@ -122,7 +122,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     
     UIButton *displayBtn = [[UIButton alloc] init];
     displayBtn.userInteractionEnabled = NO;
-    NSString *string = [NSString stringWithFormat:@"%ld积分升级为%@",([self.NextLevelScore integerValue]- [self.CurrentScore integerValue]),self.nextLevel];
+    NSString *string = [NSString stringWithFormat:@"再获得%ld积分升级为%@",([self.NextLevelScore integerValue]- [self.CurrentScore integerValue]),self.nextLevel];
     [displayBtn setTitle:string forState:UIControlStateNormal];
     [displayBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     displayBtn.titleLabel.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
