@@ -110,7 +110,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     
     slider.scrollShowTextLabel.frame=CGRectMake(5*Main_Screen_Width/375, 2*Main_Screen_Height/667, imageWidth.width, 17*Main_Screen_Height/667);
     slider.imageView.frame=CGRectMake(0, -2*Main_Screen_Height/667,imageWidth.width+10*Main_Screen_Height/667,25*Main_Screen_Height/667);
-    
+      
     [self.view addSubview:slider];
     UILabel *maxLab = [[UILabel alloc] init];
     

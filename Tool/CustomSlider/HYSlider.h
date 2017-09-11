@@ -61,4 +61,5 @@
 @property (nonatomic,weak) id <HYSliderDelegate> delegate;
 @property (nonatomic,strong) UIImageView *imageView;
 @property (nonatomic,strong) UILabel *scrollShowTextLabel;
+
 @end

@@ -10,10 +10,11 @@
 #import "UILabel+StringFrame.h"
 @interface HYSlider ()
 @property (nonatomic,strong) UIView *leftView;
-@property (nonatomic,strong) UIView *scrollShowTextView;
-@property (nonatomic,strong) UILabel *textLabel;
 
+@property (nonatomic,strong) UILabel *textLabel;
+@property (nonatomic,strong) UIView *scrollShowTextView;
 @property (nonatomic,strong) UIView *touchView;
+
 @property (nonatomic) CGFloat hyMaxValue;
 
 @end
@@ -105,7 +106,7 @@
     _showScrollTextView = showScrollTextView;
     
     self.scrollShowTextView.hidden = !showScrollTextView;
-    self.scrollShowTextView.frame = CGRectMake((self.touchView.frame.origin.x)>= 0 ? (self.touchView.frame.origin.x):(-23*Main_Screen_Width/375) ,- 27*Main_Screen_Height/667, 46*Main_Screen_Width/375,25*Main_Screen_Height/667);
+    self.scrollShowTextView.frame = CGRectMake((self.touchView.frame.origin.x)>= 0 ? (self.touchView.frame.origin.x-5*Main_Screen_Width/375):(-5*Main_Screen_Width/375) ,- 27*Main_Screen_Height/667, 46*Main_Screen_Width/375,25*Main_Screen_Height/667);
     self.scrollShowTextLabel.text = [NSString stringWithFormat:@"%.f",self.currentSliderValue];
 }
 

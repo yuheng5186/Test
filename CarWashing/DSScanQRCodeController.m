@@ -225,6 +225,7 @@
 //    }
     
 #pragma mark-获取设备编码
+    outMessage=@"aa:0005:ok";
     NSString *imei                          = outMessage;
     //处理设备编码
     NSRange
@@ -240,10 +241,15 @@
                         - startRange.location
                         - startRange.length);
     
-//    NSString *result = [imei substringWithRange:range];
+    NSString *result = [imei substringWithRange:range];
+    NSLog(@"%@",result);
+//    if (result == nil) {
+//        [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
+//    }else if(result.length>4&&result.length<4){
+//        [self.view showInfo:@"不是该平台的相关信息" autoHidden:YES interval:2];
+//    
+//    }else{
     
-    if (imei != nil) {
-        
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         HUD.removeFromSuperViewOnHide =YES;
         HUD.mode = MBProgressHUDModeIndeterminate;
@@ -321,20 +327,101 @@
             //            [self.navigationController popViewControllerAnimated:YES];
             
         }];
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    }
+    
+//    }
+//    if (imei != nil) {
+//        
+//        HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//        HUD.removeFromSuperViewOnHide =YES;
+//        HUD.mode = MBProgressHUDModeIndeterminate;
+//        HUD.labelText = @"加载中";
+//        HUD.minSize = CGSizeMake(132.f, 108.0f);
+//        
+//        NSDictionary *mulDic = @{
+//                                 @"DeviceCode":@"0005",
+//                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+//                                 };
+//        NSDictionary *params = @{
+//                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+//                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+//                                 };
+//        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@ScanCode/DeviceScanCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
+//            
+//            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+//            {
+//                
+//                
+//                NSDictionary *arr = [NSDictionary dictionary];
+//                arr = [dict objectForKey:@"JsonData"];
+//                
+//                self.scan = [[ScanCode alloc]init];
+//                [self.scan setValuesForKeysWithDictionary:arr];
+//                
+//                
+//                __weak typeof(self) weakSelf = self;
+//                HUD.completionBlock = ^(){
+//                    //(1.需要支付状态,2.扫描成功)
+//                    if(weakSelf.scan.ScanCodeState == 1)
+//                    {
+//                        DSScanPayController *payVC           = [[DSScanPayController alloc]init];
+//                        payVC.hidesBottomBarWhenPushed            = YES;
+//                        
+//                        payVC.SerMerChant = weakSelf.scan.DeviceName;
+//                        payVC.SerProject = weakSelf.scan.ServiceItems;
+//                        payVC.Jprice = [NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt];
+//                        payVC.Xprice = [NSString stringWithFormat:@"￥%@",weakSelf.scan.Amt];
+//                        
+//                        payVC.DeviceCode = weakSelf.scan.DeviceCode;
+//                        
+//                        payVC.RemainCount = [NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount];
+//                        payVC.IntegralNum = [NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum];
+//                        payVC.CardType = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
+//                        payVC.CardName = weakSelf.scan.CardName;
+//                        
+//                        [weakSelf.navigationController pushViewController:payVC animated:YES];
+//                    }
+//                    else
+//                    {
+//                        DSStartWashingController *start = [[DSStartWashingController alloc]init];
+//                        start.hidesBottomBarWhenPushed            = YES;
+//                        
+//                        start.RemainCount = [NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount];
+//                        start.IntegralNum = [NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum];
+//                        start.CardType = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
+//                        start.CardName = weakSelf.scan.CardName;
+//                        
+//                        [weakSelf.navigationController pushViewController:start animated:YES];
+//                    }
+//                };
+//                
+//                [HUD hide:YES afterDelay:1.f];
+//            }
+//            else
+//            {
+//                [HUD hide:YES];
+//                [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
+//                //                [self.navigationController popViewControllerAnimated:YES];
+//            }
+//        } fail:^(NSError *error) {
+//            [HUD hide:YES];
+//            [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+//            //            [self.navigationController popViewControllerAnimated:YES];
+//            
+//        }];
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//    }
 }
 #pragma mark-扫一扫获取设备
 -(void)getRequestDecvie:(NSString *)imei{
