@@ -52,7 +52,7 @@
     self.contentView.backgroundColor   = [UIColor whiteColor];
 
     //使用默认大小会拉大高宽，虽然设置100，但实际是6*40+(6+1)*8 = 296，参考布局规则
-    _inputView = [[TFGridInputView alloc] initWithFrame:CGRectMake(Main_Screen_Width*15/375, Main_Screen_Height*120/667, 40, 40) row:1 column:7];
+    _inputView = [[TFGridInputView alloc] initWithFrame:CGRectMake(Main_Screen_Width*15/375, Main_Screen_Height*120/667, 40, 40) row:1 column:8];
     
     _inputView.keyboardType = UIKeyboardTypeNumberPad;
     //构建一个样式，并调整各种格式
@@ -139,30 +139,8 @@
 -(void)getInputViewText{
     [_textGetButton setTitle:_inputView.text forState:(UIControlStateNormal)];
 #pragma mark-获取设备编码
-    NSString *imei                          = @"ccccc:02314005:ok";
-    //处理设备编码
-//    NSRange
-//    startRange = [imei rangeOfString:@":"];
-//    
-//    NSRange
-//    endRange = [imei rangeOfString:@":"];
-//    
-//    NSRange
-//    range = NSMakeRange(startRange.location
-//                        + startRange.length,
-//                        endRange.location
-//                        - startRange.location
-//                        - startRange.length);
-// 
-//    
-//        NSString *result = [imei substringWithRange:range];
    
-    NSArray *array = [imei componentsSeparatedByString:@":"]; //从字符A中分隔成2个元素的数组
-    
-    NSLog(@"%@",array[1]);
-//    NSLog(@"%@",result);
-    imei=@"0005";
-    if (imei != nil) {
+    if (_inputView.text != nil) {
         
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         HUD.removeFromSuperViewOnHide =YES;
@@ -171,7 +149,7 @@
         HUD.minSize = CGSizeMake(132.f, 108.0f);
         
         NSDictionary *mulDic = @{
-                                 @"DeviceCode":@"0005",
+                                 @"DeviceCode":_inputView.text,
                                  @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
                                  };
         NSDictionary *params = @{

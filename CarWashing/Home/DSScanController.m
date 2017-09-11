@@ -248,22 +248,9 @@
     #pragma mark-获取设备编码
     NSString *imei                          = outMessage;
     //处理设备编码
-    NSRange
-    startRange = [imei rangeOfString:@":"];
+    NSArray *array = [imei componentsSeparatedByString:@":"]; //从字符：中分隔成2个元素的数组
     
-    NSRange
-    endRange = [imei rangeOfString:@":"];
-    
-    NSRange
-    range = NSMakeRange(startRange.location
-                        + startRange.length,
-                        endRange.location
-                        - startRange.location
-                        - startRange.length);
-    
-//    NSString *result = [imei substringWithRange:range];
-    
-    if (imei != nil) {
+    if (array[1] != nil) {
         
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         HUD.removeFromSuperViewOnHide =YES;
@@ -272,7 +259,7 @@
         HUD.minSize = CGSizeMake(132.f, 108.0f);
         
         NSDictionary *mulDic = @{
-                                 @"DeviceCode":@"0005",
+                                 @"DeviceCode":array[1],
                                  @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
                                  };
         NSDictionary *params = @{
@@ -305,28 +292,12 @@
                         payVC.SerProject = weakSelf.scan.ServiceItems;
                         payVC.Jprice = [NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt];
                         payVC.Xprice = [NSString stringWithFormat:@"￥%@",weakSelf.scan.Amt];
-                        
-                        
-                        
-//                        NSRange
-//                        startRange = [weakSelf.scan.DeviceCode rangeOfString:@":"];
-//                        
-//                        NSRange
-//                        endRange = [weakSelf.scan.DeviceCode rangeOfString:@":"];
-//                        
-//                        NSRange
-//                        range = NSMakeRange(startRange.location
-//                                            + startRange.length,
-//                                            endRange.location
-//                                            - startRange.location
-//                                            - startRange.length);
-//                        
-//                        NSString *result = [weakSelf.scan.DeviceCode substringWithRange:range];
+   
                         payVC.DeviceCode = weakSelf.scan.DeviceCode;
                         
-                        payVC.RemainCount = [NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount];
-                        payVC.IntegralNum = [NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum];
-                        payVC.CardType = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
+                        payVC.RemainCount = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.RemainCount];
+                        payVC.IntegralNum = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.IntegralNum];
+                        payVC.CardType = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.CardType];
                         payVC.CardName = weakSelf.scan.CardName;
                         
                         [weakSelf.navigationController pushViewController:payVC animated:YES];
@@ -336,8 +307,8 @@
                         DSStartWashingController *start = [[DSStartWashingController alloc]init];
                         start.hidesBottomBarWhenPushed            = YES;
                         
-                        start.RemainCount = [NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount];
-                        start.IntegralNum = [NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum];
+                        start.RemainCount = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.RemainCount];
+                        start.IntegralNum = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.IntegralNum];
                         start.CardType = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
                         start.CardName = weakSelf.scan.CardName;
                         
