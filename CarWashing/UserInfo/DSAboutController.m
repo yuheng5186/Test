@@ -66,13 +66,13 @@
     showNameLabel.top               = appImageView.bottom +Main_Screen_Height*15/667;
     showNameLabel.centerX           = appImageView.centerX;
     
-    NSString *contentName               = @"  蔷薇汽车服务APP平台由上海专业技术团队研发，采用SoLoMo+O2O相结合的商业模式，利用物联网、二维码、牌照识别、无线路由、云计算等先进技术，通过手机、微信以及APP，实现一机在手，车主可洗车，商户可搭载商品，实现无现金时代人们消费行为和消费习惯，注重用户体验，通过价值交互提升商户的企业核心价值和竞争优势，为顾客提供方便、快捷的汽车服务体验。\n此平台的诞生将彻底改变传统汽车服务市场格局，颠覆了行业内自主经营模式，强强联合，利用移动互联网特点，将线上与线下相融合，完美打造指尖上的爱车管家式服务。\n项目优势：\n①免费的平台和设备\n②专业的一站式车主服务平台\n③多维营销需求“零”等待\n④“大数据”助推业主普惠客户\n\nSLOGAN:指尖上的爱车管家";
+    NSString *contentName               = @"    蔷薇汽车服务APP平台由上海专业技术团队研发，采用SoLoMo+O2O相结合的商业模式，利用物联网、二维码、牌照识别、无线路由、云计算等先进技术，通过手机、微信以及APP，实现一机在手，车主可洗车，商户可搭载商品，实现无现金时代人们消费行为和消费习惯，注重用户体验，通过价值交互提升商户的企业核心价值和竞争优势，为顾客提供方便、快捷的汽车服务体验。\n此平台的诞生将彻底改变传统汽车服务市场格局，颠覆了行业内自主经营模式，强强联合，利用移动互联网特点，将线上与线下相融合，完美打造指尖上的爱车管家式服务。\n项目优势：\n①免费的平台和设备\n②专业的一站式车主服务平台\n③多维营销需求“零”等待\n④“大数据”助推业主普惠客户\n\nSLOGAN:指尖上的爱车管家";
     UIFont *contentNameFont             = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
     UILabel *contentNameLabel           = [UIUtil drawLabelInView:self.scrollView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*20/375, Main_Screen_Height*400/667) font:contentNameFont text:contentName isCenter:NO];
     contentNameLabel.textColor          = [UIColor colorFromHex:@"#999999"];
 //    contentNameLabel.backgroundColor    = [UIColor redColor];
     contentNameLabel.numberOfLines      = 0;
-    contentNameLabel.top                = upView.bottom +Main_Screen_Height*5/667;
+    contentNameLabel.top                = showNameLabel.bottom +Main_Screen_Height*10/667;
     contentNameLabel.centerX            = appImageView.centerX;
     
 //    NSString *serviceProtocolName              = @"蔷薇爱车服务协议";
