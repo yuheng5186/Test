@@ -482,8 +482,8 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     
     if(self.mycar == nil)
     {
-        
-        if(_brandTF.text.length == 0 || _numTF.text.length == 0 || _text1.text.length == 0 || _lbl2.text.length <= 3 || _lbl.text.length <= 3 || _text2.text.length == 0)
+        //|| _text1.text.length == 0 || _lbl2.text.length <= 3 || _lbl.text.length <= 3 || _text2.text.length == 0
+        if(_brandTF.text.length == 0 || _numTF.text.length == 0 )
         {
             [HUD hide:YES];
             [self.view showInfo:@"请将信息填写完整" autoHidden:YES interval:2];
