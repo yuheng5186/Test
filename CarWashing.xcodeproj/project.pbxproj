@@ -133,6 +133,8 @@
 		1853BA4A1F28A04100B98C7F /* JFCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA421F28A04100B98C7F /* JFCityViewController.m */; };
 		1853BA4B1F28A04100B98C7F /* JFSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA441F28A04100B98C7F /* JFSearchView.m */; };
 		1853BA4E1F28A04C00B98C7F /* JFLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA4D1F28A04C00B98C7F /* JFLocation.m */; };
+		1887A2191F66CDD90042B062 /* MerSerListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1887A2181F66CDD90042B062 /* MerSerListModel.m */; };
+		1887A21C1F66CE260042B062 /* MerComList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1887A21B1F66CE260042B062 /* MerComList.m */; };
 		188907121F2730F4009E20B0 /* DSUpdateRuleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188907111F2730F4009E20B0 /* DSUpdateRuleController.m */; };
 		188907161F283184009E20B0 /* DSGetScoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188907151F283184009E20B0 /* DSGetScoreController.m */; };
 		18A4B1B11F4AAB5200C64978 /* HowToUpGradeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4B1B01F4AAB5200C64978 /* HowToUpGradeController.m */; };
@@ -536,6 +538,10 @@
 		1853BA441F28A04100B98C7F /* JFSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFSearchView.m; path = JFCityViewController/JFSearchView.m; sourceTree = "<group>"; };
 		1853BA4C1F28A04C00B98C7F /* JFLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFLocation.h; path = JFCityViewController/Location/JFLocation.h; sourceTree = "<group>"; };
 		1853BA4D1F28A04C00B98C7F /* JFLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFLocation.m; path = JFCityViewController/Location/JFLocation.m; sourceTree = "<group>"; };
+		1887A2171F66CDD90042B062 /* MerSerListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerSerListModel.h; sourceTree = "<group>"; };
+		1887A2181F66CDD90042B062 /* MerSerListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerSerListModel.m; sourceTree = "<group>"; };
+		1887A21A1F66CE260042B062 /* MerComList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerComList.h; sourceTree = "<group>"; };
+		1887A21B1F66CE260042B062 /* MerComList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerComList.m; sourceTree = "<group>"; };
 		188907101F2730F4009E20B0 /* DSUpdateRuleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSUpdateRuleController.h; path = UserInfo/DSUpdateRuleController.h; sourceTree = "<group>"; };
 		188907111F2730F4009E20B0 /* DSUpdateRuleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSUpdateRuleController.m; path = UserInfo/DSUpdateRuleController.m; sourceTree = "<group>"; };
 		188907141F283184009E20B0 /* DSGetScoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSGetScoreController.h; path = UserInfo/DSGetScoreController.h; sourceTree = "<group>"; };
@@ -1353,6 +1359,17 @@
 			path = Tool/CustomSlider;
 			sourceTree = "<group>";
 		};
+		1887A2161F66CDA30042B062 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				1887A2171F66CDD90042B062 /* MerSerListModel.h */,
+				1887A2181F66CDD90042B062 /* MerSerListModel.m */,
+				1887A21A1F66CE260042B062 /* MerComList.h */,
+				1887A21B1F66CE260042B062 /* MerComList.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
 		18A4B2241F4D6CAB00C64978 /* AutoSizeToDevice-master */ = {
 			isa = PBXGroup;
 			children = (
@@ -1528,6 +1545,7 @@
 		501671FE1F29781E00384186 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				1887A2161F66CDA30042B062 /* model */,
 				181E92D31F1F3B900006511E /* BusinessViewController.h */,
 				181E92D41F1F3B900006511E /* BusinessViewController.m */,
 				18322AB81F4D7A5D003ABB7B /* QWMclistTableViewCell.h */,
@@ -2123,6 +2141,7 @@
 				181E92DE1F1F3BE40006511E /* MySettingViewController.m in Sources */,
 				5061A43F1F3AAECE003939A4 /* UIView+Uitls.m in Sources */,
 				181E92E31F2054C50006511E /* DSUserInfoController.m in Sources */,
+				1887A2191F66CDD90042B062 /* MerSerListModel.m in Sources */,
 				180E43031F3B471100013D2D /* MBProgressHUD.m in Sources */,
 				04443F501F5944450032BA5E /* DSScanPayController.m in Sources */,
 				181E92CD1F1F39CC0006511E /* UIImage+BFS.m in Sources */,
@@ -2196,6 +2215,7 @@
 				1853BA0C1F28774400B98C7F /* LKActionSheet.m in Sources */,
 				188907161F283184009E20B0 /* DSGetScoreController.m in Sources */,
 				1853BA471F28A04100B98C7F /* JFCityCollectionViewCell.m in Sources */,
+				1887A21C1F66CE260042B062 /* MerComList.m in Sources */,
 				180E432C1F417E3500013D2D /* DSAddShopController.m in Sources */,
 				501672021F29797600384186 /* BusinessDetailViewController.m in Sources */,
 				181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */,

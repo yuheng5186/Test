@@ -128,6 +128,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             self.dic = [dict objectForKey:@"JsonData"];
+            NSLog(@"%@",self.dic);
             //        [self.MerchantDetailData addObjectsFromArray:arr];
             
             [self setupUI];
@@ -176,7 +177,8 @@ static NSString *businessCommentCell = @"businessCommentCell";
     headerView.frame = CGRectMake(0, Main_Screen_Width/2, Main_Screen_Width, 196*Main_Screen_Height/667);
     
     self.headerView = headerView;
-    
+   
+        
     headerView.nameLabel.text = self.dic[@"MerName"];
     headerView.adressLabel.text = self.dic[@"MerAddress"];
     [headerView.starImageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",self.dic[@"Score"]] substringToIndex:1]]]];
@@ -188,13 +190,17 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
 //    headerView.ServiceNumLabel.text = [NSString stringWithFormat:@"服务%@单",self.dic[@"ServiceCount"]];
     headerView.ServiceNumLabel.textColor  = [UIColor colorFromHex:@"#ff525a"];
-    NSString   *scoreString     = [NSString stringWithFormat:@"服务%@单",self.dic[@"ServiceCount"]];
-    NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:scoreString];
-    [AttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange(0, 2)];
-    [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#4a4a4a"] range:NSMakeRange(0, 2)];
-    [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#4a4a4a"] range:NSMakeRange([scoreString length]-1, 1)];
-
-    headerView.ServiceNumLabel.attributedText   = AttributedStr;
+     NSString   *scoreString     = [NSString stringWithFormat:@"服务%@单",self.dic[@"ServiceCount"]];
+    if (self.dic[@"ServiceCount"]!=nil) {
+        NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:scoreString];
+        [AttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange(0, 2)];
+        [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#4a4a4a"] range:NSMakeRange(0, 2)];
+        [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#4a4a4a"] range:NSMakeRange([scoreString length]-1, 1)];
+        
+        headerView.ServiceNumLabel.attributedText   = AttributedStr;
+    }
+   
+    
     
     
     
@@ -596,11 +602,40 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     
     [estimateCell.headImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserImg"]]] placeholderImage:[UIImage imageNamed:@"xichebaidi"]];
-    
+    if([[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserName"] isKindOfClass:[NSNull class]])
+    {
+        estimateCell.phoneLabel.text = @"";
+    }else
+    {
+        
     estimateCell.phoneLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserName"];
-    [estimateCell.userScoreLabel setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",self.dic[@"Score"]] substringToIndex:1]]]];
-    estimateCell.commentLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentContent"];
-    estimateCell.dateLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentDate"];
+    }
+//    [estimateCell.userScoreLabel setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",self.dic[@"Score"]] substringToIndex:1]]]];
+    if([[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"Score"] isKindOfClass:[NSNull class]])
+    {
+        
+    }else
+    {
+        [estimateCell.userScoreLabel setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"Score"]] substringToIndex:1]]]];
+    }
+
+//    estimateCell.commentLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentContent"];
+    if([[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentContent"] isKindOfClass:[NSNull class]])
+    {
+        estimateCell.commentLabel.text = @"";
+    }else
+    {
+        estimateCell.commentLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentContent"];
+    }
+
+//    estimateCell.dateLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentDate"];
+    if([[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentDate"] isKindOfClass:[NSNull class]])
+    {
+        estimateCell.dateLabel.text = @"";
+    }else
+    {
+        estimateCell.dateLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentDate"];
+    }
     estimateCell.timeLabel.hidden = YES;
     
     estimateCell.selectionStyle = UITableViewCellSelectionStyleNone;
