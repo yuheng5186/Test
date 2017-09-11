@@ -96,7 +96,7 @@
 //    UIImage *editImage              = [UIImage imageNamed:@"icon_defaultavatar"];
     
     
-    self.editButton           = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) iconName:@"touxiang" target:self action:@selector(editButtonClick:)];
+    self.editButton           = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) iconName:@"huiyuantou" target:self action:@selector(editButtonClick:)];
     self.editButton.top                  = titleNameLabel.bottom +Main_Screen_Height*5/667;
     self.editButton.centerX              = titleNameLabel.centerX;
     self.editButton.layer.masksToBounds = YES;

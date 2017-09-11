@@ -266,7 +266,7 @@
         [images addObject:[NSString stringWithFormat:@"%02ld.jpg",i+1]];
     }
     
-    sxView =   [SXScrPageView direcWithtFrame:CGRectMake(0, 0, Main_Screen_Width, 200) ImageArr:images AndImageClickBlock:^(NSInteger index) {
+    sxView =   [SXScrPageView direcWithtFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*150/667) ImageArr:images AndImageClickBlock:^(NSInteger index) {
         
         DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
         viewVC.hidesBottomBarWhenPushed = YES;
