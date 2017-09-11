@@ -136,6 +136,7 @@
     
     
     commentTextView = [[UITextView alloc] init];
+
     commentTextView.text = @"亲,您的评价可以帮助到别人哦";
     commentTextView.textColor = [UIColor colorFromHex:@"#999999"];
     commentTextView.delegate = self;
@@ -160,93 +161,73 @@
 - (void)clickSigninButton:(UIButton *)button {
     
     
-    HUD1 = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    HUD1.removeFromSuperViewOnHide =YES;
-    HUD1.mode = MBProgressHUDModeIndeterminate;
-    HUD1.minSize = CGSizeMake(132.f, 108.0f);
     
     
-    
-    NSDictionary *mulDic = @{
-                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                             @"MerCode":self.SerMerCode,
-                             @"SerCode":self.SerCode,
-                             @"OrderId":self.orderid,
-                             @"CommentContent":commentTextView.text,
-                             @"Score":[NSString stringWithFormat:@"%ld",score]
-                             };
-    
-    NSDictionary *params = @{
-                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                             };
-    
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/AddOrderComment",Khttp] success:^(NSDictionary *dict, BOOL success) {
-       
-        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-        {
-//            NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];
-//            [[NSNotificationCenter defaultCenter]postNotification:notice];
+    if (commentTextView.text.length > 0) {
+        HUD1 = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        HUD1.removeFromSuperViewOnHide =YES;
+        HUD1.mode = MBProgressHUDModeIndeterminate;
+        HUD1.minSize = CGSizeMake(132.f, 108.0f);
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"MerCode":self.SerMerCode,
+                                 @"SerCode":self.SerCode,
+                                 @"OrderId":self.orderid,
+                                 @"CommentContent":commentTextView.text,
+                                 @"Score":[NSString stringWithFormat:@"%ld",score]
+                                 };
+        
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/AddOrderComment",Khttp] success:^(NSDictionary *dict, BOOL success) {
             
-            
-            __weak typeof (self)weakSelf = self;
-            
-            HUD1.completionBlock = ^(){
-                [weakSelf.view showInfo:@"评价成功" autoHidden:YES interval:2];
-                //            self.dic = [dict objectForKey:@"JsonData"];
-                //        [self.MerchantDetailData addObjectsFromArray:arr];
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+                //            NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];
+                //            [[NSNotificationCenter defaultCenter]postNotification:notice];
                 
-                [weakSelf.navigationController popViewControllerAnimated:YES];
-            };
+                
+                __weak typeof (self)weakSelf = self;
+                
+                HUD1.completionBlock = ^(){
+                    [weakSelf.view showInfo:@"评价成功" autoHidden:YES interval:2];
+                    //            self.dic = [dict objectForKey:@"JsonData"];
+                    //        [self.MerchantDetailData addObjectsFromArray:arr];
+                    
+                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                };
+                
+                [HUD1 hide:YES afterDelay:1];
+                
+                
+            }
+            else
+            {
+                [HUD1 hide:YES];
+                [self.view showInfo:@"评论添加失败" autoHidden:YES interval:2];
+                //            [self.navigationController popViewControllerAnimated:YES];
+            }
             
-            [HUD1 hide:YES afterDelay:1];
             
-           
-        }
-        else
-        {
+            
+            
+        } fail:^(NSError *error) {
             [HUD1 hide:YES];
             [self.view showInfo:@"评论添加失败" autoHidden:YES interval:2];
-            //            [self.navigationController popViewControllerAnimated:YES];
-        }
+        }];
         
-        
-        
-        
-    } fail:^(NSError *error) {
-        [HUD1 hide:YES];
-        [self.view showInfo:@"评论添加失败" autoHidden:YES interval:2];
-    }];
+    }else {
+//         [HUD1 hide:YES];
+        [self.view showInfo:@"请输入内容再提交" autoHidden:YES interval:1];
+    }
+    
+   
 
     
 }
-
-
-//- (void)clickButton:(UIButton *)button {
-//    
-//    
-//
-//    if (button.selected) {
-//        
-//        [button setImage:[UIImage imageNamed:@"huangxingxing"] forState:UIControlStateSelected];
-//        
-//    }
-//    
-//    button.selected = !button.selected;
-//}
-//
-////初始化button
-//- (UIButton *)buttonWithNormalImage:(UIImage *)normalImage SelectedImage:(UIImage *)selectedImage {
-//    
-//    UIButton *button = [[UIButton alloc] init];
-//    
-//    [button setImage:normalImage forState:UIControlStateNormal];
-//    [button setImage:selectedImage forState:UIControlStateSelected];
-//    
-//    return button;
-//}
-
-
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     
@@ -260,7 +241,7 @@
 - (void)textViewDidEndEditing:(UITextView *)textView {
     
     if (textView.text.length < 1) {
-        textView.text = @"亲,您的评价可以帮助到别人哦";
+//        textView.text = @"亲,您的评价可以帮助到别人哦";
         textView.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         textView.textColor = [UIColor colorFromHex:@"#999999"];
     }
