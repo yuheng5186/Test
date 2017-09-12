@@ -54,9 +54,10 @@
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UIScrollViewDelegate>
 {
-    UIImageView *logoImageView;
-    SXScrPageView * sxView;
-    UIView *titleView;
+    UIImageView     *logoImageView;
+    UILabel         *titleNameLabel;
+    SXScrPageView   *sxView;
+    UIView          *titleView;
 }
 
 /** 选择的结果*/
@@ -191,8 +192,9 @@
     
     NSString *titleName              = @"蔷薇爱车";
     UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
-    UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
+    titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
+    titleNameLabel.text              = @"";
     titleNameLabel.centerX           = titleView.centerX;
     titleNameLabel.centerY           = titleView.centerY +8;
     
@@ -1336,10 +1338,13 @@
     if (imageOffsetY >= sxView.frame.size.height - 64)
     {
         titleView.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
+        titleNameLabel.text       = @"蔷薇爱车";
     }
     else
     {
         titleView.backgroundColor = [UIColor clearColor];
+        titleNameLabel.text       = @"";
+
     }
     
     
