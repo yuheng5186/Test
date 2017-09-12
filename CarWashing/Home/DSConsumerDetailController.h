@@ -11,7 +11,7 @@
 
 @interface DSConsumerDetailController : BaseController
 
-@property(nonatomic,copy)Record *record;
+@property(nonatomic,copy)Recordinfo *record;
 
 
 @end

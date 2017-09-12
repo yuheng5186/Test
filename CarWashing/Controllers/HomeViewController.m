@@ -77,6 +77,7 @@
 @property (strong, nonatomic) CLLocationManager* locationManager;
 
 @property (strong, nonatomic)NSString *LocCity;
+@property (strong, nonatomic)Record *newrc;
 
 @end
 
@@ -143,7 +144,7 @@
     self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 70, 0);
     [self.contentView addSubview:self.tableView];
     
-    [self createHeaderView];
+//    [self createHeaderView];
     
     [self createNavTitleView];
     
@@ -260,13 +261,23 @@
     backgroudView.top               = 0;
     backgroudView.left              = 0;
     [headerView addSubview:backgroudView];
-    
+   
     NSMutableArray * images = [NSMutableArray array];
+   
+    if (self.newrc.adverList.count!=0) {
+        
+        for (NSInteger i = 0; i<self.newrc.adverList.count; i++)
+        {
+            [images addObject:[NSString stringWithFormat:@"%@%@",kHTTPImg,[((NSDictionary *)self.newrc.adverList[i]) objectForKey:@"ImgUrl"]]];
+        }
+    }else{
+        for (NSInteger i = 0; i<4; i++)
+        {
+            [images addObject:[NSString stringWithFormat:@"%02ld.jpg",i+1]];
+        }
     
-    for (NSInteger i = 0; i<4; i++)
-    {
-        [images addObject:[NSString stringWithFormat:@"%02ld.jpg",i+1]];
     }
+    NSLog(@"轮播图片：%@",images);
     
     sxView =   [SXScrPageView direcWithtFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*150/667) ImageArr:images AndImageClickBlock:^(NSInteger index) {
         
@@ -643,16 +654,16 @@
             else
             {
                 
-                
-                NSArray *arr = [NSArray array];
-                arr = [dict objectForKey:@"JsonData"];
-                for(NSDictionary *dic in arr)
-                {
-                    Record *newrc = [[Record alloc]init];
-                    [newrc setValuesForKeysWithDictionary:dic];
-                    [self.GetUserRecordData addObject:newrc];
-                }
-        
+                NSLog(@"%@",[dict objectForKey:@"JsonData"]);
+//                NSArray *arr = [NSArray array];
+//                arr = [dict objectForKey:@"JsonData"];
+//                for(NSDictionary *dic in arr)
+//                {
+                    self.newrc = [[Record alloc]initWithDictionary:[dict objectForKey:@"JsonData"] error:nil];
+                    
+//                    [self.GetUserRecordData addObject:newrc];
+//                }
+                 [self createHeaderView];
                 [self.tableView reloadData];
                 [self.tableView.mj_header endRefreshing];
             }
@@ -678,7 +689,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.GetUserRecordData count];
+    return [self.newrc.recList count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -692,7 +703,7 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section==self.GetUserRecordData.count-1) {
+    if (section==self.newrc.recList.count-1) {
          return 40.1f;
     }else{
         return 0.01;
@@ -701,7 +712,7 @@
    
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-     if (section==self.GetUserRecordData.count-1) {
+     if (section==self.newrc.recList.count-1) {
     UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 40)];
     footerview.textColor         = [UIColor colorFromHex:@"#999999"];
     footerview.textAlignment=NSTextAlignmentCenter;
@@ -730,7 +741,8 @@
     cell.backgroundColor    = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    Record *record = (Record *)[self.GetUserRecordData objectAtIndex:indexPath.section];
+    Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil];
+    NSLog(@"%@==%@",record,[self.newrc.recList objectAtIndex:indexPath.section]);
     NSString *imageString;
     NSString *titleString;
     NSString *vipString;
@@ -846,7 +858,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    Record *record = (Record *)[self.GetUserRecordData objectAtIndex:indexPath.section];
+    Recordinfo *record =[[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil] ;
     
     if(record.ShowType == 1)
     {
