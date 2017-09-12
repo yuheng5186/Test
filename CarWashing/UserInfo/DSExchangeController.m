@@ -25,7 +25,7 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"激活"];
+    [self drawTitle:@"激活卡券"];
     
 }
 

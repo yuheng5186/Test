@@ -33,7 +33,7 @@
 
 - (void) drawNavigation {
     
-    [self drawTitle:@"用户权益"];
+    [self drawTitle:@"新用户注册奖励"];
 }
 - (void) drawContent {
     self.contentView.top        = self.navigationView.bottom;
