@@ -16,7 +16,6 @@
 @property(strong,nonatomic) NSTimer *timer;
 //点击图片出发Block
 @property(strong,nonatomic) imageClickBlock clickBlock;
-@property(strong,nonatomic)UIImageView *image;
 
 @end
 //获取ScrollView的X值偏移量
@@ -51,9 +50,9 @@
 {
     if(self=[self initWithFrame:frame])
     {
-
+        
         //设置ScrollView的contentSize
-        self.direct.contentSize = CGSizeMake((imageNameArray.count+2)*frame_width,0);
+        self.direct.contentSize = CGSizeMake((imageNameArray.count)*frame_width,0);
         
         self.pageVC.numberOfPages = imageNameArray.count;
         
@@ -66,7 +65,7 @@
     return self;
 }
 /**
-
+ 
  */
 #pragma mark -  initWithFrame 初始化方法重写
 -(instancetype)initWithFrame:(CGRect)frame
@@ -86,9 +85,9 @@
         //初始化轮播页码控件
         self.pageVC=[[UIPageControl alloc]init];
         //设置轮播页码的位置
-        self.pageVC.frame=CGRectMake(0,Main_Screen_Height*110/667, self.frame.size.width, 30);
-        _pageVC.currentPageIndicatorTintColor = [UIColor colorFromHex:@"#0161a1"];
-        _pageVC.pageIndicatorTintColor = [UIColor grayColor];
+        self.pageVC.frame=CGRectMake(0,self.frame.size.height-30, self.frame.size.width, 30);
+//        _pageVC.currentPageIndicatorTintColor = #define BasicBackGroundColor  [UIColor colorWithRed:102/255.0 green:51/255.0 blue:0/255.0 alpha:1];
+        _pageVC.pageIndicatorTintColor = [UIColor whiteColor];
         [self addSubview:self.pageVC];
         
         self.time = 3.0;
@@ -129,6 +128,9 @@
         self.direct.contentOffset=currentConOffSet;
     }completion:^(BOOL finished) {
         [self updataWhenFirstOrLast];
+//        self.direct.contentOffset=currentConOffSet;
+//        //更新PageControl
+//        [self updataPageControl];
     }];
 }
 
@@ -136,14 +138,14 @@
 -(void)updataWhenFirstOrLast
 {
     //当图片移动到最后一张时，动画结束移动到第二张图片的位置
-    if(contentOffSet_x>=contentSize_x-frame_width)
+    if(contentOffSet_x>=self.imageArr.count*frame_width)
     {
-        self.direct.contentOffset=CGPointMake(frame_width, 0);
+        self.direct.contentOffset=CGPointMake(0, 0);
     }
     //当图片移动到第一张时，动画结束移动到倒数第二张的位置
-    else if (contentOffSet_x<=0)
+    else if (contentOffSet_x<0)
     {
-        self.direct.contentOffset=CGPointMake(contentSize_x-self.imageArr.count*frame_width, 0);
+        self.direct.contentOffset=CGPointMake(self.imageArr.count*frame_width, 0);
     }
     
     //更新PageControl
@@ -209,7 +211,9 @@
     UIView *view=tap.view;
     if(self.clickBlock)
     {
+        
         self.clickBlock(view.tag);
+        
     }
 }
 /**
@@ -220,92 +224,45 @@
 {
     //创建一个可变数组
     NSMutableArray *imgMArr=[NSMutableArray arrayWithArray:self.imageArr];
-    //添加第一个和最后一个对象到对应可变数组的最后一个位置和第一个位置
-    [imgMArr insertObject:[self.imageArr lastObject] atIndex:0];
-    [imgMArr addObject:[self.imageArr firstObject]];
-    
-    NSInteger tags=-1;
-    if (imgMArr.count == 0)
-    {
-        return;
-    }else{
-        
-        for (int i=0; i<imgMArr.count-2; i++) {
-            
-            //将传进来的图片名在本地初始化
-            UIImageView *imgView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:imgMArr[i]]];
-            
-            //设置图片的坐标
-            imgView.frame=CGRectMake(self.frame.size.width*(i), 0, self.frame.size.width, self.frame.size.height);
-            
-            //如果本地没有这张图片进行网络请求
-            if(imgView.image ==nil)
-            {
-                
-                [imgView sd_setImageWithURL:[NSURL URLWithString:imgMArr[i]] placeholderImage:nil];
-            }
-            //让图片进行裁剪显示
-            imgView.contentMode = UIViewContentModeScaleToFill;
-            //设置tag
-            tags++;
-            imgView.tag = tags;
-            //开启用户交互
-            imgView.userInteractionEnabled=YES;
-            //添加手势
-            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageClick:)];
-            
-           
-            
-           
-            
-            [imgView addGestureRecognizer:tap];
-             [self.direct addSubview:imgView];
-            
-           
-            
-        }
-    
-    }
-    
-    
-//    for (NSString *name in imgMArr) {
-//       
-//        //将传进来的图片名在本地初始化
-//        UIImageView *imgView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:name]];
-//        
-//        //设置图片的坐标
-//        imgView.frame=CGRectMake(self.frame.size.width*(tag+1), 0, self.frame.size.width, self.frame.size.height);
-//        
-//        //如果本地没有这张图片进行网络请求
-//        if(imgView.image ==nil)
-//        {
-//            
-//            [imgView sd_setImageWithURL:[NSURL URLWithString:name] placeholderImage:nil];
-//        }
-//        //让图片进行裁剪显示
-//        imgView.contentMode = UIViewContentModeScaleToFill;
-//        
-//        //添加手势
-//        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageClick:)];
-//        
-//        //开启用户交互
-//        imgView.userInteractionEnabled=YES;
-//        
-//        [self.direct addSubview:imgView];
-//        
-//        [imgView addGestureRecognizer:tap];
-//      
-//        //设置tag
-//        imgView.tag = tag;//-1,1,2,3
-//                        //0,2
-//        tag++;//0,1,2,3,4
-//  
+//    //添加第一个和最后一个对象到对应可变数组的最后一个位置和第一个位置
+//    [imgMArr insertObject:[self.imageArr lastObject] atIndex:0];
+//    [imgMArr addObject:[self.imageArr firstObject]];
+//    
+//    NSInteger tag=-1;
+//    if (imgMArr.count == 0)
+//    {
+//        return;
 //    }
+    for (int i=0; i<self.imageArr.count; i++) {
+        //将传进来的图片名在本地初始化
+        UIImageView *imgView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:self.imageArr[i]]];
+        
+        //设置图片的坐标
+        imgView.frame=CGRectMake(self.frame.size.width*(i), 0, self.frame.size.width, self.frame.size.height);
+        
+        //如果本地没有这张图片进行网络请求
+        if(imgView.image ==nil)
+        {
+            
+            [imgView sd_setImageWithURL:[NSURL URLWithString:self.imageArr[i]] placeholderImage:nil];
+        }
+        //让图片进行裁剪显示
+        imgView.contentMode = UIViewContentModeScaleAspectFit;
+        //添加手势
+        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageClick:)];
+        
+        //开启用户交互
+        imgView.userInteractionEnabled=YES;
+        imgView.tag=i;
+        [self.direct addSubview:imgView];
+        
+        [imgView addGestureRecognizer:tap];
+    }
+  
     
-
+    
     self.pageVC.numberOfPages = self.imageArr.count;
 }
-
 
 /*
 // Only override drawRect: if you perform custom drawing.

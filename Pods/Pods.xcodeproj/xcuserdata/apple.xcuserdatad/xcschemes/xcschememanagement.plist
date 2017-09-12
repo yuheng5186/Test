@@ -19,6 +19,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>GCCycleScrollView-GCCycleScrollView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GCCycleScrollView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>IQKeyboardManager.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,6 +72,21 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>0D9836FD32348CC95586A2894E1951D9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>14337C23B39899E1E37736AA6CBF885B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>33D4867684DB880AE771C243F2867D83</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>5437890023F30CA85DFCA260CA914D48</key>
 		<dict>
 			<key>primary</key>
@@ -72,17 +97,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>81F046079725D6270A256A43F8C0C8B3</key>
+		<key>5D47C4A05159C59E3719941FE0CC8830</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7B9D49B985253FB5C30D141CCE709D3D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>8642CC820CE8C5B88C113D7F47AF4BC3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>86F554B59B53F78C400AE9246FF594EC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -98,11 +123,6 @@
 			<true/>
 		</dict>
 		<key>9E033EDB5EC0819481B0546434FA577B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9F0E1805C23BDE68501407791C52C153</key>
 		<dict>
 			<key>primary</key>
 			<true/>

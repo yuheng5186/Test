@@ -11,4 +11,5 @@ target 'CarWashing' do
   pod 'IQKeyboardManager'
   pod 'DZNEmptyDataSet'
   pod 'MJRefresh'
+  pod "GCCycleScrollView"
 end

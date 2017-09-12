@@ -52,11 +52,11 @@
 #import "CoreLocation/CoreLocation.h"
 #import "MBProgressHUD.h"
 
-@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UIScrollViewDelegate>
+@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UIScrollViewDelegate,GCCycleScrollViewDelegate>
 {
     UIImageView     *logoImageView;
     UILabel         *titleNameLabel;
-    SXScrPageView   *sxView;
+    GCCycleScrollView *cycleScroll;
     UIView          *titleView;
 }
 
@@ -263,30 +263,29 @@
     backgroudView.left              = 0;
     [headerView addSubview:backgroudView];
    
-    NSMutableArray * images;
-   
+    
+    
+    NSMutableArray * images = [NSMutableArray array];
+    
+    
     if (self.newrc.adverList.count!=0) {
-         images = [NSMutableArray arrayWithCapacity:0];
         for (NSInteger i = 0; i<self.newrc.adverList.count; i++)
         {
             [images addObject:[NSString stringWithFormat:@"%@%@",kHTTPImg,[((NSDictionary *)self.newrc.adverList[i]) objectForKey:@"ImgUrl"]]];
         }
-        NSLog(@"%@",images);
-        __weak typeof(self) weackself=self;
-        sxView =   [SXScrPageView direcWithtFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*150/667) ImageArr:images AndImageClickBlock:^(NSInteger index) {
-            NSLog(@"tag:%ld",index);
-            DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
-            viewVC.urlstr=[((NSDictionary *)weackself.newrc.adverList[index]) objectForKey:@"Url"];
-            viewVC.hidesBottomBarWhenPushed = YES;
-            [weackself.navigationController pushViewController:viewVC animated:YES];
-            
-        }];
+        //load images from website 网络图片加载
+        cycleScroll = [[GCCycleScrollView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*150/667)];
+        cycleScroll.delegate =self;
+        
+        cycleScroll.imageUrlGroups = images;
+        cycleScroll.autoScrollTimeInterval = 3.0;
+        cycleScroll.dotColor = [UIColor colorWithRed:102/255.0 green:51/255.0 blue:0/255.0 alpha:1];
     }
 
    
-    sxView.top  =   0;
-    sxView.width = Main_Screen_Width;
-    [backgroudView addSubview:sxView];
+    cycleScroll.top  =   0;
+    cycleScroll.width = Main_Screen_Width;
+    [backgroudView addSubview:cycleScroll];
     
 //    UIView *newBagView                  = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*120/667) color:[UIColor clearColor]];
 //    newBagView.top                      = sxView.bottom +Main_Screen_Height*10/667;
@@ -300,7 +299,7 @@
     
     UIView *scanView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     scanView.centerX                   = Main_Screen_Width/8;
-    scanView.top                       = Main_Screen_Height*0/667+sxView.bottom;
+    scanView.top                       = Main_Screen_Height*0/667+cycleScroll.bottom;
     
     UITapGestureRecognizer  *tapScanGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapScanButtonClick:)];
     [scanView addGestureRecognizer:tapScanGesture];
@@ -616,7 +615,16 @@
 
 
 }
-
+-(void)cycleScrollView:(GCCycleScrollView *)cycleScrollView didSelectItemAtRow:(NSInteger)row{
+    NSLog(@"dianji =%ld",(long)row);
+    
+  
+    DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
+    viewVC.urlstr=[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"Url"];
+    viewVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:viewVC animated:YES];
+    
+}
 -(void)setData
 {
 //    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -1345,7 +1353,7 @@
 //    }
     
     //    //下移
-    if (imageOffsetY >= sxView.frame.size.height - 64)
+    if (imageOffsetY >= cycleScroll.frame.size.height - 64)
     {
         titleView.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
         titleNameLabel.text       = @"蔷薇爱车";
