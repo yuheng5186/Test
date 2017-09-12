@@ -47,7 +47,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"购卡支付"];
+    [self drawTitle:[NSString stringWithFormat:@"购买%@",self.choosecard.CardName]];
     
 }
 
