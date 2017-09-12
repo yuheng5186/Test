@@ -174,7 +174,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     [self.view addSubview:payBottomView];
     
     UILabel *bottomPriceLab = [[UILabel alloc] init];
-    bottomPriceLab.text = [NSString stringWithFormat:@"￥%@元",self.choosecard.CardPrice];
+    bottomPriceLab.text = [NSString stringWithFormat:@"￥%@元",self.choosecard.PaymentPrice];
     bottomPriceLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     bottomPriceLab.textColor = [UIColor colorFromHex:@"#ff525a"];
     [payBottomView addSubview:bottomPriceLab];
@@ -316,7 +316,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     else if (indexPath.section == 1 && indexPath.row == 1) {
         
         cell.textLabel.text  = @"实付";
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"￥%@元",self.choosecard.CardPrice];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"￥%@元",self.choosecard.PaymentPrice];
         
         cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#ff3645"];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
