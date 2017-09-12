@@ -144,12 +144,13 @@
     self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 70, 0);
     [self.contentView addSubview:self.tableView];
     
-//    [self createHeaderView];
+     [self setupRefresh];
+    [self createHeaderView];
     
     [self createNavTitleView];
     
     
-    [self setupRefresh];
+   
     
     
     
@@ -262,25 +263,27 @@
     backgroudView.left              = 0;
     [headerView addSubview:backgroudView];
    
-    NSMutableArray * images = [NSMutableArray array];
+    NSMutableArray * images;
    
     if (self.newrc.adverList.count!=0) {
-        
+         images = [NSMutableArray arrayWithCapacity:0];
         for (NSInteger i = 0; i<self.newrc.adverList.count; i++)
         {
             [images addObject:[NSString stringWithFormat:@"%@%@",kHTTPImg,[((NSDictionary *)self.newrc.adverList[i]) objectForKey:@"ImgUrl"]]];
         }
+        NSLog(@"%@",images);
+        __weak typeof(self) weackself=self;
+        sxView =   [SXScrPageView direcWithtFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*150/667) ImageArr:images AndImageClickBlock:^(NSInteger index) {
+            NSLog(@"tag:%ld",index);
+            DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
+            viewVC.urlstr=[((NSDictionary *)weackself.newrc.adverList[index]) objectForKey:@"Url"];
+            viewVC.hidesBottomBarWhenPushed = YES;
+            [weackself.navigationController pushViewController:viewVC animated:YES];
+            
+        }];
     }
 
-    __weak typeof(self) weackself=self;
-    sxView =   [SXScrPageView direcWithtFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*150/667) ImageArr:images AndImageClickBlock:^(NSInteger index) {
-        NSLog(@"tag:%ld",index);
-        DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
-        viewVC.urlstr=[((NSDictionary *)weackself.newrc.adverList[index]) objectForKey:@"Url"];
-        viewVC.hidesBottomBarWhenPushed = YES;
-        [weackself.navigationController pushViewController:viewVC animated:YES];
-        
-    }];
+   
     sxView.top  =   0;
     sxView.width = Main_Screen_Width;
     [backgroudView addSubview:sxView];
@@ -864,7 +867,7 @@
     }
     
     else{
-        Record *record = (Record *)[self.GetUserRecordData objectAtIndex:indexPath.section];
+        Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil] ;
         DSConsumerDetailController *detaleController    = [[DSConsumerDetailController alloc]init];
         detaleController.hidesBottomBarWhenPushed       = YES;
         detaleController.record                         = record;

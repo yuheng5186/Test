@@ -143,7 +143,7 @@
     //当图片移动到第一张时，动画结束移动到倒数第二张的位置
     else if (contentOffSet_x<=0)
     {
-        self.direct.contentOffset=CGPointMake(contentSize_x-2*frame_width, 0);
+        self.direct.contentOffset=CGPointMake(contentSize_x-self.imageArr.count*frame_width, 0);
     }
     
     //更新PageControl
@@ -224,12 +224,13 @@
     [imgMArr insertObject:[self.imageArr lastObject] atIndex:0];
     [imgMArr addObject:[self.imageArr firstObject]];
     
-//    NSInteger tag=-1;
+    NSInteger tags=-1;
     if (imgMArr.count == 0)
     {
         return;
     }else{
-        for (int i=0; i<imgMArr.count; i++) {
+        
+        for (int i=0; i<imgMArr.count-2; i++) {
             
             //将传进来的图片名在本地初始化
             UIImageView *imgView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:imgMArr[i]]];
@@ -246,7 +247,8 @@
             //让图片进行裁剪显示
             imgView.contentMode = UIViewContentModeScaleToFill;
             //设置tag
-            imgView.tag = i;
+            tags++;
+            imgView.tag = tags;
             //开启用户交互
             imgView.userInteractionEnabled=YES;
             //添加手势
