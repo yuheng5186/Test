@@ -121,7 +121,11 @@ static NSString *id_carListCell = @"id_carListCell";
                 }
                 
             }
-            
+            NSLog(@"%@",arr);
+#pragma mark-当只有一辆车时设置为默认
+            if (arr.count==1&&[[arr objectAtIndex:0] objectForKey:@"IsDefaultFav"]==0) {
+                [self SetCarDefaultDataAndIndex:0];
+            }
             
             
             
@@ -342,76 +346,8 @@ static NSString *id_carListCell = @"id_carListCell";
     
     //记录当下的indexpath
 //    self.nowPath = path;
+    [self SetCarDefaultDataAndIndex:button.tag];
     
-    MBProgressHUD *HUD1 = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    HUD1.removeFromSuperViewOnHide =YES;
-    HUD1.mode = MBProgressHUDModeIndeterminate;
-    HUD1.minSize = CGSizeMake(132.f, 108.0f);
-//        [HUD hide:NO afterDelay:0];
-    
-    
-        NSDictionary *mulDic = @{
-                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                 @"CarCode":[[_mycararray objectAtIndex:button.tag] objectForKey:@"CarCode"],
-                                 @"ModifyType":@2,
-                                 };
-        NSDictionary *params = @{
-                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                                 };
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/ModifyCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
-            
-            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-            {
-                
-
-                __weak typeof (self)weakSelf = self;
-                
-                HUD1.completionBlock = ^(){
-                    
-                    [self.view showInfo:@"设置成功" autoHidden:YES interval:2];
-                    
-                    if(_myDefaultcararray.count == 0)
-                    {
-                        NSDictionary *dic =  [weakSelf.mycararray objectAtIndex:button.tag];
-                        [dic setValue:@"1" forKey:@"IsDefaultFav"];
-                        [weakSelf.mycararray removeObjectAtIndex:button.tag];
-                        [weakSelf.myDefaultcararray addObject:dic];
-                        
-                        
-                    }
-                    else
-                    {
-                        NSDictionary *dic = [weakSelf.mycararray objectAtIndex:button.tag];
-                        [dic setValue:@"1" forKey:@"IsDefaultFav"];
-                        NSDictionary *dic2 = [weakSelf.myDefaultcararray objectAtIndex:0];
-                        [dic2 setValue:@"2" forKey:@"IsDefaultFav"];
-                        [weakSelf.myDefaultcararray replaceObjectAtIndex:0 withObject:dic];
-                        [weakSelf.mycararray replaceObjectAtIndex:button.tag withObject:dic2];
-                        
-                    }
-                    
-                    
-                    
-                    [weakSelf.carListView reloadData];
-                    
-                };
-                
-                [HUD1 hide:YES afterDelay:1];
-                
-    
-                
-            }
-            else
-            {
-                [HUD1 hide:YES];
-                [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
-            }
-            
-        } fail:^(NSError *error) {
-            [HUD1 hide:YES];
-            [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
-        }];
 
     
     
@@ -420,7 +356,78 @@ static NSString *id_carListCell = @"id_carListCell";
     
     
 }
-
+#pragma mark-设置默认值
+-(void)SetCarDefaultDataAndIndex:(NSInteger)tags{
+    MBProgressHUD *HUD1 = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD1.removeFromSuperViewOnHide =YES;
+    HUD1.mode = MBProgressHUDModeIndeterminate;
+    HUD1.minSize = CGSizeMake(132.f, 108.0f);
+    //        [HUD hide:NO afterDelay:0];
+    
+    
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"CarCode":[[_mycararray objectAtIndex:tags] objectForKey:@"CarCode"],
+                             @"ModifyType":@2,
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/ModifyCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            
+            
+            __weak typeof (self)weakSelf = self;
+            
+            HUD1.completionBlock = ^(){
+                
+                [self.view showInfo:@"设置成功" autoHidden:YES interval:2];
+                
+                if(_myDefaultcararray.count == 0)
+                {
+                    NSDictionary *dic =  [weakSelf.mycararray objectAtIndex:tags];
+                    [dic setValue:@"1" forKey:@"IsDefaultFav"];
+                    [weakSelf.mycararray removeObjectAtIndex:tags];
+                    [weakSelf.myDefaultcararray addObject:dic];
+                    
+                    
+                }
+                else
+                {
+                    NSDictionary *dic = [weakSelf.mycararray objectAtIndex:tags];
+                    [dic setValue:@"1" forKey:@"IsDefaultFav"];
+                    NSDictionary *dic2 = [weakSelf.myDefaultcararray objectAtIndex:0];
+                    [dic2 setValue:@"2" forKey:@"IsDefaultFav"];
+                    [weakSelf.myDefaultcararray replaceObjectAtIndex:0 withObject:dic];
+                    [weakSelf.mycararray replaceObjectAtIndex:tags withObject:dic2];
+                    
+                }
+                
+                
+                
+                [weakSelf.carListView reloadData];
+                
+            };
+            
+            [HUD1 hide:YES afterDelay:1];
+            
+            
+            
+        }
+        else
+        {
+            [HUD1 hide:YES];
+            [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+        }
+        
+    } fail:^(NSError *error) {
+        [HUD1 hide:YES];
+        [self.view showInfo:@"修改失败" autoHidden:YES interval:2];
+    }];
+}
 
 - (IBAction)didClickDeleteButton:(UIButton *)sender {
     
