@@ -134,7 +134,11 @@
     taglabel2.layer.cornerRadius = 7.5*myDelegate.autoSizeScaleY;
 //    [self.contentView addSubview:taglabel2];
     self.Mctag2 = taglabel2;
-
+    
+    UIView  *lineView   = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*2/667) color:[UIColor colorFromHex:@"#e6e6e6"]];
+    lineView.centerX    = Main_Screen_Width/2;
+    lineView.top     = self.contentView.bottom-Main_Screen_Height*2/667;
+    
 }
 
 - (UIImage *)drawLineByImageView:(UIImageView *)imageView {

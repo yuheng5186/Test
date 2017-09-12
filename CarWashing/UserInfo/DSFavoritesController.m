@@ -38,6 +38,8 @@ static NSString *id_salerListCell = @"salerListCell";
         UITableView *favoriteListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 64)];
        
         [self.view addSubview:favoriteListView];
+        self.view.backgroundColor   = [UIColor colorFromHex:@"#6a6a6a"];
+        favoriteListView.backgroundColor    = [UIColor clearColor];
         _favoriteListView = favoriteListView;
     }
     
@@ -53,6 +55,7 @@ static NSString *id_salerListCell = @"salerListCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.MyFavouriteMerchantData = [[NSMutableArray alloc]init];
     
     
@@ -337,7 +340,7 @@ static NSString *id_salerListCell = @"salerListCell";
     NSDictionary *dic=[self.MyFavouriteMerchantData objectAtIndex:indexPath.row];
     [cell setUpCellWithDic:dic];
     [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
-    [cell setBackgroundColor:[UIColor clearColor]];
+    [cell setBackgroundColor:[UIColor whiteColor]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     
