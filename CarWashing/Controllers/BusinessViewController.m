@@ -518,8 +518,8 @@ static NSString *id_salerListCell = @"salerListViewCell";
                              @"ShopType":@1,
                              @"ServiceCode":[NSString stringWithFormat:@"10%ld",index+1],
                              @"DefaultSort":DefaultSort,
-                             @"Ym":@31.192255,
-                             @"Xm":@121.52334,
+                             @"Ym":[UdStorage getObjectforKey:@"Ym"],
+                             @"Xm":[UdStorage getObjectforKey:@"Xm"],
                              @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
                              @"PageSize":@10
                              };

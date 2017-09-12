@@ -82,7 +82,7 @@
     CGSize sizeaddlabel = [addlabel boundingRectWithSize:CGSizeMake(Main_Screen_Width,2000)];
     addlabel.lineBreakMode = NSLineBreakByWordWrapping;
     
-    UIImageView *imageV3 =[[UIImageView alloc]initWithFrame:CGRectMake(290 * myDelegate.autoSizeScaleX, 21* myDelegate.autoSizeScaleY+sizecatlabel.height,10 * myDelegate.autoSizeScaleX,10 * myDelegate.autoSizeScaleY)];
+    UIImageView *imageV3 =[[UIImageView alloc]initWithFrame:CGRectMake(300 * myDelegate.autoSizeScaleX, 21* myDelegate.autoSizeScaleY+sizecatlabel.height,10 * myDelegate.autoSizeScaleX,10 * myDelegate.autoSizeScaleY)];
     imageV3.opaque = YES;
     imageV3.image = [UIImage imageNamed:@"juli"];
     [self.contentView addSubview:imageV3];

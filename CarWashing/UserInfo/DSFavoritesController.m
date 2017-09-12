@@ -67,8 +67,8 @@ static NSString *id_salerListCell = @"salerListCell";
 {
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                             @"Ym":@31.192255,
-                             @"Xm":@121.52334,
+                             @"Ym":[UdStorage getObjectforKey:@"Ym"],
+                             @"Xm":[UdStorage getObjectforKey:@"Xm"],
                              @"PageIndex":@0,
                              @"PageSize":@10
                              };
