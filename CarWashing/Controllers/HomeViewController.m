@@ -388,7 +388,7 @@
     payImageView.left              = Main_Screen_Width*15/375;
     payImageView.top               = Main_Screen_Height*10/667;
     
-    NSString *payName              = @"卡券激活";
+    NSString *payName              = @"激活卡券";
     UIFont *payNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*12/667];
     UILabel *payNameLabel          = [UIUtil drawLabelInView:payView frame:[UIUtil textRect:payName font:payNameFont] font:payNameFont text:payName isCenter:NO];
     payNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
