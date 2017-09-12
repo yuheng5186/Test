@@ -22,7 +22,7 @@
 #import "MBProgressHUD.h"
 #import "DSMemberRightsController.h"
 
-@interface IcreaseCarController ()<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
+@interface IcreaseCarController ()<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate,UITextFieldDelegate>
 {
     MBProgressHUD *HUD;
 }
@@ -160,7 +160,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             }
             
             numTF1.textColor = [UIColor colorFromHex:@"#b4b4b4"];
-            numTF1.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+            numTF1.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             [carCell.contentView addSubview:numTF1];
 
             
@@ -200,7 +200,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             
             
             brandTF1.textColor = [UIColor colorFromHex:@"#b4b4b4"];
-            brandTF1.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+            brandTF1.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             [carCell.contentView addSubview:brandTF1];
             
             [brandTF1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -235,7 +235,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             }
             
             textTF1.textColor = [UIColor colorFromHex:@"#b4b4b4"];
-            textTF1.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+            textTF1.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             [carCell.contentView addSubview:textTF1];
             
             [textTF1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -246,7 +246,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         }
         else if (indexPath.row == 3) {
                 UITextField *textTF2 = [[UITextField alloc] init];
-            textTF2.keyboardType = UIKeyboardTypeNumberPad;
+            textTF2.keyboardType = UIKeyboardTypeDecimalPad;
             textTF2.delegate=self;
                 _text2 = textTF2;
                 textTF2.placeholder = @"请填写";
@@ -261,7 +261,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                 }
             
                 textTF2.textColor = [UIColor colorFromHex:@"#b4b4b4"];
-                textTF2.font = [UIFont systemFontOfSize:12];
+                textTF2.font = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
                 [carCell.contentView addSubview:textTF2];
                 
                 [textTF2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -288,7 +288,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                 }
                 
                 lbl.textColor = [UIColor colorFromHex:@"#868686"];
-                lbl.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+                lbl.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
                 [carCell.contentView addSubview:lbl];
                 
                 [lbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -333,7 +333,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                 
                 
                 lbl2.textColor = [UIColor colorFromHex:@"#868686"];
-                lbl2.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+                lbl2.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
                 [carCell.contentView addSubview:lbl2];
                 
                 [lbl2 mas_makeConstraints:^(MASConstraintMaker *make) {

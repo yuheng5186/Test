@@ -484,7 +484,7 @@ static NSString * HeaderId = @"header";
             
             numTF.text = [car.PlateNumber substringFromIndex:1];
             numTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
-            numTF.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+            numTF.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             numTF.delegate = self;
             numTF.tag = 100;
             self.carNum=numTF;
@@ -503,7 +503,7 @@ static NSString * HeaderId = @"header";
             
             [numTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(provinceBtn);
-                make.leading.equalTo(provinceBtn.mas_trailing).mas_offset(16*Main_Screen_Height/667);
+                make.leading.equalTo(provinceBtn.mas_trailing).mas_offset(0*Main_Screen_Height/667);
                 make.width.mas_equalTo(200*Main_Screen_Height/667);
             }];
         }else{
@@ -519,7 +519,7 @@ static NSString * HeaderId = @"header";
 
             self.carBrand = brandTF;
             self.carBrand.tag = 101;
-            brandTF.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+            brandTF.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             [carCell.contentView addSubview:brandTF];
             
             [brandTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -546,7 +546,7 @@ static NSString * HeaderId = @"header";
             textTF.text = car.ChassisNum;
             textTF.placeholder = @"请填写";
             textTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
-            textTF.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+            textTF.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             self.ChassisNum = textTF;
             [carCell.contentView addSubview:textTF];
             
@@ -569,7 +569,7 @@ static NSString * HeaderId = @"header";
             textTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
 
             self.Mileage = textTF;
-            textTF.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+            textTF.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             [carCell.contentView addSubview:textTF];
             
             [textTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -590,7 +590,7 @@ static NSString * HeaderId = @"header";
                 _lbl = lbl;
                 lbl.text = [NSString stringWithFormat:@"%ld",car.Manufacture];
                 lbl.textColor = [UIColor colorFromHex:@"#868686"];
-                lbl.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+                lbl.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
                 [carCell.contentView addSubview:lbl];
                 
                 [lbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -629,7 +629,7 @@ static NSString * HeaderId = @"header";
                 
                 
                 lbl2.textColor = [UIColor colorFromHex:@"#868686"];
-                lbl2.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+                lbl2.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
                 [carCell.contentView addSubview:lbl2];
                 
                 [lbl2 mas_makeConstraints:^(MASConstraintMaker *make) {
