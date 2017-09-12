@@ -9,5 +9,5 @@
 #import "BaseController.h"
 
 @interface DSAdDetailController : BaseController
-
+@property(nonatomic,strong)NSString *urlstr;
 @end

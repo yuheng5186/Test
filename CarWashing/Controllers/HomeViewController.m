@@ -270,20 +270,15 @@
         {
             [images addObject:[NSString stringWithFormat:@"%@%@",kHTTPImg,[((NSDictionary *)self.newrc.adverList[i]) objectForKey:@"ImgUrl"]]];
         }
-    }else{
-        for (NSInteger i = 0; i<4; i++)
-        {
-            [images addObject:[NSString stringWithFormat:@"%02ld.jpg",i+1]];
-        }
-    
     }
-    NSLog(@"轮播图片：%@",images);
-    
+
+    __weak typeof(self) weackself=self;
     sxView =   [SXScrPageView direcWithtFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*150/667) ImageArr:images AndImageClickBlock:^(NSInteger index) {
-        
+        NSLog(@"tag:%ld",index);
         DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
+        viewVC.urlstr=[((NSDictionary *)weackself.newrc.adverList[index]) objectForKey:@"Url"];
         viewVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:viewVC animated:YES];
+        [weackself.navigationController pushViewController:viewVC animated:YES];
         
     }];
     sxView.top  =   0;

@@ -228,7 +228,9 @@
     {
         return;
     }
+    
     for (NSString *name in imgMArr) {
+       
         //将传进来的图片名在本地初始化
         UIImageView *imgView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:name]];
         
@@ -243,6 +245,7 @@
         }
         //让图片进行裁剪显示
         imgView.contentMode = UIViewContentModeScaleToFill;
+        
         //添加手势
         UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageClick:)];
         
@@ -254,8 +257,9 @@
         [imgView addGestureRecognizer:tap];
       
         //设置tag
-        imgView.tag = tag;
-        tag++;
+        imgView.tag = tag;//-1,1,2,3
+                        //0,2
+        tag++;//0,1,2,3,4
   
     }
     
