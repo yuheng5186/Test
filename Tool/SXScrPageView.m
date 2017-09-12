@@ -16,6 +16,7 @@
 @property(strong,nonatomic) NSTimer *timer;
 //点击图片出发Block
 @property(strong,nonatomic) imageClickBlock clickBlock;
+@property(strong,nonatomic)UIImageView *image;
 
 @end
 //获取ScrollView的X值偏移量
@@ -223,45 +224,81 @@
     [imgMArr insertObject:[self.imageArr lastObject] atIndex:0];
     [imgMArr addObject:[self.imageArr firstObject]];
     
-    NSInteger tag=-1;
+//    NSInteger tag=-1;
     if (imgMArr.count == 0)
     {
         return;
+    }else{
+        for (int i=0; i<imgMArr.count; i++) {
+            
+            //将传进来的图片名在本地初始化
+            UIImageView *imgView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:imgMArr[i]]];
+            
+            //设置图片的坐标
+            imgView.frame=CGRectMake(self.frame.size.width*(i), 0, self.frame.size.width, self.frame.size.height);
+            
+            //如果本地没有这张图片进行网络请求
+            if(imgView.image ==nil)
+            {
+                
+                [imgView sd_setImageWithURL:[NSURL URLWithString:imgMArr[i]] placeholderImage:nil];
+            }
+            //让图片进行裁剪显示
+            imgView.contentMode = UIViewContentModeScaleToFill;
+            //设置tag
+            imgView.tag = i;
+            //开启用户交互
+            imgView.userInteractionEnabled=YES;
+            //添加手势
+            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageClick:)];
+            
+           
+            
+           
+            
+            [imgView addGestureRecognizer:tap];
+             [self.direct addSubview:imgView];
+            
+           
+            
+        }
+    
     }
     
-    for (NSString *name in imgMArr) {
-       
-        //将传进来的图片名在本地初始化
-        UIImageView *imgView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:name]];
-        
-        //设置图片的坐标
-        imgView.frame=CGRectMake(self.frame.size.width*(tag+1), 0, self.frame.size.width, self.frame.size.height);
-        
-        //如果本地没有这张图片进行网络请求
-        if(imgView.image ==nil)
-        {
-            
-            [imgView sd_setImageWithURL:[NSURL URLWithString:name] placeholderImage:nil];
-        }
-        //让图片进行裁剪显示
-        imgView.contentMode = UIViewContentModeScaleToFill;
-        
-        //添加手势
-        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageClick:)];
-        
-        //开启用户交互
-        imgView.userInteractionEnabled=YES;
-        
-        [self.direct addSubview:imgView];
-        
-        [imgView addGestureRecognizer:tap];
-      
-        //设置tag
-        imgView.tag = tag;//-1,1,2,3
-                        //0,2
-        tag++;//0,1,2,3,4
-  
-    }
+    
+//    for (NSString *name in imgMArr) {
+//       
+//        //将传进来的图片名在本地初始化
+//        UIImageView *imgView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:name]];
+//        
+//        //设置图片的坐标
+//        imgView.frame=CGRectMake(self.frame.size.width*(tag+1), 0, self.frame.size.width, self.frame.size.height);
+//        
+//        //如果本地没有这张图片进行网络请求
+//        if(imgView.image ==nil)
+//        {
+//            
+//            [imgView sd_setImageWithURL:[NSURL URLWithString:name] placeholderImage:nil];
+//        }
+//        //让图片进行裁剪显示
+//        imgView.contentMode = UIViewContentModeScaleToFill;
+//        
+//        //添加手势
+//        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageClick:)];
+//        
+//        //开启用户交互
+//        imgView.userInteractionEnabled=YES;
+//        
+//        [self.direct addSubview:imgView];
+//        
+//        [imgView addGestureRecognizer:tap];
+//      
+//        //设置tag
+//        imgView.tag = tag;//-1,1,2,3
+//                        //0,2
+//        tag++;//0,1,2,3,4
+//  
+//    }
     
 
     self.pageVC.numberOfPages = self.imageArr.count;

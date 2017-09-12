@@ -226,15 +226,11 @@
     
 #pragma mark-获取设备编码
     //处理设备编码
+
     NSArray *array = [imei componentsSeparatedByString:@":"]; //从字符：中分隔成2个元素的数组
-    NSString *result=array[1];
-    if (imei == nil) {
-        [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
-    }else if(result.length>8&&result.length<8){
-        [self.view showInfo:@"不是该平台的相关信息" autoHidden:YES interval:2];
-    
-    }else{
-    
+
+    if (array.count==3&&((NSString *)array[1]).length==8) {
+       
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         HUD.removeFromSuperViewOnHide =YES;
         HUD.mode = MBProgressHUDModeIndeterminate;
@@ -250,7 +246,6 @@
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
         [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@ScanCode/DeviceScanCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
-            
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
                 
@@ -303,16 +298,36 @@
             else
             {
                 [HUD hide:YES];
-                [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
-                //                [self.navigationController popViewControllerAnimated:YES];
+                [self.view showInfo:@"信息获取失败" autoHidden:YES interval:1];
             }
         } fail:^(NSError *error) {
+            NSLog(@"%@",error);
             [HUD hide:YES];
             [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
             //            [self.navigationController popViewControllerAnimated:YES];
             
         }];
-    
+    }else {
+//         message = ;
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"错误提示" message:@"扫码错误" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alertController addAction:cancelAction];
+        
+        UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //1.扫描区域
+            [self setupScanWindowView];
+            //2.开始动画
+            [self beginScanning];
+            
+            
+        }];
+        [alertController addAction:OKAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+//         [self.view showInfo:@"扫码错误" autoHidden:YES interval:1];
     }
 }
 #pragma mark-扫一扫获取设备

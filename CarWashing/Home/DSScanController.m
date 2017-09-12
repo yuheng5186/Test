@@ -250,7 +250,8 @@
     //处理设备编码
     NSArray *array = [imei componentsSeparatedByString:@":"]; //从字符：中分隔成2个元素的数组
     
-    if (array[1] != nil) {
+    if (array.count==3&&((NSString *)array[1]).length==8) {
+        
         
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         HUD.removeFromSuperViewOnHide =YES;
@@ -344,6 +345,27 @@
         
         
         
+    }else{
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"错误提示" message:@"扫码错误" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alertController addAction:cancelAction];
+        
+        UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //1.扫描区域
+            [self setupScanWindowView];
+            //2.开始动画
+            [self beginScanning];
+            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resumeAnimation) name:@"EnterForeground" object:nil];
+            
+            
+        }];
+        [alertController addAction:OKAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    
     }
 }
 
