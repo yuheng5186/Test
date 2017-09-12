@@ -87,7 +87,7 @@
         //设置轮播页码的位置
         self.pageVC.frame=CGRectMake(0,Main_Screen_Height*110/667, self.frame.size.width, 30);
         _pageVC.currentPageIndicatorTintColor = BasicBackGroundColor;
-        _pageVC.pageIndicatorTintColor = [UIColor grayColor];
+        _pageVC.pageIndicatorTintColor = [UIColor colorFromHex:@"#0161a1"];
         [self addSubview:self.pageVC];
         
         self.time = 3.0;
