@@ -66,10 +66,10 @@
     //default settings
     _layoutStyle = TFGridInputViewLayoutStyleDefault;
     _row = 1;
-    _column = 7;
+    _column = 8;
     _minSpaceX = Main_Screen_Width*8/375;
     _minSpaceY = Main_Screen_Height*8/667;
-    _cellSize = CGSizeMake(Main_Screen_Width*40/375, Main_Screen_Height*40/667);
+    _cellSize = CGSizeMake(Main_Screen_Width*35/375, Main_Screen_Height*35/667);
     
     _stateStyleDic = [[NSMutableDictionary alloc]init];
     _highlightOnlyEditing = YES;

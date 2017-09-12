@@ -52,7 +52,7 @@
     self.contentView.backgroundColor   = [UIColor whiteColor];
 
     //使用默认大小会拉大高宽，虽然设置100，但实际是6*40+(6+1)*8 = 296，参考布局规则
-    _inputView = [[TFGridInputView alloc] initWithFrame:CGRectMake(Main_Screen_Width*15/375, Main_Screen_Height*120/667, 40, 40) row:1 column:8];
+    _inputView = [[TFGridInputView alloc] initWithFrame:CGRectMake(Main_Screen_Width*10/375, Main_Screen_Height*120/667, 35, 35) row:1 column:8];
     
     _inputView.keyboardType = UIKeyboardTypeNumberPad;
     //构建一个样式，并调整各种格式
