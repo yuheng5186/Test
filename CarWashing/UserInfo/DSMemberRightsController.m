@@ -333,7 +333,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
         }else
         {
             string = [NSString stringWithFormat:@"%@X%@",[[_NextMembershipprivilegesArr objectAtIndex:indexPath.row] objectForKey:@"CardName"],[[_NextMembershipprivilegesArr objectAtIndex:indexPath.row] objectForKey:@"CardQuantity"]];
-            detailString    = @"门店吸尘是可抵扣相应金额,每月领取一次";
+            detailString    = @"自动扫码洗车可使用，达到该等级当月可领取";
         }
         
     }
