@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "QWMerchantModel.h"
 @interface BusinessEstimateCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
 
@@ -20,4 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property(nonatomic,strong)QWMerComListModel *model;
+
+
 @end

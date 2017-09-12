@@ -13,6 +13,7 @@
 #import "LCMD5Tool.h"
 #import "AFNetworkingTool.h"
 #import "MBProgressHUD.h"
+#import "UITableView+SDAutoTableViewCellHeight.h"
 @interface ShopCommentController ()<UITableViewDataSource, UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property (nonatomic, weak) UITableView *commentListView;
@@ -20,6 +21,7 @@
 @property (nonatomic, strong) NSMutableArray *MerchantCommentListData;
 
 @property (nonatomic)NSInteger page;
+@property (nonatomic,copy) NSMutableArray <QWMerComListModel *> *MerComList;
 
 @end
 
@@ -35,7 +37,13 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
     }
     return _commentListView;
 }
-
+-(NSMutableArray<QWMerComListModel *> *)MerComList{
+    if (_MerComList==nil) {
+        _MerComList=[NSMutableArray arrayWithCapacity:0];
+    }
+    return _MerComList;
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -132,8 +140,13 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            NSLog(@"%@",dict);
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
+            for (NSDictionary *dict in arr) {
+                QWMerComListModel *comlistmodel=[[QWMerComListModel alloc]initWithDictionary:dict error:nil];
+                [self.MerComList addObject:comlistmodel];
+            }
             [self.MerchantCommentListData addObjectsFromArray:arr];
             [_commentListView.mj_header endRefreshing];
             [_commentListView reloadData];
@@ -169,6 +182,7 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            NSLog(@"%@",dict);
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
             if(arr.count == 0)
@@ -184,6 +198,10 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
             }
             else
             {
+                for (NSDictionary *dict in arr) {
+                    QWMerComListModel *comlistmodel=[[QWMerComListModel alloc]initWithDictionary:dict error:nil];
+                    [self.MerComList addObject:comlistmodel];
+                }
                 [self.MerchantCommentListData addObjectsFromArray:arr];
                 [_commentListView.mj_footer endRefreshing];
                 [_commentListView reloadData];
@@ -222,62 +240,11 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BusinessEstimateCell *commentCell = [tableView dequeueReusableCellWithIdentifier:id_commentShopCell forIndexPath:indexPath];
     
-    if(self.MerchantCommentListData != 0)
-    {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,[[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"FromuserImg"]];
-            NSURL *url=[NSURL URLWithString:ImageURL];
-            NSData *data=[NSData dataWithContentsOfURL:url];
-            UIImage *img=[UIImage imageWithData:data];
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                commentCell.headImageView.image = img;
-            });
-        });
-        if([[[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"FromuserName"]isKindOfClass:[NSNull class]])
-        {
-           commentCell.phoneLabel.text  = @"";
-        }else
-        {
-             commentCell.phoneLabel.text = [[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"FromuserName"];
-//            estimateCell.phoneLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserName"];
-        }
-
-//        commentCell.phoneLabel.text = [[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"FromuserName"];
-        if([[[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"Score"] isKindOfClass:[NSNull class]])
-        {
-            
-        }else
-        {
-            [commentCell.userScoreLabel setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",[[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"Score"]] substringToIndex:1]]]];
-        }
-
-//        [commentCell.userScoreLabel setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",[[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"Score"]] substringToIndex:1]]]];
-//        commentCell.commentLabel.text = [[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"CommentContent"];
-        
-        if([[[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"CommentContent"] isKindOfClass:[NSNull class]])
-        {
-            commentCell.commentLabel.text = @"";
-        }else
-        {
-            commentCell.commentLabel.text = [[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"CommentContent"];
-        }
-
-        
-        if([[[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"CommentDate"] isKindOfClass:[NSNull class]])
-        {
-           commentCell.dateLabel.text = @"";
-        }else
-        {
-            commentCell.dateLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentDate"];
-        }
-//        commentCell.dateLabel.text = [[self.MerchantCommentListData objectAtIndex:indexPath.row] objectForKey:@"CommentDate"];
-        commentCell.timeLabel.hidden = YES;
+    if (self.MerComList.count!=0) {
+        NSLog(@"-------%@====%@====-----",self.MerComList[indexPath.row],self.MerchantCommentListData[indexPath.row]);
+        QWMerComListModel *comlistmodel=self.MerComList[indexPath.row];
+        commentCell.model =comlistmodel;
     }
-    else
-    {
-        
-    }
-    
     
     
     return commentCell;
@@ -300,7 +267,31 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
     return 40*Main_Screen_Height/667;
     
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(self.MerchantCommentListData.count == 0)
+    {
+        return 0;
+    }
+    else
+    {
+         return 120*Main_Screen_Height/667;
+//           QWMerComListModel *comlistmodel=self.MerComList[indexPath.row];
+//        return [self.commentListView cellHeightForIndexPath:indexPath model:comlistmodel keyPath:@"model" cellClass:[BusinessEstimateCell class] contentViewWidth:[self cellContentViewWith]]+23*Main_Screen_Height/667;
+    }
+//    return 126*Main_Screen_Height/667;
 
+}
+
+- (CGFloat)cellContentViewWith
+{
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    
+    // 适配ios7横屏
+    if ([UIApplication sharedApplication].statusBarOrientation != UIInterfaceOrientationPortrait && [[UIDevice currentDevice].systemVersion floatValue] < 8) {
+        width = [UIScreen mainScreen].bounds.size.height;
+    }
+    return width;
+}
 #pragma mark - 无数据占位
 //无数据占位
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
