@@ -44,6 +44,8 @@
 
 @property (nonatomic)NSInteger weiyi;
 
+@property (nonatomic,strong) NSString *areastr;
+
 @end
 
 static NSString *id_salerListCell = @"salerListViewCell";
@@ -77,7 +79,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     [super viewDidLoad];
     
     self.navigationController.navigationBar.hidden = YES;
-    
+    self.areastr=@" ";
     [self setSearchMenu];
     
     
@@ -108,7 +110,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
         
         // 获取所有值
         NSArray *allValues = note.userInfo.allValues;
-        
+       NSLog(@"%@",allValues);
         // 不需要设置标题,字典个数大于1，或者有数组
         if (allValues.count > 1 || [allValues.firstObject isKindOfClass:[NSArray class]]) return ;
         
@@ -121,8 +123,8 @@ static NSString *id_salerListCell = @"salerListViewCell";
             // 设置按钮标题
             [self.pramsDic setValue:allValues.firstObject forKey:[NSString stringWithFormat:@"%ld",(long)col]];
         }
-        
-        
+       self.areastr=[[self.pramsDic objectForKey:@"0"] objectAtIndex:1];
+       
         [self.salerListView.mj_header beginRefreshing];
 //        [self headerRereshing];
         
@@ -429,7 +431,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     NSDictionary *mulDic = @{
                              @"City":[[self.pramsDic objectForKey:@"0"] objectAtIndex:0],
-                             @"Area":[[self.pramsDic objectForKey:@"0"] objectAtIndex:1],
+                             @"Area":self.areastr,
                              @"ShopType":@1,
                              @"ServiceCode":[NSString stringWithFormat:@"10%ld",index+1],
                              @"DefaultSort":DefaultSort,
@@ -514,7 +516,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     NSDictionary *mulDic = @{
                              @"City":[[self.pramsDic objectForKey:@"0"] objectAtIndex:0],
-                             @"Area":[[self.pramsDic objectForKey:@"0"] objectAtIndex:1],
+                             @"Area":self.areastr,
                              @"ShopType":@1,
                              @"ServiceCode":[NSString stringWithFormat:@"10%ld",index+1],
                              @"DefaultSort":DefaultSort,
