@@ -493,7 +493,7 @@
             
         }else{
 
-            cell.imageView.image        = [UIImage imageNamed:@"kefu_wo"];
+            cell.imageView.image        = [UIImage imageNamed:@"kefu_wode"];
             cell.textLabel.text         = @"客服咨询";
         }
     }else{

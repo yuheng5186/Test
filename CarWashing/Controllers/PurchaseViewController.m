@@ -231,8 +231,8 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     pageControl.numberOfPages = self.imageArray.count;
     pageControl.userInteractionEnabled = NO;
     pageControl.currentPage = 0;
-    [pageControl setValue:[UIImage imageNamed:@"aichexuanzhong"] forKey:@"currentPageImage"];
-    [pageControl setValue:[UIImage imageNamed:@"aicheweixuanzhong"] forKey:@"pageImage"];
+    [pageControl setValue:[UIImage imageNamed:@"qw_gouka_xuanzhong"] forKey:@"currentPageImage"];
+    [pageControl setValue:[UIImage imageNamed:@"weixuanzhongPage"] forKey:@"pageImage"];
     pageFlowView.pageControl = pageControl;
     [_middleview addSubview:pageControl];
     
