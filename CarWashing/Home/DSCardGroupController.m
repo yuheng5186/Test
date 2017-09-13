@@ -33,7 +33,7 @@
 @property (nonatomic, weak) UITextField *activateTF;
 @property (nonatomic, weak) UIButton *activateBtn;
 @property (nonatomic, weak) UITableView *rechargeView;
-
+@property (nonatomic)NSInteger page;
 @property (nonatomic, strong) NSMutableArray *CardbagData;
 
 @end
@@ -121,13 +121,70 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     HUD.minSize = CGSizeMake(132.f, 108.0f);
     
     
-    [self GetCardbagList];
+    [self setupRefresh];
     
+}
+-(void)setupRefresh
+{
+    self.rechargeView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        
+        [self headerRereshing];
+        
+    }];
+    
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    self.rechargeView.mj_header.automaticallyChangeAlpha = YES;
+    
+    [self.rechargeView.mj_header beginRefreshing];
+    
+    // 上拉刷新
+    self.rechargeView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        
+        [self footerRereshing];
+        
+    }];
+}
+
+- (void)headerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        //
+        self.page = 0 ;
+         [self GetCardbagList];
+        
+    });
+}
+
+- (void)footerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        
+        self.page++;
+//    _CardbagData = [[NSMutableArray alloc]init];
+        [self GetCardbagListMore];
+        
+        
+        //
+        //
+        //
+        //
+        //        // 刷新表格
+        //
+        //        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        
+    });
 }
 -(void)GetCardbagList
 {
+    
     NSDictionary *mulDic = @{
-                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"PageIndex":@0,
+                             @"PageSize":@10
                              };
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
@@ -142,21 +199,110 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
             
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
-            for(NSDictionary *dic in arr)
+           
+            if(arr.count == 0)
             {
-                CardBag *model = [CardBag new];
-                [model setValuesForKeysWithDictionary:dic];
-                [_CardbagData addObject:model];
+                //                [self.view showInfo:@"暂无更多数据" autoHidden:YES interval:2];
+                  [HUD setHidden:YES];
+                [self.rechargeView reloadData];
+                [self.rechargeView.mj_header endRefreshing];
             }
-            [_rechargeView reloadData];
-            [HUD setHidden:YES];
+            else
+            {
+                for(NSDictionary *dic in arr)
+                {
+                    CardBag *model = [CardBag new];
+                    [model setValuesForKeysWithDictionary:dic];
+                    [_CardbagData addObject:model];
+                }
+//                for(NSDictionary *dic in arr)
+//                {
+//                    CardBag *model = [CardBag new];
+//                    [model setValuesForKeysWithDictionary:dic];
+//                    
+//                }
+                [HUD setHidden:YES];
+                [self.rechargeView reloadData];
+                [self.rechargeView.mj_header endRefreshing];
+            }
+
+          
+          
         }
         else
         {
+            [self.rechargeView.mj_header endRefreshing];
             [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
             [self.navigationController popViewControllerAnimated:YES];
         }
     } fail:^(NSError *error) {
+        
+         [self.rechargeView.mj_header endRefreshing];
+        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }];
+    
+}
+
+-(void)GetCardbagListMore
+{
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
+                             @"PageSize":@10
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardInfoList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+//
+            
+            
+            NSArray *arr = [NSArray array];
+            arr = [dict objectForKey:@"JsonData"];
+           
+            if(arr.count == 0)
+            {
+                //                [self.view showInfo:@"暂无更多数据" autoHidden:YES interval:2];
+                [HUD setHidden:YES];
+                [self.rechargeView reloadData];
+                [self.rechargeView.mj_footer endRefreshing];
+                self.page--;
+            }
+            else
+            {
+                for(NSDictionary *dic in arr)
+                {
+                    CardBag *model = [CardBag new];
+                    [model setValuesForKeysWithDictionary:dic];
+                    [_CardbagData addObject:model];
+                }
+                [HUD setHidden:YES];
+                [self.rechargeView reloadData];
+                [self.rechargeView.mj_footer endRefreshing];
+            }
+            
+            
+            
+        }
+        else
+        {
+            [self.rechargeView.mj_footer endRefreshing];
+             self.page--;
+            [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }
+    } fail:^(NSError *error) {
+        
+        [self.rechargeView.mj_footer endRefreshing];
+        self.page--;
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
         [self.navigationController popViewControllerAnimated:YES];
         

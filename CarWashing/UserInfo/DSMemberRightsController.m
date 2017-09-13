@@ -151,10 +151,10 @@ static NSString *id_rightsCell = @"id_rightsCell";
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardConfigList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+         NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
-            
+           
             _MembershipprivilegesArray = [[NSMutableArray alloc]init];
             _NextMembershipprivilegesArr = [[NSMutableArray alloc]init];
             _CurrentMembershipprivilegesArr = [[NSMutableArray alloc]init];
