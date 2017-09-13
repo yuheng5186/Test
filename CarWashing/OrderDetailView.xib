@@ -39,20 +39,20 @@
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="juli" translatesAutoresizingMaskIntoConstraints="NO" id="TQ3-na-VmM">
-                            <rect key="frame" x="110" y="61.5" width="10" height="10"/>
+                            <rect key="frame" x="110" y="69.5" width="10" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="D2Z-3N-A6n"/>
                                 <constraint firstAttribute="width" constant="10" id="KHR-gf-bjm"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="美容店" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCj-lI-2gt">
-                            <rect key="frame" x="320" y="15" width="43" height="17"/>
+                            <rect key="frame" x="320" y="30" width="43" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上海市浦东新区东三里桥路" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1f-0V-bnB">
-                            <rect key="frame" x="123" y="58" width="160" height="16"/>
+                            <rect key="frame" x="123" y="66" width="240" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -68,16 +68,17 @@
                     <constraints>
                         <constraint firstItem="fEb-QS-kOB" firstAttribute="leading" secondItem="nf8-nB-PNm" secondAttribute="leading" id="5fF-h7-hx0"/>
                         <constraint firstItem="fEb-QS-kOB" firstAttribute="top" secondItem="nf8-nB-PNm" secondAttribute="top" id="Gl5-nA-1eH"/>
-                        <constraint firstItem="TQ3-na-VmM" firstAttribute="top" secondItem="WCK-38-dwt" secondAttribute="bottom" constant="12" id="KDm-yV-R2w"/>
+                        <constraint firstItem="TQ3-na-VmM" firstAttribute="top" secondItem="WCK-38-dwt" secondAttribute="bottom" constant="20" id="KDm-yV-R2w"/>
                         <constraint firstItem="d1f-0V-bnB" firstAttribute="leading" secondItem="TQ3-na-VmM" secondAttribute="trailing" constant="3" id="Ptq-sS-JgI"/>
                         <constraint firstItem="aGC-zW-cgk" firstAttribute="leading" secondItem="nf8-nB-PNm" secondAttribute="leading" constant="12" id="RrH-n5-dQ8"/>
                         <constraint firstItem="ook-Tg-qLn" firstAttribute="leading" secondItem="nf8-nB-PNm" secondAttribute="leading" constant="12" id="SOn-hJ-QoC"/>
                         <constraint firstItem="d1f-0V-bnB" firstAttribute="centerY" secondItem="TQ3-na-VmM" secondAttribute="centerY" id="U4y-9H-p5y"/>
-                        <constraint firstItem="qCj-lI-2gt" firstAttribute="top" secondItem="nf8-nB-PNm" secondAttribute="top" constant="15" id="We3-0z-JIH"/>
                         <constraint firstItem="WCK-38-dwt" firstAttribute="leading" secondItem="aGC-zW-cgk" secondAttribute="trailing" constant="18" id="XQg-tq-Fv9"/>
                         <constraint firstAttribute="trailing" secondItem="qCj-lI-2gt" secondAttribute="trailing" constant="12" id="aZc-MR-O5R"/>
                         <constraint firstItem="aGC-zW-cgk" firstAttribute="top" secondItem="nf8-nB-PNm" secondAttribute="top" constant="10" id="cAC-QS-fgT"/>
                         <constraint firstItem="ook-Tg-qLn" firstAttribute="top" secondItem="nf8-nB-PNm" secondAttribute="top" constant="10" id="iYc-cz-JiA"/>
+                        <constraint firstAttribute="trailing" secondItem="d1f-0V-bnB" secondAttribute="trailing" constant="12" id="o4E-XH-5jm"/>
+                        <constraint firstItem="qCj-lI-2gt" firstAttribute="top" secondItem="WCK-38-dwt" secondAttribute="top" id="o8D-vJ-Iwn"/>
                         <constraint firstItem="TQ3-na-VmM" firstAttribute="leading" secondItem="WCK-38-dwt" secondAttribute="leading" id="q8l-Eg-gjt"/>
                         <constraint firstAttribute="height" constant="100" id="sOw-xw-iJ8"/>
                         <constraint firstAttribute="bottom" secondItem="fEb-QS-kOB" secondAttribute="bottom" id="v68-Ur-O74"/>
@@ -162,8 +163,8 @@
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="优惠劵" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLB-qc-HpK">
-                            <rect key="frame" x="12" y="153" width="46" height="18"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="优惠活动" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLB-qc-HpK">
+                            <rect key="frame" x="12" y="153" width="61.5" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
