@@ -253,7 +253,7 @@
         
         cycleScroll.imageUrlGroups = images;
         cycleScroll.autoScrollTimeInterval = 3.0;
-        cycleScroll.dotColor = [UIColor colorWithRed:171/255.0 green:171/255.0 blue:171/255.0 alpha:1];
+        cycleScroll.dotColor = [UIColor whiteColor];
     }
 
    

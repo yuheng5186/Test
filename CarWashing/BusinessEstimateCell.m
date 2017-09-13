@@ -23,7 +23,7 @@
     _model=model;
     NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,model.FromuserImg];
     NSURL *url=[NSURL URLWithString:ImageURL];
-    [self.headImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"aiche1"]];
+    [self.headImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
     self.phoneLabel.text=model.FromuserName;
      [self.userScoreLabel setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%d",model.Score] substringToIndex:1]]]];
     self.commentLabel.text=model.CommentContent;
