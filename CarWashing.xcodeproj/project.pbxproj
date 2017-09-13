@@ -18,6 +18,8 @@
 		041573A51F53C522004514E3 /* TFGridInputViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041573A11F53C522004514E3 /* TFGridInputViewCell.m */; };
 		041573A61F53C522004514E3 /* TFGridInputViewCellStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 041573A31F53C522004514E3 /* TFGridInputViewCellStyle.m */; };
 		04443F501F5944450032BA5E /* DSScanPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04443F4F1F5944450032BA5E /* DSScanPayController.m */; };
+		045E1BAF1F69150700F37230 /* problemCar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 045E1BAE1F69150700F37230 /* problemCar.plist */; };
+		045E1BB11F69151B00F37230 /* ProblemUse.plist in Resources */ = {isa = PBXBuildFile; fileRef = 045E1BB01F69151B00F37230 /* ProblemUse.plist */; };
 		1802AD991F5FC704009EB146 /* DSSalaActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1802AD981F5FC704009EB146 /* DSSalaActivityCell.m */; };
 		1805AC831F38090D00FD0844 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC821F38090D00FD0844 /* LoginViewController.m */; };
 		1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC851F385C8600FD0844 /* DSAgreementController.m */; };
@@ -309,6 +311,8 @@
 		041573A31F53C522004514E3 /* TFGridInputViewCellStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFGridInputViewCellStyle.m; sourceTree = "<group>"; };
 		04443F4E1F5944450032BA5E /* DSScanPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSScanPayController.h; path = Home/DSScanPayController.h; sourceTree = "<group>"; };
 		04443F4F1F5944450032BA5E /* DSScanPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSScanPayController.m; path = Home/DSScanPayController.m; sourceTree = "<group>"; };
+		045E1BAE1F69150700F37230 /* problemCar.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = problemCar.plist; sourceTree = "<group>"; };
+		045E1BB01F69151B00F37230 /* ProblemUse.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ProblemUse.plist; sourceTree = "<group>"; };
 		06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CarWashing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1802AD971F5FC704009EB146 /* DSSalaActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSalaActivityCell.h; sourceTree = "<group>"; };
 		1802AD981F5FC704009EB146 /* DSSalaActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSalaActivityCell.m; sourceTree = "<group>"; };
@@ -1652,6 +1656,8 @@
 				5016722E1F297FF000384186 /* problemCenter.plist */,
 				5016722F1F297FF000384186 /* ProblemTitleModel.h */,
 				501672301F297FF000384186 /* ProblemTitleModel.m */,
+				045E1BAE1F69150700F37230 /* problemCar.plist */,
+				045E1BB01F69151B00F37230 /* ProblemUse.plist */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -1962,6 +1968,7 @@
 				5094A63A1F346E7000407808 /* CancelPayCell.xib in Resources */,
 				50E2EE5A1F1F4A9000FAF130 /* SalerListViewCell.xib in Resources */,
 				50D30E821F20988A0086D3ED /* BusinessDetailCell.xib in Resources */,
+				045E1BB11F69151B00F37230 /* ProblemUse.plist in Resources */,
 				180E43291F414A7900013D2D /* PopHelpView.xib in Resources */,
 				50E2EE871F1F4D3C00FAF130 /* YZSortCell.xib in Resources */,
 				50E2EE7F1F1F4D3C00FAF130 /* YZAllCourseViewController.xib in Resources */,
@@ -1976,6 +1983,7 @@
 				18B803801F1DA2A300B52432 /* Main.storyboard in Resources */,
 				183997661F2586D300702071 /* ActivityListCell.xib in Resources */,
 				50E2EE811F1F4D3C00FAF130 /* YZMoreMenuViewController.xib in Resources */,
+				045E1BAF1F69150700F37230 /* problemCar.plist in Resources */,
 				5094A6261F3447CD00407808 /* BusinessEstimateCell.xib in Resources */,
 				50B26E9B1F307D50009B3B9F /* DiscountDetailView.xib in Resources */,
 				180E42F71F3AD4E600013D2D /* PopupView.xib in Resources */,
