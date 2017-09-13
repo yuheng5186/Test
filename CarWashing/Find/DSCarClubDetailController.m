@@ -157,7 +157,7 @@
     
     
     UIImageView *userImageView  = [UIImageView new];
-    userImageView.image         = [UIImage imageNamed:@"icon0.jpg"];
+    userImageView.image         = [UIImage imageNamed:@"pingluntouxiang.jpg"];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,newsDetail.FromusrImg];
         NSURL *url=[NSURL URLWithString:ImageURL];
