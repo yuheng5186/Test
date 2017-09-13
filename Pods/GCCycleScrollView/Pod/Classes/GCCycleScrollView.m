@@ -76,6 +76,7 @@
 
 -(void)setPlacehodlerImage:(UIImage *)placehodlerImage{
     _placehodlerImage = placehodlerImage;
+    
 }
 
 

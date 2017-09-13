@@ -92,6 +92,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         _rechargeView = rechargeView;
         _rechargeView.emptyDataSetSource=self;
         _rechargeView.emptyDataSetDelegate=self;
+        _rechargeView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
         [self.view addSubview:_rechargeView];
     }
     
