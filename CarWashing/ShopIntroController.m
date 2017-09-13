@@ -77,10 +77,18 @@ static NSString *id_infoCell = @"id_infoCell";
     for (int i = 0; i < [lab count]; i++) {
         MerflagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(12*Main_Screen_Height/667 + i % 3 * 67*Main_Screen_Height/667,  199*Main_Screen_Height/667, 60*Main_Screen_Height/667, 15*Main_Screen_Height/667)];
         MerflagsLabel.text = lab[i];
-        MerflagsLabel.backgroundColor = [UIColor redColor];
+//        MerflagsLabel.backgroundColor = [UIColor redColor];
         [MerflagsLabel setFont:[UIFont fontWithName:@"Helvetica" size:11*Main_Screen_Height/667]];
-        MerflagsLabel.textColor = [UIColor colorFromHex:@"#fefefe"];
-        MerflagsLabel.backgroundColor = [UIColor colorFromHex:@"#ff7556"];
+//        MerflagsLabel.textColor = [UIColor colorFromHex:@"#fefefe"];
+//        MerflagsLabel.backgroundColor = [UIColor colorFromHex:@"#ff7556"];
+        MerflagsLabel.textColor = [UIColor colorFromHex:@"#a8c4d7"];
+        //                MerflagsLabel.backgroundColor = [UIColor colorFromHex:@"#ff7556"];
+        MerflagsLabel.backgroundColor = [UIColor whiteColor];
+        MerflagsLabel.textAlignment = NSTextAlignmentCenter;
+//        MerflagsLabel.layer.borderColor=[UIColor colorFromHex:@"#dfdfdf"].CGColor;
+        MerflagsLabel.layer.borderColor=[UIColor colorFromHex:@"#a8c4d7"].CGColor;
+  
+        MerflagsLabel.layer.borderWidth=0.8;
         MerflagsLabel.textAlignment = NSTextAlignmentCenter;
         MerflagsLabel.layer.masksToBounds = YES;
         MerflagsLabel.layer.cornerRadius = 7.5*Main_Screen_Height/667;

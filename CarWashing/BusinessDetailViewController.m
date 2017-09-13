@@ -226,12 +226,14 @@ static NSString *businessCommentCell = @"businessCommentCell";
     for (int i = 0; i < [lab count]; i++) {
         MerflagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20*Main_Screen_Height/667 + i % 3 * 67*Main_Screen_Height/667,  i / 3 * 25*Main_Screen_Height/667 + 83*Main_Screen_Height/667, 60*Main_Screen_Height/667, 15*Main_Screen_Height/667)];
         MerflagsLabel.text = lab[i];
-        MerflagsLabel.backgroundColor = [UIColor redColor];
-        [MerflagsLabel setFont:[UIFont fontWithName:@"Helvetica" size:11 ]];
-        MerflagsLabel.textColor = [UIColor colorFromHex:@"#fefefe"];
-        MerflagsLabel.backgroundColor = [UIColor colorFromHex:@"#ff7556"];
+//        MerflagsLabel.backgroundColor = [UIColor redColor];
+        [MerflagsLabel setFont:[UIFont fontWithName:@"Helvetica" size:11*Main_Screen_Height/667 ]];
+        MerflagsLabel.textColor = [UIColor colorFromHex:@"#a8c4d7"];
+//        MerflagsLabel.backgroundColor = [UIColor colorFromHex:@"#ff7556"];
         MerflagsLabel.textAlignment = NSTextAlignmentCenter;
         MerflagsLabel.layer.masksToBounds = YES;
+        MerflagsLabel.layer.borderWidth=0.8*Main_Screen_Height/667;
+        MerflagsLabel.layer.borderColor=[UIColor colorFromHex:@"#a8c4d7"].CGColor;
         MerflagsLabel.layer.cornerRadius = 7.5*Main_Screen_Height/667;
         [headerView addSubview:MerflagsLabel];
     }
