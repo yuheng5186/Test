@@ -225,7 +225,7 @@
     
     UIView *headerView = [UIView new];
     headerView.width = [UIScreen mainScreen].bounds.size.width;
-    headerView.height   = Main_Screen_Height*505/667;
+    headerView.height   = Main_Screen_Height*240/667;
     headerView.backgroundColor  = [UIColor whiteColor];
     self.tableView.tableHeaderView  = headerView;
 
@@ -263,14 +263,13 @@
     
 
     
-    UIView *scanView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    UIView *scanView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
     scanView.centerX                   = Main_Screen_Width/8;
     scanView.top                       = Main_Screen_Height*0/667+cycleScroll.bottom;
     
     UITapGestureRecognizer  *tapScanGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapScanButtonClick:)];
     [scanView addGestureRecognizer:tapScanGesture];
-    UIImage *scanImage              = [UIImage imageNamed:@"saoyisao"];
-    UIImageView *scanImageView      = [UIUtil drawCustomImgViewInView:scanView frame:CGRectMake(0, 0, scanImage.size.width,scanImage.size.height) imageName:@"saoyisao"];
+    UIImageView *scanImageView      = [UIUtil drawCustomImgViewInView:scanView frame:CGRectMake(0, 0, Main_Screen_Width*45/375,Main_Screen_Height*45/667) imageName:@"saoyisao"];
     scanImageView.centerX           = scanView.size.width/2;
     scanImageView.top               = Main_Screen_Height*10/667;
     
@@ -278,18 +277,18 @@
     UIFont *scanNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
     UILabel *scanNameLabel          = [UIUtil drawLabelInView:scanView frame:[UIUtil textRect:scanName font:scanNameFont] font:scanNameFont text:scanName isCenter:NO];
     scanNameLabel.textColor         = [UIColor colorFromHex:@"#fefefe"];
+//    scanNameLabel.backgroundColor         = [UIColor yellowColor];
     scanNameLabel.centerX           = scanImageView.centerX;
     scanNameLabel.top               = scanImageView.bottom +Main_Screen_Height*6/667;
     
-    UIView *cardBagView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    UIView *cardBagView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
     cardBagView.centerX                   = Main_Screen_Width*3/8;
     cardBagView.centerY                   = scanView.centerY;
     
     UITapGestureRecognizer  *tapCardBagGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapCardBagButtonClick:)];
     [cardBagView addGestureRecognizer:tapCardBagGesture];
     
-    UIImage *cardImage                 = [UIImage imageNamed:@"kabao"];
-    UIImageView *cardBagImageView      = [UIUtil drawCustomImgViewInView:cardBagView frame:CGRectMake(0, 0, cardImage.size.width,cardImage.size.height) imageName:@"kabao"];
+    UIImageView *cardBagImageView      = [UIUtil drawCustomImgViewInView:cardBagView frame:CGRectMake(0, 0, Main_Screen_Width*45/375,Main_Screen_Height*45/667) imageName:@"kabao"];
     cardBagImageView.centerX           = cardBagView.size.width/2;
     cardBagImageView.top               = Main_Screen_Height*10/667;
     
@@ -301,15 +300,14 @@
     cardBagNameLabel.top               = cardBagImageView.bottom +Main_Screen_Height*6/667;
     
     
-    UIView *memberRightView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    UIView *memberRightView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
     memberRightView.centerX                   = Main_Screen_Width*5/8;
     memberRightView.centerY                   = cardBagView.centerY;
     
     UITapGestureRecognizer  *tapMemberRightGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapMemberRightButtonClick:)];
     [memberRightView addGestureRecognizer:tapMemberRightGesture];
     
-    UIImage *memberImage                   = [UIImage imageNamed:@"huiyuan"];
-    UIImageView *memberRightImageView      = [UIUtil drawCustomImgViewInView:memberRightView frame:CGRectMake(0, 0, memberImage.size.width,memberImage.size.height) imageName:@"huiyuan"];
+    UIImageView *memberRightImageView      = [UIUtil drawCustomImgViewInView:memberRightView frame:CGRectMake(0, 0, Main_Screen_Width*45/375,Main_Screen_Height*45/667) imageName:@"huiyuan"];
     memberRightImageView.centerX           = memberRightView.size.width/2;
     memberRightImageView.top               = Main_Screen_Height*10/667;
     
@@ -321,15 +319,14 @@
     rightNameLabel.top               = memberRightImageView.bottom +Main_Screen_Height*6/667;
     
     
-    UIView *scoreView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    UIView *scoreView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
     scoreView.centerX                   = Main_Screen_Width*7/8;
     scoreView.centerY                   = cardBagView.centerY;
     
     UITapGestureRecognizer  *tapScoreGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapScoreButtonClick:)];
     [scoreView addGestureRecognizer:tapScoreGesture];
     
-    UIImage *scoreImage              = [UIImage imageNamed:@"jifen"];
-    UIImageView *scoreImageView      = [UIUtil drawCustomImgViewInView:scoreView frame:CGRectMake(0, 0, scoreImage.size.width,scoreImage.size.height) imageName:@"jifen"];
+    UIImageView *scoreImageView      = [UIUtil drawCustomImgViewInView:scoreView frame:CGRectMake(0, 0,Main_Screen_Width*45/375,Main_Screen_Height*45/667) imageName:@"jifen"];
     scoreImageView.centerX           = scoreView.size.width/2;
     scoreImageView.top               = Main_Screen_Height*10/667;
     

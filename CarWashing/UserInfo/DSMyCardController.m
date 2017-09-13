@@ -16,7 +16,7 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"我的卡券" Color:[UIColor blackColor]];
+    [self drawTitle:@"我的卡包" Color:[UIColor blackColor]];
     
 }
 
