@@ -473,7 +473,7 @@
     }else if (indexPath.section == 1){
     
         if (indexPath.row == 0) {
-            cell.imageView.image        = [UIImage imageNamed:@"wodeaiche"];
+            cell.imageView.image        = [UIImage imageNamed:@"wode_wodeaiche"];
             cell.textLabel.text         = @"我的爱车";
         }else{
             cell.imageView.image        = [UIImage imageNamed:@"wwodekaquan"];
