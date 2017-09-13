@@ -36,6 +36,8 @@
 @property (nonatomic, weak) UITextField *text1;
 @property (nonatomic, weak) UITextField *text2;
 @property (nonatomic, weak) UIButton *provinceBtn;
+@property (nonatomic, strong) NSString *lblYear;
+@property (nonatomic, strong) NSString *lblData;
 
 @end
 
@@ -281,6 +283,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                 if(self.mycar == nil)
                 {
                     lbl.text = @"请选择";
+                    self.lblYear=@" ";
                 }
                 else
                 {
@@ -301,6 +304,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                 
                 if(self.mycar == nil)
                 {
+                     self.lblData=@" ";
                     lbl2.text = @"请选择";
                 }
                 else
@@ -440,7 +444,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             [_text2 resignFirstResponder];
             [_brandTF resignFirstResponder];
             QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
-                
+                self.lblYear=str;
                 self.lbl.text = str;
             }];
             [datePickerView show];
@@ -452,7 +456,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             [_text2 resignFirstResponder];
             [_brandTF resignFirstResponder];
             QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
-                
+                self.lblData=str;
                 self.lbl2.text = str;
             }];
             [datePickerView show];
@@ -491,17 +495,31 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         
         else
         {
-            NSLog(@"%@===%@",_lbl2.text,_lbl.text);
+            NSString *lblstr=@" ";
+            if (self.lblYear.length>=4) {
+               lblstr=[self.lblYear substringWithRange:NSMakeRange(0,4)];
+            }
+//            lblstr= [lblstr isEqualToString:@" "]?0:lblstr;
+            if(lblstr==nil){
+                lblstr=@"0";
+            }
+            if(_text2.text==nil){
+                _text2.text=@"0";
+            }
+//            _text2.text=[_text2.text isEqualToString:@" "]?0:_text2.text;
+            NSLog(@"%@===%@==%@===%@",self.lblYear,lblstr,self.lblData,_text2.text);
+         
             NSDictionary *mulDic = @{
                                      @"CarBrand":_brandTF.text,
                                      @"PlateNumber":[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,_numTF.text],
                                      @"ChassisNum":_text1.text,
                                      @"EngineNum":@"",
-                                     @"Manufacture":[_lbl.text substringWithRange:NSMakeRange(0,4)],
-                                     @"DepartureTime":_lbl2.text,
+                                     @"Manufacture":lblstr,
+                                     @"DepartureTime":self.lblData,
                                      @"Mileage":_text2.text,
                                      @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
                                      };
+             NSLog(@"%@",mulDic);
             NSMutableArray *ad = [NSMutableArray array];
             
             for (NSString *key in mulDic.allKeys) {
@@ -517,7 +535,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                                          @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                          @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                          };
-                
+                NSLog(@"%@",params);
                 [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/AddCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
                     
                     

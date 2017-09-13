@@ -21,16 +21,20 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    
+    NSMutableString *str = [NSMutableString string];
+    // 3.根据标签类型获取指定标签的元素
+    [str appendString:@"var header = document.getElementsByTagName(\"header\")[0];"];
+    [str appendString:@"header.parentNode.removeChild(header);"];// 移除头部的导航栏
+    [str appendString:@"var content = document.getElementById('wrap');"];
+    [str appendString:@"content.style.paddingTop = '0px';"];
+    [webView stringByEvaluatingJavaScriptFromString:str];
     
 }
 
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     NSLog(@"%@",error);
-}    
-////http://119.23.53.225:8090/InviteShare/merchantshare.html
-//http://mp.weixin.qq.com/s/dUyEWStmXKL8a24FxZuJ3Q.html
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,6 +54,7 @@
     webView.scrollView.contentInset = UIEdgeInsetsMake (0.0f, 0.0f, 80.0f, 0.0f);
     
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
