@@ -146,7 +146,7 @@
     
     NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,model.CommentUserImg];
     NSURL *url=[NSURL URLWithString:ImageURL];
-    [_iconImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"gerenxinxitou"]];
+    [_iconImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
     
     _nameLabel.text         = model.CommentUserName;
     _contentLabel.text      = model.Comment;
