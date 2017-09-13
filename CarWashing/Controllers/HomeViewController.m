@@ -530,8 +530,8 @@
     UITapGestureRecognizer  *tapServiceGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapServiceButtonClick:)];
     [serviceView addGestureRecognizer:tapServiceGesture];
     
-    UIImage *serviceImage              = [UIImage imageNamed:@"kefu"];
-    UIImageView *serviceImageView      = [UIUtil drawCustomImgViewInView:serviceView frame:CGRectMake(0, 0, serviceImage.size.width,serviceImage.size.height) imageName:@"kefu"];
+    UIImage *serviceImage              = [UIImage imageNamed:@"kefu_wo"];
+    UIImageView *serviceImageView      = [UIUtil drawCustomImgViewInView:serviceView frame:CGRectMake(0, 0, serviceImage.size.width,serviceImage.size.height) imageName:@"kefu_wo"];
     serviceImageView.left              = Main_Screen_Width*15/375;
     serviceImageView.top               = Main_Screen_Height*10/667;
     

@@ -53,6 +53,7 @@
 @property (nonatomic, strong) UILabel *userNameLabel;
 @property (nonatomic, strong) UIButton  *editButton;
 
+@property (strong, nonatomic) UIScrollView *scrollView;
 
 
 @end
@@ -81,6 +82,16 @@
 
 - (void) createSubView {
 
+    self.scrollView                         = [[UIScrollView alloc] initWithFrame:CGRectMake(self.contentView.frame.origin.x, self.contentView.frame.origin.y, self.contentView.size.width, self.contentView.size.height)];
+    self.scrollView.backgroundColor         = self.contentView.backgroundColor;
+    self.scrollView.contentSize             = CGSizeMake(self.contentView.size.width, self.contentView.size.height*1.0);
+    [self.scrollView flashScrollIndicators];
+    self.scrollView.contentInset     = UIEdgeInsetsMake(0, 0, 20, 0);
+    self.scrollView.directionalLockEnabled  = YES;
+    [self.view addSubview:self.scrollView];
+    
+    [self.scrollView addSubview:self.contentView];
+    
     UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*320/667) color:[UIColor colorFromHex:@"#0161a1"]];
     upView.top                      = 0;
     
@@ -434,7 +445,7 @@
             return 1;
             break;
         case 1:
-            return 2;
+            return 3;
             break;
         case 2:
             return 1;
@@ -475,11 +486,15 @@
         if (indexPath.row == 0) {
             cell.imageView.image        = [UIImage imageNamed:@"wode_wodeaiche"];
             cell.textLabel.text         = @"我的爱车";
-        }else{
+        }else if (indexPath.row == 1){
+        
             cell.imageView.image        = [UIImage imageNamed:@"wwodekaquan"];
             cell.textLabel.text         = @"我的卡包";
-//            cell.detailTextLabel.text   = @"3张优惠券";
-        
+            
+        }else{
+
+            cell.imageView.image        = [UIImage imageNamed:@"kefu_wo"];
+            cell.textLabel.text         = @"客服咨询";
         }
     }else{
         cell.imageView.image            = [UIImage imageNamed:@"tuijianjinding"];
@@ -507,15 +522,18 @@
             DSMyCarController *myCarController                  = [[DSMyCarController alloc]init];
             myCarController.hidesBottomBarWhenPushed            = YES;
             [self.navigationController pushViewController:myCarController animated:YES];
-        }else{
-            
+        }else if (indexPath.row == 1) {
+        
             DSCardGroupController *cardGroupController      = [[DSCardGroupController alloc]init];
             cardGroupController.hidesBottomBarWhenPushed    = YES;
             [self.navigationController pushViewController:cardGroupController animated:YES];
+        }
+        else{
             
-//            DSMyCardController *myCardController                = [[DSMyCardController alloc]init];
-//            myCardController.hidesBottomBarWhenPushed           = YES;
-//            [self.navigationController pushViewController:myCardController animated:YES];
+            DSServiceController *serviceVC          = [[DSServiceController alloc]init];
+            serviceVC.hidesBottomBarWhenPushed      = YES;
+            [self.navigationController pushViewController:serviceVC animated:YES];
+
         }
     }else{
 //        ShareWeChatController *shareVC = [[ShareWeChatController alloc] init];
