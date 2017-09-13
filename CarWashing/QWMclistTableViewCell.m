@@ -76,17 +76,23 @@
     [addlabel setFont:[UIFont fontWithName:@"Helvetica" size:13 * myDelegate.autoSizeScaleX]];
     addlabel.textColor = [UIColor colorFromHex:@"#999999"];
     addlabel.text = @"上海市浦东新区金桥路金桥路";
+   
+    
     [self.contentView addSubview:addlabel];
+    
     self.Mcaddress = addlabel;
+   
     
     CGSize sizeaddlabel = [addlabel boundingRectWithSize:CGSizeMake(Main_Screen_Width,2000)];
     addlabel.lineBreakMode = NSLineBreakByWordWrapping;
     
-    UIImageView *imageV3 =[[UIImageView alloc]initWithFrame:CGRectMake(300 * myDelegate.autoSizeScaleX, 21* myDelegate.autoSizeScaleY+sizecatlabel.height,10 * myDelegate.autoSizeScaleX,10 * myDelegate.autoSizeScaleY)];
+    UIImageView *imageV3 =[[UIImageView alloc]initWithFrame:CGRectMake(290 * myDelegate.autoSizeScaleX, 21* myDelegate.autoSizeScaleY+sizecatlabel.height,10 * myDelegate.autoSizeScaleX,10 * myDelegate.autoSizeScaleY)];
     imageV3.opaque = YES;
     imageV3.image = [UIImage imageNamed:@"juli"];
     [self.contentView addSubview:imageV3];
     self.McImagelubiaoView = imageV3;
+    
+    self.Mcrange.left=10*Main_Screen_Width/375;
     
     UILabel *julilabel = [[UILabel alloc]initWithFrame:CGRectMake(250*myDelegate.autoSizeScaleX,21* myDelegate.autoSizeScaleY+sizecatlabel.height, 108*myDelegate.autoSizeScaleX, 10*myDelegate.autoSizeScaleY)];
     [julilabel setFont:[UIFont fontWithName:@"Helvetica" size:11 * myDelegate.autoSizeScaleX]];
@@ -95,6 +101,8 @@
     julilabel.textAlignment = NSTextAlignmentRight;
     [self.contentView addSubview:julilabel];
     self.Mcrange = julilabel;
+    
+    
     
     UIImageView *lineImg = [[UIImageView alloc] initWithFrame:CGRectMake1(112, 75, 175, 2)];
     lineImg.image = [self drawLineByImageView:lineImg];
@@ -128,6 +136,7 @@
     [taglabel2 setFont:[UIFont fontWithName:@"Helvetica" size:11 * myDelegate.autoSizeScaleX]];
     taglabel2.textColor = [UIColor colorFromHex:@"#fefefe"];
     taglabel2.text = @"质量保障";
+    
     taglabel2.backgroundColor = [UIColor colorFromHex:@"#ff7556"];
     taglabel2.textAlignment = NSTextAlignmentCenter;
     taglabel2.layer.masksToBounds = YES;
@@ -135,9 +144,9 @@
 //    [self.contentView addSubview:taglabel2];
     self.Mctag2 = taglabel2;
     
-    UIView  *lineView   = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*2/667) color:[UIColor colorFromHex:@"#e6e6e6"]];
-    lineView.centerX    = Main_Screen_Width/2;
-    lineView.top     = self.contentView.bottom-Main_Screen_Height*2/667;
+//    UIView  *lineView   = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*2/667) color:[UIColor colorFromHex:@"#e6e6e6"]];
+//    lineView.centerX    = Main_Screen_Width/2;
+//    lineView.top     = self.contentView.bottom-Main_Screen_Height*2/667;
     
 }
 
@@ -172,7 +181,9 @@
                 });
             });
             self.Mcname.text = [dic objectForKey:@"MerName"];
+    
             self.Mcaddress.text = [dic objectForKey:@"MerAddress"];
+    
         //    self.freeTestLabel.text = [dicobjectForKey:@"MerName"];
         //    self.qualityLabel.text = [dicobjectForKey:@"MerName"];
             self.Mcrange.text = [NSString stringWithFormat:@"%.2fkm",[[dic objectForKey:@"Distance"] doubleValue]];
@@ -195,16 +206,22 @@
                 MerflagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(115 *myDelegate.autoSizeScaleX + i % 3 * 67 *myDelegate.autoSizeScaleX,  i / 3 * 25 *myDelegate.autoSizeScaleY + 85 *myDelegate.autoSizeScaleY, 60*myDelegate.autoSizeScaleX, 15*myDelegate.autoSizeScaleY)];
         
                 MerflagsLabel.text = lab[i];
-                MerflagsLabel.backgroundColor = [UIColor redColor];
-                [MerflagsLabel setFont:[UIFont fontWithName:@"Helvetica" size:11 ]];
-                MerflagsLabel.textColor = [UIColor colorFromHex:@"#fefefe"];
-                MerflagsLabel.backgroundColor = [UIColor colorFromHex:@"#ff7556"];
+//                MerflagsLabel.backgroundColor = [UIColor redColor];
+                [MerflagsLabel setFont:[UIFont fontWithName:@"Helvetica" size:11*Main_Screen_Height/667 ]];
+                MerflagsLabel.textColor=[UIColor colorFromHex:@"#a8c4d7"];
                 MerflagsLabel.textAlignment = NSTextAlignmentCenter;
+                MerflagsLabel.layer.borderColor=[UIColor colorFromHex:@"#a8c4d7"].CGColor;
+                MerflagsLabel.layer.borderWidth=0.8;
                 MerflagsLabel.layer.masksToBounds = YES;
                 MerflagsLabel.layer.cornerRadius = 7.5*myDelegate.autoSizeScaleY;
                 [self.contentView addSubview:MerflagsLabel];
             }
     
+    //替换某一位置的字符
+    if (self.Mcaddress.text.length>10) {
+        NSString *str4 = [self.Mcaddress.text  stringByReplacingCharactersInRange:NSMakeRange(10, self.Mcaddress.text.length-10) withString:@"..."];
+        self.Mcaddress.text=str4;
+    }
 }
 
 CG_INLINE CGRect

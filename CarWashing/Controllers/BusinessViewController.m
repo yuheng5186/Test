@@ -161,9 +161,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.salerListView.emptyDataSetSource=self;
     self.salerListView.emptyDataSetDelegate=self;
     self.salerListView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
-    
+    //去掉分割线
 //    self.salerListView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+   
     
     [self setupRefresh];
 
@@ -282,7 +282,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     NSDictionary *dic=[self.MerchantData objectAtIndex:indexPath.row];
     [cell setUpCellWithDic:dic];
     [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
-    [cell setBackgroundColor:[UIColor grayColor]];
+    [cell setBackgroundColor:[UIColor clearColor]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     
