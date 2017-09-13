@@ -147,7 +147,7 @@
 
 - (void)showAlertWithMessage:(NSString *)message{
     
-    [PhoneHelper dial: @"1008611"];
+    [PhoneHelper dial: @"4006979558"];
 }
 
 
