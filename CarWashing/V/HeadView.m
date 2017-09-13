@@ -27,6 +27,7 @@
     HeadView *headView;
     if (headView == nil) {
         headView = [[HeadView alloc] initWithReuseIdentifier:headIdentifier];
+        headView.backgroundColor    = [UIColor whiteColor];
     }
     
     return headView;

@@ -90,6 +90,7 @@
     UITableView *serviceListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 44*Main_Screen_Height/667, Main_Screen_Width, Main_Screen_Height - 64 - (44+51)*Main_Screen_Height/667)];
     serviceListView.delegate = self;
     serviceListView.dataSource = self;
+    serviceListView.backgroundColor     = [UIColor clearColor];
     [self.view addSubview:serviceListView];
     self.serviceListView = serviceListView;
     self.serviceListView.sectionHeaderHeight = 50*Main_Screen_Height/667;
@@ -249,7 +250,7 @@
     
     headView.delegate = self;
     headView.titleGroup = self.answersArray[section];
-    
+    headView.contentView.backgroundColor    = [UIColor whiteColor];
     return headView;
 }
 
