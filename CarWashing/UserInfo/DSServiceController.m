@@ -87,7 +87,7 @@
     
     [self setupTopServiceSliderView];
     
-    UITableView *serviceListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 44*Main_Screen_Height/667, Main_Screen_Width, Main_Screen_Height - 64 - (44+51)*Main_Screen_Height/667)];
+    UITableView *serviceListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 65 + 44*Main_Screen_Height/667, Main_Screen_Width, Main_Screen_Height - 64 - (44+51)*Main_Screen_Height/667)];
     serviceListView.delegate = self;
     serviceListView.dataSource = self;
     serviceListView.backgroundColor     = [UIColor clearColor];
