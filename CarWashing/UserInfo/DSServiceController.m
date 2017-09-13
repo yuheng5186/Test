@@ -48,6 +48,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.serviceTag = 0;
+    
     [self setupUI];
     
     [self loadData];
@@ -57,7 +59,19 @@
 #pragma mark 加载数据
 - (void)loadData
 {
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"problemCenter.plist" withExtension:nil];
+    //   problemCenter.plist     problemCar.plist   ProblemUse.plist
+    
+    NSURL *url;
+        if (self.serviceTag == 0) {
+            url = [[NSBundle mainBundle] URLForResource:@"problemCenter.plist" withExtension:nil];
+
+        }else if (self.serviceTag == 1){
+            url = [[NSBundle mainBundle] URLForResource:@"problemCar.plist" withExtension:nil];
+        }else{
+            url = [[NSBundle mainBundle] URLForResource:@"ProblemUse.plist" withExtension:nil];
+        }
+    
+    
     NSArray *tempArray = [NSArray arrayWithContentsOfURL:url];
     
     self.answersArray = [NSMutableArray array];
@@ -256,6 +270,7 @@
 - (void)sliderView:(HQSliderView *)sliderView didClickMenuButton:(UIButton *)button{
     
     self.serviceTag = button.tag;
+    [self loadData];
     [self.serviceListView reloadData];
 }
 

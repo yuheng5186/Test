@@ -40,17 +40,6 @@
 		<array>
 			<dict>
 				<key>answer</key>
-				<string>不同类型的优惠券使用条件各有不同，您可以在“个人中心-我的卡卷”查看优惠券的使用规则以有效期等信息，符合条件的可在订单发生时进行相应金额的抵扣。</string>
-			</dict>
-		</array>
-		<key>title</key>
-		<string>如何使用优惠券？</string>
-	</dict>
-	<dict>
-		<key>infor</key>
-		<array>
-			<dict>
-				<key>answer</key>
 				<string>获取渠道：蔷薇爱车与合作伙伴共同发起，已获得的卡卷，访问“我的—激活”进入后输入激活码进行激活。</string>
 			</dict>
 		</array>
@@ -62,33 +51,11 @@
 		<array>
 			<dict>
 				<key>answer</key>
-				<string>1、洗车优惠券分为X元洗车抵扣劵和免费体验劵                                                                               2、登录蔷薇APP后，选择门店，选择洗车服务，再选择洗车劵即可                                                                            3、每张洗车劵都会有有效期以及使用规则</string>
-			</dict>
-		</array>
-		<key>title</key>
-		<string>洗车劵怎么使用？</string>
-	</dict>
-	<dict>
-		<key>infor</key>
-		<array>
-			<dict>
-				<key>answer</key>
 				<string>登录APP点击“购卡-点击购买”完成支付即可,已购买的洗车卡可在“我的卡卷”中查看</string>
 			</dict>
 		</array>
 		<key>title</key>
 		<string>如何办理洗车卡？</string>
-	</dict>
-	<dict>
-		<key>infor</key>
-		<array>
-			<dict>
-				<key>answer</key>
-				<string>您可在提交订单的时候，直接取消订单即可。</string>
-			</dict>
-		</array>
-		<key>title</key>
-		<string>怎么取消订单？</string>
 	</dict>
 </array>
 </plist>

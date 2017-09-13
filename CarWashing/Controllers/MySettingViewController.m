@@ -477,7 +477,7 @@
             cell.textLabel.text         = @"我的爱车";
         }else{
             cell.imageView.image        = [UIImage imageNamed:@"wwodekaquan"];
-            cell.textLabel.text         = @"我的卡券";
+            cell.textLabel.text         = @"我的卡包";
 //            cell.detailTextLabel.text   = @"3张优惠券";
         
         }
