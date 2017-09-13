@@ -45,7 +45,8 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     [super viewDidLoad];
     
     //self.view.backgroundColor = [UIColor lightGrayColor];
-    
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(goBack) name:@"paysuccess" object:nil];
     NSArray *payNameArray = @[@"微信支付",@"支付宝支付"];
     NSArray *payImageNameArr = @[@"weixin",@"zhifubao"];
     self.payNameArray = payNameArray;
@@ -53,7 +54,23 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
     [self setupUI];
 }
-
+#pragma mark-支付成功回调
+-(void)goBack{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"购买成功" message:@"点击立即查看" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:cancelAction];
+    
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    
+    }];
+    [alertController addAction:OKAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 
 - (void)setupUI {
     

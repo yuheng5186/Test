@@ -117,12 +117,14 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     maxLab.textColor =[UIColor colorFromHex:@"#ffffff"];
     maxLab.textAlignment=NSTextAlignmentRight;
     maxLab.font = [UIFont systemFontOfSize:10];
-    maxLab.text = self.NextLevelScore;
+    NSLog(@"%d",[self.NextLevelScore intValue]-1);
+    
+    maxLab.text = [NSString stringWithFormat:@"%d",[self.NextLevelScore intValue]-1];
     [self.view addSubview:maxLab];
     
     UIButton *displayBtn = [[UIButton alloc] init];
     displayBtn.userInteractionEnabled = NO;
-    NSString *string = [NSString stringWithFormat:@"还需获得%ld积分升级为%@",([self.NextLevelScore integerValue]- [self.CurrentScore integerValue]),self.nextLevel];
+    NSString *string = [NSString stringWithFormat:@"还需获得%ld积分升级为%@",([self.NextLevelScore integerValue]- [self.CurrentScore integerValue]-1),self.nextLevel];
     [displayBtn setTitle:string forState:UIControlStateNormal];
     [displayBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     displayBtn.titleLabel.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];

@@ -183,7 +183,7 @@
                                  };
         
         [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/AddOrderComment",Khttp] success:^(NSDictionary *dict, BOOL success) {
-            
+            NSLog(@"%@",dict);
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
                 //            NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];

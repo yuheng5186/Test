@@ -29,6 +29,7 @@
     
     self.priceLabel.textColor = [UIColor colorFromHex:@"#ff525a"];
     
+    
     [self.stateButton setTitleColor:[UIColor colorFromHex:@"#0161a1"] forState:UIControlStateNormal];
     self.stateButton.layer.cornerRadius = 12.5*Main_Screen_Height/667;
     self.stateButton.layer.borderWidth = 1;

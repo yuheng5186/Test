@@ -283,7 +283,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                 if(self.mycar == nil)
                 {
                     lbl.text = @"请选择";
-                    self.lblYear=@" ";
+                    self.lblYear=@"";
                 }
                 else
                 {
@@ -495,15 +495,15 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         
         else
         {
-            NSString *lblstr=@" ";
+            NSString *lblstr=@"";
             if (self.lblYear.length>=4) {
                lblstr=[self.lblYear substringWithRange:NSMakeRange(0,4)];
             }
 //            lblstr= [lblstr isEqualToString:@" "]?0:lblstr;
-            if(lblstr==nil){
+            if(lblstr.length==0){
                 lblstr=@"0";
             }
-            if(_text2.text==nil){
+            if(_text2.text.length==0 ){
                 _text2.text=@"0";
             }
 //            _text2.text=[_text2.text isEqualToString:@" "]?0:_text2.text;

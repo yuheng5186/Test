@@ -128,9 +128,9 @@
     
 //    MenuTabBarController *menuTabBarController	= [[MenuTabBarController alloc] init];
 //    self.window.rootViewController				= menuTabBarController;
+        [WXApi registerApp:@"wx36260a82ad0e51bb"];      //公司
+
     
-    
-    [WXApi registerApp:@"wx36260a82ad0e51bb"];      //公司
 
 
     return YES;
@@ -169,8 +169,8 @@
     
     
 }
-
 - (void)onResp:(BaseResp *)resp
+
 {
     NSString *payResoult = [NSString stringWithFormat:@"%d", resp.errCode];
     if([resp isKindOfClass:[PayResp class]]){
@@ -179,8 +179,8 @@
         {
             NSNotification * notice = [NSNotification notificationWithName:@"paysuccess" object:nil userInfo:nil];
             [[NSNotificationCenter defaultCenter]postNotification:notice];
-//            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"支付结果：成功！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
-//            [alertview show];
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"支付结果：成功！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+            [alertview show];
             
         }
         else if([payResoult isEqualToString:@"-1"])
@@ -225,7 +225,6 @@
         
     }
 }
-
 
 
 
