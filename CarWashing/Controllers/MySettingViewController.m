@@ -93,7 +93,6 @@
     titleNameLabel.centerX           = upView.centerX;
     
     
-//    UIImage *editImage              = [UIImage imageNamed:@"icon_defaultavatar"];
     
     
     self.editButton           = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) iconName:@"huiyuantou" target:self action:@selector(editButtonClick:)];
@@ -474,7 +473,7 @@
     }else if (indexPath.section == 1){
     
         if (indexPath.row == 0) {
-            cell.imageView.image        = [UIImage imageNamed:@"wodeaiche"];
+            cell.imageView.image        = [UIImage imageNamed:@"wode_wodeaiche"];
             cell.textLabel.text         = @"我的爱车";
         }else{
             cell.imageView.image        = [UIImage imageNamed:@"wwodekaquan"];

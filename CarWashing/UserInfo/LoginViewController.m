@@ -82,7 +82,6 @@
     deaderLabel.centerX          = Main_Screen_Width/2;
     deaderLabel.top              = Main_Screen_Height*20/667;
     
-//    UIImage *logoImage          = [UIImage imageNamed:@"WechatIMG3"];
     UIImageView *logoImageView  = [UIUtil drawCustomImgViewInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*100/667) imageName:@"denglu_icon"];
     logoImageView.layer.masksToBounds = YES;
 //    logoImageView.layer.cornerRadius = logoImageView.size.width/2;
@@ -310,7 +309,6 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     }
     cell.backgroundColor    = [UIColor whiteColor];
-    //    cell.imageView.image    = [UIImage imageNamed:@"btnImage"];
     if (indexPath.row == 0) {
         cell.imageView.image                = [UIImage imageNamed:@"yonghushouji"];
         

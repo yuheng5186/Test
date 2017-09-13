@@ -86,7 +86,6 @@
 //    showLabel.top               = titleLabel.bottom +Main_Screen_Height*14/667;
 //    showLabel.centerX           = titleLabel.centerX;
     
-//    UIImage  *getImage             = [UIImage imageNamed:@"fenxiangzhuanqian"];
     UIImageView *bigImageView   = [UIUtil drawCustomImgViewInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-64) imageName:@"fenxiangzhuanqian"];
     bigImageView.top            = self.navigationView.bottom;
     bigImageView.centerX        = self.contentView.centerX;

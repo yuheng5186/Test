@@ -7,7 +7,6 @@
 //
 
 #import "HomeViewController.h"
-#import "DSMessagesController.h"
 #import "SXScrPageView.h"
 #import "DSAdDetailController.h"
 #import "DSCardGroupController.h"
@@ -287,14 +286,6 @@
     cycleScroll.width = Main_Screen_Width;
     [backgroudView addSubview:cycleScroll];
     
-//    UIView *newBagView                  = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*120/667) color:[UIColor clearColor]];
-//    newBagView.top                      = sxView.bottom +Main_Screen_Height*10/667;
-//    
-//    UIImageView *newImageView           = [UIUtil drawCustomImgViewInView:newBagView frame:CGRectMake(0, 0, Main_Screen_Width,120) imageName:@"banka"];
-//    newImageView.top                    = 0;
-//    
-//    UITapGestureRecognizer  *tapNewGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapNewButtonClick:)];
-//    [newBagView addGestureRecognizer:tapNewGesture];
 
     
     UIView *scanView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];

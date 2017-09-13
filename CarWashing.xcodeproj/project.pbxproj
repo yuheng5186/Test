@@ -77,7 +77,6 @@
 		181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E93001F208AF20006511E /* DSMemberRightsController.m */; };
 		181E93041F208C520006511E /* DSMyCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E93031F208C520006511E /* DSMyCardController.m */; };
 		181E93071F208D560006511E /* DSRecommendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E93061F208D560006511E /* DSRecommendController.m */; };
-		181E930B1F2094C10006511E /* DSMessagesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E930A1F2094C10006511E /* DSMessagesController.m */; };
 		181E93291F20B0510006511E /* SXScrPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E93281F20B0510006511E /* SXScrPageView.m */; };
 		181E932C1F20B0EB0006511E /* DSAdDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E932B1F20B0EB0006511E /* DSAdDetailController.m */; };
 		18218FE81F2ADA8A00F7207F /* DSSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18218FE71F2ADA8A00F7207F /* DSSegmentView.m */; };
@@ -429,8 +428,6 @@
 		181E93031F208C520006511E /* DSMyCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMyCardController.m; path = UserInfo/DSMyCardController.m; sourceTree = "<group>"; };
 		181E93051F208D560006511E /* DSRecommendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSRecommendController.h; path = UserInfo/DSRecommendController.h; sourceTree = "<group>"; };
 		181E93061F208D560006511E /* DSRecommendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSRecommendController.m; path = UserInfo/DSRecommendController.m; sourceTree = "<group>"; };
-		181E93091F2094C10006511E /* DSMessagesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMessagesController.h; path = Home/DSMessagesController.h; sourceTree = "<group>"; };
-		181E930A1F2094C10006511E /* DSMessagesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMessagesController.m; path = Home/DSMessagesController.m; sourceTree = "<group>"; };
 		181E93271F20B0510006511E /* SXScrPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SXScrPageView.h; path = Tool/SXScrPageView.h; sourceTree = "<group>"; };
 		181E93281F20B0510006511E /* SXScrPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SXScrPageView.m; path = Tool/SXScrPageView.m; sourceTree = "<group>"; };
 		181E932A1F20B0EB0006511E /* DSAdDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAdDetailController.h; path = Home/DSAdDetailController.h; sourceTree = "<group>"; };
@@ -1123,8 +1120,6 @@
 				18322AAC1F4AD181003ABB7B /* model */,
 				18B69E9A1F32CA71007DA0E4 /* ScanController.h */,
 				18B69E9B1F32CA71007DA0E4 /* ScanController.m */,
-				181E93091F2094C10006511E /* DSMessagesController.h */,
-				181E930A1F2094C10006511E /* DSMessagesController.m */,
 				181E932A1F20B0EB0006511E /* DSAdDetailController.h */,
 				181E932B1F20B0EB0006511E /* DSAdDetailController.m */,
 				18B697A01F21A44F009FF73A /* DSMessageDetailController.h */,
@@ -2017,7 +2012,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CarWashing/Pods-CarWashing-resources.sh",
 				"${PODS_ROOT}/AMap2DMap/MAMapKit.framework/AMap.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/GCCycleScrollView/GCCycleScrollView.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/GCCycleScrollView/GCCycleScrollView.bundle,
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
@@ -2139,7 +2134,6 @@
 				181E92CE1F1F39CC0006511E /* UIUtil.m in Sources */,
 				18A4B1B71F4BF9C800C64978 /* MemberRightsDetailController.m in Sources */,
 				501672161F297D8200384186 /* PurchaseCardViewCell.m in Sources */,
-				181E930B1F2094C10006511E /* DSMessagesController.m in Sources */,
 				50B26EA91F315EB8009B3B9F /* PayOrderController.m in Sources */,
 				181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */,
 				18B697AF1F21DAE7009FF73A /* DSCarClubController.m in Sources */,

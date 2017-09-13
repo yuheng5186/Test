@@ -99,7 +99,6 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     }
     cell.backgroundColor    = [UIColor whiteColor];
-//    cell.imageView.image    = [UIImage imageNamed:@"btnImage"];
     
     if (indexPath.section == 0) {
         cell.imageView.image                = [UIImage imageNamed:@"yonghushouji"];

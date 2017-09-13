@@ -60,7 +60,6 @@
     UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*328/667) color:[UIColor colorFromHex:@"#fafafa"]];
     upView.top                      = 0;
     
-//    UIImage *backgroundImage              = [UIImage imageNamed:@"saomaxichetiyanquan"];
     
     UIImageView *backgroundImageView;
     

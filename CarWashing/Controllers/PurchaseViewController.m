@@ -391,7 +391,6 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     
     UIImageView *containImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 330*Main_Screen_Height/667, 190*Main_Screen_Height/667)];
 //    containImageView.contentMode = UIViewContentModeScaleAspectFit;
-//    containImageView.image = [UIImage imageNamed:@"kabeijing"];
     Card *card = (Card *)[_CardArray objectAtIndex:index];
     if(card.CardType == 1)
     {
