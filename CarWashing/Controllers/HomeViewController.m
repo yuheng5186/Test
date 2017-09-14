@@ -240,8 +240,7 @@
     
     
     NSMutableArray * images = [NSMutableArray array];
-    
-    
+
     if (self.newrc.adverList.count!=0) {
         for (NSInteger i = 0; i<self.newrc.adverList.count; i++)
         {
@@ -259,7 +258,6 @@
         
           }
 
-   
     cycleScroll.top  =   0;
     cycleScroll.width = Main_Screen_Width;
     [backgroudView addSubview:cycleScroll];

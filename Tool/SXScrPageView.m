@@ -85,9 +85,9 @@
         //初始化轮播页码控件
         self.pageVC=[[UIPageControl alloc]init];
         //设置轮播页码的位置
-        self.pageVC.frame=CGRectMake(0,self.frame.size.height-30, self.frame.size.width, 30);
+        self.pageVC.frame=CGRectMake(0,self.frame.size.height+30, self.frame.size.width, 30);
 //        _pageVC.currentPageIndicatorTintColor = #define BasicBackGroundColor  [UIColor colorWithRed:102/255.0 green:51/255.0 blue:0/255.0 alpha:1];
-        _pageVC.pageIndicatorTintColor = [UIColor whiteColor];
+        _pageVC.pageIndicatorTintColor = [UIColor blueColor];
         [self addSubview:self.pageVC];
         
         self.time = 3.0;
@@ -264,12 +264,6 @@
     self.pageVC.numberOfPages = self.imageArr.count;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+
 
 @end

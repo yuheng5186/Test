@@ -136,8 +136,9 @@ static NSString *id_commentShopCell = @"id_commentShopCell";
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
+    NSLog(@"%@",params);
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetCommentDetail",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+        NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             NSLog(@"%@",dict);

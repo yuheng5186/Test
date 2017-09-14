@@ -48,7 +48,7 @@
     CGFloat titleLabelW = self.width;
     CGFloat titleLabelH = _titleLabelHeight;
     CGFloat titleLabelX = 0;
-    CGFloat titleLabelY = self.height - titleLabelH;
+    CGFloat titleLabelY = -self.height - titleLabelH;
     _titleLabel.frame = CGRectMake(titleLabelX, titleLabelY, titleLabelW, titleLabelH);
     _titleLabel.hidden = _isHiddenForTitle;
     

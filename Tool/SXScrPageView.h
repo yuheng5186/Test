@@ -31,6 +31,7 @@ typedef void(^imageClickBlock)(NSInteger index);
  *  轮播的页码
  */
 @property(strong,nonatomic) UIPageControl *pageVC;
+
 /**
  *  轮播的时间
  */

@@ -8,19 +8,22 @@
 
 #import "DSStartWashingController.h"
 #import "DSCompleteWashingController.h"
-
+#import "SXScrPageView.h"
 @interface DSStartWashingController ()
-
+{
+    SXScrPageView *cycleScroll;
+}
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic,assign) int second;
 @property (nonatomic, strong) UILabel *timeNumLabel;
-
+@property (nonatomic, strong) UILabel *stepsLabel;
+@property (nonatomic, strong) NSArray *stepsarrs;
 @end
 
 @implementation DSStartWashingController
 
 - (void) drawNavigation {
-    
+    self.stepsarrs=[[NSArray alloc]initWithObjects:@"底盘清洗",@"环绕泡沫",@"幻彩泡沫",@"高压冲洗",@"水蜡镀膜",@"风干处理", nil];
     [self drawTitle:@"蔷薇爱车"];
 }
 
@@ -39,7 +42,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+      self.second = 4;
     [self createSubView];
+     [self startTimer];
     
     
 }
@@ -49,7 +54,7 @@
         [self.timer invalidate];
         self.timer = nil;
     }
-    self.second = 30;
+  
     self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
     [self.timer fire];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
@@ -59,11 +64,25 @@
 {
     NSLog(@"================ %d",self.second);
     if (self.second == 0) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"洗车成功" message:@"洗车结束，欢迎下次光临！" preferredStyle:UIAlertControllerStyleAlert];
         
-        DSCompleteWashingController     *completeVC     = [[DSCompleteWashingController alloc]init];
-        completeVC.hidesBottomBarWhenPushed             = YES;
-        [self.navigationController pushViewController:completeVC animated:YES];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alertController addAction:cancelAction];
         
+        UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            
+        }];
+        [alertController addAction:OKAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+         [self createSubView];
+//        DSCompleteWashingController     *completeVC     = [[DSCompleteWashingController alloc]init];
+//        completeVC.hidesBottomBarWhenPushed             = YES;
+//        [self.navigationController pushViewController:completeVC animated:YES];
+//        
         [self.timer invalidate];
     }else {
         
@@ -159,38 +178,151 @@
     timeLabel.top              = self.timeNumLabel.bottom+Main_Screen_Height*10/667;
     
     
-    UIView *downView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*60/667) color:[UIColor whiteColor]];
-    downView.top                      = titleView.bottom +Main_Screen_Height*10/667;
-    downView.centerX                  = Main_Screen_Width/2;
-    
-    NSString   *string            = @"正在洗车";
-    UIFont     *Font              = [UIFont systemFontOfSize:15];
-    UILabel *washingLabel         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:Font text:string isCenter:NO];
-    washingLabel.text             = string;
-    washingLabel.textColor        = [UIColor colorFromHex:@"#4a4a4a"];
-    washingLabel.textAlignment    = NSTextAlignmentCenter;
-    washingLabel.left             = Main_Screen_Height*12/375;
-    washingLabel.top              = Main_Screen_Height*14/667;
-    
-    NSString   *cardString            = @"洗车月卡";
-    UIFont     *cardFont              = [UIFont systemFontOfSize:18];
-    UILabel *washingCardLabel         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*20/667) font:cardFont text:cardString isCenter:NO];
-    washingCardLabel.text             = cardString;
-    washingCardLabel.textColor        = [UIColor colorFromHex:@"#4a4a4a"];
-    washingCardLabel.textAlignment    = NSTextAlignmentCenter;
-    washingCardLabel.right            = Main_Screen_Width -Main_Screen_Height*12/375;
-    washingCardLabel.top              = Main_Screen_Height*14/667;
+
     
     
-    NSString   *timeStr     = [NSString stringWithFormat:@"剩余%d次",3];
     
-    UIFont     *timeStrFont       = [UIFont systemFontOfSize:12];
-    UILabel *timeStrLabel         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:timeStrFont text:timeStr isCenter:NO];
-    timeStrLabel.text             = timeStr;
-    timeStrLabel.textColor        = [UIColor colorFromHex:@"#868686"];
-    timeStrLabel.textAlignment    = NSTextAlignmentCenter;
-    timeStrLabel.right            = washingCardLabel.right;
-    timeStrLabel.top              = washingCardLabel.bottom+Main_Screen_Height*2/667;
+
+#pragma mark-洗车结束
+
+    if (self.second == 0) {
+        UIView *middleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*60/667) color:[UIColor whiteColor]];
+        middleView.top                      = titleView.bottom +Main_Screen_Height*10/667;
+        middleView.centerX                  = Main_Screen_Width/2;
+        
+        NSString   *string            = @"支付方式";
+        UIFont     *Font              = [UIFont systemFontOfSize:15];
+        UILabel *washingLabel         = [UIUtil drawLabelInView:middleView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:Font text:string isCenter:NO];
+        washingLabel.text             = string;
+        washingLabel.textColor        = [UIColor colorFromHex:@"#4a4a4a"];
+        washingLabel.textAlignment    = NSTextAlignmentCenter;
+        washingLabel.left             = Main_Screen_Height*12/375;
+        washingLabel.top              = Main_Screen_Height*20/667;
+        
+        
+        
+        NSString   *timeStr     = @"月卡抵扣";
+        
+        UIFont     *timeStrFont       = [UIFont systemFontOfSize:12];
+        UILabel *timeStrLabel         = [UIUtil drawLabelInView:middleView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:timeStrFont text:timeStr isCenter:NO];
+        timeStrLabel.text             = timeStr;
+        timeStrLabel.textColor        = [UIColor colorFromHex:@"#868686"];
+        timeStrLabel.textAlignment    = NSTextAlignmentCenter;
+        timeStrLabel.right            = Main_Screen_Width -Main_Screen_Width*12/375;
+        timeStrLabel.centerY          = washingLabel.centerY;
+            UIView *downView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*60/667) color:[UIColor whiteColor]];
+            downView.top                      = middleView.bottom +Main_Screen_Height*10/667;
+            downView.centerX                  = Main_Screen_Width/2;
+        
+            NSString   *strings            = @"洗车优惠";
+            UIFont     *Fonts              = [UIFont systemFontOfSize:15];
+            UILabel *washingLabels         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:Fonts text:strings isCenter:NO];
+            washingLabels.text             = strings;
+            washingLabels.textColor        = [UIColor colorFromHex:@"#4a4a4a"];
+            washingLabels.textAlignment    = NSTextAlignmentCenter;
+            washingLabels.left             = Main_Screen_Height*12/375;
+            washingLabels.top              = Main_Screen_Height*14/667;
+//
+            NSString   *cardString            = @"洗车月卡";
+            UIFont     *cardFont              = [UIFont systemFontOfSize:18];
+            UILabel *washingCardLabel         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*20/667) font:cardFont text:cardString isCenter:NO];
+            washingCardLabel.text             = cardString;
+            washingCardLabel.textColor        = [UIColor colorFromHex:@"#4a4a4a"];
+            washingCardLabel.textAlignment    = NSTextAlignmentCenter;
+            washingCardLabel.right            = Main_Screen_Width -Main_Screen_Height*12/375;
+            washingCardLabel.top              = Main_Screen_Height*14/667;
+        
+        
+            NSString   *timeStrs     = [NSString stringWithFormat:@"剩余%d次",3];
+        
+            UIFont     *timeStrFonts       = [UIFont systemFontOfSize:12];
+            UILabel *timeStrLabels         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:timeStrFonts text:timeStrs isCenter:NO];
+            timeStrLabels.text             = timeStr;
+            timeStrLabels.textColor        = [UIColor colorFromHex:@"#868686"];
+            timeStrLabels.textAlignment    = NSTextAlignmentCenter;
+            timeStrLabels.right            = washingCardLabel.right;
+            timeStrLabels.top              = washingCardLabel.bottom+Main_Screen_Height*2/667;
+        self.stepsLabel.top=downView.bottom+10*Main_Screen_Height/667;
+        cycleScroll.top=self.stepsLabel.bottom+5*Main_Screen_Height/667;
+    }else{
+        int tagi=0;
+        switch (self.second) {
+            case 5:
+                tagi=0;
+                break;
+            case 68:
+                tagi=1;
+                break;
+            case 109:
+                tagi=2;
+                break;
+            case 171:
+                tagi=3;
+                break;
+            case 234:
+                tagi=4;
+                break;
+            case 239:
+                tagi=5;
+                break;
+            default:
+                break;
+        }
+         NSString   *stepStrs     = self.stepsarrs[tagi];
+         UIFont     *stepStrsFonts       = [UIFont systemFontOfSize:12];
+        self.stepsLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*25/667) font:stepStrsFonts text:stepStrs isCenter:NO];
+        self.stepsLabel.text             = stepStrs;
+        self.stepsLabel.textColor        = [UIColor colorFromHex:@"#868686"];
+        self.stepsLabel.textAlignment    = NSTextAlignmentCenter;
+        self.stepsLabel.centerX            = self.contentView.centerX;
+        self.stepsLabel.top              = titleView.bottom+10*Main_Screen_Height/667;
+#pragma mark-洗车轮播图
+        NSMutableArray * images = [NSMutableArray array];
+        
+        
+        for (NSInteger i = 0; i<5; i++)
+        {
+            [images addObject:[NSString stringWithFormat:@"x%ld",i+1]];
+        }
+        
+        
+        cycleScroll =   [SXScrPageView direcWithtFrame:CGRectMake(0, 0, Main_Screen_Width*180/375, Main_Screen_Height*180/667) ImageArr:images AndImageClickBlock:^(NSInteger index) {
+            //        NSLog(@"tag:%ld",index);
+            //        DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
+            //        viewVC.urlstr=[((NSDictionary *)weackself.newrc.adverList[index]) objectForKey:@"Url"];
+            //        viewVC.hidesBottomBarWhenPushed = YES;
+            //        [weackself.navigationController pushViewController:viewVC animated:YES];
+            
+        }];
+        
+        //    cycleScroll.top  =   0;
+        //    cycleScroll.width = Main_Screen_Width;
+        //    [backgroudView addSubview:sxView];
+        //
+        //
+        //
+        //    //网络图片加载
+        //    cycleScroll = [[GCCycleScrollView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width*180/375, Main_Screen_Height*180/667)];
+        //    cycleScroll.delegate =self;
+        //
+        //    cycleScroll.localImageGroups = images;
+        //    cycleScroll.autoScrollTimeInterval = 3.0;
+        //    cycleScroll.dotColor = [UIColor blueColor];
+        //    cycleScroll.top  =   0;
+        //    cycleScroll.width = Main_Screen_Width*180/375;
+        cycleScroll.top=self.stepsLabel.bottom+25*Main_Screen_Height/667;
+        //    cycleScroll.titleLabelTextColor=[UIColor blackColor];
+        //    cycleScroll.titleLabelFont=[UIFont systemFontOfSize:12*Main_Screen_Height/667];
+        //    cycleScroll.titles = [[NSArray alloc] initWithObjects:@"测试标题1",@"测试标题2",@"测试标题3", @"测试标题4",nil];
+        cycleScroll.centerX=self.contentView.centerX;
+        cycleScroll.backgroundColor=[UIColor clearColor];
+        [self.contentView  addSubview:cycleScroll];
+        
+
+    
+    }
+    
+
     
     
     UIButton    *adButton       = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -221,11 +353,20 @@
     [adPageButton addTarget:self action:@selector(adPageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     adPageButton.bottom        = adButton.top -Main_Screen_Height*10/667;
     adPageButton.centerX       = titleView.size.width/2;
-    [self.contentView addSubview:adPageButton];
+//    [self.contentView addSubview:adPageButton];
     
-    [self startTimer];
     
+    
+    
+    
+    
+   
+        
 }
+    
+
+    
+
 
 - (void) adButtonClick:(id)sender {
     
