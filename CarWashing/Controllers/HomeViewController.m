@@ -247,14 +247,17 @@
         {
             [images addObject:[NSString stringWithFormat:@"%@%@",kHTTPImg,[((NSDictionary *)self.newrc.adverList[i]) objectForKey:@"ImgUrl"]]];
         }
-        //load images from website 网络图片加载
+        
+        
+        //网络图片加载
         cycleScroll = [[GCCycleScrollView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*150/667)];
         cycleScroll.delegate =self;
-        
+       
         cycleScroll.imageUrlGroups = images;
         cycleScroll.autoScrollTimeInterval = 3.0;
         cycleScroll.dotColor = [UIColor whiteColor];
-    }
+        
+          }
 
    
     cycleScroll.top  =   0;
@@ -558,7 +561,7 @@
 
 
 }
--(void)cycleScrollView:(GCCycleScrollView *)cycleScrollView didSelectItemAtRow:(NSInteger)row{
+- (void)cycleScrollView:(GCCycleScrollView*)cycleScrollView didSelectItemAtRow:(NSInteger)row{
     NSLog(@"dianji =%ld",(long)row);
     
   
