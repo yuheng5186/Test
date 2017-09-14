@@ -307,7 +307,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         cell.textLabel.text  = @"特惠活动";
         cell.detailTextLabel.text = [NSString stringWithFormat:@"立减%@元",self.choosecard.DiscountPrice];
         
-        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#0161a1"];
+        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#ff3645"];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         
         return cell;
