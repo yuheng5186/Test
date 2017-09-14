@@ -42,7 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-      self.second = 4;
+      self.second = 15;
     [self createSubView];
      [self startTimer];
     
@@ -62,6 +62,13 @@
 
 - (void)onTimer
 {
+    
+    if (self.second == 5) {
+        cycleScroll.pageVC.currentPage = 2;
+        
+//        [self createSubView];
+    }
+    
     NSLog(@"================ %d",self.second);
     if (self.second == 0) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"洗车成功" message:@"洗车结束，欢迎下次光临！" preferredStyle:UIAlertControllerStyleAlert];
