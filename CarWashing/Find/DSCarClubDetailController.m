@@ -269,7 +269,11 @@
     
     UILabel *textContentLabel                 = [UILabel new];
     textContentLabel.textColor                = [UIColor colorFromHex:@"#999999"];
-    textContentLabel.text                     = newsDetail.Comment;
+
+    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[newsDetail.Comment dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+   
+    textContentLabel.attributedText = attrStr;
+//    textContentLabel.text                     = newsDetail.Comment;
     textContentLabel.font                     = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     textContentLabel.numberOfLines            = 0;
     self.textContentLabel                     = textContentLabel;
@@ -537,9 +541,10 @@
                              };
     //
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/GetActivityInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+        NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            
 //            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
             
             NSDictionary *dic = [dict objectForKey:@"JsonData"];

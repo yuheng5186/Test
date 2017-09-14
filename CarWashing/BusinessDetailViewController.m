@@ -612,7 +612,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     
     
-    [estimateCell.headImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserImg"]]] placeholderImage:[UIImage imageNamed:@"xichebaidi"]];
+    [estimateCell.headImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserImg"]]] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
     if([[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserName"] isKindOfClass:[NSNull class]])
     {
         estimateCell.phoneLabel.text = @"";
