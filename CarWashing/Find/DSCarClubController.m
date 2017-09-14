@@ -16,7 +16,7 @@
 #import "CarClubNews.h"
 #import "UdStorage.h"
 #import "MBProgressHUD.h"
-
+#import "UIImageView+WebCache.h"
 @interface DSCarClubController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -105,16 +105,17 @@
     CarClubNews *news = [[CarClubNews alloc]init];
     
     news = [_NewsArray objectAtIndex:indexPath.section];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,news.IndexImg];
-        NSURL *url=[NSURL URLWithString:ImageURL];
-        NSData *data=[NSData dataWithContentsOfURL:url];
-        UIImage *img=[UIImage imageWithData:data];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [cell.activityImageView setImage:img];
-        });
-    });
+     NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,news.IndexImg];
+    [cell.activityImageView sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@""]];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,news.IndexImg];
+//        NSURL *url=[NSURL URLWithString:ImageURL];
+//        NSData *data=[NSData dataWithContentsOfURL:url];
+//        UIImage *img=[UIImage imageWithData:data];
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+//            [cell.activityImageView setImage:img];
+//        });
+//    });
     cell.activityTitleLabel.text    = news.ActivityName;
     cell.activityTimeLabel.text     = news.ActDate;
     cell.sayNumberLabel.text        = [NSString stringWithFormat:@"%ld",news.CommentCount];
