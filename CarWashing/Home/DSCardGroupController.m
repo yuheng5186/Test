@@ -326,7 +326,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
     
     UIView *titleView                  = [UIUtil drawLineInView:self.view frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*60/667) color:[UIColor whiteColor]];
-    titleView.top                      = 64;
+    titleView.top                      = Main_Screen_Height*64/667;
     
     
     [self.activateTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -338,7 +338,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
     [self.activateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.view).mas_equalTo(-Main_Screen_Width*10/375);
-        make.top.equalTo(self.view).mas_equalTo(64+Main_Screen_Height*10/667);
+        make.top.equalTo(self.view).mas_equalTo(Main_Screen_Height*64/667+Main_Screen_Height*10/667);
         make.width.mas_equalTo(Main_Screen_Width*75/375);
         make.height.mas_equalTo(Main_Screen_Height*40/667);
     }];
@@ -348,12 +348,12 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         make.top.equalTo(titleView.mas_bottom);
         make.left.equalTo(self.view).mas_offset(Main_Screen_Width*22.5/375);
         make.right.equalTo(self.view).mas_offset(-Main_Screen_Width*22.5/375);
-        make.height.mas_equalTo(self.view.height-Main_Screen_Height*60/667-64);
+        make.height.mas_equalTo(self.view.height-Main_Screen_Height*60/667-Main_Screen_Height*64/667);
     }];
     
     self.rechargeView.delegate = self;
     self.rechargeView.dataSource = self;
-    self.rechargeView.contentInset = UIEdgeInsetsMake(0, 0, 30, 0);
+//    self.rechargeView.contentInset = UIEdgeInsetsMake(0, 0, 30, 0);
     
     [self.rechargeView registerNib:[UINib nibWithNibName:@"RechargeCell" bundle:nil] forCellReuseIdentifier:id_rechargeCell];
     self.rechargeView.rowHeight = Main_Screen_Height*190/667;
@@ -491,7 +491,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 23*Main_Screen_Height/667;
+    return 0*Main_Screen_Height/667;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

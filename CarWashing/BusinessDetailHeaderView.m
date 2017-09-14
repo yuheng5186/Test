@@ -56,7 +56,7 @@
     
     //    self.ServiceNumLabel.text = [NSString stringWithFormat:@"服务%@单",self.dic[@"ServiceCount"]];
     self.ServiceNumLabel.textColor  = [UIColor colorFromHex:@"#ff525a"];
-    NSString   *scoreString     = [NSString stringWithFormat:@"服务%d单",merchantModel.ServiceCount];
+    NSString   *scoreString     = [NSString stringWithFormat:@"服务：%d单",merchantModel.ServiceCount];
 
         NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:scoreString];
         [AttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange(0, 2)];
