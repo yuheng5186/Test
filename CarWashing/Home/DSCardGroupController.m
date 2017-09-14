@@ -326,7 +326,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
     
     UIView *titleView                  = [UIUtil drawLineInView:self.view frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*60/667) color:[UIColor whiteColor]];
-    titleView.top                      = Main_Screen_Height*64/667;
+    titleView.top                      = 64;
     
     
     [self.activateTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -338,14 +338,14 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
     [self.activateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.view).mas_equalTo(-Main_Screen_Width*10/375);
-        make.top.equalTo(self.view).mas_equalTo(Main_Screen_Height*64/667+Main_Screen_Height*10/667);
+        make.top.equalTo(titleView).mas_equalTo(Main_Screen_Height*10/667);
         make.width.mas_equalTo(Main_Screen_Width*75/375);
         make.height.mas_equalTo(Main_Screen_Height*40/667);
     }];
     
     
     [self.rechargeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleView.mas_bottom);
+        make.top.equalTo(titleView.mas_bottom).mas_offset(-Main_Screen_Height*10/667);
         make.left.equalTo(self.view).mas_offset(Main_Screen_Width*22.5/375);
         make.right.equalTo(self.view).mas_offset(-Main_Screen_Width*22.5/375);
         make.height.mas_equalTo(self.view.height-Main_Screen_Height*60/667-Main_Screen_Height*64/667);
@@ -358,8 +358,8 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     [self.rechargeView registerNib:[UINib nibWithNibName:@"RechargeCell" bundle:nil] forCellReuseIdentifier:id_rechargeCell];
     self.rechargeView.rowHeight = Main_Screen_Height*190/667;
     self.rechargeView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    //self.rechargeView.backgroundColor = [UIColor whiteColor];
-     self.rechargeView.showsVerticalScrollIndicator = NO;
+    self.rechargeView.backgroundColor = [UIColor clearColor];
+    self.rechargeView.showsVerticalScrollIndicator = NO;
     UIView *blankView = [[UIView alloc] initWithFrame:CGRectMake(_activateTF.frame.origin.x,_activateTF.frame.origin.y,15.0, _activateTF.frame.size.height)];
     _activateTF.leftView = blankView;
     _activateTF.leftViewMode =UITextFieldViewModeAlways;
@@ -450,7 +450,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
     cell.CardnameLabel.text = [NSString stringWithFormat:@"免费洗车%ld次",card.CardCount];
     
-    cell.CardTimeLabel.text = [NSString stringWithFormat:@"有效期: %@-%@",[self DateZhuan:card.ExpStartDates],[self DateZhuan:card.ExpEndDates]];
+    cell.CardTimeLabel.text = [NSString stringWithFormat:@"截止日期: %@",[self DateZhuan:card.ExpEndDates]];
     
 //    if(card.CardUseState == 2)
 //    {
@@ -491,12 +491,12 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 0*Main_Screen_Height/667;
+    return 0.01;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return 0.1;
+    return Main_Screen_Height*22.5/667;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
