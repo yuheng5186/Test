@@ -218,7 +218,7 @@
         else
         {
             
-            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"回调信息" message:@"分享失败" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"回调信息" message:@"分享成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
             [alertview show];
             
         }

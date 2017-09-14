@@ -218,11 +218,11 @@
 - (void)handleScanData:(NSString *)outMessage {
     NSString *imei                          = outMessage;
 //
-//    if (imei != nil) {
-//        DSScanPayController *payVC           = [[DSScanPayController alloc]init];
-//        payVC.hidesBottomBarWhenPushed            = YES;
-//        [self.navigationController pushViewController:payVC animated:YES];
-//    }
+////    if (imei != nil) {
+//       DSStartWashingController *start = [[DSStartWashingController alloc]init];
+//        start.hidesBottomBarWhenPushed            = YES;
+//        [self.navigationController pushViewController:start animated:YES];
+////    }
     
 #pragma mark-获取设备编码
     //处理设备编码

@@ -107,7 +107,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
         
         // 获取列
         NSInteger col = [self.childViewControllers indexOfObject:note.object];
-        
+       if (col==0) {
+           self.areastr=[[self.pramsDic objectForKey:@"0"] objectAtIndex:1];
+       }
         // 获取所有值
         NSArray *allValues = note.userInfo.allValues;
        NSLog(@"%@",allValues);
@@ -123,7 +125,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
             // 设置按钮标题
             [self.pramsDic setValue:allValues.firstObject forKey:[NSString stringWithFormat:@"%ld",(long)col]];
         }
-       self.areastr=[[self.pramsDic objectForKey:@"0"] objectAtIndex:1];
+      
        
         [self.salerListView.mj_header beginRefreshing];
 //        [self headerRereshing];
@@ -444,9 +446,10 @@ static NSString *id_salerListCell = @"salerListViewCell";
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
+   NSLog(@"%@",params);
     
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetStoreList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+       NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             [self.MerchantData removeAllObjects];
