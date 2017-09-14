@@ -131,7 +131,13 @@
     UIButton  *settingButton        = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, settingImage.size.width, settingImage.size.height) iconName:@"shezhi" target:self action:@selector(settingButtonClick:)];
     settingButton.centerY           = titleNameLabel.centerY;
     settingButton.right             = Main_Screen_Width -Main_Screen_Width*10/375;
+
+    UIView      *setView            = [UIUtil drawLineInView:upView frame:CGRectMake(0, 0, settingButton.width+20, settingButton.height+20) color:[UIColor clearColor]];
+    setView.centerX                 = settingButton.centerX;
+    setView.centerY                 = settingButton.centerY;
     
+    UITapGestureRecognizer  *tapScoreGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(settingButtonClick:)];
+    [setView addGestureRecognizer:tapScoreGesture];
     
 //    NSString *userName              = APPDELEGATE.currentUser.userName;
     UIFont *userNameFont            = [UIFont boldSystemFontOfSize:Main_Screen_Height*16/667];
