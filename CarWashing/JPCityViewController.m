@@ -33,12 +33,12 @@ static NSString * const DetailID_cell = @"Detailcell";
     [super viewDidLoad];
     
     
-    _titleArray = @[@"上海市",@"苏州市",@"北京市"];
+    _titleArray = @[@"青岛市",@"苏州市",@"北京市"];
     
-    NSArray *arr = @[@"浦东新区",@"黄浦区",@"杨浦区",@"松江区",@"虹口区",@"闵行区"];
+    NSArray *arr = @[@"市南区",@"市北区",@"李沧区",@"崂山区",@"黄岛区",@"城阳区",@"即墨区",@"胶州市",@"平度市", @"莱西市",@"红岛经济区"];
     NSArray *arr1 = @[@"工业园区",@"高新区",@"相城区"];
     NSArray *arr2 = @[@"西城区",@"宣武区",@"东城区",@"皇后区"];
-     _titleDic = @{@"上海市":arr, @"苏州市":arr1, @"北京市":arr2};
+     _titleDic = @{@"青岛市":arr, @"苏州市":arr1, @"北京市":arr2};
     
     UITableView *cityTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width/2, self.view.bounds.size.height)];
     cityTableView.delegate = self;

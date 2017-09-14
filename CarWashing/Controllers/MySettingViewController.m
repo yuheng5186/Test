@@ -113,17 +113,10 @@
     self.editButton.layer.cornerRadius = Main_Screen_Height*40/667;
     if(APPDELEGATE.currentUser.userImagePath.length > 0)
     {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
-
-        NSURL *urlData=[NSURL URLWithString:ImageURL];
-        NSData *data=[NSData dataWithContentsOfURL:urlData];
-
-        UIImage *img=[UIImage imageWithData:data];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [self.editButton setImage:img forState:UIControlStateNormal];
-            });
-        });
+        [self.editButton.imageView sd_setImageWithURL:ImageURL placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
+        
+        
     }
 
 

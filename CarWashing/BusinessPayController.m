@@ -16,6 +16,8 @@
 #import "AFNetworkingTool.h"
 #import "LCMD5Tool.h"
 
+#import "AllOrderController.h"
+
 @interface BusinessPayController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) UITableView *payTableView;
@@ -54,6 +56,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
     [self setupUI];
 }
+
 #pragma mark-支付成功回调
 -(void)goBack{
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"购买成功" message:@"点击立即查看" preferredStyle:UIAlertControllerStyleAlert];
@@ -64,6 +67,9 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     [alertController addAction:cancelAction];
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        AllOrderController *all=[[AllOrderController alloc]init];
+        all.hidesBottomBarWhenPushed            = YES;
+        [self.navigationController pushViewController:all animated:YES];
         
     
     }];

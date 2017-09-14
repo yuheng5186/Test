@@ -7,7 +7,7 @@
 //
 
 #import "DSCarClubDetailController.h"
-
+#import "UIImageView+WebCache.h"
 #import "DSActivityDetailCell.h"
 #import "UITableView+SDAutoTableViewCellHeight.h"
 #import "TPKeyboardAvoidingScrollView.h"
@@ -64,7 +64,7 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"活动详情"];
+    [self drawTitle:@"详情"];
     
 }
 
@@ -157,16 +157,18 @@
     
     
     UIImageView *userImageView  = [UIImageView new];
-    userImageView.image         = [UIImage imageNamed:@"pingluntouxiang.jpg"];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,newsDetail.FromusrImg];
-        NSURL *url=[NSURL URLWithString:ImageURL];
-        NSData *data=[NSData dataWithContentsOfURL:url];
-        UIImage *img=[UIImage imageWithData:data];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [userImageView setImage:img];
-        });
-    });
+//    userImageView.image         = [UIImage imageNamed:@"pingluntouxiang.jpg"];
+     NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,newsDetail.FromusrImg];
+     [userImageView sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@"pingluntouxiang"]];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,newsDetail.FromusrImg];
+//        NSURL *url=[NSURL URLWithString:ImageURL];
+//        NSData *data=[NSData dataWithContentsOfURL:url];
+//        UIImage *img=[UIImage imageWithData:data];
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+//            [userImageView setImage:img];
+//        });
+//    });
     self.userImageView          = userImageView;
     [header addSubview:userImageView];
     
@@ -269,12 +271,16 @@
     
     UILabel *textContentLabel                 = [UILabel new];
     textContentLabel.textColor                = [UIColor colorFromHex:@"#999999"];
-
-    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[newsDetail.Comment dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-   
-    textContentLabel.attributedText = attrStr;
-//    textContentLabel.text                     = newsDetail.Comment;
+    
     textContentLabel.font                     = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[[NSString stringWithFormat:@"<html><body>%@</html></body>",newsDetail.Comment] dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    NSLog(@"%@",attrStr);
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc]initWithAttributedString:attrStr];
+    
+    [string removeAttribute:NSParagraphStyleAttributeName range: NSMakeRange(0, string.length)];
+    textContentLabel.attributedText = string;
+//    textContentLabel.text                     = newsDetail.Comment;
+    textContentLabel.adjustsFontSizeToFitWidth = YES;
     textContentLabel.numberOfLines            = 0;
     self.textContentLabel                     = textContentLabel;
     [backgroudView addSubview:textContentLabel];
@@ -296,9 +302,14 @@
             [textImageView setImage:img];
         });
     });
-    self.textImageView          = textImageView;
-    [backgroudView addSubview:textImageView];
     
+    
+    self.textImageView          = textImageView;
+    [backgroudView addSubview:self.textImageView ];
+    self.textImageView .top       = textTitleLabel.bottom;
+    self.textImageView .left      = textTitleLabel.left;
+    self.textImageView .right     = textTitleLabel.right;
+    self.textImageView .height    = Main_Screen_Height*200/667;
     textImageView.sd_layout
     .topSpaceToView(textContentLabel, 10*Main_Screen_Height/667)
     .leftEqualToView(textContentLabel)

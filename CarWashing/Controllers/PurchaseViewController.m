@@ -102,7 +102,8 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     self.locationManager = [[JFLocation alloc] init];
     _locationManager.delegate = self;
     
-    self.area = [UdStorage getObjectforKey:@"City"];
+    
+    self.area = [UdStorage getObjectforKey:@"City"]==nil?@"青岛市":[UdStorage getObjectforKey:@"City"];
     UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#0161a1"]];
     upView.top                      = 0;
     
@@ -144,14 +145,15 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 {
     NSDictionary *mulDic = @{
                              @"GetCardType":@1,
-                             @"Area":self.area
+                             @"Area":@"上海市"
                              };
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
+    NSLog(@"%@",params);
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardConfigList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+        NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             NSArray *arr = [NSArray array];

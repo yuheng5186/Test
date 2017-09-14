@@ -73,13 +73,12 @@
     if (self.second == 0) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"洗车成功" message:@"洗车结束，欢迎下次光临！" preferredStyle:UIAlertControllerStyleAlert];
         
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-        }];
-        [alertController addAction:cancelAction];
         
         UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
+//            self.tabBarController.selectedIndex = 0;
+//            
+//            
+//            [self.navigationController popToRootViewControllerAnimated:YES];
             
         }];
         [alertController addAction:OKAction];
@@ -107,9 +106,9 @@
     titleView.centerX                  = Main_Screen_Width/2;
     
     
-    NSString   *titleString     = @"精洗";
+    NSString   *titleString     = @"蔷薇自动洗车";
     
-    UIFont     *titleFont       = [UIFont systemFontOfSize:18];
+    UIFont     *titleFont       = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
     UILabel *titleLabel         = [UIUtil drawLabelInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:titleFont text:titleString isCenter:NO];
     titleLabel.text             = titleString;
     titleLabel.textColor        = [UIColor colorFromHex:@"#ff525a"];
@@ -129,12 +128,12 @@
     
     
     
-    NSString   *scoreString     = [NSString stringWithFormat:@"+%d积分",10];
+    NSString   *scoreString     = [NSString stringWithFormat:@"%@积分",self.IntegralNum];
     UILabel *scoreLabel         = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667)];
     scoreLabel.textColor        = [UIColor colorFromHex:@"#ff525a"];
     
     NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:scoreString];
-    [AttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange([scoreString length]-2, 2)];
+    [AttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13*Main_Screen_Height/667] range:NSMakeRange([scoreString length]-2, 2)];
     [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#4a4a4a"] range:NSMakeRange([scoreString length]-2, 2)];
     
     scoreLabel.attributedText   = AttributedStr;
@@ -156,7 +155,7 @@
     
     
     
-    NSString   *timeNumString     = @"5分钟";
+    NSString   *timeNumString     = @"4分钟";
     
     self.timeNumLabel         = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667)];
     self.timeNumLabel.textColor        = [UIColor colorFromHex:@"#ff525a"];
@@ -205,10 +204,8 @@
         washingLabel.textAlignment    = NSTextAlignmentCenter;
         washingLabel.left             = Main_Screen_Height*12/375;
         washingLabel.top              = Main_Screen_Height*20/667;
-        
-        
-        
-        NSString   *timeStr     = @"月卡抵扣";
+      
+        NSString   *timeStr     = self.CardName.length==0?@"微信支付":self.CardName;
         
         UIFont     *timeStrFont       = [UIFont systemFontOfSize:12];
         UILabel *timeStrLabel         = [UIUtil drawLabelInView:middleView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:timeStrFont text:timeStr isCenter:NO];
@@ -230,25 +227,25 @@
             washingLabels.left             = Main_Screen_Height*12/375;
             washingLabels.top              = Main_Screen_Height*14/667;
 //
-            NSString   *cardString            = @"洗车月卡";
-            UIFont     *cardFont              = [UIFont systemFontOfSize:18];
-            UILabel *washingCardLabel         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*20/667) font:cardFont text:cardString isCenter:NO];
-            washingCardLabel.text             = cardString;
-            washingCardLabel.textColor        = [UIColor colorFromHex:@"#4a4a4a"];
+            NSString   *timeStrs     = [NSString stringWithFormat:@"剩余%@次",self.RemainCount];
+            UIFont     *cardFont              = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+            UILabel *washingCardLabel         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*20/667) font:cardFont text:timeStrs isCenter:NO];
+            washingCardLabel.text             = timeStrs;
+            washingCardLabel.textColor        = [UIColor colorFromHex:@"#ff525a"];
             washingCardLabel.textAlignment    = NSTextAlignmentCenter;
             washingCardLabel.right            = Main_Screen_Width -Main_Screen_Height*12/375;
             washingCardLabel.top              = Main_Screen_Height*14/667;
         
         
-            NSString   *timeStrs     = [NSString stringWithFormat:@"剩余%d次",3];
         
-            UIFont     *timeStrFonts       = [UIFont systemFontOfSize:12];
+         NSString   *timeStrc     = [NSString stringWithFormat:@"剩余%@次",self.RemainCount];
+            UIFont     *timeStrFonts       = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
             UILabel *timeStrLabels         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:timeStrFonts text:timeStrs isCenter:NO];
-            timeStrLabels.text             = timeStr;
+            timeStrLabels.text             = timeStrc;
             timeStrLabels.textColor        = [UIColor colorFromHex:@"#868686"];
             timeStrLabels.textAlignment    = NSTextAlignmentCenter;
-            timeStrLabels.right            = washingCardLabel.right;
-            timeStrLabels.top              = washingCardLabel.bottom+Main_Screen_Height*2/667;
+            timeStrLabels.right            = washingLabels.right;
+            timeStrLabels.top              = washingLabels.bottom+Main_Screen_Height*2/667;
         self.stepsLabel.top=downView.bottom+10*Main_Screen_Height/667;
         cycleScroll.top=self.stepsLabel.bottom+5*Main_Screen_Height/667;
     }else{

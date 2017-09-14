@@ -279,7 +279,7 @@ if(order.PayState == 1)
     
        
         delayCell.washTypeLabel.text = order.SerName;
-        delayCell.SerMerChant = order.SerName;
+        delayCell.SerMerChant = order.MerName;
         delayCell.Jprice = [NSString stringWithFormat:@"￥%@",order.PayableAmount];
         delayCell.Xprice = [NSString stringWithFormat:@"￥%@",order.PaypriceAmount];
         delayCell.MCode = [NSString stringWithFormat:@"%ld",order.MerCode];

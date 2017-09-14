@@ -430,9 +430,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
         DefaultSort = @"4";
     }
     
-    
+//    [[self.pramsDic objectForKey:@"0"] objectAtIndex:0]
     NSDictionary *mulDic = @{
-                             @"City":[[self.pramsDic objectForKey:@"0"] objectAtIndex:0],
+                             @"City":@"上海市",
                              @"Area":self.areastr,
                              @"ShopType":@1,
                              @"ServiceCode":[NSString stringWithFormat:@"10%ld",index+1],
@@ -516,9 +516,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
         DefaultSort = @"4";
     }
     
-    
+//    [[self.pramsDic objectForKey:@"0"] objectAtIndex:0]
     NSDictionary *mulDic = @{
-                             @"City":[[self.pramsDic objectForKey:@"0"] objectAtIndex:0],
+                             @"City":@"上海市",
                              @"Area":self.areastr,
                              @"ShopType":@1,
                              @"ServiceCode":[NSString stringWithFormat:@"10%ld",index+1],

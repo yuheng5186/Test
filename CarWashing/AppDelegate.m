@@ -179,8 +179,9 @@
         {
             NSNotification * notice = [NSNotification notificationWithName:@"paysuccess" object:nil userInfo:nil];
             [[NSNotificationCenter defaultCenter]postNotification:notice];
-            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"支付结果：成功！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
-            [alertview show];
+//            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"支付结果：成功！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+//            
+//            [alertview show];
             
         }
         else if([payResoult isEqualToString:@"-1"])
