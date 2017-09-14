@@ -31,6 +31,13 @@
 @property (nonatomic, strong) NSMutableDictionary *GradeDetailDic;
 @property (nonatomic, strong) NSString *area;
 
+@property (nonatomic, weak) UILabel *noticeLabel;
+@property (nonatomic, weak) UILabel *noticeLabelOne;
+@property (nonatomic, weak) UILabel *noticeLabeTwo;
+@property (nonatomic, weak) UILabel *noticeLabelThree;
+@property (nonatomic, weak) UILabel *noticeLabelFour;
+@property (nonatomic, weak) UILabel *noticeLabelFive;
+
 @end
 
 @implementation MemberRightsDetailController
@@ -46,7 +53,7 @@
     self.area = @"上海市";
     [self setupUI];
     
-    
+    //
     if(self.nextdic == nil)
     {
         
@@ -393,54 +400,85 @@
         
         
     }else {
-        UILabel *titleLab = [[UILabel alloc] init];
-        titleLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-        titleLab.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
-        [cell.contentView addSubview:titleLab];
+        UILabel *noticeLabel = [[UILabel alloc] init];
+        noticeLabel.text = @"使用须知";
+        noticeLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+        noticeLabel.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
+        self.noticeLabel = noticeLabel;
+        [cell.contentView addSubview:self.noticeLabel];
         
-        UILabel *infosLab = [[UILabel alloc] init];
-        infosLab.textColor = [UIColor colorFromHex:@"#999999"];
-        infosLab.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
-        infosLab.numberOfLines = 0;
-        [cell.contentView addSubview:infosLab];
+
+        UILabel *noticeLabelOne = [[UILabel alloc] init];
+        noticeLabelOne.text = @"1、此卡仅限清洗汽车外观，不得购买其它服务项目";
+        noticeLabelOne.numberOfLines = 0;
+        noticeLabelOne.textColor = [UIColor colorFromHex:@"#999999"];
+        noticeLabelOne.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        self.noticeLabelOne = noticeLabelOne;
         
-        [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        [cell.contentView addSubview:self.noticeLabelOne];
+        
+        
+        [self.noticeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(cell.contentView).mas_offset(12*Main_Screen_Height/667);
             make.left.equalTo(cell.contentView).mas_offset(12*Main_Screen_Height/667);
         }];
         
-        [infosLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(titleLab.mas_bottom).mas_offset(12*Main_Screen_Height/667);
-            make.leading.equalTo(titleLab);
+        [self.noticeLabelOne mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.noticeLabel.mas_bottom).mas_offset(12*Main_Screen_Height/667);
+            make.leading.equalTo(self.noticeLabel);
             make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
         }];
         
-        UILabel *infosLab2 = [[UILabel alloc] init];
-        infosLab2.textColor = [UIColor colorFromHex:@"#999999"];
-        infosLab2.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
-        infosLab2.numberOfLines = 0;
-        [cell.contentView addSubview:infosLab2];
+        UILabel *noticeLabelTwo = [[UILabel alloc] init];
+        noticeLabelTwo.text = @"2、洗车卡不能兑换现金和转赠与其他人使用";
+        noticeLabelTwo.textColor = [UIColor colorFromHex:@"#999999"];
+        noticeLabelTwo.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        self.noticeLabeTwo = noticeLabelTwo;
+        [cell.contentView addSubview:self.noticeLabeTwo];
+        UILabel *noticeLabelThree = [[UILabel alloc] init];
+        noticeLabelThree.text = @"3、此卡一经售出，概不兑现。不记名，不挂失，不退卡，不补办";
+        noticeLabelThree.textColor = [UIColor colorFromHex:@"#999999"];
+        noticeLabelThree.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        noticeLabelThree.numberOfLines = 0;
+        self.noticeLabelThree = noticeLabelThree;
+        [cell.contentView addSubview:self.noticeLabelThree];
+        UILabel *noticeLabelFour = [[UILabel alloc] init];
+        noticeLabelFour.text = @"4、此卡可在蔷薇服务点享受会员优惠待遇，不得与其它优惠同时使用";
+        noticeLabelFour.textColor = [UIColor colorFromHex:@"#999999"];
+        noticeLabelFour.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        noticeLabelFour.numberOfLines = 0;
+        self.noticeLabelFour = noticeLabelFour;
+        [cell.contentView addSubview:self.noticeLabelFour];
+        UILabel *noticeLabelFive = [[UILabel alloc] init];
+        noticeLabelFive.text = @"5、由青岛蔷薇汽车服务有限公司保留此卡法律范围内的最终解释权。VIP热线：4006979558";
+        noticeLabelFive.textColor = [UIColor colorFromHex:@"#999999"];
+        noticeLabelFive.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        noticeLabelFive.numberOfLines = 0;
+        self.noticeLabelFive = noticeLabelFive;
+        [cell.contentView addSubview:self.noticeLabelFive];
+
         
-        UILabel *infosLab3 = [[UILabel alloc] init];
-        infosLab3.textColor = [UIColor colorFromHex:@"#999999"];
-        infosLab3.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
-        infosLab3.numberOfLines = 0;
-        [cell.contentView addSubview:infosLab3];
-        
-        titleLab.text = @"使用须知";
-        infosLab.text = @"1、本代金券由蔷薇爱车APP开发，仅限蔷薇爱车店和与蔷薇合作商家使用";
-        infosLab2.text = @"2、如果代金券购买服务时发生了退服务行为，代金券不予退还";
-        infosLab3.text = @"3、有任何问题，可咨询蔷薇客服";
-        
-        [infosLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(infosLab.mas_bottom).mas_offset(12*Main_Screen_Height/667);
-            make.leading.equalTo(infosLab);
+        [self.noticeLabeTwo mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.noticeLabelOne.mas_bottom).mas_offset(12*Main_Screen_Height/667);
+            make.leading.equalTo(self.noticeLabelOne);
             make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
         }];
         
-        [infosLab3 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(infosLab2.mas_bottom).mas_offset(12*Main_Screen_Height/667);
-            make.leading.equalTo(infosLab2);
+        [self.noticeLabelThree mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.noticeLabeTwo.mas_bottom).mas_offset(12*Main_Screen_Height/667);
+            make.leading.equalTo(self.noticeLabeTwo);
+            make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
+
+        }];
+        [self.noticeLabelFour mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.noticeLabelThree.mas_bottom).mas_offset(12*Main_Screen_Height/667);
+            make.leading.equalTo(self.noticeLabelThree);
+            make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
+           
+        }];
+        [self.noticeLabelFive mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.noticeLabelFour.mas_bottom).mas_offset(12*Main_Screen_Height/667);
+            make.leading.equalTo(self.noticeLabelFour);
             make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
             make.bottom.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
         }];
@@ -451,6 +489,7 @@
 
     return cell;
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
