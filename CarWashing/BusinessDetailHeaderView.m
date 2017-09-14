@@ -50,7 +50,7 @@
     [self.starImageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%.2f",merchantModel.Score] substringToIndex:1]]]];
     self.scoreLabel.text = [NSString stringWithFormat:@"%.2f分",merchantModel.Score];
     self.adressLabel2.text = merchantModel.MerAddress;
-    self.openTimeLabel.text =merchantModel.ServiceTime;
+    self.openTimeLabel.text = [NSString stringWithFormat:@"营业时间:%@",merchantModel.ServiceTime];
     //    self.distanceLabel.text = [NSString stringWithFormat:@"%@km",self.dic[@"Distance"]];
 //    self.distanceLabel.text = [NSString stringWithFormat:@"%.2fkm",[merchantModel..distance doubleValue]];
     

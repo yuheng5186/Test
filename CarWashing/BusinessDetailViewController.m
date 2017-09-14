@@ -725,7 +725,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     textLab.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     
     if (section == 0) {
-        textLab.text = @"服务活动";
+        textLab.text = @"服务类别";
     }else{
         textLab.text = [NSString stringWithFormat:@"评论 (%@)",self.dic[@"CommentCount"]];
     }
