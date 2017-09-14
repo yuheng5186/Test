@@ -90,7 +90,7 @@
         _pageVC.pageIndicatorTintColor = [UIColor blueColor];
         [self addSubview:self.pageVC];
         
-        self.time = 3.0;
+//        self.time = 3.0;
     }
     return self;
 }
@@ -104,9 +104,9 @@
 {
     if(self.timer == nil)
     {
-        self.timer =[NSTimer scheduledTimerWithTimeInterval:self.time
-                                                     target:self
-                                                   selector:@selector(timerSel) userInfo:nil repeats:YES];
+//        self.timer =[NSTimer scheduledTimerWithTimeInterval:self.time
+//                                                     target:self
+//                                                   selector:@selector(timerSel) userInfo:nil repeats:YES];
     }
 }
 #pragma mark 摧毁定时器
@@ -148,6 +148,7 @@
         self.direct.contentOffset=CGPointMake(self.imageArr.count*frame_width, 0);
     }
     
+    
     //更新PageControl
     [self updataPageControl];
 }
@@ -171,7 +172,7 @@
 #pragma mark 结束拖拽代理
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    [self beginTimer];
+//    [self beginTimer];
 }
 
 #pragma mark 结束滚动代理
@@ -190,7 +191,7 @@
     {
         _time = time;
         [self stopTimer];
-        [self beginTimer];
+//        [self beginTimer];
     }
 }
 

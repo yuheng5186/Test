@@ -896,10 +896,14 @@
     
 }
 - (void) tapScanButtonClick:(id)sender {
+    self.tabBarController.selectedIndex = 2;
     
-    DSScanQRCodeController *scanController      = [[DSScanQRCodeController alloc]init];
-    scanController.hidesBottomBarWhenPushed     = YES;
-    [self.navigationController pushViewController:scanController animated:YES];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+//    DSScanQRCodeController *scanController      = [[DSScanQRCodeController alloc]init];
+//    scanController.hidesBottomBarWhenPushed     = YES;
+//    [self.navigationController pushViewController:scanController animated:YES];
     
 //    ScanController * vc = [[ScanController alloc] init];
 //    vc.returnScanBarCodeValue = ^(NSString * barCodeString){
