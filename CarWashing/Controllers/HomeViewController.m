@@ -622,7 +622,7 @@
                              };
     
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetUserRecord",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+        NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
              self.GetUserRecordData = [[NSMutableArray alloc]init];
@@ -703,7 +703,7 @@
     footerview.text=@"没有更多啦!";
     return footerview;
      }else{
-        
+
          return [UILabel new];
      
      }
@@ -725,7 +725,18 @@
     }
     cell.backgroundColor    = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+//    if (self.newrc.recList.count==0) {
+//        UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*170/667)];
+//        imageview.userInteractionEnabled=YES;
+//        imageview.contentMode=UIViewContentModeScaleAspectFill;
+//        imageview.image=[UIImage imageNamed:@"banka_banner"];
+//        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
+//        [imageview addGestureRecognizer:tap];
+//        [cell.contentView addSubview:imageview];
+//    }else if(self.newrc.recList.count!=0&&self.newrc.recList.count<2){
+//
+//        
+//    }
     Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil];
     NSLog(@"%@==%@",record,[self.newrc.recList objectAtIndex:indexPath.section]);
     NSString *imageString;
