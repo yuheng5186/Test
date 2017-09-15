@@ -9,6 +9,10 @@
 #import "DSStartWashingController.h"
 #import "DSCompleteWashingController.h"
 #import "SXScrPageView.h"
+
+#import "UIImageView+WebCache.h"
+#import "UIImage+GIF.h"
+
 @interface DSStartWashingController ()<UIScrollViewDelegate>
 {
     SXScrPageView *cycleScroll;
@@ -75,12 +79,21 @@
 //    [_ADScroll setContentOffset:CGPointMake(Offx, 0) animated:YES];
     
     
+    int second = self.second%60;//秒
     
-    if (self.second == 5) {
-        cycleScroll.pageVC.currentPage = 2;
+    int minutes = self.second/60%60;//分钟的。
+    
+    if (self.second == 0) {
         
-//        [self createSubView];
+       
+        
+    }else {
+        
+        
+        
+
     }
+    
     
     NSLog(@"================ %d",self.second);
     if (self.second == 0) {
@@ -140,10 +153,15 @@
         }
 
         self.stepsLabel.text    = self.stepsarrs[tagi];
-        NSString *text  = [NSString stringWithFormat:@"%d%@",self.second--,@"秒钟"];
+//        NSString *text  = [NSString stringWithFormat:@"%d%@",self.second--,@"秒钟"];
+        
+        NSString *text  = [NSString stringWithFormat:@"%d分%d秒",minutes,second];
         
         self.timeNumLabel.text  = text;
     }
+    
+    self.second--;
+
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -429,18 +447,17 @@
     adPageButton.centerX       = titleView.size.width/2;
 //    [self.contentView addSubview:adPageButton];
     
-    
-    
-    
-    
-    
-   
+    [self gifPlay6];
         
 }
     
-
-    
-
+-(void)gifPlay6  {
+    UIImage  *image         = [UIImage sd_animatedGIFNamed:@"b1"];
+    UIImageView  *gifview   = [[UIImageView alloc]initWithFrame:CGRectMake(50,80,image.size.width, image.size.height)];
+    gifview.backgroundColor = [UIColor orangeColor];
+    gifview.image           = image;
+    [self.view addSubview:gifview];
+}
 
 - (void) adButtonClick:(id)sender {
     
