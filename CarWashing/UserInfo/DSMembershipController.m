@@ -325,7 +325,6 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     return 1;
 }
 

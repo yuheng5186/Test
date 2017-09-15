@@ -511,6 +511,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     [defaults synchronize];
     NSLog(@"setTime ==== %@",[defaults objectForKey:@"setTime"]);
 
+    start.paynum=self.Jprice;
     start.RemainCount = self.RemainCount;
     start.IntegralNum = self.IntegralNum;
     start.CardType = self.CardType;

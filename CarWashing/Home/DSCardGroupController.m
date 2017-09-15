@@ -126,6 +126,30 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
     [self setupRefresh];
     
+    [self drawBackButtonWithAction:@selector(backButtonClick:)];
+}
+
+- (void) backButtonClick:(id)sender {
+    
+    self.tabBarController.selectedIndex = 0;
+    
+    NSArray     *array  = self.navigationController.viewControllers;
+    NSArray *a = [NSArray arrayWithObject:array[0]];
+    
+    
+    
+    if(array.count == 4)
+    {
+        
+        self.navigationController.viewControllers = a;
+        
+    }
+    else
+    {
+        NSArray     *array1 = [NSArray arrayWithObject:array[0]];
+        self.navigationController.viewControllers = array1;
+    }
+    
 }
 -(void)setupRefresh
 {

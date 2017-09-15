@@ -319,11 +319,12 @@
         timeStrLabel.textAlignment    = NSTextAlignmentCenter;
         timeStrLabel.right            = Main_Screen_Width -Main_Screen_Width*12/375;
         timeStrLabel.centerY          = washingLabel.centerY;
-            UIView *downView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*60/667) color:[UIColor whiteColor]];
+       
+        UIView *downView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*60/667) color:[UIColor whiteColor]];
             downView.top                      = middleView.bottom +Main_Screen_Height*10/667;
             downView.centerX                  = Main_Screen_Width/2;
         
-            NSString   *strings            = @"洗车优惠";
+            NSString   *strings            = self.CardName.length==0?@"支付方式":@"洗车优惠";
             UIFont     *Fonts              = [UIFont systemFontOfSize:15];
             UILabel *washingLabels         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:Fonts text:strings isCenter:NO];
             washingLabels.text             = strings;
