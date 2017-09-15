@@ -211,7 +211,7 @@
     titleView.centerX                  = Main_Screen_Width/2;
     
     
-    NSString   *titleString     = @"蔷薇自动洗车";
+    NSString   *titleString     = @"精洗";
     
     UIFont     *titleFont       = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
     UILabel *titleLabel         = [UIUtil drawLabelInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:titleFont text:titleString isCenter:NO];
@@ -324,7 +324,7 @@
             downView.top                      = middleView.bottom +Main_Screen_Height*10/667;
             downView.centerX                  = Main_Screen_Width/2;
         
-            NSString   *strings            = self.CardName.length==0?@"支付方式":@"洗车优惠";
+            NSString   *strings            = self.CardName.length==0?@"支付方式":[NSString stringWithFormat:@"我的%@",self.CardName];
             UIFont     *Fonts              = [UIFont systemFontOfSize:15];
             UILabel *washingLabels         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:Fonts text:strings isCenter:NO];
             washingLabels.text             = strings;
@@ -333,7 +333,7 @@
             washingLabels.left             = Main_Screen_Height*12/375;
             washingLabels.top              = Main_Screen_Height*14/667;
 //
-            NSString   *timeStrs     = [NSString stringWithFormat:@"剩余%@次",self.RemainCount];
+        NSString   *timeStrs     =self.CardName.length==0?[NSString stringWithFormat:@"%@元",self.paynum]:[NSString stringWithFormat:@"剩余%@次",self.RemainCount];
             UIFont     *cardFont              = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
             UILabel *washingCardLabel         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*20/667) font:cardFont text:timeStrs isCenter:NO];
             washingCardLabel.text             = timeStrs;
@@ -344,14 +344,14 @@
         
         
         
-         NSString   *timeStrc     = [NSString stringWithFormat:@"剩余%@次",self.RemainCount];
-            UIFont     *timeStrFonts       = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
-            UILabel *timeStrLabels         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:timeStrFonts text:timeStrs isCenter:NO];
-            timeStrLabels.text             = timeStrc;
-            timeStrLabels.textColor        = [UIColor colorFromHex:@"#868686"];
-            timeStrLabels.textAlignment    = NSTextAlignmentCenter;
-            timeStrLabels.right            = washingLabels.right;
-            timeStrLabels.top              = washingLabels.bottom+Main_Screen_Height*2/667;
+//         NSString   *timeStrc     = [NSString stringWithFormat:@"剩余%@次",self.RemainCount];
+//            UIFont     *timeStrFonts       = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+//            UILabel *timeStrLabels         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:timeStrFonts text:timeStrs isCenter:NO];
+//            timeStrLabels.text             = timeStrc;
+//            timeStrLabels.textColor        = [UIColor colorFromHex:@"#868686"];
+//            timeStrLabels.textAlignment    = NSTextAlignmentCenter;
+//            timeStrLabels.right            = washingLabels.right;
+//            timeStrLabels.top              = washingLabels.bottom+Main_Screen_Height*2/667;
         self.stepsLabel.top=downView.bottom+10*Main_Screen_Height/667;
         cycleScroll.top=self.stepsLabel.bottom+5*Main_Screen_Height/667;
         _ADScroll.top=self.stepsLabel.bottom+5*Main_Screen_Height/667;

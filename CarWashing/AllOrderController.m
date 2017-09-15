@@ -75,7 +75,7 @@ static NSString *id_cancelCell = @"id_cancelCell";
      
 }
 -(void)fabiaoboupdateOnclick{
-    [self.allOrderListView reloadData];
+     [self setupRefresh];
 
 }
 -(void)setupRefresh
