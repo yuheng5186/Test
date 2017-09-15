@@ -109,8 +109,8 @@
         
         
         UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            self.tabBarController.selectedIndex = 0;            
-            [self.navigationController popToRootViewControllerAnimated:YES];
+//            self.tabBarController.selectedIndex = 0;            
+//            [self.navigationController popToRootViewControllerAnimated:YES];
             
         }];
         [alertController addAction:OKAction];
@@ -221,7 +221,7 @@
     titleLabel.centerX          = Main_Screen_Width/4 -Main_Screen_Width*20/375;;
     titleLabel.top              = Main_Screen_Height*16/667;
     
-    NSString   *modeString     = @"洗车模式";
+    NSString   *modeString     = @"精洗模式";
     
     UIFont     *modeFont       = [UIFont systemFontOfSize:12];
     UILabel *modeLabel         = [UIUtil drawLabelInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:modeFont text:modeString isCenter:NO];
@@ -366,7 +366,7 @@
         self.stepsLabel.textColor        = [UIColor colorFromHex:@"#000000"];
         self.stepsLabel.textAlignment    = NSTextAlignmentCenter;
         self.stepsLabel.centerX            = self.contentView.centerX;
-        self.stepsLabel.top              = titleView.bottom+10*Main_Screen_Height/667;
+        self.stepsLabel.top              = titleView.bottom+50*Main_Screen_Height/667;
 #pragma mark-洗车轮播图
         
         _ADScroll           = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*150/667)];

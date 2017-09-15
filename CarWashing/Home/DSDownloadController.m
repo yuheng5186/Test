@@ -14,7 +14,7 @@
 #import "UdStorage.h"
 #import "AFNetworkingTool.h"
 
-@interface DSDownloadController ()<UIAlertViewDelegate>
+@interface DSDownloadController ()<LKAlertViewDelegate>
 
 {
     enum WXScene scene;
@@ -217,21 +217,26 @@
             CIQRCodeFeature *feature = features[0];
             NSString *scannedResult = feature.messageString;
             //通过对话框的形式呈现
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"扫描结果"
-                                                            message:scannedResult
-                                                           delegate:self
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:@"确定", nil];
-            [self.view addSubview:alert];
-            [alert show];
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"扫描结果"
+//                                                            message:scannedResult
+//                                                           delegate:self
+//                                                  cancelButtonTitle:nil
+//                                                  otherButtonTitles:@"确定", nil];
+//            [self.view addSubview:alert];
+//            [alert show];
+            
+            LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:nil message:@"将跳转到苹果App Store" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认"];
+            [alartView show];
+            
+            
         }else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"扫描结果"
-                                                            message:@"不是二维码图片"
-                                                           delegate:self
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:@"确定", nil];
-            [self.view addSubview:alert];
-            [alert show];
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"扫描结果"
+//                                                            message:@"不是二维码图片"
+//                                                           delegate:self
+//                                                  cancelButtonTitle:nil
+//                                                  otherButtonTitles:@"确定", nil];
+//            [self.view addSubview:alert];
+//            [alert show];
         }
     }
     //获取选中的照片
@@ -244,6 +249,22 @@
     
     
 }
+
+#pragma mark ---LKAlertViewDelegate---
+- (void)alertView:(LKAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        
+        
+    }else{
+        
+        NSString * str = @"https://itunes.apple.com/cn/app/id1284053624?mt=8";
+        NSURL *url = [NSURL URLWithString:str];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
