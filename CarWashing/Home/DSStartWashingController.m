@@ -37,6 +37,17 @@
 }
 - (void) backButtonClick:(id)sender {
     
+//    NSDate*date                     = [NSDate date];
+//    NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    
+//    
+//    NSString *dateString        = [dateFormatter stringFromDate:date];
+//    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+//    [defaults setObject:dateString forKey:@"setTime"];
+//    [defaults synchronize];
+    
+    
     self.tabBarController.selectedIndex = 0;
     
     NSArray     *array  = self.navigationController.viewControllers;
@@ -119,39 +130,39 @@
 //        self.stepsLabel.text    = self.stepsarrs[tagi];
 
         switch (self.second) {
-            case 1:             //5
+            case 5:             //5
                 tagi=5;
-                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width * _imageArray.count, 0);
+                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *6, 0);
                 self.stepsLabel.text    = self.stepsarrs[tagi];
 
                 break;
-            case 3:            //68
+            case 68:            //68
                 tagi=4;
-                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *(_imageArray.count-1), 0);
+                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *5, 0);
                 self.stepsLabel.text    = self.stepsarrs[tagi];
 
                 break;
-            case 6:           //109
+            case 109:           //109
                 tagi=3;
-                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *( _imageArray.count-2), 0);
+                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *4, 0);
                 self.stepsLabel.text    = self.stepsarrs[tagi];
 
                 break;
-            case 10:           // 171
+            case 171:           // 171
                 tagi=2;
-                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width * _imageArray.count-3, 0);
+                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *3, 0);
                 self.stepsLabel.text    = self.stepsarrs[tagi];
 
                 break;
-            case 15:           // 234
+            case 234:           // 234
                 tagi=1;
-                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width * _imageArray.count-4, 0);
+                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *2, 0);
                 self.stepsLabel.text    = self.stepsarrs[tagi];
 
                 break;
-            case 24:           //239
+            case 240:           //239
                 tagi=0;
-                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width * _imageArray.count-5, 0);
+                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *1, 0);
                 self.stepsLabel.text    = self.stepsarrs[tagi];
 
                 break;
