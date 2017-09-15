@@ -500,11 +500,22 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 {
     DSStartWashingController *start = [[DSStartWashingController alloc]init];
     
+    NSDate*date                     = [NSDate date];
+    NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
+    
+    NSString *dateString        = [dateFormatter stringFromDate:date];
+    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:dateString forKey:@"setTime"];
+    [defaults synchronize];
+    NSLog(@"setTime ==== %@",[defaults objectForKey:@"setTime"]);
+
     start.RemainCount = self.RemainCount;
     start.IntegralNum = self.IntegralNum;
     start.CardType = self.CardType;
     start.CardName = self.CardName;
+    start.second=240;
     
     
     [self.navigationController pushViewController:start animated:YES];

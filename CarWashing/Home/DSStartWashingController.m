@@ -360,7 +360,7 @@
         
         
          NSString   *stepStrs     = @"";
-         UIFont     *stepStrsFonts       = [UIFont systemFontOfSize:14];
+         UIFont     *stepStrsFonts       = [UIFont systemFontOfSize:18];
         self.stepsLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*25/667) font:stepStrsFonts text:stepStrs isCenter:NO];
         self.stepsLabel.text             = stepStrs;
         self.stepsLabel.textColor        = [UIColor colorFromHex:@"#000000"];
@@ -419,7 +419,7 @@
     UIButton    *adButton       = [UIButton buttonWithType:UIButtonTypeCustom];
     adButton.frame              = CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*100/667);
     adButton.backgroundColor    = [UIColor redColor];
-    [adButton setBackgroundImage:[UIImage imageNamed:@"guanggao33"] forState:UIControlStateNormal];
+    [adButton setBackgroundImage:[UIImage imageNamed:@"banka_banner"] forState:UIControlStateNormal];
     [adButton addTarget:self action:@selector(adButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     //    logoImageView.bottom        = self.contentView.height -Main_Screen_Height*80/667;
@@ -440,7 +440,7 @@
     UIButton    *adPageButton       = [UIButton buttonWithType:UIButtonTypeCustom];
     adPageButton.frame              = CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*100/667);
     adPageButton.backgroundColor    = [UIColor redColor];
-    [adPageButton setBackgroundImage:[UIImage imageNamed:@"guanggao11"] forState:UIControlStateNormal];
+    [adPageButton setBackgroundImage:[UIImage imageNamed:@"banka_banner"] forState:UIControlStateNormal];
     [adPageButton addTarget:self action:@selector(adPageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     adPageButton.bottom        = adButton.top -Main_Screen_Height*10/667;
     adPageButton.centerX       = titleView.size.width/2;
@@ -468,14 +468,20 @@
 //}
 
 - (void) adButtonClick:(id)sender {
+    self.tabBarController.selectedIndex = 3;
     
-//    DSCompleteWashingController     *completeVC     = [[DSCompleteWashingController alloc]init];
-//    completeVC.hidesBottomBarWhenPushed             = YES;
-//    [self.navigationController pushViewController:completeVC animated:YES];
+    NSArray     *array  = self.navigationController.viewControllers;
+    NSArray *a = [NSArray arrayWithObject:array[0]];
+    self.navigationController.viewControllers = a;
 }
 
 - (void) adPageButtonClick:(id)sender {
     
+    self.tabBarController.selectedIndex = 3;
+    
+    NSArray     *array  = self.navigationController.viewControllers;
+    NSArray *a = [NSArray arrayWithObject:array[0]];
+    self.navigationController.viewControllers = a;
     
 }
 
