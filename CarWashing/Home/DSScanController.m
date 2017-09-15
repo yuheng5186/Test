@@ -246,11 +246,27 @@
 
 - (void)handleScanData:(NSString *)outMessage {
     
-    
+//    NSDate*date = [NSDate date];
+//
+//    NSTimeZone*zone2 = [NSTimeZone systemTimeZone];
+//    
+//    NSInteger interva2 = [zone2 secondsFromGMTForDate: date];
+//    
+//    NSDate *currentDate = [date dateByAddingTimeInterval: interva2];
+//    
+//    
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    [defaults setObject:currentDate forKey:@"setTime"];
+//    
+//    [defaults setInteger:23 forKey:@"myInteger"];
+//    [defaults synchronize];
+//
+//    NSLog(@"setTime ==== %@",[defaults objectForKey:@"setTime"]);
+
     
     DSStartWashingController *start = [[DSStartWashingController alloc]init];
     start.hidesBottomBarWhenPushed            = YES;
-
+    start.second                    = 24;
     
     [self.navigationController pushViewController:start animated:YES];
     
