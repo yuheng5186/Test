@@ -10,4 +10,5 @@
 
 @interface DSAdDetailController : BaseController
 @property(nonatomic,strong)NSString *urlstr;
+@property(nonatomic,strong)NSString *shareurlstr;
 @end

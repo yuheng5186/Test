@@ -373,9 +373,9 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
     UIImage *image = [self imageFromMemoryCacheForKey:key];
     if (image) {
         NSData *diskData = nil;
-//        if ([image isGIF]) {
+        if ([image isGIF]) {
             diskData = [self diskImageDataBySearchingAllPathsForKey:key];
-//        }
+        }
         if (doneBlock) {
             doneBlock(image, diskData, SDImageCacheTypeMemory);
         }

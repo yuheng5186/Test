@@ -325,7 +325,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     //    [self addCardChildViewControllers];
     
     
-    UIView *titleView                  = [UIUtil drawLineInView:self.view frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*60/667) color:[UIColor whiteColor]];
+    UIView *titleView                  = [UIUtil drawLineInView:self.view frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*60/667) color:[UIColor redColor]];
     titleView.top                      = 64;
     
     
@@ -350,7 +350,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         make.right.equalTo(self.view).mas_offset(-Main_Screen_Width*22.5/375);
         make.height.mas_equalTo(self.view.height-Main_Screen_Height*60/667-Main_Screen_Height*64/667);
     }];
-    
+//    self.rechargeView.top   =titleView.bottom+Main_Screen_Height*10/667;
     self.rechargeView.delegate = self;
     self.rechargeView.dataSource = self;
 //    self.rechargeView.contentInset = UIEdgeInsetsMake(0, 0, 30, 0);

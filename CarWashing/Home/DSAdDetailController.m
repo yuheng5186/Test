@@ -7,9 +7,18 @@
 //
 
 #import "DSAdDetailController.h"
+#import "HYActivityView.h"
 
-@interface DSAdDetailController ()<UIWebViewDelegate>
-
+#import "HTTPDefine.h"
+#import "LCMD5Tool.h"
+#import "UdStorage.h"
+#import "AFNetworkingTool.h"
+@interface DSAdDetailController ()<UIWebViewDelegate,UIAlertViewDelegate>
+{
+    enum WXScene scene;
+    
+}
+@property (nonatomic, strong) HYActivityView *activityView;
 @end
 
 @implementation DSAdDetailController
@@ -17,9 +26,129 @@
 - (void)drawNavigation {
     
     [self drawTitle:@"广告详情"];
-    
+    [self drawRightImageButton:@"fenxiang" action:@selector(shareButtonClick:)];
 }
 
+- (void) shareButtonClick:(id)sender {
+    
+    if (!self.activityView) {
+        self.activityView = [[HYActivityView alloc]initWithTitle:@"" referView:self.view];
+        
+        //横屏会变成一行6个, 竖屏无法一行同时显示6个, 会自动使用默认一行4个的设置.
+        self.activityView.numberOfButtonPerLine = 6;
+        
+        ButtonView *bv ;
+        
+        bv = [[ButtonView alloc]initWithText:@"微信" image:[UIImage imageNamed:@"btn_share_weixin"] handler:^(ButtonView *buttonView){
+            NSLog(@"点击微信");
+            NSDictionary *mulDic = @{
+                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                     @"ShareType":@3
+                                     };
+            NSDictionary *params = @{
+                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                     };
+            
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@InviteShare/UserShare",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                
+                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                {
+                    //创建发送对象实例
+                    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc] init];
+                    sendReq.bText = NO;//不使用文本信息
+                    sendReq.scene = 0;//0 = 好友列表 1 = 朋友圈 2 = 收藏
+                    
+                    //创建分享内容对象
+                    WXMediaMessage *urlMessage = [WXMediaMessage message];
+                    urlMessage.title = @"蔷薇爱车";//分享标题
+                    urlMessage.description = @"分享赚钱";//分享描述
+                    [urlMessage setThumbImage:[UIImage imageNamed:@"loginIcon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
+                    
+                    //创建多媒体对象
+                    WXWebpageObject *webObj = [WXWebpageObject object];
+                    webObj.webpageUrl = [NSString stringWithFormat:@"%@?%@",self.shareurlstr,@"2354455"];//分享链接
+                    
+                    //完成发送对象实例
+                    urlMessage.mediaObject = webObj;
+                    sendReq.message = urlMessage;
+                    
+                    //发送分享信息
+                    [WXApi sendReq:sendReq];
+                    
+                }
+                else
+                {
+                    [self.view showInfo:@"分享失败，请重试" autoHidden:YES interval:2];
+                    
+                }
+                
+            } fail:^(NSError *error) {
+                [self.view showInfo:@"分享失败，请重试" autoHidden:YES interval:2];
+                
+            }];
+            
+            
+        }];
+        [self.activityView addButtonView:bv];
+        
+        bv = [[ButtonView alloc]initWithText:@"微信朋友圈" image:[UIImage imageNamed:@"btn_share_pengyouquan"] handler:^(ButtonView *buttonView){
+            NSLog(@"点击微信朋友圈");
+            NSDictionary *mulDic = @{
+                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                     @"ShareType":@3
+                                     };
+            NSDictionary *params = @{
+                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                     };
+            
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@InviteShare/UserShare",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                
+                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                {
+                    //创建发送对象实例
+                    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc] init];
+                    sendReq.bText = NO;//不使用文本信息
+                    sendReq.scene = 1;//0 = 好友列表 1 = 朋友圈 2 = 收藏
+                    
+                    //创建分享内容对象
+                    WXMediaMessage *urlMessage = [WXMediaMessage message];
+                    urlMessage.title = @"蔷薇爱车";//分享标题
+                    urlMessage.description = @"分享赚钱";//分享描述
+                    [urlMessage setThumbImage:[UIImage imageNamed:@"loginIcon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
+                    
+                    //创建多媒体对象
+                    WXWebpageObject *webObj = [WXWebpageObject object];
+                    webObj.webpageUrl = [NSString stringWithFormat:@"%@",[[dict objectForKey:@"JsonData"] objectForKey:@"InviteShareUrl"]];//分享链接
+                    
+                    //完成发送对象实例
+                    urlMessage.mediaObject = webObj;
+                    sendReq.message = urlMessage;
+                    
+                    //发送分享信息
+                    [WXApi sendReq:sendReq];
+                    
+                }
+                else
+                {
+                    [self.view showInfo:@"分享失败，请重试" autoHidden:YES interval:2];
+                    
+                }
+                
+            } fail:^(NSError *error) {
+                [self.view showInfo:@"分享失败，请重试" autoHidden:YES interval:2];
+                
+            }];
+            
+            
+        }];
+        [self.activityView addButtonView:bv];
+        
+    }
+    
+    [self.activityView show];
+}
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     NSMutableString *str = [NSMutableString string];
     // 3.根据标签类型获取指定标签的元素

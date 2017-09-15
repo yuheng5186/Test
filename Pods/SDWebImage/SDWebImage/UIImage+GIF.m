@@ -154,5 +154,7 @@
 
     return [UIImage animatedImageWithImages:scaledImages duration:self.duration];
 }
-
+- (BOOL)isGIF {
+    return (self.images != nil);
+}
 @end
