@@ -18,7 +18,6 @@
     SXScrPageView *cycleScroll;
 }
 @property (nonatomic,strong) NSTimer *timer;
-@property (nonatomic,assign) int second;
 @property (nonatomic, strong) UILabel *timeNumLabel;
 @property (nonatomic, strong) UILabel *stepsLabel;
 @property (nonatomic, strong) NSArray *stepsarrs;
@@ -33,8 +32,18 @@
 - (void) drawNavigation {
     self.stepsarrs=[[NSArray alloc]initWithObjects:@"底盘清洗",@"环绕泡沫",@"幻彩泡沫",@"高压冲洗",@"水蜡镀膜",@"风干处理", nil];
     [self drawTitle:@"蔷薇爱车"];
-}
+    [self drawBackButtonWithAction:@selector(backButtonClick:)];
 
+}
+- (void) backButtonClick:(id)sender {
+    
+    self.tabBarController.selectedIndex = 0;
+    
+    NSArray     *array  = self.navigationController.viewControllers;
+    NSArray *a = [NSArray arrayWithObject:array[0]];
+    self.navigationController.viewControllers = a;
+
+}
 - (void) dealloc
 {
     [self.timer invalidate];
@@ -53,7 +62,7 @@
     
     _imageArray = [NSMutableArray array];
 
-      self.second = 15;
+//    self.second = 24;
     [self createSubView];
      [self startTimer];
     
@@ -83,28 +92,14 @@
     
     int minutes = self.second/60%60;//分钟的。
     
-    if (self.second == 0) {
-        
-       
-        
-    }else {
-        
-        
-        
-
-    }
-    
-    
     NSLog(@"================ %d",self.second);
     if (self.second == 0) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"洗车成功" message:@"洗车结束，欢迎下次光临！" preferredStyle:UIAlertControllerStyleAlert];
         
         
         UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//            self.tabBarController.selectedIndex = 0;
-//            
-//            
-//            [self.navigationController popToRootViewControllerAnimated:YES];
+            self.tabBarController.selectedIndex = 0;            
+            [self.navigationController popToRootViewControllerAnimated:YES];
             
         }];
         [alertController addAction:OKAction];
@@ -121,38 +116,50 @@
         
         
         int tagi=0;
+//        self.stepsLabel.text    = self.stepsarrs[tagi];
+
         switch (self.second) {
             case 1:             //5
-                tagi=0;
-                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width * _imageArray.count, 0);
-                break;
-            case 2:            //68
-                tagi=1;
-                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *(_imageArray.count-1), 0);
-
-                break;
-            case 4:           //109
-                tagi=2;
-                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *( _imageArray.count-2), 0);
-
-                break;
-            case 6:           // 171
-                tagi=3;
-                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width * _imageArray.count-3, 0);
-
-                break;
-            case 8:           // 234
-                tagi=4;
-                break;
-            case 10:           //239
                 tagi=5;
+                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width * _imageArray.count, 0);
+                self.stepsLabel.text    = self.stepsarrs[tagi];
+
+                break;
+            case 3:            //68
+                tagi=4;
+                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *(_imageArray.count-1), 0);
+                self.stepsLabel.text    = self.stepsarrs[tagi];
+
+                break;
+            case 6:           //109
+                tagi=3;
+                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *( _imageArray.count-2), 0);
+                self.stepsLabel.text    = self.stepsarrs[tagi];
+
+                break;
+            case 10:           // 171
+                tagi=2;
+                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width * _imageArray.count-3, 0);
+                self.stepsLabel.text    = self.stepsarrs[tagi];
+
+                break;
+            case 15:           // 234
+                tagi=1;
+                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width * _imageArray.count-4, 0);
+                self.stepsLabel.text    = self.stepsarrs[tagi];
+
+                break;
+            case 24:           //239
+                tagi=0;
+                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width * _imageArray.count-5, 0);
+                self.stepsLabel.text    = self.stepsarrs[tagi];
 
                 break;
             default:
                 break;
         }
 
-        self.stepsLabel.text    = self.stepsarrs[tagi];
+        self.stepsLabel.width   = Main_Screen_Width*100/375;
 //        NSString *text  = [NSString stringWithFormat:@"%d%@",self.second--,@"秒钟"];
         
         NSString *text  = [NSString stringWithFormat:@"%d分%d秒",minutes,second];
@@ -341,36 +348,15 @@
     }else{
         
         
-         NSString   *stepStrs     = @"底盘清洗";
-         UIFont     *stepStrsFonts       = [UIFont systemFontOfSize:12];
+         NSString   *stepStrs     = @"";
+         UIFont     *stepStrsFonts       = [UIFont systemFontOfSize:14];
         self.stepsLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*25/667) font:stepStrsFonts text:stepStrs isCenter:NO];
         self.stepsLabel.text             = stepStrs;
-        self.stepsLabel.textColor        = [UIColor colorFromHex:@"#868686"];
+        self.stepsLabel.textColor        = [UIColor colorFromHex:@"#000000"];
         self.stepsLabel.textAlignment    = NSTextAlignmentCenter;
         self.stepsLabel.centerX            = self.contentView.centerX;
         self.stepsLabel.top              = titleView.bottom+10*Main_Screen_Height/667;
 #pragma mark-洗车轮播图
-//        NSMutableArray * images = [NSMutableArray array];
-//        
-//        
-//        for (NSInteger i = 0; i<5; i++)
-//        {
-//            [images addObject:[NSString stringWithFormat:@"x%ld",i+1]];
-//        }
-//        
-//        
-//        cycleScroll =   [SXScrPageView direcWithtFrame:CGRectMake(0, 0, Main_Screen_Width*180/375, Main_Screen_Height*180/667) ImageArr:images AndImageClickBlock:^(NSInteger index) {
-//            
-//        }];
-//        
-//        cycleScroll.top=self.stepsLabel.bottom+25*Main_Screen_Height/667;
-//        //    cycleScroll.titleLabelTextColor=[UIColor blackColor];
-//        //    cycleScroll.titleLabelFont=[UIFont systemFontOfSize:12*Main_Screen_Height/667];
-//        //    cycleScroll.titles = [[NSArray alloc] initWithObjects:@"测试标题1",@"测试标题2",@"测试标题3", @"测试标题4",nil];
-//        cycleScroll.centerX=self.contentView.centerX;
-//        cycleScroll.backgroundColor=[UIColor clearColor];
-//        [self.contentView  addSubview:cycleScroll];
-        
         
         _ADScroll           = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*150/667)];
         _ADScroll.delegate  = self;
@@ -379,7 +365,7 @@
         _ADScroll.backgroundColor   = [UIColor clearColor];
         [self.contentView addSubview:_ADScroll];
         
-        NSArray *arr = @[[UIImage imageNamed:@"x1.png"],[UIImage imageNamed:@"x2.png"],[UIImage imageNamed:@"x3.png"],[UIImage imageNamed:@"x4.png"],[UIImage imageNamed:@"x5.png"]];
+        NSArray *arr = @[[UIImage imageNamed:@"x1.png"],[UIImage imageNamed:@"x2.png"],[UIImage imageNamed:@"x3.png"],[UIImage imageNamed:@"x4.png"],[UIImage imageNamed:@"x5.png"],[UIImage imageNamed:@"x5.png"]];
         
 //        NSArray *arr = @[@"http://www.pptbz.com/pptpic/UploadFiles_6909/201204/2012041411433867.jpg",@"http://pic25.nipic.com/20121112/5955207_224247025000_2.jpg",@"http://img10.3lian.com/c1/newpic/10/08/04.jpg",@"http://img3.imgtn.bdimg.com/it/u=2699593702,2049257415&fm=206&gp=0.jpg"];
 
@@ -449,8 +435,8 @@
     adPageButton.centerX       = titleView.size.width/2;
 //    [self.contentView addSubview:adPageButton];
     
-    [self gifPlay6];
-        
+//    [self gifPlay6];
+    
 }
 
 #pragma mark - SDWebImage内部解析gif数据
@@ -462,13 +448,13 @@
     myImgView.image = image;
 }
     
--(void)gifPlay6  {
-    UIImage  *image         = [UIImage sd_animatedGIFNamed:@"b1"];
-    UIImageView  *gifview   = [[UIImageView alloc]initWithFrame:CGRectMake(50,80,image.size.width, image.size.height)];
-    gifview.backgroundColor = [UIColor orangeColor];
-    gifview.image           = image;
-    [self.view addSubview:gifview];
-}
+//-(void)gifPlay6  {
+//    UIImage  *image         = [UIImage sd_animatedGIFNamed:@"b1"];
+//    UIImageView  *gifview   = [[UIImageView alloc]initWithFrame:CGRectMake(50,80,image.size.width, image.size.height)];
+//    gifview.backgroundColor = [UIColor orangeColor];
+//    gifview.image           = image;
+//    [self.view addSubview:gifview];
+//}
 
 - (void) adButtonClick:(id)sender {
     

@@ -16,6 +16,7 @@
 @property(nonatomic,copy)NSString *CardName;//卡片名称
 @property(nonatomic,copy)NSString *IntegralNum;//积分数
 
+@property (nonatomic,assign) int second;
 
 
 @end
