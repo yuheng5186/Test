@@ -41,63 +41,73 @@
 }
 - (void) rightButtonClick:(id)sender {
     
-    if (self.phoneFieldText.text.length >0 && self.merchantFieldText.text.length > 0 && self.addressFieldText.text.length > 0) {
+    if (self.phoneFieldText.text.length < 12) {
         
-        HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        HUD.removeFromSuperViewOnHide =YES;
-        HUD.mode = MBProgressHUDModeIndeterminate;
-        HUD.labelText = @"加载中";
-        HUD.minSize = CGSizeMake(132.f, 108.0f);
-        
-        
-        NSDictionary *mulDic = @{
-                                 @"Name":self.merchantFieldText.text,
-                                 @"Phone":self.phoneFieldText.text,
-                                 @"Address":self.addressFieldText.text
-                                 };
-        NSDictionary *params = @{
-                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                                 };
-        
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/AddMerchantSettledInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
-            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-            {
-                __weak typeof(self) weakSelf = self;
+        if (self.phoneFieldText.text.length >0 && self.merchantFieldText.text.length > 0 && self.addressFieldText.text.length > 0) {
+            
+            HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            HUD.removeFromSuperViewOnHide =YES;
+            HUD.mode = MBProgressHUDModeIndeterminate;
+            HUD.labelText = @"加载中";
+            HUD.minSize = CGSizeMake(132.f, 108.0f);
+            
+            
+            NSDictionary *mulDic = @{
+                                     @"Name":self.merchantFieldText.text,
+                                     @"Phone":self.phoneFieldText.text,
+                                     @"Address":self.addressFieldText.text
+                                     };
+            NSDictionary *params = @{
+                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                     };
+            
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/AddMerchantSettledInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                {
+                    __weak typeof(self) weakSelf = self;
+                    
+                    
+                    HUD.completionBlock = ^(){
+                        [weakSelf.view showInfo:@"入驻成功" autoHidden:YES interval:2];
+                    };
+                    
+                    LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:@"恭喜您提交成功" message:@"客服将在24小时以内联系您" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    alartView.tag               = 110;
+                    [alartView show];
+                    
+                    
+                    [HUD hide:YES afterDelay:1.f];
+                }
+                else
+                {
+                    [HUD setHidden:YES];
+                    [self.view showInfo:@"网络异常，信息提交失败" autoHidden:YES interval:2];
+                }
                 
                 
-                HUD.completionBlock = ^(){
-                    [weakSelf.view showInfo:@"入驻成功" autoHidden:YES interval:2];
-                };
-                
-                LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:@"恭喜您提交成功" message:@"客服将在24小时以内联系您" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                alartView.tag               = 110;
-                [alartView show];
                 
                 
-                [HUD hide:YES afterDelay:1.f];
-            }
-            else
-            {
+                
+                
+            } fail:^(NSError *error) {
                 [HUD setHidden:YES];
                 [self.view showInfo:@"网络异常，信息提交失败" autoHidden:YES interval:2];
-            }
+            }];
             
+        }else {
             
+            [self.view showInfo:@"请填写完整信息再提交" autoHidden:YES];
             
-            
-            
-            
-        } fail:^(NSError *error) {
-            [HUD setHidden:YES];
-            [self.view showInfo:@"网络异常，信息提交失败" autoHidden:YES interval:2];
-        }];
+        }
         
     }else {
     
-        [self.view showInfo:@"请填写完整信息再提交" autoHidden:YES];
+        [self.view showInfo:@"联系电话位数有误，请检查是否正确！" autoHidden:YES];
 
     }
+    
+    
     
 
     
@@ -265,6 +275,18 @@
 - (void) addressFieldTextChanged:(UITextField *)sender {
     
     
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    return [textField resignFirstResponder];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    [self.merchantFieldText resignFirstResponder];
+    [self.phoneFieldText resignFirstResponder];
+    [self.addressFieldText resignFirstResponder];
+
+    [self.view endEditing:YES];
 }
 
 
