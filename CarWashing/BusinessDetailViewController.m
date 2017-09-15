@@ -727,7 +727,8 @@ static NSString *businessCommentCell = @"businessCommentCell";
     if (section == 0) {
         textLab.text = @"服务类别";
     }else{
-        textLab.text = [NSString stringWithFormat:@"评论 (%@)",self.dic[@"CommentCount"]];
+        
+        textLab.text = [NSString stringWithFormat:@"评论 (%ld)",((NSArray *)self.dic[@"MerComList"]).count];
     }
     [v addSubview:textLab];
     return v;
