@@ -9,7 +9,7 @@
 #import "DSStartWashingController.h"
 #import "DSCompleteWashingController.h"
 #import "SXScrPageView.h"
-@interface DSStartWashingController ()
+@interface DSStartWashingController ()<UIScrollViewDelegate>
 {
     SXScrPageView *cycleScroll;
 }
@@ -18,6 +18,10 @@
 @property (nonatomic, strong) UILabel *timeNumLabel;
 @property (nonatomic, strong) UILabel *stepsLabel;
 @property (nonatomic, strong) NSArray *stepsarrs;
+
+@property (strong, nonatomic) NSMutableArray *imageArray;//存放图片的数组
+@property (strong, nonatomic) UIScrollView *ADScroll;//广告栏的底层ScrollView
+
 @end
 
 @implementation DSStartWashingController
@@ -42,6 +46,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    _imageArray = [NSMutableArray array];
+
       self.second = 15;
     [self createSubView];
      [self startTimer];
@@ -62,6 +69,12 @@
 
 - (void)onTimer
 {
+    
+//    float Offx = _ADScroll.contentOffset.x;
+//    Offx += Main_Screen_Width;
+//    [_ADScroll setContentOffset:CGPointMake(Offx, 0) animated:YES];
+    
+    
     
     if (self.second == 5) {
         cycleScroll.pageVC.currentPage = 2;
@@ -92,11 +105,67 @@
         [self.timer invalidate];
     }else {
         
+        
+        
+        int tagi=0;
+        switch (self.second) {
+            case 1:             //5
+                tagi=0;
+                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width * _imageArray.count, 0);
+                break;
+            case 2:            //68
+                tagi=1;
+                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *(_imageArray.count-1), 0);
+
+                break;
+            case 4:           //109
+                tagi=2;
+                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *( _imageArray.count-2), 0);
+
+                break;
+            case 6:           // 171
+                tagi=3;
+                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width * _imageArray.count-3, 0);
+
+                break;
+            case 8:           // 234
+                tagi=4;
+                break;
+            case 10:           //239
+                tagi=5;
+
+                break;
+            default:
+                break;
+        }
+
+        self.stepsLabel.text    = self.stepsarrs[tagi];
         NSString *text  = [NSString stringWithFormat:@"%d%@",self.second--,@"秒钟"];
         
         self.timeNumLabel.text  = text;
     }
 }
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (_ADScroll == scrollView) {
+        //往左滑
+        if (scrollView.contentOffset.x >= scrollView.contentSize.width - Main_Screen_Width ) {
+            scrollView.contentOffset = CGPointMake(Main_Screen_Width, 0);
+        }
+        //往右滑
+        if (scrollView.contentOffset.x <= 0) {
+            scrollView.contentOffset = CGPointMake(Main_Screen_Width * _imageArray.count, 0); // 这里的4，是整个Image数组的个数。
+        }
+        //        if (page == 0) {
+        //            [scrollView setContentOffset:CGPointMake(UIScreen_width * _imageArray.count, 0)];
+        //
+        //        }else if (page == _imageArray.count + 1){
+        //            // 如果是第最后一页就跳转到数组第一个元素的地点
+        //            [scrollView setContentOffset:CGPointMake(UIScreen_width, 0)];
+        //        }
+    }
+}
+
 
 
 - (void) createSubView {
@@ -248,31 +317,13 @@
             timeStrLabels.top              = washingLabels.bottom+Main_Screen_Height*2/667;
         self.stepsLabel.top=downView.bottom+10*Main_Screen_Height/667;
         cycleScroll.top=self.stepsLabel.bottom+5*Main_Screen_Height/667;
+        _ADScroll.top=self.stepsLabel.bottom+5*Main_Screen_Height/667;
+
+        
     }else{
-        int tagi=0;
-        switch (self.second) {
-            case 5:
-                tagi=0;
-                break;
-            case 68:
-                tagi=1;
-                break;
-            case 109:
-                tagi=2;
-                break;
-            case 171:
-                tagi=3;
-                break;
-            case 234:
-                tagi=4;
-                break;
-            case 239:
-                tagi=5;
-                break;
-            default:
-                break;
-        }
-         NSString   *stepStrs     = self.stepsarrs[tagi];
+        
+        
+         NSString   *stepStrs     = @"底盘清洗";
          UIFont     *stepStrsFonts       = [UIFont systemFontOfSize:12];
         self.stepsLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*25/667) font:stepStrsFonts text:stepStrs isCenter:NO];
         self.stepsLabel.text             = stepStrs;
@@ -281,53 +332,72 @@
         self.stepsLabel.centerX            = self.contentView.centerX;
         self.stepsLabel.top              = titleView.bottom+10*Main_Screen_Height/667;
 #pragma mark-洗车轮播图
-        NSMutableArray * images = [NSMutableArray array];
+//        NSMutableArray * images = [NSMutableArray array];
+//        
+//        
+//        for (NSInteger i = 0; i<5; i++)
+//        {
+//            [images addObject:[NSString stringWithFormat:@"x%ld",i+1]];
+//        }
+//        
+//        
+//        cycleScroll =   [SXScrPageView direcWithtFrame:CGRectMake(0, 0, Main_Screen_Width*180/375, Main_Screen_Height*180/667) ImageArr:images AndImageClickBlock:^(NSInteger index) {
+//            
+//        }];
+//        
+//        cycleScroll.top=self.stepsLabel.bottom+25*Main_Screen_Height/667;
+//        //    cycleScroll.titleLabelTextColor=[UIColor blackColor];
+//        //    cycleScroll.titleLabelFont=[UIFont systemFontOfSize:12*Main_Screen_Height/667];
+//        //    cycleScroll.titles = [[NSArray alloc] initWithObjects:@"测试标题1",@"测试标题2",@"测试标题3", @"测试标题4",nil];
+//        cycleScroll.centerX=self.contentView.centerX;
+//        cycleScroll.backgroundColor=[UIColor clearColor];
+//        [self.contentView  addSubview:cycleScroll];
         
         
-        for (NSInteger i = 0; i<5; i++)
-        {
-            [images addObject:[NSString stringWithFormat:@"x%ld",i+1]];
+        _ADScroll           = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*150/667)];
+        _ADScroll.delegate  = self;
+        _ADScroll.top       =   self.stepsLabel.bottom+25*Main_Screen_Height/667;
+        _ADScroll.centerX   =  self.contentView.centerX;
+        _ADScroll.backgroundColor   = [UIColor clearColor];
+        [self.contentView addSubview:_ADScroll];
+        
+        NSArray *arr = @[[UIImage imageNamed:@"x1.png"],[UIImage imageNamed:@"x2.png"],[UIImage imageNamed:@"x3.png"],[UIImage imageNamed:@"x4.png"],[UIImage imageNamed:@"x5.png"]];
+        
+//        NSArray *arr = @[@"http://www.pptbz.com/pptpic/UploadFiles_6909/201204/2012041411433867.jpg",@"http://pic25.nipic.com/20121112/5955207_224247025000_2.jpg",@"http://img10.3lian.com/c1/newpic/10/08/04.jpg",@"http://img3.imgtn.bdimg.com/it/u=2699593702,2049257415&fm=206&gp=0.jpg"];
+
+        [_imageArray addObjectsFromArray:arr];
+        int i = 0;
+        for (; i < _imageArray.count; i++) {
+            UIImageView *img = [[UIImageView alloc] init];
+            img.frame = CGRectMake(Main_Screen_Width * (i + 1), 0, Main_Screen_Width*150/375, Main_Screen_Height*150/667);
+//            [img sd_setImageWithURL:[NSURL URLWithString:arr[i]]];
+            [img setImage:arr[i]];
+
+            img.tag = i;
+            [_ADScroll addSubview:img];
+            
         }
         
+        // 将最后一张图片弄到第一张的位置
+        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 50, Main_Screen_Width, Main_Screen_Height/3)];
+//        [img sd_setImageWithURL:[NSURL URLWithString:_imageArray[i-1]]];
+        [img setImage:_imageArray[i-1]];
+        [_ADScroll addSubview:img];
+        // 将第一张图片放到最后位置，造成视觉上的循环
+        UIImageView *img0 = [[UIImageView alloc] initWithFrame:CGRectMake(Main_Screen_Height * (i + 1), 50, Main_Screen_Width, Main_Screen_Height/3)];
+//        [img0 sd_setImageWithURL:[NSURL URLWithString:_imageArray[0]]];
+        [img0 setImage:_imageArray[0]];
+        [_ADScroll addSubview:img0];
+        [_ADScroll setContentOffset:CGPointMake(Main_Screen_Width/3, 0)];//将起始位置设置在这里
         
-        cycleScroll =   [SXScrPageView direcWithtFrame:CGRectMake(0, 0, Main_Screen_Width*180/375, Main_Screen_Height*180/667) ImageArr:images AndImageClickBlock:^(NSInteger index) {
-            //        NSLog(@"tag:%ld",index);
-            //        DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
-            //        viewVC.urlstr=[((NSDictionary *)weackself.newrc.adverList[index]) objectForKey:@"Url"];
-            //        viewVC.hidesBottomBarWhenPushed = YES;
-            //        [weackself.navigationController pushViewController:viewVC animated:YES];
-            
-        }];
+        _ADScroll.pagingEnabled = YES;
+        _ADScroll.scrollEnabled = NO;
         
-        //    cycleScroll.top  =   0;
-        //    cycleScroll.width = Main_Screen_Width;
-        //    [backgroudView addSubview:sxView];
-        //
-        //
-        //
-        //    //网络图片加载
-        //    cycleScroll = [[GCCycleScrollView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width*180/375, Main_Screen_Height*180/667)];
-        //    cycleScroll.delegate =self;
-        //
-        //    cycleScroll.localImageGroups = images;
-        //    cycleScroll.autoScrollTimeInterval = 3.0;
-        //    cycleScroll.dotColor = [UIColor blueColor];
-        //    cycleScroll.top  =   0;
-        //    cycleScroll.width = Main_Screen_Width*180/375;
-        cycleScroll.top=self.stepsLabel.bottom+25*Main_Screen_Height/667;
-        //    cycleScroll.titleLabelTextColor=[UIColor blackColor];
-        //    cycleScroll.titleLabelFont=[UIFont systemFontOfSize:12*Main_Screen_Height/667];
-        //    cycleScroll.titles = [[NSArray alloc] initWithObjects:@"测试标题1",@"测试标题2",@"测试标题3", @"测试标题4",nil];
-        cycleScroll.centerX=self.contentView.centerX;
-        cycleScroll.backgroundColor=[UIColor clearColor];
-        [self.contentView  addSubview:cycleScroll];
+        _ADScroll.showsHorizontalScrollIndicator = NO;
+        _ADScroll.showsVerticalScrollIndicator = NO;
+        _ADScroll.contentSize = CGSizeMake((i+2)*Main_Screen_Width, 0);
         
-
-    
     }
-    
-
-    
     
     UIButton    *adButton       = [UIButton buttonWithType:UIButtonTypeCustom];
     adButton.frame              = CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*100/667);
