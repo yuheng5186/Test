@@ -147,6 +147,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
     detailController.hidesBottomBarWhenPushed       = YES;
+    detailController.GiveCount=news.GiveCount;
+    detailController.CommentCount=news.CommentCount;
     detailController.ActivityCode                   = news.ActivityCode;
     [self.navigationController pushViewController:detailController animated:YES];
     

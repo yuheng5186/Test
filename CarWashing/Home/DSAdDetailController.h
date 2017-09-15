@@ -11,4 +11,6 @@
 @interface DSAdDetailController : BaseController
 @property(nonatomic,strong)NSString *urlstr;
 @property(nonatomic,strong)NSString *shareurlstr;
+@property(nonatomic,assign)NSInteger AactivityCode;//卡编号
+@property(nonatomic,assign)NSInteger *AactivityType;//活动类型
 @end

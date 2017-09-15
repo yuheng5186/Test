@@ -132,7 +132,7 @@
                   moduleName = "CarWashing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Test/CarWashing/BusinessPayController.m"
-                  timestampString = "527146396.849661"
+                  timestampString = "527151483.989454"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "64"
@@ -147,7 +147,7 @@
                   moduleName = "CarWashing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Test/CarWashing/BusinessPayController.m"
-                  timestampString = "527146396.850989"
+                  timestampString = "527151483.990702"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "66"
@@ -355,38 +355,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CarWashing/Controllers/HomeViewController.m"
-            timestampString = "527137215.444533"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "609"
-            endingLineNumber = "609"
-            landmarkName = "-setData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CarWashing/Controllers/HomeViewController.m"
-            timestampString = "527137215.444533"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "618"
-            endingLineNumber = "618"
-            landmarkName = "-setData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "CarWashing/DSScanQRCodeController.m"
             timestampString = "527139370.004471"
             startingColumnNumber = "9223372036854775807"
@@ -410,6 +378,70 @@
             startingLineNumber = "230"
             endingLineNumber = "230"
             landmarkName = "-showAlertWithTitle:message:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CarWashing/Home/DSCardGroupController.m"
+            timestampString = "527150143.356567"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "339"
+            endingLineNumber = "339"
+            landmarkName = "-setupUI"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[DSCardGroupController setupUI]"
+                  moduleName = "CarWashing"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Test/CarWashing/Home/DSCardGroupController.m"
+                  timestampString = "527151484.029971"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "340"
+                  endingLineNumber = "340"
+                  offsetFromSymbolStart = "843">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__32-[DSCardGroupController setupUI]_block_invoke.264"
+                  moduleName = "CarWashing"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Test/CarWashing/Home/DSCardGroupController.m"
+                  timestampString = "527151484.031279"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "340"
+                  endingLineNumber = "340"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CarWashing/Find/DSCarClubDetailController.m"
+            timestampString = "527151484.220648"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "942"
+            endingLineNumber = "942"
+            landmarkName = "-downGoodButtonClick:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

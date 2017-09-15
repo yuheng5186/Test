@@ -32,6 +32,7 @@
 //@property (nonatomic, weak) DiscountCategoryView *categoryView;
 @property (nonatomic, weak) UITextField *activateTF;
 @property (nonatomic, weak) UIButton *activateBtn;
+@property (nonatomic, weak) UIView *titleView;
 @property (nonatomic, weak) UITableView *rechargeView;
 @property (nonatomic)NSInteger page;
 @property (nonatomic, strong) NSMutableArray *CardbagData;
@@ -325,9 +326,16 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     //    [self addCardChildViewControllers];
     
     
-    UIView *titleView                  = [UIUtil drawLineInView:self.view frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*60/667) color:[UIColor redColor]];
-    titleView.top                      = 64;
-    
+    UIView *titleView                  = [UIUtil drawLineInView:self.view frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*60/667) color:[UIColor whiteColor]];
+//    titleView.top                      = 64;
+    self.titleView=titleView;
+    [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).mas_offset(Main_Screen_Width*64/375);
+       make.left.equalTo(self.view);
+        make.width.equalTo(self.view);
+        make.height.mas_equalTo(Main_Screen_Height*60/667);
+        
+    }];
     
     [self.activateTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(titleView).mas_offset(Main_Screen_Width*10/375);
