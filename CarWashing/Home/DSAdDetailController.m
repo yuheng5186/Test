@@ -25,7 +25,7 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"广告详情"];
+//    [self drawTitle:@"广告详情"];
     [self drawRightImageButton:@"fenxiang" action:@selector(shareButtonClick:)];
 }
 
@@ -157,6 +157,10 @@
     [str appendString:@"var content = document.getElementById('wrap');"];
     [str appendString:@"content.style.paddingTop = '0px';"];
     [webView stringByEvaluatingJavaScriptFromString:str];
+    
+    NSString *title = [webView stringByEvaluatingJavaScriptFromString: @"document.title"];
+    
+    [self drawTitle: title];
     
 }
 
