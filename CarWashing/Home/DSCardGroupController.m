@@ -89,10 +89,11 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
     if (!_rechargeView) {
         
-        UITableView *rechargeView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        UITableView *rechargeView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _rechargeView = rechargeView;
         _rechargeView.emptyDataSetSource=self;
         _rechargeView.emptyDataSetDelegate=self;
+        _rechargeView.tableHeaderView   = [UIView new];
         _rechargeView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
         [self.view addSubview:_rechargeView];
     }
@@ -330,7 +331,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 //    titleView.top                      = 64;
     self.titleView=titleView;
     [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).mas_offset(Main_Screen_Width*64/375);
+        make.top.equalTo(self.view).mas_offset(64);
        make.left.equalTo(self.view);
         make.width.equalTo(self.view);
         make.height.mas_equalTo(Main_Screen_Height*60/667);
@@ -353,7 +354,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
     
     [self.rechargeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleView.mas_bottom).mas_offset(-Main_Screen_Height*10/667);
+        make.top.equalTo(titleView.mas_bottom).mas_offset(0);
         make.left.equalTo(self.view).mas_offset(Main_Screen_Width*22.5/375);
         make.right.equalTo(self.view).mas_offset(-Main_Screen_Width*22.5/375);
         make.height.mas_equalTo(self.view.height-Main_Screen_Height*60/667-Main_Screen_Height*64/667);
@@ -499,12 +500,12 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 0.01;
+    return Main_Screen_Height*22.5/667;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return Main_Screen_Height*22.5/667;
+    return Main_Screen_Height*0/667;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
