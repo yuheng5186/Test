@@ -57,7 +57,8 @@ static NSString *id_cancelCell = @"id_cancelCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(fabiaoboupdateOnclick) name:@"fabiaoboupdate" object:nil];
     self.allOrderListView.delegate = self;
     self.allOrderListView.dataSource = self;
     self.allOrderListView.emptyDataSetSource=self;
@@ -73,7 +74,10 @@ static NSString *id_cancelCell = @"id_cancelCell";
     
      
 }
+-(void)fabiaoboupdateOnclick{
+    [self.allOrderListView reloadData];
 
+}
 -(void)setupRefresh
 {
     self.allOrderListView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{

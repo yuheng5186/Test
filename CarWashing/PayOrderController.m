@@ -55,7 +55,8 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(goBack) name:@"paysuccess" object:nil];
     self.payOrderView.delegate = self;
     self.payOrderView.dataSource = self;
     
@@ -70,7 +71,12 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
     [self setupRefresh];
     
 }
-
+#pragma mark-支付成功回调
+-(void)goBack{
+   
+    [self.payOrderView reloadData];
+    
+}
 -(void)setupRefresh
 {
     self.payOrderView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{

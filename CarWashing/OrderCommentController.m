@@ -186,8 +186,8 @@
             NSLog(@"%@",dict);
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
-                //            NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];
-                //            [[NSNotificationCenter defaultCenter]postNotification:notice];
+                            NSNotification * notice = [NSNotification notificationWithName:@"fabiaoboupdate" object:nil userInfo:nil];
+                            [[NSNotificationCenter defaultCenter]postNotification:notice];
                 
                 
                 __weak typeof (self)weakSelf = self;
