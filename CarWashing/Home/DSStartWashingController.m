@@ -389,9 +389,11 @@
             UIImageView *img = [[UIImageView alloc] init];
             img.frame = CGRectMake(Main_Screen_Width * (i + 1), 0, Main_Screen_Width*150/375, Main_Screen_Height*150/667);
 //            [img sd_setImageWithURL:[NSURL URLWithString:arr[i]]];
-            [img setImage:arr[i]];
+             img.tag = i;
+            [self loadGifWithImageView:img andimagestr:[NSString stringWithFormat:@"b%d",i+1]];
+//            [img setImage:arr[i]];
 
-            img.tag = i;
+           
             [_ADScroll addSubview:img];
             
         }
@@ -449,6 +451,15 @@
     
     [self gifPlay6];
         
+}
+
+#pragma mark - SDWebImage内部解析gif数据
+- (void)loadGifWithImageView:(UIImageView *)myImgView andimagestr:(NSString *)imgestr
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:imgestr ofType:@"gif"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    UIImage *image = [UIImage sd_animatedGIFWithData:data];
+    myImgView.image = image;
 }
     
 -(void)gifPlay6  {
