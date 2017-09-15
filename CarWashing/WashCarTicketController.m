@@ -170,62 +170,85 @@
     }
     else
     {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy-MM-dd"];
-        NSDate *datenow = [NSDate date];
-        NSDate *newDate = [datenow dateByAddingTimeInterval:60 * 60 * 24 * self.card.ExpiredDay];
+        NSString *scordstr= [NSString stringWithFormat:@"-%ld积分",self.card.Integralnum];
+    // 创建对象.
+    NSString *stringForColor = @"red";
+    NSMutableAttributedString *mAttStri = [[NSMutableAttributedString alloc] initWithString:scordstr];
+    //
+    NSRange range = [scordstr rangeOfString:stringForColor];
+    
+    [mAttStri addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:range];
+    
+   
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"是否确认兑换" message:scordstr preferredStyle:UIAlertControllerStyleAlert];
         
-        
-        NSDictionary *mulDic = @{
-                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                 @"ConfigCode":[NSString stringWithFormat:@"%ld",self.card.ConfigCode],
-                                 @"UseLevel":@1,
-                                 @"GetCardType":[NSString stringWithFormat:@"%ld",self.card.GetCardType],
-                                 @"Area":self.card.Area,
-                                 @"CardCount":[NSString stringWithFormat:@"%ld",self.card.CardCount],
-                                 @"CardName":self.card.CardName,
-                                 @"CardPrice":[NSString stringWithFormat:@"%@",self.card.CardPrice],
-                                 @"CardType":[NSString stringWithFormat:@"%ld",self.card.CardType],
-                                 @"Description":self.card.Description,
-                                 @"ExpStartDates":[NSString stringWithFormat:@"%@",[formatter stringFromDate:datenow]],
-                                 @"ExpEndDates":[NSString stringWithFormat:@"%@",[formatter stringFromDate:newDate]],
-                                 @"Integralnum": [NSString stringWithFormat:@"%ld",self.card.Integralnum],
-                                 };
-        
-        
-        NSLog(@"%@",mulDic);
-        
-        NSDictionary *params = @{
-                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                                 };
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/ReceiveCardInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
-            
-            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-            {
-                
-                [self.view showInfo:@"兑换成功" autoHidden:YES interval:2];
-                
-                
-                APPDELEGATE.currentUser.UserScore = APPDELEGATE.currentUser.UserScore - self.card.Integralnum;
-                
-                [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
-                
-                
-                NSNotification * notice = [NSNotification notificationWithName:@"updatecard" object:nil userInfo:nil];
-                [[NSNotificationCenter defaultCenter]postNotification:notice];
-                
-                
-                
-            }
-            else
-            {
-                [self.view showInfo:@"兑换失败" autoHidden:YES interval:2];
-            }
-        } fail:^(NSError *error) {
-            [self.view showInfo:@"兑换失败" autoHidden:YES interval:2];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
         }];
+        [alertController addAction:cancelAction];
+        
+        UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"yyyy-MM-dd"];
+            NSDate *datenow = [NSDate date];
+            NSDate *newDate = [datenow dateByAddingTimeInterval:60 * 60 * 24 * self.card.ExpiredDay];
+            
+            
+            NSDictionary *mulDic = @{
+                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                     @"ConfigCode":[NSString stringWithFormat:@"%ld",self.card.ConfigCode],
+                                     @"UseLevel":@1,
+                                     @"GetCardType":[NSString stringWithFormat:@"%ld",self.card.GetCardType],
+                                     @"Area":self.card.Area,
+                                     @"CardCount":[NSString stringWithFormat:@"%ld",self.card.CardCount],
+                                     @"CardName":self.card.CardName,
+                                     @"CardPrice":[NSString stringWithFormat:@"%@",self.card.CardPrice],
+                                     @"CardType":[NSString stringWithFormat:@"%ld",self.card.CardType],
+                                     @"Description":self.card.Description,
+                                     @"ExpStartDates":[NSString stringWithFormat:@"%@",[formatter stringFromDate:datenow]],
+                                     @"ExpEndDates":[NSString stringWithFormat:@"%@",[formatter stringFromDate:newDate]],
+                                     @"Integralnum": [NSString stringWithFormat:@"%ld",self.card.Integralnum],
+                                     };
+            
+            
+            NSLog(@"%@",mulDic);
+            
+            NSDictionary *params = @{
+                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                     };
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/ReceiveCardInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                
+                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                {
+                    
+                                    [self.view showInfo:@"兑换成功" autoHidden:YES interval:2];
+                    
+                    APPDELEGATE.currentUser.UserScore = APPDELEGATE.currentUser.UserScore - self.card.Integralnum;
+                    
+                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
+                    
+                    
+                    NSNotification * notice = [NSNotification notificationWithName:@"updatecard" object:nil userInfo:nil];
+                    [[NSNotificationCenter defaultCenter]postNotification:notice];
+                    
+                    
+                    
+                }
+                else
+                {
+                    [self.view showInfo:@"兑换失败" autoHidden:YES interval:2];
+                }
+            } fail:^(NSError *error) {
+                [self.view showInfo:@"兑换失败" autoHidden:YES interval:2];
+                
+            }];
+            
+        }];
+        [alertController addAction:OKAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+       
 
     }
     

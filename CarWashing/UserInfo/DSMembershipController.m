@@ -325,7 +325,6 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     return 1;
 }
 
@@ -349,7 +348,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     {
         changeCell.backImgV.image = [UIImage imageNamed:@"qw_nianka"];
     }
-    
+    changeCell.introLab.text=[NSString stringWithFormat:@"免费扫码洗车%ld次",newcard.CardCount];
     changeCell.nameLab.text = newcard.CardName;
     changeCell.scoreLab.text = [NSString stringWithFormat:@"%ld积分",newcard.Integralnum];
     

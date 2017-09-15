@@ -16,7 +16,7 @@
 #import "AFNetworkingTool.h"
 #import "LCMD5Tool.h"
 
-#import "AllOrderController.h"
+#import "DSOrderController.h"
 
 @interface BusinessPayController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -67,9 +67,9 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     [alertController addAction:cancelAction];
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        AllOrderController *all=[[AllOrderController alloc]init];
-        all.hidesBottomBarWhenPushed            = YES;
-        [self.navigationController pushViewController:all animated:YES];
+        DSOrderController *orderVC              = [[DSOrderController alloc]init];
+        orderVC.hidesBottomBarWhenPushed        = YES;
+        [self.navigationController pushViewController:orderVC animated:YES];
         
     
     }];

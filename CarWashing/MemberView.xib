@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,6 +24,10 @@
                                 <constraint firstAttribute="width" constant="52" id="0UK-zs-7Zg"/>
                                 <constraint firstAttribute="height" constant="52" id="daC-P2-AIB"/>
                             </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="baiyin" translatesAutoresizingMaskIntoConstraints="NO" id="dxD-QE-czf">
+                            <rect key="frame" x="54" y="40" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13000000000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZU9-dr-hhs">
                             <rect key="frame" x="90" y="30" width="99" height="18"/>
@@ -80,7 +84,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Da5-xF-kll">
-                            <rect key="frame" x="295" y="12.5" width="60" height="20"/>
+                            <rect key="frame" x="295" y="13" width="60" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="2RQ-Mv-JIW"/>
                                 <constraint firstAttribute="height" constant="20" id="ACM-wd-pFp"/>
@@ -160,6 +164,7 @@
         </view>
     </objects>
     <resources>
+        <image name="baiyin" width="25" height="25"/>
         <image name="huiyuandianjitiaozhuan" width="13" height="13"/>
         <image name="huiyuantou" width="80" height="80"/>
     </resources>
