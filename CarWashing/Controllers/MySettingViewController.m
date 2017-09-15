@@ -114,7 +114,7 @@
     if(APPDELEGATE.currentUser.userImagePath.length > 0)
     {
         NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
-        [self.editButton.imageView sd_setImageWithURL:ImageURL placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
+        [self.editButton.imageView sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
         
         
     }

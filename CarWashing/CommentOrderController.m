@@ -55,7 +55,8 @@ static NSString *id_successPayCell = @"id_successPayCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(fabiaoboupdateOnclick) name:@"fabiaoboupdate" object:nil];
     self.commentOrderView.delegate = self;
     self.commentOrderView.dataSource = self;
     self.commentOrderView.emptyDataSetSource=self;
@@ -70,6 +71,10 @@ static NSString *id_successPayCell = @"id_successPayCell";
     
 }
 
+-(void)fabiaoboupdateOnclick{
+    [self.commentOrderView reloadData];
+    
+}
 -(void)setupRefresh
 {
     self.commentOrderView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
