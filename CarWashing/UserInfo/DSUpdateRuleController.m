@@ -35,7 +35,8 @@
     NSURLRequest* request           = [NSURLRequest requestWithURL: url];
     
     [webView loadRequest:request];
-    
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+
     webView.scrollView.contentInset = UIEdgeInsetsMake (0.0f, 0.0f, 80.0f, 0.0f);
 }
 
