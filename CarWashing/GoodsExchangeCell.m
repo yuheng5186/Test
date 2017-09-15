@@ -47,7 +47,7 @@
     UILabel *introLab = [[UILabel alloc] init];
     _introLab = introLab;
     //introLab.textColor = [UIColor colorFromHex:@"#ffffff"];
-    introLab.text = @"商家洗车自动抵扣";
+    introLab.text = @"免费扫码洗车次";
     introLab.textColor = [UIColor colorFromHex:@"#ffffff"];
     introLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [backImgV addSubview:introLab];
