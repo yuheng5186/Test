@@ -57,6 +57,7 @@
     UILabel         *titleNameLabel;
     GCCycleScrollView *cycleScroll;
     UIView          *titleView;
+    UIImageView *newManImageView;
 }
 
 /** 选择的结果*/
@@ -126,7 +127,8 @@
 //}
 
 - (void) createSubView {
-    
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(goBack) name:@"paysuccess" object:nil];
     [self createNavTitleView];
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStyleGrouped];
@@ -154,7 +156,9 @@
     
     
 }
-
+-(void)goBack{
+    [self setupRefresh];
+}
 -(void)setupRefresh
 {
     self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -544,6 +548,22 @@
     serviceNameLabel.top               = serviceImageView.bottom +Main_Screen_Height*12/667;
     
     
+    if (self.newrc.recList.count==0) {
+        newManImageView      = [UIUtil drawCustomImgViewInView:self.tableView frame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*75/667) imageName:@"banka_banner"];
+        newManImageView.centerX           = headerView.centerX;
+        newManImageView.top               = serviceView.bottom;
+        newManImageView.userInteractionEnabled=YES;
+        newManImageView.contentMode=UIViewContentModeScaleAspectFill;
+        newManImageView.image=[UIImage imageNamed:@"banka_banner"];
+        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
+        [newManImageView addGestureRecognizer:tap];
+        headerView.height   = serviceView.bottom +Main_Screen_Height*10/667;
+    }
+//    else{
+//        newManImageView.hidden=YES;
+//        newManImageView.frame=CGRectMake(0, 0, 0, 0);
+//    }
+    
     
 //    UIImage *newManImage                 = [UIImage imageNamed:@"GO"];
 //    UIImageView *newManImageView      = [UIUtil drawCustomImgViewInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*75/667) imageName:@"GO"];
@@ -556,6 +576,7 @@
 //    activityImageView.top               = newManImageView.bottom+Main_Screen_Height*0/667;
     
     headerView.height   = carClubView.bottom +Main_Screen_Height*10/667;
+    
 
 
 }
@@ -686,34 +707,85 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section==self.newrc.recList.count-1) {
-         return 40.1f;
+//    if (section==self.newrc.recList.count-1) {
+//         return 40.1f;
+//    }else{
+//        return 0.01;
+//    }
+    if (self.newrc.recList.count==0||self.newrc.recList.count<2) {
+        if (section==self.newrc.recList.count-1) {
+            return Main_Screen_Height*110/667;
+        }else{
+            return 0.01;
+            
+        }
     }else{
-        return 0.01;
+       
+            if (section==1) {
+                return Main_Screen_Height*110/667;
+            }else{
+                return 0.01;
+                
+            }
+            
+               
+        
     }
-    
    
 }
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-     if (section==self.newrc.recList.count-1) {
-         
-    UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 40)];
-    footerview.textColor         = [UIColor colorFromHex:@"#999999"];
-    footerview.textAlignment=NSTextAlignmentCenter;
-    footerview.text=@"没有更多啦!";
-    return footerview;
-     }else{
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
+    
+}
 
-         return [UILabel new];
-     
-     }
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//     if (section==self.newrc.recList.count-1) {
+//         
+//    UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 40)];
+//    footerview.textColor         = [UIColor colorFromHex:@"#999999"];
+//    footerview.textAlignment=NSTextAlignmentCenter;
+//    footerview.text=@"没有更多啦!";
+//    return footerview;
+//     }else{
+//
+//         return [UILabel new];
+//     
+//     }
+    UIImageView *imageview=[UIImageView new];
+    imageview.userInteractionEnabled=YES;
+    imageview.contentMode=UIViewContentModeScaleAspectFill;
+    imageview.image=[UIImage imageNamed:@"banka_banner"];
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
+    [imageview addGestureRecognizer:tap];
+    if (self.newrc.recList.count==0||self.newrc.recList.count<2) {
+        if (section==self.newrc.recList.count-1) {
+            return imageview;
+        }else{
+            return [UILabel new];
+            
+        }
+    }else{
+        
+        if (section==1) {
+            return imageview;
+        }else{
+            return [UILabel new];
+            
+        }
+        
+        
+        
+    }
+   
     
 
-
 }
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+-(void)imageviewOclick{
+    self.tabBarController.selectedIndex = 3;
+    
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 
-    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -725,18 +797,10 @@
     }
     cell.backgroundColor    = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    if (self.newrc.recList.count==0) {
-//        UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*170/667)];
-//        imageview.userInteractionEnabled=YES;
-//        imageview.contentMode=UIViewContentModeScaleAspectFill;
-//        imageview.image=[UIImage imageNamed:@"banka_banner"];
-//        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
-//        [imageview addGestureRecognizer:tap];
-//        [cell.contentView addSubview:imageview];
-//    }else if(self.newrc.recList.count!=0&&self.newrc.recList.count<2){
-//
-//        
-//    }
+
+    if (self.newrc.recList.count>1) {
+        
+   
     Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil];
     NSLog(@"%@==%@",record,[self.newrc.recList objectAtIndex:indexPath.section]);
     NSString *imageString;
@@ -845,7 +909,7 @@
     getStringLabel.textColor         = [UIColor colorFromHex:@"#868686"];
     getStringLabel.centerX           = backgroundView.centerX;
     getStringLabel.centerY           = backgroundView.centerY;
-
+         }
     
     return cell;
 }
