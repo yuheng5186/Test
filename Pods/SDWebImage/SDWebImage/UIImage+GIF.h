@@ -19,6 +19,10 @@
 /**
  *  Checks if an UIImage instance is a GIF. Will use the `images` array
  */
+
++ (UIImage *)sd_animatedGIFNamed:(NSString *)name;
+
+
 - (BOOL)isGIF;
 
 @end
