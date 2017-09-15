@@ -565,6 +565,8 @@
   
     DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
     viewVC.urlstr=[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"Url"];
+#pragma <#arguments#>
+     viewVC.shareurlstr=[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"Url"];
     viewVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:viewVC animated:YES];
     
