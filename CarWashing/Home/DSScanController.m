@@ -127,6 +127,12 @@
     if (intString > 0 && intString < 240) {
         
         DSStartWashingController *start = [[DSStartWashingController alloc]init];
+        start.RemainCount   = [NSString stringWithFormat:@"%ld",(long)self.scan.RemainCount];
+        start.IntegralNum   = [NSString stringWithFormat:@"%ld",(long)self.scan.IntegralNum];
+        start.CardType      = [NSString stringWithFormat:@"%ld",self.scan.CardType];
+        start.CardName      = self.scan.CardName;
+        start.paynum=[NSString stringWithFormat:@"￥%@",self.scan.OriginalAmt];
+        start.second        = 240;
         start.hidesBottomBarWhenPushed            = YES;
         start.second                    = 240-intString;
         
@@ -342,6 +348,7 @@
                         payVC.RemainCount = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.RemainCount];
                         payVC.IntegralNum = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.IntegralNum];
                         payVC.CardType = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.CardType];
+                       
                         payVC.CardName = weakSelf.scan.CardName;
                         
                         [weakSelf.navigationController pushViewController:payVC animated:YES];
@@ -368,6 +375,7 @@
                         start.IntegralNum   = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.IntegralNum];
                         start.CardType      = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
                         start.CardName      = weakSelf.scan.CardName;
+                        start.paynum=[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt];
                         start.second        = 240;
 
                         [weakSelf.navigationController pushViewController:start animated:YES];

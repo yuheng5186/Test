@@ -72,7 +72,7 @@ static NSString *id_successPayCell = @"id_successPayCell";
 }
 
 -(void)fabiaoboupdateOnclick{
-    [self.commentOrderView reloadData];
+     [self setupRefresh];
     
 }
 -(void)setupRefresh

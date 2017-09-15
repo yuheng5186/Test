@@ -164,6 +164,7 @@
     if (intString > 0 && intString < 240) {
         
         DSStartWashingController *start = [[DSStartWashingController alloc]init];
+        
         start.hidesBottomBarWhenPushed            = YES;
         start.second                    = 240-intString;
         
