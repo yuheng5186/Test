@@ -31,7 +31,8 @@
     self.activityImageView.image = [UIImage imageNamed:name];
     self.activityTitleLabel.text    = model.titleName;
     self.activityTimeLabel.text     = model.sayTime;
-    
+    self.sayNumberLabel.text=model.sayNumber;
+    self.goodNumberLabel.text=model.goodNumber;
 }
 #pragma mark - 懒加载
 - (UIImageView *)activityImageView{

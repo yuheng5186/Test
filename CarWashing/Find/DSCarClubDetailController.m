@@ -280,7 +280,7 @@
     [string removeAttribute:NSParagraphStyleAttributeName range: NSMakeRange(0, string.length)];
     textContentLabel.attributedText = string;
 //    textContentLabel.text                     = newsDetail.Comment;
-    textContentLabel.adjustsFontSizeToFitWidth = YES;
+//    textContentLabel.adjustsFontSizeToFitWidth = YES;
     textContentLabel.numberOfLines            = 0;
     self.textContentLabel                     = textContentLabel;
     [backgroudView addSubview:textContentLabel];
@@ -491,8 +491,8 @@
     .widthIs(25*Main_Screen_Height/667)
     .heightIs(20*Main_Screen_Height/667);
     
-    self.goodNumberLabel.text = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount];
-    self.sayNumberLab.text = [NSString stringWithFormat:@"评论(%ld)",newsDetail.CommentCount];
+    self.goodNumberLabel.text = [NSString stringWithFormat:@"共有%ld人点赞过",self.GiveCount];
+    self.sayNumberLab.text = [NSString stringWithFormat:@"评论(%ld)",self.CommentCount];
     if(newsDetail.IsGive == 1)
     {
         [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
@@ -511,22 +511,22 @@
         self.downGoodButton.selected = NO;
     }
     
-    if(newsDetail.CommentCount > 99)
+    if(self.CommentCount > 99)
     {
         self.sayShowLabel.text = @"99+";
     }
     else
     {
-        self.sayShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.CommentCount];
+        self.sayShowLabel.text = [NSString stringWithFormat:@"%ld",self.CommentCount];
     }
     
-    if(newsDetail.GiveCount>99)
+    if(self.GiveCount>99)
     {
         self.goodShowLabel.text = @"99+";
     }
     else
     {
-        self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount];
+        self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount<0?0:self.GiveCount];
     }
     
     
@@ -877,16 +877,16 @@
                 [self.downGoodButton setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
 //                self.goodShowLabel.text                     = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount+1];
                 
-                if(newsDetail.GiveCount>99)
+                if(self.GiveCount>99)
                 {
                     self.goodShowLabel.text = @"99+";
                 }else
                 {
-                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount+1];
+                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount+1];
                 }
                 
-                newsDetail.GiveCount++;
-                self.goodNumberLabel.text = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount];
+                self.GiveCount++;
+                self.goodNumberLabel.text = [NSString stringWithFormat:@"共有%ld人点赞过",self.GiveCount];
                 [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
                 self.goodButton.selected = YES;
             }
@@ -927,21 +927,21 @@
                 
                 [self.view showInfo:@"取消点赞成功" autoHidden:YES interval:2];
                 
-                if(newsDetail.GiveCount>99)
+                if(self.GiveCount>99)
                 {
                     self.goodShowLabel.text = @"99+";
                 }else
                 {
-                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount-1];
+                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount-1<0?0:self.GiveCount-1];
                 }
                 
                 
 //                self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount-1];
                 [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
                
-                newsDetail.GiveCount--;
+                self.GiveCount--;
                 [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
-                self.goodNumberLabel.text                     = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount];
+                self.goodNumberLabel.text                     = [NSString stringWithFormat:@"共有%ld人点赞过",self.GiveCount<0?0:self.GiveCount];
                 self.goodButton.selected = NO;
             }
             else
@@ -991,15 +991,15 @@
                 [self.view showInfo:@"点赞成功" autoHidden:YES interval:2];
                 
                 [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
-                self.goodNumberLabel.text                     = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount + 1];
-                newsDetail.GiveCount++;
+                self.goodNumberLabel.text                     = [NSString stringWithFormat:@"共有%ld人点赞过",self.GiveCount + 1];
+                self.GiveCount++;
                 
-                if(newsDetail.GiveCount>99)
+                if(self.GiveCount>99)
                 {
                     self.goodShowLabel.text = @"99+";
                 }else
                 {
-                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount];
+                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount];
                 }
                 
                 
@@ -1049,15 +1049,15 @@
                 [self.view showInfo:@"取消点赞成功" autoHidden:YES interval:2];
                 
                 [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
-                self.goodNumberLabel.text                     = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount - 1];
-                newsDetail.GiveCount--;
+                self.goodNumberLabel.text                     = [NSString stringWithFormat:@"共有%ld人点赞过",self.GiveCount-1<0?0:self.GiveCount-1];
+                self.GiveCount--;
                 
-                if(newsDetail.GiveCount>99)
+                if(self.GiveCount>99)
                 {
                     self.goodShowLabel.text = @"99+";
                 }else
                 {
-                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount];
+                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount];
                 }
                 
                 

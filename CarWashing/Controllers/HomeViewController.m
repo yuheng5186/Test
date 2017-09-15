@@ -562,11 +562,42 @@
 - (void)cycleScrollView:(GCCycleScrollView*)cycleScrollView didSelectItemAtRow:(NSInteger)row{
     NSLog(@"dianji =%ld",(long)row);
     
-  
+    //        活动类型1将参数【2个参数】拼接到Url（活动详情的后面）
+    //        ,类型2将参数【1个参数】拼接到Url（活动详情的后面）id
+    //        类型 3将参数【一个参数】拼接到InviteUrl(分享链接的后面)id
+//    1.2 获取一个随机数范围在：[10,100]，包括100，包括100
+//    2、  获取一个随机数范围在：[500,1000），包括500，包括1000
+    
+//    int y = (arc4random() % 11) + 10;
+//    int num = (arc4random() % 100);
+//    NSLog(@"%d==%d",num,y);
     DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
-    viewVC.urlstr=[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"Url"];
-#pragma <#arguments#>
-     viewVC.shareurlstr=[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"Url"];
+//    viewVC.urlstr=[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"Url"];
+    NSInteger typetag=[[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"AactivityType"] integerValue];
+    NSString *OnetypeUrl=[NSString stringWithFormat:@"%@?ID=%@%d&AactivityCode=%@",[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"Url"],[UdStorage getObjectforKey:Userid],(arc4random() % 11) + 10,[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"AactivityCode"]];
+    NSString *TwotypeUrl=[NSString stringWithFormat:@"%@?ID=%@%d",[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"Url"],[UdStorage getObjectforKey:Userid],(arc4random() % 11) + 10];
+     NSString *ThereSharetypeUrl=[NSString stringWithFormat:@"%@?ID=%@%d",[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"InviteUrl"],[UdStorage getObjectforKey:Userid],(arc4random() % 11) + 10];
+    
+    switch (typetag) {
+        case 0:
+            viewVC.urlstr=[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"Url"];
+            viewVC.shareurlstr=[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"InviteUrl"];
+            break;
+        case 1:
+            viewVC.shareurlstr=[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"InviteUrl"];
+            viewVC.urlstr=OnetypeUrl;
+            break;
+        case 2:
+            viewVC.shareurlstr=[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"InviteUrl"];
+            viewVC.urlstr=TwotypeUrl;
+            break;
+        case 3:
+            viewVC.urlstr=[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"Url"];
+            viewVC.shareurlstr=ThereSharetypeUrl;
+            break;
+        default:
+            break;
+    }
     viewVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:viewVC animated:YES];
     

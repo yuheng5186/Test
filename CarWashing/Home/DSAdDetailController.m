@@ -38,7 +38,9 @@
         self.activityView.numberOfButtonPerLine = 6;
         
         ButtonView *bv ;
-        
+//        活动类型1将参数【2个参数】拼接到Url（活动详情的后面）
+//        ,类型2将参数【1个参数】拼接到Url（活动详情的后面）
+//        类型 3将参数【一个参数】拼接到InviteUrl(分享链接的后面)
         bv = [[ButtonView alloc]initWithText:@"微信" image:[UIImage imageNamed:@"btn_share_weixin"] handler:^(ButtonView *buttonView){
             NSLog(@"点击微信");
             NSDictionary *mulDic = @{
@@ -67,7 +69,7 @@
                     
                     //创建多媒体对象
                     WXWebpageObject *webObj = [WXWebpageObject object];
-                    webObj.webpageUrl = [NSString stringWithFormat:@"%@?%@",self.shareurlstr,@"2354455"];//分享链接
+                    webObj.webpageUrl = [NSString stringWithFormat:@"%@",self.shareurlstr];//分享链接
                     
                     //完成发送对象实例
                     urlMessage.mediaObject = webObj;
