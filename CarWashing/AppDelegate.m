@@ -116,7 +116,9 @@
 
     
     
-    
+    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"" forKey:@"setTime"];
+    [defaults synchronize];
     
     
 //    LoginViewController *loginControl = [[LoginViewController alloc]init];
