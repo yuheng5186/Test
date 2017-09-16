@@ -41,7 +41,7 @@
     NSArray * a = self.navigationController.viewControllers;
     NSLog(@"%@",a);
     NSLog(@"%ld",self.endstr);
-    if (self.endstr== 0) {
+    if (self.endstr< 0) {
     
         self.tabBarController.selectedIndex = 0;
         [self.navigationController popToRootViewControllerAnimated:YES];
