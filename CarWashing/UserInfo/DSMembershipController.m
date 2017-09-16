@@ -224,14 +224,34 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
             [memberShipView.UserImgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,_MembershipUserScore[@"Headimg"]]] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
             
             memberShipView.phoneLabel.text = [NSString stringWithFormat:@"%@",_MembershipUserScore[@"Name"]];
-            
             [memberShipView.ScoreBtn setTitle:[NSString stringWithFormat:@"%@分",_MembershipUserScore[@"UserScore"]] forState:UIControlStateNormal];
             
              NSArray *arr2 = @[@"",@"普通会员",@"白银会员",@"黄金会员",@"铂金会员",@"钻石会员",@"黑钻会员"];
             
             NSUInteger num = [[NSString stringWithFormat:@"%@",_MembershipUserScore[@"Level_id"]] integerValue];
             
-           
+            if (num == 1) {
+                [memberShipView.signLabel setImage:[UIImage imageNamed:@"putong"]];
+
+            }else if (num == 2){
+                [memberShipView.signLabel setImage:[UIImage imageNamed:@"baiyin"]];
+
+            }else if (num == 3){
+                [memberShipView.signLabel setImage:[UIImage imageNamed:@"huangjin"]];
+                
+            }else if (num == 4){
+                [memberShipView.signLabel setImage:[UIImage imageNamed:@"bojin"]];
+                
+            }else if (num == 5){
+                [memberShipView.signLabel setImage:[UIImage imageNamed:@"zuanshi"]];
+                
+            }else if (num == 6){
+                [memberShipView.signLabel setImage:[UIImage imageNamed:@"heizuan"]];
+                
+            }else {
+                [memberShipView.signLabel setImage:[UIImage imageNamed:@"putong"]];
+                
+            }
             
             [memberShipView.LevelBtn setTitle:[arr2 objectAtIndex:num] forState:UIControlStateNormal];
             
