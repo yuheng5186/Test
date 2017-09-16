@@ -41,9 +41,10 @@
 }
 - (void) rightButtonClick:(id)sender {
     
-    if (self.phoneFieldText.text.length < 12) {
+    if (self.phoneFieldText.text.length >0 && self.merchantFieldText.text.length > 0 && self.addressFieldText.text.length > 0) {
+    if ([LCMD5Tool valiMobile:self.phoneFieldText.text]) {
         
-        if (self.phoneFieldText.text.length >0 && self.merchantFieldText.text.length > 0 && self.addressFieldText.text.length > 0) {
+        
             
             HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             HUD.removeFromSuperViewOnHide =YES;
@@ -97,13 +98,13 @@
             
         }else {
             
-            [self.view showInfo:@"请填写完整信息再提交" autoHidden:YES];
             
+            [self.view showInfo:@"联系电话不存在，请检查是否正确！" autoHidden:YES];
         }
         
     }else {
     
-        [self.view showInfo:@"联系电话位数有误，请检查是否正确！" autoHidden:YES];
+        [self.view showInfo:@"请填写完整信息再提交" autoHidden:YES];
 
     }
     

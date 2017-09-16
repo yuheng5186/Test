@@ -97,12 +97,44 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CarWashing/Home/DSStartWashingController.m"
-            timestampString = "527260440.610928"
+            filePath = "CarWashing/Controllers/MySettingViewController.m"
+            timestampString = "527265760.342092"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "695"
+            endingLineNumber = "695"
+            landmarkName = "-noticeupdateUserheadimg:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CarWashing/Controllers/MySettingViewController.m"
+            timestampString = "527265760.342092"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "-createSubView"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CarWashing/Home/DSStartWashingController.m"
+            timestampString = "527266180.491554"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "-backButtonClick:"
             landmarkType = "7">
          </BreakpointContent>
@@ -114,11 +146,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CarWashing/Home/DSStartWashingController.m"
-            timestampString = "527261471.760406"
+            timestampString = "527266182.640685"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "-backButtonClick:"
             landmarkType = "7">
          </BreakpointContent>
@@ -130,12 +162,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CarWashing/Home/DSStartWashingController.m"
-            timestampString = "527263560.854927"
+            timestampString = "527266184.136778"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "-backButtonClick:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CarWashing/Home/DSAddMerchantController.m"
+            timestampString = "527268366.246149"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "-rightButtonClick:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

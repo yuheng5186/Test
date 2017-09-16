@@ -153,7 +153,7 @@
 }
 #pragma mark-获取验证码
 - (void) getVeriifyBtnClick:(id)sender {
-    if (self.phoneNumberText.text.length == 11) {
+    if ([LCMD5Tool valiMobile:self.phoneNumberText.text]) {
         
         
         [self startTimer];
@@ -182,7 +182,7 @@
         
     }else
     {
-        [self.view showInfo:@"请输入正确的11位手机号码" autoHidden:YES];
+        [self.view showInfo:@"请输入正确的手机号码" autoHidden:YES];
         
     }
 

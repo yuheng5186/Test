@@ -1033,7 +1033,7 @@
     NSString *str2 = [[NSString stringWithFormat:@"%ld",(long)gotime] stringByReplacingOccurrencesOfString:@"-" withString:@""];
     intString = [str2 intValue];
     
-    if (intString > 0 && intString < 240) {
+    if (intString > 0 && intString < 20) {
         
         DSStartWashingController *start = [[DSStartWashingController alloc]init];
 //        [UdStorage storageObject:dateString forKey:@"setTime"];
@@ -1047,7 +1047,7 @@
         start.CardName =[UdStorage getObjectforKey:@"CardName"];
 //        start.second        = 240;
         start.hidesBottomBarWhenPushed            = YES;
-        start.second                    = 240-intString;
+        start.second                    = 20-intString;
         
         [self.navigationController pushViewController:start animated:YES];
 //        [_session stopRunning];

@@ -51,7 +51,7 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UILabel *userNameLabel;
-@property (nonatomic, strong) UIButton  *editButton;
+@property (nonatomic, strong) UIImageView  *editButton;
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 
@@ -106,18 +106,18 @@
     
     
     
-    self.editButton           = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) iconName:@"huiyuantou" target:self action:@selector(editButtonClick:)];
+    self.editButton           =[UIUtil drawCustomImgViewInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) imageName:@"huiyuantou" ];
+//    [UIUtil   drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) iconName:@"huiyuantou" target:self action:@selector(editButtonClick:)];
     self.editButton.top                  = titleNameLabel.bottom +Main_Screen_Height*5/667;
     self.editButton.centerX              = titleNameLabel.centerX;
     self.editButton.layer.masksToBounds = YES;
     self.editButton.layer.cornerRadius = Main_Screen_Height*40/667;
-    if(APPDELEGATE.currentUser.userImagePath.length > 0)
-    {
-        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
-        [self.editButton.imageView sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
+  
+       NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
+        [self.editButton sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
         
         
-    }
+    
 
 
     UIImage *settingImage           = [UIImage imageNamed:@"shezhi"];
@@ -693,15 +693,8 @@
 //    NSURL *url=[NSURL URLWithString:ImageURL];
 //    [imageV sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"touxiang"]];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
-        NSURL *url=[NSURL URLWithString:ImageURL];
-        NSData *data=[NSData dataWithContentsOfURL:url];
-        UIImage *img=[UIImage imageWithData:data];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [self.editButton setImage:img forState:UIControlStateNormal];
-        });
-    });
+    NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
+    [self.editButton sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
 }
 
 

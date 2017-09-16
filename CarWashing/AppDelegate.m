@@ -211,18 +211,18 @@
         
         if([payResoult isEqualToString:@"0"])
         {
-            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"回调信息" message:@"分享成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+            
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
             [alertview show];
-        }
-        if([payResoult isEqualToString:@"-2"])
+        }else if([payResoult isEqualToString:@"-2"])
         {
-            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"回调信息" message:@"分享已取消" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享已取消" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
             [alertview show];
         }
         else
         {
             
-            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"回调信息" message:@"分享成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
             [alertview show];
             
         }

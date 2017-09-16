@@ -194,7 +194,7 @@
     [loginButton setTitle:@"" forState:UIControlStateNormal];
     loginButton.enabled = NO;
 
-    if (self.userMobileFieldText.text.length == 11) {
+    if ([LCMD5Tool valiMobile:self.userMobileFieldText.text]) {
         if (self.verifyFieldText.text.length == 4) {
     
             
@@ -212,9 +212,9 @@
                 if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                 {
                     
-    
+                  
                     APPDELEGATE.currentUser = [User getInstanceByDic:[dict objectForKey:@"JsonData"]];
-    
+                   
                     [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.Account_Id] forKey:@"Account_Id"];
                     [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.Level_id] forKey:@"Level_id"];
                     [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
@@ -260,7 +260,7 @@
         }
 
     }else {
-        [self.view showInfo:@"请输入正确的11位手机号码" autoHidden:YES];
+        [self.view showInfo:@"请输入正确的手机号码" autoHidden:YES];
         [_indicatorView stopAnimating];
         [loginButton setTitle:@"登录" forState:UIControlStateNormal];
         loginButton.enabled = YES;
@@ -397,32 +397,19 @@
 }
 - (void) getVeriifyByButtonClick:(id)sender {
     
-    if (self.userMobileFieldText.text.length == 11) {
+    if ([LCMD5Tool valiMobile:self.userMobileFieldText.text]) {
         
         
         [self startTimer];
         [self.view showInfo:@"验证码发送成功，请在手机上查收！" autoHidden:YES interval:2];
     
         NSDictionary *mulDic = @{@"Mobile":self.userMobileFieldText.text};
-//        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-//        manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
+
         NSDictionary *params = @{
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
-//        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil];
-//        NSMutableData *tempJsonData = [NSMutableData dataWithData:jsonData];
-//        [manager POST:@"http://192.168.3.101:8090/api/User/GetVerCode" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-//            NSLog(@"请求成功---%@", responseObject);
-//            NSString *jsonString;
-//            jsonString = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
-//            NSLog(@"请求成功string---%@", jsonString);
-//            NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-//            NSLog(@"请求成功---%@", dic);
-//        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//            NSLog(@"请求失败---%@", error);
-//        }];
+
 
         NSLog(@"%@",params);
         [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetVerCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
@@ -433,7 +420,7 @@
         
     }else
     {
-        [self.view showInfo:@"请输入正确的11位手机号码" autoHidden:YES];
+        [self.view showInfo:@"请输入正确的手机号码" autoHidden:YES];
 
     }
 }
