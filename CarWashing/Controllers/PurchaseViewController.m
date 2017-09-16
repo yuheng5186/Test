@@ -103,7 +103,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     _locationManager.delegate = self;
     
     
-    self.area = [UdStorage getObjectforKey:@"City"]==nil?@"青岛市":[UdStorage getObjectforKey:@"City"];
+    self.area = [UdStorage getObjectforKey:@"locationCity"]==nil?@"青岛市":[UdStorage getObjectforKey:@"locationCity"];
     UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#0161a1"]];
     upView.top                      = 0;
     
@@ -143,9 +143,10 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 
 -(void)getMyCardData
 {
+    
     NSDictionary *mulDic = @{
                              @"GetCardType":@1,
-                             @"Area":@"青岛市"
+                             @"Area":(self.locationButton.titleLabel.text.length==0?@"青岛市":self.locationButton.titleLabel.text)
                              };
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
