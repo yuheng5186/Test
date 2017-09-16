@@ -98,7 +98,12 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resumeAnimation) name:@"EnterForeground" object:nil];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
 
+    
+    [self resumeAnimation];
+    [_session startRunning];
+}
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -309,6 +314,7 @@
                     {
                         
                         
+                        
                         NSDate*date                     = [NSDate date];
                         NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
                         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -324,7 +330,7 @@
                         [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum] forKey:@"IntegralNum"];
                         [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.CardType] forKey:@"CardType"];
                         [UdStorage storageObject:weakSelf.scan.CardName forKey:@"CardName"];
-
+                        
                         DSStartWashingController *start = [[DSStartWashingController alloc]init];
                         start.hidesBottomBarWhenPushed            = YES;
                         
@@ -334,8 +340,10 @@
                         start.CardName      = weakSelf.scan.CardName;
                         start.paynum=[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt];
                         start.second        = 240;
-
+                        
                         [weakSelf.navigationController pushViewController:start animated:YES];
+                        
+                        
                         
                         
                     }
