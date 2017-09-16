@@ -98,55 +98,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resumeAnimation) name:@"EnterForeground" object:nil];
 }
 
--(void)viewWillAppear:(BOOL)animated{
 
-    
-    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
-    NSString    *stringTime     = [defaults objectForKey:@"setTime"];
-    
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *overdate = [dateFormatter dateFromString:stringTime];
-    NSTimeZone *zone1 = [NSTimeZone systemTimeZone];
-    NSInteger interva1 = [zone1 secondsFromGMTForDate: overdate];
-    NSDate*endDate = [overdate dateByAddingTimeInterval: interva1];
-    
-    //获取当前时间
-    NSDate*date = [NSDate date];
-    NSTimeZone*zone2 = [NSTimeZone systemTimeZone];
-    NSInteger interva2 = [zone2 secondsFromGMTForDate: date];
-    NSDate *currentDate = [date dateByAddingTimeInterval: interva2];
-    
-    NSInteger intString;
-    NSTimeInterval interval =[endDate timeIntervalSinceDate:currentDate];
-    NSInteger gotime = round(interval);
-    NSString *str2 = [[NSString stringWithFormat:@"%ld",(long)gotime] stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    intString = [str2 intValue];
-    
-    if (intString > 0 && intString < 240) {
-        
-        DSStartWashingController *start = [[DSStartWashingController alloc]init];
-        start.RemainCount   = [NSString stringWithFormat:@"%ld",(long)self.scan.RemainCount];
-        start.IntegralNum   = [NSString stringWithFormat:@"%ld",(long)self.scan.IntegralNum];
-        start.CardType      = [NSString stringWithFormat:@"%ld",self.scan.CardType];
-        start.CardName      = self.scan.CardName;
-        start.paynum=[NSString stringWithFormat:@"￥%@",self.scan.OriginalAmt];
-        start.second        = 240;
-        start.hidesBottomBarWhenPushed            = YES;
-        start.second                    = 240-intString;
-        
-        [self.navigationController pushViewController:start animated:YES];
-        [_session stopRunning];
-
-    }else {
-    
-        
-    }
-    
-    [self resumeAnimation];
-    [_session startRunning];
-}
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -367,6 +319,11 @@
                         [defaults setObject:dateString forKey:@"setTime"];
                         [defaults synchronize];
                         NSLog(@"setTime ==== %@",[defaults objectForKey:@"setTime"]);
+                        [UdStorage storageObject:[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt] forKey:@"Jprice"];
+                        [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount] forKey:@"RemainCount"];
+                        [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum] forKey:@"IntegralNum"];
+                        [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.CardType] forKey:@"CardType"];
+                        [UdStorage storageObject:weakSelf.scan.CardName forKey:@"CardName"];
 
                         DSStartWashingController *start = [[DSStartWashingController alloc]init];
                         start.hidesBottomBarWhenPushed            = YES;

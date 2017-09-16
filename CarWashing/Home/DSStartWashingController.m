@@ -12,7 +12,8 @@
 
 #import "UIImageView+WebCache.h"
 #import "UIImage+GIF.h"
-
+#import "HomeViewController.h"
+#import "DSScanController.h"
 @interface DSStartWashingController ()<UIScrollViewDelegate>
 {
     SXScrPageView *cycleScroll;
@@ -36,23 +37,42 @@
 
 }
 - (void) backButtonClick:(id)sender {
+
+   
+    // push将控制器压到栈中，栈是先进后出；pop是出栈：即将控制器从栈中取出。
     
-//    NSDate*date                     = [NSDate date];
-//    NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//    
-//    
-//    NSString *dateString        = [dateFormatter stringFromDate:date];
-//    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
-//    [defaults setObject:dateString forKey:@"setTime"];
-//    [defaults synchronize];
+    NSArray * a = self.navigationController.viewControllers;
     
+    NSMutableArray *arrController = [NSMutableArray arrayWithArray:a];
     
-    self.tabBarController.selectedIndex = 0;
+    NSInteger VcCount = arrController.count;
     
-    NSArray     *array  = self.navigationController.viewControllers;
-    NSArray *a = [NSArray arrayWithObject:array[0]];
-    self.navigationController.viewControllers = a;
+    //最后一个vc是自己，(-2)是倒数第二个是上一个控制器。
+    
+    UIViewController *lastVC = arrController[VcCount - 1];
+    if ([arrController[0] isKindOfClass:[DSScanController class]]) {
+        self.tabBarController.selectedIndex = 0;
+    }else{
+        // 返回到倒数第三个控制器
+    
+        if([lastVC isKindOfClass:[HomeViewController class]]) {
+        
+            [self.navigationController popViewControllerAnimated:YES];
+        
+        }
+    
+        else
+        {
+        
+            HomeViewController *earnVC = [[HomeViewController alloc]init];
+
+            [arrController replaceObjectAtIndex:(VcCount - 1) withObject:earnVC];
+            self.navigationController.viewControllers = arrController;
+        }
+    }
+
+    
+
 
 }
 - (void) dealloc
@@ -324,9 +344,9 @@
             downView.top                      = middleView.bottom +Main_Screen_Height*10/667;
             downView.centerX                  = Main_Screen_Width/2;
         
-            NSString   *strings            = self.CardName.length==0?@"支付方式":[NSString stringWithFormat:@"我的%@",self.CardName];
+            NSString   *strings            = self.CardName.length==0?@"支付金额":[NSString stringWithFormat:@"我的%@",self.CardName];
             UIFont     *Fonts              = [UIFont systemFontOfSize:15];
-            UILabel *washingLabels         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:Fonts text:strings isCenter:NO];
+            UILabel *washingLabels         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*20/667) font:Fonts text:strings isCenter:NO];
             washingLabels.text             = strings;
             washingLabels.textColor        = [UIColor colorFromHex:@"#4a4a4a"];
             washingLabels.textAlignment    = NSTextAlignmentCenter;

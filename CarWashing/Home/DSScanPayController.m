@@ -506,17 +506,15 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
     
     NSString *dateString        = [dateFormatter stringFromDate:date];
-    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:dateString forKey:@"setTime"];
-    [defaults synchronize];
-    NSLog(@"setTime ==== %@",[defaults objectForKey:@"setTime"]);
-
-    start.paynum=self.Jprice;
-    start.RemainCount = self.RemainCount;
-    start.IntegralNum = self.IntegralNum;
-    start.CardType = self.CardType;
-    start.CardName = self.CardName;
-    start.second=240;
+    [UdStorage storageObject:dateString forKey:@"setTime"];
+    
+    
+   
+    start.paynum=[UdStorage getObjectforKey:@"Jprice"];
+    start.RemainCount = [UdStorage getObjectforKey:@"RemainCount"];
+    start.IntegralNum = [UdStorage getObjectforKey:@"IntegralNum"];
+    start.CardType = [UdStorage getObjectforKey:@"CardType"];
+    start.CardName =[UdStorage getObjectforKey:@"CardName"];    start.second=240;
     
     
     [self.navigationController pushViewController:start animated:YES];

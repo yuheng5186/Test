@@ -17,11 +17,11 @@
 
 #import "WXApi.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<UITabBarDelegate>
 {
     AppDelegate *myDelegate;
 }
-
+@property (nonatomic, strong) MenuTabBarController *menuTabBarController;
 @end
 
 @implementation AppDelegate
@@ -87,6 +87,7 @@
         
         
         MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
+       
         self.window.rootViewController  = menuTabBarController;
         
     }

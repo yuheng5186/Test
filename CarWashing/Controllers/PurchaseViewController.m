@@ -145,7 +145,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 {
     NSDictionary *mulDic = @{
                              @"GetCardType":@1,
-                             @"Area":@"上海市"
+                             @"Area":@"青岛市"
                              };
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
