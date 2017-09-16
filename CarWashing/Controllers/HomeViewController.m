@@ -1036,12 +1036,16 @@
     if (intString > 0 && intString < 240) {
         
         DSStartWashingController *start = [[DSStartWashingController alloc]init];
-//        start.RemainCount   = [NSString stringWithFormat:@"%ld",(long)self.scan.RemainCount];
-//        start.IntegralNum   = [NSString stringWithFormat:@"%ld",(long)self.scan.IntegralNum];
-//        start.CardType      = [NSString stringWithFormat:@"%ld",self.scan.CardType];
-//        start.CardName      = self.scan.CardName;
-//        start.paynum=[NSString stringWithFormat:@"￥%@",self.scan.OriginalAmt];
-        start.second        = 240;
+//        [UdStorage storageObject:dateString forKey:@"setTime"];
+        
+        
+  
+        start.paynum=[UdStorage getObjectforKey:@"Jprice"];
+        start.RemainCount = [UdStorage getObjectforKey:@"RemainCount"];
+        start.IntegralNum = [UdStorage getObjectforKey:@"IntegralNum"];
+        start.CardType = [UdStorage getObjectforKey:@"CardType"];
+        start.CardName =[UdStorage getObjectforKey:@"CardName"];
+//        start.second        = 240;
         start.hidesBottomBarWhenPushed            = YES;
         start.second                    = 240-intString;
         

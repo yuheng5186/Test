@@ -138,39 +138,6 @@
 
     return YES;
 }
-/**
- *  TabBarController代理
- */
-//- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-//    if ([viewController.tabBarItem.title isEqualToString:@"消息"] || [viewController.tabBarItem.title isEqualToString:@"收益"] || [viewController.tabBarItem.title isEqualToString:@"我"]) {
-//        NSString *sign = ;     //取出登陆状态(NSUserDefaults即可)
-//        NSInteger selectedIndex;
-//        if (sign == nil) {  //未登录
-//            if ([viewController.tabBarItem.title isEqualToString:@"消息"]) {
-//                selectedIndex = 2;
-//            } else if ([viewController.tabBarItem.title isEqualToString:@"收益"]) {
-//                selectedIndex = 3;
-//            } else if ([viewController.tabBarItem.title isEqualToString:@"我"]) {
-//                selectedIndex = 4;
-//            }
-//            LoginViewController *loginVC = [[LoginViewController alloc]init]; //登陆界面
-//            loginVC.selectedIndex = selectedIndex;    //将所选的TabbarItem 传入登陆界面
-//            loginVC.hidesBottomBarWhenPushed = YES;   //隐藏Tabbar
-//            NavigationController *loginNav = [[NavigationController alloc] initWithRootViewController:loginVC];   //使登陆界面的Navigationbar可以显示出来
-//            [((UINavigationController *)tabBarController.selectedViewController) presentViewController:loginNav animated:YES completion:nil]; //跳转登陆界面
-//            
-//            //在登陆界面判断登陆成功之后发送通知,将所选的TabbarItem传回,使用通知传值
-//            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(logSelect:) name:@"logSelect" object:nil];     //接收
-//            
-//            return NO;
-//        }else{
-//            return YES;
-//        }
-//    }else{
-//        return YES;
-//    }
-//}
-
 
 + (AppDelegate *)sharedInstance {
     return (AppDelegate *)[UIApplication sharedApplication].delegate;

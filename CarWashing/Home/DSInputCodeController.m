@@ -164,7 +164,11 @@
     if (intString > 0 && intString < 240) {
         
         DSStartWashingController *start = [[DSStartWashingController alloc]init];
-        
+        start.paynum=[UdStorage getObjectforKey:@"Jprice"];
+        start.RemainCount = [UdStorage getObjectforKey:@"RemainCount"];
+        start.IntegralNum = [UdStorage getObjectforKey:@"IntegralNum"];
+        start.CardType = [UdStorage getObjectforKey:@"CardType"];
+        start.CardName =[UdStorage getObjectforKey:@"CardName"];
         start.hidesBottomBarWhenPushed            = YES;
         start.second                    = 240-intString;
         
@@ -245,6 +249,11 @@
                         [defaults setObject:dateString forKey:@"setTime"];
                         [defaults synchronize];
                         NSLog(@"setTime ==== %@",[defaults objectForKey:@"setTime"]);
+                        [UdStorage storageObject:[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt] forKey:@"Jprice"];
+                        [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount] forKey:@"RemainCount"];
+                        [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum] forKey:@"IntegralNum"];
+                        [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.CardType] forKey:@"CardType"];
+                        [UdStorage storageObject:weakSelf.scan.CardName forKey:@"CardName"];
                         
                         
                         DSStartWashingController *start = [[DSStartWashingController alloc]init];

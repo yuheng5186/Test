@@ -282,6 +282,12 @@
                     }
                     else
                     {
+                        [UdStorage storageObject:[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt] forKey:@"Jprice"];
+                        [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount] forKey:@"RemainCount"];
+                        [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum] forKey:@"IntegralNum"];
+                        [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.CardType] forKey:@"CardType"];
+                        [UdStorage storageObject:weakSelf.scan.CardName forKey:@"CardName"];
+
                         DSStartWashingController *start = [[DSStartWashingController alloc]init];
                         start.hidesBottomBarWhenPushed            = YES;
                         
