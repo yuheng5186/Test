@@ -266,7 +266,7 @@
                         start.IntegralNum = [NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum];
                         start.CardType = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
                         start.CardName = weakSelf.scan.CardName;
-                        start.second        = 240;
+                        start.second        = 20;
 
                         [weakSelf.navigationController pushViewController:start animated:YES];
                     }
