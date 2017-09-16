@@ -18,6 +18,7 @@
 #import "LoginViewController.h"
 #import "DSScanController.h"
 #import "UdStorage.h"
+#import "DSStartWashingController.h"
 @interface MenuTabBarController ()
 
 @property (nonatomic, strong)     UIImageView *imageView;
@@ -149,7 +150,10 @@
     [self.tabBar addSubview:button];
 }
 - (void)didSelectRouterAction {
-    self.selectedViewController = self.viewControllers[2];
+    
+    
+           self.selectedViewController = self.viewControllers[2];
+   
 }
 
 - (void)didReceiveMemoryWarning {
