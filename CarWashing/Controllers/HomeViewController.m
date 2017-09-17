@@ -551,13 +551,13 @@
     if (self.newrc.recList.count==0) {
         newManImageView      = [UIUtil drawCustomImgViewInView:self.tableView frame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*75/667) imageName:@"banka_banner"];
         newManImageView.centerX           = headerView.centerX;
-        newManImageView.top               = serviceView.bottom;
+        newManImageView.top               = serviceView.bottom+Main_Screen_Height*20/667;
         newManImageView.userInteractionEnabled=YES;
         newManImageView.contentMode=UIViewContentModeScaleAspectFill;
         newManImageView.image=[UIImage imageNamed:@"banka_banner"];
         UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
         [newManImageView addGestureRecognizer:tap];
-        headerView.height   = serviceView.bottom +Main_Screen_Height*10/667;
+        headerView.height   = serviceNameLabel.bottom;
     }
 //    else{
 //        newManImageView.hidden=YES;

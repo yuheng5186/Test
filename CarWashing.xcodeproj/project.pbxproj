@@ -64,7 +64,6 @@
 		181E92CE1F1F39CC0006511E /* UIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92C71F1F39CC0006511E /* UIUtil.m */; };
 		181E92CF1F1F39CC0006511E /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92C91F1F39CC0006511E /* UIView+Frame.m */; };
 		181E92D21F1F3B180006511E /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92D11F1F3B180006511E /* HomeViewController.m */; };
-		181E92D51F1F3B900006511E /* BusinessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92D41F1F3B900006511E /* BusinessViewController.m */; };
 		181E92D81F1F3BAE0006511E /* FindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92D71F1F3BAE0006511E /* FindViewController.m */; };
 		181E92DB1F1F3BC60006511E /* PurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92DA1F1F3BC60006511E /* PurchaseViewController.m */; };
 		181E92DE1F1F3BE40006511E /* MySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92DD1F1F3BE40006511E /* MySettingViewController.m */; };
@@ -134,6 +133,7 @@
 		1853BA4A1F28A04100B98C7F /* JFCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA421F28A04100B98C7F /* JFCityViewController.m */; };
 		1853BA4B1F28A04100B98C7F /* JFSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA441F28A04100B98C7F /* JFSearchView.m */; };
 		1853BA4E1F28A04C00B98C7F /* JFLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA4D1F28A04C00B98C7F /* JFLocation.m */; };
+		185833DD1F6E0D71004EA905 /* BusinessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185833DC1F6E0D71004EA905 /* BusinessViewController.m */; };
 		1887A2241F66E0870042B062 /* QWMerComListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1887A2211F66E0870042B062 /* QWMerComListModel.m */; };
 		1887A2251F66E0870042B062 /* QWMerchantModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1887A2231F66E0870042B062 /* QWMerchantModel.m */; };
 		1888214C1F6BD336002618F7 /* b1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 188821461F6BD336002618F7 /* b1.gif */; };
@@ -408,8 +408,6 @@
 		181E92C91F1F39CC0006511E /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Frame.m"; path = "Tool/UIView+Frame.m"; sourceTree = "<group>"; };
 		181E92D01F1F3B180006511E /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = Controllers/HomeViewController.h; sourceTree = "<group>"; };
 		181E92D11F1F3B180006511E /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = Controllers/HomeViewController.m; sourceTree = "<group>"; };
-		181E92D31F1F3B900006511E /* BusinessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessViewController.h; path = Controllers/BusinessViewController.h; sourceTree = "<group>"; };
-		181E92D41F1F3B900006511E /* BusinessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.objc; name = BusinessViewController.m; path = Controllers/BusinessViewController.m; sourceTree = "<group>"; };
 		181E92D61F1F3BAE0006511E /* FindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FindViewController.h; path = Controllers/FindViewController.h; sourceTree = "<group>"; };
 		181E92D71F1F3BAE0006511E /* FindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FindViewController.m; path = Controllers/FindViewController.m; sourceTree = "<group>"; };
 		181E92D91F1F3BC60006511E /* PurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PurchaseViewController.h; path = Controllers/PurchaseViewController.h; sourceTree = "<group>"; };
@@ -545,6 +543,8 @@
 		1853BA441F28A04100B98C7F /* JFSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFSearchView.m; path = JFCityViewController/JFSearchView.m; sourceTree = "<group>"; };
 		1853BA4C1F28A04C00B98C7F /* JFLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFLocation.h; path = JFCityViewController/Location/JFLocation.h; sourceTree = "<group>"; };
 		1853BA4D1F28A04C00B98C7F /* JFLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFLocation.m; path = JFCityViewController/Location/JFLocation.m; sourceTree = "<group>"; };
+		185833DB1F6E0D71004EA905 /* BusinessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessViewController.h; path = model/BusinessViewController.h; sourceTree = "<group>"; };
+		185833DC1F6E0D71004EA905 /* BusinessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessViewController.m; path = model/BusinessViewController.m; sourceTree = "<group>"; };
 		1887A2201F66E0870042B062 /* QWMerComListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWMerComListModel.h; sourceTree = "<group>"; };
 		1887A2211F66E0870042B062 /* QWMerComListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWMerComListModel.m; sourceTree = "<group>"; };
 		1887A2221F66E0870042B062 /* QWMerchantModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWMerchantModel.h; sourceTree = "<group>"; };
@@ -1579,8 +1579,8 @@
 			isa = PBXGroup;
 			children = (
 				1887A21E1F66E0870042B062 /* model */,
-				181E92D31F1F3B900006511E /* BusinessViewController.h */,
-				181E92D41F1F3B900006511E /* BusinessViewController.m */,
+				185833DB1F6E0D71004EA905 /* BusinessViewController.h */,
+				185833DC1F6E0D71004EA905 /* BusinessViewController.m */,
 				18322AB81F4D7A5D003ABB7B /* QWMclistTableViewCell.h */,
 				18322AB91F4D7A5D003ABB7B /* QWMclistTableViewCell.m */,
 				501672001F29797600384186 /* BusinessDetailViewController.h */,
@@ -2114,6 +2114,7 @@
 				1853BA461F28A04100B98C7F /* JFCityCollectionFlowLayout.m in Sources */,
 				50B26E641F300D60009B3B9F /* PayPurchaseCardController.m in Sources */,
 				18B69EAA1F32CB5B007DA0E4 /* ZFConst.m in Sources */,
+				185833DD1F6E0D71004EA905 /* BusinessViewController.m in Sources */,
 				5016720D1F297A3500384186 /* ShopCommentController.m in Sources */,
 				185090571F4586B200795E0A /* User.m in Sources */,
 				183997651F2586D300702071 /* ActivityListCell.m in Sources */,
@@ -2218,7 +2219,6 @@
 				507FED011F2B3111009CC505 /* CashViewController.m in Sources */,
 				18B697B21F21DB3F009FF73A /* DSCarTravellingController.m in Sources */,
 				5016723B1F29809200384186 /* UIView+HQCategory.m in Sources */,
-				181E92D51F1F3B900006511E /* BusinessViewController.m in Sources */,
 				5016720C1F297A3500384186 /* ShopCategoryView.m in Sources */,
 				50E2EE831F1F4D3C00FAF130 /* UIView+YZCategory.m in Sources */,
 				18218FE81F2ADA8A00F7207F /* DSSegmentView.m in Sources */,
