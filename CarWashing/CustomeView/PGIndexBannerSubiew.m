@@ -45,7 +45,7 @@
 - (UIView *)coverView {
     if (_coverView == nil) {
         _coverView = [[UIView alloc] initWithFrame:self.bounds];
-        _coverView.backgroundColor = [UIColor blackColor];
+        _coverView.backgroundColor = [UIColor whiteColor];
     }
     return _coverView;
 }

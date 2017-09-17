@@ -328,8 +328,9 @@ static NSString * HeaderId = @"header";
         bannerView.mainImageView = containImageView;
 
 
-    
-    
+    bannerView.backgroundColor=[UIColor whiteColor];
+    bannerView.mainImageView.backgroundColor=[UIColor clearColor];
+    bannerView.mainImageView.clipsToBounds=YES;
     return bannerView;
 }
 
