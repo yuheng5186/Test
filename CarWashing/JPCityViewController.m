@@ -43,6 +43,7 @@ static NSString * const DetailID_cell = @"Detailcell";
     UITableView *cityTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width/2, self.view.bounds.size.height)];
     cityTableView.delegate = self;
     cityTableView.dataSource = self;
+    cityTableView.contentInset  = UIEdgeInsetsMake(0, 0, Main_Screen_Height*550/667, 0);
     self.cityTableView = cityTableView;
     [self.view addSubview:cityTableView];
     
@@ -50,6 +51,8 @@ static NSString * const DetailID_cell = @"Detailcell";
     UITableView *cityDTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2, 0, self.view.bounds.size.width/2, self.view.bounds.size.height)];
     cityDTableView.delegate = self;
     cityDTableView.dataSource = self;
+    cityDTableView.contentInset  = UIEdgeInsetsMake(0, 0, Main_Screen_Height*550/667, 0);
+
     self.cityDetailTableView = cityDTableView;
     [self.view addSubview:cityDTableView];
     

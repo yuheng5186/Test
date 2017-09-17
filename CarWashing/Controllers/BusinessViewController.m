@@ -382,7 +382,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 {
     // 第1列 高度
     if (index == 0) {
-        return 270;
+        return 140;
     }
     
     // 第2列 高度

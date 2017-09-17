@@ -26,7 +26,7 @@
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="putong" translatesAutoresizingMaskIntoConstraints="NO" id="dxD-QE-czf">
-                            <rect key="frame" x="50" y="48" width="20" height="20"/>
+                            <rect key="frame" x="48" y="48" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="20" id="Dl9-rP-yup"/>
                                 <constraint firstAttribute="height" constant="20" id="kx5-QX-vhM"/>
@@ -42,7 +42,7 @@
                     <color key="backgroundColor" red="1" green="0.84547439280000003" blue="0.29088167599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstItem="Vp3-OH-hEg" firstAttribute="leading" secondItem="YJW-xs-lvQ" secondAttribute="leading" constant="16" id="2Iy-md-7ql"/>
-                        <constraint firstItem="dxD-QE-czf" firstAttribute="leading" secondItem="Vp3-OH-hEg" secondAttribute="trailing" constant="-18" id="D8Q-md-psh"/>
+                        <constraint firstItem="dxD-QE-czf" firstAttribute="leading" secondItem="Vp3-OH-hEg" secondAttribute="trailing" constant="-20" id="D8Q-md-psh"/>
                         <constraint firstItem="Vp3-OH-hEg" firstAttribute="top" secondItem="YJW-xs-lvQ" secondAttribute="top" constant="13" id="DGT-g3-QNF"/>
                         <constraint firstItem="ZU9-dr-hhs" firstAttribute="centerY" secondItem="Vp3-OH-hEg" secondAttribute="centerY" id="PIe-Xu-hCm"/>
                         <constraint firstItem="ZU9-dr-hhs" firstAttribute="leading" secondItem="Vp3-OH-hEg" secondAttribute="trailing" constant="22" id="WR5-Gr-WtN"/>

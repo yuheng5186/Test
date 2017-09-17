@@ -33,7 +33,7 @@
 
 - (void) drawContent
 {
-    self.contentView.top                = self.statusView.bottom;
+    self.contentView.top                = self.navigationView.bottom;
     self.contentView.height             = self.view.height;
     
 }
@@ -45,12 +45,12 @@
 
 - (void) createSubView {
     
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*150/667) style:UITableViewStyleGrouped];
-    self.tableView.top              = 0;
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*150/667) style:UITableViewStylePlain];
+    self.tableView.top              = -10;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     self.tableView.scrollEnabled    = NO;
-    self.tableView.tableFooterView  = [UIView new];
+    self.tableView.tableHeaderView  = [UIView new];
     self.tableView.backgroundColor  = [UIColor clearColor];
     [self.contentView addSubview:self.tableView];
     
@@ -88,6 +88,14 @@
     return 2;
     
 }
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+
+    return 0.01;
+}
+- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+
+    return 0.01;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return Main_Screen_Height*50/667;
 }
@@ -101,7 +109,7 @@
     }
     cell.backgroundColor    = [UIColor whiteColor];
     if (indexPath.row == 0) {
-        self.phoneNumberText                = [[UITextField alloc]initWithFrame:CGRectMake(Main_Screen_Width*10/375, Main_Screen_Height*45/667, Main_Screen_Width-Main_Screen_Width*240/375, Main_Screen_Height*40/667)];
+        self.phoneNumberText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*200/375, Main_Screen_Height*40/667)];
 //        self.phoneNumberText.placeholder    = @"输入验证码";
         self.phoneNumberText.text           = APPDELEGATE.currentUser.userPhone;
         self.phoneNumberText.delegate       = self;
@@ -193,7 +201,7 @@
         [self.timer invalidate];
         self.timer = nil;
     }
-    self.second = 10;
+    self.second = 60;
     self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
     [self.timer fire];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];

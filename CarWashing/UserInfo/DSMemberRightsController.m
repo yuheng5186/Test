@@ -21,11 +21,12 @@
 
 @interface DSMemberRightsController ()<UITableViewDelegate, UITableViewDataSource>
 {
-    UITableView *memberRightsView;
-    MBProgressHUD *HUD;
-    UILabel *membershipNameLabel;
-    UIButton *gradeBtn;
-    UIImageView *membershipImageView;
+    UITableView         *memberRightsView;
+    MBProgressHUD       *HUD;
+    UILabel             *membershipNameLabel;
+    UIButton            *gradeBtn;
+    UIImageView         *membershipImageView;
+    UIImageView         *signImageView;
 }
 
 @property (nonatomic, strong) NSMutableArray *MembershipprivilegesArray;
@@ -80,7 +81,27 @@ static NSString *id_rightsCell = @"id_rightsCell";
     membershipImageView.top               = Main_Screen_Height*15/667;
     membershipImageView.centerX           = upView.centerX;
     
-    NSString *membershipName              = @"白银会员";
+    
+    signImageView                           = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*20/375, Main_Screen_Height*20/667) imageName:@"putong"];
+    signImageView.layer.masksToBounds       = YES;
+    signImageView.layer.cornerRadius        = signImageView.size.height/2;
+    signImageView.centerY                   = membershipImageView.centerY +Main_Screen_Height*40/667;
+    signImageView.centerX                   = membershipImageView.centerX +Main_Screen_Width*40/667;
+    if (Main_Screen_Height == 568) {
+        signImageView.centerY                   = membershipImageView.centerY +Main_Screen_Height*40/667;
+        signImageView.centerX                   = membershipImageView.centerX +Main_Screen_Width*40/667;
+    }
+    if (Main_Screen_Height == 667) {
+        signImageView.centerY                   = membershipImageView.centerY +Main_Screen_Height*35/667;
+        signImageView.centerX                   = membershipImageView.centerX +Main_Screen_Width*35/667;
+    }
+    if (Main_Screen_Height == 736) {
+        signImageView.centerY                   = membershipImageView.centerY +Main_Screen_Height*30/667;
+        signImageView.centerX                   = membershipImageView.centerX +Main_Screen_Width*30/667;
+    }
+    
+    
+    NSString *membershipName              = @"普通会员";
     UIFont *membershipNameFont            = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     membershipNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:membershipName font:membershipNameFont] font:membershipNameFont text:membershipName isCenter:NO];
     membershipNameLabel.textColor         = [UIColor colorFromHex:@"#ffffff"];
@@ -217,6 +238,32 @@ static NSString *id_rightsCell = @"id_rightsCell";
 //    });
     
     [membershipImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,_MembershipprivilegesDic[@"Headimg"]]] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
+    
+    NSUInteger num = [_MembershipprivilegesDic[@"Level_id"] integerValue];
+    
+    if (num == 1) {
+        signImageView.image = [UIImage imageNamed:@"putong"];
+        
+    }else if (num == 2){
+        signImageView.image = [UIImage imageNamed:@"baiyin"];
+
+    }else if (num == 3){
+        signImageView.image = [UIImage imageNamed:@"huangjin"];
+
+    }else if (num == 4){
+        signImageView.image = [UIImage imageNamed:@"bojin"];
+        
+    }else if (num == 5){
+        signImageView.image = [UIImage imageNamed:@"zuanshi"];
+
+    }else if (num == 6){
+        signImageView.image = [UIImage imageNamed:@"heizuan"];
+
+    }else {
+        signImageView.image = [UIImage imageNamed:@"putong"];
+
+        
+    }
     
     
     
