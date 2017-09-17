@@ -51,7 +51,8 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UILabel *userNameLabel;
-@property (nonatomic, strong) UIImageView  *editButton;
+@property (nonatomic, strong) UIButton  *editButton;
+@property (nonatomic, strong) UIButton  *signButton;
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 
@@ -106,20 +107,56 @@
     
     
     
-    self.editButton           =[UIUtil drawCustomImgViewInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) imageName:@"huiyuantou" ];
-//    [UIUtil   drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) iconName:@"huiyuantou" target:self action:@selector(editButtonClick:)];
+    self.editButton           = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) iconName:@"huiyuantou" target:self action:@selector(editButtonClick:)];
     self.editButton.top                  = titleNameLabel.bottom +Main_Screen_Height*5/667;
     self.editButton.centerX              = titleNameLabel.centerX;
     self.editButton.layer.masksToBounds = YES;
     self.editButton.layer.cornerRadius = Main_Screen_Height*40/667;
-  
-       NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
-        [self.editButton sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
+    if(APPDELEGATE.currentUser.userImagePath.length > 0)
+    {
+        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
+        [self.editButton.imageView sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
         
         
+    }
+
+    self.signButton                         = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*20/375, Main_Screen_Height*20/667) iconName:@"putong" target:self action:@selector(editButtonClick:)];
+    self.signButton.centerY                 = self.editButton.centerY +Main_Screen_Height*35/667;
+    self.signButton.centerX                 = self.editButton.centerX +Main_Screen_Width*35/667;
+    self.signButton.layer.masksToBounds     = YES;
+    self.signButton.layer.cornerRadius      = self.signButton.height/2;
     
-
-
+    if (Main_Screen_Height == 736) {
+        self.signButton.centerY                 = self.editButton.centerY +Main_Screen_Height*30/667;
+        self.signButton.centerX                 = self.editButton.centerX +Main_Screen_Width*30/667;
+    }
+    
+    NSUInteger num = APPDELEGATE.currentUser.Level_id;
+    
+    if (num == 1) {
+        [self.signButton setImage:[UIImage imageNamed:@"putong"] forState:UIControlStateNormal];
+        
+    }else if (num == 2){
+        [self.signButton setImage:[UIImage imageNamed:@"baiyin"] forState:UIControlStateNormal];
+        
+    }else if (num == 3){
+        [self.signButton setImage:[UIImage imageNamed:@"huangjin"] forState:UIControlStateNormal];
+        
+    }else if (num == 4){
+        [self.signButton setImage:[UIImage imageNamed:@"bojin"] forState:UIControlStateNormal];
+        
+    }else if (num == 5){
+        [self.signButton setImage:[UIImage imageNamed:@"zuanshi"] forState:UIControlStateNormal];
+        
+    }else if (num == 6){
+        [self.signButton setImage:[UIImage imageNamed:@"heizuan"] forState:UIControlStateNormal];
+        
+    }else {
+        [self.signButton setImage:[UIImage imageNamed:@"putong"] forState:UIControlStateNormal];
+        
+    }
+    
+    
     UIImage *settingImage           = [UIImage imageNamed:@"shezhi"];
     UIButton  *settingButton        = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, settingImage.size.width, settingImage.size.height) iconName:@"shezhi" target:self action:@selector(settingButtonClick:)];
     settingButton.centerY           = titleNameLabel.centerY;
@@ -674,7 +711,8 @@
     
     
     NSLog(@"%ld",APPDELEGATE.currentUser.UserScore);
-    
+    NSLog(@"%ld",(long)APPDELEGATE.currentUser.Level_id);
+
     [self.tableView reloadData];
     
 }
@@ -684,6 +722,7 @@
     self.userNameLabel.top               = self.editButton.bottom +Main_Screen_Height*13/667;
     self.userNameLabel.centerX           = Main_Screen_Width/2;
     self.userNameLabel.text = APPDELEGATE.currentUser.userName;
+
 }
 
 
@@ -693,8 +732,15 @@
 //    NSURL *url=[NSURL URLWithString:ImageURL];
 //    [imageV sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"touxiang"]];
     
-    NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
-    [self.editButton sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
+        NSURL *url1=[NSURL URLWithString:ImageURL];
+        NSData *data=[NSData dataWithContentsOfURL:url1];
+        UIImage *img=[UIImage imageWithData:data];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.editButton setImage:img forState:UIControlStateNormal];
+        });
+    });
 }
 
 

@@ -37,6 +37,8 @@
 }
 - (void) buttonClick:(id)sender {
     
+    [self.userNameText resignFirstResponder];
+    
     if (self.userNameText.text.length > 0) {
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         HUD.removeFromSuperViewOnHide =YES;

@@ -45,7 +45,7 @@
 @property (nonatomic)NSInteger weiyi;
 
 @property (nonatomic,strong) NSString *areastr;
-@property (nonatomic,strong) NSString *citystr;
+
 @end
 
 static NSString *id_salerListCell = @"salerListViewCell";
@@ -80,7 +80,6 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     self.navigationController.navigationBar.hidden = YES;
     self.areastr=@" ";
-   self.citystr=@" ";
     [self setSearchMenu];
     
     
@@ -109,8 +108,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
         // 获取列
         NSInteger col = [self.childViewControllers indexOfObject:note.object];
        if (col==0) {
-          self.citystr=[[self.pramsDic objectForKey:@"0"] objectAtIndex:0];
-           self.areastr=[[self.pramsDic objectForKey:@"0"] objectAtIndex:1];//区域
+           self.areastr=[[self.pramsDic objectForKey:@"0"] objectAtIndex:1];
        }
         // 获取所有值
         NSArray *allValues = note.userInfo.allValues;
@@ -122,13 +120,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
         if ([str containsString:@":"]) {
             NSArray *array = [allValues.firstObject componentsSeparatedByString:@":"];
             // 设置按钮标题
-            NSLog(@"%@===%@",array,[NSString stringWithFormat:@"%ld",(long)col]);
-           self.citystr=array[0];
-           self.areastr=array[1];
             [self.pramsDic setValue:array forKey:[NSString stringWithFormat:@"%ld",(long)col]];
         } else {
             // 设置按钮标题
-           NSLog(@"%@===%@",allValues.firstObject,[NSString stringWithFormat:@"%ld",(long)col]);
             [self.pramsDic setValue:allValues.firstObject forKey:[NSString stringWithFormat:@"%ld",(long)col]];
         }
       
@@ -330,7 +324,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     
     // 初始化标题
-    _titles = @[[UdStorage getObjectforKey:@"City"],@"普洗-5座轿车",@"默认排序"];
+    _titles = @[[UdStorage getObjectforKey:@"Quyu"],@"普洗-5座轿车",@"默认排序"];
     
 //    NSLog(@"%@",self.pramsDic);
     
@@ -388,16 +382,16 @@ static NSString *id_salerListCell = @"salerListViewCell";
 {
     // 第1列 高度
     if (index == 0) {
-        return 270*Main_Screen_Height/667;
+        return 140;
     }
     
     // 第2列 高度
     if (index == 1) {
-        return 130*Main_Screen_Height/667;
+        return 180;
     }
     
     // 第3列 高度
-    return 130*Main_Screen_Height/667;
+    return 180;
 }
 
 -(void)setData
@@ -438,7 +432,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
 //    [[self.pramsDic objectForKey:@"0"] objectAtIndex:0]
     NSDictionary *mulDic = @{
-                             @"City":self.citystr,
+                             @"City":@"上海市",
                              @"Area":self.areastr,
                              @"ShopType":@1,
                              @"ServiceCode":[NSString stringWithFormat:@"10%ld",index+1],
@@ -524,7 +518,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
 //    [[self.pramsDic objectForKey:@"0"] objectAtIndex:0]
     NSDictionary *mulDic = @{
-                             @"City":self.citystr,
+                             @"City":@"上海市",
                              @"Area":self.areastr,
                              @"ShopType":@1,
                              @"ServiceCode":[NSString stringWithFormat:@"10%ld",index+1],

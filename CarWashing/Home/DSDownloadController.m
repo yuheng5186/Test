@@ -186,7 +186,7 @@
     titleLabel.centerX          = logoImageView.centerX;
     titleLabel.top              = logoImageView.bottom +Main_Screen_Height*12/667;
     
-    self.bigImageView   = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*160/375, Main_Screen_Height*160/667) imageName:@"WechatIMG54"];
+    self.bigImageView   = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*160/375, Main_Screen_Height*160/667) imageName:@"qiangweixiazai"];
     self.bigImageView.top            = titleLabel.bottom +Main_Screen_Height*28/667;
     self.bigImageView.centerX        = titleView.size.width/2;
     self.bigImageView.userInteractionEnabled    = YES;
@@ -195,7 +195,7 @@
     tapNewGesture.minimumPressDuration              = 1.0;
     [self.bigImageView addGestureRecognizer:tapNewGesture];
     
-    NSString *showString              = @"长按识别二维码";
+    NSString *showString              = @"长按识别二维码,下载蔷薇爱车APP";
     UIFont *showStringFont            = [UIFont systemFontOfSize:14];
     UILabel *showLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:showString font:showStringFont] font:showStringFont text:showString isCenter:NO];
     showLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
