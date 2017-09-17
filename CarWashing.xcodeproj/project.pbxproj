@@ -20,6 +20,10 @@
 		04443F501F5944450032BA5E /* DSScanPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04443F4F1F5944450032BA5E /* DSScanPayController.m */; };
 		045E1BAF1F69150700F37230 /* problemCar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 045E1BAE1F69150700F37230 /* problemCar.plist */; };
 		045E1BB11F69151B00F37230 /* ProblemUse.plist in Resources */ = {isa = PBXBuildFile; fileRef = 045E1BB01F69151B00F37230 /* ProblemUse.plist */; };
+		04DB28E41F6E184F009B4D9C /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DB28DE1F6E184F009B4D9C /* NSDate+Extension.m */; };
+		04DB28E51F6E184F009B4D9C /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DB28E01F6E184F009B4D9C /* UIView+Extension.m */; };
+		04DB28E61F6E184F009B4D9C /* WSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DB28E21F6E184F009B4D9C /* WSDatePickerView.m */; };
+		04DB28E71F6E184F009B4D9C /* WSDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DB28E31F6E184F009B4D9C /* WSDatePickerView.xib */; };
 		1802AD991F5FC704009EB146 /* DSSalaActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1802AD981F5FC704009EB146 /* DSSalaActivityCell.m */; };
 		1805AC831F38090D00FD0844 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC821F38090D00FD0844 /* LoginViewController.m */; };
 		1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC851F385C8600FD0844 /* DSAgreementController.m */; };
@@ -319,6 +323,13 @@
 		04443F4F1F5944450032BA5E /* DSScanPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSScanPayController.m; path = Home/DSScanPayController.m; sourceTree = "<group>"; };
 		045E1BAE1F69150700F37230 /* problemCar.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = problemCar.plist; sourceTree = "<group>"; };
 		045E1BB01F69151B00F37230 /* ProblemUse.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ProblemUse.plist; sourceTree = "<group>"; };
+		04DB28DD1F6E184F009B4D9C /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
+		04DB28DE1F6E184F009B4D9C /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
+		04DB28DF1F6E184F009B4D9C /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		04DB28E01F6E184F009B4D9C /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		04DB28E11F6E184F009B4D9C /* WSDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSDatePickerView.h; sourceTree = "<group>"; };
+		04DB28E21F6E184F009B4D9C /* WSDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSDatePickerView.m; sourceTree = "<group>"; };
+		04DB28E31F6E184F009B4D9C /* WSDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WSDatePickerView.xib; sourceTree = "<group>"; };
 		06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CarWashing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1802AD971F5FC704009EB146 /* DSSalaActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSalaActivityCell.h; sourceTree = "<group>"; };
 		1802AD981F5FC704009EB146 /* DSSalaActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSalaActivityCell.m; sourceTree = "<group>"; };
@@ -868,6 +879,20 @@
 			path = giftu;
 			sourceTree = "<group>";
 		};
+		04DB28DC1F6E184F009B4D9C /* WSDaePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				04DB28DD1F6E184F009B4D9C /* NSDate+Extension.h */,
+				04DB28DE1F6E184F009B4D9C /* NSDate+Extension.m */,
+				04DB28DF1F6E184F009B4D9C /* UIView+Extension.h */,
+				04DB28E01F6E184F009B4D9C /* UIView+Extension.m */,
+				04DB28E11F6E184F009B4D9C /* WSDatePickerView.h */,
+				04DB28E21F6E184F009B4D9C /* WSDatePickerView.m */,
+				04DB28E31F6E184F009B4D9C /* WSDatePickerView.xib */,
+			);
+			path = WSDaePickerView;
+			sourceTree = "<group>";
+		};
 		1805AC801F3808DB00FD0844 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -962,6 +987,7 @@
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				04DB28DC1F6E184F009B4D9C /* WSDaePickerView */,
 				18E702701F5503BC007A9777 /* KPIndicatorView */,
 				0415739D1F53C522004514E3 /* TFGridInputView */,
 				0401E8FA1F4ED6E900F0CA79 /* EAIntroView */,
@@ -2014,6 +2040,7 @@
 				183997661F2586D300702071 /* ActivityListCell.xib in Resources */,
 				50E2EE811F1F4D3C00FAF130 /* YZMoreMenuViewController.xib in Resources */,
 				045E1BAF1F69150700F37230 /* problemCar.plist in Resources */,
+				04DB28E71F6E184F009B4D9C /* WSDatePickerView.xib in Resources */,
 				5094A6261F3447CD00407808 /* BusinessEstimateCell.xib in Resources */,
 				50B26E9B1F307D50009B3B9F /* DiscountDetailView.xib in Resources */,
 				1888214F1F6BD336002618F7 /* b4.gif in Resources */,
@@ -2193,6 +2220,7 @@
 				181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */,
 				1839979F1F25E69100702071 /* DSPasswordController.m in Sources */,
 				1853BA061F28475500B98C7F /* DSTextView.m in Sources */,
+				04DB28E51F6E184F009B4D9C /* UIView+Extension.m in Sources */,
 				180E42F21F3AC7D500013D2D /* LewPopupViewAnimationDrop.m in Sources */,
 				181E92F51F2085B60006511E /* DSFavoritesController.m in Sources */,
 				501672311F297FF000384186 /* AnswerModel.m in Sources */,
@@ -2248,6 +2276,7 @@
 				18A4B23D1F4E9F3600C64978 /* JXMapNavigationView.m in Sources */,
 				041573A61F53C522004514E3 /* TFGridInputViewCellStyle.m in Sources */,
 				180E43041F3B471100013D2D /* UIView+BFSToastInfo.m in Sources */,
+				04DB28E61F6E184F009B4D9C /* WSDatePickerView.m in Sources */,
 				500C6BF51F3B5B13007D34A1 /* BusinessMapController.m in Sources */,
 				50B26EA01F30819D009B3B9F /* RechargeDetailController.m in Sources */,
 				181E92DB1F1F3BC60006511E /* PurchaseViewController.m in Sources */,
@@ -2305,6 +2334,7 @@
 				180E42EA1F3AB37D00013D2D /* YzdHUDIndicator.m in Sources */,
 				0401E9091F4ED95000F0CA79 /* DSGuideViewController.m in Sources */,
 				185090471F4557E100795E0A /* TYAlertScaleFadeAnimation.m in Sources */,
+				04DB28E41F6E184F009B4D9C /* NSDate+Extension.m in Sources */,
 				50B26EAC1F315EF0009B3B9F /* CommentOrderController.m in Sources */,
 				183997A21F25F00700702071 /* DSAboutController.m in Sources */,
 				1853BA491F28A04100B98C7F /* JFCityTableViewCell.m in Sources */,
