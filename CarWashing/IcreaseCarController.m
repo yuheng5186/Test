@@ -22,6 +22,9 @@
 #import "MBProgressHUD.h"
 #import "DSMemberRightsController.h"
 
+#import "WSDatePickerView.h"
+
+
 @interface IcreaseCarController ()<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate,UITextFieldDelegate>
 {
     MBProgressHUD *HUD;
@@ -448,6 +451,21 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                 self.lbl.text = str;
             }];
             [datePickerView show];
+            
+            
+            WSDatePickerView *datepicker = [[WSDatePickerView alloc] initWithDateStyle:DateStyleShowYearMonthDay CompleteBlock:^(NSDate *selectDate) {
+                
+                NSString *date = [selectDate stringWithFormat:@"yyyy-MM"];
+                NSLog(@"选择的日期：%@",date);
+                self.lblYear = date;
+                self.lbl.text = date;
+                
+            }];
+            datepicker.dateLabelColor = [UIColor colorFromHex:@"#0161a1"];//年-月-日-时-分 颜色
+            datepicker.datePickerColor = [UIColor blackColor];//滚轮日期颜色
+            datepicker.doneButtonColor = [UIColor colorFromHex:@"#0161a1"];//确定按钮的颜色
+            [datepicker show];
+            
         }
         
         if (indexPath.row == 2) {
@@ -455,11 +473,26 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             [_text1 resignFirstResponder];
             [_text2 resignFirstResponder];
             [_brandTF resignFirstResponder];
-            QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
-                self.lblData=str;
-                self.lbl2.text = str;
+            
+            
+            WSDatePickerView *datepicker = [[WSDatePickerView alloc] initWithDateStyle:DateStyleShowYearMonthDay CompleteBlock:^(NSDate *selectDate) {
+                
+                NSString *date = [selectDate stringWithFormat:@"yyyy-MM-dd"];
+                NSLog(@"选择的日期：%@",date);
+                self.lblData = date;
+                self.lbl2.text = date;
+                
             }];
-            [datePickerView show];
+            datepicker.dateLabelColor = [UIColor colorFromHex:@"#0161a1"];//年-月-日-时-分 颜色
+            datepicker.datePickerColor = [UIColor blackColor];//滚轮日期颜色
+            datepicker.doneButtonColor = [UIColor colorFromHex:@"#0161a1"];//确定按钮的颜色
+            [datepicker show];
+            
+//            QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
+//                self.lblData=str;
+//                self.lbl2.text = str;
+//            }];
+//            [datePickerView show];
         }
     }
     
