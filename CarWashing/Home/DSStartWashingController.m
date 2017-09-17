@@ -14,6 +14,7 @@
 #import "UIImage+GIF.h"
 #import "HomeViewController.h"
 #import "DSScanController.h"
+#import "DSInputCodeController.h"
 @interface DSStartWashingController ()<UIScrollViewDelegate>
 {
     SXScrPageView *cycleScroll;
@@ -22,7 +23,7 @@
 @property (nonatomic, strong) UILabel *timeNumLabel;
 @property (nonatomic, strong) UILabel *stepsLabel;
 @property (nonatomic, strong) NSArray *stepsarrs;
-
+@property (nonatomic, assign) NSInteger endstr;
 @property (strong, nonatomic) NSMutableArray *imageArray;//存放图片的数组
 @property (strong, nonatomic) UIScrollView *ADScroll;//广告栏的底层ScrollView
 
@@ -37,41 +38,47 @@
 
 }
 - (void) backButtonClick:(id)sender {
-
-   
-    // push将控制器压到栈中，栈是先进后出；pop是出栈：即将控制器从栈中取出。
-    
     NSArray * a = self.navigationController.viewControllers;
+    NSLog(@"%@",a);
+    NSLog(@"%ld",self.endstr);
+    if (self.endstr<0) {
     
-    NSMutableArray *arrController = [NSMutableArray arrayWithArray:a];
-    
-    NSInteger VcCount = arrController.count;
-    
-    //最后一个vc是自己，(-2)是倒数第二个是上一个控制器。
-    
-    UIViewController *lastVC = arrController[VcCount - 1];
-    if ([arrController[0] isKindOfClass:[DSScanController class]]) {
         self.tabBarController.selectedIndex = 0;
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }else{
-        // 返回到倒数第三个控制器
-    
-        if([lastVC isKindOfClass:[HomeViewController class]]) {
+        // push将控制器压到栈中，栈是先进后出；pop是出栈：即将控制器从栈中取出。
         
-            [self.navigationController popViewControllerAnimated:YES];
+        NSArray * a = self.navigationController.viewControllers;
+        NSLog(@"%@",a);
+        NSMutableArray *arrController = [NSMutableArray arrayWithArray:a];
         
+        NSInteger VcCount = arrController.count;
+        
+        //最后一个vc是自己，(-2)是倒数第二个是上一个控制器。
+        
+        UIViewController *lastVC = arrController[VcCount - 1];
+        if ([arrController[0] isKindOfClass:[DSScanController class]]||[arrController[1] isKindOfClass:[DSInputCodeController class]]) {
+            self.tabBarController.selectedIndex = 0;
+        }else{
+            // 返回到倒数第三个控制器
+            
+            if([lastVC isKindOfClass:[HomeViewController class]]||[arrController[1] isKindOfClass:[DSInputCodeController class]]) {
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            }
+            
+            else
+            {
+                
+                HomeViewController *earnVC = [[HomeViewController alloc]init];
+                
+                [arrController replaceObjectAtIndex:(VcCount - 1) withObject:earnVC];
+                self.navigationController.viewControllers = arrController;
+            }
         }
     
-        else
-        {
-        
-            HomeViewController *earnVC = [[HomeViewController alloc]init];
-
-            [arrController replaceObjectAtIndex:(VcCount - 1) withObject:earnVC];
-            self.navigationController.viewControllers = arrController;
-        }
     }
-
-    
 
 
 }
@@ -90,7 +97,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.endstr=1;
     _imageArray = [NSMutableArray array];
 
 //    self.second = 24;
@@ -131,6 +138,7 @@
         UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 //            self.tabBarController.selectedIndex = 0;            
 //            [self.navigationController popToRootViewControllerAnimated:YES];
+            self.endstr=self.second;
             
         }];
         [alertController addAction:OKAction];

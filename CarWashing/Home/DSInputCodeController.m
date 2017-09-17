@@ -138,46 +138,49 @@
 #pragma mark-编号开锁
 -(void)getInputViewText{
     
-    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
-    NSString    *stringTime     = [defaults objectForKey:@"setTime"];
-    
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *overdate = [dateFormatter dateFromString:stringTime];
-    NSTimeZone *zone1 = [NSTimeZone systemTimeZone];
-    NSInteger interva1 = [zone1 secondsFromGMTForDate: overdate];
-    NSDate*endDate = [overdate dateByAddingTimeInterval: interva1];
-    
-    //获取当前时间
-    NSDate*date = [NSDate date];
-    NSTimeZone*zone2 = [NSTimeZone systemTimeZone];
-    NSInteger interva2 = [zone2 secondsFromGMTForDate: date];
-    NSDate *currentDate = [date dateByAddingTimeInterval: interva2];
-    
-    NSInteger intString;
-    NSTimeInterval interval =[endDate timeIntervalSinceDate:currentDate];
-    NSInteger gotime = round(interval);
-    NSString *str2 = [[NSString stringWithFormat:@"%ld",(long)gotime] stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    intString = [str2 intValue];
-    
-    if (intString > 0 && intString < 240) {
-        
-        DSStartWashingController *start = [[DSStartWashingController alloc]init];
-        start.paynum=[UdStorage getObjectforKey:@"Jprice"];
-        start.RemainCount = [UdStorage getObjectforKey:@"RemainCount"];
-        start.IntegralNum = [UdStorage getObjectforKey:@"IntegralNum"];
-        start.CardType = [UdStorage getObjectforKey:@"CardType"];
-        start.CardName =[UdStorage getObjectforKey:@"CardName"];
-        start.hidesBottomBarWhenPushed            = YES;
-        start.second                    = 240-intString;
-        
-        [self.navigationController pushViewController:start animated:YES];
-        
-    }else {
-        
-        
-    }
+//    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+//    NSString    *stringTime     = [defaults objectForKey:@"setTime"];
+//    
+//    
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    NSDate *overdate = [dateFormatter dateFromString:stringTime];
+//    NSTimeZone *zone1 = [NSTimeZone systemTimeZone];
+//    NSInteger interva1 = [zone1 secondsFromGMTForDate: overdate];
+//    NSDate*endDate = [overdate dateByAddingTimeInterval: interva1];
+//    
+//    //获取当前时间
+//    NSDate*date = [NSDate date];
+//    NSTimeZone*zone2 = [NSTimeZone systemTimeZone];
+//    NSInteger interva2 = [zone2 secondsFromGMTForDate: date];
+//    NSDate *currentDate = [date dateByAddingTimeInterval: interva2];
+//    
+//    NSInteger intString;
+//    NSTimeInterval interval =[endDate timeIntervalSinceDate:currentDate];
+//    NSInteger gotime = round(interval);
+//    NSString *str2 = [[NSString stringWithFormat:@"%ld",(long)gotime] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+//    intString = [str2 intValue];
+//    
+//    if (intString > 0 && intString < 240) {
+//        
+//        DSStartWashingController *start = [[DSStartWashingController alloc]init];
+//        start.paynum=[UdStorage getObjectforKey:@"Jprice"];
+//        start.RemainCount = [UdStorage getObjectforKey:@"RemainCount"];
+//        start.IntegralNum = [UdStorage getObjectforKey:@"IntegralNum"];
+//        start.CardType = [UdStorage getObjectforKey:@"CardType"];
+//        start.CardName =[UdStorage getObjectforKey:@"CardName"];
+//        start.hidesBottomBarWhenPushed            = YES;
+//        start.second                    = 240-intString;
+//        
+//        [self.navigationController pushViewController:start animated:YES];
+//        
+//    }else {
+//        self.tabBarController.selectedIndex = 2;
+//        //
+//        //
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//        
+//    }
     
     
     
@@ -263,7 +266,7 @@
                         start.IntegralNum = [NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum];
                         start.CardType = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
                         start.CardName = weakSelf.scan.CardName;
-                        start.second        = 240;
+                        start.second        = 20;
 
                         [weakSelf.navigationController pushViewController:start animated:YES];
                     }

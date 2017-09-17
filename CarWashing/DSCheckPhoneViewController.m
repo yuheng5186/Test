@@ -73,7 +73,7 @@
 }
 - (void) nextButtonClick:(id)sender {
 
-        if (self.phoneNumberText.text.length == 11) {
+        if ([LCMD5Tool valiMobile:self.phoneNumberText.text]) {
             if (self.verifyNumberFieldText.text.length == 4) {
                 //请求数据
                 [self updateUserphone:self.phoneNumberText.text andverifyNumberStr:self.verifyNumberFieldText.text];
@@ -83,7 +83,7 @@
             }
             
         }else {
-            [self.view showInfo:@"请输入正确的11位手机号码" autoHidden:YES];
+            [self.view showInfo:@"请输入正确的手机号码" autoHidden:YES];
         }
     
     
@@ -91,7 +91,7 @@
 
 #pragma mark-获取短信验证码
 -(void)requestVerifyNumAndPhoneNum:(NSString *)phoneNum{
-    if (self.phoneNumberText.text.length == 11) {
+    if ([LCMD5Tool valiMobile:self.phoneNumberText.text]) {
         
         
         [self startTimer];
@@ -120,7 +120,7 @@
         
     }else
     {
-        [self.view showInfo:@"请输入正确的11位手机号码" autoHidden:YES];
+        [self.view showInfo:@"请输入正确手机号码" autoHidden:YES];
         
     }
     

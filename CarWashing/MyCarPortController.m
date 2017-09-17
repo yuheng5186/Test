@@ -107,6 +107,8 @@ static NSString *id_carListCell = @"id_carListCell";
             
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
+           
+          
             for(NSDictionary *dic in arr)
             {
 //                MyCar *newcar = [[MyCar alloc]init];
@@ -121,11 +123,15 @@ static NSString *id_carListCell = @"id_carListCell";
                 }
                 
             }
-            NSLog(@"%@",arr);
 #pragma mark-当只有一辆车时设置为默认
-            if (arr.count==1&&[[arr objectAtIndex:0] objectForKey:@"IsDefaultFav"]==0) {
+            NSLog(@"%@===%ld===%@",arr,arr.count,[(NSDictionary *)arr[0] objectForKey:@"IsDefaultFav"]);
+            int isdefault=  [[(NSDictionary *)arr[0] objectForKey:@"IsDefaultFav"] intValue];
+            if (arr.count==1&&isdefault==0) {
                 [self SetCarDefaultDataAndIndex:0];
             }
+
+            
+            
             
             
             
@@ -274,7 +280,7 @@ static NSString *id_carListCell = @"id_carListCell";
             [carCell.defaultButton setTitle:@"已默认" forState:UIControlStateNormal];
             
             [carCell.defaultButton setTitleColor:[UIColor grayColor] forState:UIControlStateSelected];
-
+             carCell.defaulLabel.hidden = NO;
         }
         else
         {
