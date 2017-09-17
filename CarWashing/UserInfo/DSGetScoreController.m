@@ -37,6 +37,7 @@
 //    [self  gotoAppStorePageRaisal:@"1284053624"];
     
     NSString *str = [NSString stringWithFormat:  @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%d",1284053624];
+//    NSString *str =@"https://itunes.apple.com/cn/app/id1284053624?mt=8";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
                      
                      

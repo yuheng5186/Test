@@ -197,12 +197,9 @@
         
     }else if (indexPath.row == 1){
     
-//        DSAboutController *aboutController             = [[DSAboutController alloc]init];
-//        aboutController.hidesBottomBarWhenPushed        = YES;
-//        [self.navigationController pushViewController:aboutController animated:YES];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/qq/id451108668?mt=12"]];
 
-    
+        NSString *str = [NSString stringWithFormat:  @"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1284053624&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
     }else {
     
 //        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/qq/id451108668?mt=12"]];
