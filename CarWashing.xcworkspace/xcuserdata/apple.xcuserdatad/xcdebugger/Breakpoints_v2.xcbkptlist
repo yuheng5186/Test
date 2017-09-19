@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CarWashing/Find/DSCarClubDetailController.m"
-            timestampString = "527486562.141868"
+            timestampString = "527495377.55127"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1206"
-            endingLineNumber = "1206"
+            startingLineNumber = "1208"
+            endingLineNumber = "1208"
             landmarkName = "-addCommentariesSupportTypeid:andSupType:"
             landmarkType = "7">
          </BreakpointContent>

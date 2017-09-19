@@ -93,7 +93,9 @@
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
+    
 }
+
 // 当键盘出现或改变时调用
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
@@ -166,7 +168,7 @@
 //    });
     self.userImageView          = userImageView;
     [header addSubview:userImageView];
-    
+    self.userImageView.backgroundColor=[UIColor clearColor];
     
     userImageView.sd_layout
     .leftSpaceToView(header, 10*Main_Screen_Height/667)
@@ -414,7 +416,7 @@
     self.downView.layer.borderWidth=0.6;
     self.downView.layer.borderColor=[UIColor grayColor].CGColor;
     self.userSayTextField                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-150*Main_Screen_Width/375, Main_Screen_Height*40/667)];
-    self.userSayTextField.placeholder    = @"    我来说两句...";
+    self.userSayTextField.placeholder    = @"我来说两句...";
     self.userSayTextField.delegate       = self;
     self.userSayTextField.returnKeyType  = UIReturnKeyDone;
     self.userSayTextField.textAlignment  = NSTextAlignmentLeft;

@@ -148,7 +148,7 @@ static NSString *id_cancelCell = @"id_cancelCell";
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
-             //1未支付   2 待评价   3、完成订单、
+             //1未支付   2 待评价   3、完成订单、4.
             NSLog(@"%@",dict);
             self.page = 0;
             self.OrderDataArray = [[NSMutableArray alloc]init];
@@ -291,8 +291,23 @@ if(order.PayState == 1)
         delayCell.OrderCode = order.OrderCode;
         
         return delayCell;
-    }else
-    {
+    }
+else if(order.PayState == 4){
+    SuccessPayCell *successCell = [tableView dequeueReusableCellWithIdentifier:id_successPayCell forIndexPath:indexPath];
+    successCell.delegate = self;
+    
+    successCell.stateLabel.textColor=[UIColor colorFromHex:@"#999999"];
+    successCell.stateLabel.text=@"交易失败";
+    [successCell.stateButton setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
+    [successCell.stateButton setTitle:@"已过期" forState:UIControlStateNormal];
+    [successCell.stateButton setEnabled:NO];
+    successCell.stateButton.layer.cornerRadius = 12.5*Main_Screen_Height/667;
+    successCell.stateButton.layer.borderWidth = 1;
+    successCell.stateButton.layer.borderColor = [UIColor colorFromHex:@"#999999"].CGColor;
+    
+    return successCell;
+    
+}else{
         SuccessPayCell *successCell = [tableView dequeueReusableCellWithIdentifier:id_successPayCell forIndexPath:indexPath];
         successCell.delegate = self;
         
