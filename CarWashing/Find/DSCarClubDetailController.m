@@ -568,7 +568,7 @@
             for(NSDictionary *dic in arr)
             {
 
-//                NSLog(@"%@",dic);
+                NSLog(@"%@",dic);
                 DSUserModel *model = [DSUserModel new];
             
                 [model setValuesForKeysWithDictionary:dic];
@@ -726,13 +726,14 @@
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/GetActivityCommentList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+        NSLog(@"======%@===",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             [_modelsArray removeAllObjects];
 //            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
+            NSLog(@"======%@===",arr);
             for(NSDictionary *dic in arr)
             {
                 DSUserModel *model = [DSUserModel new];
