@@ -446,13 +446,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             [_text1 resignFirstResponder];
             [_text2 resignFirstResponder];
             [_brandTF resignFirstResponder];
-            QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
-                self.lblYear=str;
-                self.lbl.text = str;
-            }];
-            [datePickerView show];
-            
-            
+
             WSDatePickerView *datepicker = [[WSDatePickerView alloc] initWithDateStyle:DateStyleShowYearMonthDay CompleteBlock:^(NSDate *selectDate) {
                 
                 NSString *date = [selectDate stringWithFormat:@"yyyy-MM"];

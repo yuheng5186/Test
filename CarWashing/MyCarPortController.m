@@ -108,7 +108,6 @@ static NSString *id_carListCell = @"id_carListCell";
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
            
-          
             for(NSDictionary *dic in arr)
             {
 //                MyCar *newcar = [[MyCar alloc]init];
@@ -124,17 +123,14 @@ static NSString *id_carListCell = @"id_carListCell";
                 
             }
 #pragma mark-当只有一辆车时设置为默认
-            NSLog(@"%@===%ld===%@",arr,arr.count,[(NSDictionary *)arr[0] objectForKey:@"IsDefaultFav"]);
-            int isdefault=  [[(NSDictionary *)arr[0] objectForKey:@"IsDefaultFav"] intValue];
-            if (arr.count==1&&isdefault==0) {
-                [self SetCarDefaultDataAndIndex:0];
+           
+            if (arr.count!=0) {
+                 NSLog(@"%@===%ld===%@",arr,arr.count,[(NSDictionary *)arr[0] objectForKey:@"IsDefaultFav"]);
+                int isdefault=  [[(NSDictionary *)arr[0] objectForKey:@"IsDefaultFav"] intValue];
+                if (arr.count==1&&isdefault==0) {
+                    [self SetCarDefaultDataAndIndex:0];
+                }
             }
-
-            
-            
-            
-            
-            
             
             __block __weak typeof (self)weakSelf = self;
 
@@ -144,9 +140,6 @@ static NSString *id_carListCell = @"id_carListCell";
                 
             };
 
-            
-            
-            
             [HUD hide:YES afterDelay:1];
             
         }
@@ -156,9 +149,6 @@ static NSString *id_carListCell = @"id_carListCell";
             [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
 //            [self setupUI];
         }
-        
-        
-        
         
     } fail:^(NSError *error) {
         [HUD setHidden:YES];
