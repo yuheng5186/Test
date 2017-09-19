@@ -189,18 +189,18 @@
         }
         else if([payResoult isEqualToString:@"-1"])
         {
-            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"支付结果：失败！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"支付失败" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
             [alertview show];
         }
         else if([payResoult isEqualToString:@"-2"])
         {
 //            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"用户已经退出支付！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
-              UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"支付结果：失败！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+              UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"取消支付" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
             [alertview show];
         }
         else
         {
-            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"支付结果：失败！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"支付失败" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
             [alertview show];
         }
         

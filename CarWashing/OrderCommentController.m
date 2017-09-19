@@ -16,7 +16,7 @@
 #import "UdStorage.h"
 
 #import "MBProgressHUD.h"
-
+#import "IQKeyboardManager.h"
 @interface OrderCommentController ()<UITextViewDelegate>
 {
     UITextView *commentTextView;
@@ -49,7 +49,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //是否显示键盘上的工具条
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     UIView *containStarView = [[UIView alloc] initWithFrame:CGRectMake(0, 64 + 10*Main_Screen_Height/667, Main_Screen_Width, 110*Main_Screen_Height/667)];
     containStarView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:containStarView];

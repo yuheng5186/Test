@@ -41,7 +41,7 @@
 - (void) createSubView {
     
     UIImageView     *view0 = [UIImageView new];
-    view0.backgroundColor   = [UIColor redColor];
+    view0.backgroundColor   = [UIColor clearColor];
     _iconImageView          = view0;
     
     UILabel *lab1           = [UILabel new];
