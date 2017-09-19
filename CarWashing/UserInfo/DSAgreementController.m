@@ -26,7 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.contentView.top                = Main_Screen_Height*30/667;
-    self.contentView.backgroundColor    = [UIColor grayColor];
+    self.contentView.backgroundColor    = [UIColor whiteColor];
     self.contentView.height             = self.view.height;
     self.webView                        = [[UIWebView alloc] initWithFrame: self.contentView.frame];
 //    self.webView.backgroundColor        = [UIColor colorFromHex: @"#111112"];
@@ -38,7 +38,7 @@
 //    self.webView.scrollView.scrollEnabled = NO;
     [self.webView sizeToFit];
     
-    
+    self.webView.backgroundColor        = [UIColor clearColor];
     [self.contentView addSubview: self.webView];
     
     [self showBlackLoading];

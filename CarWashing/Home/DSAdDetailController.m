@@ -185,7 +185,7 @@
     NSURLRequest* request           = [NSURLRequest requestWithURL: url];
     
     [webView loadRequest:request];
-    
+    webView.backgroundColor         = [UIColor clearColor];
     webView.scrollView.contentInset = UIEdgeInsetsMake (0.0f, 0.0f, 80.0f, 0.0f);
     
 }

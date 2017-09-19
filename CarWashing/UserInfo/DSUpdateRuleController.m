@@ -16,17 +16,19 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"等级规则"];
+//    [self drawTitle:@"等级规则"];
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor       = [UIColor whiteColor];
+    self.contentView.backgroundColor       = [UIColor whiteColor];
+
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 64)];
     webView.opaque = NO;
     webView.delegate = self;
-    
+    webView.backgroundColor     = [UIColor clearColor];
     [webView sizeToFit];
     
     [self.view addSubview:webView];
@@ -43,7 +45,9 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     
+    NSString *title = [webView stringByEvaluatingJavaScriptFromString: @"document.title"];
     
+    [self drawTitle: title];
 }
 
 
