@@ -70,33 +70,49 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__61-[MySettingViewController tableView:didSelectRowAtIndexPath:]_block_invoke.501"
+                  symbolName = "__61-[MySettingViewController tableView:didSelectRowAtIndexPath:]_block_invoke.499"
                   moduleName = "CarWashing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Test/CarWashing/Controllers/MySettingViewController.m"
-                  timestampString = "527505206.264411"
+                  timestampString = "527506638.009679"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "666"
                   endingLineNumber = "666"
-                  offsetFromSymbolStart = "800">
+                  offsetFromSymbolStart = "524">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__61-[MySettingViewController tableView:didSelectRowAtIndexPath:]_block_invoke_2.504"
+                  symbolName = "__61-[MySettingViewController tableView:didSelectRowAtIndexPath:]_block_invoke_2.500"
                   moduleName = "CarWashing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Test/CarWashing/Controllers/MySettingViewController.m"
-                  timestampString = "527505206.265887"
+                  timestampString = "527506638.010947"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "668"
-                  endingLineNumber = "668"
-                  offsetFromSymbolStart = "80">
+                  startingLineNumber = "683"
+                  endingLineNumber = "683"
+                  offsetFromSymbolStart = "48">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CarWashing/AppDelegate.m"
+            timestampString = "527506070.561149"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
+            landmarkName = "-onResp:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
