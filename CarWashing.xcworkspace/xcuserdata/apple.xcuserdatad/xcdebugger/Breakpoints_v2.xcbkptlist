@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CarWashing/Find/DSCarClubDetailController.m"
-            timestampString = "527477079.098778"
+            timestampString = "527486562.141868"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1207"
-            endingLineNumber = "1207"
+            startingLineNumber = "1206"
+            endingLineNumber = "1206"
             landmarkName = "-addCommentariesSupportTypeid:andSupType:"
             landmarkType = "7">
          </BreakpointContent>
@@ -35,29 +35,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CarWashing/Find/DSCarClubDetailController.m"
-            timestampString = "527476944.382446"
+            filePath = "CarWashing/BusinessPayController.m"
+            timestampString = "527491724.787766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "729"
-            endingLineNumber = "729"
-            landmarkName = "-requestCommentList"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CarWashing/Find/DSCarClubDetailController.m"
-            timestampString = "527477070.957997"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "736"
-            endingLineNumber = "736"
-            landmarkName = "-requestCommentList"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

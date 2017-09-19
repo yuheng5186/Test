@@ -12,7 +12,6 @@
 #import "UITableView+SDAutoTableViewCellHeight.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "IQKeyboardManager.h"
-#import "UIScrollView+EmptyDataSet.h"//第三方空白页
 
 #import "HTTPDefine.h"
 #import "LCMD5Tool.h"
@@ -22,7 +21,7 @@
 #import "MBProgressHUD.h"
 
 
-@interface DSCarClubDetailController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
+@interface DSCarClubDetailController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
     CarClubNews *newsDetail;
     
@@ -78,16 +77,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//     [IQKeyboardManager sharedManager].enable = YES;
-    // Do any additional setup after loading the view.
+    //是否显示键盘上的工具条
+     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+//     Do any additional setup after loading the view.
     
     newsDetail = [[CarClubNews alloc]init];
     self.page = 0;
     
-    //添加监听，当键盘出现时收到消息
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
-    //添加监听，当键盘退出时收到消息
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:)name:UIKeyboardWillHideNotification object:nil];
+//    //添加监听，当键盘出现时收到消息
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
+//    //添加监听，当键盘退出时收到消息
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:)name:UIKeyboardWillHideNotification object:nil];
     
      [self createSubView];
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -135,13 +135,8 @@
 
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
-#pragma maek-空白页
-    self.tableView.emptyDataSetSource = self;
-    self.tableView.emptyDataSetDelegate = self;
-//        self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
-    //    self.tableView.scrollEnabled    = NO;
-    //    self.tableView.tableFooterView  = [UIView new];
-//    self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 180, 0);
+
+
     [self.contentView addSubview:self.tableView];
 
     
@@ -384,7 +379,7 @@
     
     self.tableView.tableHeaderView  = header;
     
-    if(_modelsArray.count == 0)
+    if(self.CommentCount == 0)
     {
         UIView *v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 215*Main_Screen_Height/667)];
         v.backgroundColor = [UIColor whiteColor];
@@ -402,6 +397,9 @@
         nocommentlab.textColor = [UIColor colorFromHex:@"#999999"];
         [v addSubview:nocommentlab];
         self.tableView.tableFooterView = v;
+        self.tableView.tableFooterView.hidden=NO;
+    }else{
+        self.tableView.tableFooterView.hidden=YES;
     }
     
 
@@ -413,7 +411,8 @@
                                       Main_Screen_Height*60/667-44, Main_Screen_Width, Main_Screen_Height*60/667);
     self.downView .backgroundColor  = [UIColor whiteColor];
     
-    
+    self.downView.layer.borderWidth=0.6;
+    self.downView.layer.borderColor=[UIColor grayColor].CGColor;
     self.userSayTextField                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-150*Main_Screen_Width/375, Main_Screen_Height*40/667)];
     self.userSayTextField.placeholder    = @"    我来说两句...";
     self.userSayTextField.delegate       = self;
@@ -574,7 +573,7 @@
                 [model setValuesForKeysWithDictionary:dic];
                 [_modelsArray addObject:model];
             }
-
+            self.CommentCount=_modelsArray.count;
        
 //            self.userName.text = newsDetail.FromusrName;
 //            self.sayTime.text = newsDetail.ActDate;
@@ -662,7 +661,6 @@
         self.page = 0 ;
         [self.downView removeFromSuperview];
         [self requestActivityDetail];
-        
     });
 }
 
@@ -1153,9 +1151,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_modelsArray count];
     
-//    return self.modelsArray.count;
+    return self.CommentCount;
+    
+
 }
 
 
@@ -1302,83 +1301,6 @@
 
 
 
-#pragma mark - 无数据占位
-//无数据占位
-- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
-    return [UIImage imageNamed:@"pinglun_kongbai"];
-}
-
-- (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView{
-    
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath: @"pinglun_kongbai"];
-    animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
-    animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI_2, 0.0, 0.0,   1.0)];
-    animation.duration = 0.25;
-    animation.cumulative = YES;
-    animation.repeatCount = MAXFLOAT;
-    return animation;
-}
-//设置文字（上图下面的文字，我这个图片默认没有这个文字的）是富文本样式，扩展性很强！
-
-//这个是设置标题文字的
-- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
-    NSString *text = @"暂无评论信息";
-    
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:16.0f],
-                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
-    
-    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
-}
-//设置占位图空白页的背景色( 图片优先级高于文字)
-
-
-// 返回可以点击的按钮 上面带文字
-- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-    NSDictionary *attribute = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f]};
-    return [[NSAttributedString alloc] initWithString:@"afdfdgfd" attributes:attribute];
-}
-
-
-- (UIImage *)buttonImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-    return [UIImage imageNamed:@"pinglun_kongbai"];
-}
-//是否显示空白页，默认YES
-- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
-    return YES;
-}
-//是否允许点击，默认YES
-- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView {
-    return NO;
-}
-//是否允许滚动，默认NO
-- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
-    return YES;
-}
-//图片是否要动画效果，默认NO
-- (BOOL) emptyDataSetShouldAllowImageViewAnimate:(UIScrollView *)scrollView {
-    return YES;
-}
-//空白页点击事件
-- (void)emptyDataSetDidTapView:(UIScrollView *)scrollView {
-    NSLog(@"空白页点击事件");
-}
-//空白页按钮点击事件
-- (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView {
-    return NSLog(@"空白页按钮点击事件");
-}
-/**
- *  调整垂直位置
- */
-- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
-{//偏移量计算逻辑 ->
-//    当前屏幕一半的高度 = (获取屏幕的的高度->减去导航栏高度)/2
-    //判断headerView高度是否超过屏幕的一半
-    BOOL isHeader =  (CGRectGetHeight(self.tableView.tableHeaderView.frame)>(self.view.bounds.size.height-64)/2);
-    //计算偏移量 (bgView 为空白占位图)
-//    CGFloat height=CGRectGetHeight(self.tableView.tableHeaderView.frame.size.height-(self.view.bounds.size.height-64)/2));
-//    return isHeader?self.tableView.tableHeaderView.frame.size.height-(self.view.bounds.size.height-64)/2:-64;
-    return 450*Main_Screen_Height/667;
-}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

@@ -403,7 +403,7 @@
         UILabel *noticeLabel = [[UILabel alloc] init];
         noticeLabel.text = @"使用须知";
         noticeLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-        noticeLabel.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
+        noticeLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
         self.noticeLabel = noticeLabel;
         [cell.contentView addSubview:self.noticeLabel];
         
@@ -412,7 +412,7 @@
         noticeLabelOne.text = @"1、此卡仅限清洗汽车外观，不得购买其它服务项目";
         noticeLabelOne.numberOfLines = 0;
         noticeLabelOne.textColor = [UIColor colorFromHex:@"#999999"];
-        noticeLabelOne.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        noticeLabelOne.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         self.noticeLabelOne = noticeLabelOne;
         
         [cell.contentView addSubview:self.noticeLabelOne];
@@ -432,27 +432,27 @@
         UILabel *noticeLabelTwo = [[UILabel alloc] init];
         noticeLabelTwo.text = @"2、洗车卡不能兑换现金和转赠与其他人使用";
         noticeLabelTwo.textColor = [UIColor colorFromHex:@"#999999"];
-        noticeLabelTwo.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        noticeLabelTwo.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         self.noticeLabeTwo = noticeLabelTwo;
         [cell.contentView addSubview:self.noticeLabeTwo];
         UILabel *noticeLabelThree = [[UILabel alloc] init];
         noticeLabelThree.text = @"3、此卡一经售出，概不兑现。不记名，不挂失，不退卡，不补办";
         noticeLabelThree.textColor = [UIColor colorFromHex:@"#999999"];
-        noticeLabelThree.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        noticeLabelThree.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         noticeLabelThree.numberOfLines = 0;
         self.noticeLabelThree = noticeLabelThree;
         [cell.contentView addSubview:self.noticeLabelThree];
         UILabel *noticeLabelFour = [[UILabel alloc] init];
         noticeLabelFour.text = @"4、此卡可在蔷薇服务点享受会员优惠待遇，不得与其它优惠同时使用";
         noticeLabelFour.textColor = [UIColor colorFromHex:@"#999999"];
-        noticeLabelFour.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        noticeLabelFour.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         noticeLabelFour.numberOfLines = 0;
         self.noticeLabelFour = noticeLabelFour;
         [cell.contentView addSubview:self.noticeLabelFour];
         UILabel *noticeLabelFive = [[UILabel alloc] init];
         noticeLabelFive.text = @"5、由青岛蔷薇汽车服务有限公司保留此卡法律范围内的最终解释权。VIP热线：4006979558";
         noticeLabelFive.textColor = [UIColor colorFromHex:@"#999999"];
-        noticeLabelFive.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+        noticeLabelFive.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         noticeLabelFive.numberOfLines = 0;
         self.noticeLabelFive = noticeLabelFive;
         [cell.contentView addSubview:self.noticeLabelFive];

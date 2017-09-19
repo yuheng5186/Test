@@ -1047,7 +1047,7 @@
         start.CardName =[UdStorage getObjectforKey:@"CardName"];
 //        start.second        = 240;
         start.hidesBottomBarWhenPushed            = YES;
-        start.second                    = 20-intString;
+        start.second                    = 240-intString;
         
         [self.navigationController pushViewController:start animated:YES];
 //        [_session stopRunning];
