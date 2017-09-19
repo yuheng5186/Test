@@ -404,7 +404,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 {
     
    
-   NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"车身外部清洗维护",@"车内清洁-5座轿车",@"车内清洁-SVU或7座轿车", nil];
+   NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"车身外部清洗维护",@"车内清洁-5座轿车",@"车内清洁SUV或7座", nil];
    
    NSInteger index;
    
@@ -493,7 +493,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 -(void)setDatamore
 {
    
-   NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"车身外部清洗维护",@"车内清洁-5座轿车",@"车内清洁-SVU或7座轿车", nil];
+   NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"车身外部清洗维护",@"车内清洁-5座轿车",@"车内清洁SUV或7座", nil];
    
    NSInteger index;
    
