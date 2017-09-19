@@ -580,6 +580,7 @@
 
 
 }
+
 - (void)cycleScrollView:(GCCycleScrollView*)cycleScrollView didSelectItemAtRow:(NSInteger)row{
     NSLog(@"dianji =%ld",(long)row);
     

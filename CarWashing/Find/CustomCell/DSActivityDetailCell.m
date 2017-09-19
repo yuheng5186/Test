@@ -73,9 +73,9 @@
     thumbupvie.titleLabel.textColor=[UIColor colorFromHex:@"#868686"];
     [thumbupvie setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     thumbupvie.titleLabel.font               = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
-    [thumbupvie setTitle:@"0" forState:UIControlStateNormal];
-    [thumbupvie setImage:[UIImage imageNamed:@"pinglundianzan"] forState:UIControlStateNormal];
-    [thumbupvie setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateSelected];
+//    [thumbupvie setTitle:@"0" forState:UIControlStateNormal];
+//    [thumbupvie setImage:[UIImage imageNamed:@"pinglundianzan"] forState:UIControlStateNormal];
+//    [thumbupvie setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateSelected];
      [thumbupvie setTitleEdgeInsets:UIEdgeInsetsMake(10*Main_Screen_Height/667, -thumbupvie.imageView.image.size.width, 0, thumbupvie.imageView.image.size.width)];
     [thumbupvie setImageEdgeInsets:UIEdgeInsetsMake(10*Main_Screen_Height/667, thumbupvie.titleLabel.bounds.size.width, 0, -thumbupvie.titleLabel.bounds.size.width)];
      [thumbupvie addTarget:self action:@selector(ThumbOclick:) forControlEvents:UIControlEventTouchUpInside];

@@ -55,6 +55,7 @@
             
             [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@InviteShare/UserShare",Khttp] success:^(NSDictionary *dict, BOOL success) {
                 
+                NSLog(@"%@",dict);
                 if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                 {
                     //创建发送对象实例
@@ -64,8 +65,8 @@
                     
                     //创建分享内容对象
                     WXMediaMessage *urlMessage = [WXMediaMessage message];
-                    urlMessage.title = @"蔷薇爱车";//分享标题
-                    urlMessage.description = @"分享赚钱";//分享描述
+                    urlMessage.title = [[dict objectForKey:@"JsonData"] objectForKey:@"ShareTitle"];;//分享标题
+                    urlMessage.description =[[dict objectForKey:@"JsonData"] objectForKey:@"ShareContent"];;//分享描述
                     [urlMessage setThumbImage:[UIImage imageNamed:@"loginIcon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
                     
                     //创建多媒体对象
@@ -117,8 +118,8 @@
                     
                     //创建分享内容对象
                     WXMediaMessage *urlMessage = [WXMediaMessage message];
-                    urlMessage.title = @"蔷薇爱车";//分享标题
-                    urlMessage.description = @"分享赚钱";//分享描述
+                    urlMessage.title = [[dict objectForKey:@"JsonData"] objectForKey:@"ShareTitle"];;//分享标题
+                    urlMessage.description =[[dict objectForKey:@"JsonData"] objectForKey:@"ShareContent"];;//分享描述
                     [urlMessage setThumbImage:[UIImage imageNamed:@"loginIcon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
                     
                     //创建多媒体对象
