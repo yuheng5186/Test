@@ -21,7 +21,7 @@
 #import "MBProgressHUD.h"
 
 
-@interface DSCarClubDetailController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+@interface DSCarClubDetailController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIScrollViewDelegate>
 {
     CarClubNews *newsDetail;
     
@@ -77,6 +77,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     //是否显示键盘上的工具条
      [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
 //     Do any additional setup after loading the view.
@@ -1192,6 +1193,12 @@
     
     
     return cell;
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self.userSayTextField resignFirstResponder];
+   
+    
+    
 }
 
 #pragma mark-评论支持

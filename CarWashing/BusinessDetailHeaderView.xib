@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -90,7 +90,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="美容店" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SHX-hz-M0q">
-                    <rect key="frame" x="231" y="9" width="40" height="16"/>
+                    <rect key="frame" x="245" y="9" width="40" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -257,7 +257,7 @@
                 <constraint firstItem="IQA-RW-0Ij" firstAttribute="centerY" secondItem="KeK-77-8ss" secondAttribute="centerY" id="gyX-yk-v0a"/>
                 <constraint firstItem="quV-0Z-T4d" firstAttribute="centerY" secondItem="iJw-Mx-rww" secondAttribute="centerY" id="jGO-jU-7FA"/>
                 <constraint firstAttribute="bottom" secondItem="quV-0Z-T4d" secondAttribute="bottom" constant="16.5" id="jLT-RF-TpX"/>
-                <constraint firstItem="m2S-Ew-y8U" firstAttribute="leading" secondItem="SHX-hz-M0q" secondAttribute="trailing" constant="19" id="ldD-3T-A8O"/>
+                <constraint firstItem="m2S-Ew-y8U" firstAttribute="leading" secondItem="SHX-hz-M0q" secondAttribute="trailing" constant="5" id="ldD-3T-A8O"/>
                 <constraint firstItem="eKm-rc-TZ2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="ltq-ga-HdD"/>
                 <constraint firstItem="quV-0Z-T4d" firstAttribute="top" secondItem="4Ae-uk-brs" secondAttribute="bottom" constant="15.5" id="mcN-OJ-e0O"/>
                 <constraint firstItem="4Ae-uk-brs" firstAttribute="centerY" secondItem="nTf-A9-UN4" secondAttribute="centerY" id="nzw-9q-LjB"/>
