@@ -168,7 +168,7 @@
 //    });
     self.userImageView          = userImageView;
     [header addSubview:userImageView];
-    self.userImageView.backgroundColor=[UIColor clearColor];
+  
     
     userImageView.sd_layout
     .leftSpaceToView(header, 10*Main_Screen_Height/667)
@@ -488,7 +488,7 @@
     
     goodShowLabel.sd_layout
     .leftSpaceToView(downGoodButton, 5*Main_Screen_Height/667)
-    .topSpaceToView(self.downView , 10*Main_Screen_Height/667)
+    .topSpaceToView(self.downView , 20*Main_Screen_Height/667)
     .widthIs(25*Main_Screen_Height/667)
     .heightIs(20*Main_Screen_Height/667);
     
@@ -612,6 +612,7 @@
             
 //
            [self createHeaderView];
+              self.userImageView.backgroundColor=[UIColor clearColor];
             [_tableView reloadData];
             [self.tableView.mj_header endRefreshing];
         }
