@@ -30,7 +30,7 @@
     webView.delegate = self;
     webView.backgroundColor     = [UIColor clearColor];
     [webView sizeToFit];
-    
+    webView.dataDetectorTypes = UIDataDetectorTypeNone;
     [self.view addSubview:webView];
     
     NSURL * url                     = [NSURL URLWithString: @"http://119.23.53.225:8090/qw/dengji.html"];
