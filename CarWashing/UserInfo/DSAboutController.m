@@ -99,8 +99,8 @@
     
     
     
-    NSString *copyrightlName              = @"Copyright2014-2017蔷薇版权所有  沪ICP备";
-    UIFont *copyrightlNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
+    NSString *copyrightlName              = @"Copyright2014-2017蔷薇版权所有  鲁ICP备17040309号";
+    UIFont *copyrightlNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*12/667];
     UILabel *copyrightlNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:copyrightlName font:copyrightlNameFont] font:copyrightlNameFont text:copyrightlName isCenter:NO];
     copyrightlNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
     copyrightlNameLabel.top               = updateRuleButton.bottom +Main_Screen_Height*5/667;
