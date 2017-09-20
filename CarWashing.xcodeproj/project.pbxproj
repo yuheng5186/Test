@@ -20,6 +20,7 @@
 		04443F501F5944450032BA5E /* DSScanPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04443F4F1F5944450032BA5E /* DSScanPayController.m */; };
 		045E1BAF1F69150700F37230 /* problemCar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 045E1BAE1F69150700F37230 /* problemCar.plist */; };
 		045E1BB11F69151B00F37230 /* ProblemUse.plist in Resources */ = {isa = PBXBuildFile; fileRef = 045E1BB01F69151B00F37230 /* ProblemUse.plist */; };
+		046E41E71F72414100DF4866 /* HSUpdateApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E41E61F72414100DF4866 /* HSUpdateApp.m */; };
 		04DB28E41F6E184F009B4D9C /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DB28DE1F6E184F009B4D9C /* NSDate+Extension.m */; };
 		04DB28E51F6E184F009B4D9C /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DB28E01F6E184F009B4D9C /* UIView+Extension.m */; };
 		04DB28E61F6E184F009B4D9C /* WSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DB28E21F6E184F009B4D9C /* WSDatePickerView.m */; };
@@ -323,6 +324,8 @@
 		04443F4F1F5944450032BA5E /* DSScanPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSScanPayController.m; path = Home/DSScanPayController.m; sourceTree = "<group>"; };
 		045E1BAE1F69150700F37230 /* problemCar.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = problemCar.plist; sourceTree = "<group>"; };
 		045E1BB01F69151B00F37230 /* ProblemUse.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ProblemUse.plist; sourceTree = "<group>"; };
+		046E41E51F72414100DF4866 /* HSUpdateApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSUpdateApp.h; sourceTree = "<group>"; };
+		046E41E61F72414100DF4866 /* HSUpdateApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSUpdateApp.m; sourceTree = "<group>"; };
 		04DB28DD1F6E184F009B4D9C /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
 		04DB28DE1F6E184F009B4D9C /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
 		04DB28DF1F6E184F009B4D9C /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
@@ -987,6 +990,8 @@
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				046E41E51F72414100DF4866 /* HSUpdateApp.h */,
+				046E41E61F72414100DF4866 /* HSUpdateApp.m */,
 				04DB28DC1F6E184F009B4D9C /* WSDaePickerView */,
 				18E702701F5503BC007A9777 /* KPIndicatorView */,
 				0415739D1F53C522004514E3 /* TFGridInputView */,
@@ -2284,6 +2289,7 @@
 				5016721B1F297DA500384186 /* payCardDetailCell.m in Sources */,
 				5061A43E1F3AAECE003939A4 /* SCBaseViewController.m in Sources */,
 				1807D94A1F4C23FC0080C4AB /* HYSlider.m in Sources */,
+				046E41E71F72414100DF4866 /* HSUpdateApp.m in Sources */,
 				182190061F301BA400F7207F /* DSUserModel.m in Sources */,
 				1853BA0C1F28774400B98C7F /* LKActionSheet.m in Sources */,
 				188907161F283184009E20B0 /* DSGetScoreController.m in Sources */,
