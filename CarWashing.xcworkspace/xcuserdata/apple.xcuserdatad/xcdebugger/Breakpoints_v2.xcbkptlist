@@ -70,31 +70,31 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__61-[MySettingViewController tableView:didSelectRowAtIndexPath:]_block_invoke.499"
+                  symbolName = "__61-[MySettingViewController tableView:didSelectRowAtIndexPath:]_block_invoke.501"
                   moduleName = "CarWashing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Test/CarWashing/Controllers/MySettingViewController.m"
-                  timestampString = "527506638.009679"
+                  timestampString = "527582770.607454"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "666"
                   endingLineNumber = "666"
-                  offsetFromSymbolStart = "524">
+                  offsetFromSymbolStart = "823">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__61-[MySettingViewController tableView:didSelectRowAtIndexPath:]_block_invoke_2.500"
+                  symbolName = "__61-[MySettingViewController tableView:didSelectRowAtIndexPath:]_block_invoke_2.504"
                   moduleName = "CarWashing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Test/CarWashing/Controllers/MySettingViewController.m"
-                  timestampString = "527506638.010947"
+                  timestampString = "527582770.608754"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "683"
-                  endingLineNumber = "683"
-                  offsetFromSymbolStart = "48">
+                  startingLineNumber = "668"
+                  endingLineNumber = "668"
+                  offsetFromSymbolStart = "67">
                </Location>
             </Locations>
          </BreakpointContent>

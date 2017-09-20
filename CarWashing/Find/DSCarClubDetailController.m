@@ -85,10 +85,7 @@
     newsDetail = [[CarClubNews alloc]init];
     self.page = 0;
     
-//    //添加监听，当键盘出现时收到消息
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
-//    //添加监听，当键盘退出时收到消息
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:)name:UIKeyboardWillHideNotification object:nil];
+
     
      [self createSubView];
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -97,36 +94,6 @@
     
 }
 
-// 当键盘出现或改变时调用
-- (void)keyboardWillShow:(NSNotification *)aNotification
-{
-    // 获取键盘的高度
-    NSDictionary *userInfo = [aNotification userInfo];
-    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGRect keyboardRect = [aValue CGRectValue];
-    int height = keyboardRect.size.height;
-
-    if (self.userSayTextField.text.length ==0) {//键盘弹出
-        
-        self.downView.frame = CGRectMake(0, Main_Screen_Height -Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*60/667);
-    }else{
-        CGRect rect =CGRectMake(0, Main_Screen_Height -Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*60/667);
-        self.downView.frame = rect;
-    }
-}
-// 当键退出时调用
-- (void)keyboardWillHide:(NSNotification *)aNotification
-{
-
-    if (self.userSayTextField.text.length ==0) {//键盘弹出
-        
-        self.downView.frame = CGRectMake(0, Main_Screen_Height -Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*60/667);
-    }else{
-        CGRect rect =CGRectMake(0, Main_Screen_Height -Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*60/667);
-        self.downView.frame = rect;
-    }
-
-}
 
 
 - (void) createSubView {
