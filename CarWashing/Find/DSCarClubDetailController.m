@@ -705,8 +705,7 @@
             NSLog(@"======%@===",arr);
             for(NSDictionary *dic in arr)
             {
-                DSUserModel *model = [DSUserModel new];
-                [model setValuesForKeysWithDictionary:dic];
+                DSUserModel *model = [[DSUserModel alloc]initWithDictionary:dic error:nil];;
                 [_modelsArray addObject:model];
             }
             [_tableView reloadData];
@@ -747,8 +746,8 @@
             arr = [dict objectForKey:@"JsonData"];
             for(NSDictionary *dic in arr)
             {
-                DSUserModel *model = [DSUserModel new];
-                [model setValuesForKeysWithDictionary:dic];
+                DSUserModel *model = [[DSUserModel alloc]initWithDictionary:dic error:nil];
+                
                 [_moreArray addObject:model];
             }
             if(_moreArray.count == 0)
@@ -1149,13 +1148,13 @@
         btn.selected=!btn.selected;
     
     };
-    if(self.modelsArray.count == 0)
+    if(_modelsArray.count == 0)
     {
         
     }
     else
     {
-        cell.model  = self.modelsArray[indexPath.row];
+        cell.model  = _modelsArray[indexPath.row];
     }
     
     
@@ -1289,13 +1288,13 @@
     // >>>>>>>>>>>>>>>>>>>>> * cell自适应步骤2 * >>>>>>>>>>>>>>>>>>>>>>>>
     /* model 为模型实例， keyPath 为 model 的属性名，通过 kvc 统一赋值接口 */
     
-    if(self.modelsArray.count == 0)
+    if(_modelsArray.count == 0)
     {
         return 0;
     }
     else
     {
-        return [self.tableView cellHeightForIndexPath:indexPath model:self.modelsArray[indexPath.row] keyPath:@"model" cellClass:[DSActivityDetailCell class] contentViewWidth:[self cellContentViewWith]]+23*Main_Screen_Height/667;
+        return [self.tableView cellHeightForIndexPath:indexPath model:_modelsArray[indexPath.row] keyPath:@"model" cellClass:[DSActivityDetailCell class] contentViewWidth:[self cellContentViewWith]]+23*Main_Screen_Height/667;
     }
     
 }
