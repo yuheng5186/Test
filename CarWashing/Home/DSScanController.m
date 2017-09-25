@@ -101,8 +101,37 @@
 -(void)viewWillAppear:(BOOL)animated{
 
     
-    [self resumeAnimation];
-    [_session startRunning];
+    /// 先判断摄像头硬件是否好用
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        /// 用户是否允许摄像头使用
+        NSString * mediaType = AVMediaTypeVideo;
+        AVAuthorizationStatus  authorizationStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
+        /// 不允许弹出提示框
+        if (authorizationStatus == AVAuthorizationStatusRestricted|| authorizationStatus == AVAuthorizationStatusDenied) {
+            
+            UIAlertController * alertC = [UIAlertController alertControllerWithTitle:@"您已经禁止蔷薇爱车访问摄像头" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            [self presentViewController:alertC animated:YES completion:nil];
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+
+                self.tabBarController.selectedIndex = 0;
+
+            }];
+            [alertC addAction:action];
+        }else{
+            ////这里是摄像头可以使用的处理逻辑
+            [self resumeAnimation];
+            [_session startRunning];
+        }
+    } else {
+        /// 硬件问题提示
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"手机摄像头设备损坏" message:@"" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        
+        [alertView show];
+    }
+    
+    
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
