@@ -262,10 +262,10 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     [_middleview addSubview:introLabelTwo];
     
     introLabelThree = [[UILabel alloc] init];
-    introLabelThree.text = [NSString stringWithFormat:@"有效期%ld天",card.ExpiredDay];
-    introLabelThree.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+    introLabelThree.text = [NSString stringWithFormat:@"￥%@",card.CardPrice];
+    introLabelThree.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     introLabelThree.textAlignment = NSTextAlignmentCenter;
-    introLabelThree.textColor = [UIColor colorFromHex:@"#999999"];
+    introLabelThree.textColor = [UIColor colorFromHex:@"#0161a1"];
     [_middleview addSubview:introLabelThree];
     
     UIButton *buyButton = [[UIButton alloc] init];
@@ -441,7 +441,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     [bannerView addSubview:scoreLab];
     
     UILabel *invalidLab = [[UILabel alloc] init];
-    invalidLab.text = [NSString stringWithFormat:@"有效期%ld天",card.ExpiredDay];
+    invalidLab.text = [NSString stringWithFormat:@"￥%@",card.CardPrice];
     invalidLab.font = [UIFont systemFontOfSize:10*Main_Screen_Height/667];
     [bannerView addSubview:invalidLab];
     
@@ -527,7 +527,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     functionLabel.text = card.CardName;
     introLabelOne.text = [NSString stringWithFormat:@"持卡洗车次数%ld次",card.CardCount];
     introLabelTwo.text =[NSString stringWithFormat:@"购卡获得%ld积分",card.Integralnum];
-    introLabelThree.text = [NSString stringWithFormat:@"有效期%ld天",card.ExpiredDay];
+    introLabelThree.text = [NSString stringWithFormat:@"￥%@",card.CardPrice];
     
     
 }
