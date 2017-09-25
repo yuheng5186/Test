@@ -62,6 +62,8 @@
     GCCycleScrollView *cycleScroll;
     UIView          *titleView;
     UIImageView *newManImageView;
+    MBProgressHUD *HUD;
+
 }
 
 /** 选择的结果*/
@@ -150,6 +152,13 @@
     [UdStorage storageObject:@"121.523387"  forKey:@"Xm"];
 
     _IsSign = 0;
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    
     
     [self createSubView];
     
@@ -586,18 +595,28 @@
     serviceNameLabel.centerX           = serviceImageView.centerX;
     serviceNameLabel.top               = serviceImageView.bottom +Main_Screen_Height*12/667;
     
+    newManImageView      = [UIUtil drawCustomImgViewInView:self.tableView frame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*75/667) imageName:@"banka_banner"];
+    newManImageView.centerX           = headerView.centerX;
+    newManImageView.top               = serviceView.bottom+Main_Screen_Height*20/667;
+    newManImageView.userInteractionEnabled=YES;
+    newManImageView.contentMode=UIViewContentModeScaleAspectFill;
+    newManImageView.image=[UIImage imageNamed:@"banka_banner"];
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
+    [newManImageView addGestureRecognizer:tap];
+    headerView.height   = serviceNameLabel.bottom;
     
-    if (self.newrc.recList.count==0) {
-        newManImageView      = [UIUtil drawCustomImgViewInView:self.tableView frame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*75/667) imageName:@"banka_banner"];
-        newManImageView.centerX           = headerView.centerX;
-        newManImageView.top               = serviceView.bottom+Main_Screen_Height*20/667;
-        newManImageView.userInteractionEnabled=YES;
-        newManImageView.contentMode=UIViewContentModeScaleAspectFill;
-        newManImageView.image=[UIImage imageNamed:@"banka_banner"];
-        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
-        [newManImageView addGestureRecognizer:tap];
-        headerView.height   = serviceNameLabel.bottom;
-    }
+    
+//    if (self.newrc.recList.count==0) {
+//        newManImageView      = [UIUtil drawCustomImgViewInView:self.tableView frame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*75/667) imageName:@"banka_banner"];
+//        newManImageView.centerX           = headerView.centerX;
+//        newManImageView.top               = serviceView.bottom+Main_Screen_Height*20/667;
+//        newManImageView.userInteractionEnabled=YES;
+//        newManImageView.contentMode=UIViewContentModeScaleAspectFill;
+//        newManImageView.image=[UIImage imageNamed:@"banka_banner"];
+//        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
+//        [newManImageView addGestureRecognizer:tap];
+//        headerView.height   = serviceNameLabel.bottom;
+//    }
 //    else{
 //        newManImageView.hidden=YES;
 //        newManImageView.frame=CGRectMake(0, 0, 0, 0);
@@ -697,7 +716,7 @@
             }
             else
             {
-                
+
                 NSLog(@"%@",[dict objectForKey:@"JsonData"]);
 //                NSArray *arr = [NSArray array];
 //                arr = [dict objectForKey:@"JsonData"];
@@ -708,8 +727,20 @@
 //                    [self.GetUserRecordData addObject:newrc];
 //                }
                  [self createHeaderView];
+                
+                if (self.newrc.recList.count==0) {
+                    newManImageView.hidden=NO;
+                    newManImageView.frame=CGRectMake(0, 0, 0, 0);
+                }else {
+                    newManImageView.hidden=YES;
+                    newManImageView.frame=CGRectMake(0, 0, 0, 0);
+                }
+                
                 [self.tableView reloadData];
                 [self.tableView.mj_header endRefreshing];
+                
+                [HUD setHidden:YES];
+
             }
             
 //            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -717,11 +748,14 @@
         }
         else
         {
+            [HUD setHidden:YES];
             [self.view showInfo:@"数据请求失败,请检查定位" autoHidden:YES interval:2];
             [self.tableView.mj_header endRefreshing];
+
         }
         
     } fail:^(NSError *error) {
+        [HUD setHidden:YES];
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
         [self.tableView.mj_header endRefreshing];
     }];
@@ -753,7 +787,7 @@
 //        return 0.01;
 //    }
     if (self.newrc.recList.count==0||self.newrc.recList.count<2) {
-        if (section==self.newrc.recList.count-1) {
+        if (section==0) {
             return Main_Screen_Height*110/667;
         }else{
             return 0.01;
@@ -761,7 +795,7 @@
         }
     }else{
        
-            if (section==1) {
+            if (section==0) {
                 return Main_Screen_Height*110/667;
             }else{
                 return 0.01;
@@ -797,8 +831,10 @@
     imageview.image=[UIImage imageNamed:@"banka_banner"];
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
     [imageview addGestureRecognizer:tap];
+    
+    
     if (self.newrc.recList.count==0||self.newrc.recList.count<2) {
-        if (section==self.newrc.recList.count-1) {
+        if (section==0) {
             return imageview;
         }else{
             return [UILabel new];
@@ -806,14 +842,12 @@
         }
     }else{
         
-        if (section==1) {
+        if (section==0) {
             return imageview;
         }else{
             return [UILabel new];
             
         }
-        
-        
         
     }
    
@@ -838,7 +872,8 @@
     cell.backgroundColor    = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-    if (self.newrc.recList.count>1) {
+    if (self.newrc.recList.count>0)
+    {
         
    
     Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil];

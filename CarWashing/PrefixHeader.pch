@@ -30,6 +30,9 @@
 #import "WXApi.h"
 #import "WXApiObject.h"
 
+#import "MBProgressHUD.h"
+
+
 #import "GCCycleScrollView.h"//广告无限滚动
 //NSUserDefaults 保存数据
 #define IsNotFirstOpen   @"isNotFirstOpen"       //不是第一次打开
