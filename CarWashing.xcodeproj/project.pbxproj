@@ -18,6 +18,7 @@
 		041573A51F53C522004514E3 /* TFGridInputViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041573A11F53C522004514E3 /* TFGridInputViewCell.m */; };
 		041573A61F53C522004514E3 /* TFGridInputViewCellStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 041573A31F53C522004514E3 /* TFGridInputViewCellStyle.m */; };
 		04443F501F5944450032BA5E /* DSScanPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04443F4F1F5944450032BA5E /* DSScanPayController.m */; };
+		0452AC9F1F790D7900506306 /* DSCardShowDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0452AC9E1F790D7900506306 /* DSCardShowDetailViewController.m */; };
 		045E1BAF1F69150700F37230 /* problemCar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 045E1BAE1F69150700F37230 /* problemCar.plist */; };
 		045E1BB11F69151B00F37230 /* ProblemUse.plist in Resources */ = {isa = PBXBuildFile; fileRef = 045E1BB01F69151B00F37230 /* ProblemUse.plist */; };
 		046E41E71F72414100DF4866 /* HSUpdateApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E41E61F72414100DF4866 /* HSUpdateApp.m */; };
@@ -322,6 +323,8 @@
 		041573A31F53C522004514E3 /* TFGridInputViewCellStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFGridInputViewCellStyle.m; sourceTree = "<group>"; };
 		04443F4E1F5944450032BA5E /* DSScanPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSScanPayController.h; path = Home/DSScanPayController.h; sourceTree = "<group>"; };
 		04443F4F1F5944450032BA5E /* DSScanPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSScanPayController.m; path = Home/DSScanPayController.m; sourceTree = "<group>"; };
+		0452AC9D1F790D7900506306 /* DSCardShowDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCardShowDetailViewController.h; sourceTree = "<group>"; };
+		0452AC9E1F790D7900506306 /* DSCardShowDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSCardShowDetailViewController.m; sourceTree = "<group>"; };
 		045E1BAE1F69150700F37230 /* problemCar.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = problemCar.plist; sourceTree = "<group>"; };
 		045E1BB01F69151B00F37230 /* ProblemUse.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ProblemUse.plist; sourceTree = "<group>"; };
 		046E41E51F72414100DF4866 /* HSUpdateApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSUpdateApp.h; sourceTree = "<group>"; };
@@ -1669,6 +1672,8 @@
 				501672181F297DA500384186 /* payCardDetailCell.m */,
 				18322ABE1F4D950C003ABB7B /* Card.h */,
 				18322ABF1F4D950C003ABB7B /* Card.m */,
+				0452AC9D1F790D7900506306 /* DSCardShowDetailViewController.h */,
+				0452AC9E1F790D7900506306 /* DSCardShowDetailViewController.m */,
 			);
 			name = Purchase;
 			sourceTree = "<group>";
@@ -2143,6 +2148,7 @@
 				501672201F297F3100384186 /* HQSliderView.m in Sources */,
 				0401E9031F4ED6E900F0CA79 /* EARestrictedScrollView.m in Sources */,
 				18A6033A1F4FC06000CFA328 /* TggStarEvaluationView.m in Sources */,
+				0452AC9F1F790D7900506306 /* DSCardShowDetailViewController.m in Sources */,
 				1853BA461F28A04100B98C7F /* JFCityCollectionFlowLayout.m in Sources */,
 				50B26E641F300D60009B3B9F /* PayPurchaseCardController.m in Sources */,
 				18B69EAA1F32CB5B007DA0E4 /* ZFConst.m in Sources */,

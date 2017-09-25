@@ -23,6 +23,7 @@
 #import "UdStorage.h"
 #import "Card.h"
 #import "MBProgressHUD.h"
+#import "DSCardShowDetailViewController.h"
 
 #define KCURRENTCITYINFODEFAULTS [NSUserDefaults standardUserDefaults]
 @interface PurchaseViewController ()<JFLocationDelegate, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource, UIScrollViewDelegate>
@@ -358,10 +359,16 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 
 - (void)didSelectCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex {
     Card *card = (Card *)[_CardArray objectAtIndex:_Xuhao];
-    PayPurchaseCardController *payCardVC = [[PayPurchaseCardController alloc] init];
-    payCardVC.hidesBottomBarWhenPushed = YES;
-    payCardVC.choosecard = card;
-    [self.navigationController pushViewController:payCardVC animated:YES];
+//    PayPurchaseCardController *payCardVC = [[PayPurchaseCardController alloc] init];
+//    payCardVC.hidesBottomBarWhenPushed = YES;
+//    payCardVC.choosecard = card;
+//    [self.navigationController pushViewController:payCardVC animated:YES];
+    
+    DSCardShowDetailViewController  *cardDetail = [DSCardShowDetailViewController new];
+    cardDetail.hidesBottomBarWhenPushed = YES;
+    cardDetail.choosecard   = card;
+    [self.navigationController pushViewController:cardDetail animated:YES];
+    
 }
 
 
