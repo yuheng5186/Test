@@ -340,7 +340,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
             payCell.detailTextLabel.text = self.SerMerChant;
             payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
             payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
-            payCell.detailTextLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
+            payCell.detailTextLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#999999"];
         }else if (indexPath.section == 0 && indexPath.row == 1){
             
@@ -348,7 +348,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
             payCell.detailTextLabel.text = self.SerProject;
             payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
             payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
-            payCell.detailTextLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
+            payCell.detailTextLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#999999"];
         }
         else
@@ -357,7 +357,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
             payCell.detailTextLabel.text = self.Jprice;
             payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
             payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
-            payCell.detailTextLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
+            payCell.detailTextLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#ff3645"];
         }
         
@@ -370,7 +370,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
             payCell.detailTextLabel.text = [NSString stringWithFormat:@"立减%.2f元",[[self.Jprice substringFromIndex:1] doubleValue] - [[self.Xprice substringFromIndex:1] doubleValue]];
             payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
             payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
-            payCell.detailTextLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
+            payCell.detailTextLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
         }
         else
@@ -378,7 +378,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
             payCell.detailTextLabel.text = self.Xprice;
             payCell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
             payCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
-            payCell.detailTextLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
+            payCell.detailTextLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             payCell.detailTextLabel.textColor = [UIColor colorFromHex:@"#ff3645"];
         }
         
@@ -390,7 +390,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
         cell.imageView.image = [UIImage imageNamed:self.payImageNameArr[indexPath.row]];
         cell.textLabel.text = self.payNameArray[indexPath.row];
         cell.textLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-        cell.textLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+        cell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
         
 //        UIButton *payWayBtn = [[UIButton alloc] init];
 //        [payWayBtn setImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];

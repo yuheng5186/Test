@@ -248,7 +248,7 @@
 
 - (NSArray *)hotCityArray {
     if (!_hotCityArray) {
-        _hotCityArray = @[@"北京", @"上海", @"广州", @"深圳", @"武汉", @"天津", @"西安", @"南京", @"杭州", @"成都", @"重庆"];
+        _hotCityArray = @[@"青岛市", @"上海市", @"广州市", @"深圳市", @"天津市", @"西安市", @"南京市", @"重庆市"];
     }
     return _hotCityArray;
 }

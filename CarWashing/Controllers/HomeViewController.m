@@ -149,11 +149,6 @@
     [UdStorage storageObject:@"31.192272" forKey:@"Ym"];
     [UdStorage storageObject:@"121.523387"  forKey:@"Xm"];
 
-//    [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.latitude] forKey:@"Ym"];
-//    [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.longitude]  forKey:@"Xm"];
-    
-    
-    
     _IsSign = 0;
     
     [self createSubView];
@@ -674,13 +669,13 @@
 
     if(self.LocCity == nil)
     {
-        self.LocCity = @"";
+        self.LocCity = @"青岛市";
     }
     
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                             @"Area":@"上海市"
-//                             @"Area":self.LocCity
+//                             @"Area":@"上海市"
+                             @"Area":self.LocCity
                              };
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
@@ -1388,8 +1383,8 @@
     
 //    NSLog(@"经度=%f 纬度=%f 高度=%f", currLocation.coordinate.latitude, currLocation.coordinate.longitude, currLocation.altitude);
     
-    [UdStorage storageObject:@"青岛市" forKey:@"City"];
-    [UdStorage storageObject:@"市南区" forKey:@"Quyu"];
+//    [UdStorage storageObject:@"青岛市" forKey:@"City"];
+//    [UdStorage storageObject:@"市南区" forKey:@"Quyu"];
     [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.latitude] forKey:@"Ym"];
     [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.longitude]  forKey:@"Xm"];
     

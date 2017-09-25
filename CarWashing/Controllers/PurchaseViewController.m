@@ -117,16 +117,16 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     self.locationButton        = [UIButton buttonWithType:UIButtonTypeCustom];
     self.locationButton.frame             = CGRectMake(0, 0, Main_Screen_Width*70/375, Main_Screen_Height*30/667);
     self.locationButton.backgroundColor   = [UIColor clearColor];
-    [self.locationButton setTitle:@"上海" forState:UIControlStateNormal];
+    [self.locationButton setTitle:@"青岛市" forState:UIControlStateNormal];
     [self.locationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.locationButton.titleLabel.font   = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
-    self.locationButton.left              = Main_Screen_Width*14/375;
+    self.locationButton.titleLabel.font   = [UIFont systemFontOfSize:Main_Screen_Height*13/667];
+    self.locationButton.left              = Main_Screen_Width*12/375;
     self.locationButton.centerY           = titleNameLabel.centerY;
     [self.locationButton addTarget:self action:@selector(clickLocationButton) forControlEvents:UIControlEventTouchUpInside];
     [self.locationButton setImage:[UIImage imageNamed:@"dingwei1"] forState:UIControlStateNormal];
-    self.locationButton.imageEdgeInsets = UIEdgeInsetsMake(0, -Main_Screen_Width*10/375, 0, 0);
+    self.locationButton.imageEdgeInsets = UIEdgeInsetsMake(0, -Main_Screen_Width*0/375, 0, 0);
     [self.locationButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-    self.locationButton.layer.cornerRadius = Main_Screen_Height*15/667;
+    self.locationButton.layer.cornerRadius = self.locationButton.height/2;
     //self.locationButton.clipsToBounds = YES;
     self.locationButton.layer.borderWidth = 1;
     self.locationButton.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -581,21 +581,32 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 - (void)currentLocation:(NSDictionary *)locationDictionary {
     NSString *city = [locationDictionary valueForKey:@"City"];
     if (![_resultLabel.text isEqualToString:city]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"您定位到%@，确定切换城市吗？",city] preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            _resultLabel.text = city;
-            
-            
-            [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"locationCity"];
-            [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"currentCity"];
-            [self.manager cityNumberWithCity:city cityNumber:^(NSString *cityNumber) {
-                [KCURRENTCITYINFODEFAULTS setObject:cityNumber forKey:@"cityNumber"];
-            }];
+        
+        
+        _resultLabel.text = city;
+        
+        
+        [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"locationCity"];
+        [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"currentCity"];
+        [self.manager cityNumberWithCity:city cityNumber:^(NSString *cityNumber) {
+            [KCURRENTCITYINFODEFAULTS setObject:cityNumber forKey:@"cityNumber"];
         }];
-        [alertController addAction:cancelAction];
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
+        
+//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"您定位到%@，确定切换城市吗？",city] preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+//        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            _resultLabel.text = city;
+//            
+//            
+//            [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"locationCity"];
+//            [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"currentCity"];
+//            [self.manager cityNumberWithCity:city cityNumber:^(NSString *cityNumber) {
+//                [KCURRENTCITYINFODEFAULTS setObject:cityNumber forKey:@"cityNumber"];
+//            }];
+//        }];
+//        [alertController addAction:cancelAction];
+//        [alertController addAction:okAction];
+//        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 
