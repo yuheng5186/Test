@@ -144,6 +144,14 @@
     self.title = @"首页";
     self.navigationController.navigationBar.hidden = YES;
     
+    [UdStorage storageObject:@"青岛市" forKey:@"City"];
+    [UdStorage storageObject:@"市南区" forKey:@"Quyu"];
+    [UdStorage storageObject:@"31.192272" forKey:@"Ym"];
+    [UdStorage storageObject:@"121.523387"  forKey:@"Xm"];
+
+//    [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.latitude] forKey:@"Ym"];
+//    [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.longitude]  forKey:@"Xm"];
+    
     
     
     _IsSign = 0;
@@ -1385,9 +1393,10 @@
     [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.latitude] forKey:@"Ym"];
     [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.longitude]  forKey:@"Xm"];
     
+    NSLog(@"Ym=====%@",[UdStorage getObjectforKey:@"Ym"]);
     
-    
-    
+    NSLog(@"Xm=====%@",[UdStorage getObjectforKey:@"Xm"]);
+
     
     
     
