@@ -255,7 +255,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     if (section == 0) {
-        return 3;
+        return 4;
     }
     if (section == 1) {
         return 2;
@@ -324,6 +324,18 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         
         return cell;
     }
+    else if (indexPath.section == 0 && indexPath.row == 3) {
+        
+        cell.textLabel.text  = @"实际价格";
+
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"￥%@",self.choosecard.CardPrice];
+        
+        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+        
+        return cell;
+    }
+    
     
     else if (indexPath.section == 1 && indexPath.row == 0) {
         
