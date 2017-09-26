@@ -19,7 +19,7 @@
         
         self.titleLabel.x = self.imageView.x;
         
-        self.imageView.x = self.titleLabel.maxX + 6;
+        self.imageView.x = self.titleLabel.maxX + 1;
     }
     
     
