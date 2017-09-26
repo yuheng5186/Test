@@ -73,7 +73,7 @@
     }
     
     UIButton *logoutButton      = [UIUtil drawDefaultButton:self.contentView title:@"退出当前帐号" target:self action:@selector(logoutButtonClick:)];
-    logoutButton.top           = self.tableView.bottom;
+    logoutButton.top           = self.tableView.bottom+Main_Screen_Height*30/667;
     logoutButton.centerX       = upView.centerX;
     
     
@@ -122,7 +122,7 @@
 //        default:
 //            break;
 //    }
-    return 2;
+    return 3;
     
 }
 
@@ -144,13 +144,12 @@
     cell.textLabel.font         = [UIFont systemFontOfSize:15];
     
     if (indexPath.row == 0) {
-        cell.textLabel.text     = @"关于蔷薇";
+        cell.textLabel.text     = @"密码管理";
+
 
     }else if (indexPath.row == 1){
     
-//        cell.textLabel.text     = @"关于蔷薇";
-        cell.textLabel.text     = @"给我评分";
-
+        cell.textLabel.text     = @"关于蔷薇";
 
     }else {
     
@@ -188,21 +187,21 @@
     
     if (indexPath.row == 0) {
         
-//        DSPasswordController *passwordController        = [[DSPasswordController alloc]init];
-//        passwordController.hidesBottomBarWhenPushed      = YES;
-//        [self.navigationController pushViewController:passwordController animated:YES];
+        DSPasswordController *passwordController        = [[DSPasswordController alloc]init];
+        passwordController.hidesBottomBarWhenPushed      = YES;
+        [self.navigationController pushViewController:passwordController animated:YES];
+
+        
+    }else if (indexPath.row == 1){
         DSAboutController *aboutController             = [[DSAboutController alloc]init];
         aboutController.hidesBottomBarWhenPushed        = YES;
         [self.navigationController pushViewController:aboutController animated:YES];
-        
-    }else if (indexPath.row == 1){
-    
 
-        NSString *str = [NSString stringWithFormat:  @"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1284053624&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+
     }else {
     
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/qq/id451108668?mt=12"]];
+        NSString *str = [NSString stringWithFormat:  @"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1284053624&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 
     }
     

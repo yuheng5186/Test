@@ -1108,7 +1108,7 @@
     NSString *str2 = [[NSString stringWithFormat:@"%ld",(long)gotime] stringByReplacingOccurrencesOfString:@"-" withString:@""];
     intString = [str2 intValue];
     
-    if (intString > 0 && intString < 20) {
+    if (intString > 0 && intString < 240) {
         
         DSStartWashingController *start = [[DSStartWashingController alloc]init];
 //        [UdStorage storageObject:dateString forKey:@"setTime"];

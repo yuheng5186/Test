@@ -275,7 +275,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     buyButton.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
     buyButton.titleLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     buyButton.layer.cornerRadius = 20*Main_Screen_Height/667;
-    [buyButton addTarget:self action:@selector(didSelectCell:withSubViewIndex:) forControlEvents:UIControlEventTouchUpInside];
+    [buyButton addTarget:self action:@selector(didCickBuyButton) forControlEvents:UIControlEventTouchUpInside];
     [_middleview addSubview:buyButton];
     
 //    _pageControl.hidden = YES;
@@ -437,7 +437,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     [bannerView addSubview:cardtagLab];
     
     UILabel *timesLab = [[UILabel alloc] init];
-    timesLab.text = [NSString stringWithFormat:@"持卡洗车次数%ld次",card.CardCount];
+    timesLab.text = [NSString stringWithFormat:@"免费扫码洗车%ld次",card.CardCount];
     timesLab.textColor = [UIColor colorFromHex:@"#ffffff"];
     timesLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [bannerView addSubview:timesLab];
