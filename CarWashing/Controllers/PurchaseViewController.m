@@ -275,7 +275,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     buyButton.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
     buyButton.titleLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     buyButton.layer.cornerRadius = 20*Main_Screen_Height/667;
-    [buyButton addTarget:self action:@selector(didSelectCell:withSubViewIndex:) forControlEvents:UIControlEventTouchUpInside];
+    [buyButton addTarget:self action:@selector(didCickBuyButton) forControlEvents:UIControlEventTouchUpInside];
     [_middleview addSubview:buyButton];
     
 //    _pageControl.hidden = YES;
