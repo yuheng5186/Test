@@ -9,5 +9,4 @@
 #import "BaseController.h"
 
 @interface PassWordLoginViewController : BaseController
-
 @end

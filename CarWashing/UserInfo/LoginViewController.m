@@ -113,7 +113,7 @@
 
 //    UIImage *backgroundImage            = [UIImage imageNamed:@"dengluditu"];
     UIImageView  *backgroundImageView   = [UIUtil drawCustomImgViewInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width-10, Main_Screen_Height*380/667) imageName:@"dengluditu"];
-    backgroundImageView.top             = welcomeLabel.bottom;
+    backgroundImageView.top             = welcomeLabel.bottom-20;
     backgroundImageView.centerX         = Main_Screen_Width/2;
     
     
@@ -147,7 +147,7 @@
     loginButton.backgroundColor   = [UIColor colorFromHex:@"#0161a1"];
     loginButton.tintColor         = [UIColor whiteColor];
     loginButton.layer.cornerRadius  = Main_Screen_Height*5/667;
-    loginButton.bottom            = backgroundImageView.bottom -Main_Screen_Height*65/667;
+    loginButton.bottom            = backgroundImageView.bottom -Main_Screen_Height*75/667;
     loginButton.centerX           = Main_Screen_Width/2;
     
     _indicatorView = [[KPIndicatorView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Height*35/667, Main_Screen_Height*35/667)];
@@ -166,7 +166,7 @@
     [passwordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(loginButton.mas_bottom);
         make.right.equalTo(loginButton.mas_right);
-        make.size.mas_equalTo(CGSizeMake(100, Main_Screen_Height*30/667));
+        make.size.mas_equalTo(CGSizeMake(100, Main_Screen_Height*40/667));
     }];
     
     UIButton *updateRuleButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*320/375, Main_Screen_Height*30/667)];
@@ -181,7 +181,7 @@
     [updateRuleButton setBackgroundColor:[UIColor clearColor]];
     [updateRuleButton.titleLabel setFont:[UIFont systemFontOfSize:Main_Screen_Height*14/667]];
     [updateRuleButton addTarget:self action:@selector(agreeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    updateRuleButton.top              = loginButton.bottom +Main_Screen_Height*20/667;
+    updateRuleButton.top              = loginButton.bottom +Main_Screen_Height*40/667;
     updateRuleButton.centerX          = loginButton.centerX;
     [self.contentView addSubview:updateRuleButton];
     
@@ -214,7 +214,8 @@
             
             NSDictionary *mulDic = @{
                                      @"Mobile":self.userMobileFieldText.text,
-                                     @"VerCode":self.verifyFieldText.text
+                                     @"VerCode":self.verifyFieldText.text,
+                                     @"LoginType":@(0)
                                      };
             NSDictionary *params = @{
                                      @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],

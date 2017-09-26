@@ -7,15 +7,23 @@
 //
 
 #import "DSPasswordController.h"
-
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "UdStorage.h"
+#import "HTTPDefine.h"
 @interface DSPasswordController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
-
+{
+    UIButton * submitButton;
+}
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UITextField *userMobileFieldText;
 @property (nonatomic, strong) UITextField *verifyFieldText;
 @property (nonatomic, strong) UITextField *passwordNewFieldText;
 @property (nonatomic, strong) UITextField *passwordAgainFieldText;
-
+@property (nonatomic,strong) NSTimer *timer;
+@property (nonatomic,assign) int second;
+@property (nonatomic, strong) UIButton *getVeriifyStringButton;
+@property (nonatomic, strong) UIButton *resendFakeBtn;
 
 
 @end
@@ -23,8 +31,12 @@
 @implementation DSPasswordController
 
 - (void)drawNavigation {
+    if (self.type==1) {
+        [self drawTitle:@"找回密码"];
+    }else{
+        [self drawTitle:@"密码管理"];
+    }
     
-    [self drawTitle:@"密码管理"];
     
 }
 
@@ -56,14 +68,77 @@
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
     
-    UIButton *submitButton      = [UIUtil drawDefaultButton:self.contentView title:@"提交" target:self action:@selector(submitButtonClick:)];
+    submitButton      = [UIUtil drawDefaultButton:self.contentView title:@"提交" target:self action:@selector(submitButtonClick:)];
     submitButton.top           = self.tableView.bottom +Main_Screen_Height*40/667;
     submitButton.centerX       = Main_Screen_Width/2;
     
 }
 - (void) submitButtonClick:(id)sender {
+    
 
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.verifyFieldText resignFirstResponder];
+    
+    [self.userMobileFieldText resignFirstResponder];
+    
+    [submitButton setTitle:@"提交" forState:UIControlStateNormal];
+    submitButton.enabled = NO;
+    if (self.passwordNewFieldText.text.length!=6) {
+        [self.view showInfo:@"请输入6位密码" autoHidden:YES interval:2];
+        return;
+    }
+    if (![self.passwordNewFieldText.text isEqualToString:self.passwordAgainFieldText.text]) {
+        [self.view showInfo:@"两次密码输入不一致" autoHidden:YES interval:2];
+        return;
+    }
+    if ([LCMD5Tool valiMobile:self.userMobileFieldText.text]) {
+        if (self.verifyFieldText.text.length == 4) {
+            
+            
+            
+            NSDictionary *mulDic = @{
+                                     @"Mobile":self.userMobileFieldText.text,
+                                     @"VerCode":self.verifyFieldText.text,
+                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                     @"PassWord":self.passwordNewFieldText.text
+                                     };
+            NSDictionary *params = @{
+                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                     };
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/Login",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                
+                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+                else
+                {
+                    [self.view showInfo:@"验证码不正确" autoHidden:YES interval:2];
+                    [submitButton setTitle:@"提交" forState:UIControlStateNormal];
+                    submitButton.enabled = YES;
+                }
+                
+            } fail:^(NSError *error) {
+                [self.view showInfo:@"提交失败" autoHidden:YES interval:2];
+                [submitButton setTitle:@"提交" forState:UIControlStateNormal];
+                submitButton.enabled = YES;
+            }];
+            
+            
+            
+            
+            
+        }else{
+            [self.view showInfo:@"请输入4位验证码！" autoHidden:YES interval:2];
+            [submitButton setTitle:@"提交" forState:UIControlStateNormal];
+            submitButton.enabled = YES;
+        }
+        
+    }else {
+        [self.view showInfo:@"请输入正确的手机号码" autoHidden:YES];
+        [submitButton setTitle:@"提交" forState:UIControlStateNormal];
+        submitButton.enabled = YES;
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -104,7 +179,7 @@
         cell.imageView.image                = [UIImage imageNamed:@"yonghushouji"];
         
         self.userMobileFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(10*Main_Screen_Height/667, 45*Main_Screen_Height/667, Main_Screen_Width-Main_Screen_Width*70/375, Main_Screen_Height*40/667)];
-        self.userMobileFieldText.placeholder    = @"15800781856";
+        self.userMobileFieldText.placeholder    = @"请输入手机号码";
         self.userMobileFieldText.delegate       = self;
         self.userMobileFieldText.clearButtonMode= UITextFieldViewModeAlways;
         self.userMobileFieldText.returnKeyType  = UIReturnKeyDone;
@@ -139,11 +214,11 @@
         
         NSString *getVeriifyString      = @"获取验证码";
         UIFont *getVeriifyStringFont          = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
-        UIButton *getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*90/375, Main_Screen_Height*30/667) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyButtonClick:)];
-        getVeriifyStringButton.backgroundColor=  [UIColor colorFromHex:@"#0161a1"];
-        getVeriifyStringButton.layer.cornerRadius = Main_Screen_Height*15/667;
-        getVeriifyStringButton.right          = Main_Screen_Width -Main_Screen_Width*10/375;
-        getVeriifyStringButton.top            = Main_Screen_Height*10/667;
+        _getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*90/375, Main_Screen_Height*30/667) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyButtonClick:)];
+        _getVeriifyStringButton.backgroundColor=  [UIColor colorFromHex:@"#0161a1"];
+        _getVeriifyStringButton.layer.cornerRadius = Main_Screen_Height*15/667;
+        _getVeriifyStringButton.right          = Main_Screen_Width -Main_Screen_Width*10/375;
+        _getVeriifyStringButton.top            = Main_Screen_Height*10/667;
     }else if (indexPath.section == 2){
         cell.imageView.image                = [UIImage imageNamed:@"mimasuo"];
         
@@ -210,7 +285,33 @@
 
 }
 - (void) getVeriifyButtonClick:(id)sender {
-    
+    if ([LCMD5Tool valiMobile:self.userMobileFieldText.text]) {
+        
+        
+        [self startTimer];
+        [self.view showInfo:@"验证码发送成功，请在手机上查收！" autoHidden:YES interval:2];
+        
+        NSDictionary *mulDic = @{@"Mobile":self.userMobileFieldText.text};
+        
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        
+        
+        NSLog(@"%@",params);
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetVerCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            NSLog(@"%@",dict);
+        } fail:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
+        
+    }else
+    {
+        [self.view showInfo:@"请输入正确的手机号码" autoHidden:YES];
+        
+    }
+
 }
 
 - (void) passwordNewFieldTextChanged: (UITextField *) sender
@@ -226,19 +327,43 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)startTimer
+{
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+    self.second = 60;
+    self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
+    [self.timer fire];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)onTimer
+{
+    if (self.second == 0) {
+        
+        [self.view showInfo:@"未收到验证码，请点击重新发送！" autoHidden:YES interval:2];
+        self.getVeriifyStringButton.hidden = NO;
+        self.resendFakeBtn.hidden = NO;
+        self.getVeriifyStringButton.enabled = YES;
+        self.resendFakeBtn.enabled = YES;
+        [self.getVeriifyStringButton setTitle:@"重新发送" forState:UIControlStateNormal];
+        //                [self.resendBtn setTitle:NSLocalizedString(@"Resend Code", nil) forState:UIControlStateNormal];
+        //        self.secondLbl.text = @"";
+        //        self.secondLbl.hidden = YES;
+        [self.timer invalidate];
+        
+    } else {
+        //        self.resendBtn.hidden = YES;
+        self.getVeriifyStringButton.enabled = NO;
+        self.resendFakeBtn.enabled = NO;
+        //        [self.resendBtn setTitle:NSLocalizedString(@"Waiting", nil) forState:UIControlStateNormal];
+        //        self.secondLbl.hidden = NO;
+        NSString *text = [NSString stringWithFormat:@"%d%@",self.second--,@"s"];
+        [self.getVeriifyStringButton setTitle:text forState:UIControlStateNormal];
+    }
 }
-*/
+
 
 @end

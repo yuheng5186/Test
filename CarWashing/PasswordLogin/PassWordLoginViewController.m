@@ -20,6 +20,7 @@
 #import "HTTPDefine.h"
 
 #import "IQKeyboardManager.h"
+#import "DSPasswordController.h"
 @interface PassWordLoginViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     KPIndicatorView *_indicatorView;
@@ -62,10 +63,10 @@
 - (void) createSubView {
     UIButton * backBtn = [UIButton buttonWithType:UIButtonTypeSystem];
 //    backBtn.backgroundColor=[UIColor redColor];
-    backBtn.frame=CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*30/667);
+    backBtn.frame=CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*40/667);
     backBtn.top  = Main_Screen_Height/667;
-    UIImageView * backimage = [[UIImageView alloc]initWithFrame:CGRectMake(10, 5, 10, 20)];
-    backimage.image=[UIImage imageNamed:@"icon_titlebar_arrow"];
+    UIImageView * backimage = [[UIImageView alloc]initWithFrame:CGRectMake(15, 5, 20, 20)];
+    backimage.image=[UIImage imageNamed:@"dengluyefanhui"];
     
     [backBtn addSubview:backimage];
     [backBtn addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
@@ -74,7 +75,6 @@
     NSString   *headerString     = @"登录";
     UIFont     *headerFont       = [UIFont systemFontOfSize:Main_Screen_Height*20/667];
     UILabel *deaderLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*30/667) font:headerFont text:headerString isCenter:NO];
-    deaderLabel.backgroundColor=[UIColor yellowColor];
     deaderLabel.textColor        = [UIColor blackColor];
     deaderLabel.textAlignment    = NSTextAlignmentCenter;
     
@@ -112,7 +112,7 @@
     
     //    UIImage *backgroundImage            = [UIImage imageNamed:@"dengluditu"];
     UIImageView  *backgroundImageView   = [UIUtil drawCustomImgViewInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width-10, Main_Screen_Height*380/667) imageName:@"dengluditu"];
-    backgroundImageView.top             = welcomeLabel.bottom;
+    backgroundImageView.top             = welcomeLabel.bottom-20;
     backgroundImageView.centerX         = Main_Screen_Width/2;
     
     
@@ -132,7 +132,7 @@
     }
     
     
-    NSString   *remindString     = @"新用户验证码登录即可完成注册";
+    NSString   *remindString     = @"";
     UIFont     *remindFont       = [UIFont systemFontOfSize:Main_Screen_Height*12/667];
     UILabel *remindLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*250/375, Main_Screen_Height*30/667) font:remindFont text:remindString isCenter:NO];
     remindLabel.textColor        = [UIColor colorFromHex:@"#999999"];
@@ -146,7 +146,7 @@
     loginButton.backgroundColor   = [UIColor colorFromHex:@"#0161a1"];
     loginButton.tintColor         = [UIColor whiteColor];
     loginButton.layer.cornerRadius  = Main_Screen_Height*5/667;
-    loginButton.bottom            = backgroundImageView.bottom -Main_Screen_Height*65/667;
+    loginButton.bottom            = backgroundImageView.bottom -Main_Screen_Height*75/667;
     loginButton.centerX           = Main_Screen_Width/2;
     
     _indicatorView = [[KPIndicatorView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Height*35/667, Main_Screen_Height*35/667)];
@@ -165,8 +165,37 @@
     [ForgetpasswordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(loginButton.mas_bottom);
         make.left.equalTo(loginButton.mas_left);
-        make.size.mas_equalTo(CGSizeMake(100, Main_Screen_Height*30/667));
+        make.size.mas_equalTo(CGSizeMake(100, Main_Screen_Height*40/667));
     }];
+    UIButton * checkLoginBtn = [UIButton buttonWithType: UIButtonTypeSystem];
+    [checkLoginBtn setTitle:@"验证码登录?" forState:UIControlStateNormal];
+    [checkLoginBtn setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
+    checkLoginBtn.titleLabel.font=[UIFont systemFontOfSize:Main_Screen_Height*12/667];
+    checkLoginBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    checkLoginBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [checkLoginBtn addTarget:self action:@selector(checkLoginBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:checkLoginBtn];
+    [checkLoginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(loginButton.mas_bottom);
+        make.right.equalTo(loginButton.mas_right);
+        make.size.mas_equalTo(CGSizeMake(100, Main_Screen_Height*40/667));
+    }];
+    
+    UIButton *updateRuleButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*320/375, Main_Screen_Height*30/667)];
+    [updateRuleButton setTitleColor:[UIColor colorFromHex:@"#0161a1"] forState:UIControlStateNormal];
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"注册即为同意《蔷薇爱车用户服务协议》"];
+    NSRange titleRange = {0,[title length]};
+    [title addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleNone] range:titleRange];
+    [title addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, 6)];
+    [title addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#0161a1"] range:NSMakeRange(6, 12)];
+    
+    [updateRuleButton setAttributedTitle:title forState:UIControlStateNormal];
+    [updateRuleButton setBackgroundColor:[UIColor clearColor]];
+    [updateRuleButton.titleLabel setFont:[UIFont systemFontOfSize:Main_Screen_Height*14/667]];
+    [updateRuleButton addTarget:self action:@selector(agreeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    updateRuleButton.top              = loginButton.bottom +Main_Screen_Height*40/667;
+    updateRuleButton.centerX          = loginButton.centerX;
+    [self.contentView addSubview:updateRuleButton];
     [self.scrollView addSubview:self.contentView];
     [self.view addSubview:self.scrollView];
     
@@ -190,20 +219,23 @@
     loginButton.enabled = NO;
     
     if ([LCMD5Tool valiMobile:self.userMobileFieldText.text]) {
-        if (self.verifyFieldText.text.length == 4) {
+        if (self.verifyFieldText.text.length == 6) {
             
             
             
             NSDictionary *mulDic = @{
+                                     @"LoginType":@(1),
                                      @"Mobile":self.userMobileFieldText.text,
                                      @"VerCode":self.verifyFieldText.text
+                                     
                                      };
             NSDictionary *params = @{
                                      @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                      @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                      };
+            NSLog(@"%@",params);
             [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/Login",Khttp] success:^(NSDictionary *dict, BOOL success) {
-                
+                NSLog(@"%@",dict);
                 if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                 {
                     
@@ -230,7 +262,7 @@
                 }
                 else
                 {
-                    [self.view showInfo:@"验证码不正确" autoHidden:YES interval:2];
+                    [self.view showInfo:@"密码不正确" autoHidden:YES interval:2];
                     [_indicatorView stopAnimating];
                     [loginButton setTitle:@"登录" forState:UIControlStateNormal];
                     loginButton.enabled = YES;
@@ -243,12 +275,8 @@
                 loginButton.enabled = YES;
             }];
             
-            
-            
-            
-            
         }else{
-            [self.view showInfo:@"请输入4位验证码！" autoHidden:YES interval:2];
+            [self.view showInfo:@"请输入6位密码！" autoHidden:YES interval:2];
             [_indicatorView stopAnimating];
             [loginButton setTitle:@"登录" forState:UIControlStateNormal];
             loginButton.enabled = YES;
@@ -321,7 +349,7 @@
         cell.imageView.image                = [UIImage imageNamed:@"mimayanzheng"];
         
         self.verifyFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*260/375, Main_Screen_Height*40/667)];
-        self.verifyFieldText.placeholder    = @"输入验证码";
+        self.verifyFieldText.placeholder    = @"请输入密码";
         self.verifyFieldText.delegate       = self;
         self.verifyFieldText.returnKeyType  = UIReturnKeyDone;
         self.verifyFieldText.keyboardType   = UIKeyboardTypeNumberPad;
@@ -334,14 +362,14 @@
         [self.verifyFieldText addTarget:self action:@selector(verifyFieldChanged:) forControlEvents:UIControlEventEditingChanged];
         [cell.contentView addSubview:self.verifyFieldText];
         
-        NSString *getVeriifyString      = @"获取验证码";
-        UIFont *getVeriifyStringFont          = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
-        self.getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*90/375, Main_Screen_Height*28/667) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyByButtonClick:)];
-        self.getVeriifyStringButton.backgroundColor=  [UIColor colorFromHex:@"#0161a1"];
-        self.getVeriifyStringButton.layer.masksToBounds  = YES;
-        self.getVeriifyStringButton.layer.cornerRadius = Main_Screen_Height*14/667;
-        self.getVeriifyStringButton.right          = self.tableView.width;
-        self.getVeriifyStringButton.centerY        = self.verifyFieldText.centerY;
+//        NSString *getVeriifyString      = @"获取验证码";
+//        UIFont *getVeriifyStringFont          = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
+//        self.getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*90/375, Main_Screen_Height*28/667) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyByButtonClick:)];
+//        self.getVeriifyStringButton.backgroundColor=  [UIColor colorFromHex:@"#0161a1"];
+//        self.getVeriifyStringButton.layer.masksToBounds  = YES;
+//        self.getVeriifyStringButton.layer.cornerRadius = Main_Screen_Height*14/667;
+//        self.getVeriifyStringButton.right          = self.tableView.width;
+//        self.getVeriifyStringButton.centerY        = self.verifyFieldText.centerY;
         
         UIView          *lineView       = [UIUtil drawLineInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 1) color:[UIColor colorFromHex:@"#e6e6e6"]];
         lineView.top                    = Main_Screen_Height*46/667;
@@ -381,37 +409,24 @@
 {
     
 }
-- (void) getVeriifyByButtonClick:(id)sender {
-    
-    if ([LCMD5Tool valiMobile:self.userMobileFieldText.text]) {
-        
-        
-        [self.view showInfo:@"验证码发送成功，请在手机上查收！" autoHidden:YES interval:2];
-        
-        NSDictionary *mulDic = @{@"Mobile":self.userMobileFieldText.text};
-        
-        NSDictionary *params = @{
-                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                                 };
-        
-        
-        NSLog(@"%@",params);
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetVerCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
-            NSLog(@"%@",dict);
-        } fail:^(NSError *error) {
-            NSLog(@"%@",error);
-        }];
-        
-    }else
-    {
-        [self.view showInfo:@"请输入正确的手机号码" autoHidden:YES];
-        
-    }
-}
 -(void)ForgetpasswordBtn
 {
-    NSLog(@"12345677");
+    DSPasswordController *passwordController        = [[DSPasswordController alloc]init];
+    passwordController.type=1;
+    passwordController.hidesBottomBarWhenPushed      = YES;
+    [self.navigationController pushViewController:passwordController animated:YES];
+}
+-(void)checkLoginBtnClick
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (void) agreeButtonClick:(id)sender {
+    
+    DSAgreementController *agreeController      = [[DSAgreementController alloc]init];
+    
+    agreeController.hidesBottomBarWhenPushed    = YES;
+    [self.navigationController pushViewController:agreeController animated:YES];
+    
 }
 - (void) backButtonClick {
     [self.navigationController popViewControllerAnimated:YES];
