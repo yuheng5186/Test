@@ -226,7 +226,7 @@
             NSDictionary *mulDic = @{
                                      @"LoginType":@(1),
                                      @"Mobile":self.userMobileFieldText.text,
-                                     @"VerCode":self.verifyFieldText.text
+                                     @"PassWord":self.verifyFieldText.text
                                      
                                      };
             NSDictionary *params = @{
