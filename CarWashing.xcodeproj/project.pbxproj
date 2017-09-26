@@ -180,6 +180,10 @@
 		18B803851F1DA2A300B52432 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18B803831F1DA2A300B52432 /* LaunchScreen.storyboard */; };
 		18B803901F1DA2A300B52432 /* CarWashingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B8038F1F1DA2A300B52432 /* CarWashingTests.m */; };
 		18B8039B1F1DA2A300B52432 /* CarWashingUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B8039A1F1DA2A300B52432 /* CarWashingUITests.m */; };
+		18D815841F79ECA800A1FA04 /* CYCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D815821F79ECA800A1FA04 /* CYCardTableViewCell.m */; };
+		18D815851F79ECA800A1FA04 /* CYCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D815831F79ECA800A1FA04 /* CYCardTableViewCell.xib */; };
+		18D8158A1F79FFE300A1FA04 /* CYCardDeatilListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D815891F79FFE300A1FA04 /* CYCardDeatilListViewController.m */; };
+		18D8158E1F7A358A00A1FA04 /* PassWordLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D8158D1F7A358A00A1FA04 /* PassWordLoginViewController.m */; };
 		18E702761F5503BC007A9777 /* KPIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E702721F5503BC007A9777 /* KPIndicatorView.m */; };
 		18E702771F5503BC007A9777 /* KPIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E702731F5503BC007A9777 /* KPIndicatorView.xib */; };
 		18E702781F5503BC007A9777 /* RoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E702751F5503BC007A9777 /* RoundView.m */; };
@@ -636,6 +640,13 @@
 		18B803961F1DA2A300B52432 /* CarWashingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarWashingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B8039A1F1DA2A300B52432 /* CarWashingUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarWashingUITests.m; sourceTree = "<group>"; };
 		18B8039C1F1DA2A300B52432 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18D815811F79ECA800A1FA04 /* CYCardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYCardTableViewCell.h; sourceTree = "<group>"; };
+		18D815821F79ECA800A1FA04 /* CYCardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYCardTableViewCell.m; sourceTree = "<group>"; };
+		18D815831F79ECA800A1FA04 /* CYCardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CYCardTableViewCell.xib; sourceTree = "<group>"; };
+		18D815881F79FFE300A1FA04 /* CYCardDeatilListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYCardDeatilListViewController.h; sourceTree = "<group>"; };
+		18D815891F79FFE300A1FA04 /* CYCardDeatilListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYCardDeatilListViewController.m; sourceTree = "<group>"; };
+		18D8158C1F7A358A00A1FA04 /* PassWordLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassWordLoginViewController.h; sourceTree = "<group>"; };
+		18D8158D1F7A358A00A1FA04 /* PassWordLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassWordLoginViewController.m; sourceTree = "<group>"; };
 		18E702711F5503BC007A9777 /* KPIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPIndicatorView.h; sourceTree = "<group>"; };
 		18E702721F5503BC007A9777 /* KPIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPIndicatorView.m; sourceTree = "<group>"; };
 		18E702731F5503BC007A9777 /* KPIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KPIndicatorView.xib; sourceTree = "<group>"; };
@@ -902,6 +913,7 @@
 		1805AC801F3808DB00FD0844 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				18D8158B1F7A34FF00A1FA04 /* PasswordLogin */,
 				185090541F4586B200795E0A /* account */,
 				1805AC811F38090D00FD0844 /* LoginViewController.h */,
 				1805AC821F38090D00FD0844 /* LoginViewController.m */,
@@ -1180,6 +1192,8 @@
 		181E93081F2094420006511E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				18D815871F79FFA300A1FA04 /* CYCardDeatil */,
+				18D815801F79EC3000A1FA04 /* CYView */,
 				18322AAC1F4AD181003ABB7B /* model */,
 				18B69E9A1F32CA71007DA0E4 /* ScanController.h */,
 				18B69E9B1F32CA71007DA0E4 /* ScanController.m */,
@@ -1577,6 +1591,36 @@
 				18B8039C1F1DA2A300B52432 /* Info.plist */,
 			);
 			path = CarWashingUITests;
+			sourceTree = "<group>";
+		};
+		18D815801F79EC3000A1FA04 /* CYView */ = {
+			isa = PBXGroup;
+			children = (
+				18D815811F79ECA800A1FA04 /* CYCardTableViewCell.h */,
+				18D815821F79ECA800A1FA04 /* CYCardTableViewCell.m */,
+				18D815831F79ECA800A1FA04 /* CYCardTableViewCell.xib */,
+			);
+			name = CYView;
+			path = Home/CYView;
+			sourceTree = "<group>";
+		};
+		18D815871F79FFA300A1FA04 /* CYCardDeatil */ = {
+			isa = PBXGroup;
+			children = (
+				18D815881F79FFE300A1FA04 /* CYCardDeatilListViewController.h */,
+				18D815891F79FFE300A1FA04 /* CYCardDeatilListViewController.m */,
+			);
+			name = CYCardDeatil;
+			path = Home/CYCardDeatil;
+			sourceTree = "<group>";
+		};
+		18D8158B1F7A34FF00A1FA04 /* PasswordLogin */ = {
+			isa = PBXGroup;
+			children = (
+				18D8158C1F7A358A00A1FA04 /* PassWordLoginViewController.h */,
+				18D8158D1F7A358A00A1FA04 /* PassWordLoginViewController.m */,
+			);
+			path = PasswordLogin;
 			sourceTree = "<group>";
 		};
 		18E702701F5503BC007A9777 /* KPIndicatorView */ = {
@@ -2055,6 +2099,7 @@
 				50B26E9B1F307D50009B3B9F /* DiscountDetailView.xib in Resources */,
 				1888214F1F6BD336002618F7 /* b4.gif in Resources */,
 				180E42F71F3AD4E600013D2D /* PopupView.xib in Resources */,
+				18D815851F79ECA800A1FA04 /* CYCardTableViewCell.xib in Resources */,
 				5097FE1B1F2F4335002EF8F8 /* MyCarViewCell.xib in Resources */,
 				1888214C1F6BD336002618F7 /* b1.gif in Resources */,
 				5094A6351F346E5800407808 /* DelayPayCell.xib in Resources */,
@@ -2160,6 +2205,7 @@
 				181E92CC1F1F39CC0006511E /* UIColor+HexColor.m in Sources */,
 				18B69EC01F346A3F007DA0E4 /* DSScanQRCodeController.m in Sources */,
 				50CAA6A11F41AB0300138CEF /* EarnScoreController.m in Sources */,
+				18D8158E1F7A358A00A1FA04 /* PassWordLoginViewController.m in Sources */,
 				0401E8CA1F4E674700F0CA79 /* DSStartWashingController.m in Sources */,
 				5097FE131F2F4173002EF8F8 /* JPCityViewController.m in Sources */,
 				185090461F4557E100795E0A /* TYAlertFadeAnimation.m in Sources */,
@@ -2278,6 +2324,7 @@
 				185090451F4557E100795E0A /* TYAlertDropDownAnimation.m in Sources */,
 				1853BA481F28A04100B98C7F /* JFCityHeaderView.m in Sources */,
 				50769F4F1F3C549300DDFCC7 /* BusinessPayCell.m in Sources */,
+				18D8158A1F79FFE300A1FA04 /* CYCardDeatilListViewController.m in Sources */,
 				50E2EE801F1F4D3C00FAF130 /* YZMoreMenuViewController.m in Sources */,
 				50D30E811F20988A0086D3ED /* BusinessDetailCell.m in Sources */,
 				5071B4841F39D3CC009FFF67 /* MyCarInfosHeaderView.m in Sources */,
@@ -2359,6 +2406,7 @@
 				185090441F4557E100795E0A /* TYAlertController.m in Sources */,
 				180E43241F3D836F00013D2D /* WeixinTimelineActivity.m in Sources */,
 				501672461F29DA6C00384186 /* MemberRegualrController.m in Sources */,
+				18D815841F79ECA800A1FA04 /* CYCardTableViewCell.m in Sources */,
 				18322AC01F4D950C003ABB7B /* Card.m in Sources */,
 				185090271F441BFA00795E0A /* UdStorage.m in Sources */,
 				1850901C1F43F19B00795E0A /* LCMD5Tool.m in Sources */,

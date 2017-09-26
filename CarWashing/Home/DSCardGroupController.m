@@ -20,6 +20,9 @@
 #import "UdStorage.h"
 #import "CardBag.h"
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
+//新增的页面
+#import "CYCardTableViewCell.h"
+#import "CYCardDeatilListViewController.h"
 @interface DSCardGroupController ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
     MBProgressHUD *HUD;
@@ -39,7 +42,7 @@
 
 @end
 
-static NSString *id_rechargeCell = @"id_rechargeCell";
+static NSString *CyrechargeCell = @"CyrechargeCell";
 
 @implementation DSCardGroupController
 
@@ -93,8 +96,8 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         _rechargeView = rechargeView;
         _rechargeView.emptyDataSetSource=self;
         _rechargeView.emptyDataSetDelegate=self;
-        _rechargeView.tableHeaderView   = [UIView new];
-        _rechargeView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+//        _rechargeView.tableHeaderView   = [UIView new];
+//        _rechargeView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
         [self.view addSubview:_rechargeView];
     }
     
@@ -124,8 +127,8 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     HUD.minSize = CGSizeMake(132.f, 108.0f);
     
     
-    [self setupRefresh];
-    
+//    [self setupRefresh];
+    [self GetCardbagList];
     [self drawBackButtonWithAction:@selector(backButtonClick:)];
 }
 
@@ -151,74 +154,72 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     }
     
 }
--(void)setupRefresh
-{
-    self.rechargeView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
-        
-        [self headerRereshing];
-        
-    }];
-    
-    // 设置自动切换透明度(在导航栏下面自动隐藏)
-    self.rechargeView.mj_header.automaticallyChangeAlpha = YES;
-    
-    [self.rechargeView.mj_header beginRefreshing];
-    
-    // 上拉刷新
-    self.rechargeView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
-        
-        [self footerRereshing];
-        
-    }];
-}
+//-(void)setupRefresh
+//{
+//    self.rechargeView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+//        
+//        [self headerRereshing];
+//        
+//    }];
+//    
+//    // 设置自动切换透明度(在导航栏下面自动隐藏)
+//    self.rechargeView.mj_header.automaticallyChangeAlpha = YES;
+//    
+//    [self.rechargeView.mj_header beginRefreshing];
+//    
+//    // 上拉刷新
+//    self.rechargeView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+//        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+//        
+//        [self footerRereshing];
+//        
+//    }];
+//}
 
-- (void)headerRereshing
-{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        //
-        self.page = 0 ;
-         [self GetCardbagList];
-        
-    });
-}
-
-- (void)footerRereshing
-{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        
-        self.page++;
-//    _CardbagData = [[NSMutableArray alloc]init];
-        [self GetCardbagListMore];
-        
-        
-        //
-        //
-        //
-        //
-        //        // 刷新表格
-        //
-        //        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        
-    });
-}
+//- (void)headerRereshing
+//{
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        
+//        //
+//        self.page = 0 ;
+//         [self GetCardbagList];
+//        
+//    });
+//}
+//
+//- (void)footerRereshing
+//{
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        
+//        
+//        self.page++;
+////    _CardbagData = [[NSMutableArray alloc]init];
+//        [self GetCardbagListMore];
+//        
+//        
+//        //
+//        //
+//        //
+//        //
+//        //        // 刷新表格
+//        //
+//        //        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+//        
+//    });
+//}
 -(void)GetCardbagList
 {
     
     NSDictionary *mulDic = @{
-                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                             @"PageIndex":@0,
-                             @"PageSize":@10
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
                              };
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardInfoList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardTypeList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"---%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             _CardbagData = [[NSMutableArray alloc]init];
@@ -272,70 +273,70 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
 }
 
--(void)GetCardbagListMore
-{
-    NSDictionary *mulDic = @{
-                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                             @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
-                             @"PageSize":@10
-                             };
-    NSDictionary *params = @{
-                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                             };
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardInfoList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
-        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-        {
-//
-            
-            
-            NSArray *arr = [NSArray array];
-            arr = [dict objectForKey:@"JsonData"];
-           
-            if(arr.count == 0)
-            {
-                //                [self.view showInfo:@"暂无更多数据" autoHidden:YES interval:2];
-                [HUD setHidden:YES];
-                [self.rechargeView reloadData];
-                [self.rechargeView.mj_footer endRefreshing];
-                self.page--;
-            }
-            else
-            {
-                for(NSDictionary *dic in arr)
-                {
-                    CardBag *model = [CardBag new];
-                    [model setValuesForKeysWithDictionary:dic];
-                    [_CardbagData addObject:model];
-                }
-                [HUD setHidden:YES];
-                [self.rechargeView reloadData];
-                [self.rechargeView.mj_footer endRefreshing];
-            }
-            
-            
-            
-        }
-        else
-        {
-            [self.rechargeView.mj_footer endRefreshing];
-             self.page--;
-            [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
-            
-            [self.navigationController popViewControllerAnimated:YES];
-            
-        }
-    } fail:^(NSError *error) {
-        
-        [self.rechargeView.mj_footer endRefreshing];
-        self.page--;
-        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
-        [self.navigationController popViewControllerAnimated:YES];
-        
-    }];
-    
-}
+//-(void)GetCardbagListMore
+//{
+//    NSDictionary *mulDic = @{
+//                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+//                             @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
+//                             @"PageSize":@10
+//                             };
+//    NSDictionary *params = @{
+//                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+//                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+//                             };
+//    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardInfoList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+//        
+//        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+//        {
+////
+//            
+//            
+//            NSArray *arr = [NSArray array];
+//            arr = [dict objectForKey:@"JsonData"];
+//           
+//            if(arr.count == 0)
+//            {
+//                //                [self.view showInfo:@"暂无更多数据" autoHidden:YES interval:2];
+//                [HUD setHidden:YES];
+//                [self.rechargeView reloadData];
+//                [self.rechargeView.mj_footer endRefreshing];
+//                self.page--;
+//            }
+//            else
+//            {
+//                for(NSDictionary *dic in arr)
+//                {
+//                    CardBag *model = [CardBag new];
+//                    [model setValuesForKeysWithDictionary:dic];
+//                    [_CardbagData addObject:model];
+//                }
+//                [HUD setHidden:YES];
+//                [self.rechargeView reloadData];
+//                [self.rechargeView.mj_footer endRefreshing];
+//            }
+//            
+//            
+//            
+//        }
+//        else
+//        {
+//            [self.rechargeView.mj_footer endRefreshing];
+//             self.page--;
+//            [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
+//            
+//            [self.navigationController popViewControllerAnimated:YES];
+//            
+//        }
+//    } fail:^(NSError *error) {
+//        
+//        [self.rechargeView.mj_footer endRefreshing];
+//        self.page--;
+//        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+//        [self.navigationController popViewControllerAnimated:YES];
+//        
+//    }];
+//    
+//}
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
     [self.activateTF resignFirstResponder];
@@ -379,8 +380,10 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     
     [self.rechargeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(titleView.mas_bottom).mas_offset(0);
-        make.left.equalTo(self.view).mas_offset(Main_Screen_Width*22.5/375);
-        make.right.equalTo(self.view).mas_offset(-Main_Screen_Width*22.5/375);
+//        make.left.equalTo(self.view).mas_offset(Main_Screen_Width*22.5/375);
+//        make.right.equalTo(self.view).mas_offset(-Main_Screen_Width*22.5/375);
+        make.left.equalTo(self.view);
+        make.right.equalTo(self.view);
         make.height.mas_equalTo(self.view.height-Main_Screen_Height*60/667-Main_Screen_Height*64/667);
     }];
 //    self.rechargeView.top   =titleView.bottom+Main_Screen_Height*10/667;
@@ -388,8 +391,8 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     self.rechargeView.dataSource = self;
 //    self.rechargeView.contentInset = UIEdgeInsetsMake(0, 0, 30, 0);
     
-    [self.rechargeView registerNib:[UINib nibWithNibName:@"RechargeCell" bundle:nil] forCellReuseIdentifier:id_rechargeCell];
-    self.rechargeView.rowHeight = Main_Screen_Height*190/667;
+//    [self.rechargeView registerNib:[UINib nibWithNibName:@"RechargeCell" bundle:nil] forCellReuseIdentifier:id_rechargeCell];
+    self.rechargeView.rowHeight = Main_Screen_Height*160/667;
     self.rechargeView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.rechargeView.backgroundColor = [UIColor clearColor];
     self.rechargeView.showsVerticalScrollIndicator = NO;
@@ -402,104 +405,110 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 
 
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
-    return [_CardbagData count];
-//    return 0;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+//    
+//    return [_CardbagData count];
+////    return 0;
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 1;
+    return [_CardbagData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    RechargeCell *cell = [tableView dequeueReusableCellWithIdentifier:id_rechargeCell forIndexPath:indexPath];
-    cell.contentView.backgroundColor = self.view.backgroundColor;
-    cell.backgroundColor = self.view.backgroundColor;
-    
-    CardBag *card = (CardBag *)[_CardbagData objectAtIndex:indexPath.section];
-    
-    
-    if(card.CardType == 1)
-    {
-        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_tiyanka"];
-        
-        if(card.CardUseState == 2)
-        {
-            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_tiyanka"];
-            
-        }
-        else if(card.CardUseState == 3)
-        {
-            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_tiyanka"];
-        }
-        
-        
-    }else if(card.CardType == 2)
-    {
-        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yueka"];
-        
-        if(card.CardUseState == 2)
-        {
-            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_yueka"];
-            
-        }
-        else if(card.CardUseState == 3)
-        {
-            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_yueka"];
-        }
-        
-    }else if(card.CardType == 3)
-    {
-        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_cika"];
-        
-        if(card.CardUseState == 2)
-        {
-            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_cika"];
-            
-        }
-        else if(card.CardUseState == 3)
-        {
-            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_cika"];
-        }
-        
-    }else if(card.CardType == 4)
-    {
-        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_nianka"];
-        
-        if(card.CardUseState == 2)
-        {
-            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_nianka"];
-            
-        }
-        else if(card.CardUseState == 3)
-        {
-            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_nianka"];
-        }
-        
+    CYCardTableViewCell * cell = [_rechargeView dequeueReusableCellWithIdentifier:CyrechargeCell];
+    if (cell==nil) {
+        cell = [[[NSBundle mainBundle]loadNibNamed:@"CYCardTableViewCell" owner:self options:nil]lastObject];
     }
-    
-    cell.CardnameLabel.text = [NSString stringWithFormat:@"免费洗车%ld次",card.CardCount];
-    
-    cell.CardTimeLabel.text = [NSString stringWithFormat:@"截止日期: %@",[self DateZhuan:card.ExpEndDates]];
-    
-//    if(card.CardUseState == 2)
+    CardBag * model = _CardbagData[indexPath.row];
+    [cell configCell:model];
+//    RechargeCell *cell = [tableView dequeueReusableCellWithIdentifier:id_rechargeCell forIndexPath:indexPath];
+//    cell.contentView.backgroundColor = self.view.backgroundColor;
+//    cell.backgroundColor = self.view.backgroundColor;
+//    
+//    CardBag *card = (CardBag *)[_CardbagData objectAtIndex:indexPath.section];
+//    
+//    
+//    if(card.CardType == 1)
 //    {
-//        cell.CardnameLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
-//        cell.tagLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
-//        cell.CarddesLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
-//        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_cika"];
+//        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_tiyanka"];
+//        
+//        if(card.CardUseState == 2)
+//        {
+//            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_tiyanka"];
+//            
+//        }
+//        else if(card.CardUseState == 3)
+//        {
+//            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_tiyanka"];
+//        }
+//        
+//        
+//    }else if(card.CardType == 2)
+//    {
+//        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yueka"];
+//        
+//        if(card.CardUseState == 2)
+//        {
+//            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_yueka"];
+//            
+//        }
+//        else if(card.CardUseState == 3)
+//        {
+//            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_yueka"];
+//        }
+//        
+//    }else if(card.CardType == 3)
+//    {
+//        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_cika"];
+//        
+//        if(card.CardUseState == 2)
+//        {
+//            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_cika"];
+//            
+//        }
+//        else if(card.CardUseState == 3)
+//        {
+//            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_cika"];
+//        }
+//        
+//    }else if(card.CardType == 4)
+//    {
+//        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_nianka"];
+//        
+//        if(card.CardUseState == 2)
+//        {
+//            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_nianka"];
+//            
+//        }
+//        else if(card.CardUseState == 3)
+//        {
+//            cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_nianka"];
+//        }
 //        
 //    }
-//    else if(card.CardUseState == 3)
-//    {
-//        cell.CardnameLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
-//        cell.tagLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
-//        cell.CarddesLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
-//        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_cika"];
-//    }
+//    
+//    cell.CardnameLabel.text = [NSString stringWithFormat:@"免费洗车%ld次",card.CardCount];
+//    
+//    cell.CardTimeLabel.text = [NSString stringWithFormat:@"截止日期: %@",[self DateZhuan:card.ExpEndDates]];
+//    
+////    if(card.CardUseState == 2)
+////    {
+////        cell.CardnameLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+////        cell.tagLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+////        cell.CarddesLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+////        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_cika"];
+////        
+////    }
+////    else if(card.CardUseState == 3)
+////    {
+////        cell.CardnameLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+////        cell.tagLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+////        cell.CarddesLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
+////        cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_cika"];
+////    }
     
     
 
@@ -522,24 +531,24 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     return str;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    return Main_Screen_Height*22.5/667;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    
-    return Main_Screen_Height*0/667;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    
+//    return Main_Screen_Height*22.5/667;
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    
+//    return Main_Screen_Height*0/667;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [self.activateTF resignFirstResponder];
 
-    CardBag *card = (CardBag *)[_CardbagData objectAtIndex:indexPath.section];
-    RechargeDetailController *rechargeDetailVC = [[RechargeDetailController alloc] init];
+    CardBag *card = (CardBag *)[_CardbagData objectAtIndex:indexPath.row];
+    CYCardDeatilListViewController *rechargeDetailVC = [[CYCardDeatilListViewController alloc] init];
     rechargeDetailVC.hidesBottomBarWhenPushed = YES;
-    rechargeDetailVC.card = card;
+    rechargeDetailVC.GetCardType = card.Type;
     [self.navigationController pushViewController:rechargeDetailVC animated:YES];
     
 }

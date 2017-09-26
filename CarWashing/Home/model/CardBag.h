@@ -26,5 +26,7 @@
 @property(nonatomic)NSInteger Integralnum;
 @property(nonatomic)NSInteger CardType;
 @property(nonatomic)NSInteger UseLevel;
-
+//卡包列表
+@property(nonatomic,assign)NSInteger Type;
+@property(nonatomic,assign)NSInteger Counts;
 @end

@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CardBag.h"
 @interface RechargeCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *CardnameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *CarddesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *CardTimeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImgV;
-@property (weak, nonatomic) IBOutlet UILabel *tagLabel;
 
 @end
