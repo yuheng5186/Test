@@ -93,19 +93,18 @@
     if ([LCMD5Tool valiMobile:self.userMobileFieldText.text]) {
         if (self.verifyFieldText.text.length == 4) {
             
-            
-            
             NSDictionary *mulDic = @{
-                                     @"Mobile":self.userMobileFieldText.text,
-                                     @"VerCode":self.verifyFieldText.text,
                                      @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                     @"PassWord":self.passwordNewFieldText.text
+                                     @"Mobile":self.userMobileFieldText.text,
+                                     @"PassWord":self.passwordNewFieldText.text,
+                                     @"VerCode":self.verifyFieldText.text
+                                     
                                      };
             NSDictionary *params = @{
                                      @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                      @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                      };
-            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/Login",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/PassWordManage",Khttp] success:^(NSDictionary *dict, BOOL success) {
                 
                 if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                 {
