@@ -43,7 +43,7 @@
     exchangeTF.placeholder = @"请输入激活码";
     exchangeTF.textAlignment = NSTextAlignmentCenter;
     exchangeTF.layer.cornerRadius = Main_Screen_Height*24/667;
-    exchangeTF.keyboardType = UIKeyboardTypeNumberPad;
+    exchangeTF.keyboardType = UIKeyboardTypeASCIICapable;
     exchangeTF.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:exchangeTF];
     
@@ -94,7 +94,6 @@
                 else if([[[dict objectForKey:@"JsonData"] objectForKey:@"Activationstate"] integerValue] == 1)
                 {
                     [self.view showInfo:@"激活成功,你可以在我的卡包中进行查看" autoHidden:YES interval:2];
-                    
                 }
                 else if([[[dict objectForKey:@"JsonData"]objectForKey:@"Activationstate"] integerValue] == 2)
                 {

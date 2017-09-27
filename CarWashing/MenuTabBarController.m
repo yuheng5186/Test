@@ -13,7 +13,6 @@
 #import "FindViewController.h"
 #import "PurchaseViewController.h"
 #import "MySettingViewController.h"
-#import "DSScanQRCodeController.h"
 
 #import "LoginViewController.h"
 #import "DSScanController.h"

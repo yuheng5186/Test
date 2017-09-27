@@ -156,47 +156,72 @@
         
         int tagi=0;
 //        self.stepsLabel.text    = self.stepsarrs[tagi];
+        if (self.second<=5&&0<self.second) {
+            tagi=5;
+            _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *6, 0);
+            self.stepsLabel.text    = self.stepsarrs[tagi];
+        }else if (self.second<=68&&5<self.second){
+            tagi=4;
+            _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *5, 0);
+            self.stepsLabel.text    = self.stepsarrs[tagi];
+        }else if (self.second<=109&&68<self.second){
+            tagi=3;
+            _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *4, 0);
+            self.stepsLabel.text    = self.stepsarrs[tagi];
+        }else if (self.second<=171&&109<self.second){
+            tagi=2;
+            _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *3, 0);
+            self.stepsLabel.text    = self.stepsarrs[tagi];
+        }else if (self.second<=234&&171<self.second){
+            tagi=1;
+            _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *2, 0);
+            self.stepsLabel.text    = self.stepsarrs[tagi];
 
-        switch (self.second) {
-            case 5:             //5
-                tagi=5;
-                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *6, 0);
-                self.stepsLabel.text    = self.stepsarrs[tagi];
-
-                break;
-            case 68:            //68
-                tagi=4;
-                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *5, 0);
-                self.stepsLabel.text    = self.stepsarrs[tagi];
-
-                break;
-            case 109:           //109
-                tagi=3;
-                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *4, 0);
-                self.stepsLabel.text    = self.stepsarrs[tagi];
-
-                break;
-            case 171:           // 171
-                tagi=2;
-                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *3, 0);
-                self.stepsLabel.text    = self.stepsarrs[tagi];
-
-                break;
-            case 234:           // 234
-                tagi=1;
-                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *2, 0);
-                self.stepsLabel.text    = self.stepsarrs[tagi];
-
-                break;
-            case 240:           //239
-                tagi=0;
-                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *1, 0);
-                self.stepsLabel.text    = self.stepsarrs[tagi];
-
-                break;
-            default:
-                break;
+        }else if (self.second<=240&&234<self.second){
+            tagi=0;
+            _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *1, 0);
+            self.stepsLabel.text    = self.stepsarrs[tagi];
         }
+//        switch (self.second) {
+//            case 5:             //5
+//                tagi=5;
+//                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *6, 0);
+//                self.stepsLabel.text    = self.stepsarrs[tagi];
+//
+//                break;
+//            case 68:            //68
+//                tagi=4;
+//                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *5, 0);
+//                self.stepsLabel.text    = self.stepsarrs[tagi];
+//
+//                break;
+//            case 109:           //109
+//                tagi=3;
+//                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *4, 0);
+//                self.stepsLabel.text    = self.stepsarrs[tagi];
+//
+//                break;
+//            case 171:           // 171
+//                tagi=2;
+//                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *3, 0);
+//                self.stepsLabel.text    = self.stepsarrs[tagi];
+//
+//                break;
+//            case 234:           // 234
+//                tagi=1;
+//                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *2, 0);
+//                self.stepsLabel.text    = self.stepsarrs[tagi];
+//
+//                break;
+//            case 240:           //239
+//                tagi=0;
+//                _ADScroll.contentOffset = CGPointMake(Main_Screen_Width *1, 0);
+//                self.stepsLabel.text    = self.stepsarrs[tagi];
+//
+//                break;
+//            default:
+//                break;
+//        }
 
         self.stepsLabel.width   = Main_Screen_Width*100/375;
 //        NSString *text  = [NSString stringWithFormat:@"%d%@",self.second--,@"秒钟"];
@@ -241,7 +266,7 @@
     
     NSString   *titleString     = @"精洗";
     
-    UIFont     *titleFont       = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
+    UIFont     *titleFont       = [UIFont systemFontOfSize:14];
     UILabel *titleLabel         = [UIUtil drawLabelInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:titleFont text:titleString isCenter:NO];
     titleLabel.text             = titleString;
     titleLabel.textColor        = [UIColor colorFromHex:@"#ff525a"];
