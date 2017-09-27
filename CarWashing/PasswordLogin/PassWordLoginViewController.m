@@ -71,7 +71,6 @@
     [backBtn addSubview:backimage];
     [backBtn addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:backBtn];
-    
     NSString   *headerString     = @"登录";
     UIFont     *headerFont       = [UIFont systemFontOfSize:Main_Screen_Height*20/667];
     UILabel *deaderLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*30/667) font:headerFont text:headerString isCenter:NO];
