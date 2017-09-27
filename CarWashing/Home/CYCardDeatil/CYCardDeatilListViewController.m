@@ -36,7 +36,6 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
-
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.removeFromSuperViewOnHide =YES;
     HUD.mode = MBProgressHUDModeIndeterminate;
@@ -241,14 +240,13 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     //    self.rechargeView.top   =titleView.bottom+Main_Screen_Height*10/667;
     self.rechargeView.delegate = self;
     self.rechargeView.dataSource = self;
-    self.rechargeView.contentInset = UIEdgeInsetsMake(0, 0, 30, 0);
+    self.rechargeView.contentInset = UIEdgeInsetsMake(0, 0, 5, 0);
     
     [self.rechargeView registerNib:[UINib nibWithNibName:@"RechargeCell" bundle:nil] forCellReuseIdentifier:id_rechargeCell];
     self.rechargeView.rowHeight = Main_Screen_Height*190/667;
     self.rechargeView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.rechargeView.backgroundColor = [UIColor clearColor];
     self.rechargeView.showsVerticalScrollIndicator = NO;
-   
     
 }
 
@@ -260,9 +258,8 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         _rechargeView = rechargeView;
         _rechargeView.emptyDataSetSource=self;
         _rechargeView.emptyDataSetDelegate=self;
-        _rechargeView.tableHeaderView   = [UIView new];
-        _rechargeView.tableHeaderView.backgroundColor=[UIColor redColor];
-        _rechargeView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+//        _rechargeView.tableHeaderView   = [UIView new];
+//        _rechargeView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
         [self.view addSubview:_rechargeView];
     }
     return _rechargeView;
@@ -353,6 +350,11 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
 
     return Main_Screen_Height*0/667;
+}
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView * view = [[UIView alloc]init];
+    view.backgroundColor=[UIColor clearColor];
+    return view;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     

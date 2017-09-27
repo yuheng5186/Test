@@ -18,13 +18,13 @@
 {
     if (model.Type ==1) {
         self.typeLabel.text = @"购买卡";
-         self.leftNumLabel.text = [NSString stringWithFormat:@"购买卡(%ld)",model.Counts];
+         self.leftNumLabel.text = [NSString stringWithFormat:@"洗车卡(%ld)",model.Counts];
     }else if (model.Type ==2) {
         self.typeLabel.text = @"赠送卡";
-        self.leftNumLabel.text = [NSString stringWithFormat:@"赠送卡(%ld)",model.Counts];
+        self.leftNumLabel.text = [NSString stringWithFormat:@"洗车卡(%ld)",model.Counts];
     }else if (model.Type ==3) {
         self.typeLabel.text = @"领取卡";
-        self.leftNumLabel.text = [NSString stringWithFormat:@"领取卡(%ld)",model.Counts];
+        self.leftNumLabel.text = [NSString stringWithFormat:@"洗车卡(%ld)",model.Counts];
     }
    
 }
