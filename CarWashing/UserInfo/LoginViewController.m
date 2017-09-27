@@ -411,6 +411,8 @@
 }
 - (void) getVeriifyByButtonClick:(id)sender {
     
+    [self.verifyFieldText becomeFirstResponder];
+    
     if ([LCMD5Tool valiMobile:self.userMobileFieldText.text]) {
         
         
