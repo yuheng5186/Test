@@ -823,17 +823,22 @@
 //         return [UILabel new];
 //     
 //     }
-    UIImageView *imageview=[UIImageView new];
+    UIView * backView=[[UIView alloc]init];
+    UIView * lineview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*30/667)];
+    lineview.backgroundColor=[UIColor colorFromHex:@"#f6f6f6"];
+    [backView addSubview:lineview];
+    UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height*30/667, Main_Screen_Width, Main_Screen_Height*60/667)];
     imageview.userInteractionEnabled=YES;
     imageview.contentMode=UIViewContentModeScaleAspectFill;
     imageview.image=[UIImage imageNamed:@"banka_banner"];
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
     [imageview addGestureRecognizer:tap];
-    
+    [backView addSubview:imageview];
     
     if (self.newrc.recList.count==0||self.newrc.recList.count<2) {
         if (section==0) {
-            return imageview;
+            
+            return backView;
         }else{
             return [UILabel new];
             
@@ -841,7 +846,7 @@
     }else{
         
         if (section==0) {
-            return imageview;
+            return backView;
         }else{
             return [UILabel new];
             
@@ -1140,8 +1145,6 @@
         
         DSStartWashingController *start = [[DSStartWashingController alloc]init];
 //        [UdStorage storageObject:dateString forKey:@"setTime"];
-        
-        
   
         start.paynum=[UdStorage getObjectforKey:@"Jprice"];
         start.RemainCount = [UdStorage getObjectforKey:@"RemainCount"];
