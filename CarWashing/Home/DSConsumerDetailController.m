@@ -152,8 +152,9 @@
             cell.detailTextLabel.text   = self.record.CreateDate;
             
         }else if (indexPath.row == 2){
-            NSArray *arr = @[@"",@"微信支付",@"支付宝支付",@"洗车卡抵扣"];
+            NSArray *arr = @[@"",@"微信支付",@"支付宝支付",@"洗车卡抵扣",@"洗车卡抵扣"];
             cell.textLabel.text     = @"支付方式";
+            NSLog(@"---%@",self.record);
             cell.detailTextLabel.text   = [arr objectAtIndex:self.record.PayMathod];
             
         }else if (indexPath.row == 3){

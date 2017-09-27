@@ -411,16 +411,19 @@
 {
     
 }
+#pragma mark ----操作事件
 -(void)ForgetpasswordBtn
 {
     ForgetPasswordLoginViewController *ForgetpasswordController        = [[ForgetPasswordLoginViewController alloc]init];
     ForgetpasswordController.hidesBottomBarWhenPushed      = YES;
     [self.navigationController pushViewController:ForgetpasswordController animated:YES];
 }
+//验证码登录
 -(void)checkLoginBtnClick
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+//协议
 - (void) agreeButtonClick:(id)sender {
     
     DSAgreementController *agreeController      = [[DSAgreementController alloc]init];
@@ -429,6 +432,7 @@
     [self.navigationController pushViewController:agreeController animated:YES];
     
 }
+//返回按钮
 - (void) backButtonClick {
     [self.navigationController popViewControllerAnimated:YES];
 }

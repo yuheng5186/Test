@@ -261,9 +261,6 @@
                 [loginButton setTitle:@"登录" forState:UIControlStateNormal];
                 loginButton.enabled = YES;
             }];
-    
-            
-            
             
             
         }else{

@@ -883,8 +883,7 @@
     NSString *remindShowString;
     NSString *getString;
     
-    if(record.ShowType == 2)
-    {
+    if(record.ShowType == 2){
         imageString               = @"xiaofeijilu";
         titleString               = @"消费记录";
         vipString                 = @"";
@@ -916,10 +915,35 @@
         
         
         getString                 = @"查看详情";
-    }
-
-    else if(record.ShowType == 1)
-    {
+    }else if(record.ShowType == 3){
+        imageString               = @"zensong";
+        titleString               = @"活动赠送";
+        vipString                 = @"";
+        contentShowString         = [NSString stringWithFormat:@"%@",record.MiddleDes];
+        remindShowString          = record.ConsumerDescrip;
+        
+//        if(record.ConsumptionType == 1)
+//        {
+//            contentShowString         = [NSString stringWithFormat:@"￥%@",record.MiddleDes];
+//            remindShowString          = record.BottomDes;
+//        }
+//        else if(record.ConsumptionType == 2)
+//        {
+//            contentShowString         = record.MiddleDes;
+//            remindShowString          = [NSString stringWithFormat:@"剩余%@次免费洗车",record.BottomDes];
+//        }
+//        else if(record.ConsumptionType == 3)
+//        {
+//            contentShowString         = record.MiddleDes;
+//            remindShowString          = [NSString stringWithFormat:@"支付金额: %@元",record.BottomDes];
+//        }
+//        else if(record.ConsumptionType == 4)
+//        {
+//            contentShowString         = [NSString stringWithFormat:@"您购买%@",record.MiddleDes];
+//            remindShowString          = [NSString stringWithFormat:@"支付金额: %@元",record.BottomDes];
+//        }
+        getString                 = @"查看详情";
+    }else if(record.ShowType == 1){
         
         imageString         = @"quanyi";
         titleString         = @"优惠活动";
@@ -993,7 +1017,7 @@
     
     Recordinfo *record =[[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil] ;
     
-    if(record.ShowType == 1)
+    if(record.ShowType == 1)//优惠活动
     {
         DSUserRightDetailController *rightController    = [[DSUserRightDetailController alloc]init];
         rightController.hidesBottomBarWhenPushed        = YES;
@@ -1001,7 +1025,13 @@
         [self.navigationController pushViewController:rightController animated:YES];
     }
     
-    else{
+    else if(record.ShowType == 2){//消费记录
+        Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil] ;
+        DSConsumerDetailController *detaleController    = [[DSConsumerDetailController alloc]init];
+        detaleController.hidesBottomBarWhenPushed       = YES;
+        detaleController.record                         = record;
+        [self.navigationController pushViewController:detaleController animated:YES];
+    }else if(record.ShowType == 3){//活动赠送
         Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil] ;
         DSConsumerDetailController *detaleController    = [[DSConsumerDetailController alloc]init];
         detaleController.hidesBottomBarWhenPushed       = YES;
