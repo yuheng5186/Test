@@ -190,6 +190,7 @@
 		18E7027B1F5537B3007A9777 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E7027A1F5537B3007A9777 /* Record.m */; };
 		18E7028D1F5E3443007A9777 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E7028C1F5E3443007A9777 /* Order.m */; };
 		18E702931F614010007A9777 /* ScanCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E702921F614010007A9777 /* ScanCode.m */; };
+		18EDACC31F7B4F07008D59D7 /* ForgetPasswordLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EDACC21F7B4F07008D59D7 /* ForgetPasswordLoginViewController.m */; };
 		374B966A10F9B5E6D74241BF /* libPods-CarWashing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */; };
 		500C6BA41F3AE619007D34A1 /* QFDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 500C6BA31F3AE619007D34A1 /* QFDatePickerView.m */; };
 		500C6BF51F3B5B13007D34A1 /* BusinessMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 500C6BF41F3B5B13007D34A1 /* BusinessMapController.m */; };
@@ -658,6 +659,8 @@
 		18E7028C1F5E3443007A9777 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		18E702911F614010007A9777 /* ScanCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCode.h; sourceTree = "<group>"; };
 		18E702921F614010007A9777 /* ScanCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCode.m; sourceTree = "<group>"; };
+		18EDACC11F7B4F07008D59D7 /* ForgetPasswordLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordLoginViewController.h; sourceTree = "<group>"; };
+		18EDACC21F7B4F07008D59D7 /* ForgetPasswordLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordLoginViewController.m; sourceTree = "<group>"; };
 		1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarWashing.release.xcconfig"; path = "Pods/Target Support Files/Pods-CarWashing/Pods-CarWashing.release.xcconfig"; sourceTree = "<group>"; };
 		500C6BA21F3AE619007D34A1 /* QFDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFDatePickerView.h; sourceTree = "<group>"; };
 		500C6BA31F3AE619007D34A1 /* QFDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFDatePickerView.m; sourceTree = "<group>"; };
@@ -913,6 +916,7 @@
 		1805AC801F3808DB00FD0844 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				18EDACC01F7B4ED8008D59D7 /* ForgetPasswordLogin */,
 				18D8158B1F7A34FF00A1FA04 /* PasswordLogin */,
 				185090541F4586B200795E0A /* account */,
 				1805AC811F38090D00FD0844 /* LoginViewController.h */,
@@ -1636,6 +1640,15 @@
 			path = Tool/KPIndicatorView;
 			sourceTree = "<group>";
 		};
+		18EDACC01F7B4ED8008D59D7 /* ForgetPasswordLogin */ = {
+			isa = PBXGroup;
+			children = (
+				18EDACC11F7B4F07008D59D7 /* ForgetPasswordLoginViewController.h */,
+				18EDACC21F7B4F07008D59D7 /* ForgetPasswordLoginViewController.m */,
+			);
+			path = ForgetPasswordLogin;
+			sourceTree = "<group>";
+		};
 		39EAED5D8DBADAE8DF2E358D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2315,6 +2328,7 @@
 				180E43221F3D836F00013D2D /* WeixinActivity.m in Sources */,
 				1805AC911F386FA800FD0844 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				18A4B23A1F4E9F2200C64978 /* CLLocation+YCLocation.m in Sources */,
+				18EDACC31F7B4F07008D59D7 /* ForgetPasswordLoginViewController.m in Sources */,
 				1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */,
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
 				1850904A1F4557E100795E0A /* TYShowAlertView.m in Sources */,
