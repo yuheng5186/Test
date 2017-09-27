@@ -187,7 +187,7 @@
     titleLabel.centerX          = logoImageView.centerX;
     titleLabel.top              = logoImageView.bottom +Main_Screen_Height*12/667;
     
-    self.bigImageView   = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*160/375, Main_Screen_Height*160/667) imageName:@"qiangweixiazai"];
+    self.bigImageView   = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*160/375, Main_Screen_Height*160/667) imageName:@"downloadAPP"];
     self.bigImageView.top            = titleLabel.bottom +Main_Screen_Height*28/667;
     self.bigImageView.centerX        = titleView.size.width/2;
     self.bigImageView.userInteractionEnabled    = YES;
@@ -258,7 +258,7 @@
         
     }else{
         
-        NSString * str = @"https://itunes.apple.com/cn/app/id1284053624?mt=8";
+        NSString * str = @"http://api.qiangweilovecar.com/appshow/appdown.html";
         NSURL *url = [NSURL URLWithString:str];
         [[UIApplication sharedApplication] openURL:url];
     }
