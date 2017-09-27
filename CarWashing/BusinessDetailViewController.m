@@ -514,7 +514,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
 //    NSString *message = @"是否拨打商家电话";
 //    NSString *title = @"";
 //    [self showAlertWithTitle:title message:message];
-    [PhoneHelper dial:self.dic[@"MerPhone"]];
+//    [PhoneHelper dial:self.dic[@"MerPhone"]];
 }
 
 #pragma mark - 点击查看全部评价
@@ -940,7 +940,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
 //    NSString *message = @"是否拨打商家电话";
 //    NSString *title = @"";
 //    [self showAlertWithTitle:title message:message];
-    
+//    NSLog(@"self.dic == %@",self.dic[@"MerPhone"]);
     [PhoneHelper dial: self.dic[@"MerPhone"]];
 
 }
