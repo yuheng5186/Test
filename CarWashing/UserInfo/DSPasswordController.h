@@ -9,5 +9,4 @@
 #import "BaseController.h"
 
 @interface DSPasswordController : BaseController
-@property(nonatomic,assign)NSInteger type;
 @end

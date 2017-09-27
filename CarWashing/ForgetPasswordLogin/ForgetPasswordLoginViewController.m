@@ -1,12 +1,12 @@
 //
-//  PassWordLoginViewController.m
+//  ForgetPasswordLoginViewController.m
 //  CarWashing
 //
-//  Created by apple on 2017/9/26.
+//  Created by apple on 2017/9/27.
 //  Copyright © 2017年 DS. All rights reserved.
 //
 
-#import "PassWordLoginViewController.h"
+#import "ForgetPasswordLoginViewController.h"
 #import "MenuTabBarController.h"
 #import "AppDelegate.h"
 #import "DSAgreementController.h"
@@ -20,49 +20,51 @@
 #import "HTTPDefine.h"
 
 #import "IQKeyboardManager.h"
-#import "ForgetPasswordLoginViewController.h"
-@interface PassWordLoginViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+@interface ForgetPasswordLoginViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     KPIndicatorView *_indicatorView;
     UIButton  *loginButton;
 }
-
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UITextField *userMobileFieldText;
 @property (nonatomic, strong) UITextField *verifyFieldText;
+@property (nonatomic, strong) UITextField *passwordFieldText;
 @property (nonatomic, strong) TPKeyboardAvoidingScrollView *scrollView;
 
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic,assign) int second;
 @property (nonatomic, strong) UIButton *getVeriifyStringButton;
 @property (nonatomic, strong) UIButton *resendFakeBtn;
-
 @end
 
-@implementation PassWordLoginViewController
-//- (void) drawNavigation {
-//    
-//        [self drawTitle:@"登录"];
-//    
-//}
-- (void) drawContent {
+@implementation ForgetPasswordLoginViewController
+- (void)drawNavigation {
+    [self drawTitle:@"忘记密码"];
     
+}
+
+- (void) drawContent
+{
     self.statusView.backgroundColor         = [UIColor whiteColor];
     self.navigationView.hidden              = YES;
     self.contentView.backgroundColor        = [UIColor whiteColor];
     self.contentView.top                    = self.statusView.bottom;
     self.contentView.height                 = self.view.height;
     self.view.backgroundColor               = [UIColor whiteColor];
+    
+}
+- (void) dealloc
+{
+    [self.timer invalidate];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     [IQKeyboardManager sharedManager].enable = NO;
     [self createSubView];
-//    [self drawBackButtonWithAction:@selector(backButtonClick:)];
 }
 - (void) createSubView {
     UIButton * backBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-//    backBtn.backgroundColor=[UIColor redColor];
+    //    backBtn.backgroundColor=[UIColor redColor];
     backBtn.frame=CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*40/667);
     backBtn.top  = Main_Screen_Height/667;
     UIImageView * backimage = [[UIImageView alloc]initWithFrame:CGRectMake(15, 5, 20, 20)];
@@ -72,7 +74,7 @@
     [backBtn addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:backBtn];
     
-    NSString   *headerString     = @"登录";
+    NSString   *headerString     = @"忘记密码";
     UIFont     *headerFont       = [UIFont systemFontOfSize:Main_Screen_Height*20/667];
     UILabel *deaderLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*30/667) font:headerFont text:headerString isCenter:NO];
     deaderLabel.textColor        = [UIColor blackColor];
@@ -80,6 +82,7 @@
     
     deaderLabel.centerX          = Main_Screen_Width/2;
     deaderLabel.top              = Main_Screen_Height/667;
+    
     UIView * lineView=[[UIView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height*40/667, Main_Screen_Width, 1)];
     lineView.backgroundColor=RGBAA(242, 242, 242, 1.0);
     [self.contentView addSubview:lineView];
@@ -119,7 +122,7 @@
     backgroundImageView.centerX         = Main_Screen_Width/2;
     
     
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width*280/375,Main_Screen_Height*95/667) style:UITableViewStyleGrouped];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width*280/375,Main_Screen_Height*150/667) style:UITableViewStyleGrouped];
     self.tableView.top              = backgroundImageView.top +Main_Screen_Height*100/667;
     self.tableView.centerX          = backgroundImageView.centerX-Main_Screen_Width*10/375;
     self.tableView.delegate         = self;
@@ -157,19 +160,19 @@
     _indicatorView.centerX           = Main_Screen_Width/2;
     [self.contentView addSubview:_indicatorView];
     
-    UIButton * ForgetpasswordBtn = [UIButton buttonWithType: UIButtonTypeSystem];
-    [ForgetpasswordBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
-    [ForgetpasswordBtn setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
-    ForgetpasswordBtn.titleLabel.font=[UIFont systemFontOfSize:Main_Screen_Height*12/667];
-    ForgetpasswordBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    ForgetpasswordBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [ForgetpasswordBtn addTarget:self action:@selector(ForgetpasswordBtn) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:ForgetpasswordBtn];
-    [ForgetpasswordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(loginButton.mas_bottom);
-        make.left.equalTo(loginButton.mas_left);
-        make.size.mas_equalTo(CGSizeMake(100, Main_Screen_Height*40/667));
-    }];
+//    UIButton * ForgetpasswordBtn = [UIButton buttonWithType: UIButtonTypeSystem];
+//    [ForgetpasswordBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
+//    [ForgetpasswordBtn setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
+//    ForgetpasswordBtn.titleLabel.font=[UIFont systemFontOfSize:Main_Screen_Height*12/667];
+//    ForgetpasswordBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+//    ForgetpasswordBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//    [ForgetpasswordBtn addTarget:self action:@selector(ForgetpasswordBtn) forControlEvents:UIControlEventTouchUpInside];
+//    [self.contentView addSubview:ForgetpasswordBtn];
+//    [ForgetpasswordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(loginButton.mas_bottom);
+//        make.left.equalTo(loginButton.mas_left);
+//        make.size.mas_equalTo(CGSizeMake(100, Main_Screen_Height*40/667));
+//    }];
     UIButton * checkLoginBtn = [UIButton buttonWithType: UIButtonTypeSystem];
     [checkLoginBtn setTitle:@"验证码登录?" forState:UIControlStateNormal];
     [checkLoginBtn setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
@@ -216,20 +219,33 @@
     [self.verifyFieldText resignFirstResponder];
     
     [self.userMobileFieldText resignFirstResponder];
+    [self.passwordFieldText resignFirstResponder];
     
-    [_indicatorView startAnimating];
-    [loginButton setTitle:@"" forState:UIControlStateNormal];
-    loginButton.enabled = NO;
-    
+//    [_indicatorView startAnimating];
+//    [loginButton setTitle:@"" forState:UIControlStateNormal];
+//    loginButton.enabled = NO;
+    if (self.userMobileFieldText.text.length==0) {
+        [self.view showInfo:@"请输入手机号" autoHidden:YES interval:2];
+        return;
+    }
+    if (self.verifyFieldText.text.length==0) {
+        [self.view showInfo:@"请输入验证码" autoHidden:YES interval:2];
+        return;
+    }
+    if (self.passwordFieldText.text.length==0) {
+        [self.view showInfo:@"请输入新密码" autoHidden:YES interval:2];
+        return;
+    }
     if ([LCMD5Tool valiMobile:self.userMobileFieldText.text]) {
-        if (self.verifyFieldText.text.length >= 6) {
+        if (self.passwordFieldText.text.length >= 6) {
             
             
             
             NSDictionary *mulDic = @{
-                                     @"LoginType":@(1),
+                                     @"LoginType":@(2),
                                      @"Mobile":self.userMobileFieldText.text,
-                                     @"PassWord":self.verifyFieldText.text
+                                     @"PassWord":self.passwordFieldText.text,
+                                     @"VerCode":self.verifyFieldText.text
                                      
                                      };
             NSDictionary *params = @{
@@ -302,7 +318,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return 2;
+    return 3;
     
 }
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -347,12 +363,11 @@
         lineView.top                    = Main_Screen_Height*46/667;
         lineView.left                   = cell.imageView.left +Main_Screen_Width*20/375;
         
-    }else
-    {
+    }else if(indexPath.row ==1){
         cell.imageView.image                = [UIImage imageNamed:@"mimayanzheng"];
         
         self.verifyFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*260/375, Main_Screen_Height*40/667)];
-        self.verifyFieldText.placeholder    = @"请输入密码";
+        self.verifyFieldText.placeholder    = @"请输入验证码";
         self.verifyFieldText.delegate       = self;
         self.verifyFieldText.returnKeyType  = UIReturnKeyDone;
         self.verifyFieldText.keyboardType   = UIKeyboardTypeNumberPad;
@@ -365,14 +380,35 @@
         [self.verifyFieldText addTarget:self action:@selector(verifyFieldChanged:) forControlEvents:UIControlEventEditingChanged];
         [cell.contentView addSubview:self.verifyFieldText];
         
-//        NSString *getVeriifyString      = @"获取验证码";
-//        UIFont *getVeriifyStringFont          = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
-//        self.getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*90/375, Main_Screen_Height*28/667) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyByButtonClick:)];
-//        self.getVeriifyStringButton.backgroundColor=  [UIColor colorFromHex:@"#0161a1"];
-//        self.getVeriifyStringButton.layer.masksToBounds  = YES;
-//        self.getVeriifyStringButton.layer.cornerRadius = Main_Screen_Height*14/667;
-//        self.getVeriifyStringButton.right          = self.tableView.width;
-//        self.getVeriifyStringButton.centerY        = self.verifyFieldText.centerY;
+                NSString *getVeriifyString      = @"获取验证码";
+                UIFont *getVeriifyStringFont          = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
+                self.getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*90/375, Main_Screen_Height*28/667) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyByButtonClick:)];
+                self.getVeriifyStringButton.backgroundColor=  [UIColor colorFromHex:@"#0161a1"];
+                self.getVeriifyStringButton.layer.masksToBounds  = YES;
+                self.getVeriifyStringButton.layer.cornerRadius = Main_Screen_Height*14/667;
+                self.getVeriifyStringButton.right          = self.tableView.width;
+                self.getVeriifyStringButton.centerY        = self.verifyFieldText.centerY;
+        
+        UIView          *lineView       = [UIUtil drawLineInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 1) color:[UIColor colorFromHex:@"#e6e6e6"]];
+        lineView.top                    = Main_Screen_Height*46/667;
+        lineView.left                   = cell.imageView.left +Main_Screen_Width*20/375;
+        
+    }else if (indexPath.row == 2) {
+        cell.imageView.image                = [UIImage imageNamed:@"mimayanzheng"];
+        
+        self.passwordFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-150, Main_Screen_Height*40/667)];
+        self.passwordFieldText.placeholder    = @"至少输入6位新密码";
+        self.passwordFieldText.delegate       = self;
+        self.passwordFieldText.returnKeyType  = UIReturnKeyDone;
+        self.passwordFieldText.keyboardType   = UIKeyboardTypeNumberPad;
+        self.passwordFieldText.textAlignment  = NSTextAlignmentLeft;
+        self.passwordFieldText.font           = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
+        self.passwordFieldText.backgroundColor= [UIColor whiteColor];
+        self.passwordFieldText.top            = Main_Screen_Height*3/667;
+        self.passwordFieldText.left           = Main_Screen_Width*50/375 ;
+        
+//        [self.passwordFieldText addTarget:self action:@selector(userPhoneFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
+        [cell.contentView addSubview:self.passwordFieldText];
         
         UIView          *lineView       = [UIUtil drawLineInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 1) color:[UIColor colorFromHex:@"#e6e6e6"]];
         lineView.top                    = Main_Screen_Height*46/667;
@@ -390,6 +426,74 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
+}
+- (void) getVeriifyByButtonClick:(id)sender {
+    
+    if ([LCMD5Tool valiMobile:self.userMobileFieldText.text]) {
+        
+        
+        [self startTimer];
+        [self.view showInfo:@"验证码发送成功，请在手机上查收！" autoHidden:YES interval:2];
+        
+        NSDictionary *mulDic = @{@"Mobile":self.userMobileFieldText.text};
+        
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        
+        
+        NSLog(@"%@",params);
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetVerCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            NSLog(@"%@",dict);
+        } fail:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
+        
+    }else
+    {
+        [self.view showInfo:@"请输入正确的手机号码" autoHidden:YES];
+        
+    }
+}
+
+
+- (void)startTimer
+{
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+    self.second = 60;
+    self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
+    [self.timer fire];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+}
+
+- (void)onTimer
+{
+    if (self.second == 0) {
+        
+        [self.view showInfo:@"未收到验证码，请点击重新发送！" autoHidden:YES interval:2];
+        self.getVeriifyStringButton.hidden = NO;
+        self.resendFakeBtn.hidden = NO;
+        self.getVeriifyStringButton.enabled = YES;
+        self.resendFakeBtn.enabled = YES;
+        [self.getVeriifyStringButton setTitle:@"重新发送" forState:UIControlStateNormal];
+        //                [self.resendBtn setTitle:NSLocalizedString(@"Resend Code", nil) forState:UIControlStateNormal];
+        //        self.secondLbl.text = @"";
+        //        self.secondLbl.hidden = YES;
+        [self.timer invalidate];
+        
+    } else {
+        //        self.resendBtn.hidden = YES;
+        self.getVeriifyStringButton.enabled = NO;
+        self.resendFakeBtn.enabled = NO;
+        //        [self.resendBtn setTitle:NSLocalizedString(@"Waiting", nil) forState:UIControlStateNormal];
+        //        self.secondLbl.hidden = NO;
+        NSString *text = [NSString stringWithFormat:@"%d%@",self.second--,@"s"];
+        [self.getVeriifyStringButton setTitle:text forState:UIControlStateNormal];
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -412,26 +516,14 @@
 {
     
 }
--(void)ForgetpasswordBtn
+-(void)backButtonClick
 {
-    ForgetPasswordLoginViewController *ForgetpasswordController        = [[ForgetPasswordLoginViewController alloc]init];
-    ForgetpasswordController.hidesBottomBarWhenPushed      = YES;
-    [self.navigationController pushViewController:ForgetpasswordController animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)checkLoginBtnClick
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
-- (void) agreeButtonClick:(id)sender {
-    
-    DSAgreementController *agreeController      = [[DSAgreementController alloc]init];
-    
-    agreeController.hidesBottomBarWhenPushed    = YES;
-    [self.navigationController pushViewController:agreeController animated:YES];
-    
-}
-- (void) backButtonClick {
-    [self.navigationController popViewControllerAnimated:YES];
-}
+
 
 @end

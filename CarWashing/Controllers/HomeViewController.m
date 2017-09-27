@@ -101,7 +101,6 @@
     
 }
 
-
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     //一句代码实现检测更新,很简单哦 （需要在viewDidAppear完成时，再调用改方法。不然在网速飞快的时候，会出现一个bug，就是当前控制器viewDidLoad调用的话，可能当前视图还没加载完毕就需要推出UIAlertAction）
@@ -641,7 +640,6 @@
 
 - (void)cycleScrollView:(GCCycleScrollView*)cycleScrollView didSelectItemAtRow:(NSInteger)row{
     NSLog(@"dianji =%ld",(long)row);
-    
     //        活动类型1将参数【2个参数】拼接到Url（活动详情的后面）
     //        ,类型2将参数【1个参数】拼接到Url（活动详情的后面）id
     //        类型 3将参数【一个参数】拼接到InviteUrl(分享链接的后面)id

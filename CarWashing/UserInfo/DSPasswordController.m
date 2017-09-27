@@ -31,12 +31,7 @@
 @implementation DSPasswordController
 
 - (void)drawNavigation {
-    if (self.type==1) {
-        [self drawTitle:@"找回密码"];
-    }else{
         [self drawTitle:@"密码管理"];
-    }
-    
     
 }
 
@@ -80,8 +75,8 @@
     
     [self.userMobileFieldText resignFirstResponder];
     
-    [submitButton setTitle:@"提交" forState:UIControlStateNormal];
-    submitButton.enabled = NO;
+//    [submitButton setTitle:@"提交" forState:UIControlStateNormal];
+//    submitButton.enabled = NO;
     if (self.passwordNewFieldText.text.length!=6) {
         [self.view showInfo:@"请输入6位密码" autoHidden:YES interval:2];
         return;

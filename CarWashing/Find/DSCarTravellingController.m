@@ -237,20 +237,11 @@
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-       
             self.page++;
             _otherArray = [NSMutableArray new];
             [self requesetCarClubNewsmore];
-            
-        
-        
-        
-        
-        
         // 刷新表格
-        
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        
     });
 }
 
