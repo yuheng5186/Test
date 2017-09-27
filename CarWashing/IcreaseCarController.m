@@ -152,7 +152,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             UITextField *numTF1 = [[UITextField alloc] init];
             numTF1.delegate=self;
             _numTF = numTF1;
-            
+            _numTF.keyboardType = UIKeyboardTypeASCIICapable;
             if(self.mycar == nil)
             {
                 numTF1.placeholder = @"请输入车牌号";
