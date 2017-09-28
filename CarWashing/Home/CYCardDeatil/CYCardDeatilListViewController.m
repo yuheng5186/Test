@@ -173,7 +173,6 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
-    NSLog(@"--%@",params);
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardInfoList",Khttp] success:^(NSDictionary *dict, BOOL success) {
 
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
@@ -359,7 +358,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    CardBag *card = (CardBag *)[_CardbagData objectAtIndex:indexPath.row];
+    CardBag *card =_CardbagData [indexPath.section];
     RechargeDetailController *rechargeDetailVC = [[RechargeDetailController alloc] init];
     rechargeDetailVC.hidesBottomBarWhenPushed = YES;
     rechargeDetailVC.card = card;

@@ -639,7 +639,7 @@
 }
 
 - (void)cycleScrollView:(GCCycleScrollView*)cycleScrollView didSelectItemAtRow:(NSInteger)row{
-    NSLog(@"dianji =%ld",(long)row);
+//    NSLog(@"dianji =%ld",(long)row);
     //        活动类型1将参数【2个参数】拼接到Url（活动详情的后面）
     //        ,类型2将参数【1个参数】拼接到Url（活动详情的后面）id
     //        类型 3将参数【一个参数】拼接到InviteUrl(分享链接的后面)id
@@ -700,7 +700,6 @@
                              };
     
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetUserRecord",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
              self.GetUserRecordData = [[NSMutableArray alloc]init];
@@ -715,7 +714,7 @@
             else
             {
 
-                NSLog(@"%@",[dict objectForKey:@"JsonData"]);
+//                NSLog(@"%@",[dict objectForKey:@"JsonData"]);
 //                NSArray *arr = [NSArray array];
 //                arr = [dict objectForKey:@"JsonData"];
 //                for(NSDictionary *dic in arr)
@@ -882,7 +881,7 @@
         
    
     Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil];
-    NSLog(@"%@==%@",record,[self.newrc.recList objectAtIndex:indexPath.section]);
+//    NSLog(@"%@==%@",record,[self.newrc.recList objectAtIndex:indexPath.section]);
     NSString *imageString;
     NSString *titleString;
     NSString *vipString;
@@ -1456,9 +1455,9 @@
     [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.latitude] forKey:@"Ym"];
     [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.longitude]  forKey:@"Xm"];
     
-    NSLog(@"Ym=====%@",[UdStorage getObjectforKey:@"Ym"]);
+//    NSLog(@"Ym=====%@",[UdStorage getObjectforKey:@"Ym"]);
     
-    NSLog(@"Xm=====%@",[UdStorage getObjectforKey:@"Xm"]);
+//    NSLog(@"Xm=====%@",[UdStorage getObjectforKey:@"Xm"]);
 
     
     
