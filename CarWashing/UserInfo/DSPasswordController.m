@@ -220,9 +220,10 @@
         self.passwordNewFieldText.placeholder    = @"请输入新密码";
         self.passwordNewFieldText.delegate       = self;
         self.passwordNewFieldText.returnKeyType  = UIReturnKeyDone;
+        self.passwordNewFieldText.secureTextEntry  = YES;
         self.passwordNewFieldText.clearButtonMode= UITextFieldViewModeAlways;
         self.passwordNewFieldText.textAlignment  = NSTextAlignmentLeft;
-        self.passwordNewFieldText.keyboardType   = UIKeyboardTypeNumberPad;
+        self.passwordNewFieldText.keyboardType   = UIKeyboardTypeDefault;
         self.passwordNewFieldText.font           = [UIFont systemFontOfSize:14];
         self.passwordNewFieldText.backgroundColor= [UIColor whiteColor];
         self.passwordNewFieldText.top            = Main_Screen_Height*5/667;
@@ -238,7 +239,8 @@
         self.passwordAgainFieldText.delegate       = self;
         self.passwordAgainFieldText.returnKeyType  = UIReturnKeyDone;
         self.passwordAgainFieldText.textAlignment  = NSTextAlignmentLeft;
-        self.passwordAgainFieldText.keyboardType   = UIKeyboardTypeNumberPad;
+        self.passwordAgainFieldText.keyboardType   = UIKeyboardTypeDefault;
+        self.passwordAgainFieldText.secureTextEntry = YES;
 
         self.passwordAgainFieldText.clearButtonMode= UITextFieldViewModeAlways;
         self.passwordAgainFieldText.font           = [UIFont systemFontOfSize:14];

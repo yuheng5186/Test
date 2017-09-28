@@ -350,11 +350,12 @@
     {
         cell.imageView.image                = [UIImage imageNamed:@"mimayanzheng"];
         
-        self.verifyFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*260/375, Main_Screen_Height*40/667)];
+        self.verifyFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*100/375, Main_Screen_Height*40/667)];
         self.verifyFieldText.placeholder    = @"请输入密码";
         self.verifyFieldText.delegate       = self;
         self.verifyFieldText.returnKeyType  = UIReturnKeyDone;
-        self.verifyFieldText.keyboardType   = UIKeyboardTypeNumberPad;
+        self.verifyFieldText.secureTextEntry= YES;
+        self.verifyFieldText.keyboardType   = UIKeyboardTypeDefault;
         self.verifyFieldText.textAlignment  = NSTextAlignmentLeft;
         self.verifyFieldText.font           = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
         //        self.verifyFieldText.backgroundColor= [UIColor grayColor];
@@ -431,8 +432,8 @@
             return YES;
         }
         //so easy
-        else if (self.verifyFieldText.text.length >= 4) {
-            self.verifyFieldText.text = [textField.text substringToIndex:4];
+        else if (self.verifyFieldText.text.length >= 20) {
+            self.verifyFieldText.text = [textField.text substringToIndex:20];
             return NO;
         }
     }
