@@ -112,6 +112,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
 
     memberRightsView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    memberRightsView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:memberRightsView];
     
     
@@ -404,7 +405,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section==0) {
         if (_CurrentMembershipprivilegesArr.count==0) {
-            return 80;
+            return 70;
         }else{
            return 10*Main_Screen_Height/667;
         }
@@ -420,16 +421,17 @@ static NSString *id_rightsCell = @"id_rightsCell";
 {
     if (section==0) {
         
+        
         UIView * footView= [[UIView alloc]init];
         footView.backgroundColor=[UIColor whiteColor];
-        UIView * lineVIew=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 1)];
-        lineVIew.backgroundColor=RGBAA(239, 239, 239, 1.0);
-        [footView addSubview:lineVIew];
+//        UIView * lineVIew=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 1)];
+//        lineVIew.backgroundColor=RGBAA(239, 239, 239, 1.0);
+//        [footView addSubview:lineVIew];
         
-        UIImageView * leftImage = [[UIImageView alloc]initWithFrame:CGRectMake(Main_Screen_Width*30/667, 25, 30, 30)];
+        UIImageView * leftImage = [[UIImageView alloc]initWithFrame:CGRectMake(Main_Screen_Width*30/667, 20, 30, 30)];
         leftImage.image=[UIImage imageNamed:@"shengjihoukaquan"];
         [footView addSubview:leftImage];
-        UILabel * detailLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 30)];
+        UILabel * detailLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 20)];
         detailLabel.top       = footView.bottom+25;
         detailLabel.left      = 70*Main_Screen_Height/667;
         detailLabel.textColor = [UIColor blackColor];
@@ -443,25 +445,34 @@ static NSString *id_rightsCell = @"id_rightsCell";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *hederview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
     hederview.backgroundColor=[UIColor colorFromHex:@"0xf0f0f0"];
+    
+   
+    
     UIView *hederviews=[[UIView alloc]initWithFrame:CGRectMake(0, 10, Main_Screen_Width, 40)];
     hederviews.backgroundColor=[UIColor whiteColor];
+    
+   
     
     
     UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, Main_Screen_Width, 40)];
     
     infoLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
     infoLabel.font = [UIFont systemFontOfSize:15];
+    UIView * lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 39, Main_Screen_Width, 1)];
+    lineView.backgroundColor=RGBAA(239, 239, 239, 1.0);
+   
     
     if (section == 0) {
         
         infoLabel.text = @"  等级特权";
-        
+       
     }else{
         
         infoLabel.text = @"  升级后可获得特权";
     }
     
     [hederviews addSubview:infoLabel];
+    [hederviews addSubview:lineView];
     [hederview addSubview:hederviews];
     
     return hederview;
