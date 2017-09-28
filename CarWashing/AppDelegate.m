@@ -52,7 +52,7 @@
     [[UITabBar appearance] setBarTintColor: [UIColor whiteColor]];
     [[UITabBar appearance] setTintColor: [UIColor colorFromHex:@"#0161a1"]];
     
-    application.statusBarStyle                      = UIStatusBarStyleLightContent;
+    application.statusBarStyle                      = UIStatusBarStyleDefault;
     application.applicationIconBadgeNumber          = 0;
     
     self.window									= [[UIWindow alloc] initWithFrame: UIScreen.mainScreen.bounds];

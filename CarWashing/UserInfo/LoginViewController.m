@@ -40,7 +40,10 @@
 @end
 
 @implementation LoginViewController
-
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    //    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
+}
 - (void) drawNavigation {
 
 //    [self drawTitle:@"登录" Color:[UIColor blackColor]];
