@@ -76,7 +76,7 @@
 
 - (void) createSubView {
 
-    NSString   *headerString     = @"登录";
+    NSString   *headerString     = @"";
     UIFont     *headerFont       = [UIFont systemFontOfSize:Main_Screen_Height*20/667];
     UILabel *deaderLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*30/667) font:headerFont text:headerString isCenter:NO];
     deaderLabel.textColor        = [UIColor blackColor];
@@ -196,6 +196,7 @@
 - (TPKeyboardAvoidingScrollView *)scrollView {
     if (!_scrollView) {
         _scrollView = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:self.contentView.bounds];
+        _scrollView.top = 20;
     }
     return _scrollView;
 }

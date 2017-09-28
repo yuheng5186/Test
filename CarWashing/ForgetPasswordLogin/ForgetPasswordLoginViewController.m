@@ -337,8 +337,8 @@
             return YES;
         }
         //so easy
-        else if (self.passwordFieldText.text.length >= 6) {
-            self.passwordFieldText.text = [textField.text substringToIndex:6];
+        else if (self.passwordFieldText.text.length >= 20) {
+            self.passwordFieldText.text = [textField.text substringToIndex:20];
             return NO;
         }
     }
@@ -382,7 +382,7 @@
     if (indexPath.row == 0) {
         cell.imageView.image                = [UIImage imageNamed:@"yonghushouji"];
         
-        self.userMobileFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-150, Main_Screen_Height*40/667)];
+        self.userMobileFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*100/375, Main_Screen_Height*40/667)];
         self.userMobileFieldText.placeholder    = @"请输入手机号码";
         self.userMobileFieldText.delegate       = self;
         self.userMobileFieldText.returnKeyType  = UIReturnKeyDone;
@@ -433,11 +433,11 @@
     }else if (indexPath.row == 2) {
         cell.imageView.image                = [UIImage imageNamed:@"mimayanzheng"];
         
-        self.passwordFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-150, Main_Screen_Height*40/667)];
+        self.passwordFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*100/375, Main_Screen_Height*40/667)];
         self.passwordFieldText.placeholder    = @"至少输入6位新密码";
         self.passwordFieldText.delegate       = self;
         self.passwordFieldText.returnKeyType  = UIReturnKeyDone;
-        self.passwordFieldText.keyboardType   = UIKeyboardTypeNumberPad;
+        self.passwordFieldText.keyboardType   = UIKeyboardTypeDefault;
         self.passwordFieldText.textAlignment  = NSTextAlignmentLeft;
         self.passwordFieldText.font           = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
         self.passwordFieldText.backgroundColor= [UIColor whiteColor];
