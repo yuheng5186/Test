@@ -226,7 +226,7 @@
             self.phoneFieldText.placeholder    = @"请填写联系电话";
             self.phoneFieldText.delegate       = self;
             self.phoneFieldText.returnKeyType  = UIReturnKeyDone;
-            self.phoneFieldText.keyboardType   = UIKeyboardTypeNumberPad;
+            self.phoneFieldText.keyboardType   = UIKeyboardTypePhonePad;
             self.phoneFieldText.textAlignment  = NSTextAlignmentLeft;
             self.phoneFieldText.font           = [UIFont systemFontOfSize:14];
             self.phoneFieldText.backgroundColor= [UIColor whiteColor];
@@ -280,7 +280,21 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     return [textField resignFirstResponder];
 }
-
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField == self.phoneFieldText)
+    {
+        //这里的if时候为了获取删除操作,如果没有次if会造成当达到字数限制后删除键也不能使用的后果.
+        if (range.length == 1 && string.length == 0) {
+            return YES;
+        }
+        //so easy
+        else if (self.phoneFieldText.text.length >= 15) {
+            self.phoneFieldText.text = [textField.text substringToIndex:15];
+            return NO;
+        }
+    }
+    return YES;
+}
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
     [self.merchantFieldText resignFirstResponder];
