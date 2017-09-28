@@ -136,7 +136,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    [self startLocation];
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];
     
@@ -160,7 +160,7 @@
     
     
     [self createSubView];
-    
+    _GetUserRecordData = [NSMutableArray array];
 //    self.locationManager = [[JFLocation alloc] init];
 //    _locationManager.delegate = self;
     
@@ -227,7 +227,7 @@
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        [self startLocation];
+
         
         
        
@@ -698,11 +698,12 @@
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
-    
+    NSLog(@"---%@",params);
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetUserRecord",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"---%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
-             self.GetUserRecordData = [[NSMutableArray alloc]init];
+            
             
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
