@@ -343,7 +343,6 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id_rightsCell];
     
@@ -403,12 +402,43 @@ static NSString *id_rightsCell = @"id_rightsCell";
     return 70;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    
+    if (section==0) {
+        if (_CurrentMembershipprivilegesArr.count==0) {
+            return 100;
+        }else{
+           return 10*Main_Screen_Height/667;
+        }
+    }
+
     return 10*Main_Screen_Height/667;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
     return 50;
+}
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section==0) {
+        
+        UIView * footView= [[UIView alloc]init];
+        footView.backgroundColor=[UIColor whiteColor];
+        UIView * lineVIew=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 1)];
+        lineVIew.backgroundColor=RGBAA(239, 239, 239, 1.0);
+        [footView addSubview:lineVIew];
+        
+        UIImageView * leftImage = [[UIImageView alloc]initWithFrame:CGRectMake(Main_Screen_Width*30/667, 38, 30, 30)];
+        leftImage.image=[UIImage imageNamed:@"shengjihoukaquan"];
+        [footView addSubview:leftImage];
+        UILabel * detailLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 30)];
+        detailLabel.top       = footView.bottom+38;
+        detailLabel.left      = 70*Main_Screen_Height/667;
+        detailLabel.textColor = [UIColor blackColor];
+        detailLabel.font = [UIFont systemFontOfSize:Main_Screen_Height*17/667];
+        detailLabel.text = @"暂无优惠";
+        [footView addSubview:detailLabel];
+        return footView;
+    }
+    return nil;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *hederview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];

@@ -721,7 +721,9 @@
 //                for(NSDictionary *dic in arr)
 //                {
                     self.newrc = [[Record alloc]initWithDictionary:[dict objectForKey:@"JsonData"] error:nil];
-                    
+                [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%@",dict[@"JsonData"][@"adverList"][0][@"Url"]] forKey:@"homeUrl"];
+                [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%@",dict[@"JsonData"][@"adverList"][0][@"InviteUrl"]] forKey:@"homeInviteUrl"];
+                
 //                    [self.GetUserRecordData addObject:newrc];
 //                }
                  [self createHeaderView];

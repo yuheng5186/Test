@@ -533,10 +533,8 @@
             cell.imageView.image        = [UIImage imageNamed:@"wode_wodeaiche"];
             cell.textLabel.text         = @"我的爱车";
         }else if (indexPath.row == 1){
-        
             cell.imageView.image        = [UIImage imageNamed:@"wwodekaquan"];
             cell.textLabel.text         = @"我的卡包";
-            
         }else{
 
             cell.imageView.image        = [UIImage imageNamed:@"kefu_wode"];
