@@ -83,18 +83,18 @@
     deaderLabel.textAlignment    = NSTextAlignmentCenter;
 
     deaderLabel.centerX          = Main_Screen_Width/2;
-    deaderLabel.top              = Main_Screen_Height*20/667;
+    deaderLabel.top              = Main_Screen_Height/667;
     
     UIImageView *logoImageView  = [UIUtil drawCustomImgViewInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*100/667) imageName:@"denglu_icon"];
     logoImageView.layer.masksToBounds = YES;
 //    logoImageView.layer.cornerRadius = logoImageView.size.width/2;
-    logoImageView.top           = deaderLabel.bottom +Main_Screen_Height*30/667;
+    logoImageView.top           = deaderLabel.top +Main_Screen_Height*40/667;
     logoImageView.centerX       = Main_Screen_Width/2;
     
     NSString   *titleString     = @"蔷薇爱车";
 //    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc]initWithString:titleString];
 //    CGAffineTransform matrix = CGAffineTransformMake(1, 0, tanf(-20 * (CGFloat)M_PI / 180), 1, 0, 0);
-    UIFont     *titleFont       = [UIFont boldSystemFontOfSize:Main_Screen_Height*25/667];
+    UIFont     *titleFont       = [UIFont systemFontOfSize:Main_Screen_Height*20/667];
     UILabel *titleLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*30/667) font:titleFont text:titleString isCenter:NO];
 //    titleLabel.attributedText   = attributed;
 //    titleLabel.transform        = matrix;
@@ -103,7 +103,7 @@
 
     
     titleLabel.centerX          = Main_Screen_Width/2;
-    titleLabel.top              = logoImageView.bottom +Main_Screen_Height*20/667;
+    titleLabel.top              = logoImageView.bottom +Main_Screen_Height*10/667;
     
     NSString   *welcomeString     = @"欢迎登录蔷薇爱车APP";
     UIFont     *welcomeFont       = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
@@ -111,7 +111,7 @@
     welcomeLabel.textColor        = [UIColor colorFromHex:@"#0161a1"];
     welcomeLabel.textAlignment    = NSTextAlignmentCenter;
     welcomeLabel.centerX          = Main_Screen_Width/2;
-    welcomeLabel.top              = titleLabel.bottom +Main_Screen_Height*10/667;
+    welcomeLabel.top              = titleLabel.bottom ;
     
 
 //    UIImage *backgroundImage            = [UIImage imageNamed:@"dengluditu"];
