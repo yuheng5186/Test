@@ -386,6 +386,37 @@
     
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if (textField == self.userMobileFieldText) {
+        //这里的if时候为了获取删除操作,如果没有次if会造成当达到字数限制后删除键也不能使用的后果.
+        if (range.length == 1 && string.length == 0) {
+            return YES;
+        }
+        //so easy
+        else if (self.userMobileFieldText.text.length >= 11) {
+            self.userMobileFieldText.text = [textField.text substringToIndex:11];
+            return NO;
+        }
+    }
+    if (textField == self.verifyFieldText) {
+        //这里的if时候为了获取删除操作,如果没有次if会造成当达到字数限制后删除键也不能使用的后果.
+        if (range.length == 1 && string.length == 0) {
+            return YES;
+        }
+        //so easy
+        else if (self.verifyFieldText.text.length >= 4) {
+            self.verifyFieldText.text = [textField.text substringToIndex:4];
+            return NO;
+        }
+    }
+    
+    return YES;
+    
+}
+
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;

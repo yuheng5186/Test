@@ -309,6 +309,43 @@
     }
     
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if (textField == self.userMobileFieldText) {
+        if (range.length == 1 && string.length == 0) {
+            return YES;
+        }
+        //so easy
+        else if (self.userMobileFieldText.text.length >= 11) {
+            self.userMobileFieldText.text = [textField.text substringToIndex:11];
+            return NO;
+        }
+    }
+    if (textField == self.verifyFieldText) {
+        if (range.length == 1 && string.length == 0) {
+            return YES;
+        }
+        //so easy
+        else if (self.verifyFieldText.text.length >= 4) {
+            self.verifyFieldText.text = [textField.text substringToIndex:4];
+            return NO;
+        }
+    }
+    if (textField == self.passwordFieldText) {
+        if (range.length == 1 && string.length == 0) {
+            return YES;
+        }
+        //so easy
+        else if (self.passwordFieldText.text.length >= 6) {
+            self.passwordFieldText.text = [textField.text substringToIndex:6];
+            return NO;
+        }
+    }
+    return YES;
+    
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

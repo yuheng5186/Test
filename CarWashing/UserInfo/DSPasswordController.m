@@ -222,6 +222,7 @@
         self.passwordNewFieldText.returnKeyType  = UIReturnKeyDone;
         self.passwordNewFieldText.clearButtonMode= UITextFieldViewModeAlways;
         self.passwordNewFieldText.textAlignment  = NSTextAlignmentLeft;
+        self.passwordNewFieldText.keyboardType   = UIKeyboardTypeNumberPad;
         self.passwordNewFieldText.font           = [UIFont systemFontOfSize:14];
         self.passwordNewFieldText.backgroundColor= [UIColor whiteColor];
         self.passwordNewFieldText.top            = Main_Screen_Height*5/667;
@@ -237,6 +238,8 @@
         self.passwordAgainFieldText.delegate       = self;
         self.passwordAgainFieldText.returnKeyType  = UIReturnKeyDone;
         self.passwordAgainFieldText.textAlignment  = NSTextAlignmentLeft;
+        self.passwordAgainFieldText.keyboardType   = UIKeyboardTypeNumberPad;
+
         self.passwordAgainFieldText.clearButtonMode= UITextFieldViewModeAlways;
         self.passwordAgainFieldText.font           = [UIFont systemFontOfSize:14];
         self.passwordAgainFieldText.backgroundColor= [UIColor whiteColor];
@@ -279,6 +282,9 @@
 
 }
 - (void) getVeriifyButtonClick:(id)sender {
+    
+    [self.verifyFieldText becomeFirstResponder];
+    
     if ([LCMD5Tool valiMobile:self.userMobileFieldText.text]) {
         
         
@@ -305,6 +311,57 @@
         [self.view showInfo:@"请输入正确的手机号码" autoHidden:YES];
         
     }
+
+}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    if (textField == self.userMobileFieldText) {
+        //这里的if时候为了获取删除操作,如果没有次if会造成当达到字数限制后删除键也不能使用的后果.
+        if (range.length == 1 && string.length == 0) {
+            return YES;
+        }
+        //so easy
+        else if (self.userMobileFieldText.text.length >= 11) {
+            self.userMobileFieldText.text = [textField.text substringToIndex:11];
+            return NO;
+        }
+    }
+    
+    if (textField == self.verifyFieldText) {
+        //这里的if时候为了获取删除操作,如果没有次if会造成当达到字数限制后删除键也不能使用的后果.
+        if (range.length == 1 && string.length == 0) {
+            return YES;
+        }
+        //so easy
+        else if (self.verifyFieldText.text.length >= 4) {
+            self.verifyFieldText.text = [textField.text substringToIndex:4];
+            return NO;
+        }
+    }
+    
+    if (textField == self.passwordNewFieldText) {
+        //这里的if时候为了获取删除操作,如果没有次if会造成当达到字数限制后删除键也不能使用的后果.
+        if (range.length == 1 && string.length == 0) {
+            return YES;
+        }
+        //so easy
+        else if (self.passwordNewFieldText.text.length >= 6) {
+            self.passwordNewFieldText.text = [textField.text substringToIndex:6];
+            return NO;
+        }
+    }
+    if (textField == self.passwordAgainFieldText) {
+        //这里的if时候为了获取删除操作,如果没有次if会造成当达到字数限制后删除键也不能使用的后果.
+        if (range.length == 1 && string.length == 0) {
+            return YES;
+        }
+        //so easy
+        else if (self.passwordAgainFieldText.text.length >= 6) {
+            self.passwordAgainFieldText.text = [textField.text substringToIndex:6];
+            return NO;
+        }
+    }
+    return YES;
 
 }
 

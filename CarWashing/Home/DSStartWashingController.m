@@ -477,6 +477,8 @@
     [adButton addTarget:self action:@selector(adButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     //    logoImageView.bottom        = self.contentView.height -Main_Screen_Height*80/667;
+    adButton.bottom        = self.contentView.height -Main_Screen_Height*70/667;
+
     if (Main_Screen_Height == 568) {
         adButton.bottom        = self.contentView.height -Main_Screen_Height*85/667;
     }
