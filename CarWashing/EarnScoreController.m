@@ -12,6 +12,7 @@
 #import "ScoreDetailController.h"
 #import "DSMyCarController.h"
 #import "DSUserInfoController.h"
+#import "DSAdDetailController.h"
 
 #import "LCMD5Tool.h"
 #import "AFNetworkingTool.h"
@@ -43,6 +44,9 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
         
         UIImageView *adverView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 100*Main_Screen_Height/667)];
         _adverView = adverView;
+        adverView.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(adverViewClick:)];
+        [adverView addGestureRecognizer:tap];
         [self.view addSubview:adverView];
     }
     return _adverView;
@@ -231,7 +235,16 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
         [self.navigationController pushViewController:userInfoController animated:YES];
     }
 }
-
+//banner点击
+-(void)adverViewClick:(UITapGestureRecognizer*)recognizer
+{
+    NSLog(@"hah");
+    DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
+    viewVC.urlstr=HOMEURL;
+    viewVC.shareurlstr=HOMEINTURL;
+    viewVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:viewVC animated:YES];
+}
 
 
 - (void)didReceiveMemoryWarning {
