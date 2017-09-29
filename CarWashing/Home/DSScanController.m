@@ -21,9 +21,10 @@
 #import "MBProgressHUD.h"
 #import "UdStorage.h"
 #import "ScanCode.h"
+#import "Record.h"
 
 #import "DSStartWashingController.h"
-
+#import "DSConsumerDetailController.h"
 
 @interface DSScanController ()<AVCaptureMetadataOutputObjectsDelegate>
 {
@@ -42,7 +43,7 @@
 @property (nonatomic, strong) UILabel * inputLabel;
 
 @property (nonatomic, strong) ScanCode *scan;
-
+@property (strong, nonatomic)Record *newrc;
 
 @end
 
@@ -376,8 +377,6 @@
                             [weakSelf.navigationController pushViewController:start animated:YES];
                             
                             
-                            
-                            
                         }
                     };
                     
@@ -433,7 +432,7 @@
                     
                     self.scan = [[ScanCode alloc]init];
                     [self.scan setValuesForKeysWithDictionary:arr];
-                    
+                    self.newrc = [[Record alloc]initWithDictionary:[dict objectForKey:@"JsonData"] error:nil];
                     
                     __weak typeof(self) weakSelf = self;
                     HUD.completionBlock = ^(){
@@ -460,40 +459,12 @@
                         }
                         else
                         {
-                            
-                            [weakSelf.view showInfo:@"口卡成功" autoHidden:YES interval:1];
-                            
-                            //                                NSDate*date                     = [NSDate date];
-                            //                                NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
-                            //                                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-                            //
-                            //
-                            //                                NSString *dateString        = [dateFormatter stringFromDate:date];
-                            //                                NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
-                            //                                [defaults setObject:dateString forKey:@"setTime"];
-                            //                                [defaults synchronize];
-                            //                                NSLog(@"setTime ==== %@",[defaults objectForKey:@"setTime"]);
-                            //                                [UdStorage storageObject:[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt] forKey:@"Jprice"];
-                            //                                [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount] forKey:@"RemainCount"];
-                            //                                [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum] forKey:@"IntegralNum"];
-                            //                                [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.CardType] forKey:@"CardType"];
-                            //                                [UdStorage storageObject:weakSelf.scan.CardName forKey:@"CardName"];
-                            //
-                            //                                DSStartWashingController *start = [[DSStartWashingController alloc]init];
-                            //                                start.hidesBottomBarWhenPushed            = YES;
-                            //
-                            //                                start.RemainCount   = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.RemainCount];
-                            //                                start.IntegralNum   = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.IntegralNum];
-                            //                                start.CardType      = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
-                            //                                start.CardName      = weakSelf.scan.CardName;
-                            //                                start.paynum=[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt];
-                            //                                start.second        = 240;
-                            //
-                            //                                [weakSelf.navigationController pushViewController:start animated:YES];
-                            
-                            
-                            
-                            
+                            [weakSelf.view showInfo:@"扣卡成功" autoHidden:YES interval:1];
+                            Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)weakSelf.newrc  error:nil] ;
+                            DSConsumerDetailController *detaleController    = [[DSConsumerDetailController alloc]init];
+                            detaleController.hidesBottomBarWhenPushed       = YES;
+                            detaleController.record                         = record;
+                            [weakSelf.navigationController pushViewController:detaleController animated:YES];
                         }
                     };
                     
@@ -510,18 +481,13 @@
                 [HUD hide:YES];
                 [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
                 //            [self.navigationController popViewControllerAnimated:YES];
-                
             }];
         }
     }else{
-        
         //处理设备编码
         NSArray *array = [imei componentsSeparatedByString:@":"]; //从字符：中分隔成2个元素的数组
-        
         if (array.count==3&&((NSString *)array[1]).length==8) {
-            
         }else {
-        
         
         }
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"错误提示" message:@"扫码错误" preferredStyle:UIAlertControllerStyleAlert];
@@ -537,8 +503,6 @@
 //            //2.开始动画
 //            [self beginScanning];
             [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resumeAnimation) name:@"EnterForeground" object:nil];
-            
-            
         }];
         [alertController addAction:OKAction];
         

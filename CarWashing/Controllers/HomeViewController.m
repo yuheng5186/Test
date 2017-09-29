@@ -140,7 +140,6 @@
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];
     
-    
     // Do any additional setup after loading the view.
     self.title = @"首页";
     self.navigationController.navigationBar.hidden = YES;

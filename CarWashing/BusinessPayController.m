@@ -226,6 +226,12 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 #pragma mark-购买商家服务支付,
         //商家编号:MerCode,SerCode 服务编号,
          NSLog(@"%@==%@==%@==%@",self.MCode,self.SCode,self.OrderCode,self.SerMerChant);
+        NSString *uriStr = @"";
+        if ([self.SCode isEqualToString:@"0"]) {
+            uriStr = @"MerScanPayment";
+        }else{
+            uriStr = @"ServicePayment";
+        }
         NSDictionary *mulDic = @{
                                  @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                                  @"MerCode":self.MCode,
@@ -238,7 +244,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
         NSLog(@"%@",params);
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/ServicePayment",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/%@",Khttp,uriStr] success:^(NSDictionary *dict, BOOL success) {
             NSLog(@"%@",dict);
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
