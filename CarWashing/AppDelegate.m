@@ -48,11 +48,11 @@
     [IQKeyboardManager sharedManager].enable = YES;
     [AMapServices sharedServices].apiKey = @"f6d2c4b2f6bbe466b2d1b1889783445e";
     
-    application.statusBarHidden                     = NO;
+//    application.statusBarHidden                     = NO;
     [[UITabBar appearance] setBarTintColor: [UIColor whiteColor]];
     [[UITabBar appearance] setTintColor: [UIColor colorFromHex:@"#0161a1"]];
     
-    application.statusBarStyle                      = UIStatusBarStyleDefault;
+//    application.statusBarStyle                      = UIStatusBarStyleLightContent;
     application.applicationIconBadgeNumber          = 0;
     
     self.window									= [[UIWindow alloc] initWithFrame: UIScreen.mainScreen.bounds];
