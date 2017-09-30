@@ -83,10 +83,6 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.citystr=@" ";
     [self setSearchMenu];
     
-    
-    
-    
-    
     self.pramsDic = [[NSMutableDictionary alloc]init];
     NSArray *array1 = [[NSArray alloc] initWithObjects:[UdStorage getObjectforKey:@"City"],[UdStorage getObjectforKey:@"Quyu"], nil];
     NSDictionary *dic = @{@"0":array1,@"1":@"车身外部清洗维护",@"2":@"默认排序"};
@@ -98,11 +94,8 @@ static NSString *id_salerListCell = @"salerListViewCell";
    
     self.otherArray = [[NSMutableArray alloc]init];
     
-    
-    
     //    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     //    [center addObserver:self selector:@selector(noticeupdatexuanze:) name:YZUpdateMenuTitleNote object:nil];
-    
     
     NSNotificationCenter *observer = [[NSNotificationCenter defaultCenter] addObserverForName:YZUpdateMenuTitleNote object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         
@@ -139,17 +132,12 @@ static NSString *id_salerListCell = @"salerListViewCell";
         
         
     }];
-
     
     
     [self setupUI];
     
-    
-    
-    
 
 }
-
 
 - (void)setupUI {
     
@@ -336,7 +324,6 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     // 添加子控制器
     [self setupAllChildViewController];
-   
    
 
    

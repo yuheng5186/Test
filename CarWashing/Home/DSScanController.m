@@ -387,7 +387,11 @@
                 else
                 {
                     [HUD hide:YES];
-                    [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
+                    [_session stopRunning];
+                    
+                    [self.view showInfo:@"扫码失败" autoHidden:YES interval:2];
+                    [_session startRunning];
+        
                     //                [self.navigationController popViewControllerAnimated:YES];
                 }
             } fail:^(NSError *error) {
@@ -470,13 +474,16 @@
                 else
                 {
                     [HUD hide:YES];
-                    [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
+                    [_session stopRunning];
+                    
+                    [self.view showInfo:@"扫码失败" autoHidden:YES interval:2];
+                    [_session startRunning];
                     //                [self.navigationController popViewControllerAnimated:YES];
                 }
             } fail:^(NSError *error) {
                 NSLog(@"%@",error);
                 [HUD hide:YES];
-                [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+                [self.view showInfo:@"扫码失败" autoHidden:YES interval:2];
                 //            [self.navigationController popViewControllerAnimated:YES];
             }];
         }
