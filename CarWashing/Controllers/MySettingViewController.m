@@ -114,7 +114,9 @@
     
     NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,APPDELEGATE.currentUser.userImagePath];
     [self.editButton sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
-    
+    self.editButton.userInteractionEnabled=YES;
+    UITapGestureRecognizer * headertap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(headertapClick)];
+    [self.editButton addGestureRecognizer:headertap];
     
     
 //    self.editButton           = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*80/667) iconName:@"huiyuantou" target:self action:@selector(editButtonClick:)];
@@ -747,7 +749,12 @@
 
 
 
-
+-(void)headertapClick
+{
+    DSUserInfoController *userInfoController    = [[DSUserInfoController alloc]init];
+    userInfoController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:userInfoController animated:YES];
+}
 #pragma mark - modal代理
 - (void)setTabBarIsHide:(UIViewController *)VC {
     

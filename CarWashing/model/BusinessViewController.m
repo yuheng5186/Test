@@ -372,7 +372,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     [button setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateSelected];
     [button setImage:[UIImage imageNamed:@"xiala"] forState:UIControlStateNormal];
     [button setImage:[UIImage imageNamed:@"shangla"] forState:UIControlStateSelected];
-    button.titleLabel.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+    button.titleLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     
     return button;
 }

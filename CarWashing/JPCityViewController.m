@@ -94,7 +94,7 @@ static NSString * const DetailID_cell = @"Detailcell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID_cell];
         
         cell.textLabel.text = self.titleArray[indexPath.row];
-        cell.textLabel.font = [UIFont systemFontOfSize:12];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
         cell.textLabel.textColor = [UIColor colorFromHex:@"#999999"];
         [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
         return cell;
@@ -102,7 +102,7 @@ static NSString * const DetailID_cell = @"Detailcell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:DetailID_cell];
     
     cell.textLabel.text = [self.titleDic objectForKey:_selectedCategory][indexPath.row];
-    cell.textLabel.font = [UIFont systemFontOfSize:12];
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
     cell.textLabel.textColor = [UIColor colorFromHex:@"#999999"];
    [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     return cell;

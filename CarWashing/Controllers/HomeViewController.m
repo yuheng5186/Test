@@ -100,7 +100,11 @@
     self.contentView.backgroundColor    = [UIColor colorFromHex:@"#0161a1"];
     
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self setData];
+}
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     //一句代码实现检测更新,很简单哦 （需要在viewDidAppear完成时，再调用改方法。不然在网速飞快的时候，会出现一个bug，就是当前控制器viewDidLoad调用的话，可能当前视图还没加载完毕就需要推出UIAlertAction）
@@ -796,6 +800,8 @@
        
             if (section==0) {
                 return Main_Screen_Height*110/667;
+            }else if (section==self.newrc.recList.count-1){
+                return 50;
             }else{
                 return 0.01;
                 
@@ -804,7 +810,6 @@
                
         
     }
-   
 }
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 10;
@@ -812,18 +817,7 @@
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-//     if (section==self.newrc.recList.count-1) {
-//         
-//    UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 40)];
-//    footerview.textColor         = [UIColor colorFromHex:@"#999999"];
-//    footerview.textAlignment=NSTextAlignmentCenter;
-//    footerview.text=@"没有更多啦!";
-//    return footerview;
-//     }else{
-//
-//         return [UILabel new];
-//     
-//     }
+
     UIView * backView=[[UIView alloc]init];
     UIView * lineview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*30/667)];
     lineview.backgroundColor=[UIColor colorFromHex:@"#f6f6f6"];
@@ -838,19 +832,25 @@
     
     if (self.newrc.recList.count==0||self.newrc.recList.count<2) {
         if (section==0) {
-            
             return backView;
         }else{
             return [UILabel new];
-            
         }
     }else{
-        
         if (section==0) {
             return backView;
+        }else if (section==self.newrc.recList.count-1){
+            UIView * sectionn =[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
+            
+            UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
+            footerview.backgroundColor = [UIColor colorFromHex:@"#f6f6f6"];
+            footerview.textColor         = [UIColor colorFromHex:@"#999999"];
+            footerview.textAlignment=NSTextAlignmentCenter;
+            footerview.text=@"没有更多啦";
+            [sectionn addSubview:footerview];
+            return sectionn;
         }else{
             return [UILabel new];
-            
         }
         
     }

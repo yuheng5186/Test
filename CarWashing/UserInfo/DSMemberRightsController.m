@@ -384,13 +384,13 @@ static NSString *id_rightsCell = @"id_rightsCell";
         }
         
     }
-    UILabel *titleLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 20) font:[UIFont systemFontOfSize:Main_Screen_Height*14/667] text:string isCenter:NO];
+    UILabel *titleLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 20) font:[UIFont systemFontOfSize:Main_Screen_Height*16/667] text:string isCenter:NO];
     titleLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
 //    titleLabel.backgroundColor  = [UIColor redColor];
     titleLabel.top       = 13;
     titleLabel.left      = 70*Main_Screen_Height/667;
     
-    UILabel *detailLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 30) font:[UIFont systemFontOfSize:Main_Screen_Height*12/667] text:detailString isCenter:NO];
+    UILabel *detailLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 30) font:[UIFont systemFontOfSize:Main_Screen_Height*14/667] text:detailString isCenter:NO];
     detailLabel.textColor = [UIColor colorFromHex:@"#999999"];
 //    detailLabel.backgroundColor  = [UIColor redColor];
     detailLabel.numberOfLines   = 2;

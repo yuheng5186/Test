@@ -23,13 +23,42 @@
 - (void) drawNavigation {
     
     [self drawTitle:@"消费记录"];
+    if (self.showType==2) {
+       [self drawBackButtonWithAction:@selector(backButtonClick:)];
+    }
+    
 }
+- (void) backButtonClick:(id)sender {
+    
+   
+    self.tabBarController.selectedIndex = 0;
+    
+    NSArray     *array  = self.navigationController.viewControllers;
+    NSArray *a = [NSArray arrayWithObject:array[0]];
+    
+    
+    
+    if(array.count == 4)
+    {
+        
+        self.navigationController.viewControllers = a;
+        
+    }
+    else
+    {
+        NSArray     *array1 = [NSArray arrayWithObject:array[0]];
+        self.navigationController.viewControllers = array1;
+    }
+    
+}
+
 - (void) drawContent
 {
     self.contentView.top                = self.statusView.bottom;
     self.contentView.backgroundColor    = [UIColor colorFromHex:@"#111112"];
     
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (self.showType==2) {
@@ -138,7 +167,7 @@
             
             UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 5*Main_Screen_Height/667, Main_Screen_Width - 15*Main_Screen_Width/375, 30*Main_Screen_Height/667)];
             
-            label.font = [UIFont boldSystemFontOfSize:17*Main_Screen_Width/375];
+            label.font = [UIFont systemFontOfSize:17*Main_Screen_Width/375];
             label.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:label];
             
@@ -151,7 +180,7 @@
                 [label2 setText:[NSString stringWithFormat:@"剩余%@次",self.record.BottomDes]];
             }
             
-            label2.font = [UIFont boldSystemFontOfSize:12*Main_Screen_Width/375];
+            label2.font = [UIFont systemFontOfSize:12*Main_Screen_Width/375];
             label2.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:label2];
             
@@ -169,20 +198,61 @@
         
 
     }else {
-        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#999999"];
-        cell.detailTextLabel.font   = [UIFont systemFontOfSize:13];
+//        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#999999"];
+//        cell.detailTextLabel.font   = [UIFont systemFontOfSize:13];
+//        cell.detailTextLabel.numberOfLines =2;
+        
         if (indexPath.row == 0) {
             
             cell.textLabel.text     = @"消费说明";
             if (self.showType ==2) {
-                cell.detailTextLabel.text   = self.CYrecord.ServiceItems;
+                if ([self.CYrecord.ServiceItems rangeOfString:@"-"].location !=NSNotFound){//包含
+                    NSArray *array = [self.CYrecord.ServiceItems componentsSeparatedByString:@"-"];
+                    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 5*Main_Screen_Height/667, Main_Screen_Width - 15*Main_Screen_Width/375, 30*Main_Screen_Height/667)];
+                    label.textColor=[UIColor colorFromHex:@"#999999"];
+                    label.font = [UIFont systemFontOfSize:14];
+                    label.textAlignment = NSTextAlignmentRight;
+                    [cell.contentView addSubview:label];
+                    UILabel *label2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 30*Main_Screen_Height/667, Main_Screen_Width - 15*Main_Screen_Width/375, 20*Main_Screen_Height/667)];
+                    label2.font = [UIFont systemFontOfSize:14];
+                    label2.textColor=[UIColor colorFromHex:@"#999999"];
+                    label2.textAlignment = NSTextAlignmentRight;
+                    [cell.contentView addSubview:label2];
+                    [label setText:[NSString stringWithFormat:@"%@",array[0]]];
+                    [label2 setText:[NSString stringWithFormat:@"%@",array[1]]];
+
+                }else{
+                    cell.detailTextLabel.text   = self.CYrecord.ServiceItems;
+                }
+                
             }else{
-                cell.detailTextLabel.text   = self.record.ConsumerDescrip;
+                if ([self.record.ConsumerDescrip rangeOfString:@"-"].location !=NSNotFound){//包含
+                    NSArray *array = [self.record.ConsumerDescrip componentsSeparatedByString:@"-"];
+                    NSLog(@"--%@",array);
+                    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 5*Main_Screen_Height/667, Main_Screen_Width - 15*Main_Screen_Width/375, 30*Main_Screen_Height/667)];
+                    label.textColor=[UIColor colorFromHex:@"#999999"];
+
+                    label.font = [UIFont systemFontOfSize:14];
+                    label.textAlignment = NSTextAlignmentRight;
+                    [cell.contentView addSubview:label];
+                    UILabel *label2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 30*Main_Screen_Height/667, Main_Screen_Width - 15*Main_Screen_Width/375, 20*Main_Screen_Height/667)];
+                    label2.font = [UIFont systemFontOfSize:14];
+                    label2.textColor=[UIColor colorFromHex:@"#999999"];
+
+                    label2.textAlignment = NSTextAlignmentRight;
+                    [cell.contentView addSubview:label2];
+                    [label setText:[NSString stringWithFormat:@"%@",array[0]]];
+                    [label2 setText:[NSString stringWithFormat:@"%@",array[1]]];
+                    
+                }else{
+                    cell.detailTextLabel.text   = self.record.ConsumerDescrip;
+                }
             }
             
             
         }else if (indexPath.row == 1){
             cell.textLabel.text     = @"订单时间";
+            cell.detailTextLabel.font=[UIFont systemFontOfSize:14.0];
             if (self.showType ==2) {
                 cell.detailTextLabel.text   = [NSString stringWithFormat:@"%@",nowtimeStr];
             }else{
@@ -193,6 +263,7 @@
         }else if (indexPath.row == 2){
             NSArray *arr = @[@"",@"微信支付",@"支付宝支付",@"洗车卡抵扣",@"洗车卡抵扣"];
             cell.textLabel.text     = @"支付方式";
+            cell.detailTextLabel.font=[UIFont systemFontOfSize:14.0];
             NSLog(@"---%@",self.record);
             if (self.showType ==2) {
                 cell.detailTextLabel.text   = @"洗车卡抵扣";
@@ -202,6 +273,7 @@
             
             
         }else if (indexPath.row == 3){
+            cell.detailTextLabel.font=[UIFont systemFontOfSize:14.0];
             cell.textLabel.text     = @"积分奖励";
             if (self.showType==2) {
              cell.detailTextLabel.text   = [NSString stringWithFormat:@"%@积分",self.CYrecord.IntegralNum];
@@ -211,6 +283,7 @@
 
             
         }else {
+            cell.detailTextLabel.font=[UIFont systemFontOfSize:14.0];
             cell.textLabel.text     = @"订单编号";
             if (self.showType==2) {
                  cell.detailTextLabel.text   = self.CYrecord.Account_Id;

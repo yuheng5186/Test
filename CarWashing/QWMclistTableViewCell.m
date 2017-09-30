@@ -47,7 +47,7 @@
     self.McImagecheckView = imageV1;
     
     UILabel *namelabel = [[UILabel alloc]initWithFrame:CGRectMake1(112,12, 100, 10)];
-    [namelabel setFont:[UIFont fontWithName:@"Helvetica" size:16 * myDelegate.autoSizeScaleX]];
+    [namelabel setFont:[UIFont fontWithName:@"Helvetica" size:18 * myDelegate.autoSizeScaleX]];
     namelabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     namelabel.text = @"金雷快修店";
     [self.contentView addSubview:namelabel];
@@ -62,7 +62,7 @@
     
     
     UILabel *catlabel = [[UILabel alloc]initWithFrame:CGRectMake1(250,12, 108, 10)];
-    [catlabel setFont:[UIFont fontWithName:@"Helvetica" size:12 * myDelegate.autoSizeScaleX]];
+    [catlabel setFont:[UIFont fontWithName:@"Helvetica" size:14 * myDelegate.autoSizeScaleX]];
     catlabel.textColor = [UIColor colorFromHex:@"#868686"];
     catlabel.text = @"美容店";
     catlabel.textAlignment = NSTextAlignmentRight;
@@ -72,8 +72,8 @@
     CGSize sizecatlabel = [catlabel boundingRectWithSize:CGSizeMake(Main_Screen_Width,2000)];
     catlabel.lineBreakMode = NSLineBreakByWordWrapping;
     
-    UILabel *addlabel = [[UILabel alloc]initWithFrame:CGRectMake(112 * myDelegate.autoSizeScaleX, 19* myDelegate.autoSizeScaleY+size.height, 200* myDelegate.autoSizeScaleX, 10* myDelegate.autoSizeScaleY)];
-    [addlabel setFont:[UIFont fontWithName:@"Helvetica" size:13 * myDelegate.autoSizeScaleX]];
+    UILabel *addlabel = [[UILabel alloc]initWithFrame:CGRectMake(112 * myDelegate.autoSizeScaleX, 20* myDelegate.autoSizeScaleY+size.height, 200* myDelegate.autoSizeScaleX, 10* myDelegate.autoSizeScaleY)];
+    [addlabel setFont:[UIFont fontWithName:@"Helvetica" size:14 * myDelegate.autoSizeScaleX]];
     addlabel.textColor = [UIColor colorFromHex:@"#999999"];
     addlabel.text = @"上海市浦东新区金桥路金桥路";
    
@@ -95,7 +95,7 @@
     self.Mcrange.left=10*Main_Screen_Width/375;
     
     UILabel *julilabel = [[UILabel alloc]initWithFrame:CGRectMake(250*myDelegate.autoSizeScaleX,21* myDelegate.autoSizeScaleY+sizecatlabel.height, 108*myDelegate.autoSizeScaleX, 10*myDelegate.autoSizeScaleY)];
-    [julilabel setFont:[UIFont fontWithName:@"Helvetica" size:11 * myDelegate.autoSizeScaleX]];
+    [julilabel setFont:[UIFont fontWithName:@"Helvetica" size:12 * myDelegate.autoSizeScaleX]];
     julilabel.textColor = [UIColor colorFromHex:@"#868686"];
     julilabel.text = @"1.25km";
     julilabel.textAlignment = NSTextAlignmentRight;

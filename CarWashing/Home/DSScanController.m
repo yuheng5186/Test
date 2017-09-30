@@ -27,10 +27,10 @@
 #import "DSStartWashingController.h"
 #import "DSConsumerDetailController.h"
 
-@interface DSScanController ()<AVCaptureMetadataOutputObjectsDelegate>
+@interface DSScanController ()<AVCaptureMetadataOutputObjectsDelegate,LKAlertViewDelegate>
 {
     MBProgressHUD *HUD;
-    
+    NSString * Cystr;
 }
 
 @property (nonatomic, strong) AVCaptureSession *session;
@@ -279,6 +279,7 @@
 
 - (void)handleScanData:(NSString *)outMessage {
     
+    
     #pragma mark-获取设备编码
     NSString *imei                          = outMessage;
     if([imei rangeOfString:@":"].location !=NSNotFound)//_roaldSearchText
@@ -306,7 +307,7 @@
                                      @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                      @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                      };
-            NSLog(@"====%@====",params);
+            NSLog(@"====%@====",params);// DeviceScanCode
             [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@ScanCode/DeviceScanCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
                 NSLog(@"%@",dict);
                 if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
@@ -400,7 +401,7 @@
     
     }else if ([imei rangeOfString:@"#"].location !=NSNotFound){
         NSArray *array = [imei componentsSeparatedByString:@"#"]; //从字符：中分隔成2个元素的数组
-        
+        Cystr = [NSString stringWithFormat:@"%@",array[1]];
         if (array.count==3&&((NSString *)array[1]).length==4) {
             
             [_session stopRunning];
@@ -417,8 +418,8 @@
                                      @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                      @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                      };
-            NSLog(@"====%@====",params);
-            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@ScanCode/MerchantScanCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            NSLog(@"====%@====",params);// MerchantScanCode
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@ScanCode/ScanQuery",Khttp] success:^(NSDictionary *dict, BOOL success) {
                 NSLog(@"%@",dict);
                 if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                 {
@@ -433,7 +434,7 @@
                     
                     
                     __weak typeof(self) weakSelf = self;
-                    weakSelf.newrc = [[CYModel alloc]initWithDictionary:[dict objectForKey:@"JsonData"] error:nil];
+//                    weakSelf.newrc = [[CYModel alloc]initWithDictionary:[dict objectForKey:@"JsonData"] error:nil];
                     HUD.completionBlock = ^(){
                         //(1.需要支付状态,2.扫描成功)
                         if(weakSelf.scan.ScanCodeState == 1)
@@ -456,11 +457,12 @@
                             [weakSelf.navigationController pushViewController:payVC animated:YES];
                         }
                         else{
-                            DSConsumerDetailController *detaleController    = [[DSConsumerDetailController alloc]init];
-                            detaleController.hidesBottomBarWhenPushed       = YES;
-                            detaleController.showType = 2;
-                            detaleController.CYrecord                       = weakSelf.newrc;
-                            [weakSelf.navigationController pushViewController:detaleController animated:YES];
+                            LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:@"提示" message:[NSString stringWithFormat:@"是否使用%@来支付洗车服务",dict[@"JsonData"][@"CardName"]] delegate:weakSelf cancelButtonTitle:@"否" otherButtonTitles:@"是"];
+                            alartView.tag               = 110;
+                            [alartView show];
+                            
+                            
+                            
                         }
                     };
                     [HUD hide:YES afterDelay:1.f];
@@ -547,15 +549,47 @@
 #pragma mark-> 获取扫描区域的比例关系
 -(CGRect)getScanCrop:(CGRect)rect readerViewBounds:(CGRect)readerViewBounds
 {
-    
     CGFloat x,y,width,height;
-    
     x = (CGRectGetHeight(readerViewBounds)-CGRectGetHeight(rect))/2/CGRectGetHeight(readerViewBounds);
     y = (CGRectGetWidth(readerViewBounds)-CGRectGetWidth(rect))/2/CGRectGetWidth(readerViewBounds);
     width = CGRectGetHeight(rect)/CGRectGetHeight(readerViewBounds);
     height = CGRectGetWidth(rect)/CGRectGetWidth(readerViewBounds);
-    
     return CGRectMake(x, y, width, height);
+    
+}
+- (void)alertView:(LKAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 110) {
+        if (buttonIndex == 0) {//否
+            self.tabBarController.selectedIndex=0;
+        }else{
+            NSDictionary *mulDic = @{
+                                     @"DeviceCode":Cystr,
+                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                                     };
+            NSDictionary *params = @{
+                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                     };
+            __weak typeof(self) weakSelf = self;
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@ScanCode/MerchantScanCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]){
+                    weakSelf.newrc = [[CYModel alloc]initWithDictionary:[dict objectForKey:@"JsonData"] error:nil];
+                    DSConsumerDetailController *detaleController    = [[DSConsumerDetailController alloc]init];
+                    detaleController.hidesBottomBarWhenPushed       = YES;
+                    detaleController.showType = 2;
+                    detaleController.CYrecord                       = self.newrc;
+                    [self.navigationController pushViewController:detaleController animated:YES];
+                }
+            } fail:^(NSError *error) {
+                [weakSelf.view showInfo:@"卡信息获取失败" autoHidden:YES interval:2];
+            }];
+            
+            
+            
+            
+        }
+    }
+    
     
 }
 
@@ -564,14 +598,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
