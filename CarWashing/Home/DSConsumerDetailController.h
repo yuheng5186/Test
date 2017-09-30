@@ -8,10 +8,13 @@
 
 #import "BaseController.h"
 #import "Record.h"
-
+#import "CYModel.h"
 @interface DSConsumerDetailController : BaseController
 
 @property(nonatomic,copy)Recordinfo *record;
 
+@property(nonatomic,copy)CYModel *CYrecord;
+
+@property(nonatomic,assign)NSInteger showType;
 
 @end

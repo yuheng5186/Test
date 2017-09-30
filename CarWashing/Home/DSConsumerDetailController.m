@@ -9,7 +9,10 @@
 #import "DSConsumerDetailController.h"
 
 @interface DSConsumerDetailController ()<UITableViewDelegate,UITableViewDataSource>
-
+{
+    NSInteger showtype;
+    NSString *nowtimeStr;
+}
 @property (nonatomic, strong) UITableView *tableView;
 
 
@@ -27,14 +30,33 @@
     self.contentView.backgroundColor    = [UIColor colorFromHex:@"#111112"];
     
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (self.showType==2) {
+        [self.view showInfo:@"扣卡成功" autoHidden:YES interval:1];
+    }
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     
+    // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
     
+    [formatter setDateFormat:@"YYYY/MM/dd HH:mm:ss"];
     
-//    NSLog(@"%@",self.record);
+    //现在时间,你可以输出来看下是什么格式
     
+    NSDate *datenow = [NSDate date];
+    
+    //----------将nsdate按formatter格式转成nsstring
+    
+    nowtimeStr = [formatter stringFromDate:datenow];
+    
+    NSLog(@"nowtimeStr =  %@",nowtimeStr);
+    
+    NSLog(@"---CYrecord%@",self.CYrecord);
+    NSLog(@"---%@",self.record);
     
     // Do any additional setup after loading the view.
     [self createSubView];
@@ -108,20 +130,27 @@
         cell.textLabel.text     = @"付款金额";
         cell.detailTextLabel.textColor = [UIColor blackColor];
        
-        if(self.record.ConsumptionType == 2)
+        if(self.record.ConsumptionType == 2||[self.CYrecord.ScanCodeState isEqualToString:@"2"])
         {
             cell.textLabel.text = @"付款方式";
 //            [cell.detailTextLabel setNumberOfLines:2];
 //            cell.detailTextLabel.text   = [NSString stringWithFormat:@"%@\n%@",self.record.MiddleDes,self.record.BottomDes];
             
             UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 5*Main_Screen_Height/667, Main_Screen_Width - 15*Main_Screen_Width/375, 30*Main_Screen_Height/667)];
-            [label setText:self.record.MiddleDes];
-            label.font = [UIFont boldSystemFontOfSize:19*Main_Screen_Width/375];
+            
+            label.font = [UIFont boldSystemFontOfSize:17*Main_Screen_Width/375];
             label.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:label];
             
-            UILabel *label2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 35*Main_Screen_Height/667, Main_Screen_Width - 15*Main_Screen_Width/375, 20*Main_Screen_Height/667)];
-            [label2 setText:[NSString stringWithFormat:@"剩余%@次",self.record.BottomDes]];
+            UILabel *label2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 30*Main_Screen_Height/667, Main_Screen_Width - 15*Main_Screen_Width/375, 20*Main_Screen_Height/667)];
+            if (self.showType ==2) {
+                [label setText:self.CYrecord.CardName];
+                [label2 setText:[NSString stringWithFormat:@"剩余%@次",self.CYrecord.RemainCount]];
+            }else{
+                [label setText:self.record.MiddleDes];
+                [label2 setText:[NSString stringWithFormat:@"剩余%@次",self.record.BottomDes]];
+            }
+            
             label2.font = [UIFont boldSystemFontOfSize:12*Main_Screen_Width/375];
             label2.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:label2];
@@ -145,25 +174,50 @@
         if (indexPath.row == 0) {
             
             cell.textLabel.text     = @"消费说明";
-            cell.detailTextLabel.text   = self.record.ConsumerDescrip;
+            if (self.showType ==2) {
+                cell.detailTextLabel.text   = self.CYrecord.ServiceItems;
+            }else{
+                cell.detailTextLabel.text   = self.record.ConsumerDescrip;
+            }
+            
             
         }else if (indexPath.row == 1){
             cell.textLabel.text     = @"订单时间";
-            cell.detailTextLabel.text   = self.record.CreateDate;
+            if (self.showType ==2) {
+                cell.detailTextLabel.text   = [NSString stringWithFormat:@"%@",nowtimeStr];
+            }else{
+                cell.detailTextLabel.text   = self.record.CreateDate;
+            }
+            
             
         }else if (indexPath.row == 2){
             NSArray *arr = @[@"",@"微信支付",@"支付宝支付",@"洗车卡抵扣",@"洗车卡抵扣"];
             cell.textLabel.text     = @"支付方式";
             NSLog(@"---%@",self.record);
-            cell.detailTextLabel.text   = [arr objectAtIndex:self.record.PayMathod];
+            if (self.showType ==2) {
+                cell.detailTextLabel.text   = @"洗车卡抵扣";
+            }else{
+                cell.detailTextLabel.text   = [arr objectAtIndex:self.record.PayMathod];
+            }
+            
             
         }else if (indexPath.row == 3){
             cell.textLabel.text     = @"积分奖励";
-            cell.detailTextLabel.text   = [NSString stringWithFormat:@"%ld积分",self.record.IntegralNumber];
+            if (self.showType==2) {
+             cell.detailTextLabel.text   = [NSString stringWithFormat:@"%@积分",self.CYrecord.IntegralNum];
+            }else{
+             cell.detailTextLabel.text   = [NSString stringWithFormat:@"%ld积分",self.record.IntegralNumber];
+            }
+
             
         }else {
             cell.textLabel.text     = @"订单编号";
-            cell.detailTextLabel.text   = self.record.UniqueNumber;
+            if (self.showType==2) {
+                 cell.detailTextLabel.text   = self.CYrecord.Account_Id;
+            }else{
+                cell.detailTextLabel.text   = self.record.UniqueNumber;
+            }
+           
             
         }
 
@@ -180,19 +234,6 @@
     
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

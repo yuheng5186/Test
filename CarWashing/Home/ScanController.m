@@ -22,6 +22,7 @@
 
 #import "DSStartWashingController.h"
 
+
 @interface ScanController ()<AVCaptureMetadataOutputObjectsDelegate>
 {
     MBProgressHUD *HUD;

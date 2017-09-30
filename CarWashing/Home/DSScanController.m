@@ -22,6 +22,7 @@
 #import "UdStorage.h"
 #import "ScanCode.h"
 #import "Record.h"
+#import "CYModel.h"
 
 #import "DSStartWashingController.h"
 #import "DSConsumerDetailController.h"
@@ -43,7 +44,7 @@
 @property (nonatomic, strong) UILabel * inputLabel;
 
 @property (nonatomic, strong) ScanCode *scan;
-@property (strong, nonatomic)Record *newrc;
+@property (strong, nonatomic)CYModel *newrc;
 
 @end
 
@@ -403,14 +404,11 @@
         if (array.count==3&&((NSString *)array[1]).length==4) {
             
             [_session stopRunning];
-            
-            
             HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             HUD.removeFromSuperViewOnHide =YES;
             HUD.mode = MBProgressHUDModeIndeterminate;
             HUD.labelText = @"加载中";
             HUD.minSize = CGSizeMake(132.f, 108.0f);
-            
             NSDictionary *mulDic = @{
                                      @"DeviceCode":array[1],
                                      @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
@@ -432,9 +430,10 @@
                     
                     self.scan = [[ScanCode alloc]init];
                     [self.scan setValuesForKeysWithDictionary:arr];
-                    self.newrc = [[Record alloc]initWithDictionary:[dict objectForKey:@"JsonData"] error:nil];
+                    
                     
                     __weak typeof(self) weakSelf = self;
+                    weakSelf.newrc = [[CYModel alloc]initWithDictionary:[dict objectForKey:@"JsonData"] error:nil];
                     HUD.completionBlock = ^(){
                         //(1.需要支付状态,2.扫描成功)
                         if(weakSelf.scan.ScanCodeState == 1)
@@ -452,22 +451,18 @@
                             payVC.RemainCount = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.RemainCount];
                             payVC.IntegralNum = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.IntegralNum];
                             payVC.CardType = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.CardType];
-                            
                             payVC.CardName = weakSelf.scan.CardName;
                             
                             [weakSelf.navigationController pushViewController:payVC animated:YES];
                         }
-                        else
-                        {
-                            [weakSelf.view showInfo:@"扣卡成功" autoHidden:YES interval:1];
-                            Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)weakSelf.newrc  error:nil] ;
+                        else{
                             DSConsumerDetailController *detaleController    = [[DSConsumerDetailController alloc]init];
                             detaleController.hidesBottomBarWhenPushed       = YES;
-                            detaleController.record                         = record;
+                            detaleController.showType = 2;
+                            detaleController.CYrecord                       = weakSelf.newrc;
                             [weakSelf.navigationController pushViewController:detaleController animated:YES];
                         }
                     };
-                    
                     [HUD hide:YES afterDelay:1.f];
                 }
                 else
