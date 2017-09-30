@@ -22,5 +22,5 @@
 @property(nonatomic,copy)NSString *CardType;
 @property(nonatomic,copy)NSString *CardName;
 @property(nonatomic,copy)NSString *IntegralNum;
-
+@property(nonatomic,copy)NSString *payType;
 @end

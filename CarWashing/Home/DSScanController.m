@@ -444,6 +444,7 @@
                         if(weakSelf.scan.ScanCodeState == 1)
                         {
                             DSScanPayController *payVC           = [[DSScanPayController alloc]init];
+                            payVC.payType =@"#";
                             payVC.hidesBottomBarWhenPushed            = YES;
                             
                             payVC.SerMerChant = weakSelf.scan.DeviceName;

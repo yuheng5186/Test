@@ -214,19 +214,33 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 //        DSStartWashingController    *startVC    = [[DSStartWashingController alloc]init];
 //        startVC.hidesBottomBarWhenPushed        = YES;
 //        [self.navigationController pushViewController:startVC animated:YES];
-        
-        
+        NSDictionary *mulDic ;
+        NSString * urlStr =@"";
+        if ([self.payType isEqualToString:@"#"]) {
+            urlStr = @"MerScanPayment";
+            mulDic = @{
+                                     @"Account_Id":[UdStorage getObjectforKey:Userid],
+                                     @"MerCode":self.DeviceCode,
+                                     @"SerCode":@(0),
+                                     @"MerName":self.SerMerChant
+                                     };
+        }else{
+            
+            urlStr = @"ScanPayment";
+            mulDic = @{
+                                     @"Account_Id":[UdStorage getObjectforKey:Userid],
+                                     @"DeviceCode":self.DeviceCode
+                                     };
+        }
 #pragma mark-扫码洗车 3.37自动扫码支付
-        NSDictionary *mulDic = @{
-                                 @"Account_Id":[UdStorage getObjectforKey:Userid],
-                                 @"DeviceCode":self.DeviceCode
-                                 };
+       
         NSDictionary *params = @{
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
         NSLog(@"%@",params);
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/ScanPayment",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"--%@",[NSString stringWithFormat:@"%@Payment/%@",Khttp,urlStr]);
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/%@",Khttp,urlStr] success:^(NSDictionary *dict, BOOL success) {
             NSLog(@"%@",dict);
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
