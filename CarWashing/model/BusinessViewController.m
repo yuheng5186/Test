@@ -24,7 +24,8 @@
 
 #import "CoreLocation/CoreLocation.h"
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
-
+//地图
+#import "MapViewController.h"
 @interface BusinessViewController ()<UITableViewDelegate, UITableViewDataSource,YZPullDownMenuDataSource,CLLocationManagerDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
     
@@ -72,6 +73,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.navigationView.hidden  = YES;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
+//    [self drawRightImageButton:@"pinglundianzan" action:@selector(rightBtnClick)];
     
 }
 
@@ -150,6 +152,12 @@ static NSString *id_salerListCell = @"salerListViewCell";
     titleNameLabel.textColor         = [UIColor whiteColor];
     titleNameLabel.centerX           = titleView.centerX;
     titleNameLabel.centerY           = titleView.centerY +8;
+    
+    UIButton * rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightBtn.frame = CGRectMake(titleView.frame.size.width-70, 8, 70, 64);
+    [rightBtn setImage:[UIImage imageNamed:@"dingwei2"] forState:UIControlStateNormal];
+    [rightBtn addTarget:self action:@selector(mapClick) forControlEvents:UIControlEventTouchUpInside];
+    [titleView addSubview:rightBtn];
     
     //
     self.salerListView.delegate = self;
@@ -583,7 +591,13 @@ static NSString *id_salerListCell = @"salerListViewCell";
 //    
 //    [self setData];
 //}
-
+#pragma mark -----定位跳转
+-(void)mapClick
+{
+    MapViewController * mapView = [[MapViewController alloc]init];
+    mapView.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:mapView animated:YES];
+}
 -(void)viewWillAppear:(BOOL)animated
 {
 //    [self setSearchMenu];
