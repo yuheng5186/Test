@@ -270,14 +270,15 @@
     exchangeNameLabel.textColor         = [UIColor blackColor];
     exchangeNameLabel.centerX           = exchangeImageView.centerX;
     exchangeNameLabel.top               = exchangeImageView.bottom +Main_Screen_Height*10/667;
-    
     backgroudView.height                = exchangeView.bottom +Main_Screen_Height*10/667;
-    
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStyleGrouped];
     self.tableView.top              = backgroudView.bottom;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     self.tableView.scrollEnabled    = NO;
+    self.tableView.estimatedRowHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.tableFooterView  = [UIView new];
     self.tableView.backgroundColor  = [UIColor clearColor];
     [self.contentView addSubview:self.tableView];

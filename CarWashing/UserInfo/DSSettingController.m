@@ -64,6 +64,9 @@
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     self.tableView.scrollEnabled    = NO;
+    self.tableView.estimatedRowHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.backgroundColor  = [UIColor clearColor];
 //    self.tableView.tableFooterView  = [UIView new];
     [self.contentView addSubview:self.tableView];

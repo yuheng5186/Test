@@ -140,6 +140,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+   
 //    [self startLocation];
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];
@@ -183,6 +186,7 @@
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStyleGrouped];
     self.tableView.top              = 0;
+    
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     //    self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
@@ -193,6 +197,11 @@
     
 //    self.tableView.bounces  = NO;
     self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 70, 0);
+    if (@available(iOS 11.0, *)) {
+        _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 70, 0);
+        _tableView.scrollIndicatorInsets = _tableView.contentInset;
+    }
     [self.contentView addSubview:self.tableView];
     
      [self setupRefresh];
