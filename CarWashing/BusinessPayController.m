@@ -227,7 +227,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
         //商家编号:MerCode,SerCode 服务编号,
          NSLog(@"%@==%@==%@==%@",self.MCode,self.SCode,self.OrderCode,self.SerMerChant);
         NSString *uriStr = @"";
-        if (self.SCode == 0) {
+        if ([self.SCode isEqualToString:@"0"]) {
             uriStr = @"MerScanPayment";
         }else{
             uriStr = @"ServicePayment";
