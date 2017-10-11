@@ -61,6 +61,10 @@
 		180E43291F414A7900013D2D /* PopHelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180E43281F414A7900013D2D /* PopHelpView.xib */; };
 		180E432C1F417E3500013D2D /* DSAddShopController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E432B1F417E3500013D2D /* DSAddShopController.m */; };
 		180E432F1F41921E00013D2D /* PhoneHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E432E1F41921E00013D2D /* PhoneHelper.m */; };
+		1816A4751F8DB7A5004A6835 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1816A4741F8DB7A5004A6835 /* MapKit.framework */; };
+		1816A47F1F8E0A6C004A6835 /* AudioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1816A47E1F8E0A6C004A6835 /* AudioModel.m */; };
+		1816A4821F8E0BCE004A6835 /* CustAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1816A4811F8E0BCE004A6835 /* CustAnnotationView.m */; };
+		1816A4851F8E1AE1004A6835 /* CyMapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1816A4841F8E1AE1004A6835 /* CyMapModel.m */; };
 		181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92B71F1F364A0006511E /* MenuTabBarController.m */; };
 		181E92BB1F1F36710006511E /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BA1F1F36710006511E /* BaseController.m */; };
 		181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BF1F1F39CC0006511E /* BlackLoadingView.m */; };
@@ -412,6 +416,14 @@
 		180E432B1F417E3500013D2D /* DSAddShopController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAddShopController.m; path = Home/DSAddShopController.m; sourceTree = "<group>"; };
 		180E432D1F41921E00013D2D /* PhoneHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneHelper.h; path = Tool/PhoneHelper.h; sourceTree = "<group>"; };
 		180E432E1F41921E00013D2D /* PhoneHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneHelper.m; path = Tool/PhoneHelper.m; sourceTree = "<group>"; };
+		1816A4731F8DAE79004A6835 /* APIKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
+		1816A4741F8DB7A5004A6835 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		1816A47D1F8E0A6C004A6835 /* AudioModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioModel.h; sourceTree = "<group>"; };
+		1816A47E1F8E0A6C004A6835 /* AudioModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioModel.m; sourceTree = "<group>"; };
+		1816A4801F8E0BCE004A6835 /* CustAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustAnnotationView.h; sourceTree = "<group>"; };
+		1816A4811F8E0BCE004A6835 /* CustAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustAnnotationView.m; sourceTree = "<group>"; };
+		1816A4831F8E1AE1004A6835 /* CyMapModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyMapModel.h; sourceTree = "<group>"; };
+		1816A4841F8E1AE1004A6835 /* CyMapModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyMapModel.m; sourceTree = "<group>"; };
 		181E92B61F1F364A0006511E /* MenuTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTabBarController.h; sourceTree = "<group>"; };
 		181E92B71F1F364A0006511E /* MenuTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTabBarController.m; sourceTree = "<group>"; };
 		181E92B91F1F36710006511E /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
@@ -843,6 +855,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1816A4751F8DB7A5004A6835 /* MapKit.framework in Frameworks */,
 				374B966A10F9B5E6D74241BF /* libPods-CarWashing.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1010,6 +1023,19 @@
 				180E43201F3D836F00013D2D /* WeixinTimelineActivity.m */,
 			);
 			name = weixinshare;
+			sourceTree = "<group>";
+		};
+		1816A4761F8DCA04004A6835 /* MapVIewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1816A47D1F8E0A6C004A6835 /* AudioModel.h */,
+				1816A47E1F8E0A6C004A6835 /* AudioModel.m */,
+				1816A4801F8E0BCE004A6835 /* CustAnnotationView.h */,
+				1816A4811F8E0BCE004A6835 /* CustAnnotationView.m */,
+				1816A4831F8E1AE1004A6835 /* CyMapModel.h */,
+				1816A4841F8E1AE1004A6835 /* CyMapModel.m */,
+			);
+			path = MapVIewModel;
 			sourceTree = "<group>";
 		};
 		181E91D71F1DDD830006511E /* Tool */ = {
@@ -1565,6 +1591,7 @@
 				18B803811F1DA2A300B52432 /* Assets.xcassets */,
 				18B803831F1DA2A300B52432 /* LaunchScreen.storyboard */,
 				18B803861F1DA2A300B52432 /* Info.plist */,
+				1816A4731F8DAE79004A6835 /* APIKey.h */,
 				500C6BA11F3AE619007D34A1 /* QFDatePickerView */,
 				5061A4391F3AAECE003939A4 /* SCAutoMove */,
 				5042E34E1F33162200CD140F /* CyclePageView */,
@@ -1660,6 +1687,7 @@
 		18FF43151F8CC2E1006809CD /* MapControllerView */ = {
 			isa = PBXGroup;
 			children = (
+				1816A4761F8DCA04004A6835 /* MapVIewModel */,
 				18FF43171F8CC320006809CD /* MapViewController.h */,
 				18FF43181F8CC320006809CD /* MapViewController.m */,
 			);
@@ -1669,6 +1697,7 @@
 		39EAED5D8DBADAE8DF2E358D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1816A4741F8DB7A5004A6835 /* MapKit.framework */,
 				06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */,
 			);
 			name = Frameworks;
@@ -2225,6 +2254,7 @@
 				0401E9031F4ED6E900F0CA79 /* EARestrictedScrollView.m in Sources */,
 				18A6033A1F4FC06000CFA328 /* TggStarEvaluationView.m in Sources */,
 				0452AC9F1F790D7900506306 /* DSCardShowDetailViewController.m in Sources */,
+				1816A47F1F8E0A6C004A6835 /* AudioModel.m in Sources */,
 				1853BA461F28A04100B98C7F /* JFCityCollectionFlowLayout.m in Sources */,
 				50B26E641F300D60009B3B9F /* PayPurchaseCardController.m in Sources */,
 				18B69EAA1F32CB5B007DA0E4 /* ZFConst.m in Sources */,
@@ -2424,6 +2454,7 @@
 				181E92FB1F2086ED0006511E /* DSServiceController.m in Sources */,
 				50769F521F3D52C500DDFCC7 /* ProvinceShortController.m in Sources */,
 				1853BA4B1F28A04100B98C7F /* JFSearchView.m in Sources */,
+				1816A4851F8E1AE1004A6835 /* CyMapModel.m in Sources */,
 				180E42EA1F3AB37D00013D2D /* YzdHUDIndicator.m in Sources */,
 				0401E9091F4ED95000F0CA79 /* DSGuideViewController.m in Sources */,
 				185090471F4557E100795E0A /* TYAlertScaleFadeAnimation.m in Sources */,
@@ -2445,6 +2476,7 @@
 				185090271F441BFA00795E0A /* UdStorage.m in Sources */,
 				1850901C1F43F19B00795E0A /* LCMD5Tool.m in Sources */,
 				18A4B2301F4D832300C64978 /* ShareWechatView.m in Sources */,
+				1816A4821F8E0BCE004A6835 /* CustAnnotationView.m in Sources */,
 				180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */,
 				5071B4811F381366009FFF67 /* OrderCommentController.m in Sources */,
 				181E93291F20B0510006511E /* SXScrPageView.m in Sources */,

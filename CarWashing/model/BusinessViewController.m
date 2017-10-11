@@ -154,7 +154,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     titleNameLabel.centerY           = titleView.centerY +8;
     
     UIButton * rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightBtn.frame = CGRectMake(titleView.frame.size.width-70, 8, 70, 64);
+    rightBtn.frame = CGRectMake(titleView.frame.size.width-60, 8, 60, 64);
     [rightBtn setImage:[UIImage imageNamed:@"dingwei2"] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(mapClick) forControlEvents:UIControlEventTouchUpInside];
     [titleView addSubview:rightBtn];
