@@ -33,10 +33,7 @@
 @property (nonatomic,strong) CyMapModel *MerChantmodel;
 @property (nonatomic,strong) NSDictionary *dicData;
 @property (nonatomic,strong) NSMutableArray  *dataArray;
-/**
- *  图片数组
- */
-@property (nonatomic, strong) NSMutableArray *imageArray;
+
 @end
 
 @implementation MapViewController
@@ -100,7 +97,7 @@
     pageFlowView.dataSource = self;
     pageFlowView.minimumPageAlpha = 0;
     //    pageFlowView.minimumPageScale = 0.85;
-    pageFlowView.orginPageCount = self.imageArray.count;
+//    pageFlowView.orginPageCount = self.imageArray.count;
     pageFlowView.orientation = NewPagedFlowViewOrientationHorizontal;
     [bottomView addSubview:pageFlowView];
     [pageFlowView stopTimer];
@@ -234,7 +231,6 @@
     detailController.hidesBottomBarWhenPushed      = YES;
     detailController.MerCode                       =model.MerCode;
     detailController.distance                      = model.Distance;
-    
     [self.navigationController pushViewController:detailController animated:YES];
     
 }
@@ -373,15 +369,7 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-#pragma mark lazy load
-- (NSMutableArray *)imageArray {
-    if (_imageArray == nil) {
-        _imageArray = [NSMutableArray array];
-//        NSArray * a = @[@"qw_tiyanka",@"qw_yueka",@"qw_cika",@"qw_nianka"];
-//        [_imageArray addObjectsFromArray:a];
-    }
-    return _imageArray;
-}
+
 - (NSMutableArray *)locationArray{
     
     if (_locationArray == nil) {
