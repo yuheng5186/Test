@@ -548,7 +548,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     payController.Xprice = lblPrice.text;
     
     payController.MCode = self.dic[@"MerCode"];
-    payController.SCode = [[self.dic[@"MerSerList"] objectAtIndex:self.lastPath.row] objectForKey:@"SerCode"];
+    payController.SCode = [NSString stringWithFormat:@"%@",[[self.dic[@"MerSerList"] objectAtIndex:self.lastPath.row] objectForKey:@"SerCode"]];
     
     payController.OrderCode = @"";
     
