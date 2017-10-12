@@ -196,6 +196,10 @@
 //    self.tableView.tableHeaderView  = [UIView new];
     
 //    self.tableView.bounces  = NO;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
     self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 70, 0);
     if (@available(iOS 11.0, *)) {
         _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
