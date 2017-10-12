@@ -189,7 +189,9 @@
     self.noticeView.dataSource = self;
     self.noticeView.estimatedRowHeight = 80;
     self.noticeView.rowHeight = UITableViewAutomaticDimension;
-    
+    self.noticeView.estimatedSectionHeaderHeight = 0;
+    self.noticeView.estimatedSectionFooterHeight = 0;
+    self.noticeView.rowHeight = UITableViewAutomaticDimension;
     self.noticeView.tableHeaderView = containView;
 }
 
