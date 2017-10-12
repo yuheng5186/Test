@@ -11,7 +11,6 @@
 #import <AMapLocationKit/AMapLocationKit.h>
 #import "APIKey.h"
 //自定义的大头针
-#import "AudioModel.h"
 #import "NewPagedFlowView.h"
 #import "PGIndexBannerSubiew.h"
 #import <Masonry.h>
@@ -23,20 +22,30 @@
 #import "CyMapModel.h"
 #import "MJExtension.h"
 #import "UIImageView+WebCache.h"
-@interface MapViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,NewPagedFlowViewDelegate,NewPagedFlowViewDataSource>
+
+#import "UdStorage.h"
+#import "MapView.h"
+#import "Item.h"
+#import "TestMapCell.h"
+#import "JXMapNavigationView.h"
+@interface MapViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,NewPagedFlowViewDelegate,NewPagedFlowViewDataSource,MapViewDelegate>
 {
     NewPagedFlowView *pageFlowView;
 }
-@property (nonatomic,strong) MAMapView * mapView;
+//@property (nonatomic,strong) MAMapView * mapView;
+@property (nonatomic,strong)MapView *mapView;
+@property (nonatomic,strong)NSArray *annotations;
 @property (nonatomic, strong) AMapLocationManager *locationManager;
 @property (nonatomic,retain) NSMutableArray *locationArray;
 @property (nonatomic,strong) CyMapModel *MerChantmodel;
 @property (nonatomic,strong) NSDictionary *dicData;
 @property (nonatomic,strong) NSMutableArray  *dataArray;
-
+#pragma mark - map
+@property (nonatomic, strong)JXMapNavigationView *mapNavigationView;
 @end
 
 @implementation MapViewController
+
 - (void) drawContent {
     
     self.statusView.hidden      = YES;
@@ -49,20 +58,58 @@
 }
 -(void)getData{
     NSDictionary *mulDic = @{
-                             @"Xm":@(121.527685),
+                             @"Xm":[UdStorage getObjectforKey:@"Xm"],
                              //                             @"Area":@"上海市"
-                             @"Ym":@(31.190149)
+                             @"Ym":[UdStorage getObjectforKey:@"Ym"]
                              };
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Merchant/GetStoreMapList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"---%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             self.dicData = dict;
             self.dataArray =[CyMapModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
-            [pageFlowView reloadData];
+            
+         
+            for (int i=0; i<self.dataArray.count; i++) {
+                CyMapModel * model = self.dataArray[i];
+                self.annotations = @[@{@"latitude":[UdStorage getObjectforKey:@"Ym"],@"longitude":[UdStorage getObjectforKey:@"Xm"],@"title":@"test-title-1",@"subtitle":[NSString stringWithFormat:@"%@",model.MerAddress]},@{@"latitude":[NSString stringWithFormat:@"%@",model.Ym],@"longitude":[NSString stringWithFormat:@"%@",model.Xm],@"subtitle":[NSString stringWithFormat:@"%@",model.MerAddress]}];
+            }
+            
+
+            self.mapView = [[MapView alloc] initWithDelegate:self];
+            [self.contentView addSubview:_mapView];
+            [_mapView setFrame:self.view.bounds];
+            [_mapView beginLoad];
+            NSLog(@"---%@",self.annotations);
+            UIView * stateBarView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 22)];
+            stateBarView.backgroundColor=[UIColor colorFromHex:@"#0161a1"];
+            [self.contentView addSubview:stateBarView];
+            
+            UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor clearColor]];
+            titleView.top                      = 0;
+            UIButton * rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            rightBtn.frame = CGRectMake(0, 10, 70, 64);
+            [rightBtn setImage:[UIImage imageNamed:@"ditu_fanhui"] forState:UIControlStateNormal];
+            [rightBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
+            [titleView addSubview:rightBtn];
+            UIView * bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height-(170*Main_Screen_Height/667), Main_Screen_Width, 170*Main_Screen_Height/667)];
+            [self.contentView addSubview:bottomView];
+            //无限轮播图
+            pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 160*Main_Screen_Height/667)];
+            pageFlowView.delegate = self;
+            pageFlowView.dataSource = self;
+            pageFlowView.minimumPageAlpha = 0;
+            //    pageFlowView.minimumPageScale = 0.85;
+            //    pageFlowView.orginPageCount = self.imageArray.count;
+            pageFlowView.orientation = NewPagedFlowViewOrientationHorizontal;
+            [bottomView addSubview:pageFlowView];
+            [pageFlowView stopTimer];
+            
+           [pageFlowView reloadData];
         }
         else
         {
@@ -80,27 +127,7 @@
     self.contentView.backgroundColor= [UIColor colorFromHex:@"f6f6f6"];
     _dataArray = [NSMutableArray array];
     [self getData];
-    [self showMapView];
-//    [self initAnnotations];
-    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor clearColor]];
-    titleView.top                      = 0;
-    UIButton * rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightBtn.frame = CGRectMake(0, 8, 70, 64);
-    [rightBtn setImage:[UIImage imageNamed:@"ditu_fanhui"] forState:UIControlStateNormal];
-    [rightBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [titleView addSubview:rightBtn];
-    UIView * bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height-(170*Main_Screen_Height/667), Main_Screen_Width, 170*Main_Screen_Height/667)];
-    [self.contentView addSubview:bottomView];
-    //无限轮播图
-    pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 160*Main_Screen_Height/667)];
-    pageFlowView.delegate = self;
-    pageFlowView.dataSource = self;
-    pageFlowView.minimumPageAlpha = 0;
-    //    pageFlowView.minimumPageScale = 0.85;
-//    pageFlowView.orginPageCount = self.imageArray.count;
-    pageFlowView.orientation = NewPagedFlowViewOrientationHorizontal;
-    [bottomView addSubview:pageFlowView];
-    [pageFlowView stopTimer];
+    
 }
 ////添加多个大头针
 //- (void)initAnnotations
@@ -117,108 +144,157 @@
 //}
 
 
--(void)showMapView
-{
-    self.mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
-    self.mapView.delegate = self;
-    //设置成NO表示关闭指南针；YES表示显示指南针
-    self.mapView.showsCompass= NO;
-    //设置成NO表示不显示比例尺；YES表示显示比例尺
-    self.mapView.showsScale= NO;
-    //缩放等级
-    [self.mapView setZoomLevel:16 animated:YES];
-    //开启定位
-    self.mapView.showsUserLocation = YES;
-    [self.contentView addSubview:self.mapView];
-    
-    CLLocationCoordinate2D coor ;
-    coor.latitude = 31.190149;
-    coor.longitude = 121.527685;
-    
-    MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
-    pointAnnotation.coordinate = coor;
-    //设置地图的定位中心点坐标
-    self.mapView.centerCoordinate = coor;
-    //将点添加到地图上，即所谓的大头针
-    [self.mapView addAnnotation:pointAnnotation];
-//    CLLocationCoordinate2D coordinates[10] = {
-//        {39.992520, 116.336170},
-//        {39.992520, 116.336170},
-//        {39.998293, 116.352343},
-//        {40.004087, 116.348904},
-//        {40.001442, 116.353915},
-//        {39.989105, 116.353915},
-//        {39.989098, 116.360200},
-//        {39.998439, 116.360201},
-//        {39.979590, 116.324219},
-//        {39.978234, 116.352792}};
+//-(void)showMapView
+//{
+//    self.mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
+//    self.mapView.delegate = self;
+//    //设置成NO表示关闭指南针；YES表示显示指南针
+//    self.mapView.showsCompass= NO;
+//    //设置成NO表示不显示比例尺；YES表示显示比例尺
+//    self.mapView.showsScale= NO;
+//    //缩放等级
+//    [self.mapView setZoomLevel:16 animated:YES];
+//    //开启定位
+//    self.mapView.showsUserLocation = YES;
+//    [self.contentView addSubview:self.mapView];
 //
-//    for (int i = 0; i < 10; ++i)
-//    {
-//        MAPointAnnotation *a1 = [[MAPointAnnotation alloc] init];
-//        a1.coordinate = coordinates[i];
-//        a1.title      = [NSString stringWithFormat:@"anno: %d", i];
-//        a1.coordinate = coor;
-//        //设置地图的定位中心点坐标
-//        self.mapView.centerCoordinate = coor;
-//        [self.locationArray addObject:a1];
+//    CLLocationCoordinate2D coor ;
+//    coor.latitude = 31.190149;
+//    coor.longitude = 121.527685;
+//
+//    MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
+//    pointAnnotation.coordinate = coor;
+//    //设置地图的定位中心点坐标
+//    self.mapView.centerCoordinate = coor;
+//    //将点添加到地图上，即所谓的大头针
+//    [self.mapView addAnnotation:pointAnnotation];
+////    CLLocationCoordinate2D coordinates[10] = {
+////        {39.992520, 116.336170},
+////        {39.992520, 116.336170},
+////        {39.998293, 116.352343},
+////        {40.004087, 116.348904},
+////        {40.001442, 116.353915},
+////        {39.989105, 116.353915},
+////        {39.989098, 116.360200},
+////        {39.998439, 116.360201},
+////        {39.979590, 116.324219},
+////        {39.978234, 116.352792}};
+////
+////    for (int i = 0; i < 10; ++i)
+////    {
+////        MAPointAnnotation *a1 = [[MAPointAnnotation alloc] init];
+////        a1.coordinate = coordinates[i];
+////        a1.title      = [NSString stringWithFormat:@"anno: %d", i];
+////        a1.coordinate = coor;
+////        //设置地图的定位中心点坐标
+////        self.mapView.centerCoordinate = coor;
+////        [self.locationArray addObject:a1];
+////    }
+////
+////    [self.mapView addAnnotations:self.locationArray];
+//}
+//#pragma mark -------  MAMapViewDelegate
+//
+//- (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation {
+////    MAPointAnnotation *point = [[MAPointAnnotation alloc] init];
+//    //设置点的经纬度
+////    point.coordinate = _currentUL.location.coordinate;
+//    CLLocation *currentLocation = [[CLLocation alloc]initWithLatitude:31.190149 longitude:121.527685];
+//
+//    // 初始化编码器
+//    CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
+//    [geoCoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+//        //获取当前城市位置信息，其中CLPlacemark包括name、thoroughfare、subThoroughfare、locality、subLocality等详细信息
+//        CLPlacemark *mark = [placemarks lastObject];
+//        NSString *cityName = mark.locality;
+//       NSLog(@"城市 - %@", cityName);
+////        self.currentCity  = cityName;
+//    }];
+//}
+//#pragma mark ----大头针
+//- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id <MAAnnotation>)annotation {
+//    //大头针标注
+//    if ([annotation isKindOfClass:[MAPointAnnotation class]]) {//判断是否是自己的定位气泡，如果是自己的定位气泡，不做任何设置，显示为蓝点，如果不是自己的定位气泡，比如大头针就会进入
+//        static NSString *pointReuseIndentifier = @"pointReuseIndentifier";
+//        MAAnnotationView*annotationView = (MAAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndentifier];
+//        if (annotationView == nil) {
+//            annotationView = [[MAAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pointReuseIndentifier];
+//        }
+//        annotationView.frame = CGRectMake(0, 0, 100, 100);
+//        annotationView.canShowCallout= YES;       //设置气泡可以弹出，默认为NO
+//        //annotationView.animatesDrop = YES;        //设置标注动画显示，默认为NO
+//        annotationView.draggable = YES;           //设置标注可以拖动，默认为NO
+//        //设置大头针显示的图片
+//        annotationView.image = [UIImage imageNamed:@"dahuang"];
+//        //点击大头针显示的左边的视图
+//        UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
+//        UILabel * addlabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
+//        addlabel.text = @"哈哈哈";
+//        addlabel.textAlignment = NSTextAlignmentCenter;
+//        addlabel.textColor=[UIColor colorFromHex:@"#999999"];
+//        [view addSubview:addlabel];
+////        UIImageView *imageV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"fenxiangzhuanqian"]];
+//        annotationView.leftCalloutAccessoryView = view;
+//
+//        //点击大头针显示的右边视图
+//        UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 50)];
+//        rightButton.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
+//        [rightButton setTitle:@"导航" forState:UIControlStateNormal];
+//        annotationView.rightCalloutAccessoryView = rightButton;
+////
+////        //        annotationView.image = [UIImage imageNamed:@"redPin"];
+//        return annotationView;
 //    }
-//
-//    [self.mapView addAnnotations:self.locationArray];
-}
-#pragma mark -------  MAMapViewDelegate
+//    return nil;
+//}
+#pragma mark -
+#pragma mark delegate
 
-- (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation {
-//    MAPointAnnotation *point = [[MAPointAnnotation alloc] init];
-    //设置点的经纬度
-//    point.coordinate = _currentUL.location.coordinate;
-    CLLocation *currentLocation = [[CLLocation alloc]initWithLatitude:31.190149 longitude:121.527685];
-    
-    // 初始化编码器
-    CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
-    [geoCoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-        //获取当前城市位置信息，其中CLPlacemark包括name、thoroughfare、subThoroughfare、locality、subLocality等详细信息
-        CLPlacemark *mark = [placemarks lastObject];
-        NSString *cityName = mark.locality;
-       NSLog(@"城市 - %@", cityName);
-//        self.currentCity  = cityName;
-    }];
+- (NSInteger)numbersWithCalloutViewForMapView
+{
+    return _annotations.count;
 }
-#pragma mark ----大头针
-- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id <MAAnnotation>)annotation {
-    //大头针标注
-    if ([annotation isKindOfClass:[MAPointAnnotation class]]) {//判断是否是自己的定位气泡，如果是自己的定位气泡，不做任何设置，显示为蓝点，如果不是自己的定位气泡，比如大头针就会进入
-        static NSString *pointReuseIndentifier = @"pointReuseIndentifier";
-        MAAnnotationView*annotationView = (MAAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndentifier];
-        if (annotationView == nil) {
-            annotationView = [[MAAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pointReuseIndentifier];
-        }
-        annotationView.frame = CGRectMake(0, 0, 100, 100);
-        annotationView.canShowCallout= YES;       //设置气泡可以弹出，默认为NO
-        //annotationView.animatesDrop = YES;        //设置标注动画显示，默认为NO
-        annotationView.draggable = YES;           //设置标注可以拖动，默认为NO
-        //设置大头针显示的图片
-        annotationView.image = [UIImage imageNamed:@"dahuang"];
-        //点击大头针显示的左边的视图
-        UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
-        UILabel * addlabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
-        addlabel.text = @"哈哈哈";
-        addlabel.textAlignment = NSTextAlignmentCenter;
-        addlabel.textColor=[UIColor colorFromHex:@"#999999"];
-        [view addSubview:addlabel];
-//        UIImageView *imageV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"fenxiangzhuanqian"]];
-        annotationView.leftCalloutAccessoryView = view;
-        
-        //点击大头针显示的右边视图
-        UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 50)];
-        rightButton.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
-        [rightButton setTitle:@"导航" forState:UIControlStateNormal];
-        annotationView.rightCalloutAccessoryView = rightButton;
-//
-//        //        annotationView.image = [UIImage imageNamed:@"redPin"];
-        return annotationView;
+
+- (CLLocationCoordinate2D)coordinateForMapViewWithIndex:(NSInteger)index
+{
+    Item *item = [[Item alloc] initWithDictionary:[_annotations objectAtIndex:index]];
+    CLLocationCoordinate2D coordinate;
+    coordinate.latitude = [item.latitude doubleValue];
+    coordinate.longitude = [item.longitude doubleValue];
+    
+    return coordinate;
+}
+
+- (UIImage *)baseMKAnnotationViewImageWithIndex:(NSInteger)index
+{
+    if (index==0) {
+        return [UIImage imageNamed:@"wodeweizhi"];
     }
-    return nil;
+    return [UIImage imageNamed:@"dian"];
+    
+    
+}
+
+- (UIView *)mapViewCalloutContentViewWithIndex:(NSInteger)index
+{
+    if (index==0) {
+        return nil;
+    }
+    Item *item = [[Item alloc] initWithDictionary:[_annotations objectAtIndex:index]];
+    TestMapCell  *cell = [[[NSBundle mainBundle] loadNibNamed:@"TestMapCell" owner:self options:nil] objectAtIndex:0];
+    cell.subtitle.text = item.subtitle;
+    return cell;
+}
+
+- (void)calloutViewDidSelectedWithIndex:(NSInteger)index
+{
+    if (index!=0) {
+        NSLog(@"--%@",[_annotations objectAtIndex:index]);
+        Item *item = [[Item alloc] initWithDictionary:[_annotations objectAtIndex:index]];
+        [self.mapNavigationView showMapNavigationViewWithtargetLatitude:[item.latitude doubleValue] targetLongitute:[item.longitude doubleValue] toName:item.subtitle];
+        [self.view addSubview:_mapNavigationView];
+    }
+   
 }
 #pragma mark NewPagedFlowView Delegate
 - (CGSize)sizeForPageInFlowView:(NewPagedFlowView *)flowView {
@@ -232,7 +308,7 @@
     detailController.MerCode                       =model.MerCode;
     detailController.distance                      = model.Distance;
     [self.navigationController pushViewController:detailController animated:YES];
-    
+
 }
 
 
@@ -369,32 +445,37 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-- (NSMutableArray *)locationArray{
-    
-    if (_locationArray == nil) {
-        _locationArray = [NSMutableArray new];
-        NSArray* a = @[@{@"latitude":@"30.281843",
-                               @"longitude":@"120.102193",
-                               @"title":@"test-title-1",
-                               @"subtitle":@"test-sub-title-11"},
-                             @{@"latitude":@"30.290144",
-                               @"longitude":@"120.146696‎",
-                               @"title":@"test-title-2",
-                               @"subtitle":@"test-sub-title-22"},
-                             @{@"latitude":@"30.248076",
-                               @"longitude":@"120.164162‎",
-                               @"title":@"test-title-3",
-                               @"subtitle":@"test-sub-title-33"},
-                             @{@"latitude":@"30.425622",
-                               @"longitude":@"120.299605",
-                               @"title":@"test-title-4",
-                               @"subtitle":@"test-sub-title-44"}
-                             ];
-        [_locationArray addObjectsFromArray:a];
+- (JXMapNavigationView *)mapNavigationView{
+    if (_mapNavigationView == nil) {
+        _mapNavigationView = [[JXMapNavigationView alloc]init];
     }
-    return _locationArray;
+    return _mapNavigationView;
 }
+//- (NSMutableArray *)locationArray{
+//
+//    if (_locationArray == nil) {
+//        _locationArray = [NSMutableArray new];
+//        NSArray* a = @[@{@"latitude":@"30.281843",
+//                               @"longitude":@"120.102193",
+//                               @"title":@"test-title-1",
+//                               @"subtitle":@"test-sub-title-11"},
+//                             @{@"latitude":@"30.290144",
+//                               @"longitude":@"120.146696‎",
+//                               @"title":@"test-title-2",
+//                               @"subtitle":@"test-sub-title-22"},
+//                             @{@"latitude":@"30.248076",
+//                               @"longitude":@"120.164162‎",
+//                               @"title":@"test-title-3",
+//                               @"subtitle":@"test-sub-title-33"},
+//                             @{@"latitude":@"30.425622",
+//                               @"longitude":@"120.299605",
+//                               @"title":@"test-title-4",
+//                               @"subtitle":@"test-sub-title-44"}
+//                             ];
+//        [_locationArray addObjectsFromArray:a];
+//    }
+//    return _locationArray;
+//}
 
 
 

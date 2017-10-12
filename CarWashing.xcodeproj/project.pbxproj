@@ -62,8 +62,6 @@
 		180E432C1F417E3500013D2D /* DSAddShopController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E432B1F417E3500013D2D /* DSAddShopController.m */; };
 		180E432F1F41921E00013D2D /* PhoneHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E432E1F41921E00013D2D /* PhoneHelper.m */; };
 		1816A4751F8DB7A5004A6835 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1816A4741F8DB7A5004A6835 /* MapKit.framework */; };
-		1816A47F1F8E0A6C004A6835 /* AudioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1816A47E1F8E0A6C004A6835 /* AudioModel.m */; };
-		1816A4821F8E0BCE004A6835 /* CustAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1816A4811F8E0BCE004A6835 /* CustAnnotationView.m */; };
 		1816A4851F8E1AE1004A6835 /* CyMapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1816A4841F8E1AE1004A6835 /* CyMapModel.m */; };
 		181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92B71F1F364A0006511E /* MenuTabBarController.m */; };
 		181E92BB1F1F36710006511E /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BA1F1F36710006511E /* BaseController.m */; };
@@ -196,6 +194,13 @@
 		18E7028D1F5E3443007A9777 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E7028C1F5E3443007A9777 /* Order.m */; };
 		18E702931F614010007A9777 /* ScanCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E702921F614010007A9777 /* ScanCode.m */; };
 		18EDACC71F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EDACC61F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m */; };
+		18FBC5BD1F8F007B00054561 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5BC1F8F007B00054561 /* MapView.m */; };
+		18FBC5C11F8F013600054561 /* BasicMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5C01F8F013600054561 /* BasicMapAnnotation.m */; };
+		18FBC5C41F8F01B400054561 /* CallOutAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5C31F8F01B400054561 /* CallOutAnnotationView.m */; };
+		18FBC5C71F8F021E00054561 /* CalloutMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5C61F8F021E00054561 /* CalloutMapAnnotation.m */; };
+		18FBC5CA1F8F054500054561 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5C91F8F054500054561 /* Item.m */; };
+		18FBC5D01F8F05D500054561 /* TestMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5CF1F8F05D500054561 /* TestMapCell.m */; };
+		18FBC5D41F8F06F500054561 /* TestMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FBC5D31F8F06F500054561 /* TestMapCell.xib */; };
 		18FF43191F8CC320006809CD /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF43181F8CC320006809CD /* MapViewController.m */; };
 		374B966A10F9B5E6D74241BF /* libPods-CarWashing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */; };
 		500C6BA41F3AE619007D34A1 /* QFDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 500C6BA31F3AE619007D34A1 /* QFDatePickerView.m */; };
@@ -418,10 +423,6 @@
 		180E432E1F41921E00013D2D /* PhoneHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneHelper.m; path = Tool/PhoneHelper.m; sourceTree = "<group>"; };
 		1816A4731F8DAE79004A6835 /* APIKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
 		1816A4741F8DB7A5004A6835 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		1816A47D1F8E0A6C004A6835 /* AudioModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioModel.h; sourceTree = "<group>"; };
-		1816A47E1F8E0A6C004A6835 /* AudioModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioModel.m; sourceTree = "<group>"; };
-		1816A4801F8E0BCE004A6835 /* CustAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustAnnotationView.h; sourceTree = "<group>"; };
-		1816A4811F8E0BCE004A6835 /* CustAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustAnnotationView.m; sourceTree = "<group>"; };
 		1816A4831F8E1AE1004A6835 /* CyMapModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyMapModel.h; sourceTree = "<group>"; };
 		1816A4841F8E1AE1004A6835 /* CyMapModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyMapModel.m; sourceTree = "<group>"; };
 		181E92B61F1F364A0006511E /* MenuTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTabBarController.h; sourceTree = "<group>"; };
@@ -677,6 +678,19 @@
 		18E702921F614010007A9777 /* ScanCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCode.m; sourceTree = "<group>"; };
 		18EDACC51F7B50C6008D59D7 /* ForgetPasswordLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordLoginViewController.h; sourceTree = "<group>"; };
 		18EDACC61F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordLoginViewController.m; sourceTree = "<group>"; };
+		18FBC5BB1F8F007B00054561 /* MapView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
+		18FBC5BC1F8F007B00054561 /* MapView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
+		18FBC5BF1F8F013600054561 /* BasicMapAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicMapAnnotation.h; sourceTree = "<group>"; };
+		18FBC5C01F8F013600054561 /* BasicMapAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasicMapAnnotation.m; sourceTree = "<group>"; };
+		18FBC5C21F8F01B400054561 /* CallOutAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallOutAnnotationView.h; sourceTree = "<group>"; };
+		18FBC5C31F8F01B400054561 /* CallOutAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CallOutAnnotationView.m; sourceTree = "<group>"; };
+		18FBC5C51F8F021E00054561 /* CalloutMapAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalloutMapAnnotation.h; sourceTree = "<group>"; };
+		18FBC5C61F8F021E00054561 /* CalloutMapAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalloutMapAnnotation.m; sourceTree = "<group>"; };
+		18FBC5C81F8F054500054561 /* Item.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		18FBC5C91F8F054500054561 /* Item.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		18FBC5CE1F8F05D500054561 /* TestMapCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestMapCell.h; sourceTree = "<group>"; };
+		18FBC5CF1F8F05D500054561 /* TestMapCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestMapCell.m; sourceTree = "<group>"; };
+		18FBC5D31F8F06F500054561 /* TestMapCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestMapCell.xib; sourceTree = "<group>"; };
 		18FF43171F8CC320006809CD /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		18FF43181F8CC320006809CD /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarWashing.release.xcconfig"; path = "Pods/Target Support Files/Pods-CarWashing/Pods-CarWashing.release.xcconfig"; sourceTree = "<group>"; };
@@ -1028,12 +1042,13 @@
 		1816A4761F8DCA04004A6835 /* MapVIewModel */ = {
 			isa = PBXGroup;
 			children = (
-				1816A47D1F8E0A6C004A6835 /* AudioModel.h */,
-				1816A47E1F8E0A6C004A6835 /* AudioModel.m */,
-				1816A4801F8E0BCE004A6835 /* CustAnnotationView.h */,
-				1816A4811F8E0BCE004A6835 /* CustAnnotationView.m */,
 				1816A4831F8E1AE1004A6835 /* CyMapModel.h */,
 				1816A4841F8E1AE1004A6835 /* CyMapModel.m */,
+				18FBC5C81F8F054500054561 /* Item.h */,
+				18FBC5C91F8F054500054561 /* Item.m */,
+				18FBC5CE1F8F05D500054561 /* TestMapCell.h */,
+				18FBC5CF1F8F05D500054561 /* TestMapCell.m */,
+				18FBC5D31F8F06F500054561 /* TestMapCell.xib */,
 			);
 			path = MapVIewModel;
 			sourceTree = "<group>";
@@ -1684,9 +1699,33 @@
 			path = ForgetPasswordLogin;
 			sourceTree = "<group>";
 		};
+		18FBC5B81F8F002000054561 /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				18FBC5BB1F8F007B00054561 /* MapView.h */,
+				18FBC5BC1F8F007B00054561 /* MapView.m */,
+			);
+			path = MapView;
+			sourceTree = "<group>";
+		};
+		18FBC5BE1F8F00E200054561 /* MapCalloutView */ = {
+			isa = PBXGroup;
+			children = (
+				18FBC5BF1F8F013600054561 /* BasicMapAnnotation.h */,
+				18FBC5C01F8F013600054561 /* BasicMapAnnotation.m */,
+				18FBC5C21F8F01B400054561 /* CallOutAnnotationView.h */,
+				18FBC5C31F8F01B400054561 /* CallOutAnnotationView.m */,
+				18FBC5C51F8F021E00054561 /* CalloutMapAnnotation.h */,
+				18FBC5C61F8F021E00054561 /* CalloutMapAnnotation.m */,
+			);
+			path = MapCalloutView;
+			sourceTree = "<group>";
+		};
 		18FF43151F8CC2E1006809CD /* MapControllerView */ = {
 			isa = PBXGroup;
 			children = (
+				18FBC5B81F8F002000054561 /* MapView */,
+				18FBC5BE1F8F00E200054561 /* MapCalloutView */,
 				1816A4761F8DCA04004A6835 /* MapVIewModel */,
 				18FF43171F8CC320006809CD /* MapViewController.h */,
 				18FF43181F8CC320006809CD /* MapViewController.m */,
@@ -2085,7 +2124,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -2159,6 +2198,7 @@
 				50B26E9B1F307D50009B3B9F /* DiscountDetailView.xib in Resources */,
 				1888214F1F6BD336002618F7 /* b4.gif in Resources */,
 				180E42F71F3AD4E600013D2D /* PopupView.xib in Resources */,
+				18FBC5D41F8F06F500054561 /* TestMapCell.xib in Resources */,
 				18D815851F79ECA800A1FA04 /* CYCardTableViewCell.xib in Resources */,
 				5097FE1B1F2F4335002EF8F8 /* MyCarViewCell.xib in Resources */,
 				1888214C1F6BD336002618F7 /* b1.gif in Resources */,
@@ -2254,7 +2294,6 @@
 				0401E9031F4ED6E900F0CA79 /* EARestrictedScrollView.m in Sources */,
 				18A6033A1F4FC06000CFA328 /* TggStarEvaluationView.m in Sources */,
 				0452AC9F1F790D7900506306 /* DSCardShowDetailViewController.m in Sources */,
-				1816A47F1F8E0A6C004A6835 /* AudioModel.m in Sources */,
 				1853BA461F28A04100B98C7F /* JFCityCollectionFlowLayout.m in Sources */,
 				50B26E641F300D60009B3B9F /* PayPurchaseCardController.m in Sources */,
 				18B69EAA1F32CB5B007DA0E4 /* ZFConst.m in Sources */,
@@ -2327,6 +2366,7 @@
 				1853BA4A1F28A04100B98C7F /* JFCityViewController.m in Sources */,
 				18A4B1B41F4AAB7800C64978 /* WayToUpGradeCell.m in Sources */,
 				50B26E851F306E0A009B3B9F /* DiscountDetailController.m in Sources */,
+				18FBC5D01F8F05D500054561 /* TestMapCell.m in Sources */,
 				181E92DE1F1F3BE40006511E /* MySettingViewController.m in Sources */,
 				5061A43F1F3AAECE003939A4 /* UIView+Uitls.m in Sources */,
 				181E92E31F2054C50006511E /* DSUserInfoController.m in Sources */,
@@ -2367,6 +2407,7 @@
 				18B697B21F21DB3F009FF73A /* DSCarTravellingController.m in Sources */,
 				5016723B1F29809200384186 /* UIView+HQCategory.m in Sources */,
 				5016720C1F297A3500384186 /* ShopCategoryView.m in Sources */,
+				18FBC5C71F8F021E00054561 /* CalloutMapAnnotation.m in Sources */,
 				50E2EE831F1F4D3C00FAF130 /* UIView+YZCategory.m in Sources */,
 				18218FE81F2ADA8A00F7207F /* DSSegmentView.m in Sources */,
 				501672521F2A091000384186 /* ScoreCategoryView.m in Sources */,
@@ -2399,6 +2440,7 @@
 				180E43041F3B471100013D2D /* UIView+BFSToastInfo.m in Sources */,
 				04DB28E61F6E184F009B4D9C /* WSDatePickerView.m in Sources */,
 				500C6BF51F3B5B13007D34A1 /* BusinessMapController.m in Sources */,
+				18FBC5C41F8F01B400054561 /* CallOutAnnotationView.m in Sources */,
 				50B26EA01F30819D009B3B9F /* RechargeDetailController.m in Sources */,
 				181E92DB1F1F3BC60006511E /* PurchaseViewController.m in Sources */,
 				0401E9011F4ED6E900F0CA79 /* EAIntroPage.m in Sources */,
@@ -2414,6 +2456,7 @@
 				501672021F29797600384186 /* BusinessDetailViewController.m in Sources */,
 				181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */,
 				5094A63D1F34850300407808 /* ShopInfoHeadView.m in Sources */,
+				18FBC5BD1F8F007B00054561 /* MapView.m in Sources */,
 				18E702931F614010007A9777 /* ScanCode.m in Sources */,
 				1805AC901F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				5094A6391F346E7000407808 /* CancelPayCell.m in Sources */,
@@ -2437,6 +2480,7 @@
 				50B26EC91F31AFA7009B3B9F /* IcreaseCarController.m in Sources */,
 				18B69EA31F32CB48007DA0E4 /* UIImage+Zirkfied.m in Sources */,
 				18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */,
+				18FBC5CA1F8F054500054561 /* Item.m in Sources */,
 				186CE5FC1F7E5A540001F920 /* CYModel.m in Sources */,
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
 				18E702761F5503BC007A9777 /* KPIndicatorView.m in Sources */,
@@ -2444,6 +2488,7 @@
 				180E430A1F3C741100013D2D /* DSShareGetMoneyController.m in Sources */,
 				501672411F29D16C00384186 /* MemberView.m in Sources */,
 				180E43231F3D836F00013D2D /* WeixinSessionActivity.m in Sources */,
+				18FBC5C11F8F013600054561 /* BasicMapAnnotation.m in Sources */,
 				1805AC931F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				50E2EE7E1F1F4D3C00FAF130 /* YZAllCourseViewController.m in Sources */,
 				50CAA69E1F41A7D700138CEF /* GoodsExchangeCell.m in Sources */,
@@ -2476,7 +2521,6 @@
 				185090271F441BFA00795E0A /* UdStorage.m in Sources */,
 				1850901C1F43F19B00795E0A /* LCMD5Tool.m in Sources */,
 				18A4B2301F4D832300C64978 /* ShareWechatView.m in Sources */,
-				1816A4821F8E0BCE004A6835 /* CustAnnotationView.m in Sources */,
 				180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */,
 				5071B4811F381366009FFF67 /* OrderCommentController.m in Sources */,
 				181E93291F20B0510006511E /* SXScrPageView.m in Sources */,
@@ -2644,7 +2688,7 @@
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWash;
 				PRODUCT_NAME = CarWashing;
@@ -2662,7 +2706,7 @@
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWash;
 				PRODUCT_NAME = CarWashing;

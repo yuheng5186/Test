@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface CyMapModel : NSObject
-@property (nonatomic,assign)float Xm;
-@property (nonatomic,assign)float Ym;
+@property (nonatomic,copy)NSString* Xm;
+@property (nonatomic,copy)NSString* Ym;
 @property (nonatomic,copy) NSString* Area;
 @property (nonatomic,copy) NSString* City;
 @property (nonatomic,copy) NSString* CommentCount;
