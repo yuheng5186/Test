@@ -16,7 +16,9 @@
 
 
 #import "WXApi.h"
-
+//地图
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import "APIKey.h"
 @interface AppDelegate ()<UITabBarDelegate>
 {
     AppDelegate *myDelegate;
@@ -25,7 +27,20 @@
 @end
 
 @implementation AppDelegate
-
+#pragma mark ----地图相关
+- (void)configureAPIKey
+{
+    if ([APIKey length] == 0)
+    {
+        NSString *reason = [NSString stringWithFormat:@"apiKey为空，请检查key是否正确设置。"];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:reason delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [alert show];
+    }
+    
+    [AMapServices sharedServices].apiKey = (NSString *)APIKey;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -133,7 +148,7 @@
 //    self.window.rootViewController				= menuTabBarController;
         [WXApi registerApp:@"wx36260a82ad0e51bb"];      //公司
 
-    
+     [self configureAPIKey];
 
 
     return YES;

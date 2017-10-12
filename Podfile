@@ -12,4 +12,6 @@ target 'CarWashing' do
   pod 'MJRefresh'
   pod "GCCycleScrollView"
   pod 'WechatOpenSDK', '~> 1.8.0'
+  pod 'AMapLocation', '~> 2.4.0'
+  pod 'MJExtension', '~> 3.0.13'
 end
