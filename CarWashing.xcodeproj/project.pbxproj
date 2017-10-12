@@ -201,6 +201,8 @@
 		18FBC5CA1F8F054500054561 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5C91F8F054500054561 /* Item.m */; };
 		18FBC5D01F8F05D500054561 /* TestMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5CF1F8F05D500054561 /* TestMapCell.m */; };
 		18FBC5D41F8F06F500054561 /* TestMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FBC5D31F8F06F500054561 /* TestMapCell.xib */; };
+		18FBC5DA1F8F565000054561 /* CYCarInsertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5D91F8F565000054561 /* CYCarInsertViewController.m */; };
+		18FBC5DD1F8F641A00054561 /* CYSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5DC1F8F641A00054561 /* CYSlideViewController.m */; };
 		18FF43191F8CC320006809CD /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF43181F8CC320006809CD /* MapViewController.m */; };
 		374B966A10F9B5E6D74241BF /* libPods-CarWashing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */; };
 		500C6BA41F3AE619007D34A1 /* QFDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 500C6BA31F3AE619007D34A1 /* QFDatePickerView.m */; };
@@ -691,6 +693,10 @@
 		18FBC5CE1F8F05D500054561 /* TestMapCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestMapCell.h; sourceTree = "<group>"; };
 		18FBC5CF1F8F05D500054561 /* TestMapCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestMapCell.m; sourceTree = "<group>"; };
 		18FBC5D31F8F06F500054561 /* TestMapCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestMapCell.xib; sourceTree = "<group>"; };
+		18FBC5D81F8F565000054561 /* CYCarInsertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYCarInsertViewController.h; sourceTree = "<group>"; };
+		18FBC5D91F8F565000054561 /* CYCarInsertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYCarInsertViewController.m; sourceTree = "<group>"; };
+		18FBC5DB1F8F641A00054561 /* CYSlideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYSlideViewController.h; sourceTree = "<group>"; };
+		18FBC5DC1F8F641A00054561 /* CYSlideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYSlideViewController.m; sourceTree = "<group>"; };
 		18FF43171F8CC320006809CD /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		18FF43181F8CC320006809CD /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarWashing.release.xcconfig"; path = "Pods/Target Support Files/Pods-CarWashing/Pods-CarWashing.release.xcconfig"; sourceTree = "<group>"; };
@@ -1132,6 +1138,7 @@
 		181E92E01F20532B0006511E /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
+				18FBC5D51F8F559600054561 /* CYCarView(新增页面) */,
 				18322AB01F4AD6A8003ABB7B /* Model */,
 				181E92E11F2054C50006511E /* DSUserInfoController.h */,
 				181E92E21F2054C50006511E /* DSUserInfoController.m */,
@@ -1719,6 +1726,33 @@
 				18FBC5C61F8F021E00054561 /* CalloutMapAnnotation.m */,
 			);
 			path = MapCalloutView;
+			sourceTree = "<group>";
+		};
+		18FBC5D51F8F559600054561 /* CYCarView(新增页面) */ = {
+			isa = PBXGroup;
+			children = (
+				18FBC5D71F8F55F800054561 /* CYModelAndCell */,
+				18FBC5D61F8F55D000054561 /* CYController */,
+			);
+			path = "CYCarView(新增页面)";
+			sourceTree = "<group>";
+		};
+		18FBC5D61F8F55D000054561 /* CYController */ = {
+			isa = PBXGroup;
+			children = (
+				18FBC5D81F8F565000054561 /* CYCarInsertViewController.h */,
+				18FBC5D91F8F565000054561 /* CYCarInsertViewController.m */,
+				18FBC5DB1F8F641A00054561 /* CYSlideViewController.h */,
+				18FBC5DC1F8F641A00054561 /* CYSlideViewController.m */,
+			);
+			path = CYController;
+			sourceTree = "<group>";
+		};
+		18FBC5D71F8F55F800054561 /* CYModelAndCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CYModelAndCell;
 			sourceTree = "<group>";
 		};
 		18FF43151F8CC2E1006809CD /* MapControllerView */ = {
@@ -2514,6 +2548,7 @@
 				18A4B22A1F4D6CAB00C64978 /* README.md in Sources */,
 				180E42E71F3AB37D00013D2D /* UIWindow+YzdHUD.m in Sources */,
 				185090441F4557E100795E0A /* TYAlertController.m in Sources */,
+				18FBC5DD1F8F641A00054561 /* CYSlideViewController.m in Sources */,
 				180E43241F3D836F00013D2D /* WeixinTimelineActivity.m in Sources */,
 				501672461F29DA6C00384186 /* MemberRegualrController.m in Sources */,
 				18D815841F79ECA800A1FA04 /* CYCardTableViewCell.m in Sources */,
@@ -2525,6 +2560,7 @@
 				5071B4811F381366009FFF67 /* OrderCommentController.m in Sources */,
 				181E93291F20B0510006511E /* SXScrPageView.m in Sources */,
 				5016724C1F2A020600384186 /* ScoreIntroController.m in Sources */,
+				18FBC5DA1F8F565000054561 /* CYCarInsertViewController.m in Sources */,
 				18B69EA21F32CB48007DA0E4 /* UIColor+Zirkfied.m in Sources */,
 				185090521F4558AC00795E0A /* TYAlertController+BlurEffects.m in Sources */,
 				18A4B22D1F4D7D6E00C64978 /* ShareWeChatController.m in Sources */,

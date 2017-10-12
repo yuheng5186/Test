@@ -19,6 +19,7 @@
 #import "UdStorage.h"
 #import "MBProgressHUD.h"
 
+#import "CYCarInsertViewController.h"
 @interface MyCarPortController ()<UITableViewDataSource, UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
     MBProgressHUD *HUD;
@@ -554,9 +555,13 @@ static NSString *id_carListCell = @"id_carListCell";
 #pragma mark - 新增车辆
 - (void)didClickIncreaseButton {
     
-    IcreaseCarController *increaseVC = [[IcreaseCarController alloc] init];
+//    IcreaseCarController *increaseVC = [[IcreaseCarController alloc] init];
+//    increaseVC.hidesBottomBarWhenPushed = YES;
+//    increaseVC.titlename = @"新增车辆";
+//    [self.navigationController pushViewController:increaseVC animated:YES];
+    CYCarInsertViewController * increaseVC = [[CYCarInsertViewController alloc]init];
     increaseVC.hidesBottomBarWhenPushed = YES;
-    increaseVC.titlename = @"新增车辆";
+    increaseVC.open=1;
     [self.navigationController pushViewController:increaseVC animated:YES];
     
 }
