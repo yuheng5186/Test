@@ -148,5 +148,9 @@
     }
     return nil;
 }
-
+-(void)dealloc {
+    [self.mapView removeFromSuperview];
+    self.mapView.delegate = nil;
+    self.mapView = nil;
+}
 @end

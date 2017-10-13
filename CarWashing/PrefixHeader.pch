@@ -25,6 +25,7 @@
 #import "JSONModel.h"
 #import "MJRefresh.h"
 #import "UILabel+StringFrame.h"
+#import "MJExtension.h"
 
 #import "WechatAuthSDK.h"
 #import "WXApi.h"
