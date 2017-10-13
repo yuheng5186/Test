@@ -22,7 +22,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(hh:) name:@"gb" object:nil];
     self.view.backgroundColor=[UIColor whiteColor];
     //   初始化tableview
-    _choosetableView=[[UITableView alloc]initWithFrame:CGRectMake(0,0, 300, Main_Screen_Height-64) style:UITableViewStylePlain];
+    _choosetableView=[[UITableView alloc]initWithFrame:CGRectMake(0,0, 250, Main_Screen_Height-64) style:UITableViewStylePlain];
     _choosetableView.rowHeight=50;
     _choosetableView.delegate=self;
     _choosetableView.dataSource=self;
@@ -65,7 +65,6 @@
     }else{
         cell.textLabel.text = [NSString stringWithFormat:@"------第%u奔驰------",(unsigned)indexPath.row + 1];
     }
-    
     
     return cell;
 }

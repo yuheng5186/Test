@@ -20,6 +20,7 @@
     NSMutableArray *_indexArr;//索引数组
     UILabel *_myindex;//中间索引view
     UILabel *_indexView;//右边索引view
+    UIView  * headerView;
 }
 @property (nonatomic, strong) UITableView *tableview;
 @property (nonatomic, strong) UIView *rightView;
@@ -29,26 +30,7 @@
 
 @implementation CYCarInsertViewController
 
--(UIView*)rightView{
-    if (_rightView==nil) {
-        _rightView=[[UIView alloc]initWithFrame:CGRectMake(Main_Screen_Width+300, 64, 300, Main_Screen_Height-64)];
-        _rightView.userInteractionEnabled=YES;
-        _rightView.backgroundColor=[UIColor redColor];
-        UISwipeGestureRecognizer* recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-        [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
-        [self.rightView addGestureRecognizer:recognizer];
-        CYSlideViewController * first = [[CYSlideViewController alloc] init];
-        [self addChildViewController:first];
-        //addChildViewController 会调用 [child willMoveToParentViewController:self] 方法，但是不会调用 didMoveToParentViewController:方法，官方建议显示调用
-        [first didMoveToParentViewController:self];
-        [first.view setFrame:CGRectMake(0,0,_rightView.frame.size.width,_rightView.frame.size.height )];
-        _currentVC = first;
-        [_rightView addSubview:_currentVC.view];
-        
-       
-    }
-    return _rightView;
-}
+
 - (void)drawNavigation {
     
     [self drawTitle:@"请选择品牌"];
@@ -65,10 +47,35 @@
     _tableview=[[UITableView alloc]initWithFrame:CGRectMake(0,64, ViewWid, ViewHigt-64) style:0];
     _tableview.delegate=self;
     _tableview.dataSource=self;
+    headerView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 135)];
+    headerView.backgroundColor=[UIColor whiteColor];
+    _tableview.tableHeaderView = headerView;
     [self.view addSubview:_tableview];
     
+    UIView * gralView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 30)];
+    gralView.backgroundColor=RGBAA(242, 242, 242, 1.0);
+    [headerView addSubview:gralView];
+    UILabel * titlelbael=[[UILabel alloc]initWithFrame:CGRectMake(15, 0, Main_Screen_Width-30, 30)];
+    titlelbael.text = @"热门品牌";
+    [gralView addSubview:titlelbael];
+    
+    UIView * blakView=[[UIView alloc]initWithFrame:CGRectMake(0, 30, Main_Screen_Width, 105)];
+    [headerView addSubview:blakView];
+    
+    NSArray * titleArr=@[@"宝马",@"奔驶",@"大众",@"劳斯莱斯",@"吉普",@"悍马"];
+    CGFloat w = (Main_Screen_Width-30)/3;
+    for (int i = 0; i < titleArr.count; i++) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(15+i%3*w, 15+i/3*45, w-15, 30);
+        [btn setTitle:titleArr[i] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        btn.backgroundColor = [UIColor grayColor];
+        [blakView addSubview:btn];
+    }
+    
     //    初始化右边索引条
-    _indexView=[[UILabel alloc]initWithFrame:CGRectMake(ViewWid-15,(ViewHigt-380)/2,13,380)];
+    _indexView=[[UILabel alloc]initWithFrame:CGRectMake(ViewWid-15,(ViewHigt-300)/2,13,380)];
     _indexView.numberOfLines=0;
     _indexView.font=[UIFont systemFontOfSize:12];
     _indexView.backgroundColor=[UIColor clearColor];
@@ -102,13 +109,7 @@
     
     
 }
--(void)pop{
-    [self.navigationController popViewControllerAnimated:YES];
-}
--(void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+
 //点击开始
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -148,9 +149,9 @@
     _myindex.text=_indexArr[index];
     //    跳到tableview指定的区
     NSIndexPath *indpath=[NSIndexPath indexPathForRow:0 inSection:index];
-    [_tableview  scrollToRowAtIndexPath:indpath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    [_tableview  scrollToRowAtIndexPath:indpath atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
-
+#pragma mark =----tableViewDelegate
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return _indexArr[section];
@@ -186,7 +187,7 @@
     
     [UIView animateWithDuration:0.5 animations:^{
         [self.view addSubview:self.rightView];
-        self.rightView.frame=CGRectMake(Main_Screen_Width-300, 64, 300, Main_Screen_Height-64);
+        self.rightView.frame=CGRectMake(Main_Screen_Width-250, 64, 250, Main_Screen_Height-64);
     }];
     NSDictionary *dict;
     if (self.open == 1) {
@@ -197,16 +198,45 @@
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"gb" object:nil userInfo:dict];
     self.open =2;
-    
-    
-  
 }
+#pragma mark ------ 手势 -----
 -(void)handleSwipeFrom:(UITapGestureRecognizer*)SwipeGesture
 {
     [UIView animateWithDuration:0.5 animations:^{
         
-        self.rightView.frame=CGRectMake(Main_Screen_Width+300, 64, 300, Main_Screen_Height-64);
+        self.rightView.frame=CGRectMake(Main_Screen_Width+250, 64, 250, Main_Screen_Height-64);
     }];
 }
-
+#pragma mark ------ 懒加载 -----
+-(UIView*)rightView{
+    if (_rightView==nil) {
+        _rightView=[[UIView alloc]initWithFrame:CGRectMake(Main_Screen_Width+250, 64, 250, Main_Screen_Height-64)];
+        _rightView.userInteractionEnabled=YES;
+        _rightView.backgroundColor=[UIColor redColor];
+        UISwipeGestureRecognizer* recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+        [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+        [self.rightView addGestureRecognizer:recognizer];
+        CYSlideViewController * first = [[CYSlideViewController alloc] init];
+        [self addChildViewController:first];
+        //addChildViewController 会调用 [child willMoveToParentViewController:self] 方法，但是不会调用 didMoveToParentViewController:方法，官方建议显示调用
+        [first didMoveToParentViewController:self];
+        [first.view setFrame:CGRectMake(0,0,_rightView.frame.size.width,_rightView.frame.size.height )];
+        _currentVC = first;
+        [_rightView addSubview:_currentVC.view];
+        
+    }
+    return _rightView;
+}
+#pragma mark ------ Action -----
+-(void)btnClick:(UIButton*)btn
+{
+ [self.navigationController popViewControllerAnimated:YES];
+}
+-(void)pop{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end
