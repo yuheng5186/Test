@@ -16,6 +16,11 @@
 #import "BusinessDetailViewController.h"
 #import "QWMclistTableViewCell.h"
 
+#import "JFLocation.h"
+#import "JFAreaDataManager.h"
+#import "JFCityViewController.h"
+#import "CoreLocation/CoreLocation.h"
+
 #import "LCMD5Tool.h"
 #import "AFNetworkingTool.h"
 #import "HTTPDefine.h"
@@ -28,7 +33,8 @@
 #import "MapViewController.h"
 @interface BusinessViewController ()<UITableViewDelegate, UITableViewDataSource,YZPullDownMenuDataSource,CLLocationManagerDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
-    
+    NSString * lau;
+    NSString * lon;
 }
 
 @property (nonatomic, weak) UITableView *salerListView;
@@ -47,6 +53,7 @@
 
 @property (nonatomic,strong) NSString *areastr;
 @property (nonatomic,strong) NSString *citystr;
+@property (strong, nonatomic) CLLocationManager* locationManager;
 @end
 
 static NSString *id_salerListCell = @"salerListViewCell";
@@ -438,8 +445,8 @@ static NSString *id_salerListCell = @"salerListViewCell";
                              @"ShopType":@1,
                              @"ServiceCode":[NSString stringWithFormat:@"10%ld",index+1],
                              @"DefaultSort":DefaultSort,
-                             @"Ym":[UdStorage getObjectforKey:@"Ym"],
-                             @"Xm":[UdStorage getObjectforKey:@"Xm"],
+                             @"Ym":lau,
+                             @"Xm":lon,
                              @"PageIndex":@0,
                              @"PageSize":@10
                              };
@@ -600,13 +607,12 @@ static NSString *id_salerListCell = @"salerListViewCell";
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:YES];
 //    [self setSearchMenu];
+        [self startLocation];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 #pragma mark - 无数据占位
 //无数据占位
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
@@ -692,6 +698,134 @@ static NSString *id_salerListCell = @"salerListViewCell";
       return 0.f;
 //   }
 }
+#pragma mark-----开启定位
+-(void)startLocation{
+    
+    if ([CLLocationManager locationServicesEnabled]) {//判断定位操作是否被允许
+        
+        self.locationManager = [[CLLocationManager alloc] init];
+        
+        self.locationManager.delegate = self;//遵循代理
+        
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        
+        self.locationManager.distanceFilter = 10.0f;
+        
+        [_locationManager requestWhenInUseAuthorization];//使用程序其间允许访问位置数据（iOS8以上版本定位需要）
+        
+        [self.locationManager startUpdatingLocation];//开始定位
+        
+    }else{//不能定位用户的位置的情况再次进行判断，并给与用户提示
+        
+        //1.提醒用户检查当前的网络状况
+        
+        //2.提醒用户打开定位开关
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无法进行定位" message:@"请检查您的设备是否开启定位功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    
+    //当前所在城市的坐标值
+    CLLocation *currLocation = [locations lastObject];
+    
+    //    NSLog(@"经度=%f 纬度=%f 高度=%f", currLocation.coordinate.latitude, currLocation.coordinate.longitude, currLocation.altitude);
+    
+    //    [UdStorage storageObject:@"青岛市" forKey:@"City"];
+    //    [UdStorage storageObject:@"市南区" forKey:@"Quyu"];
+    lau = [NSString stringWithFormat:@"%f",currLocation.coordinate.latitude];
+    lon = [NSString stringWithFormat:@"%f",currLocation.coordinate.longitude];
+//    [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.latitude] forKey:@"Ym"];
+//    [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.longitude]  forKey:@"Xm"];
+    
+    //    NSLog(@"Ym=====%@",[UdStorage getObjectforKey:@"Ym"]);
+    
+    //    NSLog(@"Xm=====%@",[UdStorage getObjectforKey:@"Xm"]);
+    
+    
+    
+    
+    
+    
+    //根据经纬度反向地理编译出地址信息
+    CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
+    
+    [geoCoder reverseGeocodeLocation:currLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        
+        for (CLPlacemark * placemark in placemarks) {
+            
+            NSDictionary *address = [placemark addressDictionary];
+            
+            //  Country(国家)  State(省)  City（市）
+            //            NSLog(@"#####%@",address);
+            //
+            //            NSLog(@"%@", [address objectForKey:@"Country"]);
+            //
+            //            NSLog(@"%@", [address objectForKey:@"State"]);
+            //
+            //            NSLog(@"%@", [address objectForKey:@"City"]);
+            
+            NSString *subLocality=[address objectForKey:@"SubLocality"];
+            
+            
+            [UdStorage storageObject:subLocality forKey:@"subLocality"];
+            
+            
+        }
+        
+    }];
+    
+}
+
+//- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+//
+//
+//
+//    CLLocation *location = [locations lastObject];
+//
+//    NSLog(@"latitude === %g  longitude === %g",location.coordinate.latitude, location.coordinate.longitude);
+//
+//
+//
+//    //反向地理编码
+//
+//    CLGeocoder *clGeoCoder = [[CLGeocoder alloc] init];
+//
+//    CLLocation *cl = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
+//
+//    [clGeoCoder reverseGeocodeLocation:cl completionHandler: ^(NSArray *placemarks,NSError *error) {
+//
+//        for (CLPlacemark *placeMark in placemarks) {
+//
+//
+//
+//            NSDictionary *addressDic = placeMark.addressDictionary;
+//
+//
+//
+//            NSString *state=[addressDic objectForKey:@"State"];
+//
+//            NSString *city=[addressDic objectForKey:@"City"];
+//
+//            NSString *subLocality=[addressDic objectForKey:@"SubLocality"];
+//
+//            NSString *street=[addressDic objectForKey:@"Street"];
+//
+//
+//
+//            NSLog(@"所在城市====%@ %@ %@ %@", state, city, subLocality, street);
+//
+//            [_locationManager stopUpdatingLocation];
+//
+//        }
+//
+//    }];
+//
+//}
 
 
 @end

@@ -24,10 +24,20 @@
 
 #import "WSDatePickerView.h"
 
-
+//选择车系
+#import "CYChooseCarTypeViewController.h"
+#import "CYCarInsertViewController.h"
 @interface IcreaseCarController ()<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate,UITextFieldDelegate>
 {
     MBProgressHUD *HUD;
+    NSString * CYTYpe;
+    NSString * a;
+    //编辑车系信息
+    NSString * editType;
+    NSString * editCarName;
+    NSString * editCayType;
+    NSString * replaceStr;
+    NSString * replaceType;
 }
 
 @property (nonatomic, weak) UITableView *carInfoView;
@@ -36,6 +46,7 @@
 @property (nonatomic, weak) UILabel *lbl2;
 @property (nonatomic, weak) UITextField *numTF;
 @property (nonatomic, weak) UITextField *brandTF;
+@property (nonatomic, weak) UITextField *brandTypeTF;
 @property (nonatomic, weak) UITextField *text1;
 @property (nonatomic, weak) UITextField *text2;
 @property (nonatomic, weak) UIButton *provinceBtn;
@@ -63,7 +74,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UITableView *carInfoView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 400*Main_Screen_Height/667) style:UITableViewStyleGrouped];
+    UITableView *carInfoView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height-100) style:UITableViewStyleGrouped];
     _carInfoView = carInfoView;
     [self.view addSubview:carInfoView];
     
@@ -84,8 +95,30 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEditing)];
     tap.delegate = self;
     [self.view addGestureRecognizer:tap];
+    //通知
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(hh:) name:@"CYBack" object:nil];
+    //通知
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(editCarInformation:) name:@"editCarIndorMation" object:nil];
 }
-
+-(void)editCarInformation:(NSNotification *)notification{
+    CYTYpe=@"2";
+    replaceType = @"2";
+    replaceStr = notification.userInfo[@"CYCarname"];
+    editType    = notification.userInfo[@"CYType"];
+    editCarName = notification.userInfo[@"CYCarname"];
+    editCayType = notification.userInfo[@"CYCarType"];
+    [self.carInfoView reloadData];
+}
+- (void)hh:(NSNotification *)notification{
+    
+    // 如果是传多个数据，那么需要哪个数据，就对应取出对应的数据即可
+    CYTYpe=@"1";
+    editCarName = self.mycar.CarBrand;
+    a  = notification.userInfo[@"color"];
+    editType = notification.userInfo[@"CYType"];
+    [self.carInfoView reloadData];
+    
+}
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     
     if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {//判断如果点击的是tableView的cell，就把手势给关闭了
@@ -100,7 +133,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 2;
+        return 3;
     }
     
     return 4;
@@ -127,10 +160,12 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             }
             else
             {
-                
                 NSString *first = self.mycar.PlateNumber;
-                
-                [provinceBtn setTitle:[first substringToIndex:1] forState:UIControlStateNormal];
+                if (first==nil) {
+                    [provinceBtn setTitle:@"沪" forState:UIControlStateNormal];
+                }else{
+                    [provinceBtn setTitle:[first substringToIndex:1] forState:UIControlStateNormal];
+                }
             }
             [provinceBtn setTitleColor:[UIColor colorFromHex:@"#868686"] forState:UIControlStateNormal];
             provinceBtn.titleLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
@@ -159,11 +194,12 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             }
             else
             {
-                
                 NSString *first = self.mycar.PlateNumber;
                 numTF1.text = [first substringFromIndex:1];
+                if (first ==nil) {
+                    numTF1.placeholder = @"请输入车牌号";
+                }
             }
-            
             numTF1.textColor = [UIColor colorFromHex:@"#b4b4b4"];
             numTF1.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             [carCell.contentView addSubview:numTF1];
@@ -186,22 +222,34 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                 make.leading.equalTo(provinceBtn.mas_trailing).mas_offset(16*Main_Screen_Height/667);
                 make.width.mas_equalTo(200*Main_Screen_Height/667);
             }];
-        }else{
-            carCell.textLabel.text = @"品牌车系";
+        }else if(indexPath.row==1){
+            carCell.textLabel.text = @"品牌";
             carCell.textLabel.textColor = [UIColor colorFromHex:@"#868686"];
             carCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             
             UITextField *brandTF1 = [[UITextField alloc] init];
+            brandTF1.enabled=NO;
             _brandTF = brandTF1;
             
             if(self.mycar == nil)
             {
                 brandTF1.placeholder = @"请填写";
             }
-            else
-            {
-                brandTF1.text = self.mycar.CarBrand;
+            else{
+                if ([replaceType isEqualToString:@"2"]) {
+                    brandTF1.text= replaceStr;
+                }else{
+                    if ([editType isEqualToString:@"1"]) {
+                        brandTF1.text = editCarName;
+                    }else{
+                        brandTF1.text = self.mycar.CarBrand;
+                    }
+                }
+                
+               
             }
+            
+            
             
             
             brandTF1.textColor = [UIColor colorFromHex:@"#b4b4b4"];
@@ -211,6 +259,41 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             [brandTF1 mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
 
+                make.centerY.equalTo(carCell);
+                make.right.equalTo(carCell.contentView).mas_offset(-12*Main_Screen_Height/667);
+            }];
+        }else if(indexPath.row==2){
+            carCell.textLabel.text = @"车系";
+            carCell.textLabel.textColor = [UIColor colorFromHex:@"#868686"];
+            carCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+            
+            UITextField *brandTF1 = [[UITextField alloc] init];
+            brandTF1.enabled =NO;
+            _brandTypeTF = brandTF1;
+            
+            if(self.mycar == nil)
+            {
+                brandTF1.placeholder = @"请填写";
+            }
+            else{
+                if ([editType isEqualToString:@"1"]) {
+                    if ([CYTYpe isEqualToString:@"1"]) {
+                        brandTF1.text = a;
+                    }else{
+                        brandTF1.text = editCayType;
+                    }
+                }else{
+                    brandTF1.text = self.mycar.CarType;
+                }
+//
+            }
+            brandTF1.textColor = [UIColor colorFromHex:@"#b4b4b4"];
+            brandTF1.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+            [carCell.contentView addSubview:brandTF1];
+            
+            [brandTF1 mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
+                
                 make.centerY.equalTo(carCell);
                 make.right.equalTo(carCell.contentView).mas_offset(-12*Main_Screen_Height/667);
             }];
@@ -280,9 +363,6 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             carCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 1) {
                 UILabel *lbl = [[UILabel alloc] init];
-                _lbl = lbl;
-                
-                
                 if(self.mycar == nil)
                 {
                     lbl.text = @"请选择";
@@ -301,10 +381,9 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                     make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
                     make.centerY.equalTo(carCell);
                 }];
+                _lbl = lbl;
             }else {
                 UILabel *lbl2 = [[UILabel alloc] init];
-                _lbl2 = lbl2;
-                
                 if(self.mycar == nil)
                 {
                      self.lblData=@" ";
@@ -334,7 +413,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
 //                        NSString *targetTime = [outputFormatter stringFromDate:inputDate];
                         lbl2.text  = self.mycar.DepartureTime;
 //                    }
-//
+                        _lbl2 = lbl2;
                 }
 
                 
@@ -488,6 +567,23 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
 //            }];
 //            [datePickerView show];
         }
+    }else if (indexPath.section==0){
+        if (indexPath.row==2) {
+            CYChooseCarTypeViewController * chooseTypeVc=[[CYChooseCarTypeViewController alloc]init];
+            if ([editType isEqualToString:@"1"]) {
+                chooseTypeVc.CarNameString = editCarName;
+            }else{
+                chooseTypeVc.CarNameString = self.mycar.CarBrand;
+            }
+            
+            chooseTypeVc.hidesBottomBarWhenPushed =YES;
+            [self.navigationController pushViewController:chooseTypeVc animated:YES];
+        }else if (indexPath.row==1){
+            CYCarInsertViewController * chooseTypeVc=[[CYCarInsertViewController alloc]init];
+            chooseTypeVc.CyTYpe = @"编辑车辆信息";
+            chooseTypeVc.hidesBottomBarWhenPushed =YES;
+            [self.navigationController pushViewController:chooseTypeVc animated:YES];
+        }
     }
     
 }
@@ -538,6 +634,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
          
             NSDictionary *mulDic = @{
                                      @"CarBrand":_brandTF.text,
+                                     @"CarType":_brandTypeTF.text,
                                      @"PlateNumber":[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,_numTF.text],
                                      @"ChassisNum":_text1.text,
                                      @"EngineNum":@"",
@@ -546,7 +643,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                                      @"Mileage":_text2.text,
                                      @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
                                      };
-             NSLog(@"%@",mulDic);
+             NSLog(@"00000--%@",mulDic);
             NSMutableArray *ad = [NSMutableArray array];
             
             for (NSString *key in mulDic.allKeys) {
@@ -670,12 +767,10 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                         [HUD setHidden:YES];
                         [self.view showInfo:@"新增失败" autoHidden:YES interval:2];
                     }
-                    
                 } fail:^(NSError *error) {
                     [HUD setHidden:YES];
                     [self.view showInfo:@"新增失败" autoHidden:YES interval:2];
                 }];
-                
             }
             else
             {
@@ -710,9 +805,14 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             if(_text2.text.length==0 ){
                 _text2.text=@"0";
             }
+            if (self.lbl.text==nil||self.lbl2.text==nil) {
+                [HUD hide:YES];
+              [self.view showInfo:@"请选择生产年份和上路时间" autoHidden:YES interval:2];
+                return;
+            }
             //            _text2.text=[_text2.text isEqualToString:@" "]?0:_text2.text;
             NSLog(@"%@===%@==%@===%@",self.lblYear,lblstr,self.lblData,_text2.text);
-            
+             NSLog(@"%@===%@==%@===%@",_brandTypeTF.text,_brandTF.text,self.lblData,_text2.text);
 //            NSDictionary *mulDic = @{
 //                                     @"CarBrand":_brandTF.text,
 //                                     @"PlateNumber":[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,_numTF.text],
@@ -728,6 +828,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             
             NSDictionary *mulDic = @{
                                      @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                     @"CarType":_brandTypeTF.text,
                                      @"CarCode":[NSString stringWithFormat:@"%ld",self.mycar.CarCode],
                                      @"ModifyType":@1,
                                      @"CarBrand":_brandTF.text,
@@ -818,6 +919,9 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     [self presentViewController:provinceVC animated:NO completion:nil];
 }
 
-
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end

@@ -16,6 +16,7 @@
 @interface CYSlideViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSString* a;
+    NSString* CYType;
 }
 @property (nonatomic,strong) UITableView     * choosetableView;
 @property (nonatomic,strong) NSMutableArray  * DetailArray;
@@ -40,7 +41,7 @@
 }
 - (void)hh:(NSNotification *)notification{
     
-    
+    CYType = notification.userInfo[@"CYType"];
     // 如果是传多个数据，那么需要哪个数据，就对应取出对应的数据即可
     
     a  = notification.userInfo[@"color"];
@@ -108,7 +109,37 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"pop" object:nil];
+    if ([CYType isEqualToString:@"1"]) {//编辑车系
+        CYCarRMListModel * carBrandmodel = self.DetailArray[indexPath.section];
+        self.RMListArrayRow = [CYCarRMListModel mj_objectArrayWithKeyValuesArray:self.dicData[@"JsonData"][indexPath.section][@"List"]];
+        CYCarRMListModel * model = self.RMListArrayRow[indexPath.row];
+        NSDictionary *dict = @{@"CYCarname":a,@"CYCarType":[NSString stringWithFormat:@"%@ %@",carBrandmodel.Title,model.Title],@"CYType":@"1"};
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"pop" object:nil userInfo:dict];
+    }else{
+        CYCarRMListModel * carBrandmodel = self.DetailArray[indexPath.section];
+        self.RMListArrayRow = [CYCarRMListModel mj_objectArrayWithKeyValuesArray:self.dicData[@"JsonData"][indexPath.section][@"List"]];
+        CYCarRMListModel * model = self.RMListArrayRow[indexPath.row];
+        NSDictionary *mulDic = @{
+                                 @"CarBrand":a,
+                                 @"CarType":[NSString stringWithFormat:@"%@-%@",carBrandmodel.Title,model.Title],
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                                 };
+        NSLog(@"%@",mulDic);
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/AddCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            NSLog(@"---%@",dict);
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]){
+                NSDictionary *dict = @{@"CYType":@"0"};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"pop" object:nil userInfo:dict];
+            }
+        } fail:^(NSError *error) {
+            NSLog(@"---%@",error);
+        }];
+    }
+    
 }
 -(void)dealloc
 {

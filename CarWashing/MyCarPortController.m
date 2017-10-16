@@ -72,7 +72,11 @@ static NSString *id_carListCell = @"id_carListCell";
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self getMyCarData];
 
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -188,7 +192,6 @@ static NSString *id_carListCell = @"id_carListCell";
     HUD.minSize = CGSizeMake(132.f, 108.0f);
     
     
-    [self getMyCarData];
     
     
     
@@ -563,7 +566,7 @@ static NSString *id_carListCell = @"id_carListCell";
     increaseVC.hidesBottomBarWhenPushed = YES;
     increaseVC.open=1;
     [self.navigationController pushViewController:increaseVC animated:YES];
-    
+//
 }
 
 -(void)noticeincreaseMyCar:(NSNotification *)sender{
@@ -648,15 +651,5 @@ static NSString *id_carListCell = @"id_carListCell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

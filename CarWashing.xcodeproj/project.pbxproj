@@ -176,6 +176,7 @@
 		18B69EA61F32CB52007DA0E4 /* ZFMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B69EA51F32CB52007DA0E4 /* ZFMaskView.m */; };
 		18B69EAA1F32CB5B007DA0E4 /* ZFConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B69EA91F32CB5B007DA0E4 /* ZFConst.m */; };
 		18B69EC01F346A3F007DA0E4 /* DSScanQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B69EBF1F346A3F007DA0E4 /* DSScanQRCodeController.m */; };
+		18B7F9AF1F945B5900302F64 /* CYChooseCarTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B7F9AE1F945B5900302F64 /* CYChooseCarTypeViewController.m */; };
 		18B803771F1DA2A300B52432 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B803761F1DA2A300B52432 /* main.m */; };
 		18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B803791F1DA2A300B52432 /* AppDelegate.m */; };
 		18B803801F1DA2A300B52432 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18B8037E1F1DA2A300B52432 /* Main.storyboard */; };
@@ -647,6 +648,8 @@
 		18B69EA91F32CB5B007DA0E4 /* ZFConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZFConst.m; path = ZFScan/Other/ZFConst.m; sourceTree = "<group>"; };
 		18B69EBE1F346A3F007DA0E4 /* DSScanQRCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSScanQRCodeController.h; sourceTree = "<group>"; };
 		18B69EBF1F346A3F007DA0E4 /* DSScanQRCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSScanQRCodeController.m; sourceTree = "<group>"; };
+		18B7F9AD1F945B5900302F64 /* CYChooseCarTypeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYChooseCarTypeViewController.h; sourceTree = "<group>"; };
+		18B7F9AE1F945B5900302F64 /* CYChooseCarTypeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYChooseCarTypeViewController.m; sourceTree = "<group>"; };
 		18B803721F1DA2A300B52432 /* CarWashing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarWashing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B803761F1DA2A300B52432 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18B803781F1DA2A300B52432 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1579,6 +1582,15 @@
 			name = ScanQRCode;
 			sourceTree = "<group>";
 		};
+		18B7F9AC1F945B2200302F64 /* CYChooseCarType(选择车系) */ = {
+			isa = PBXGroup;
+			children = (
+				18B7F9AD1F945B5900302F64 /* CYChooseCarTypeViewController.h */,
+				18B7F9AE1F945B5900302F64 /* CYChooseCarTypeViewController.m */,
+			);
+			path = "CYChooseCarType(选择车系)";
+			sourceTree = "<group>";
+		};
 		18B803691F1DA2A300B52432 = {
 			isa = PBXGroup;
 			children = (
@@ -1734,6 +1746,7 @@
 		18FBC5D51F8F559600054561 /* CYCarView(新增页面) */ = {
 			isa = PBXGroup;
 			children = (
+				18B7F9AC1F945B2200302F64 /* CYChooseCarType(选择车系) */,
 				18FBC5D71F8F55F800054561 /* CYModelAndCell */,
 				18FBC5D61F8F55D000054561 /* CYController */,
 			);
@@ -2354,6 +2367,7 @@
 				5094A6251F3447CD00407808 /* BusinessEstimateCell.m in Sources */,
 				18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */,
 				18F7EAD01F90A5D80067AEEF /* CYCarRMListModel.m in Sources */,
+				18B7F9AF1F945B5900302F64 /* CYChooseCarTypeViewController.m in Sources */,
 				181E92F21F20848D0006511E /* DSOrderController.m in Sources */,
 				18322ABA1F4D7A5D003ABB7B /* QWMclistTableViewCell.m in Sources */,
 				185090481F4557E100795E0A /* TYAlertView.m in Sources */,

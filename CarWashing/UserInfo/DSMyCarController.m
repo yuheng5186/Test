@@ -134,7 +134,7 @@ static NSString * HeaderId = @"header";
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/GetCarList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+        NSLog(@"我的爱车数据--%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             _Xuhao = 0;
@@ -427,7 +427,7 @@ static NSString * HeaderId = @"header";
     else
     {
         if (section == 0) {
-            return 2;
+            return 3;
         }
         
         return 4;
@@ -507,8 +507,8 @@ static NSString * HeaderId = @"header";
                 make.leading.equalTo(provinceBtn.mas_trailing).mas_offset(0*Main_Screen_Height/667);
                 make.width.mas_equalTo(200*Main_Screen_Height/667);
             }];
-        }else{
-            carCell.textLabel.text = @"品牌车系";
+        }else if(indexPath.row==1){
+            carCell.textLabel.text = @"品牌";
             carCell.textLabel.textColor = [UIColor colorFromHex:@"#868686"];
             carCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             
@@ -518,6 +518,27 @@ static NSString * HeaderId = @"header";
             brandTF.delegate = self;
             brandTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
 
+            self.carBrand = brandTF;
+            self.carBrand.tag = 101;
+            brandTF.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+            [carCell.contentView addSubview:brandTF];
+            
+            [brandTF mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
+                make.centerY.equalTo(carCell);
+                make.right.equalTo(carCell.contentView).mas_offset(-12*Main_Screen_Height/667);
+            }];
+        }else if(indexPath.row==2){
+            carCell.textLabel.text = @"车系";
+            carCell.textLabel.textColor = [UIColor colorFromHex:@"#868686"];
+            carCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+            
+            UITextField *brandTF = [[UITextField alloc] init];
+            brandTF.placeholder = @"请填写";
+            brandTF.text = car.CarType;
+            brandTF.delegate = self;
+            brandTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
+            
             self.carBrand = brandTF;
             self.carBrand.tag = 101;
             brandTF.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];

@@ -72,14 +72,14 @@
         {
             self.dicData = dict;
             self.dataArray =[CyMapModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
-            
-         
-            for (int i=0; i<self.dataArray.count; i++) {
-                CyMapModel * model = self.dataArray[i];
-                self.annotations = @[@{@"latitude":[UdStorage getObjectforKey:@"Ym"],@"longitude":[UdStorage getObjectforKey:@"Xm"],@"title":@"test-title-1",@"subtitle":[NSString stringWithFormat:@"%@",model.MerAddress]},@{@"latitude":[NSString stringWithFormat:@"%@",model.Ym],@"longitude":[NSString stringWithFormat:@"%@",model.Xm],@"subtitle":[NSString stringWithFormat:@"%@",model.MerAddress]}];
+            if (self.dataArray.count==0) {
+                self.annotations = @[@{@"latitude":[UdStorage getObjectforKey:@"Ym"],@"longitude":[UdStorage getObjectforKey:@"Xm"],@"title":@"test-title-1",@"subtitle":[NSString stringWithFormat:@""]}];
+            }else{
+                for (int i=0; i<self.dataArray.count; i++) {
+                    CyMapModel * model = self.dataArray[i];
+                    self.annotations = @[@{@"latitude":[UdStorage getObjectforKey:@"Ym"],@"longitude":[UdStorage getObjectforKey:@"Xm"],@"title":@"test-title-1",@"subtitle":[NSString stringWithFormat:@"%@",model.MerAddress]},@{@"latitude":[NSString stringWithFormat:@"%@",model.Ym],@"longitude":[NSString stringWithFormat:@"%@",model.Xm],@"subtitle":[NSString stringWithFormat:@"%@",model.MerAddress]}];
+                }
             }
-            
-
             self.mapView = [[MapView alloc] initWithDelegate:self];
             [self.contentView addSubview:_mapView];
             [_mapView setFrame:self.view.bounds];
@@ -108,8 +108,7 @@
             pageFlowView.orientation = NewPagedFlowViewOrientationHorizontal;
             [bottomView addSubview:pageFlowView];
             [pageFlowView stopTimer];
-            
-           [pageFlowView reloadData];
+            [pageFlowView reloadData];
         }
         else
         {
@@ -294,7 +293,6 @@
         [self.mapNavigationView showMapNavigationViewWithtargetLatitude:[item.latitude doubleValue] targetLongitute:[item.longitude doubleValue] toName:item.subtitle];
         [self.view addSubview:_mapNavigationView];
     }
-   
 }
 #pragma mark NewPagedFlowView Delegate
 - (CGSize)sizeForPageInFlowView:(NewPagedFlowView *)flowView {
