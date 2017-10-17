@@ -54,8 +54,9 @@
 
 #import "HSUpdateApp.h"
 
-
-@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UIScrollViewDelegate,GCCycleScrollViewDelegate>
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
+@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UIScrollViewDelegate,GCCycleScrollViewDelegate,AMapLocationManagerDelegate>
 {
     UIImageView     *logoImageView;
     UILabel         *titleNameLabel;
@@ -80,7 +81,8 @@
 
 @property (nonatomic, strong) NSMutableArray *GetUserRecordData;
 
-@property (strong, nonatomic) CLLocationManager* locationManager;
+//@property (strong, nonatomic) CLLocationManager* locationManager;
+@property (strong, nonatomic) AMapLocationManager* locationManager;
 
 @property (strong, nonatomic)NSString *LocCity;
 @property (strong, nonatomic)Record *newrc;
@@ -109,6 +111,7 @@
     [super viewDidAppear:animated];
     //一句代码实现检测更新,很简单哦 （需要在viewDidAppear完成时，再调用改方法。不然在网速飞快的时候，会出现一个bug，就是当前控制器viewDidLoad调用的话，可能当前视图还没加载完毕就需要推出UIAlertAction）
     [self hsUpdateApp];
+    [self configLocationManager];
 }
 
 -(void)hsUpdateApp{
@@ -1427,132 +1430,132 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)startLocation{
-    
-    if ([CLLocationManager locationServicesEnabled]) {//判断定位操作是否被允许
-        
-        self.locationManager = [[CLLocationManager alloc] init];
-        
-        self.locationManager.delegate = self;//遵循代理
-        
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        
-        self.locationManager.distanceFilter = 10.0f;
-        
-        [_locationManager requestWhenInUseAuthorization];//使用程序其间允许访问位置数据（iOS8以上版本定位需要）
-        
-        [self.locationManager startUpdatingLocation];//开始定位
-        
-    }else{//不能定位用户的位置的情况再次进行判断，并给与用户提示
-        
-        //1.提醒用户检查当前的网络状况
-        
-        //2.提醒用户打开定位开关
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无法进行定位" message:@"请检查您的设备是否开启定位功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-        
-    }
-    
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-    
-    //当前所在城市的坐标值
-    CLLocation *currLocation = [locations lastObject];
-    
-//    NSLog(@"经度=%f 纬度=%f 高度=%f", currLocation.coordinate.latitude, currLocation.coordinate.longitude, currLocation.altitude);
-    
-//    [UdStorage storageObject:@"青岛市" forKey:@"City"];
-//    [UdStorage storageObject:@"市南区" forKey:@"Quyu"];
-    [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.latitude] forKey:@"Ym"];
-    [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.longitude]  forKey:@"Xm"];
-    
-//    NSLog(@"Ym=====%@",[UdStorage getObjectforKey:@"Ym"]);
-    
-//    NSLog(@"Xm=====%@",[UdStorage getObjectforKey:@"Xm"]);
-
-    
-    
-    
-    
-    
-    //根据经纬度反向地理编译出地址信息
-    CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
-    
-    [geoCoder reverseGeocodeLocation:currLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-        
-        for (CLPlacemark * placemark in placemarks) {
-            
-            NSDictionary *address = [placemark addressDictionary];
-            
-            //  Country(国家)  State(省)  City（市）
-//            NSLog(@"#####%@",address);
-//            
-//            NSLog(@"%@", [address objectForKey:@"Country"]);
-//            
-//            NSLog(@"%@", [address objectForKey:@"State"]);
-//            
-//            NSLog(@"%@", [address objectForKey:@"City"]);
-            
-            NSString *subLocality=[address objectForKey:@"SubLocality"];
-            
-            self.LocCity = [address objectForKey:@"City"];
-            
-            [UdStorage storageObject:subLocality forKey:@"subLocality"];
-            
-            
-        }
-        
-    }];
-    
-}
-
-//- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+//-(void)startLocation{
 //    
-//    
-//    
-//    CLLocation *location = [locations lastObject];
-//    
-//    NSLog(@"latitude === %g  longitude === %g",location.coordinate.latitude, location.coordinate.longitude);
-//    
-//    
-//    
-//    //反向地理编码
-//    
-//    CLGeocoder *clGeoCoder = [[CLGeocoder alloc] init];
-//    
-//    CLLocation *cl = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
-//    
-//    [clGeoCoder reverseGeocodeLocation:cl completionHandler: ^(NSArray *placemarks,NSError *error) {
+//    if ([CLLocationManager locationServicesEnabled]) {//判断定位操作是否被允许
 //        
-//        for (CLPlacemark *placeMark in placemarks) {
+//        self.locationManager = [[CLLocationManager alloc] init];
+//        
+//        self.locationManager.delegate = self;//遵循代理
+//        
+//        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+//        
+//        self.locationManager.distanceFilter = 10.0f;
+//        
+//        [_locationManager requestWhenInUseAuthorization];//使用程序其间允许访问位置数据（iOS8以上版本定位需要）
+//        
+//        [self.locationManager startUpdatingLocation];//开始定位
+//        
+//    }else{//不能定位用户的位置的情况再次进行判断，并给与用户提示
+//        
+//        //1.提醒用户检查当前的网络状况
+//        
+//        //2.提醒用户打开定位开关
+//        
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无法进行定位" message:@"请检查您的设备是否开启定位功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        [alert show];
+//        
+//    }
+//    
+//}
+//
+//- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+//    
+//    //当前所在城市的坐标值
+//    CLLocation *currLocation = [locations lastObject];
+//    
+////    NSLog(@"经度=%f 纬度=%f 高度=%f", currLocation.coordinate.latitude, currLocation.coordinate.longitude, currLocation.altitude);
+//    
+////    [UdStorage storageObject:@"青岛市" forKey:@"City"];
+////    [UdStorage storageObject:@"市南区" forKey:@"Quyu"];
+//    [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.latitude] forKey:@"Ym"];
+//    [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.longitude]  forKey:@"Xm"];
+//    
+////    NSLog(@"Ym=====%@",[UdStorage getObjectforKey:@"Ym"]);
+//    
+////    NSLog(@"Xm=====%@",[UdStorage getObjectforKey:@"Xm"]);
+//
+//    
+//    
+//    
+//    
+//    
+//    //根据经纬度反向地理编译出地址信息
+//    CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
+//    
+//    [geoCoder reverseGeocodeLocation:currLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+//        
+//        for (CLPlacemark * placemark in placemarks) {
 //            
+//            NSDictionary *address = [placemark addressDictionary];
 //            
+//            //  Country(国家)  State(省)  City（市）
+////            NSLog(@"#####%@",address);
+////            
+////            NSLog(@"%@", [address objectForKey:@"Country"]);
+////            
+////            NSLog(@"%@", [address objectForKey:@"State"]);
+////            
+////            NSLog(@"%@", [address objectForKey:@"City"]);
 //            
-//            NSDictionary *addressDic = placeMark.addressDictionary;
+//            NSString *subLocality=[address objectForKey:@"SubLocality"];
 //            
+//            self.LocCity = [address objectForKey:@"City"];
 //            
+//            [UdStorage storageObject:subLocality forKey:@"subLocality"];
 //            
-//            NSString *state=[addressDic objectForKey:@"State"];
-//            
-//            NSString *city=[addressDic objectForKey:@"City"];
-//            
-//            NSString *subLocality=[addressDic objectForKey:@"SubLocality"];
-//            
-//            NSString *street=[addressDic objectForKey:@"Street"];
-//            
-//            
-//            
-//            NSLog(@"所在城市====%@ %@ %@ %@", state, city, subLocality, street);
-//            
-//            [_locationManager stopUpdatingLocation];
 //            
 //        }
 //        
 //    }];
 //    
 //}
+//
+////- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+////    
+////    
+////    
+////    CLLocation *location = [locations lastObject];
+////    
+////    NSLog(@"latitude === %g  longitude === %g",location.coordinate.latitude, location.coordinate.longitude);
+////    
+////    
+////    
+////    //反向地理编码
+////    
+////    CLGeocoder *clGeoCoder = [[CLGeocoder alloc] init];
+////    
+////    CLLocation *cl = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
+////    
+////    [clGeoCoder reverseGeocodeLocation:cl completionHandler: ^(NSArray *placemarks,NSError *error) {
+////        
+////        for (CLPlacemark *placeMark in placemarks) {
+////            
+////            
+////            
+////            NSDictionary *addressDic = placeMark.addressDictionary;
+////            
+////            
+////            
+////            NSString *state=[addressDic objectForKey:@"State"];
+////            
+////            NSString *city=[addressDic objectForKey:@"City"];
+////            
+////            NSString *subLocality=[addressDic objectForKey:@"SubLocality"];
+////            
+////            NSString *street=[addressDic objectForKey:@"Street"];
+////            
+////            
+////            
+////            NSLog(@"所在城市====%@ %@ %@ %@", state, city, subLocality, street);
+////            
+////            [_locationManager stopUpdatingLocation];
+////            
+////        }
+////        
+////    }];
+////    
+////}
 
 -(void)noticeupdateUserheadimg:(NSNotification *)sender{
     //    UIImageView *imageV = [[UIImageView alloc]init];
@@ -1598,7 +1601,39 @@
 }
 
 
+#pragma mark-----开启定位
+- (void)configLocationManager
+{
+    self.locationManager = [[AMapLocationManager alloc] init];
+    [self.locationManager setDelegate:self];
+    [self.locationManager setPausesLocationUpdatesAutomatically:NO];
+    [self.locationManager setAllowsBackgroundLocationUpdates:NO];
+    [self startSerialLocation];
+}
+- (void)startSerialLocation
+{
+    //开始定位
+    [self.locationManager startUpdatingLocation];
+}
 
+- (void)stopSerialLocation
+{
+    //停止定位
+    [self.locationManager stopUpdatingLocation];
+}
+
+- (void)amapLocationManager:(AMapLocationManager *)manager didFailWithError:(NSError *)error
+{
+    //定位错误
+    NSLog(@"%s, amapLocationManager = %@, error = %@", __func__, [manager class], error);
+}
+- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location
+{
+    //定位结果
+    NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
+    [UdStorage storageObject:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"Ym"];
+    [UdStorage storageObject:[NSString stringWithFormat:@"%f",location.coordinate.longitude]  forKey:@"Xm"];
+}
 /*
  #pragma mark - Navigation
  

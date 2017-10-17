@@ -26,6 +26,7 @@
 #import "MBProgressHUD.h"
 
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
+#import "CYCarInsertViewController.h"
 
 @interface DSMyCarController ()<UITableViewDelegate, UITableViewDataSource, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource, UITextFieldDelegate,UIGestureRecognizerDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
@@ -49,6 +50,7 @@
 @property (nonatomic, weak) UILabel *lbl2;
 @property (nonatomic, weak) UITextField *carNum;
 @property (nonatomic, weak) UITextField *carBrand;
+@property (nonatomic, weak) UITextField *carBrandType;
 @property (nonatomic, weak) UITextField *ChassisNum;
 @property (nonatomic, weak) UITextField *Mileage;
 @end
@@ -296,7 +298,11 @@ static NSString * HeaderId = @"header";
         [containImageView addSubview:carpinpai];
         
         UILabel *carpro = [[UILabel alloc]init];
-        carpro.text = [NSString stringWithFormat:@"%ld年产",car.Manufacture];
+        if (car.Manufacture==0) {
+            carpro.text = @"";
+        }else{
+            carpro.text = [NSString stringWithFormat:@"%ld年产",car.Manufacture];
+        }
         carpro.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
         carpro.textColor = [UIColor whiteColor];
 
@@ -358,6 +364,7 @@ static NSString * HeaderId = @"header";
     
         self.carNum.text =  [car.PlateNumber substringFromIndex:1];
         self.carBrand.text = car.CarBrand;
+        self.carBrandType.text = car.CarType;
         self.ChassisNum.text = car.ChassisNum;
         self.Mileage.text = [NSString stringWithFormat:@"%ld",car.Mileage];
         
@@ -539,8 +546,8 @@ static NSString * HeaderId = @"header";
             brandTF.delegate = self;
             brandTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
             
-            self.carBrand = brandTF;
-            self.carBrand.tag = 101;
+            self.carBrandType = brandTF;
+            self.carBrand.tag = 102;
             brandTF.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             [carCell.contentView addSubview:brandTF];
             
@@ -995,10 +1002,14 @@ static NSString * HeaderId = @"header";
 }
 //空白页按钮点击事件
 - (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView {
-    IcreaseCarController *increaseVC = [[IcreaseCarController alloc] init];
+    CYCarInsertViewController * increaseVC = [[CYCarInsertViewController alloc]init];
     increaseVC.hidesBottomBarWhenPushed = YES;
-    increaseVC.titlename = @"新增车辆";
+    increaseVC.open=1;
     [self.navigationController pushViewController:increaseVC animated:YES];
+//    IcreaseCarController *increaseVC = [[IcreaseCarController alloc] init];
+//    increaseVC.hidesBottomBarWhenPushed = YES;
+//    increaseVC.titlename = @"新增车辆";
+//    [self.navigationController pushViewController:increaseVC animated:YES];
 }
 /**
  *  调整垂直位置

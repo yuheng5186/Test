@@ -90,7 +90,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [self startLocation];
-    [self configLocationManager];
+//    [self configLocationManager];
     self.navigationController.navigationBar.hidden = YES;
     self.areastr=@" ";
     self.citystr=@" ";
@@ -257,15 +257,15 @@ static NSString *id_salerListCell = @"salerListViewCell";
     {
         if([lab count] <= 3)
         {
-            return 110*Main_Screen_Height/667;
+            return 130*Main_Screen_Height/667;
         }
         else if(([lab count] > 3) && ([lab count] <= 6))
         {
-            return 125*Main_Screen_Height/667;
+            return 145*Main_Screen_Height/667;
         }
         else
         {
-            return 140*Main_Screen_Height/667;
+            return 160*Main_Screen_Height/667;
         }
         
     }
@@ -451,8 +451,8 @@ static NSString *id_salerListCell = @"salerListViewCell";
                              @"ShopType":@1,
                              @"ServiceCode":@(index),
                              @"DefaultSort":DefaultSort,
-                             @"Ym":lau,
-                             @"Xm":lon,
+                             @"Ym":[UdStorage getObjectforKey:@"Ym"],
+                             @"Xm":[UdStorage getObjectforKey:@"Xm"],
                              @"PageIndex":@0,
                              @"PageSize":@10
                              };
@@ -526,6 +526,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
         DefaultSort = @"3";
     }
     else
+        
     {
         DefaultSort = @"4";
     }
@@ -708,45 +709,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
       return 0.f;
 //   }
 }
-#pragma mark-----开启定位
-- (void)configLocationManager
-{
-    self.locationManager = [[AMapLocationManager alloc] init];
-    
-    [self.locationManager setDelegate:self];
-    
-    [self.locationManager setPausesLocationUpdatesAutomatically:NO];
-    
-    [self.locationManager setAllowsBackgroundLocationUpdates:YES];
-    [self startSerialLocation];
-}
-- (void)startSerialLocation
-{
-    //开始定位
-    [self.locationManager startUpdatingLocation];
-}
 
-- (void)stopSerialLocation
-{
-    //停止定位
-    [self.locationManager stopUpdatingLocation];
-}
-
-- (void)amapLocationManager:(AMapLocationManager *)manager didFailWithError:(NSError *)error
-{
-    //定位错误
-    NSLog(@"%s, amapLocationManager = %@, error = %@", __func__, [manager class], error);
-}
-
-- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location
-{
-    //定位结果
-    NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
-        lau = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
-        lon = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
-        [UdStorage storageObject:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"Ym"];
-        [UdStorage storageObject:[NSString stringWithFormat:@"%f",location.coordinate.longitude]  forKey:@"Xm"];
-}
 //-(void)startLocation{
 //
 //    if ([CLLocationManager locationServicesEnabled]) {//判断定位操作是否被允许

@@ -276,12 +276,8 @@ if(order.PayState == 1)
     {
         DelayPayCell *delayCell = [tableView dequeueReusableCellWithIdentifier:id_delayPayCell forIndexPath:indexPath];
         delayCell.delegate = self;
-
-            delayCell.orderLabel.text = [NSString stringWithFormat:@"订单号: %@",order.OrderCode];
-            delayCell.priceLabel.text = [NSString stringWithFormat:@"￥%@",order.PaypriceAmount];
-           
-    
-       
+        delayCell.orderLabel.text = [NSString stringWithFormat:@"订单号: %@",order.OrderCode];
+        delayCell.priceLabel.text = [NSString stringWithFormat:@"￥%@",order.PaypriceAmount];
         delayCell.washTypeLabel.text = order.SerName;
         delayCell.SerMerChant = order.MerName;
         delayCell.Jprice = [NSString stringWithFormat:@"￥%@",order.PayableAmount];
@@ -289,13 +285,12 @@ if(order.PayState == 1)
         delayCell.MCode = [NSString stringWithFormat:@"%ld",order.MerCode];
         delayCell.SCode =[NSString stringWithFormat:@"%ld",order.SerCode];
         delayCell.OrderCode = order.OrderCode;
-        
         return delayCell;
     }
 else if(order.PayState == 4){
     SuccessPayCell *successCell = [tableView dequeueReusableCellWithIdentifier:id_successPayCell forIndexPath:indexPath];
     successCell.delegate = self;
-    
+    successCell.orderLabel.text = [NSString stringWithFormat:@"订单号: %@",order.OrderCode];
     successCell.stateLabel.textColor=[UIColor colorFromHex:@"#999999"];
     successCell.stateLabel.text=@"交易失败";
     [successCell.stateButton setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
@@ -319,7 +314,6 @@ else if(order.PayState == 4){
             successCell.stateButton.layer.cornerRadius = 12.5*Main_Screen_Height/667;
             successCell.stateButton.layer.borderWidth = 1;
             successCell.stateButton.layer.borderColor = [UIColor colorFromHex:@"#999999"].CGColor;
-            
         }else{
             [successCell.stateButton setTitle:@"去评价" forState:UIControlStateNormal];
             [successCell.stateButton setEnabled:YES];
@@ -338,31 +332,17 @@ else if(order.PayState == 4){
         successCell.orderid = order.OrderCode;
         successCell.SerMerCode = [NSString stringWithFormat:@"%ld",order.MerCode];
         successCell.SerCode = [NSString stringWithFormat:@"%ld",order.SerCode];
-        
-        
-        
         return successCell;
     }
-    
-    
 }
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     Order *order = (Order *)[self.OrderDataArray objectAtIndex:indexPath.section];
-//
 //    if(order.PayState == 3)
 //    {
         OrderDetailController *orderDetailVC = [[OrderDetailController alloc] init];
         orderDetailVC.hidesBottomBarWhenPushed = YES;
-    
-    
         orderDetailVC.MerCode = order.MerCode;
-    
         orderDetailVC.MerChantService = order.SerName;
-    
-    
         orderDetailVC.ShijiPrice = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
         orderDetailVC.Jprice = [NSString stringWithFormat:@"%@",order.PayableAmount];
         orderDetailVC.youhuiprice = [NSString stringWithFormat:@"%@",order.DeductionAmount];
@@ -374,28 +354,16 @@ else if(order.PayState == 4){
         {
             orderDetailVC.paymethod = @"支付宝支付";
         }
-    
-    
-    
         [self.navigationController pushViewController:orderDetailVC animated:YES];
 //    }
-
-        
-    
-        
-    
 }
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     Order *order = (Order *)[self.OrderDataArray objectAtIndex:indexPath.section];
     
 //    if(order.PayState == 3)
 //    {
 //        return 100*Main_Screen_Height/667;
 //    }
-    
     
     return 150*Main_Screen_Height/667;
 }
@@ -408,14 +376,11 @@ else if(order.PayState == 4){
     return 0.1;
 }
 
-
-
 #pragma mark - 实现success的代理方法
 - (void)pushController:(UIViewController *)viewController animated:(BOOL)animated {
     
     [self.navigationController pushViewController:viewController animated:animated];
 }
-
 
 - (void)pushVC:(UIViewController *)viewController animated:(BOOL)animated {
     
@@ -445,7 +410,6 @@ else if(order.PayState == 4){
     
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:13.0f],
                                  NSForegroundColorAttributeName: [UIColor colorFromHex: @"#4a4a4a"]};
-    
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 //设置占位图空白页的背景色( 图片优先级高于文字)
@@ -499,9 +463,6 @@ else if(order.PayState == 4){
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-
 
 @end

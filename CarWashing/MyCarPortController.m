@@ -201,58 +201,65 @@ static NSString *id_carListCell = @"id_carListCell";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 130*Main_Screen_Height/667;
+    return 160;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
-    if([_myDefaultcararray count] == 0)
-    {
-        return 1;
-    }
-    else
-    {
-        return 2;
-    }
+    NSInteger a = self.myDefaultcararray.count;
+    NSInteger b = self.self.mycararray.count;
+    //    if([_myDefaultcararray count] == 0)
+//    {
+//        return 1;
+//    }
+//    else
+//    {
+//        return self.mycararray.count;
+//    }
+    return a+b;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if([_myDefaultcararray count] != 0)
-    {
-        if(section == 1)
-        {
-            return [self.mycararray count];
-        }
-        else
-        {
-            return 1;
-        }
-    }
-    else
-    {
-        return [self.mycararray count];
-    }
-
+//    if([_myDefaultcararray count] != 0)
+//    {
+//        if(section == 1)
+//        {
+//            return [self.mycararray count];
+//        }
+//        else
+//        {
+//            return 1;
+//        }
+//    }
+//    else
+//    {
+//        return [self.mycararray count];
+//    }
+    return 1;
 //    return 0;
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if([_myDefaultcararray count] != 0)
-    {
-        if(section == 1)
-        {
-            return 10*Main_Screen_Height/667;
-        }
-        else
-        {
-            return 0;
-        }
-    }
-    else
-    {
+//    if([_myDefaultcararray count] != 0)
+//    {
+//        if(section == 1)
+//        {
+//            return 10*Main_Screen_Height/667;
+//        }
+//        else
+//        {
+//            return 0;
+//        }
+//    }
+//    else
+//    {
+//        return 0;
+//    }
+    if (section==0) {
         return 0;
+    }else{
+        return 10*Main_Screen_Height/667;
     }
     
 }
@@ -260,17 +267,20 @@ static NSString *id_carListCell = @"id_carListCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     MyCarViewCell *carCell = [tableView dequeueReusableCellWithIdentifier:id_carListCell];
-    
-    
     if([_myDefaultcararray count] != 0)
     {
         if(indexPath.section == 0)
         {
-            carCell.manuLabel.text = [NSString stringWithFormat:@"%@年产",[[_myDefaultcararray objectAtIndex:indexPath.row] objectForKey:@"Manufacture"]];
-            carCell.brandLabel.text = [[_myDefaultcararray objectAtIndex:indexPath.row] objectForKey:@"CarBrand"];
+            if ([[[_myDefaultcararray objectAtIndex:indexPath.section] objectForKey:@"Manufacture"] isKindOfClass:[NSNull class]]) {
+                carCell.manuLabel.hidden=YES;
+            }else{
+                carCell.manuLabel.text = [NSString stringWithFormat:@"%@年产",[[_myDefaultcararray objectAtIndex:indexPath.section] objectForKey:@"Manufacture"]];
+            }
+            
+            carCell.brandLabel.text = [[_myDefaultcararray objectAtIndex:indexPath.section] objectForKey:@"CarBrand"];
             carCell.defaultButton.selected = YES;
             carCell.defaultButton.enabled = NO;
-            carCell.deleteButton.tag = indexPath.row+10000;
+            carCell.deleteButton.tag = indexPath.section+10000;
             [carCell.defaultButton setTitle:@"已默认" forState:UIControlStateNormal];
             
             [carCell.defaultButton setTitleColor:[UIColor grayColor] forState:UIControlStateSelected];
@@ -278,11 +288,15 @@ static NSString *id_carListCell = @"id_carListCell";
         }
         else
         {
-            carCell.manuLabel.text = [NSString stringWithFormat:@"%@年产",[[_mycararray objectAtIndex:indexPath.row] objectForKey:@"Manufacture"]];
-            carCell.brandLabel.text = [[_mycararray objectAtIndex:indexPath.row] objectForKey:@"CarBrand"];
+            if ([[[_mycararray objectAtIndex:indexPath.section-1] objectForKey:@"Manufacture"] isKindOfClass:[NSNull class]]) {
+                carCell.manuLabel.hidden=YES;
+            }else{
+                carCell.manuLabel.text = [NSString stringWithFormat:@"%@年产",[[_mycararray objectAtIndex:indexPath.section-1] objectForKey:@"Manufacture"]];
+            }
+            carCell.brandLabel.text = [[_mycararray objectAtIndex:indexPath.section-1] objectForKey:@"CarBrand"];
             carCell.defaultButton.selected = NO;
-            carCell.defaultButton.tag = indexPath.row;
-            carCell.deleteButton.tag = indexPath.row;
+            carCell.defaultButton.tag = indexPath.section-1;
+            carCell.deleteButton.tag = indexPath.section-1;
             [carCell.defaultButton setTitle:@"设置默认" forState:UIControlStateNormal];
             
             carCell.defaulLabel.hidden = YES;
@@ -290,12 +304,13 @@ static NSString *id_carListCell = @"id_carListCell";
     }
     else
     {
-        carCell.manuLabel.text = [NSString stringWithFormat:@"%@年产",[[_mycararray objectAtIndex:indexPath.row] objectForKey:@"Manufacture"]];
-        carCell.brandLabel.text = [[_mycararray objectAtIndex:indexPath.row] objectForKey:@"CarBrand"];
+        carCell.manuLabel.text = [NSString stringWithFormat:@"%@年产",[[_mycararray objectAtIndex:indexPath.section] objectForKey:@"Manufacture"]];
+        carCell.brandLabel.text = [[_mycararray objectAtIndex:indexPath.section] objectForKey:@"CarBrand"];
         carCell.defaultButton.selected = NO;
-        carCell.defaultButton.tag = indexPath.row;
-        carCell.deleteButton.tag = indexPath.row;
+        carCell.defaultButton.tag = indexPath.section;
+        carCell.deleteButton.tag = indexPath.section;
         [carCell.defaultButton setTitle:@"设置默认" forState:UIControlStateNormal];
+        
         
         carCell.defaulLabel.hidden = YES;
     }
