@@ -181,7 +181,6 @@
                 });
             });
             self.Mcname.text = [dic objectForKey:@"MerName"];
-    
             self.Mcaddress.text = [dic objectForKey:@"MerAddress"];
     
         //    self.freeTestLabel.text = [dicobjectForKey:@"MerName"];

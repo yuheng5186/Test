@@ -29,7 +29,7 @@
     // Do any additional setup after loading the view.
     
     [self createSubView];
-
+    NSLog(@"---%ld",self.choosecard.CardType);
 }
 
 - (void) createSubView {
@@ -47,9 +47,19 @@
     
 //    self.contentView.backgroundColor    = [UIColor colorFromHex:@"#fefefe"];
     
-    UIImageView *appImageView      = [UIUtil drawCustomImgViewInView:self.scrollView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*40/375, Main_Screen_Height*200/667) imageName:@"qw_tiyanka"];
+    UIImageView *appImageView      = [UIUtil drawCustomImgViewInView:self.scrollView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*40/375, Main_Screen_Height*200/667) imageName:nil];
+    
     appImageView.top               = Main_Screen_Height*20/667;
     appImageView.centerX           = Main_Screen_Width/2;
+    if (self.choosecard.CardType==1) {
+        appImageView.image=[UIImage imageNamed:@"qw_tiyanka"];
+    }else if (self.choosecard.CardType==2){
+        appImageView.image=[UIImage imageNamed:@"qw_yueka"];
+    }else if (self.choosecard.CardType==3){
+        appImageView.image=[UIImage imageNamed:@"qw_cika"];
+    }else if (self.choosecard.CardType==4){
+        appImageView.image=[UIImage imageNamed:@"qw_nianka"];
+    }
     
     
     NSString *dicountString              = [NSString stringWithFormat:@"有效期%ld天",self.choosecard.ExpiredDay];

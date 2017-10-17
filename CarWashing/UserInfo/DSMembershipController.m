@@ -80,7 +80,10 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [self GetMembershipUserScore];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -101,7 +104,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     HUD.labelText = @"加载中";
     HUD.minSize = CGSizeMake(132.f, 108.0f);
     
-    [self GetMembershipUserScore];
+//    [self GetMembershipUserScore];
 }
 
 

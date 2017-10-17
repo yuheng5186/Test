@@ -29,9 +29,11 @@
 
 #import "CoreLocation/CoreLocation.h"
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
 //地图
 #import "MapViewController.h"
-@interface BusinessViewController ()<UITableViewDelegate, UITableViewDataSource,YZPullDownMenuDataSource,CLLocationManagerDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
+@interface BusinessViewController ()<UITableViewDelegate, UITableViewDataSource,YZPullDownMenuDataSource,CLLocationManagerDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,AMapLocationManagerDelegate>
 {
     NSString * lau;
     NSString * lon;
@@ -53,7 +55,8 @@
 
 @property (nonatomic,strong) NSString *areastr;
 @property (nonatomic,strong) NSString *citystr;
-@property (strong, nonatomic) CLLocationManager* locationManager;
+//@property (strong, nonatomic) CLLocationManager* locationManager;
+@property (strong, nonatomic) AMapLocationManager* locationManager;
 @end
 
 static NSString *id_salerListCell = @"salerListViewCell";
@@ -86,7 +89,8 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+//    [self startLocation];
+    [self configLocationManager];
     self.navigationController.navigationBar.hidden = YES;
     self.areastr=@" ";
     self.citystr=@" ";
@@ -94,7 +98,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     self.pramsDic = [[NSMutableDictionary alloc]init];
     NSArray *array1 = [[NSArray alloc] initWithObjects:[UdStorage getObjectforKey:@"City"],[UdStorage getObjectforKey:@"Quyu"], nil];
-    NSDictionary *dic = @{@"0":array1,@"1":@"车身外部清洗维护",@"2":@"默认排序"};
+    NSDictionary *dic = @{@"0":array1,@"1":@"全部",@"2":@"默认排序"};
     self.pramsDic  = [NSMutableDictionary dictionaryWithDictionary:dic];
     self.MerchantData = [[NSMutableArray alloc]init];
      self.page = 0;
@@ -333,7 +337,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     
     // 初始化标题
-    _titles = @[[UdStorage getObjectforKey:@"City"],@"车身外部清洗维护",@"默认排序"];
+    _titles = @[[UdStorage getObjectforKey:@"City"],@"全部",@"默认排序"];
     
 //    NSLog(@"%@",self.pramsDic);
     
@@ -405,9 +409,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 -(void)setData
 {
     
-   
-   NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"车身外部清洗维护",@"车内清洁-5座轿车",@"车内清洁SUV或7座", nil];
-   
+   NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"全部",@"车身外部清洗维护",@"车内清洁-5座轿车",@"车内清洁SUV或7座", nil];
    NSInteger index;
    
    if ([array containsObject:[self.pramsDic objectForKey:@"1"]]) {
@@ -437,13 +439,17 @@ static NSString *id_salerListCell = @"salerListViewCell";
     {
         DefaultSort = @"4";
     }
-    
+    if (index==0) {
+        index=0;
+    }else{
+        index = [[NSString stringWithFormat:@"10%ld",index]integerValue];
+    }
 //    [[self.pramsDic objectForKey:@"0"] objectAtIndex:0]
     NSDictionary *mulDic = @{
                              @"City":self.citystr,
                              @"Area":self.areastr,
                              @"ShopType":@1,
-                             @"ServiceCode":[NSString stringWithFormat:@"10%ld",index+1],
+                             @"ServiceCode":@(index),
                              @"DefaultSort":DefaultSort,
                              @"Ym":lau,
                              @"Xm":lon,
@@ -495,7 +501,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 -(void)setDatamore
 {
    
-   NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"车身外部清洗维护",@"车内清洁-5座轿车",@"车内清洁SUV或7座", nil];
+   NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"全部",@"车身外部清洗维护",@"车内清洁-5座轿车",@"车内清洁SUV或7座", nil];
    
    NSInteger index;
    
@@ -523,13 +529,17 @@ static NSString *id_salerListCell = @"salerListViewCell";
     {
         DefaultSort = @"4";
     }
-    
+    if (index==0) {
+        index=0;
+    }else{
+        index = [[NSString stringWithFormat:@"10%ld",index]integerValue];
+    }
 //    [[self.pramsDic objectForKey:@"0"] objectAtIndex:0]
     NSDictionary *mulDic = @{
                              @"City":self.citystr,
                              @"Area":self.areastr,
                              @"ShopType":@1,
-                             @"ServiceCode":[NSString stringWithFormat:@"10%ld",index+1],
+                             @"ServiceCode":@(index),
                              @"DefaultSort":DefaultSort,
                              @"Ym":[UdStorage getObjectforKey:@"Ym"],
                              @"Xm":[UdStorage getObjectforKey:@"Xm"],
@@ -609,7 +619,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 {
     [super viewWillAppear:YES];
 //    [self setSearchMenu];
-        [self startLocation];
+//        [self startLocation];
 }
 
 
@@ -699,133 +709,173 @@ static NSString *id_salerListCell = @"salerListViewCell";
 //   }
 }
 #pragma mark-----开启定位
--(void)startLocation{
+- (void)configLocationManager
+{
+    self.locationManager = [[AMapLocationManager alloc] init];
     
-    if ([CLLocationManager locationServicesEnabled]) {//判断定位操作是否被允许
-        
-        self.locationManager = [[CLLocationManager alloc] init];
-        
-        self.locationManager.delegate = self;//遵循代理
-        
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        
-        self.locationManager.distanceFilter = 10.0f;
-        
-        [_locationManager requestWhenInUseAuthorization];//使用程序其间允许访问位置数据（iOS8以上版本定位需要）
-        
-        [self.locationManager startUpdatingLocation];//开始定位
-        
-    }else{//不能定位用户的位置的情况再次进行判断，并给与用户提示
-        
-        //1.提醒用户检查当前的网络状况
-        
-        //2.提醒用户打开定位开关
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无法进行定位" message:@"请检查您的设备是否开启定位功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-        
-    }
+    [self.locationManager setDelegate:self];
     
+    [self.locationManager setPausesLocationUpdatesAutomatically:NO];
+    
+    [self.locationManager setAllowsBackgroundLocationUpdates:YES];
+    [self startSerialLocation];
+}
+- (void)startSerialLocation
+{
+    //开始定位
+    [self.locationManager startUpdatingLocation];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-    
-    //当前所在城市的坐标值
-    CLLocation *currLocation = [locations lastObject];
-    
-    //    NSLog(@"经度=%f 纬度=%f 高度=%f", currLocation.coordinate.latitude, currLocation.coordinate.longitude, currLocation.altitude);
-    
-    //    [UdStorage storageObject:@"青岛市" forKey:@"City"];
-    //    [UdStorage storageObject:@"市南区" forKey:@"Quyu"];
-    lau = [NSString stringWithFormat:@"%f",currLocation.coordinate.latitude];
-    lon = [NSString stringWithFormat:@"%f",currLocation.coordinate.longitude];
+- (void)stopSerialLocation
+{
+    //停止定位
+    [self.locationManager stopUpdatingLocation];
+}
+
+- (void)amapLocationManager:(AMapLocationManager *)manager didFailWithError:(NSError *)error
+{
+    //定位错误
+    NSLog(@"%s, amapLocationManager = %@, error = %@", __func__, [manager class], error);
+}
+
+- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location
+{
+    //定位结果
+    NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
+        lau = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
+        lon = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
+        [UdStorage storageObject:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"Ym"];
+        [UdStorage storageObject:[NSString stringWithFormat:@"%f",location.coordinate.longitude]  forKey:@"Xm"];
+}
+//-(void)startLocation{
+//
+//    if ([CLLocationManager locationServicesEnabled]) {//判断定位操作是否被允许
+//
+//        self.locationManager = [[CLLocationManager alloc] init];
+//
+//        self.locationManager.delegate = self;//遵循代理
+//
+//        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+//
+//        self.locationManager.distanceFilter = 10.0f;
+//
+//        [_locationManager requestWhenInUseAuthorization];//使用程序其间允许访问位置数据（iOS8以上版本定位需要）
+//
+//        [self.locationManager startUpdatingLocation];//开始定位
+//
+//    }else{//不能定位用户的位置的情况再次进行判断，并给与用户提示
+//
+//        //1.提醒用户检查当前的网络状况
+//
+//        //2.提醒用户打开定位开关
+//
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无法进行定位" message:@"请检查您的设备是否开启定位功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        [alert show];
+//
+//    }
+//
+//}
+//
+//- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+////    NSLog(@"Ym=====%@",[UdStorage getObjectforKey:@"Ym"]);
+////
+////    NSLog(@"Xm=====%@",[UdStorage getObjectforKey:@"Xm"]);
+//    //当前所在城市的坐标值
+//    CLLocation *currLocation = [locations lastObject];
+//
+//    //    NSLog(@"经度=%f 纬度=%f 高度=%f", currLocation.coordinate.latitude, currLocation.coordinate.longitude, currLocation.altitude);
+//
+//    //    [UdStorage storageObject:@"青岛市" forKey:@"City"];
+//    //    [UdStorage storageObject:@"市南区" forKey:@"Quyu"];
+//    lau = [NSString stringWithFormat:@"%f",currLocation.coordinate.latitude];
+//    lon = [NSString stringWithFormat:@"%f",currLocation.coordinate.longitude];
 //    [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.latitude] forKey:@"Ym"];
 //    [UdStorage storageObject:[NSString stringWithFormat:@"%f",currLocation.coordinate.longitude]  forKey:@"Xm"];
-    
-    //    NSLog(@"Ym=====%@",[UdStorage getObjectforKey:@"Ym"]);
-    
-    //    NSLog(@"Xm=====%@",[UdStorage getObjectforKey:@"Xm"]);
-    
-    
-    
-    
-    
-    
-    //根据经纬度反向地理编译出地址信息
-    CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
-    
-    [geoCoder reverseGeocodeLocation:currLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-        
-        for (CLPlacemark * placemark in placemarks) {
-            
-            NSDictionary *address = [placemark addressDictionary];
-            
-            //  Country(国家)  State(省)  City（市）
-            //            NSLog(@"#####%@",address);
-            //
-            //            NSLog(@"%@", [address objectForKey:@"Country"]);
-            //
-            //            NSLog(@"%@", [address objectForKey:@"State"]);
-            //
-            //            NSLog(@"%@", [address objectForKey:@"City"]);
-            
-            NSString *subLocality=[address objectForKey:@"SubLocality"];
-            
-            
-            [UdStorage storageObject:subLocality forKey:@"subLocality"];
-            
-            
-        }
-        
-    }];
-    
-}
-
-//- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+//
+////        NSLog(@"Ym=====%@",[UdStorage getObjectforKey:@"Ym"]);
+////
+////        NSLog(@"Xm=====%@",[UdStorage getObjectforKey:@"Xm"]);
 //
 //
 //
-//    CLLocation *location = [locations lastObject];
-//
-//    NSLog(@"latitude === %g  longitude === %g",location.coordinate.latitude, location.coordinate.longitude);
 //
 //
 //
-//    //反向地理编码
+//    //根据经纬度反向地理编译出地址信息
+//    CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
 //
-//    CLGeocoder *clGeoCoder = [[CLGeocoder alloc] init];
+//    [geoCoder reverseGeocodeLocation:currLocation completionHandler:^(NSArray *placemarks, NSError *error) {
 //
-//    CLLocation *cl = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
+//        for (CLPlacemark * placemark in placemarks) {
 //
-//    [clGeoCoder reverseGeocodeLocation:cl completionHandler: ^(NSArray *placemarks,NSError *error) {
+//            NSDictionary *address = [placemark addressDictionary];
 //
-//        for (CLPlacemark *placeMark in placemarks) {
+//            //  Country(国家)  State(省)  City（市）
+//            //            NSLog(@"#####%@",address);
+//            //
+//            //            NSLog(@"%@", [address objectForKey:@"Country"]);
+//            //
+//            //            NSLog(@"%@", [address objectForKey:@"State"]);
+//            //
+//            //            NSLog(@"%@", [address objectForKey:@"City"]);
 //
-//
-//
-//            NSDictionary *addressDic = placeMark.addressDictionary;
-//
-//
-//
-//            NSString *state=[addressDic objectForKey:@"State"];
-//
-//            NSString *city=[addressDic objectForKey:@"City"];
-//
-//            NSString *subLocality=[addressDic objectForKey:@"SubLocality"];
-//
-//            NSString *street=[addressDic objectForKey:@"Street"];
+//            NSString *subLocality=[address objectForKey:@"SubLocality"];
 //
 //
+//            [UdStorage storageObject:subLocality forKey:@"subLocality"];
 //
-//            NSLog(@"所在城市====%@ %@ %@ %@", state, city, subLocality, street);
-//
-//            [_locationManager stopUpdatingLocation];
 //
 //        }
 //
 //    }];
 //
 //}
+//
+////- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+////
+////
+////
+////    CLLocation *location = [locations lastObject];
+////
+////    NSLog(@"latitude === %g  longitude === %g",location.coordinate.latitude, location.coordinate.longitude);
+////
+////
+////
+////    //反向地理编码
+////
+////    CLGeocoder *clGeoCoder = [[CLGeocoder alloc] init];
+////
+////    CLLocation *cl = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
+////
+////    [clGeoCoder reverseGeocodeLocation:cl completionHandler: ^(NSArray *placemarks,NSError *error) {
+////
+////        for (CLPlacemark *placeMark in placemarks) {
+////
+////
+////
+////            NSDictionary *addressDic = placeMark.addressDictionary;
+////
+////
+////
+////            NSString *state=[addressDic objectForKey:@"State"];
+////
+////            NSString *city=[addressDic objectForKey:@"City"];
+////
+////            NSString *subLocality=[addressDic objectForKey:@"SubLocality"];
+////
+////            NSString *street=[addressDic objectForKey:@"Street"];
+////
+////
+////
+////            NSLog(@"所在城市====%@ %@ %@ %@", state, city, subLocality, street);
+////
+////            [_locationManager stopUpdatingLocation];
+////
+////        }
+////
+////    }];
+////
+////}
 
 
 @end

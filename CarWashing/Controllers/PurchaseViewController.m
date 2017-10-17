@@ -137,6 +137,19 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     _middleview = [[UIView alloc]initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height-64)];
 //    _middleview.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:241/255.0 alpha:1];
     [self.contentView addSubview:_middleview];
+    
+    _Xuhao = 0;
+    _CardArray = [[NSMutableArray alloc]init];
+    _imageArray = [[NSMutableArray alloc]init];
+    
+    [_middleview removeAllSubviews];
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.removeFromSuperViewOnHide =YES;
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.labelText = @"加载中";
+    HUD.minSize = CGSizeMake(132.f, 108.0f);
+    [self getMyCardData];
 }
 
 -(void)getMyCardData
@@ -314,19 +327,19 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    _Xuhao = 0;
-    _CardArray = [[NSMutableArray alloc]init];
-    _imageArray = [[NSMutableArray alloc]init];
+//    _Xuhao = 0;
+//    _CardArray = [[NSMutableArray alloc]init];
+//    _imageArray = [[NSMutableArray alloc]init];
+//
+//    [_middleview removeAllSubviews];
+//
+//    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    HUD.removeFromSuperViewOnHide =YES;
+//    HUD.mode = MBProgressHUDModeIndeterminate;
+//    HUD.labelText = @"加载中";
+//    HUD.minSize = CGSizeMake(132.f, 108.0f);
     
-    [_middleview removeAllSubviews];
-    
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    HUD.removeFromSuperViewOnHide =YES;
-    HUD.mode = MBProgressHUDModeIndeterminate;
-    HUD.labelText = @"加载中";
-    HUD.minSize = CGSizeMake(132.f, 108.0f);
-    
-    [self getMyCardData];
+//    [self getMyCardData];
 
 }
 
