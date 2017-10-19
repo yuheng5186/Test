@@ -569,8 +569,6 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
         {
             self.area = [NSString stringWithFormat:@"%@市",cityName];
         }
-        
-        
     }];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:cityViewController];
@@ -582,15 +580,12 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 - (void)locating {
     NSLog(@"定位中...");
 }
-
 //定位成功
 - (void)currentLocation:(NSDictionary *)locationDictionary {
     NSString *city = [locationDictionary valueForKey:@"City"];
     if (![_resultLabel.text isEqualToString:city]) {
         
-        
         _resultLabel.text = city;
-        
         
         [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"locationCity"];
         [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"currentCity"];
