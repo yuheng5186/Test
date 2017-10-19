@@ -169,48 +169,48 @@
     
 }
 
-//点击开始
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [self myTouch:touches];
-}
-
-
-//点击进行中
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [self myTouch:touches];
-}
-
-//点击结束
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    // 让中间的索引view消失
-    [UIView animateWithDuration:1 animations:^{
-        _myindex.alpha=0;
-    }];
-}
-
-//点击会掉的方法
--(void)myTouch:(NSSet *)touches
-{
-    //    让中间的索引view出现
-    [UIView animateWithDuration:0.3 animations:^{
-        _myindex.alpha=1;
-    }];
-    //    获取点击的区域
-    UITouch *touch = [touches anyObject];
-    CGPoint point = [touch locationInView:_indexView];
-    int index=(int)((point.y/380)*26);
-    NSLog(@"--%d",index);
-    if (index>25||index<0)return;
-    //    给显示的view赋标题
-    _myindex.text=_indexArr[index];
-    //    跳到tableview指定的区
-    NSIndexPath *indpath=[NSIndexPath indexPathForRow:0 inSection:index];
-    [_tableview  scrollToRowAtIndexPath:indpath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-   
-}
+////点击开始
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+//    [self myTouch:touches];
+//}
+//
+//
+////点击进行中
+//-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+//    [self myTouch:touches];
+//}
+//
+////点击结束
+//-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+//    // 让中间的索引view消失
+//    [UIView animateWithDuration:1 animations:^{
+//        _myindex.alpha=0;
+//    }];
+//}
+//
+////点击会掉的方法
+//-(void)myTouch:(NSSet *)touches
+//{
+//    //    让中间的索引view出现
+//    [UIView animateWithDuration:0.3 animations:^{
+//        _myindex.alpha=1;
+//    }];
+//    //    获取点击的区域
+//    UITouch *touch = [touches anyObject];
+//    CGPoint point = [touch locationInView:_indexView];
+//    int index=(int)((point.y/380)*26);
+//    NSLog(@"--%d",index);
+//    if (index>25||index<0)return;
+//    //    给显示的view赋标题
+//    _myindex.text=_indexArr[index];
+//    //    跳到tableview指定的区
+//    NSIndexPath *indpath=[NSIndexPath indexPathForRow:0 inSection:index];
+//    [_tableview  scrollToRowAtIndexPath:indpath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//
+//}
 -(void)indexBtnClick:(UIButton *)Indexbtn
 {
     NSIndexPath *indpath=[NSIndexPath indexPathForRow:0 inSection:Indexbtn.tag];
