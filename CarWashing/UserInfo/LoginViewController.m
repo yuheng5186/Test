@@ -467,7 +467,11 @@
         NSLog(@"%@",params);
         [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetVerCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
             NSLog(@"%@",dict);
+            if (![dict[@"ResultCode"]isEqualToString:@"F000000"]) {
+                [self.view showInfo:[NSString stringWithFormat:@"%@",dict[@"ResultMessage"]] autoHidden:YES interval:2];
+            }
         } fail:^(NSError *error) {
+            [self.view showInfo:@"网络请求超时，请稍后再试！" autoHidden:YES interval:2];
             NSLog(@"%@",error);
         }];
         

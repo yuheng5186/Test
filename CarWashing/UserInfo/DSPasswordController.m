@@ -295,7 +295,7 @@
         
         
         [self startTimer];
-        [self.view showInfo:@"验证码发送成功，请在手机上查收！" autoHidden:YES interval:2];
+        [self.view showInfo:@"验证码发送成功，请在手机上查收！" autoHidden:YES interval:1];
         
         NSDictionary *mulDic = @{@"Mobile":self.userMobileFieldText.text};
         
@@ -308,8 +308,12 @@
         NSLog(@"%@",params);
         [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetVerCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
             NSLog(@"%@",dict);
+            if (![dict[@"ResultCode"]isEqualToString:@"F000000"]) {
+                [self.view showInfo:[NSString stringWithFormat:@"%@",dict[@"ResultMessage"]] autoHidden:YES interval:2];
+            }
         } fail:^(NSError *error) {
             NSLog(@"%@",error);
+            [self.view showInfo:@"网络请求超时，请稍后再试！" autoHidden:YES interval:2];
         }];
         
     }else

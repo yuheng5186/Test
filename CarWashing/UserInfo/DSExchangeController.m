@@ -14,7 +14,7 @@
 #import "MBProgressHUD.h"
 #import "UdStorage.h"
 
-@interface DSExchangeController ()
+@interface DSExchangeController ()<LKAlertViewDelegate>
 {
     UITextField *exchangeTF;
 }
@@ -66,7 +66,8 @@
  }
                              
 - (void)didClickExchangeScoreBtn:(UIButton *)button {
-    
+//    LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:@"提示" message:@"是否退出当前账户？" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@""];
+//    [alartView show];
     
     if(exchangeTF.text.length == 0)
     {
@@ -99,6 +100,7 @@
                 {
                     if([[[dict objectForKey:@"JsonData"] objectForKey:@"CardUseState"] integerValue] == 1)
                     {
+                        
                         [self.view showInfo:@"对不起，该卡已被激活" autoHidden:YES interval:2];
                     }
                     else if([[[dict objectForKey:@"JsonData"] objectForKey:@"CardUseState"] integerValue] == 2)
