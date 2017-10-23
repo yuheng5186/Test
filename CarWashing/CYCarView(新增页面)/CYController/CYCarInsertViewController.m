@@ -58,13 +58,13 @@
         self.RMListArray = (NSMutableArray*)[CYCarRMListModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"][@"RMList"][0][@"List"]];
         self.RMListArraySection = (NSMutableArray*)[CYCarRMListModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"][@"ZMList"]];
         
-//        NSArray * titleArr=@[@"宝马",@"奔驶",@"大众",@"劳斯莱斯",@"吉普",@"悍马"];
+        //        NSArray * titleArr=@[@"宝马",@"奔驶",@"大众",@"劳斯莱斯",@"吉普",@"悍马"];
         if (self.RMListArray.count<=6) {
             headerView.frame= CGRectMake(0, 0, Main_Screen_Width, 135);
             blakView.frame = CGRectMake(0, 30, Main_Screen_Width, 105);
-        }else if (self.RMListArray.count<=12){
+        }else if (self.RMListArray.count>6&&self.RMListArray.count<=12){
             headerView.frame= CGRectMake(0, 0, Main_Screen_Width, 225);
-            blakView.frame = CGRectMake(0, 30, Main_Screen_Width, 165);
+            blakView.frame = CGRectMake(0, 30, Main_Screen_Width, 195);
         }
         CGFloat w = (Main_Screen_Width-30)/3;
         for (int i = 0; i < self.RMListArray.count; i++) {
@@ -81,6 +81,15 @@
             btn.backgroundColor = [UIColor colorFromHex:@"#e6e6e6"];
             [blakView addSubview:btn];
         }
+        UIButton * RMBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        RMBtn.frame=CGRectMake(Main_Screen_Width-30, (Main_Screen_Height-340)/2, 30, 20);
+        [RMBtn setTitle:@"热门" forState:UIControlStateNormal];
+        RMBtn.titleLabel.font = [UIFont systemFontOfSize:12.0];
+        [RMBtn setTitleColor:RGBAA(102, 102, 102, 1.0) forState:UIControlStateNormal];
+        [RMBtn addTarget:self action:@selector(rmClick) forControlEvents:UIControlEventTouchUpInside];
+        RMBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        RMBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+        [self.view addSubview:RMBtn];
         for (int i=0; i<self.RMListArraySection.count; i++) {
             CYCarRMListModel * model = [CYCarRMListModel mj_objectArrayWithKeyValuesArray:self.dicData[@"JsonData"][@"ZMList"]][i];
             UIButton * indexBtn = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -97,7 +106,7 @@
         }
         [self.tableview reloadData];
     } fail:^(NSError *error) {
-         NSLog(@"---%@",error);
+        NSLog(@"---%@",error);
     }];
 }
 - (void)viewDidLoad {
@@ -118,51 +127,53 @@
     _tableview.tableHeaderView = headerView;
     [self.view addSubview:_tableview];
     
-    UIView * gralView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 30)];
-    gralView.backgroundColor=RGBAA(242, 242, 242, 1.0);
+    UIView * gralView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 28)];
+    gralView.backgroundColor=[UIColor colorFromHex:@"#f6f6f6"];
     [headerView addSubview:gralView];
-    UILabel * titlelbael=[[UILabel alloc]initWithFrame:CGRectMake(15, 0, Main_Screen_Width-30, 30)];
+    UILabel * titlelbael=[[UILabel alloc]initWithFrame:CGRectMake(15, 0, Main_Screen_Width-30, 28)];
     titlelbael.text = @"热门品牌";
+    titlelbael.font = [UIFont boldSystemFontOfSize:17.0];
+    //    titlelbael.textColor = [UIColor blackColor];
     [gralView addSubview:titlelbael];
     
     blakView=[[UIView alloc]initWithFrame:CGRectMake(0, 30, Main_Screen_Width, 105)];
     [headerView addSubview:blakView];
     
     
-     //    初始化右边索引条
+    //    初始化右边索引条
     indexrightView =[[UIView alloc]initWithFrame:CGRectMake(ViewWid-30, (ViewHigt-300)/2, 30, 380)];
     _indexView.backgroundColor=[UIColor clearColor];
     [self.view addSubview:indexrightView];
-//    //    初始化右边索引条
-//    _indexView=[[UILabel alloc]initWithFrame:CGRectMake(ViewWid-15,(ViewHigt-300)/2,13,380)];
-//    _indexView.numberOfLines=0;
-//    _indexView.font=[UIFont systemFontOfSize:12];
-//    _indexView.backgroundColor=[UIColor clearColor];
-//    _indexView.textAlignment=NSTextAlignmentCenter;
-//    _indexView.userInteractionEnabled=YES;
-//    _indexView.layer.cornerRadius=5;
-//    _indexView.layer.masksToBounds=YES;
-//    _indexView.alpha=0.7;
-//    [self.view addSubview:_indexView];
-//    //    初始化索引条内容
-//    _indexArr=[NSMutableArray arrayWithCapacity:0];
-//    for (int i=0; i<26; i++)
-//    {
-//        NSString *str=[NSString stringWithFormat:@"%c",i+65];
-//        [_indexArr addObject:str];
-//        _indexView.text=i==0?str:[NSString stringWithFormat:@"%@\n%@",_indexView.text,str];
-//    }
-//    //    初始化显示的索引view
-//    _myindex=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
-//    _myindex.font=[UIFont boldSystemFontOfSize:30];
-//    _myindex.backgroundColor=RGBAA(153, 153, 153, 0.8);
-//    _myindex.textColor=[UIColor whiteColor];
-//    _myindex.textAlignment=NSTextAlignmentCenter;
-//    _myindex.center=self.view.center;
-//    _myindex.layer.cornerRadius=_myindex.frame.size.width/2;
-//    _myindex.layer.masksToBounds=YES;
-//    _myindex.alpha=0;
-//    [self.view addSubview:_myindex];
+    //    //    初始化右边索引条
+    //    _indexView=[[UILabel alloc]initWithFrame:CGRectMake(ViewWid-15,(ViewHigt-300)/2,13,380)];
+    //    _indexView.numberOfLines=0;
+    //    _indexView.font=[UIFont systemFontOfSize:12];
+    //    _indexView.backgroundColor=[UIColor clearColor];
+    //    _indexView.textAlignment=NSTextAlignmentCenter;
+    //    _indexView.userInteractionEnabled=YES;
+    //    _indexView.layer.cornerRadius=5;
+    //    _indexView.layer.masksToBounds=YES;
+    //    _indexView.alpha=0.7;
+    //    [self.view addSubview:_indexView];
+    //    //    初始化索引条内容
+    //    _indexArr=[NSMutableArray arrayWithCapacity:0];
+    //    for (int i=0; i<26; i++)
+    //    {
+    //        NSString *str=[NSString stringWithFormat:@"%c",i+65];
+    //        [_indexArr addObject:str];
+    //        _indexView.text=i==0?str:[NSString stringWithFormat:@"%@\n%@",_indexView.text,str];
+    //    }
+    //    //    初始化显示的索引view
+    //    _myindex=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+    //    _myindex.font=[UIFont boldSystemFontOfSize:30];
+    //    _myindex.backgroundColor=RGBAA(153, 153, 153, 0.8);
+    //    _myindex.textColor=[UIColor whiteColor];
+    //    _myindex.textAlignment=NSTextAlignmentCenter;
+    //    _myindex.center=self.view.center;
+    //    _myindex.layer.cornerRadius=_myindex.frame.size.width/2;
+    //    _myindex.layer.masksToBounds=YES;
+    //    _myindex.alpha=0;
+    //    [self.view addSubview:_myindex];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(pop:) name:@"pop" object:nil];
     
     
@@ -174,8 +185,8 @@
 //{
 //    [self myTouch:touches];
 //}
-//
-//
+
+
 ////点击进行中
 //-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 //{
@@ -216,17 +227,21 @@
     NSIndexPath *indpath=[NSIndexPath indexPathForRow:0 inSection:Indexbtn.tag];
     [_tableview  scrollToRowAtIndexPath:indpath atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
+-(void)rmClick
+{
+    [self.tableview setContentOffset:CGPointMake(0, 0) animated:YES];
+}
 #pragma mark =----tableViewDelegate
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-   self.RMListArrayRow = [CYCarRMListModel mj_objectArrayWithKeyValuesArray:self.dicData[@"JsonData"][@"ZMList"]];
+    self.RMListArrayRow = [CYCarRMListModel mj_objectArrayWithKeyValuesArray:self.dicData[@"JsonData"][@"ZMList"]];
     CYCarRMListModel * model = self.RMListArrayRow[section];
     return [NSString stringWithFormat:@"%@",model.Title];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
+    
     return self.RMListArraySection.count;
 }
 
@@ -246,7 +261,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
         cell.backgroundView = nil;
     }
-     self.RMListArrayRow = [CYCarRMListModel mj_objectArrayWithKeyValuesArray:self.dicData[@"JsonData"][@"ZMList"][indexPath.section][@"List"]];
+    self.RMListArrayRow = [CYCarRMListModel mj_objectArrayWithKeyValuesArray:self.dicData[@"JsonData"][@"ZMList"][indexPath.section][@"List"]];
     CYCarRMListModel * model = self.RMListArrayRow[indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%@",model.Title];
     
@@ -255,7 +270,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
+    
     self.RMListArrayRow = [CYCarRMListModel mj_objectArrayWithKeyValuesArray:self.dicData[@"JsonData"][@"ZMList"][indexPath.section][@"List"]];
     CYCarRMListModel * model = self.RMListArrayRow[indexPath.row];
     [UIView animateWithDuration:0.5 animations:^{
@@ -264,7 +279,7 @@
     }];
     NSDictionary *dict;
     if ([self.CyTYpe isEqualToString:@"编辑车辆信息"]) {
-         dict = @{@"color":[NSString stringWithFormat:@"%@",model.Title],@"CYType":@"1"};
+        dict = @{@"color":[NSString stringWithFormat:@"%@",model.Title],@"CYType":@"1"};
     }else{
         dict = @{@"color":[NSString stringWithFormat:@"%@",model.Title]};
     }
@@ -321,11 +336,12 @@
         NSDictionary *dict = @{@"CYCarname":notification.userInfo[@"CYCarname"],@"CYCarType":notification.userInfo[@"CYCarType"],@"CYType":@"1"};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"editCarIndorMation" object:nil userInfo:dict];
     }
-   
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 @end
