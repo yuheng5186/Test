@@ -906,7 +906,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
 #pragma mark - 地图导航
 - (IBAction)didClickSmallBtn:(UIButton *)sender {
     
-
+    NSLog(@"%@--%@",[NSString stringWithFormat:@"%@",self.dic[@"Ym"]],[NSString stringWithFormat:@"%@",self.dic[@"Xm"]]);
     [self.mapNavigationView showMapNavigationViewWithtargetLatitude:[self.dic[@"Ym"] doubleValue] targetLongitute:[self.dic[@"Xm"] doubleValue] toName:self.dic[@"MerName"]];
     [self.view addSubview:_mapNavigationView];
 

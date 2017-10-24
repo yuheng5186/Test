@@ -26,7 +26,6 @@
     KPIndicatorView *_indicatorView;
     UIButton  *loginButton;
 }
-
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UITextField *userMobileFieldText;
 @property (nonatomic, strong) UITextField *verifyFieldText;

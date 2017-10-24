@@ -52,7 +52,7 @@ static NSString *CyrechargeCell = @"CyrechargeCell";
         
         UITextField *activateTF = [[UITextField alloc] init];
         activateTF.backgroundColor = [UIColor whiteColor];
-        activateTF.placeholder = @"  请输入激活码";
+        activateTF.placeholder = @"  请输入激活码(区分大小写)";
         activateTF.font = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
         activateTF.textColor = [UIColor colorFromHex:@"#c8c8c8"];
         activateTF.layer.cornerRadius = Main_Screen_Height*20/667;
@@ -570,7 +570,7 @@ static NSString *CyrechargeCell = @"CyrechargeCell";
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/ActivationCard",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/ActivationCardOne",Khttp] success:^(NSDictionary *dict, BOOL success) {
             
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {

@@ -17,6 +17,8 @@
 @interface DSExchangeController ()<LKAlertViewDelegate>
 {
     UITextField *exchangeTF;
+    NSString    * remindStr;
+    NSString   * remindTitle;
 }
 
 @end
@@ -40,7 +42,7 @@
 - (void)setupUI {
     
     exchangeTF = [[UITextField alloc] init];
-    exchangeTF.placeholder = @"请输入激活码";
+    exchangeTF.placeholder = @"请输入激活码(区分大小写)";
     exchangeTF.textAlignment = NSTextAlignmentCenter;
     exchangeTF.layer.cornerRadius = Main_Screen_Height*24/667;
     exchangeTF.keyboardType = UIKeyboardTypeASCIICapable;
@@ -55,20 +57,18 @@
         make.width.mas_equalTo(Main_Screen_Width*351/375);
         make.height.mas_equalTo(Main_Screen_Height*48/667);
     }];
-    
     [exchangeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(exchangeTF.mas_bottom).mas_offset(Main_Screen_Height*60/667);
         make.centerX.equalTo(self.view);
         make.width.mas_equalTo(Main_Screen_Width*351/375);
         make.height.mas_equalTo(Main_Screen_Height*48/667);
     }];
-
  }
                              
 - (void)didClickExchangeScoreBtn:(UIButton *)button {
-//    LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:@"提示" message:@"是否退出当前账户？" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@""];
-//    [alartView show];
-    
+
+    remindStr = @"";
+    remindTitle = @"";
     if(exchangeTF.text.length == 0)
     {
         [self.view showInfo:@"请输入激活码" autoHidden:YES interval:2];
@@ -83,41 +83,52 @@
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/ActivationCard",Khttp] success:^(NSDictionary *dict, BOOL success) {
-            
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/ActivationCardOne",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            NSLog(@"---%@",dict);
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
                 
                 if([[[dict objectForKey:@"JsonData"] objectForKey:@"Activationstate"] integerValue] == 3)
                 {
-                    [self.view showInfo:@"对不起，该卡不存在" autoHidden:YES interval:2];
+                    remindTitle =@"提示";
+                    remindStr = [NSString stringWithFormat:@"激活码不存在（请注意大小写）您的剩余激活次数%@次",dict[@"JsonData"][@"RemainTimes"]];
+//                    [self.view showInfo:@"对不起，该卡不存在" autoHidden:YES interval:2];
                 }
                 else if([[[dict objectForKey:@"JsonData"] objectForKey:@"Activationstate"] integerValue] == 1)
                 {
-                    [self.view showInfo:@"激活成功,你可以在我的卡包中进行查看" autoHidden:YES interval:2];
+                    remindTitle =@"恭喜你，激活成功";
+                    remindStr = [NSString stringWithFormat:@"蔷薇洗车%@一张，您的剩余激活次数%@次",dict[@"JsonData"][@"CardName"],dict[@"JsonData"][@"RemainTimes"]];
                 }
                 else if([[[dict objectForKey:@"JsonData"]objectForKey:@"Activationstate"] integerValue] == 2)
                 {
-                    if([[[dict objectForKey:@"JsonData"] objectForKey:@"CardUseState"] integerValue] == 1)
-                    {
-                        
-                        [self.view showInfo:@"对不起，该卡已被激活" autoHidden:YES interval:2];
-                    }
-                    else if([[[dict objectForKey:@"JsonData"] objectForKey:@"CardUseState"] integerValue] == 2)
-                    {
-                        [self.view showInfo:@"对不起，该卡已被使用" autoHidden:YES interval:2];
-                    }
-                    else{
-                        [self.view showInfo:@"对不起，该卡已失效" autoHidden:YES interval:2];
-                    }
-                    
-                    
+                    remindTitle =@"提示";
+                    remindStr = [NSString stringWithFormat:@"该码已被激活过 您的剩余激活次数%@次",dict[@"JsonData"][@"RemainTimes"]];
+//                    if([[[dict objectForKey:@"JsonData"] objectForKey:@"CardUseState"] integerValue] == 1)
+//                    {
+//
+//                        [self.view showInfo:@"对不起，该卡已被激活" autoHidden:YES interval:2];
+//                    }
+//                    else if([[[dict objectForKey:@"JsonData"] objectForKey:@"CardUseState"] integerValue] == 2)
+//                    {
+//                        [self.view showInfo:@"对不起，该卡已被使用" autoHidden:YES interval:2];
+//                    }
+//                    else{
+//                        [self.view showInfo:@"对不起，该卡已失效" autoHidden:YES interval:2];
+//                    }
                 }
                 else
                 {
-                    [self.view showInfo:@"激活失败" autoHidden:YES interval:2];
+                    NSInteger  str=[[NSString stringWithFormat:@"%@",dict[@"JsonData"][@"RemainTimes"]]integerValue];
+                    if (str==-1) {
+                        remindTitle =@"提示";
+                        remindStr = @"您今天的激活次数已使用完";
+                    }else{
+                        remindTitle =@"提示";
+                        remindStr = @"激活失败";
+                    }
                 }
-                
+                LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:remindTitle message:remindStr delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@""];
+                [alartView show];
                 
             }
             else
@@ -139,19 +150,6 @@
     [self.view endEditing:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

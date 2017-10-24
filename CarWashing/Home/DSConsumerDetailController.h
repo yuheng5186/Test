@@ -17,4 +17,5 @@
 
 @property(nonatomic,assign)NSInteger showType;
 
+@property(nonatomic,copy)NSString *titlename;
 @end
