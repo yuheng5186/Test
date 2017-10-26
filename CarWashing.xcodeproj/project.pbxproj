@@ -27,6 +27,14 @@
 		04DB28E61F6E184F009B4D9C /* WSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DB28E21F6E184F009B4D9C /* WSDatePickerView.m */; };
 		04DB28E71F6E184F009B4D9C /* WSDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DB28E31F6E184F009B4D9C /* WSDatePickerView.xib */; };
 		1802AD991F5FC704009EB146 /* DSSalaActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1802AD981F5FC704009EB146 /* DSSalaActivityCell.m */; };
+		180599B91FA17899003EAD1E /* TLMenuButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180599B61FA17899003EAD1E /* TLMenuButtonView.m */; };
+		180599BA1FA17899003EAD1E /* TLMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 180599B71FA17899003EAD1E /* TLMenuButton.m */; };
+		180599BF1FA18DBE003EAD1E /* CYPublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180599BD1FA18DBE003EAD1E /* CYPublishViewController.m */; };
+		180599C01FA18DBE003EAD1E /* CYPublishViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180599BE1FA18DBE003EAD1E /* CYPublishViewController.xib */; };
+		180599C41FA1BCD9003EAD1E /* CYSecondcarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180599C21FA1BCD9003EAD1E /* CYSecondcarViewController.m */; };
+		180599C51FA1BCD9003EAD1E /* CYSecondcarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180599C31FA1BCD9003EAD1E /* CYSecondcarViewController.xib */; };
+		180599C91FA1BE07003EAD1E /* CYDynamicShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180599C71FA1BE07003EAD1E /* CYDynamicShareViewController.m */; };
+		180599CA1FA1BE07003EAD1E /* CYDynamicShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180599C81FA1BE07003EAD1E /* CYDynamicShareViewController.xib */; };
 		1805AC831F38090D00FD0844 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC821F38090D00FD0844 /* LoginViewController.m */; };
 		1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC851F385C8600FD0844 /* DSAgreementController.m */; };
 		1805AC901F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC891F386FA800FD0844 /* TPKeyboardAvoidingCollectionView.m */; };
@@ -359,6 +367,19 @@
 		06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CarWashing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1802AD971F5FC704009EB146 /* DSSalaActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSalaActivityCell.h; sourceTree = "<group>"; };
 		1802AD981F5FC704009EB146 /* DSSalaActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSalaActivityCell.m; sourceTree = "<group>"; };
+		180599B51FA17899003EAD1E /* TLMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLMenuButton.h; sourceTree = "<group>"; };
+		180599B61FA17899003EAD1E /* TLMenuButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLMenuButtonView.m; sourceTree = "<group>"; };
+		180599B71FA17899003EAD1E /* TLMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLMenuButton.m; sourceTree = "<group>"; };
+		180599B81FA17899003EAD1E /* TLMenuButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLMenuButtonView.h; sourceTree = "<group>"; };
+		180599BC1FA18DBE003EAD1E /* CYPublishViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYPublishViewController.h; sourceTree = "<group>"; };
+		180599BD1FA18DBE003EAD1E /* CYPublishViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYPublishViewController.m; sourceTree = "<group>"; };
+		180599BE1FA18DBE003EAD1E /* CYPublishViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CYPublishViewController.xib; sourceTree = "<group>"; };
+		180599C11FA1BCD9003EAD1E /* CYSecondcarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYSecondcarViewController.h; sourceTree = "<group>"; };
+		180599C21FA1BCD9003EAD1E /* CYSecondcarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYSecondcarViewController.m; sourceTree = "<group>"; };
+		180599C31FA1BCD9003EAD1E /* CYSecondcarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CYSecondcarViewController.xib; sourceTree = "<group>"; };
+		180599C61FA1BE07003EAD1E /* CYDynamicShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYDynamicShareViewController.h; sourceTree = "<group>"; };
+		180599C71FA1BE07003EAD1E /* CYDynamicShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYDynamicShareViewController.m; sourceTree = "<group>"; };
+		180599C81FA1BE07003EAD1E /* CYDynamicShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CYDynamicShareViewController.xib; sourceTree = "<group>"; };
 		1805AC811F38090D00FD0844 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = UserInfo/LoginViewController.h; sourceTree = "<group>"; };
 		1805AC821F38090D00FD0844 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = UserInfo/LoginViewController.m; sourceTree = "<group>"; };
 		1805AC841F385C8600FD0844 /* DSAgreementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAgreementController.h; path = UserInfo/DSAgreementController.h; sourceTree = "<group>"; };
@@ -958,6 +979,33 @@
 			path = WSDaePickerView;
 			sourceTree = "<group>";
 		};
+		180599B41FA17882003EAD1E /* threeButon */ = {
+			isa = PBXGroup;
+			children = (
+				180599B51FA17899003EAD1E /* TLMenuButton.h */,
+				180599B71FA17899003EAD1E /* TLMenuButton.m */,
+				180599B81FA17899003EAD1E /* TLMenuButtonView.h */,
+				180599B61FA17899003EAD1E /* TLMenuButtonView.m */,
+			);
+			path = threeButon;
+			sourceTree = "<group>";
+		};
+		180599BB1FA18D1B003EAD1E /* CYPublishVC */ = {
+			isa = PBXGroup;
+			children = (
+				180599BC1FA18DBE003EAD1E /* CYPublishViewController.h */,
+				180599BD1FA18DBE003EAD1E /* CYPublishViewController.m */,
+				180599BE1FA18DBE003EAD1E /* CYPublishViewController.xib */,
+				180599C11FA1BCD9003EAD1E /* CYSecondcarViewController.h */,
+				180599C21FA1BCD9003EAD1E /* CYSecondcarViewController.m */,
+				180599C31FA1BCD9003EAD1E /* CYSecondcarViewController.xib */,
+				180599C61FA1BE07003EAD1E /* CYDynamicShareViewController.h */,
+				180599C71FA1BE07003EAD1E /* CYDynamicShareViewController.m */,
+				180599C81FA1BE07003EAD1E /* CYDynamicShareViewController.xib */,
+			);
+			path = CYPublishVC;
+			sourceTree = "<group>";
+		};
 		1805AC801F3808DB00FD0844 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -1068,6 +1116,7 @@
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				180599B41FA17882003EAD1E /* threeButon */,
 				046E41E51F72414100DF4866 /* HSUpdateApp.h */,
 				046E41E61F72414100DF4866 /* HSUpdateApp.m */,
 				04DB28DC1F6E184F009B4D9C /* WSDaePickerView */,
@@ -1256,6 +1305,7 @@
 		181E93081F2094420006511E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				180599BB1FA18D1B003EAD1E /* CYPublishVC */,
 				18D815871F79FFA300A1FA04 /* CYCardDeatil */,
 				18D815801F79EC3000A1FA04 /* CYView */,
 				18322AAC1F4AD181003ABB7B /* model */,
@@ -2221,9 +2271,11 @@
 				50D30E7D1F2044C20086D3ED /* BusinessDetailHeaderView.xib in Resources */,
 				50B26E6E1F301B60009B3B9F /* RechargeCell.xib in Resources */,
 				1850902E1F45573F00795E0A /* ShareView.xib in Resources */,
+				180599C01FA18DBE003EAD1E /* CYPublishViewController.xib in Resources */,
 				5097FDFE1F2ECE2F002EF8F8 /* TicketCashView.xib in Resources */,
 				5094A63A1F346E7000407808 /* CancelPayCell.xib in Resources */,
 				50E2EE5A1F1F4A9000FAF130 /* SalerListViewCell.xib in Resources */,
+				180599CA1FA1BE07003EAD1E /* CYDynamicShareViewController.xib in Resources */,
 				50D30E821F20988A0086D3ED /* BusinessDetailCell.xib in Resources */,
 				045E1BB11F69151B00F37230 /* ProblemUse.plist in Resources */,
 				180E43291F414A7900013D2D /* PopHelpView.xib in Resources */,
@@ -2231,6 +2283,7 @@
 				50E2EE871F1F4D3C00FAF130 /* YZSortCell.xib in Resources */,
 				50E2EE7F1F1F4D3C00FAF130 /* YZAllCourseViewController.xib in Resources */,
 				18E702771F5503BC007A9777 /* KPIndicatorView.xib in Resources */,
+				180599C51FA1BCD9003EAD1E /* CYSecondcarViewController.xib in Resources */,
 				50B26EC61F31A0A7009B3B9F /* CarTicketView.xib in Resources */,
 				18B803851F1DA2A300B52432 /* LaunchScreen.storyboard in Resources */,
 				1888214E1F6BD336002618F7 /* b3.gif in Resources */,
@@ -2365,6 +2418,7 @@
 				18322AC61F4FF077003ABB7B /* CardConfigGrade.m in Sources */,
 				181E92EF1F2081840006511E /* DSMembershipController.m in Sources */,
 				5094A6251F3447CD00407808 /* BusinessEstimateCell.m in Sources */,
+				180599C41FA1BCD9003EAD1E /* CYSecondcarViewController.m in Sources */,
 				18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */,
 				18F7EAD01F90A5D80067AEEF /* CYCarRMListModel.m in Sources */,
 				18B7F9AF1F945B5900302F64 /* CYChooseCarTypeViewController.m in Sources */,
@@ -2404,6 +2458,7 @@
 				180E42E81F3AB37D00013D2D /* YzdHUDBackgroundView.m in Sources */,
 				50E2EE621F1F4D2D00FAF130 /* YZPullDownMenu.m in Sources */,
 				180E42F51F3AD4AE00013D2D /* PopupView.m in Sources */,
+				180599C91FA1BE07003EAD1E /* CYDynamicShareViewController.m in Sources */,
 				1853BA121F288D9800B98C7F /* DSChangeNameController.m in Sources */,
 				181E92BB1F1F36710006511E /* BaseController.m in Sources */,
 				181E932C1F20B0EB0006511E /* DSAdDetailController.m in Sources */,
@@ -2421,6 +2476,7 @@
 				18A4B1B41F4AAB7800C64978 /* WayToUpGradeCell.m in Sources */,
 				50B26E851F306E0A009B3B9F /* DiscountDetailController.m in Sources */,
 				18FBC5D01F8F05D500054561 /* TestMapCell.m in Sources */,
+				180599BF1FA18DBE003EAD1E /* CYPublishViewController.m in Sources */,
 				181E92DE1F1F3BE40006511E /* MySettingViewController.m in Sources */,
 				5061A43F1F3AAECE003939A4 /* UIView+Uitls.m in Sources */,
 				181E92E31F2054C50006511E /* DSUserInfoController.m in Sources */,
@@ -2528,6 +2584,7 @@
 				5071B4771F37F702009FFF67 /* OrderDetailController.m in Sources */,
 				1805AC921F386FA800FD0844 /* TPKeyboardAvoidingTableView.m in Sources */,
 				5042E3561F33165C00CD140F /* NewPagedFlowView.m in Sources */,
+				180599B91FA17899003EAD1E /* TLMenuButtonView.m in Sources */,
 				5097FDFC1F2ECE0B002EF8F8 /* TicketCashView.m in Sources */,
 				1853BA451F28A04100B98C7F /* JFButton.m in Sources */,
 				041573A51F53C522004514E3 /* TFGridInputViewCell.m in Sources */,
@@ -2566,6 +2623,7 @@
 				18322ACC1F502F9E003ABB7B /* DSCheckPhoneViewController.m in Sources */,
 				181E92D81F1F3BAE0006511E /* FindViewController.m in Sources */,
 				18A4B22A1F4D6CAB00C64978 /* README.md in Sources */,
+				180599BA1FA17899003EAD1E /* TLMenuButton.m in Sources */,
 				180E42E71F3AB37D00013D2D /* UIWindow+YzdHUD.m in Sources */,
 				185090441F4557E100795E0A /* TYAlertController.m in Sources */,
 				18FBC5DD1F8F641A00054561 /* CYSlideViewController.m in Sources */,
