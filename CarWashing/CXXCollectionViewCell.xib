@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CXXCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pxd-Ba-tSK">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <state key="normal" image="pic_sc"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwf-VD-IxD">
+                        <rect key="frame" x="25" y="0.0" width="25" height="23"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="KOH-N0-HrQ"/>
+                            <constraint firstAttribute="width" constant="25" id="RuB-W2-nds"/>
+                        </constraints>
+                        <state key="normal" image="pic_del"/>
+                        <connections>
+                            <action selector="closeBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="RKb-4g-pUt"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Pxd-Ba-tSK" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="HDf-JP-vVn"/>
+                <constraint firstAttribute="trailing" secondItem="Pxd-Ba-tSK" secondAttribute="trailing" id="NAV-D7-w0J"/>
+                <constraint firstAttribute="trailing" secondItem="dwf-VD-IxD" secondAttribute="trailing" id="SVO-ho-HdY"/>
+                <constraint firstAttribute="bottom" secondItem="Pxd-Ba-tSK" secondAttribute="bottom" id="bpw-ge-NMY"/>
+                <constraint firstItem="Pxd-Ba-tSK" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="fe7-4g-XfM"/>
+                <constraint firstItem="dwf-VD-IxD" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hep-aZ-GuT"/>
+            </constraints>
+            <connections>
+                <outlet property="addImageBtn" destination="Pxd-Ba-tSK" id="1Vc-Hw-A9A"/>
+                <outlet property="closeBtn" destination="dwf-VD-IxD" id="dgE-zP-D80"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="pic_del" width="16" height="16"/>
+        <image name="pic_sc" width="90" height="90"/>
+    </resources>
+</document>
