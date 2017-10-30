@@ -33,7 +33,7 @@
 #import "WXApiObject.h"
 
 #import "MBProgressHUD.h"
-
+#import "CYAlertView.h"
 
 #import "GCCycleScrollView.h"//广告无限滚动
 //NSUserDefaults 保存数据

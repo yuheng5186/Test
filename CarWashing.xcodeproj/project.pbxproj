@@ -150,6 +150,16 @@
 		1853BA4B1F28A04100B98C7F /* JFSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA441F28A04100B98C7F /* JFSearchView.m */; };
 		1853BA4E1F28A04C00B98C7F /* JFLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA4D1F28A04C00B98C7F /* JFLocation.m */; };
 		185833DD1F6E0D71004EA905 /* BusinessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185833DC1F6E0D71004EA905 /* BusinessViewController.m */; };
+		186175E61FA6C3C100C6EFF3 /* DataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 186175D91FA6C3C000C6EFF3 /* DataSigner.m */; };
+		186175E71FA6C3C100C6EFF3 /* NSDataEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 186175DB1FA6C3C000C6EFF3 /* NSDataEx.m */; };
+		186175E81FA6C3C100C6EFF3 /* openssl_wrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 186175DD1FA6C3C000C6EFF3 /* openssl_wrapper.m */; };
+		186175E91FA6C3C100C6EFF3 /* RSADataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 186175E01FA6C3C000C6EFF3 /* RSADataSigner.m */; };
+		186175EA1FA6C3C100C6EFF3 /* MD5DataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 186175E11FA6C3C100C6EFF3 /* MD5DataSigner.m */; };
+		186175EB1FA6C3C100C6EFF3 /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 186175E21FA6C3C100C6EFF3 /* RSADataVerifier.m */; };
+		186175EC1FA6C3C100C6EFF3 /* base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 186175E31FA6C3C100C6EFF3 /* base64.m */; };
+		186175ED1FA6C3C100C6EFF3 /* DataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 186175E51FA6C3C100C6EFF3 /* DataVerifier.m */; };
+		186175F31FA6C48100C6EFF3 /* AlipayOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 186175F21FA6C48100C6EFF3 /* AlipayOrder.m */; };
+		186175F71FA7057000C6EFF3 /* CYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 186175F61FA7057000C6EFF3 /* CYAlertView.m */; };
 		186CE5FC1F7E5A540001F920 /* CYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 186CE5FB1F7E5A540001F920 /* CYModel.m */; };
 		1887A2241F66E0870042B062 /* QWMerComListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1887A2211F66E0870042B062 /* QWMerComListModel.m */; };
 		1887A2251F66E0870042B062 /* QWMerchantModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1887A2231F66E0870042B062 /* QWMerchantModel.m */; };
@@ -620,6 +630,27 @@
 		1853BA4D1F28A04C00B98C7F /* JFLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFLocation.m; path = JFCityViewController/Location/JFLocation.m; sourceTree = "<group>"; };
 		185833DB1F6E0D71004EA905 /* BusinessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessViewController.h; path = model/BusinessViewController.h; sourceTree = "<group>"; };
 		185833DC1F6E0D71004EA905 /* BusinessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessViewController.m; path = model/BusinessViewController.m; sourceTree = "<group>"; };
+		186175D51FA6C3BF00C6EFF3 /* DataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataVerifier.h; sourceTree = "<group>"; };
+		186175D61FA6C3BF00C6EFF3 /* DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSigner.h; sourceTree = "<group>"; };
+		186175D71FA6C3BF00C6EFF3 /* RSADataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataSigner.h; sourceTree = "<group>"; };
+		186175D81FA6C3C000C6EFF3 /* NSDataEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataEx.h; sourceTree = "<group>"; };
+		186175D91FA6C3C000C6EFF3 /* DataSigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSigner.m; sourceTree = "<group>"; };
+		186175DA1FA6C3C000C6EFF3 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		186175DB1FA6C3C000C6EFF3 /* NSDataEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataEx.m; sourceTree = "<group>"; };
+		186175DC1FA6C3C000C6EFF3 /* MD5DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5DataSigner.h; sourceTree = "<group>"; };
+		186175DD1FA6C3C000C6EFF3 /* openssl_wrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = openssl_wrapper.m; sourceTree = "<group>"; };
+		186175DE1FA6C3C000C6EFF3 /* RSADataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataVerifier.h; sourceTree = "<group>"; };
+		186175DF1FA6C3C000C6EFF3 /* openssl_wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = openssl_wrapper.h; sourceTree = "<group>"; };
+		186175E01FA6C3C000C6EFF3 /* RSADataSigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataSigner.m; sourceTree = "<group>"; };
+		186175E11FA6C3C100C6EFF3 /* MD5DataSigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5DataSigner.m; sourceTree = "<group>"; };
+		186175E21FA6C3C100C6EFF3 /* RSADataVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataVerifier.m; sourceTree = "<group>"; };
+		186175E31FA6C3C100C6EFF3 /* base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = base64.m; sourceTree = "<group>"; };
+		186175E41FA6C3C100C6EFF3 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
+		186175E51FA6C3C100C6EFF3 /* DataVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataVerifier.m; sourceTree = "<group>"; };
+		186175F11FA6C48100C6EFF3 /* AlipayOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlipayOrder.h; sourceTree = "<group>"; };
+		186175F21FA6C48100C6EFF3 /* AlipayOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlipayOrder.m; sourceTree = "<group>"; };
+		186175F51FA7057000C6EFF3 /* CYAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYAlertView.h; sourceTree = "<group>"; };
+		186175F61FA7057000C6EFF3 /* CYAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYAlertView.m; sourceTree = "<group>"; };
 		186CE5FA1F7E5A540001F920 /* CYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYModel.h; sourceTree = "<group>"; };
 		186CE5FB1F7E5A540001F920 /* CYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYModel.m; sourceTree = "<group>"; };
 		1887A2201F66E0870042B062 /* QWMerComListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWMerComListModel.h; sourceTree = "<group>"; };
@@ -1342,6 +1373,7 @@
 		181E93081F2094420006511E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				186175F41FA7051E00C6EFF3 /* CYAlertView */,
 				180599BB1FA18D1B003EAD1E /* CYPublishVC */,
 				18D815871F79FFA300A1FA04 /* CYCardDeatil */,
 				18D815801F79EC3000A1FA04 /* CYView */,
@@ -1574,6 +1606,49 @@
 			name = JFCityViewController;
 			sourceTree = "<group>";
 		};
+		186175D31FA6C36F00C6EFF3 /* Alipay支付宝支付相关 */ = {
+			isa = PBXGroup;
+			children = (
+				186175F11FA6C48100C6EFF3 /* AlipayOrder.h */,
+				186175F21FA6C48100C6EFF3 /* AlipayOrder.m */,
+				186175D41FA6C3AC00C6EFF3 /* UNtil */,
+			);
+			name = "Alipay支付宝支付相关";
+			sourceTree = "<group>";
+		};
+		186175D41FA6C3AC00C6EFF3 /* UNtil */ = {
+			isa = PBXGroup;
+			children = (
+				186175E41FA6C3C100C6EFF3 /* base64.h */,
+				186175E31FA6C3C100C6EFF3 /* base64.m */,
+				186175DA1FA6C3C000C6EFF3 /* config.h */,
+				186175D61FA6C3BF00C6EFF3 /* DataSigner.h */,
+				186175D91FA6C3C000C6EFF3 /* DataSigner.m */,
+				186175D51FA6C3BF00C6EFF3 /* DataVerifier.h */,
+				186175E51FA6C3C100C6EFF3 /* DataVerifier.m */,
+				186175DC1FA6C3C000C6EFF3 /* MD5DataSigner.h */,
+				186175E11FA6C3C100C6EFF3 /* MD5DataSigner.m */,
+				186175D81FA6C3C000C6EFF3 /* NSDataEx.h */,
+				186175DB1FA6C3C000C6EFF3 /* NSDataEx.m */,
+				186175DF1FA6C3C000C6EFF3 /* openssl_wrapper.h */,
+				186175DD1FA6C3C000C6EFF3 /* openssl_wrapper.m */,
+				186175D71FA6C3BF00C6EFF3 /* RSADataSigner.h */,
+				186175E01FA6C3C000C6EFF3 /* RSADataSigner.m */,
+				186175DE1FA6C3C000C6EFF3 /* RSADataVerifier.h */,
+				186175E21FA6C3C100C6EFF3 /* RSADataVerifier.m */,
+			);
+			name = UNtil;
+			sourceTree = "<group>";
+		};
+		186175F41FA7051E00C6EFF3 /* CYAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				186175F51FA7057000C6EFF3 /* CYAlertView.h */,
+				186175F61FA7057000C6EFF3 /* CYAlertView.m */,
+			);
+			path = CYAlertView;
+			sourceTree = "<group>";
+		};
 		187CCBEF1F43F77E00FCDF1C /* CustomSlider */ = {
 			isa = PBXGroup;
 			children = (
@@ -1703,6 +1778,7 @@
 		18B803741F1DA2A300B52432 /* CarWashing */ = {
 			isa = PBXGroup;
 			children = (
+				186175D31FA6C36F00C6EFF3 /* Alipay支付宝支付相关 */,
 				0422FB271F6B65A8006EE9F1 /* giftu */,
 				181E92DF1F1F3CC90006511E /* Controllers */,
 				18B803781F1DA2A300B52432 /* AppDelegate.h */,
@@ -2426,6 +2502,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CarWashing/Pods-CarWashing-resources.sh",
 				"${PODS_ROOT}/AMap2DMap/MAMapKit.framework/AMap.bundle",
+				"${PODS_ROOT}/AliPay_SDK/AliPay-master/AlipaySDK.bundle",
 				$PODS_CONFIGURATION_BUILD_DIR/GCCycleScrollView/GCCycleScrollView.bundle,
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
@@ -2492,6 +2569,7 @@
 				185833DD1F6E0D71004EA905 /* BusinessViewController.m in Sources */,
 				5016720D1F297A3500384186 /* ShopCommentController.m in Sources */,
 				185090571F4586B200795E0A /* User.m in Sources */,
+				186175E91FA6C3C100C6EFF3 /* RSADataSigner.m in Sources */,
 				183997651F2586D300702071 /* ActivityListCell.m in Sources */,
 				181E92FE1F2088E80006511E /* DSMyCarController.m in Sources */,
 				181E92CC1F1F39CC0006511E /* UIColor+HexColor.m in Sources */,
@@ -2505,6 +2583,7 @@
 				18322AC61F4FF077003ABB7B /* CardConfigGrade.m in Sources */,
 				181E92EF1F2081840006511E /* DSMembershipController.m in Sources */,
 				5094A6251F3447CD00407808 /* BusinessEstimateCell.m in Sources */,
+				186175ED1FA6C3C100C6EFF3 /* DataVerifier.m in Sources */,
 				180599C41FA1BCD9003EAD1E /* CYSecondcarViewController.m in Sources */,
 				18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */,
 				18F7EAD01F90A5D80067AEEF /* CYCarRMListModel.m in Sources */,
@@ -2514,6 +2593,7 @@
 				185090481F4557E100795E0A /* TYAlertView.m in Sources */,
 				18B697B51F21DBCE009FF73A /* DSWheelGroupController.m in Sources */,
 				185090491F4557E100795E0A /* TYBaseAnimation.m in Sources */,
+				186175E71FA6C3C100C6EFF3 /* NSDataEx.m in Sources */,
 				5097FE1A1F2F4335002EF8F8 /* MyCarViewCell.m in Sources */,
 				188907121F2730F4009E20B0 /* DSUpdateRuleController.m in Sources */,
 				181E92CB1F1F39CC0006511E /* UIColor+Additions.m in Sources */,
@@ -2550,6 +2630,7 @@
 				180599C91FA1BE07003EAD1E /* CYDynamicShareViewController.m in Sources */,
 				1853BA121F288D9800B98C7F /* DSChangeNameController.m in Sources */,
 				181E92BB1F1F36710006511E /* BaseController.m in Sources */,
+				186175F31FA6C48100C6EFF3 /* AlipayOrder.m in Sources */,
 				181E932C1F20B0EB0006511E /* DSAdDetailController.m in Sources */,
 				501672131F297AD000384186 /* BusinessDetailHeaderView.m in Sources */,
 				50B26E681F301B29009B3B9F /* DiscountCell.m in Sources */,
@@ -2577,9 +2658,12 @@
 				50B26E711F302E17009B3B9F /* DiscountCategoryView.m in Sources */,
 				181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */,
 				1839979F1F25E69100702071 /* DSPasswordController.m in Sources */,
+				186175EA1FA6C3C100C6EFF3 /* MD5DataSigner.m in Sources */,
+				186175EB1FA6C3C100C6EFF3 /* RSADataVerifier.m in Sources */,
 				1853BA061F28475500B98C7F /* DSTextView.m in Sources */,
 				04DB28E51F6E184F009B4D9C /* UIView+Extension.m in Sources */,
 				180E42F21F3AC7D500013D2D /* LewPopupViewAnimationDrop.m in Sources */,
+				186175F71FA7057000C6EFF3 /* CYAlertView.m in Sources */,
 				181E92F51F2085B60006511E /* DSFavoritesController.m in Sources */,
 				501672311F297FF000384186 /* AnswerModel.m in Sources */,
 				501672281F297FDD00384186 /* AnswerCell.m in Sources */,
@@ -2590,6 +2674,7 @@
 				180E432F1F41921E00013D2D /* PhoneHelper.m in Sources */,
 				1853BA0F1F28854D00B98C7F /* DSChangePhoneController.m in Sources */,
 				50E2EE861F1F4D3C00FAF130 /* YZSortCell.m in Sources */,
+				186175E61FA6C3C100C6EFF3 /* DataSigner.m in Sources */,
 				18F67E6E1FA3098A007D03B4 /* TZImageManager.m in Sources */,
 				501672331F297FF000384186 /* ProblemTitleModel.m in Sources */,
 				180E42EB1F3AB37D00013D2D /* YzdHUDLabel.m in Sources */,
@@ -2601,6 +2686,7 @@
 				1887A2241F66E0870042B062 /* QWMerComListModel.m in Sources */,
 				18A4B2291F4D6CAB00C64978 /* UIView+AutoSizeToDevice.m in Sources */,
 				5016724F1F2A023600384186 /* ScoreGetController.m in Sources */,
+				186175E81FA6C3C100C6EFF3 /* openssl_wrapper.m in Sources */,
 				180E42DB1F39B97A00013D2D /* DSCarWashingActivityController.m in Sources */,
 				185090221F441AF500795E0A /* AFNetworkingTool+GetToken.m in Sources */,
 				181E92CF1F1F39CC0006511E /* UIView+Frame.m in Sources */,
@@ -2625,6 +2711,7 @@
 				1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */,
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
 				1850904A1F4557E100795E0A /* TYShowAlertView.m in Sources */,
+				186175EC1FA6C3C100C6EFF3 /* base64.m in Sources */,
 				18322AAF1F4AD1C7003ABB7B /* Carcircle.m in Sources */,
 				50B26EA31F315D76009B3B9F /* OrderCategoryView.m in Sources */,
 				5094A62F1F346E4200407808 /* SuccessPayCell.m in Sources */,

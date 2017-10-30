@@ -29,7 +29,8 @@
 
 @property (nonatomic, strong) TLMenuButtonView *tlMenuView ;
 @property (nonatomic, weak) UIView *containerView;
-
+@property (nonatomic,strong) UIView * blackView;
+@property (nonatomic,strong) UIButton * addbtn;
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) DSSegmentView *segmentView;
 @property (nonatomic, weak) UIScrollView *shopScrollView;
@@ -100,20 +101,15 @@
     _ISShowMenuButton = NO;
     
     
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-67, self.view.bounds.size.height-107, 55, 55)];
-    button.layer.cornerRadius = 27.5;
-    button.backgroundColor = [UIColor grayColor];
-    [button addTarget:self action:@selector(clickAddButton:) forControlEvents:UIControlEventTouchUpInside];
-    [button setImage:[UIImage imageNamed:@"jiahao"] forState:UIControlStateNormal];
-    [self.view addSubview:button];
+    [self.view addSubview:self.addbtn];
     
     TLMenuButtonView *tlMenuView =[TLMenuButtonView standardMenuView];
-    tlMenuView.centerPoint = button.center;
+    tlMenuView.centerPoint = self.addbtn.center;
     __weak typeof(self) weakSelf = self;
     tlMenuView.clickAddButton = ^(NSInteger tag, UIColor *color){
         weakSelf.view.backgroundColor = color;
         _ISShowMenuButton = YES;
-        [weakSelf clickAddButton:button];
+        [weakSelf clickAddButton:self.addbtn];
         NSLog(@"=====%ld",tag);
         if (tag==5) {//发布问题
             CYPublishViewController *findController      = [[CYPublishViewController alloc]init];
@@ -322,12 +318,15 @@
             CGAffineTransform rotate = CGAffineTransformMakeRotation( M_PI / 4 );
             [sender setTransform:rotate];
         }];
+        [self.view addSubview:self.blackView];
+        [self.view addSubview:self.addbtn];
         [_tlMenuView showItems];
     }else{
         [UIView animateWithDuration:0.2 animations:^{
             CGAffineTransform rotate = CGAffineTransformMakeRotation( 0 );
             [sender setTransform:rotate];
         }];
+        [_blackView removeFromSuperview];
         [_tlMenuView dismiss];
     }
     _ISShowMenuButton = !_ISShowMenuButton;
@@ -346,5 +345,23 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+-(UIView *)blackView{
+    if (_blackView==nil) {
+        _blackView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
+        _blackView.backgroundColor=[UIColor blackColor];
+        _blackView.alpha=0.3;
+        
+    }
+    return _blackView;
+}
+-(UIButton*)addbtn{
+    if (_addbtn==nil) {
+        _addbtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-67, self.view.bounds.size.height-107, 55, 55)];
+        _addbtn.layer.cornerRadius = 27.5;
+        _addbtn.backgroundColor = [UIColor grayColor];
+        [_addbtn addTarget:self action:@selector(clickAddButton:) forControlEvents:UIControlEventTouchUpInside];
+        [_addbtn setImage:[UIImage imageNamed:@"jiahao"] forState:UIControlStateNormal];
+    }
+    return _addbtn;
+}
 @end

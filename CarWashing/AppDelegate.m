@@ -19,13 +19,16 @@
 //地图
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import "APIKey.h"
+//支付
+#import <AlipaySDK/AlipaySDK.h>
 @interface AppDelegate ()<UITabBarDelegate>
 {
     AppDelegate *myDelegate;
 }
 @property (nonatomic, strong) MenuTabBarController *menuTabBarController;
 @end
-
+//2017082308341476支付宝appid
+//支付宝公钥 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2dYOFRhBEb+XSAQq17rAKI3WebLIgmMZ352/nFTF2f5e8xkeVfmRm0qehNRRAtKMHJXEyjE27RMXhy53y+jSd4ZLaYVrm1RYYB0PbIH+0kC+NZqlhiZ+s8KQr6UZh37OCB+RcuNnsoybcTzhcuMkQbf2OkNzdBGGHv90XpW0YNXiSv/KblD/DsFoaR9Qb9olwYl5lGNfdKoNbhyfhTwD0vTTQB3Ojm2PSJcmjOzsmet5gps7E7DSWqIE5ApE5XgTkPHLzdT37B4I18Ed/Pip0Ye9sCXlVQ/Ok2gBGYcXWHg8Hv8D1DLvDM1F90NgQ9Q9vCWq+4pvASJFJe3sLVak9QIDAQAB
 @implementation AppDelegate
 #pragma mark ----地图相关
 - (void)configureAPIKey
@@ -136,7 +139,6 @@
     [defaults setObject:@"" forKey:@"setTime"];
     [defaults synchronize];
     
-    
 //    LoginViewController *loginControl = [[LoginViewController alloc]init];
 //    UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:loginControl];
 //    nav.navigationBar.hidden      = YES;
@@ -146,7 +148,7 @@
     
 //    MenuTabBarController *menuTabBarController	= [[MenuTabBarController alloc] init];
 //    self.window.rootViewController				= menuTabBarController;
-        [WXApi registerApp:@"wx36260a82ad0e51bb"];      //公司
+    [WXApi registerApp:@"wx36260a82ad0e51bb"];      //公司
 
      [self configureAPIKey];
 
@@ -166,21 +168,97 @@
 
 - (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
-    
-    return [WXApi handleOpenURL:url delegate:self];
+    if ([url.host isEqualToString:@"safepay"]) {
+        // 支付跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+        }];
+        
+        // 授权跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+            // 解析 auth code
+            NSString *result = resultDic[@"result"];
+            NSString *authCode = nil;
+            if (result.length>0) {
+                NSArray *resultArr = [result componentsSeparatedByString:@"&"];
+                for (NSString *subResult in resultArr) {
+                    if (subResult.length > 10 && [subResult hasPrefix:@"auth_code="]) {
+                        authCode = [subResult substringFromIndex:10];
+                        break;
+                    }
+                }
+            }
+            NSLog(@"授权结果 authCode = %@", authCode?:@"");
+        }];
+    }
+    [WXApi handleOpenURL:url delegate:self];
+    return YES;
 }
-
-
+// NOTE: 9.0以后使用新API接口
+//- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
+//{
+//    if ([url.host isEqualToString:@"safepay"]) {
+//        // 支付跳转支付宝钱包进行支付，处理支付结果
+//        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+//            NSLog(@"result = %@",resultDic);
+//        }];
+//
+//        // 授权跳转支付宝钱包进行支付，处理支付结果
+//        [[AlipaySDK defaultService] processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic) {
+//            NSLog(@"result = %@",resultDic);
+//            // 解析 auth code
+//            NSString *result = resultDic[@"result"];
+//            NSString *authCode = nil;
+//            if (result.length>0) {
+//                NSArray *resultArr = [result componentsSeparatedByString:@"&"];
+//                for (NSString *subResult in resultArr) {
+//                    if (subResult.length > 10 && [subResult hasPrefix:@"auth_code="]) {
+//                        authCode = [subResult substringFromIndex:10];
+//                        break;
+//                    }
+//                }
+//            }
+//            NSLog(@"授权结果 authCode = %@", authCode?:@"");
+//        }];
+//    }
+//    [WXApi handleOpenURL:url delegate:self];
+//    return YES;
+//
+//}
+// NOTE: 9.0以后使用新API接口
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
 {
     
-  
     if ([options[UIApplicationOpenURLOptionsSourceApplicationKey] isEqualToString:@"com.tencent.xin"]){
         
         return [WXApi handleOpenURL:url delegate:self];
     }
-    
-    
+    if ([url.host isEqualToString:@"safepay"]) {
+        // 支付跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+        }];
+        
+        // 授权跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+            // 解析 auth code
+            NSString *result = resultDic[@"result"];
+            NSString *authCode = nil;
+            if (result.length>0) {
+                NSArray *resultArr = [result componentsSeparatedByString:@"&"];
+                for (NSString *subResult in resultArr) {
+                    if (subResult.length > 10 && [subResult hasPrefix:@"auth_code="]) {
+                        authCode = [subResult substringFromIndex:10];
+                        break;
+                    }
+                }
+            }
+            NSLog(@"授权结果 authCode = %@", authCode?:@"");
+        }];
+    }
+    [WXApi handleOpenURL:url delegate:self];
 
     return YES;
     

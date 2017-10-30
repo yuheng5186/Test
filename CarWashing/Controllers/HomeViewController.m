@@ -83,7 +83,7 @@
 
 //@property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) AMapLocationManager* locationManager;
-
+@property (strong, nonatomic) CYAlertView * CYalerView;
 @property (strong, nonatomic)NSString *LocCity;
 @property (strong, nonatomic)Record *newrc;
 
@@ -171,8 +171,11 @@
     _GetUserRecordData = [NSMutableArray array];
 //    self.locationManager = [[JFLocation alloc] init];
 //    _locationManager.delegate = self;
+   
+    [[UIApplication sharedApplication].keyWindow addSubview:self.CYalerView];
     
 }
+
 //- (JFAreaDataManager *)manager {
 //    if (!_manager) {
 //        _manager = [JFAreaDataManager shareManager];
@@ -180,6 +183,7 @@
 //    }
 //    return _manager;
 //}
+
 
 - (void) createSubView {
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
@@ -1644,5 +1648,17 @@
  // Pass the selected object to the new view controller.
  }
  */
-
+-(CYAlertView *)CYalerView
+{
+    if (_CYalerView==nil) {
+        _CYalerView = [[CYAlertView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
+        [_CYalerView showView];
+        [_CYalerView.cancelButton addTarget:self action:@selector(cancelClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _CYalerView;
+}
+-(void)cancelClick
+{
+    [self.CYalerView removeFromSuperview];
+}
 @end

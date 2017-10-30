@@ -79,6 +79,7 @@
     
     [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];
     [self createSubView];
+    
 }
 
 - (void) createSubView {
@@ -217,8 +218,8 @@
     UITapGestureRecognizer  *tapOrderGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapOrderButtonClick:)];
     [orderView addGestureRecognizer:tapOrderGesture];
     
-    UIImage     *orderImage          = [UIImage imageNamed:@"dingdan"];
-    UIImageView *orderImageView      = [UIUtil drawCustomImgViewInView:orderView frame:CGRectMake(0, 0, orderImage.size.width,orderImage.size.height) imageName:@"dingdan"];
+    UIImage     *orderImage          = [UIImage imageNamed:@"wode_dingdan"];
+    UIImageView *orderImageView      = [UIUtil drawCustomImgViewInView:orderView frame:CGRectMake(0, 0, orderImage.size.width,orderImage.size.height) imageName:@"wode_dingdan"];
     orderImageView.centerX           = orderView.width/2;
     orderImageView.top               = Main_Screen_Height*15/667;
     
@@ -229,9 +230,6 @@
     orderNameLabel.centerX           = orderImageView.centerX;
     orderNameLabel.top               = orderImageView.bottom +Main_Screen_Height*10/667;
     
-    
-    
-    
     UIView *favoritesView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     favoritesView.centerX                   = Main_Screen_Width/2;
     favoritesView.top                       = Main_Screen_Height*10/667;
@@ -239,8 +237,8 @@
     UITapGestureRecognizer  *favoritesTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapFavoritesButtonClick:)];
     [favoritesView addGestureRecognizer:favoritesTapGesture];
     
-    UIImage     *favoritesImage          = [UIImage imageNamed:@"shoucang"];
-    UIImageView *favoritesImageView      = [UIUtil drawCustomImgViewInView:favoritesView frame:CGRectMake(0, 0, favoritesImage.size.width,favoritesImage.size.height) imageName:@"shoucang"];
+    UIImage     *favoritesImage          = [UIImage imageNamed:@"wode_shoucang"];
+    UIImageView *favoritesImageView      = [UIUtil drawCustomImgViewInView:favoritesView frame:CGRectMake(0, 0, favoritesImage.size.width,favoritesImage.size.height) imageName:@"wode_shoucang"];
     favoritesImageView.centerX           = favoritesView.width/2;
     favoritesImageView.top               = Main_Screen_Height*15/667;
     
@@ -259,8 +257,8 @@
     UITapGestureRecognizer  *exchangeTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapExchangeButtonClick:)];
     [exchangeView addGestureRecognizer:exchangeTapGesture];
     
-    UIImage     *exchangeImage          = [UIImage imageNamed:@"duihuanliwu"];
-    UIImageView *exchangeImageView      = [UIUtil drawCustomImgViewInView:exchangeView frame:CGRectMake(0, 0, exchangeImage.size.width,exchangeImage.size.height) imageName:@"duihuanliwu"];
+    UIImage     *exchangeImage          = [UIImage imageNamed:@"wode_jihuo"];
+    UIImageView *exchangeImageView      = [UIUtil drawCustomImgViewInView:exchangeView frame:CGRectMake(0, 0, exchangeImage.size.width,exchangeImage.size.height) imageName:@"wode_jihuo"];
     exchangeImageView.centerX           = exchangeView.width/2;
     exchangeImageView.top               = Main_Screen_Height*15/667;
     
