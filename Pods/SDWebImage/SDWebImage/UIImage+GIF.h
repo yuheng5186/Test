@@ -15,5 +15,5 @@
 + (UIImage *)sd_animatedGIFWithData:(NSData *)data;
 
 - (UIImage *)sd_animatedImageByScalingAndCroppingToSize:(CGSize)size;
-- (BOOL)isGIF;
+
 @end

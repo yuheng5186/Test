@@ -315,16 +315,20 @@
     
     if (!_ISShowMenuButton) {
         [UIView animateWithDuration:0.2 animations:^{
-            CGAffineTransform rotate = CGAffineTransformMakeRotation( M_PI / 4 );
-            [sender setTransform:rotate];
+//            CGAffineTransform rotate = CGAffineTransformMakeRotation( M_PI / 4 );
+//            [sender setTransform:rotate];
+            [_addbtn setImage:[UIImage imageNamed:@"fabu_guanbi"] forState:UIControlStateNormal];
         }];
+        
         [self.view addSubview:self.blackView];
         [self.view addSubview:self.addbtn];
         [_tlMenuView showItems];
     }else{
         [UIView animateWithDuration:0.2 animations:^{
-            CGAffineTransform rotate = CGAffineTransformMakeRotation( 0 );
-            [sender setTransform:rotate];
+//            CGAffineTransform rotate = CGAffineTransformMakeRotation( 0 );
+//            [sender setTransform:rotate];
+            [_addbtn setImage:[UIImage imageNamed:@"fabuanniu"] forState:UIControlStateNormal];
+
         }];
         [_blackView removeFromSuperview];
         [_tlMenuView dismiss];
@@ -356,11 +360,11 @@
 }
 -(UIButton*)addbtn{
     if (_addbtn==nil) {
-        _addbtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-67, self.view.bounds.size.height-107, 55, 55)];
-        _addbtn.layer.cornerRadius = 27.5;
-        _addbtn.backgroundColor = [UIColor grayColor];
+        _addbtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-(80*Main_Screen_Height/667), self.view.bounds.size.height-(180*Main_Screen_Height/667), 80*Main_Screen_Height/667, 80*Main_Screen_Height/667)];
+//        _addbtn.layer.cornerRadius = 27.5;
+//        _addbtn.backgroundColor = [UIColor grayColor];
         [_addbtn addTarget:self action:@selector(clickAddButton:) forControlEvents:UIControlEventTouchUpInside];
-        [_addbtn setImage:[UIImage imageNamed:@"jiahao"] forState:UIControlStateNormal];
+        [_addbtn setImage:[UIImage imageNamed:@"fabuanniu"] forState:UIControlStateNormal];
     }
     return _addbtn;
 }

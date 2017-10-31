@@ -2,7 +2,7 @@ platform :ios, '8.0'
 target 'CarWashing' do
   pod 'AFNetworking', '~> 3.1.0'
   pod 'Masonry', '~> 1.0.2'
-  pod 'SDWebImage', '~> 4.0.0'
+  pod 'SDWebImage', '~> 3.7.2'
   pod 'JSONModel', '~> 1.7.0'
   pod 'FMDB', '~> 2.7.2'
   pod 'SDAutoLayout'
@@ -16,4 +16,7 @@ target 'CarWashing' do
   pod 'MJExtension', '~> 3.0.13'
   pod 'AliPay_SDK', '~> 3.0.0'
   pod 'OpenSSL-for-iOS', '~> 1.0.2.d.1'
+  pod 'TZImagePickerController', '~> 1.9.3'
+  pod 'MWPhotoBrowser'
+  pod 'ACAlertController'
 end

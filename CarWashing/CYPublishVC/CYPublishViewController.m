@@ -7,17 +7,18 @@
 //
 
 #import "CYPublishViewController.h"
-#import "CXXChooseImageViewController.h"
-@interface CYPublishViewController ()<UITextViewDelegate,CXXChooseImageViewControllerDelegate>
+#import "ACMediaFrame.h"
+#import "UIImage+ACGif.h"
+@interface CYPublishViewController ()<UITextViewDelegate>
 {
     UITextView * contentTextField;
     UILabel * numLabel;
     UILabel * placeHoldLabel;
 }
 @property (nonatomic,strong)  UIScrollView   * backScrollerView;
-@property (nonatomic, strong) CXXChooseImageViewController *vc;
 @property (nonatomic,strong)  NSMutableArray * imageArr;
-@property (strong, nonatomic) UIScrollView         *photoImageView;
+@property (strong, nonatomic) UIView         *photoImageView;
+@property (strong, nonatomic) NSMutableArray         *photoArray;
 @end
 
 @implementation CYPublishViewController
@@ -27,7 +28,8 @@
 //}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.backScrollerView.backgroundColor=[UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
+    _photoArray =[NSMutableArray array];
+    self.backScrollerView.backgroundColor=[UIColor whiteColor];
     _imageArr=[NSMutableArray array];
     UILabel * navlabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 20, Main_Screen_Width-160, 44)];
     navlabel.textColor=[UIColor whiteColor];
@@ -63,26 +65,23 @@
         make.bottom.mas_equalTo(contentTextField.mas_bottom);
         make.size.mas_equalTo(CGSizeMake(200, 20));
     }];
-    _photoImageView =[[UIScrollView alloc]init];
-    _photoImageView.contentSize =CGSizeMake(750, 100);
-    _photoImageView.backgroundColor=[UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
+    _photoImageView =[[UIView alloc]init];
+    _photoImageView.backgroundColor=[UIColor whiteColor];
     [self.backScrollerView addSubview:_photoImageView];
     [_photoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(contentTextField.mas_bottom);
         make.left.mas_equalTo(contentTextField.mas_left);
         make.right.mas_equalTo(contentTextField.mas_right);
-        make.height.mas_equalTo(100);
+        make.height.mas_equalTo(300);
     }];
    //上传图片相关
-    CXXChooseImageViewController *vc = [[CXXChooseImageViewController alloc] init];
-    self.imageArr=vc.dataArr;
-    vc.delegate = self;
-    self.vc = vc;
-    [self addChildViewController:vc];
-
-    [vc setOrigin:CGPointMake(0, 0) ItemSize:CGSizeMake(60, 60) rowCount:5]; //注意要满足 ItemSize的宽度 * rowCount < 屏幕宽度
-    [_photoImageView addSubview:vc.view];
-    vc.maxImageCount = 9;
+    CGFloat height = [ACSelectMediaView defaultViewHeight];
+    ACSelectMediaView *mediaView = [[ACSelectMediaView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, height)];
+    mediaView.type = ACMediaTypePhoto;
+    mediaView.allowMultipleSelection = NO;
+    _photoArray = mediaView.mediaArray;
+    mediaView.naviBarBgColor = [UIColor colorFromHex:@"#0161a1"];
+    [_photoImageView addSubview:mediaView];
     
 }
 #pragma mark ----懒加载
@@ -96,9 +95,15 @@
     return _backScrollerView;
 }
 
+#pragma mark---选取的图片数组
 -(void)rightbtnClick
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    NSLog(@"图片--%@",_photoArray);
+    for (int i=0; i<_photoArray.count; i++) {
+        ACMediaModel * model = _photoArray[i];
+        NSLog(@"--%@",model.image);
+    }
+    
 }
 - (void)textViewDidBeginEditing:(UITextView *)textView{
      placeHoldLabel.text =nil;
