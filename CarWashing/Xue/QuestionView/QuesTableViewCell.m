@@ -10,7 +10,12 @@
 
 @implementation QuesTableViewCell
 
-
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
+        
+    }
+    return self;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -21,6 +26,10 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+-(void)setUp{
+    
 }
 
 @end
