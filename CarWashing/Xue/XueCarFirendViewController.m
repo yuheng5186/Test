@@ -29,6 +29,8 @@
 @property (nonatomic, strong) TLMenuButtonView *tlMenuView ;
 @property (nonatomic,strong) UIView * blackView;
 @property (nonatomic,strong) UIButton * addbtn;
+@property (nonatomic,weak)UIButton *selectedBtn;
+@property (nonatomic,strong) NSMutableArray * btnArray;
 
 @end
 
@@ -87,12 +89,21 @@
     for (int i = 0; i < buttonNames.count; i++) {
         UIButton *jackButton = [[UIButton alloc]initWithFrame:CGRectMake(i * (self.view.frame.size.width)/4, 64, (self.view.frame.size.width)/4, 44)];
         [jackButton setTitle:buttonNames[i] forState:(UIControlStateNormal)];
-        [jackButton setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
         jackButton.titleLabel.font = [UIFont systemFontOfSize:14];
         jackButton.backgroundColor = [UIColor whiteColor];
+        [jackButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal] ;
+        [jackButton setTitleColor:[UIColor colorWithRed:254/255.0 green:184/255.0 blue:71/255.0 alpha:1.0] forState:UIControlStateSelected];
         jackButton.tag = i;
+        if (jackButton.tag == 0) {
+            //第一个按钮默认选中
+            jackButton.selected = YES;
+            jackButton.titleLabel.font=[UIFont systemFontOfSize:17];
+            //记录原按钮
+            self.selectedBtn = jackButton;
+        }
         [jackButton addTarget:self action:@selector(buttonAction:) forControlEvents:(UIControlEventTouchUpInside)];
         [self.view addSubview:jackButton];
+        [self.btnArray addObject:jackButton];
     }       //for循环结束
     
     //添加scrollView
@@ -106,7 +117,7 @@
 
     //添加动画灰色条
     _amnationView = [[UIView alloc]initWithFrame:CGRectMake(0, 108, (self.view.frame.size.width)/4, 3)];
-    _amnationView.backgroundColor = [UIColor grayColor];
+    _amnationView.backgroundColor = [UIColor colorWithRed:254/255.0 green:184/255.0 blue:71/255.0 alpha:1.0];
     [self.view addSubview:_amnationView];
     
     [_baseView addSubview:self.firstView];
@@ -116,23 +127,61 @@
 
 }
 
-#pragma mark - TableView
-
-//-(void)setTableView{
-//    QuestionNewView *questionView = [[QuestionNewView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-108)];
-//    [questionView setTable];
-//    [_baseView addSubview:questionView];
-//}
-
 #pragma mark - 动画
 
 //移动scrollView改变小灰条的位置
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
+//    NSLog(@"%f",_baseView.contentOffset.x/((self.view.frame.size.width)*4));
+//    CGFloat f =[[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue];
+//    NSLog(@"%.2f",f);
+//    NSInteger a;
+//    if ([[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue]==0.00) {
+//         a=1;
+//        UIButton * sender = self.btnArray[a];
+//        //每当点击按钮时取消上次选中的
+//        self.selectedBtn.selected = NO;
+//        self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
+//        sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
+//        //当前点击按钮选中
+//        sender.selected = YES;
+//        self.selectedBtn = sender;
+//    }else if ([[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue]==0.25){
+//         a=2;
+//        UIButton * sender = self.btnArray[a];
+//        //每当点击按钮时取消上次选中的
+//        self.selectedBtn.selected = NO;
+//        self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
+//        sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
+//        //当前点击按钮选中
+//        sender.selected = YES;
+//        self.selectedBtn = sender;
+//    }else if ([[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue]==0.50){
+//         a=3;
+//        UIButton * sender = self.btnArray[a];
+//        //每当点击按钮时取消上次选中的
+//        self.selectedBtn.selected = NO;
+//        self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
+//        sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
+//        //当前点击按钮选中
+//        sender.selected = YES;
+//        self.selectedBtn = sender;
+//    }else if ([[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue]==0.50){
+//         a=4;
+//        UIButton * sender = self.btnArray[a];
+//        //每当点击按钮时取消上次选中的
+//        self.selectedBtn.selected = NO;
+//        self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
+//        sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
+//        //当前点击按钮选中
+//        sender.selected = YES;
+//        self.selectedBtn = sender;
+//    }
+
+   
     [UIView animateWithDuration:0.1 animations:^{
         [_amnationView setFrame:CGRectMake(_baseView.contentOffset.x/((self.view.frame.size.width)*4)*(self.view.frame.size.width), 108, (self.view.frame.size.width)/4, 3)];
     }];
-//    NSLog(@"%f",_baseView.contentOffset.x/((self.view.frame.size.width)*4));
+   
 
 }
 
@@ -146,6 +195,14 @@
     [UIView animateWithDuration:1 animations:^{
         [_baseView setContentOffset:CGPointMake(sender.tag*(self.view.frame.size.width), 0) animated:YES];
     }];
+    //每当点击按钮时取消上次选中的
+    self.selectedBtn.selected = NO;
+    self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
+    sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
+    //当前点击按钮选中
+    sender.selected = YES;
+    self.selectedBtn = sender;
+    
 }
 
 //懒加载4个viewController
@@ -233,5 +290,13 @@
         [_addbtn setImage:[UIImage imageNamed:@"fabuanniu"] forState:UIControlStateNormal];
     }
     return _addbtn;
+}
+-(NSMutableArray *)btnArray
+{
+    if (_btnArray==nil) {
+        _btnArray=[NSMutableArray array];
+        
+    }
+    return _btnArray;
 }
 @end

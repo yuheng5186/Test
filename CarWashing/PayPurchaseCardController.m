@@ -76,9 +76,20 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     
     [self setupUI];
     payStyle = @"微信支付";
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickCancel) name:@"alipayresultCancel" object:nil];
+     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickSuccess) name:@"alipayresultSuccess" object:nil];
+     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickfail) name:@"alipayresultfail" object:nil];
     
 }
-
+-(void)resultClickCancel{
+    [self.view showInfo:@"订单支付已取消" autoHidden:YES interval:2];
+}
+-(void)resultClickSuccess{
+    [self.view showInfo:@"订单支付成功" autoHidden:YES interval:2];
+}
+-(void)resultClickfail{
+    [self.view showInfo:@"订单支付失败" autoHidden:YES interval:2];
+}
 #pragma mark-支付成功回调
 -(void)goBack{
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"购买成功" message:@"点击立即查看" preferredStyle:UIAlertControllerStyleAlert];
@@ -561,6 +572,13 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     
 
 }
+-(void)alipay{
+    [AFNetworkingTool post:nil andurl:@"http://119.23.53.225:20000/WeixinPay.ashx?op=GetUnifiedorder" success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"---%@",dict);
+    } fail:^(NSError *error) {
+        NSLog(@"---错误%@",error);
+    }];
+}
 - (void)doAlipayPay
 {
     //重要说明
@@ -577,7 +595,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     // rsa2PrivateKey 可以保证商户交易在更加安全的环境下进行，建议使用 rsa2PrivateKey
     // 获取 rsa2PrivateKey，建议使用支付宝提供的公私钥生成工具生成，
     // 工具地址：https://doc.open.alipay.com/docs/doc.htm?treeId=291&articleId=106097&docType=1
-    NSString *rsa2PrivateKey = @"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBANHtCPzxh+Mmi0WtBXqhxtDqhQxR091wzK6TcO5S00coTl7RVi9DtvwVm1HOvGlwsVYKhUMCP2yHctQlsbTnXDntazY3FhMhJkLt3Y8MlIRYHqQtZ063oqkX3egEyFMZuT5DD570fDraWqpGjupgHnpveoRYVDu5BZv6o4rCju4HAgMBAAECgYAalHKw5DwabMTxm4i4EEfGKAuUlb/HqAKikBSaeG478kSKCONqtJ40qN+zqgN9LkGl7UsWQvCY40WMywEHMMwiZpI89W32QXUKaE0ztGCcYD+YVBm4vIWTLDdOMka0B17+XE/pbMHP7JGnlvtwv7gC7ACxkwsDoyA2TLK8s5fN4QJBAP5S/IF33yobWLw1JmJv81Cg6OKLvGBTdOO/0kH4Kb/EiRVD8/TjYkrcsFB7ifXVRi4gvAj+vVBV2mftxjdNV68CQQDTTyeEiWtUS6TclVfFd4gt7qC1WmeDOzjWcJE9I8H/t3JBCb92dTkcnd8KKJw64CsPsVmgFU2ZQBgM+HxXyA0pAkA0a15oQRDaWPCdOkdDGtgH0mKt7ydQo2MAXlU0C7ZvNE8c9vidjRCBZaNhs1ToOqFQeKbJI9hZapituzCTzXk5AkEAoVe23MPwZ5S6dJKzSdtS539kxhQZJWJ6q4GX5A8BebcgTfibcF9hFDCWtLL9VxcCyiCoRkr9zR3bP0wb5QqiwQJBANyH5/+flpdir0qfjg/jm49I7jEdU3weg9ViQ8P2lBSPHQOXm+xhY4GBcmSNdqI2YtMbtMeC0o6ymtk2BkagLyc=";
+    NSString *rsa2PrivateKey = @"MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDZ1g4VGEERv5dIBCrXusAojdZ5ssiCYxnfnb+cVMXZ/l7zGR5V+ZGbSp6E1FEC0owclcTKMTbtExeHLnfL6NJ3hktphWubVFhgHQ9sgf7SQL41mqWGJn6zwpCvpRmHfs4IH5Fy42eyjJtxPOFy4yRBt/Y6Q3N0EYYe/3RelbRg1eJK/8puUP8OwWhpH1Bv2iXBiXmUY190qg1uHJ+FPAPS9NNAHc6ObY9IlyaM7OyZ63mCmzsTsNJaogTkCkTleBOQ8cvN1PfsHgjXwR38+KnRh72wJeVVD86TaAEZhxdYeDwe/wPUMu8MzUX3Q2BD1D28Jar7im8BIkUl7ewtVqT1AgMBAAECggEBANPd0lKIBXl6q2uaygSKGS0YTtqMnWHbeyW3qs4k0U3ljnnIG24pTooIOEcerTAekbGXpQ+2cCKCqCaNdmx3pIQltKEL6A3qKg5JFWBGyw25dIZ0Q7tHI4I4oTqETGExXrgd4/wm2wuYn/Kx8OAptXDJuI0QX3ErPhRWBtubpRVsBWBUz3kwgXQFEXwCTG1VX3tiKcR8eaRIsQnk/4Xt15WfNF0ZuOcN1LCM7azyykSWBXqE/KZsn2zWAeblB7A4DNzySm9Jbb7ovMsbNVX8sASxHnwZPW5Z43wT/yNVPtQpMK2rIRcHFvhu4qhXhFIivgC8TW9c2TJ7w9ktJPB1oIECgYEA9rXipmuklDZ+MKFXsIG1yr0rGEefNt6ZFoS9ETw8UA18PWoHTmCiq/WpuLiTCcvOX8JYu88Dhi8Z88qVZXAkVF5aSpgpXgW3/+j3s0E4fj0uMSbXvGBe3XNAHaARL+1PcQpdJ0i/oleWMrSyOpBFOZMZKT6K703wr+sg3IWM2lUCgYEA4gnXak+Z1OJAvvFs2P2Z88GTZuyNSbikDvh7dYRn4bxLdGhkQV6dfDqswia27fwgcR1JTtrNq00bC/FmEQ7bhR5cgBtcQoyUxvl2REPTQ3NZApTI7TtU7yhkJs489PWzLpV2X94XlJnI4ovFQWgrWCZ8Oem2wAwLn72O5rD0gCECgYEA9PuMQ2GkniC2kifE4dsL4HSUNJn6egv0zK2m6VR9N6kMdBezhZrkLgnWLT3rlNCy79gXMPfSMg7XoITMcVw4VycSVfxfJ6RaIF8AiRn8tS6fjeNaWw7/ZLurMT/fkU3/kuqNshLFaLm8xkE0sn7Mnu15EMGwSQ2GMco0aYacZbkCgYBamU86UUV7SmRhJCtYne1DAmeubUoELnmzdm0loThyBiLIOb9VZDMDRBFSkGnp4ZCvRenILXMaIgGhO9SJKcdbB9xTjKPiGK7ZQcvheL4I3wbiPfh6/bkBUtMxqqBMHt7+4PFdY4tYCHu4MgWSPcqBvos0OzUArNNL55KLbInTgQKBgDNg/N1K2vUpQGoOpumm431/ha/lMXV9Pd2Ujc7xy+DBni6qBL+ZUi5rbmyWP6rV2qbs5BiON3tQc33gZhdsi8L3wrKekTYyoGGo0E+OBwYq2NVnDcYg+MqaPlqLhfN0z4Z/PK22idXRTdSj+QPXO6SQC08pN3TfqseqH3pn1Pe1";
     NSString *rsaPrivateKey = @"";
     //partner和seller获取失败,提示
     if ([appID length] == 0 ||
@@ -619,7 +637,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     // NOTE: 商品数据
     order.biz_content = [BizContent new];
     order.biz_content.body = @"我是测试数据";
-    order.biz_content.subject = @"1";
+    order.biz_content.subject = @"进行支付啦";
     order.biz_content.out_trade_no = [self generateTradeNO]; //订单ID（由商家自行制定）
     order.biz_content.timeout_express = @"30m"; //超时时间设置
     order.biz_content.total_amount = [NSString stringWithFormat:@"%.2f", 0.01]; //商品价格
@@ -642,7 +660,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     // NOTE: 如果加签成功，则继续执行支付
     if (signedString != nil) {
         //应用注册scheme,在AliSDKDemo-Info.plist定义URL types
-        NSString *appScheme = @"alisdkdemo";
+        NSString *appScheme = @"QiangWei";
         
         // NOTE: 将签名成功字符串格式化为订单字符串,请严格按照该格式
         NSString *orderString = [NSString stringWithFormat:@"%@&sign=%@",
@@ -651,6 +669,15 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         // NOTE: 调用支付结果开始支付
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             NSLog(@"reslut = %@",resultDic);
+            /**        * 状态码        * 9000 订单支付成功        * 8000 正在处理中        * 4000 订单支付失败        * 6001 用户中途取消        * 6002 网络连接出错        */
+//            if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+////                [self aliPayReslut];
+//            }else if ([resultDic[@"resultStatus"]isEqualToString:@"4000"]){
+//                [self.view showInfo:@"订单支付失败" autoHidden:YES interval:2];
+//               
+//            }else if ([resultDic[@"resultStatus"]isEqualToString:@"6001"]){
+//                 [self.view showInfo:@"订单支付已取消" autoHidden:YES interval:2];
+//            }
         }];
     }
 }
