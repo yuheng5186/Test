@@ -7,18 +7,28 @@
 //
 
 #import "XueCarFirendViewController.h"
-#import "QuestionNewView.h"
 #import "HotTopicViewController.h"
 #import "UsedCarViewController.h"
 #import "QuestionsViewController.h"
 #import "InfoViewController.h"
 
+#import "TLMenuButtonView.h"
+
+// 发布相关
+#import "CYPublishViewController.h"
+#import "CYSecondcarViewController.h"
+#import "CYDynamicShareViewController.h"
 @interface XueCarFirendViewController ()<UITableViewDelegate>
+{
+    BOOL _ISShowMenuButton;
+}
 @property (nonatomic,strong) UIView * firstView;
 @property (nonatomic,strong) UIView * secondView;
 @property (nonatomic,strong) UIView * thridView;
 @property (nonatomic,strong) UIView * fourthView;
-
+@property (nonatomic, strong) TLMenuButtonView *tlMenuView ;
+@property (nonatomic,strong) UIView * blackView;
+@property (nonatomic,strong) UIButton * addbtn;
 
 @end
 
@@ -36,12 +46,39 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self setTopButton];
+    _ISShowMenuButton = NO;
+    
+    
+    [self.view addSubview:self.addbtn];
+    
+    TLMenuButtonView *tlMenuView =[TLMenuButtonView standardMenuView];
+    tlMenuView.centerPoint = self.addbtn.center;
+    __weak typeof(self) weakSelf = self;
+    tlMenuView.clickAddButton = ^(NSInteger tag, UIColor *color){
+        weakSelf.view.backgroundColor = color;
+        _ISShowMenuButton = YES;
+        [weakSelf clickAddButton:self.addbtn];
+        NSLog(@"=====%ld",tag);
+        if (tag==5) {//发布问题
+            CYPublishViewController *findController      = [[CYPublishViewController alloc]init];
+            findController.hidesBottomBarWhenPushed = YES;
+            [weakSelf.navigationController pushViewController:findController animated:YES];
+        }else if (tag==3){//动态分享
+            CYDynamicShareViewController *findController      = [[CYDynamicShareViewController alloc]init];
+            findController.hidesBottomBarWhenPushed = YES;
+            [weakSelf.navigationController pushViewController:findController animated:YES];
+        }else if (tag==1){//二手车信息
+            CYSecondcarViewController *findController      = [[CYSecondcarViewController alloc]init];
+            findController.hidesBottomBarWhenPushed = YES;
+            [weakSelf.navigationController pushViewController:findController animated:YES];
+        }
+        
+        
+    };
+    _tlMenuView = tlMenuView;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 -(void)setTopButton{
     
@@ -81,11 +118,11 @@
 
 #pragma mark - TableView
 
--(void)setTableView{
-    QuestionNewView *questionView = [[QuestionNewView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-108)];
-    [questionView setTable];
-    [_baseView addSubview:questionView];
-}
+//-(void)setTableView{
+//    QuestionNewView *questionView = [[QuestionNewView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-108)];
+//    [questionView setTable];
+//    [_baseView addSubview:questionView];
+//}
 
 #pragma mark - 动画
 
@@ -145,6 +182,48 @@
     }
     return _fourthView;
 }
-
-
+#pragma mark----弹簧按钮下相关
+- (void)clickAddButton:(UIButton *)sender{
+    
+    if (!_ISShowMenuButton) {
+        [UIView animateWithDuration:0.2 animations:^{
+            //            CGAffineTransform rotate = CGAffineTransformMakeRotation( M_PI / 4 );
+            //            [sender setTransform:rotate];
+            [_addbtn setImage:[UIImage imageNamed:@"fabu_guanbi"] forState:UIControlStateNormal];
+        }];
+        
+        [self.view addSubview:self.blackView];
+        [self.view addSubview:self.addbtn];
+        [_tlMenuView showItems];
+    }else{
+        [UIView animateWithDuration:0.2 animations:^{
+            //            CGAffineTransform rotate = CGAffineTransformMakeRotation( 0 );
+            //            [sender setTransform:rotate];
+            [_addbtn setImage:[UIImage imageNamed:@"fabuanniu"] forState:UIControlStateNormal];
+            
+        }];
+        [_blackView removeFromSuperview];
+        [_tlMenuView dismiss];
+    }
+    _ISShowMenuButton = !_ISShowMenuButton;
+}
+-(UIView *)blackView{
+    if (_blackView==nil) {
+        _blackView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
+        _blackView.backgroundColor=[UIColor blackColor];
+        _blackView.alpha=0.3;
+        
+    }
+    return _blackView;
+}
+-(UIButton*)addbtn{
+    if (_addbtn==nil) {
+        _addbtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-(80*Main_Screen_Height/667), self.view.bounds.size.height-(180*Main_Screen_Height/667), 80*Main_Screen_Height/667, 80*Main_Screen_Height/667)];
+        //        _addbtn.layer.cornerRadius = 27.5;
+        //        _addbtn.backgroundColor = [UIColor grayColor];
+        [_addbtn addTarget:self action:@selector(clickAddButton:) forControlEvents:UIControlEventTouchUpInside];
+        [_addbtn setImage:[UIImage imageNamed:@"fabuanniu"] forState:UIControlStateNormal];
+    }
+    return _addbtn;
+}
 @end
