@@ -54,8 +54,10 @@
 //cell
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *quesCellID = @"question";
-    QuesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:quesCellID forIndexPath:indexPath];
-    
+    QuesTableViewCell *cell = [_quesTableView dequeueReusableCellWithIdentifier:quesCellID];
+    if(cell == nil){
+        cell = [[QuesTableViewCell alloc]initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:quesCellID];
+    }
     return cell;
 }
 
