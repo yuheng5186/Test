@@ -12,7 +12,7 @@
 @interface QuestionsViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(strong,nonatomic)UITableView *quesTableView;
-@property(strong,nonatomic)NSArray *dataArray;
+@property(strong,nonatomic)NSMutableArray *dataArray;
 @end
 
 @implementation QuestionsViewController
@@ -33,17 +33,25 @@
 #pragma mark - TableView
 -(void)getData{
     //获取数据
-    _dataArray = @[@"0",@"1",@"2"];
+    NSArray *oneData = [NSArray new];
+    NSArray *twoData = @[@"ershouchetu",@"ershouchetu"];
+    NSArray *threeData = @[@"ershouchetu"];
+    _dataArray = [[NSMutableArray alloc]init];
+    [_dataArray addObject:oneData];
+    [_dataArray addObject:twoData];
+    [_dataArray addObject:threeData];
+
 }
 
 
 #pragma mark - TableView
 -(UITableView *)quesTableView{
     if(_quesTableView == nil){
-        _quesTableView = [[UITableView alloc]initWithFrame:self.view.frame style:(UITableViewStylePlain)];
+        _quesTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-106) style:(UITableViewStylePlain)];
         _quesTableView.delegate = self;
         _quesTableView.dataSource = self;
         _quesTableView.backgroundColor = [UIColor orangeColor];
+        _quesTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_quesTableView registerClass:[QuesTableViewCell class] forCellReuseIdentifier:@"question"];
     }
     return _quesTableView;
@@ -54,9 +62,11 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(_dataArray[indexPath.section] != nil){
-        return 340;
+    NSArray *tempArray = [[NSArray alloc]initWithArray:_dataArray[indexPath.section]];
+    if(tempArray.count > 0){
+        return 350;
     }
+    
     return 200;
 }
 
@@ -74,6 +84,10 @@
 //        cell = [[QuesTableViewCell alloc]initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:quesCellID];
 //    }
     QuesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:quesCellID forIndexPath:indexPath];
+    NSArray *tempArray = [[NSArray alloc]initWithArray:_dataArray[indexPath.section]];
+    if(tempArray.count == 0){
+        cell.largeImageView.hidden = YES;
+    }
     return cell;
 }
 

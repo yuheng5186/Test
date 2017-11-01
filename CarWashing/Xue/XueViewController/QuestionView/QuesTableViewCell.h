@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface QuesTableViewCell : UITableViewCell
-
+@property(strong,nonatomic)UIImageView *largeImageView;
 @end

@@ -65,9 +65,9 @@
     mailLabel.numberOfLines = 0;
     [self.contentView addSubview:mailLabel];
     
-    UIImageView *largeImageView = [[UIImageView alloc]initWithFrame:CGRectMake(92, 180, Main_Screen_Width-104, 150)];
-    largeImageView.backgroundColor = [UIColor lightGrayColor];
-    [self.contentView addSubview:largeImageView];
+    _largeImageView = [[UIImageView alloc]initWithFrame:CGRectMake(92, 180, Main_Screen_Width-104, 150)];
+    _largeImageView.backgroundColor = [UIColor lightGrayColor];
+    [self.contentView addSubview:_largeImageView];
     
 }
 
