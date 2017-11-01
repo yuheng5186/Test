@@ -1177,6 +1177,8 @@
 		181051761FA96A5300355F2F /* Xue */ = {
 			isa = PBXGroup;
 			children = (
+				1818511F1FA99860003A3A47 /* XueMode l */,
+				1818511E1FA9984D003A3A47 /* XueCell */,
 				1818511D1FA99727003A3A47 /* XueViewController */,
 				181051811FA9743B00355F2F /* XueCarFirendViewController.h */,
 				181051821FA9743B00355F2F /* XueCarFirendViewController.m */,
@@ -1221,6 +1223,20 @@
 				181051901FA9926900355F2F /* QuestionView */,
 			);
 			path = XueViewController;
+			sourceTree = "<group>";
+		};
+		1818511E1FA9984D003A3A47 /* XueCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = XueCell;
+			sourceTree = "<group>";
+		};
+		1818511F1FA99860003A3A47 /* XueMode l */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "XueMode l";
 			sourceTree = "<group>";
 		};
 		181E91D71F1DDD830006511E /* Tool */ = {
