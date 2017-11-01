@@ -56,6 +56,7 @@
 
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
+#import "XueCarFirendViewController.h"
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UIScrollViewDelegate,GCCycleScrollViewDelegate,AMapLocationManagerDelegate>
 {
     UIImageView     *logoImageView;
@@ -1386,9 +1387,16 @@
 }
 - (void) tapCarClubButtonClick:(id)sender {
     
-    FindViewController *findController      = [[FindViewController alloc]init];
-    findController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:findController animated:YES];
+    //一下是新的车友圈
+    XueCarFirendViewController *carFriendView = [[XueCarFirendViewController alloc]init];
+    carFriendView.hidesBottomBarWhenPushed = YES;
+
+    [self.navigationController pushViewController:carFriendView animated:YES];
+    
+//    FindViewController *findController      = [[FindViewController alloc]init];
+//    findController.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:findController animated:YES];
+    
 }
 
 - (void) tapNewButtonClick:(id)sender {
