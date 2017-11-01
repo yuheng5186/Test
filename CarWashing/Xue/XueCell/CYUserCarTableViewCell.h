@@ -10,8 +10,8 @@
 
 @interface CYUserCarTableViewCell : UITableViewCell
 @property (nonatomic,strong) UIImageView * carImageView;
-@property (nonatomic,strong) UIImageView * titlelabel;
-@property (nonatomic,strong) UIImageView * distancelabel;
-@property (nonatomic,strong) UIImageView * timeLabel;
--(instancetype)initWithFrame:(CGRect)frame;
+@property (nonatomic,strong) UILabel * titlelabel;
+@property (nonatomic,strong) UILabel * distancelabel;
+@property (nonatomic,strong) UILabel * timeLabel;
+
 @end

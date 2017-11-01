@@ -7,9 +7,10 @@
 //
 
 #import "UsedCarViewController.h"
+#import "CYUserCarTableViewCell.h"
 
-@interface UsedCarViewController ()
-
+@interface UsedCarViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property(strong,nonatomic)UITableView *CYUserCarTableView;
 @end
 
 @implementation UsedCarViewController
@@ -18,21 +19,33 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor greenColor];
+    [self.view addSubview:self.CYUserCarTableView];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - TableView
+-(UITableView *)CYUserCarTableView{
+    if(_CYUserCarTableView == nil){
+        _CYUserCarTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-108) style:(UITableViewStylePlain)];
+        _CYUserCarTableView.delegate = self;
+        _CYUserCarTableView.dataSource = self;
+        _CYUserCarTableView.rowHeight = 145;
+        
+//        _CYUserCarTableView.backgroundColor = [UIColor orangeColor];
+    }
+    return _CYUserCarTableView;
+}
+//每组行数
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 10;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//cell
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CYUserCarCellID = @"CYUserCarCellID";
+    CYUserCarTableViewCell *cell = [_CYUserCarTableView dequeueReusableCellWithIdentifier:CYUserCarCellID];
+    if(cell == nil){
+        cell = [[CYUserCarTableViewCell alloc]initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CYUserCarCellID];
+    }
+    return cell;
 }
-*/
-
 @end

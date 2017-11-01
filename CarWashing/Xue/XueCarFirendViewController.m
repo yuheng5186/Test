@@ -152,8 +152,9 @@
 -(UIView *)firstView{
     if(_firstView==nil){
         _firstView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-108)];
-        [_firstView addSubview:[QuestionsViewController new].view];
-        
+        QuestionsViewController * vc =[[QuestionsViewController alloc]init];
+        [self addChildViewController:vc];
+        [_firstView addSubview:vc.view];
         
     }
     return _firstView;
@@ -162,7 +163,9 @@
 -(UIView *)secondView{
     if(_secondView == nil){
         _secondView = [[UIView alloc]initWithFrame:CGRectMake(Main_Screen_Width, 0, Main_Screen_Width, Main_Screen_Height-108)];
-        [_secondView addSubview:[HotTopicViewController new].view];
+        HotTopicViewController * vc =[[HotTopicViewController alloc]init];
+        [self addChildViewController:vc];
+        [_secondView addSubview:vc.view];
     }
     return _secondView;
 }
@@ -170,7 +173,10 @@
 -(UIView *)thridView{
     if(_thridView == nil){
         _thridView = [[UIView alloc]initWithFrame:CGRectMake(Main_Screen_Width*2, 0, Main_Screen_Width, Main_Screen_Height-108)];
-        [_thridView addSubview:[UsedCarViewController new].view];
+        UsedCarViewController * vc =[[UsedCarViewController alloc]init];
+        [self addChildViewController:vc];
+        [_thridView addSubview:vc.view];
+
     }
     return _thridView;
 }
@@ -178,7 +184,9 @@
 -(UIView *)fourthView{
     if(_fourthView == nil){
         _fourthView = [[UIView alloc]initWithFrame:CGRectMake(Main_Screen_Width*3, 0, Main_Screen_Width, Main_Screen_Height-108)];
-        [_fourthView addSubview:[InfoViewController new].view];
+        InfoViewController * vc =[[InfoViewController alloc]init];
+        [self addChildViewController:vc];
+        [_fourthView addSubview:vc.view];
     }
     return _fourthView;
 }
