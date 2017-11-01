@@ -170,12 +170,23 @@
     if ([url.host isEqualToString:@"safepay"]) {
         // 支付跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
+            NSLog(@"result == %@",resultDic);
+            /**        * 状态码        * 9000 订单支付成功        * 8000 正在处理中        * 4000 订单支付失败        * 6001 用户中途取消        * 6002 网络连接出错        */
+            if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+                //                [self aliPayReslut];
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"alipayresultSuccess" object:nil];
+            }else if ([resultDic[@"resultStatus"]isEqualToString:@"4000"]){
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"alipayresultfail" object:nil];
+                
+            }else if ([resultDic[@"resultStatus"]isEqualToString:@"6001"]){
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"alipayresultCancel" object:nil];
+                //                [self.view showInfo:@"订单支付已取消" autoHidden:YES interval:2];
+            }
         }];
         
         // 授权跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
+            NSLog(@"result === %@",resultDic);
             // 解析 auth code
             NSString *result = resultDic[@"result"];
             NSString *authCode = nil;
@@ -236,12 +247,24 @@
     if ([url.host isEqualToString:@"safepay"]) {
         // 支付跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
+            NSLog(@"result == %@",resultDic);
+             /**        * 状态码        * 9000 订单支付成功        * 8000 正在处理中        * 4000 订单支付失败        * 6001 用户中途取消        * 6002 网络连接出错        */
+            if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+                //                [self aliPayReslut];
+                 [[NSNotificationCenter defaultCenter]postNotificationName:@"alipayresultSuccess" object:nil];
+            }else if ([resultDic[@"resultStatus"]isEqualToString:@"4000"]){
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"alipayresultfail" object:nil];
+                
+            }else if ([resultDic[@"resultStatus"]isEqualToString:@"6001"]){
+                 [[NSNotificationCenter defaultCenter]postNotificationName:@"alipayresultCancel" object:nil];
+//                [self.view showInfo:@"订单支付已取消" autoHidden:YES interval:2];
+            }
+           
         }];
         
         // 授权跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
+            NSLog(@"result ==== %@",resultDic);
             // 解析 auth code
             NSString *result = resultDic[@"result"];
             NSString *authCode = nil;

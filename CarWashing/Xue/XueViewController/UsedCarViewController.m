@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor greenColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.CYUserCarTableView];
 }
 
@@ -28,9 +28,9 @@
         _CYUserCarTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-108) style:(UITableViewStylePlain)];
         _CYUserCarTableView.delegate = self;
         _CYUserCarTableView.dataSource = self;
-        _CYUserCarTableView.rowHeight = 145;
+        _CYUserCarTableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
+        _CYUserCarTableView.rowHeight = 145*Main_Screen_Height/667;
         
-//        _CYUserCarTableView.backgroundColor = [UIColor orangeColor];
     }
     return _CYUserCarTableView;
 }
@@ -47,5 +47,9 @@
         cell = [[CYUserCarTableViewCell alloc]initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CYUserCarCellID];
     }
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [_CYUserCarTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 @end
