@@ -18,8 +18,13 @@
 
 #import "DSOrderController.h"
 
+#import "AlipayOrder.h"
+#import "RSADataSigner.h"
+#import <AlipaySDK/AlipaySDK.h>
 @interface BusinessPayController ()<UITableViewDelegate, UITableViewDataSource>
-
+{
+    NSString * payStyle;
+}
 @property (nonatomic, weak) UITableView *payTableView;
 
 @property (nonatomic, strong) NSArray *payNameArray;
@@ -55,8 +60,20 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     self.payImageNameArr = payImageNameArr;
     
     [self setupUI];
+    payStyle = @"微信支付";
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickCancel) name:@"alipayresultCancel" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickSuccess) name:@"alipayresultSuccess" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickfail) name:@"alipayresultfail" object:nil];
 }
-
+-(void)resultClickCancel{
+    [self.view showInfo:@"订单支付已取消" autoHidden:YES interval:2];
+}
+-(void)resultClickSuccess{
+    [self.view showInfo:@"订单支付成功" autoHidden:YES interval:2];
+}
+-(void)resultClickfail{
+    [self.view showInfo:@"订单支付失败" autoHidden:YES interval:2];
+}
 #pragma mark-支付成功回调
 -(void)goBack{
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"购买成功" message:@"点击立即查看" preferredStyle:UIAlertControllerStyleAlert];
@@ -223,71 +240,77 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-#pragma mark-购买商家服务支付,
-        //商家编号:MerCode,SerCode 服务编号,
-         NSLog(@"%@==%@==%@==%@",self.MCode,self.SCode,self.OrderCode,self.SerMerChant);
-        NSString *uriStr = @"";
-        if ([self.SCode isEqualToString:@"0"]) {
-            uriStr = @"MerScanPayment";
-        }else{
-            uriStr = @"ServicePayment";
-        }
-        NSDictionary *mulDic = @{
-                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                 @"MerCode":self.MCode,
-                                 @"SerCode":self.SCode,
-                                 @"OrderCode":self.OrderCode,
-                                 @"MerName":self.SerMerChant
-                                 };
-        NSDictionary *params = @{
-                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                                 };
-        NSLog(@"%@",params);
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/%@",Khttp,uriStr] success:^(NSDictionary *dict, BOOL success) {
-            NSLog(@"%@",dict);
-            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-            {
-                NSDictionary *di = [NSDictionary dictionary];
-                di = [dict objectForKey:@"JsonData"];
-                
-                NSMutableString *stamp = [di objectForKey:@"timestamp"];
-                //调起微信支付
-                PayReq *req= [[PayReq alloc] init];
-                req.partnerId
-                = [di objectForKey:@"partnerid"];
-                req.prepayId
-                = [di objectForKey:@"prepayid"];
-                req.nonceStr
-                = [di objectForKey:@"noncestr"];
-                req.timeStamp
-                = stamp.intValue;
-                req.package
-                = [di objectForKey:@"packag"];
-                req.sign = [di objectForKey:@"sign"];
-                BOOL result = [WXApi sendReq:req];
-                
-                NSLog(@"-=-=-=-=-%d", result);
-                //日志输出
-                NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[di
-                                                                                                            objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign
-                      );
-                
+        if ([payStyle isEqualToString:@"微信支付"]) {
+            //商家编号:MerCode,SerCode 服务编号,
+            NSLog(@"%@==%@==%@==%@",self.MCode,self.SCode,self.OrderCode,self.SerMerChant);
+            NSString *uriStr = @"";
+            if ([self.SCode isEqualToString:@"0"]) {
+                uriStr = @"MerScanPayment";
+            }else{
+                uriStr = @"ServicePayment";
             }
-            else
-            {
+            NSDictionary *mulDic = @{
+                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                     @"MerCode":self.MCode,
+                                     @"SerCode":self.SCode,
+                                     @"OrderCode":self.OrderCode,
+                                     @"MerName":self.SerMerChant
+                                     };
+            NSDictionary *params = @{
+                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                     };
+            NSLog(@"%@",params);
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/%@",Khttp,uriStr] success:^(NSDictionary *dict, BOOL success) {
+                NSLog(@"%@",dict);
+                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                {
+                    NSDictionary *di = [NSDictionary dictionary];
+                    di = [dict objectForKey:@"JsonData"];
+                    
+                    NSMutableString *stamp = [di objectForKey:@"timestamp"];
+                    //调起微信支付
+                    PayReq *req= [[PayReq alloc] init];
+                    req.partnerId
+                    = [di objectForKey:@"partnerid"];
+                    req.prepayId
+                    = [di objectForKey:@"prepayid"];
+                    req.nonceStr
+                    = [di objectForKey:@"noncestr"];
+                    req.timeStamp
+                    = stamp.intValue;
+                    req.package
+                    = [di objectForKey:@"packag"];
+                    req.sign = [di objectForKey:@"sign"];
+                    BOOL result = [WXApi sendReq:req];
+                    
+                    NSLog(@"-=-=-=-=-%d", result);
+                    //日志输出
+                    NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[di
+                                                                                                                objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign
+                          );
+                    
+                }
+                else
+                {
+                    
+                    [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+                    
+                }
                 
+                
+                
+                
+            } fail:^(NSError *error) {
+                NSLog(@"%@",error);
                 [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
-                
-            }
+            }];
             
-            
-            
-            
-        } fail:^(NSError *error) {
-            NSLog(@"%@",error);
-            [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
-        }];
+        }else if ([payStyle isEqualToString:@"支付宝支付"]){
+            [self doAlipayPay];
+        }
+#pragma mark-购买商家服务支付,
+        
 
         
         
@@ -321,7 +344,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     }
     else if(section == 2)
     {
-        return 1;
+        return 2;
     }
     
     return 2;
@@ -497,6 +520,11 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
             self.lastPath = indexPath;
         
         }
+        if (indexPath.row==0) {
+            payStyle = @"微信支付";
+        }else if (indexPath.row==1){
+            payStyle = @"支付宝支付";
+        }
     }
 }
 
@@ -523,5 +551,121 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     // Pass the selected object to the new view controller.
 }
 */
-
+- (void)doAlipayPay
+{
+    //重要说明
+    //这里只是为了方便直接向商户展示支付宝的整个支付流程；所以Demo中加签过程直接放在客户端完成；
+    //真实App里，privateKey等数据严禁放在客户端，加签过程务必要放在服务端完成；
+    //防止商户私密数据泄露，造成不必要的资金损失，及面临各种安全风险；
+    /*============================================================================*/
+    /*=======================需要填写商户app申请的===================================*/
+    /*============================================================================*/
+    NSString *appID = @"2017082308341476";
+    
+    // 如下私钥，rsa2PrivateKey 或者 rsaPrivateKey 只需要填入一个
+    // 如果商户两个都设置了，优先使用 rsa2PrivateKey
+    // rsa2PrivateKey 可以保证商户交易在更加安全的环境下进行，建议使用 rsa2PrivateKey
+    // 获取 rsa2PrivateKey，建议使用支付宝提供的公私钥生成工具生成，
+    // 工具地址：https://doc.open.alipay.com/docs/doc.htm?treeId=291&articleId=106097&docType=1
+    NSString *rsa2PrivateKey = @"MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDZ1g4VGEERv5dIBCrXusAojdZ5ssiCYxnfnb+cVMXZ/l7zGR5V+ZGbSp6E1FEC0owclcTKMTbtExeHLnfL6NJ3hktphWubVFhgHQ9sgf7SQL41mqWGJn6zwpCvpRmHfs4IH5Fy42eyjJtxPOFy4yRBt/Y6Q3N0EYYe/3RelbRg1eJK/8puUP8OwWhpH1Bv2iXBiXmUY190qg1uHJ+FPAPS9NNAHc6ObY9IlyaM7OyZ63mCmzsTsNJaogTkCkTleBOQ8cvN1PfsHgjXwR38+KnRh72wJeVVD86TaAEZhxdYeDwe/wPUMu8MzUX3Q2BD1D28Jar7im8BIkUl7ewtVqT1AgMBAAECggEBANPd0lKIBXl6q2uaygSKGS0YTtqMnWHbeyW3qs4k0U3ljnnIG24pTooIOEcerTAekbGXpQ+2cCKCqCaNdmx3pIQltKEL6A3qKg5JFWBGyw25dIZ0Q7tHI4I4oTqETGExXrgd4/wm2wuYn/Kx8OAptXDJuI0QX3ErPhRWBtubpRVsBWBUz3kwgXQFEXwCTG1VX3tiKcR8eaRIsQnk/4Xt15WfNF0ZuOcN1LCM7azyykSWBXqE/KZsn2zWAeblB7A4DNzySm9Jbb7ovMsbNVX8sASxHnwZPW5Z43wT/yNVPtQpMK2rIRcHFvhu4qhXhFIivgC8TW9c2TJ7w9ktJPB1oIECgYEA9rXipmuklDZ+MKFXsIG1yr0rGEefNt6ZFoS9ETw8UA18PWoHTmCiq/WpuLiTCcvOX8JYu88Dhi8Z88qVZXAkVF5aSpgpXgW3/+j3s0E4fj0uMSbXvGBe3XNAHaARL+1PcQpdJ0i/oleWMrSyOpBFOZMZKT6K703wr+sg3IWM2lUCgYEA4gnXak+Z1OJAvvFs2P2Z88GTZuyNSbikDvh7dYRn4bxLdGhkQV6dfDqswia27fwgcR1JTtrNq00bC/FmEQ7bhR5cgBtcQoyUxvl2REPTQ3NZApTI7TtU7yhkJs489PWzLpV2X94XlJnI4ovFQWgrWCZ8Oem2wAwLn72O5rD0gCECgYEA9PuMQ2GkniC2kifE4dsL4HSUNJn6egv0zK2m6VR9N6kMdBezhZrkLgnWLT3rlNCy79gXMPfSMg7XoITMcVw4VycSVfxfJ6RaIF8AiRn8tS6fjeNaWw7/ZLurMT/fkU3/kuqNshLFaLm8xkE0sn7Mnu15EMGwSQ2GMco0aYacZbkCgYBamU86UUV7SmRhJCtYne1DAmeubUoELnmzdm0loThyBiLIOb9VZDMDRBFSkGnp4ZCvRenILXMaIgGhO9SJKcdbB9xTjKPiGK7ZQcvheL4I3wbiPfh6/bkBUtMxqqBMHt7+4PFdY4tYCHu4MgWSPcqBvos0OzUArNNL55KLbInTgQKBgDNg/N1K2vUpQGoOpumm431/ha/lMXV9Pd2Ujc7xy+DBni6qBL+ZUi5rbmyWP6rV2qbs5BiON3tQc33gZhdsi8L3wrKekTYyoGGo0E+OBwYq2NVnDcYg+MqaPlqLhfN0z4Z/PK22idXRTdSj+QPXO6SQC08pN3TfqseqH3pn1Pe1";
+    NSString *rsaPrivateKey = @"";
+    //partner和seller获取失败,提示
+    if ([appID length] == 0 ||
+        ([rsa2PrivateKey length] == 0 && [rsaPrivateKey length] == 0))
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"缺少appId或者私钥。"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    /*
+     *生成订单信息及签名
+     */
+    //将商品信息赋予AlixPayOrder的成员变量
+    AlipayOrder* order = [AlipayOrder new];
+    
+    // NOTE: app_id设置
+    order.app_id = appID;
+    
+    // NOTE: 支付接口名称
+    order.method = @"alipay.trade.app.pay";
+    
+    // NOTE: 参数编码格式
+    order.charset = @"utf-8";
+    
+    // NOTE: 当前时间点
+    NSDateFormatter* formatter = [NSDateFormatter new];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    order.timestamp = [formatter stringFromDate:[NSDate date]];
+    
+    // NOTE: 支付版本
+    order.version = @"1.0";
+    
+    // NOTE: sign_type 根据商户设置的私钥来决定
+    order.sign_type = (rsa2PrivateKey.length > 1)?@"RSA2":@"RSA";
+    // NOTE: 商品数据
+    order.biz_content = [BizContent new];
+    order.biz_content.body = @"我是测试数据";
+    order.biz_content.subject = @"进行支付啦";
+    order.biz_content.out_trade_no = [self generateTradeNO]; //订单ID（由商家自行制定）
+    order.biz_content.timeout_express = @"30m"; //超时时间设置
+    order.biz_content.total_amount = [NSString stringWithFormat:@"%.2f", 0.01]; //商品价格
+    
+    //将商品信息拼接成字符串
+    NSString *orderInfo = [order orderInfoEncoded:NO];
+    NSString *orderInfoEncoded = [order orderInfoEncoded:YES];
+    NSLog(@"orderSpec = %@",orderInfo);
+    
+    // NOTE: 获取私钥并将商户信息签名，外部商户的加签过程请务必放在服务端，防止公私钥数据泄露；
+    //       需要遵循RSA签名规范，并将签名字符串base64编码和UrlEncode
+    NSString *signedString = nil;
+    RSADataSigner* signer = [[RSADataSigner alloc] initWithPrivateKey:((rsa2PrivateKey.length > 1)?rsa2PrivateKey:rsaPrivateKey)];
+    if ((rsa2PrivateKey.length > 1)) {
+        signedString = [signer signString:orderInfo withRSA2:YES];
+    } else {
+        signedString = [signer signString:orderInfo withRSA2:NO];
+    }
+    
+    // NOTE: 如果加签成功，则继续执行支付
+    if (signedString != nil) {
+        //应用注册scheme,在AliSDKDemo-Info.plist定义URL types
+        NSString *appScheme = @"QiangWei";
+        
+        // NOTE: 将签名成功字符串格式化为订单字符串,请严格按照该格式
+        NSString *orderString = [NSString stringWithFormat:@"%@&sign=%@",
+                                 orderInfoEncoded, signedString];
+        
+        // NOTE: 调用支付结果开始支付
+        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+            NSLog(@"reslut = %@",resultDic);
+            /**        * 状态码        * 9000 订单支付成功        * 8000 正在处理中        * 4000 订单支付失败        * 6001 用户中途取消        * 6002 网络连接出错        */
+            //            if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+            ////                [self aliPayReslut];
+            //            }else if ([resultDic[@"resultStatus"]isEqualToString:@"4000"]){
+            //                [self.view showInfo:@"订单支付失败" autoHidden:YES interval:2];
+            //
+            //            }else if ([resultDic[@"resultStatus"]isEqualToString:@"6001"]){
+            //                 [self.view showInfo:@"订单支付已取消" autoHidden:YES interval:2];
+            //            }
+        }];
+    }
+}
+- (NSString *)generateTradeNO
+{
+    static int kNumber = 15;
+    
+    NSString *sourceStr = @"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    NSMutableString *resultStr = [[NSMutableString alloc] init];
+    srand((unsigned)time(0));
+    for (int i = 0; i < kNumber; i++)
+    {
+        unsigned index = rand() % [sourceStr length];
+        NSString *oneStr = [sourceStr substringWithRange:NSMakeRange(index, 1)];
+        [resultStr appendString:oneStr];
+    }
+    return resultStr;
+}
 @end
