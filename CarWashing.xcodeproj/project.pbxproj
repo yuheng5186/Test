@@ -76,6 +76,8 @@
 		181051931FA9928A00355F2F /* QuesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181051921FA9928A00355F2F /* QuesTableViewCell.m */; };
 		1816A4751F8DB7A5004A6835 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1816A4741F8DB7A5004A6835 /* MapKit.framework */; };
 		1816A4851F8E1AE1004A6835 /* CyMapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1816A4841F8E1AE1004A6835 /* CyMapModel.m */; };
+		181851231FA99A10003A3A47 /* CYUserCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181851211FA99A10003A3A47 /* CYUserCarTableViewCell.m */; };
+		181851241FA99A10003A3A47 /* CYUserCarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 181851221FA99A10003A3A47 /* CYUserCarTableViewCell.xib */; };
 		181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92B71F1F364A0006511E /* MenuTabBarController.m */; };
 		181E92BB1F1F36710006511E /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BA1F1F36710006511E /* BaseController.m */; };
 		181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BF1F1F39CC0006511E /* BlackLoadingView.m */; };
@@ -485,6 +487,9 @@
 		1816A4741F8DB7A5004A6835 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		1816A4831F8E1AE1004A6835 /* CyMapModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyMapModel.h; sourceTree = "<group>"; };
 		1816A4841F8E1AE1004A6835 /* CyMapModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyMapModel.m; sourceTree = "<group>"; };
+		181851201FA99A10003A3A47 /* CYUserCarTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYUserCarTableViewCell.h; sourceTree = "<group>"; };
+		181851211FA99A10003A3A47 /* CYUserCarTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYUserCarTableViewCell.m; sourceTree = "<group>"; };
+		181851221FA99A10003A3A47 /* CYUserCarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CYUserCarTableViewCell.xib; sourceTree = "<group>"; };
 		181E92B61F1F364A0006511E /* MenuTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTabBarController.h; sourceTree = "<group>"; };
 		181E92B71F1F364A0006511E /* MenuTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTabBarController.m; sourceTree = "<group>"; };
 		181E92B91F1F36710006511E /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
@@ -1228,6 +1233,9 @@
 		1818511E1FA9984D003A3A47 /* XueCell */ = {
 			isa = PBXGroup;
 			children = (
+				181851201FA99A10003A3A47 /* CYUserCarTableViewCell.h */,
+				181851211FA99A10003A3A47 /* CYUserCarTableViewCell.m */,
+				181851221FA99A10003A3A47 /* CYUserCarTableViewCell.xib */,
 			);
 			path = XueCell;
 			sourceTree = "<group>";
@@ -2489,6 +2497,7 @@
 				50B26E6E1F301B60009B3B9F /* RechargeCell.xib in Resources */,
 				1850902E1F45573F00795E0A /* ShareView.xib in Resources */,
 				180599C01FA18DBE003EAD1E /* CYPublishViewController.xib in Resources */,
+				181851241FA99A10003A3A47 /* CYUserCarTableViewCell.xib in Resources */,
 				5097FDFE1F2ECE2F002EF8F8 /* TicketCashView.xib in Resources */,
 				5094A63A1F346E7000407808 /* CancelPayCell.xib in Resources */,
 				18AD86AF1FA82442003423C7 /* ACMediaFrame.bundle in Resources */,
@@ -2631,6 +2640,7 @@
 				181E92FE1F2088E80006511E /* DSMyCarController.m in Sources */,
 				181E92CC1F1F39CC0006511E /* UIColor+HexColor.m in Sources */,
 				18B69EC01F346A3F007DA0E4 /* DSScanQRCodeController.m in Sources */,
+				181851231FA99A10003A3A47 /* CYUserCarTableViewCell.m in Sources */,
 				50CAA6A11F41AB0300138CEF /* EarnScoreController.m in Sources */,
 				18D8158E1F7A358A00A1FA04 /* PassWordLoginViewController.m in Sources */,
 				0401E8CA1F4E674700F0CA79 /* DSStartWashingController.m in Sources */,
