@@ -68,8 +68,6 @@
 		180E43291F414A7900013D2D /* PopHelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180E43281F414A7900013D2D /* PopHelpView.xib */; };
 		180E432C1F417E3500013D2D /* DSAddShopController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E432B1F417E3500013D2D /* DSAddShopController.m */; };
 		180E432F1F41921E00013D2D /* PhoneHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E432E1F41921E00013D2D /* PhoneHelper.m */; };
-		1810517D1FA96F1600355F2F /* QuestionNewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810517C1FA96F1600355F2F /* QuestionNewTableViewCell.m */; };
-		181051801FA96F6300355F2F /* QuestionNewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810517F1FA96F6300355F2F /* QuestionNewView.m */; };
 		181051831FA9743B00355F2F /* XueCarFirendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181051821FA9743B00355F2F /* XueCarFirendViewController.m */; };
 		181051861FA97C5300355F2F /* HotTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181051851FA97C5300355F2F /* HotTopicViewController.m */; };
 		181051891FA97D1F00355F2F /* UsedCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181051881FA97D1F00355F2F /* UsedCarViewController.m */; };
@@ -471,10 +469,6 @@
 		180E432B1F417E3500013D2D /* DSAddShopController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAddShopController.m; path = Home/DSAddShopController.m; sourceTree = "<group>"; };
 		180E432D1F41921E00013D2D /* PhoneHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneHelper.h; path = Tool/PhoneHelper.h; sourceTree = "<group>"; };
 		180E432E1F41921E00013D2D /* PhoneHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneHelper.m; path = Tool/PhoneHelper.m; sourceTree = "<group>"; };
-		1810517B1FA96F1600355F2F /* QuestionNewTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuestionNewTableViewCell.h; sourceTree = "<group>"; };
-		1810517C1FA96F1600355F2F /* QuestionNewTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuestionNewTableViewCell.m; sourceTree = "<group>"; };
-		1810517E1FA96F6200355F2F /* QuestionNewView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuestionNewView.h; sourceTree = "<group>"; };
-		1810517F1FA96F6300355F2F /* QuestionNewView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuestionNewView.m; sourceTree = "<group>"; };
 		181051811FA9743B00355F2F /* XueCarFirendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XueCarFirendViewController.h; sourceTree = "<group>"; };
 		181051821FA9743B00355F2F /* XueCarFirendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XueCarFirendViewController.m; sourceTree = "<group>"; };
 		181051841FA97C5300355F2F /* HotTopicViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotTopicViewController.h; sourceTree = "<group>"; };
@@ -1183,19 +1177,9 @@
 		181051761FA96A5300355F2F /* Xue */ = {
 			isa = PBXGroup;
 			children = (
-				1810517B1FA96F1600355F2F /* QuestionNewTableViewCell.h */,
-				1810517C1FA96F1600355F2F /* QuestionNewTableViewCell.m */,
-				1810517E1FA96F6200355F2F /* QuestionNewView.h */,
-				1810517F1FA96F6300355F2F /* QuestionNewView.m */,
+				1818511D1FA99727003A3A47 /* XueViewController */,
 				181051811FA9743B00355F2F /* XueCarFirendViewController.h */,
 				181051821FA9743B00355F2F /* XueCarFirendViewController.m */,
-				181051901FA9926900355F2F /* QuestionView */,
-				181051841FA97C5300355F2F /* HotTopicViewController.h */,
-				181051851FA97C5300355F2F /* HotTopicViewController.m */,
-				181051871FA97D1F00355F2F /* UsedCarViewController.h */,
-				181051881FA97D1F00355F2F /* UsedCarViewController.m */,
-				1810518D1FA98E9A00355F2F /* InfoViewController.h */,
-				1810518E1FA98E9A00355F2F /* InfoViewController.m */,
 			);
 			path = Xue;
 			sourceTree = "<group>";
@@ -1223,6 +1207,20 @@
 				18FBC5D31F8F06F500054561 /* TestMapCell.xib */,
 			);
 			path = MapVIewModel;
+			sourceTree = "<group>";
+		};
+		1818511D1FA99727003A3A47 /* XueViewController */ = {
+			isa = PBXGroup;
+			children = (
+				181051841FA97C5300355F2F /* HotTopicViewController.h */,
+				181051851FA97C5300355F2F /* HotTopicViewController.m */,
+				181051871FA97D1F00355F2F /* UsedCarViewController.h */,
+				181051881FA97D1F00355F2F /* UsedCarViewController.m */,
+				1810518D1FA98E9A00355F2F /* InfoViewController.h */,
+				1810518E1FA98E9A00355F2F /* InfoViewController.m */,
+				181051901FA9926900355F2F /* QuestionView */,
+			);
+			path = XueViewController;
 			sourceTree = "<group>";
 		};
 		181E91D71F1DDD830006511E /* Tool */ = {
@@ -1286,8 +1284,8 @@
 		181E92DF1F1F3CC90006511E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1805AC801F3808DB00FD0844 /* Login */,
 				18B697A91F21DA60009FF73A /* Find */,
+				1805AC801F3808DB00FD0844 /* Login */,
 				181E93081F2094420006511E /* Home */,
 				501671FF1F29786C00384186 /* Purchase */,
 				501671FE1F29781E00384186 /* Business */,
@@ -2811,7 +2809,6 @@
 				5016720E1F297A3500384186 /* ShopIntroController.m in Sources */,
 				18218FEB1F2B0C3C00F7207F /* DSCarClubDetailController.m in Sources */,
 				18B697AC1F21DAB3009FF73A /* DSSaleActivityController.m in Sources */,
-				1810517D1FA96F1600355F2F /* QuestionNewTableViewCell.m in Sources */,
 				5071B4771F37F702009FFF67 /* OrderDetailController.m in Sources */,
 				1805AC921F386FA800FD0844 /* TPKeyboardAvoidingTableView.m in Sources */,
 				5042E3561F33165C00CD140F /* NewPagedFlowView.m in Sources */,
@@ -2820,7 +2817,6 @@
 				1853BA451F28A04100B98C7F /* JFButton.m in Sources */,
 				1810518F1FA98E9A00355F2F /* InfoViewController.m in Sources */,
 				041573A51F53C522004514E3 /* TFGridInputViewCell.m in Sources */,
-				181051801FA96F6300355F2F /* QuestionNewView.m in Sources */,
 				50B26EC91F31AFA7009B3B9F /* IcreaseCarController.m in Sources */,
 				18B69EA31F32CB48007DA0E4 /* UIImage+Zirkfied.m in Sources */,
 				18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */,
