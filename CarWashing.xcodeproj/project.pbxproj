@@ -74,6 +74,7 @@
 		1810518C1FA98E8700355F2F /* QuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810518B1FA98E8700355F2F /* QuestionsViewController.m */; };
 		1810518F1FA98E9A00355F2F /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810518E1FA98E9A00355F2F /* InfoViewController.m */; };
 		181051931FA9928A00355F2F /* QuesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181051921FA9928A00355F2F /* QuesTableViewCell.m */; };
+		1810519C1FA9AC2700355F2F /* HotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810519B1FA9AC2700355F2F /* HotTableViewCell.m */; };
 		1816A4751F8DB7A5004A6835 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1816A4741F8DB7A5004A6835 /* MapKit.framework */; };
 		1816A4851F8E1AE1004A6835 /* CyMapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1816A4841F8E1AE1004A6835 /* CyMapModel.m */; };
 		181851231FA99A10003A3A47 /* CYUserCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181851211FA99A10003A3A47 /* CYUserCarTableViewCell.m */; };
@@ -482,6 +483,8 @@
 		1810518E1FA98E9A00355F2F /* InfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		181051911FA9928A00355F2F /* QuesTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuesTableViewCell.h; sourceTree = "<group>"; };
 		181051921FA9928A00355F2F /* QuesTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuesTableViewCell.m; sourceTree = "<group>"; };
+		1810519A1FA9AC2700355F2F /* HotTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotTableViewCell.h; sourceTree = "<group>"; };
+		1810519B1FA9AC2700355F2F /* HotTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotTableViewCell.m; sourceTree = "<group>"; };
 		1816A4731F8DAE79004A6835 /* APIKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
 		1816A4741F8DB7A5004A6835 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		1816A4831F8E1AE1004A6835 /* CyMapModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyMapModel.h; sourceTree = "<group>"; };
@@ -1233,6 +1236,8 @@
 			children = (
 				181851201FA99A10003A3A47 /* CYUserCarTableViewCell.h */,
 				181851211FA99A10003A3A47 /* CYUserCarTableViewCell.m */,
+				1810519A1FA9AC2700355F2F /* HotTableViewCell.h */,
+				1810519B1FA9AC2700355F2F /* HotTableViewCell.m */,
 			);
 			path = XueCell;
 			sourceTree = "<group>";
@@ -2733,6 +2738,7 @@
 				50E2EE611F1F4D2D00FAF130 /* YZCover.m in Sources */,
 				501672371F29808600384186 /* HQTableViewCell.m in Sources */,
 				18322AC91F501271003ABB7B /* Mylabel.m in Sources */,
+				1810519C1FA9AC2700355F2F /* HotTableViewCell.m in Sources */,
 				180E432F1F41921E00013D2D /* PhoneHelper.m in Sources */,
 				1853BA0F1F28854D00B98C7F /* DSChangePhoneController.m in Sources */,
 				50E2EE861F1F4D3C00FAF130 /* YZSortCell.m in Sources */,

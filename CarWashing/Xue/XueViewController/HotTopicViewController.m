@@ -7,9 +7,10 @@
 //
 
 #import "HotTopicViewController.h"
+#import "HotTableViewCell.h"
 
-@interface HotTopicViewController ()
-
+@interface HotTopicViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property(strong,nonatomic)UITableView *hotTable;
 @end
 
 @implementation HotTopicViewController
@@ -18,6 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor cyanColor];
+    [self.view addSubview:self.hotTable];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -25,14 +27,42 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+#pragma mark - Navigation
+-(UITableView *)hotTable{
+    if(_hotTable == nil){
+        _hotTable = [[UITableView alloc]initWithFrame:self.view.frame style:(UITableViewStylePlain)];
+        _hotTable.delegate = self;
+        _hotTable.dataSource = self;
+        
+        [_hotTable registerClass:[HotTableViewCell class] forCellReuseIdentifier:@"OneImage"];
+    }
+    return _hotTable;
 }
-*/
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 250;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+
+//动态格子数量
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 3;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    HotTableViewCell *oneImageCell = [tableView dequeueReusableCellWithIdentifier:@"OneImage" forIndexPath:indexPath];
+    return oneImageCell;
+    
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+
 
 @end

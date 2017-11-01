@@ -154,8 +154,7 @@
         _firstView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-108)];
         QuestionsViewController * vc =[[QuestionsViewController alloc]init];
         [self addChildViewController:vc];
-        [_firstView addSubview:vc.view];
-        
+        [_firstView addSubview:vc.view];        
     }
     return _firstView;
 }

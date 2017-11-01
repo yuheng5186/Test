@@ -10,6 +10,7 @@
 #import "QuesTableViewCell.h"
 
 @interface QuestionsViewController ()<UITableViewDelegate,UITableViewDataSource>
+
 @property(strong,nonatomic)UITableView *quesTableView;
 @property(strong,nonatomic)NSArray *dataArray;
 @end
@@ -18,7 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self getData];
     [self.view addSubview:self.quesTableView];
     // Do any additional setup after loading the view.
 }
@@ -42,22 +44,36 @@
         _quesTableView.delegate = self;
         _quesTableView.dataSource = self;
         _quesTableView.backgroundColor = [UIColor orangeColor];
+        [_quesTableView registerClass:[QuesTableViewCell class] forCellReuseIdentifier:@"question"];
     }
     return _quesTableView;
 }
 
-//每组行数
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return _dataArray.count;
 }
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(_dataArray[indexPath.section] != nil){
+        return 340;
+    }
+    return 200;
+}
+
+//每组行数
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+
 
 //cell
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *quesCellID = @"question";
-    QuesTableViewCell *cell = [_quesTableView dequeueReusableCellWithIdentifier:quesCellID];
-    if(cell == nil){
-        cell = [[QuesTableViewCell alloc]initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:quesCellID];
-    }
+//    QuesTableViewCell *cell = [_quesTableView dequeueReusableCellWithIdentifier:quesCellID];
+//    if(cell == nil){
+//        cell = [[QuesTableViewCell alloc]initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:quesCellID];
+//    }
+    QuesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:quesCellID forIndexPath:indexPath];
     return cell;
 }
 
