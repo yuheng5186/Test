@@ -241,6 +241,10 @@
 		18FB09C41FAAEFE100297E93 /* TZPhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FB09B81FAAEFE000297E93 /* TZPhotoPickerController.m */; };
 		18FB09C91FAAF05E00297E93 /* LxGridViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FB09C51FAAF05D00297E93 /* LxGridViewFlowLayout.m */; };
 		18FB09CA1FAAF05E00297E93 /* TZTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FB09C71FAAF05E00297E93 /* TZTestCell.m */; };
+		18FB09CF1FAB0C0B00297E93 /* CYHotTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FB09CE1FAB0C0B00297E93 /* CYHotTopicModel.m */; };
+		18FB09D21FAB0C6100297E93 /* CYUserCarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FB09D11FAB0C6100297E93 /* CYUserCarModel.m */; };
+		18FB09D51FAB0C7A00297E93 /* CYInforModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FB09D41FAB0C7A00297E93 /* CYInforModel.m */; };
+		18FB09D81FAB0C9200297E93 /* CYQuestionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FB09D71FAB0C9200297E93 /* CYQuestionModel.m */; };
 		18FBC5BD1F8F007B00054561 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5BC1F8F007B00054561 /* MapView.m */; };
 		18FBC5C11F8F013600054561 /* BasicMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5C01F8F013600054561 /* BasicMapAnnotation.m */; };
 		18FBC5C41F8F01B400054561 /* CallOutAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5C31F8F01B400054561 /* CallOutAnnotationView.m */; };
@@ -820,6 +824,14 @@
 		18FB09C61FAAF05E00297E93 /* TZTestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZTestCell.h; sourceTree = "<group>"; };
 		18FB09C71FAAF05E00297E93 /* TZTestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZTestCell.m; sourceTree = "<group>"; };
 		18FB09C81FAAF05E00297E93 /* LxGridViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridViewFlowLayout.h; sourceTree = "<group>"; };
+		18FB09CD1FAB0C0B00297E93 /* CYHotTopicModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYHotTopicModel.h; sourceTree = "<group>"; };
+		18FB09CE1FAB0C0B00297E93 /* CYHotTopicModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYHotTopicModel.m; sourceTree = "<group>"; };
+		18FB09D01FAB0C6100297E93 /* CYUserCarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYUserCarModel.h; sourceTree = "<group>"; };
+		18FB09D11FAB0C6100297E93 /* CYUserCarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYUserCarModel.m; sourceTree = "<group>"; };
+		18FB09D31FAB0C7A00297E93 /* CYInforModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYInforModel.h; sourceTree = "<group>"; };
+		18FB09D41FAB0C7A00297E93 /* CYInforModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYInforModel.m; sourceTree = "<group>"; };
+		18FB09D61FAB0C9200297E93 /* CYQuestionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYQuestionModel.h; sourceTree = "<group>"; };
+		18FB09D71FAB0C9200297E93 /* CYQuestionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYQuestionModel.m; sourceTree = "<group>"; };
 		18FBC5BB1F8F007B00054561 /* MapView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
 		18FBC5BC1F8F007B00054561 /* MapView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 		18FBC5BF1F8F013600054561 /* BasicMapAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicMapAnnotation.h; sourceTree = "<group>"; };
@@ -1281,6 +1293,14 @@
 		1818511F1FA99860003A3A47 /* XueMode l */ = {
 			isa = PBXGroup;
 			children = (
+				18FB09CD1FAB0C0B00297E93 /* CYHotTopicModel.h */,
+				18FB09CE1FAB0C0B00297E93 /* CYHotTopicModel.m */,
+				18FB09D01FAB0C6100297E93 /* CYUserCarModel.h */,
+				18FB09D11FAB0C6100297E93 /* CYUserCarModel.m */,
+				18FB09D31FAB0C7A00297E93 /* CYInforModel.h */,
+				18FB09D41FAB0C7A00297E93 /* CYInforModel.m */,
+				18FB09D61FAB0C9200297E93 /* CYQuestionModel.h */,
+				18FB09D71FAB0C9200297E93 /* CYQuestionModel.m */,
 			);
 			path = "XueMode l";
 			sourceTree = "<group>";
@@ -2724,6 +2744,7 @@
 				181051831FA9743B00355F2F /* XueCarFirendViewController.m in Sources */,
 				18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */,
 				18F7EAD01F90A5D80067AEEF /* CYCarRMListModel.m in Sources */,
+				18FB09D21FAB0C6100297E93 /* CYUserCarModel.m in Sources */,
 				18B7F9AF1F945B5900302F64 /* CYChooseCarTypeViewController.m in Sources */,
 				181E92F21F20848D0006511E /* DSOrderController.m in Sources */,
 				18322ABA1F4D7A5D003ABB7B /* QWMclistTableViewCell.m in Sources */,
@@ -2761,6 +2782,7 @@
 				180E42D21F39A89000013D2D /* DSAddMerchantController.m in Sources */,
 				50B26E991F307D31009B3B9F /* DiscountDetailView.m in Sources */,
 				180E42E81F3AB37D00013D2D /* YzdHUDBackgroundView.m in Sources */,
+				18FB09CF1FAB0C0B00297E93 /* CYHotTopicModel.m in Sources */,
 				50E2EE621F1F4D2D00FAF130 /* YZPullDownMenu.m in Sources */,
 				180E42F51F3AD4AE00013D2D /* PopupView.m in Sources */,
 				180599C91FA1BE07003EAD1E /* CYDynamicShareViewController.m in Sources */,
@@ -2920,6 +2942,7 @@
 				186CE5FC1F7E5A540001F920 /* CYModel.m in Sources */,
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
 				18E702761F5503BC007A9777 /* KPIndicatorView.m in Sources */,
+				18FB09D51FAB0C7A00297E93 /* CYInforModel.m in Sources */,
 				5071B47C1F380987009FFF67 /* OrderDetailView.m in Sources */,
 				180E430A1F3C741100013D2D /* DSShareGetMoneyController.m in Sources */,
 				501672411F29D16C00384186 /* MemberView.m in Sources */,
@@ -2973,6 +2996,7 @@
 				185090521F4558AC00795E0A /* TYAlertController+BlurEffects.m in Sources */,
 				18A4B22D1F4D7D6E00C64978 /* ShareWeChatController.m in Sources */,
 				181E92E91F207FF60006511E /* DSSettingController.m in Sources */,
+				18FB09D81FAB0C9200297E93 /* CYQuestionModel.m in Sources */,
 				1850902D1F45573F00795E0A /* ShareView.m in Sources */,
 				18FB09A11FAAC58200297E93 /* SDWaitingView.m in Sources */,
 				181E92F81F2086620006511E /* DSExchangeController.m in Sources */,
