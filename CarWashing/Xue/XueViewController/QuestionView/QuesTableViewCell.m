@@ -72,9 +72,8 @@
     [self.contentView addSubview:_largeImageView];
     
     _realLargeImage = [[UIImageView alloc]init];
-    _realLargeImage.backgroundColor = [UIColor redColor];
     [_largeImageView addSubview:_realLargeImage];
-        
+    
 }
 
 @end

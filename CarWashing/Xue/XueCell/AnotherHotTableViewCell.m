@@ -74,10 +74,12 @@
     UICollectionViewFlowLayout *layOut = [[UICollectionViewFlowLayout alloc]init];
     layOut.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layOut.itemSize = CGSizeMake(100, 100);
+    
     UICollectionView *imageCollection = [[UICollectionView alloc]initWithFrame:CGRectMake(12, 65, Main_Screen_Width, 100) collectionViewLayout:layOut];
     imageCollection.backgroundColor = [UIColor whiteColor];
     imageCollection.delegate = self;
     imageCollection.dataSource = self;
+    imageCollection.showsHorizontalScrollIndicator = NO;
     [imageCollection registerClass:[HotSecondDetailCollectionViewCell class] forCellWithReuseIdentifier:@"second"];
     [self.contentView addSubview:imageCollection];
     
