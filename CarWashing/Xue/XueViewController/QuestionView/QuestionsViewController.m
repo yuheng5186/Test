@@ -20,7 +20,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self getData];
     [self.view addSubview:self.quesTableView];
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {

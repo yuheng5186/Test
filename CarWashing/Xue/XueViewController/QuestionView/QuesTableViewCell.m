@@ -33,6 +33,8 @@
     _headImageView.backgroundColor = [UIColor grayColor];
     _headImageView.clipsToBounds = YES;
     _headImageView.layer.cornerRadius = 18;
+    //////////
+//    NSURL *headImageURL = [NSURL url]
     [self.contentView addSubview:_headImageView];
     
     _nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(58, 20, 250, 35)];
