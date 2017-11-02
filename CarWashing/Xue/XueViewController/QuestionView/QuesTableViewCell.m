@@ -7,6 +7,11 @@
 //
 
 #import "QuesTableViewCell.h"
+#import "UIView+SDAutoLayout.h"
+#import "SDWeiXinPhotoContainerView.h"
+#import "UIImageView+WebCache.h"
+
+
 
 @implementation QuesTableViewCell
 
@@ -33,8 +38,6 @@
     _headImageView.backgroundColor = [UIColor grayColor];
     _headImageView.clipsToBounds = YES;
     _headImageView.layer.cornerRadius = 18;
-    //////////
-//    NSURL *headImageURL = [NSURL url]
     [self.contentView addSubview:_headImageView];
     
     _nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(58, 20, 250, 35)];
@@ -58,18 +61,20 @@
     [self.contentView addSubview:_timeLable];
     
     _mailLabel = [[UILabel alloc]initWithFrame:CGRectMake(56, 70, Main_Screen_Width-70, 70)];
-    _mailLabel.text = @"杭州一名执勤女警近日因为路人一张随手拍的照片走红网络。想去杭州偶遇她等。杭州一名执勤女警近日因为路人一张随手拍的照片走.";
     _mailLabel.textColor = [UIColor colorFromHex:@"#3f3f3f"];
+//    _mailLabel.backgroundColor = [UIColor grayColor];
     _mailLabel.font = [UIFont systemFontOfSize:13];
     _mailLabel.numberOfLines = 0;
     [self.contentView addSubview:_mailLabel];
     
-    _largeImageView = [[UIImageView alloc]initWithFrame:CGRectMake(56, 140, Main_Screen_Width-70, 150)];
+    _largeImageView = [[UIView alloc]init];
     _largeImageView.backgroundColor = [UIColor lightGrayColor];
-    _largeImageView.clipsToBounds = YES;
-    _largeImageView.layer.cornerRadius = 3;
     [self.contentView addSubview:_largeImageView];
     
+    _realLargeImage = [[UIImageView alloc]init];
+    _realLargeImage.backgroundColor = [UIColor redColor];
+    [_largeImageView addSubview:_realLargeImage];
+        
 }
 
 @end

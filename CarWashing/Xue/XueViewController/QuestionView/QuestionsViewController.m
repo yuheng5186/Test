@@ -8,8 +8,13 @@
 
 #import "QuestionsViewController.h"
 #import "QuesTableViewCell.h"
+#import "UIView+SDAutoLayout.h"
+#import "SDWeiXinPhotoContainerView.h"
+#import "UIImageView+WebCache.h"
+
 
 @interface QuestionsViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic)SDWeiXinPhotoContainerView *picContainerView;
 
 @end
 
@@ -30,13 +35,22 @@
 #pragma mark - TableView
 -(void)getData{
     //获取数据
+    NSString *URLStringJpg = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509604874541&di=5cfaf6d8a3ddb781ea369e1bd2e3e948&imgtype=0&src=http%3A%2F%2Fi1.ymfile.com%2Fuploads%2Fllc%2Fphb%2F06%2F27%2Fx2_1.1403838708_2048_1536_264311.jpg";
     NSArray *oneData = [NSArray new];
-    NSArray *twoData = @[@"ershouchetu",@"ershouchetu"];
-    NSArray *threeData = @[@"ershouchetu"];
+    NSArray *twoData = @[URLStringJpg,URLStringJpg];
+    NSArray *threeData = @[URLStringJpg,URLStringJpg,URLStringJpg,URLStringJpg,URLStringJpg,URLStringJpg,URLStringJpg];
+    NSArray *fourArray = @[URLStringJpg,URLStringJpg,URLStringJpg,URLStringJpg];
+    NSArray *fiveArray = @[URLStringJpg];
     _dataArray = [[NSMutableArray alloc]init];
     [_dataArray addObject:oneData];
     [_dataArray addObject:twoData];
     [_dataArray addObject:threeData];
+    [_dataArray addObject:fourArray];
+    [_dataArray addObject:fiveArray];
+    
+    _mainImfoArray = @[@"项目中我们有时会需要根据字符串来确定UILabel的宽度或高度，如我们经常遇到的单元格自适应问题。如果是要动态知道UILabel的高度，那么我们直接利用单元格自适应高度就可以",@"项目中我们有时会需要根据字符串来确定UILabel的宽度或高度，如果是要动态知道UILabel的高度，那么我们直接利用单元格自适应高度就可以",@"如我们经常遇到的单元格自适应问题。如果是要动态知道UILabel的高度，那么我们直接利用单元格自适应高度就可以",@"项目中我们有时以",@"项目中我们有时会需要根据字符串来确定UILabel的宽度或高度，如我们经常遇到的单元格自适应问题。如果是要动态知道UILabel的高。"];
+
+    
 
 }
 
@@ -48,7 +62,7 @@
         _quesTableView.delegate = self;
         _quesTableView.dataSource = self;
         _quesTableView.backgroundColor = [UIColor whiteColor];
-        _quesTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        _quesTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_quesTableView registerClass:[QuesTableViewCell class] forCellReuseIdentifier:@"question"];
     }
     return _quesTableView;
@@ -60,8 +74,14 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *tempArray = [[NSArray alloc]initWithArray:_dataArray[indexPath.section]];
-    if(tempArray.count > 0){
-        return 310;
+    if(tempArray.count == 1){
+        return 230;
+    }else if(tempArray.count > 1 && tempArray.count <= 3){
+        return 230;
+    }else if (tempArray.count <= 6 && tempArray.count > 3){
+        return 315;
+    }else if (tempArray.count <= 9 && tempArray.count > 6){
+        return 400;
     }
     //没有图片
     return 150;
@@ -75,16 +95,54 @@
 
 //cell
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //重用cell
     static NSString *quesCellID = @"question";
-//    QuesTableViewCell *cell = [_quesTableView dequeueReusableCellWithIdentifier:quesCellID];
-//    if(cell == nil){
-//        cell = [[QuesTableViewCell alloc]initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:quesCellID];
-//    }
     QuesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:quesCellID forIndexPath:indexPath];
+    
+    //九宫格图片
+    
+    //////////////////////
+    NSDictionary *font123 = @{NSFontAttributeName:[UIFont systemFontOfSize:13]};
+    CGSize maxSize = CGSizeMake(Main_Screen_Width-70, MAXFLOAT);
+    CGSize labelSize = [_mainImfoArray[indexPath.section] boundingRectWithSize:maxSize options:(NSStringDrawingUsesLineFragmentOrigin) attributes:font123 context:nil].size;
+    /////////////////////
+
+    cell.largeImageView.frame = CGRectMake(56, 80+labelSize.height, Main_Screen_Width-70, 240);
+    _picContainerView = [SDWeiXinPhotoContainerView new];
+    _picContainerView.frame=CGRectMake(0, 0,cell.largeImageView.frame.size.width, cell.largeImageView.frame.size.height);
+    [cell.largeImageView addSubview:_picContainerView];
+    
+    
+    //cell中逻辑判断
     NSArray *tempArray = [[NSArray alloc]initWithArray:_dataArray[indexPath.section]];
-    if(tempArray.count == 0){
+    if (tempArray.count == 1) {
+        cell.realLargeImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-70, 150)];
+        cell.largeImageView.height = 150;
+        cell.largeImageView.hidden = NO;
+        
+        NSURL *largeImageUrl = [NSURL URLWithString:tempArray[0]];
+        [cell.realLargeImage sd_setImageWithURL:largeImageUrl];
+    }else if (tempArray.count <= 3 && tempArray.count > 1) {
+        cell.largeImageView.hidden = NO;
+        cell.largeImageView.height = 80;
+        _picContainerView.picPathStringsArray = tempArray;
+    }else if (tempArray.count <= 6 && tempArray.count > 3){
+        cell.largeImageView.hidden = NO;
+        cell.largeImageView.height = 165;
+        _picContainerView.picPathStringsArray = tempArray;
+    }else if (tempArray.count <= 9&& tempArray.count > 6){
+        cell.largeImageView.hidden = NO;
+        cell.largeImageView.height = 250;
+        _picContainerView.picPathStringsArray = tempArray;
+    }else if(tempArray.count == 0){
         cell.largeImageView.hidden = YES;
     }
+    
+    
+    cell.mailLabel.height = labelSize.height;
+    cell.mailLabel.text = _mainImfoArray[indexPath.section];
+    
     return cell;
 }
 

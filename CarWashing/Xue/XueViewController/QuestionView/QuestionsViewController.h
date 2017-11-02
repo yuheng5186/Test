@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface QuestionsViewController : UIViewController
 @property(strong,nonatomic)UITableView *quesTableView;
+
 @property(strong,nonatomic)NSMutableArray *dataArray;
+@property(strong,nonatomic)NSArray *mainImfoArray;
+@property(nonatomic)CGSize *mainSize;
 @end
