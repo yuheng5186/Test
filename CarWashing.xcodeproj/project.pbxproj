@@ -75,6 +75,8 @@
 		1810518F1FA98E9A00355F2F /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810518E1FA98E9A00355F2F /* InfoViewController.m */; };
 		181051931FA9928A00355F2F /* QuesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181051921FA9928A00355F2F /* QuesTableViewCell.m */; };
 		1810519C1FA9AC2700355F2F /* HotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810519B1FA9AC2700355F2F /* HotTableViewCell.m */; };
+		181051A51FA9D9D800355F2F /* AnotherHotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181051A41FA9D9D800355F2F /* AnotherHotTableViewCell.m */; };
+		181440001FAA0A6300715E90 /* HotSecondDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18143FFF1FAA0A6300715E90 /* HotSecondDetailCollectionViewCell.m */; };
 		1816A4751F8DB7A5004A6835 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1816A4741F8DB7A5004A6835 /* MapKit.framework */; };
 		1816A4851F8E1AE1004A6835 /* CyMapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1816A4841F8E1AE1004A6835 /* CyMapModel.m */; };
 		181851231FA99A10003A3A47 /* CYUserCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181851211FA99A10003A3A47 /* CYUserCarTableViewCell.m */; };
@@ -485,6 +487,10 @@
 		181051921FA9928A00355F2F /* QuesTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuesTableViewCell.m; sourceTree = "<group>"; };
 		1810519A1FA9AC2700355F2F /* HotTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotTableViewCell.h; sourceTree = "<group>"; };
 		1810519B1FA9AC2700355F2F /* HotTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotTableViewCell.m; sourceTree = "<group>"; };
+		181051A31FA9D9D800355F2F /* AnotherHotTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnotherHotTableViewCell.h; sourceTree = "<group>"; };
+		181051A41FA9D9D800355F2F /* AnotherHotTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnotherHotTableViewCell.m; sourceTree = "<group>"; };
+		18143FFE1FAA0A6300715E90 /* HotSecondDetailCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotSecondDetailCollectionViewCell.h; sourceTree = "<group>"; };
+		18143FFF1FAA0A6300715E90 /* HotSecondDetailCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotSecondDetailCollectionViewCell.m; sourceTree = "<group>"; };
 		1816A4731F8DAE79004A6835 /* APIKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
 		1816A4741F8DB7A5004A6835 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		1816A4831F8E1AE1004A6835 /* CyMapModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyMapModel.h; sourceTree = "<group>"; };
@@ -1238,6 +1244,10 @@
 				181851211FA99A10003A3A47 /* CYUserCarTableViewCell.m */,
 				1810519A1FA9AC2700355F2F /* HotTableViewCell.h */,
 				1810519B1FA9AC2700355F2F /* HotTableViewCell.m */,
+				181051A31FA9D9D800355F2F /* AnotherHotTableViewCell.h */,
+				181051A41FA9D9D800355F2F /* AnotherHotTableViewCell.m */,
+				18143FFE1FAA0A6300715E90 /* HotSecondDetailCollectionViewCell.h */,
+				18143FFF1FAA0A6300715E90 /* HotSecondDetailCollectionViewCell.m */,
 			);
 			path = XueCell;
 			sourceTree = "<group>";
@@ -2885,6 +2895,7 @@
 				185090441F4557E100795E0A /* TYAlertController.m in Sources */,
 				18FBC5DD1F8F641A00054561 /* CYSlideViewController.m in Sources */,
 				180E43241F3D836F00013D2D /* WeixinTimelineActivity.m in Sources */,
+				181051A51FA9D9D800355F2F /* AnotherHotTableViewCell.m in Sources */,
 				501672461F29DA6C00384186 /* MemberRegualrController.m in Sources */,
 				18D815841F79ECA800A1FA04 /* CYCardTableViewCell.m in Sources */,
 				18322AC01F4D950C003ABB7B /* Card.m in Sources */,
@@ -2893,6 +2904,7 @@
 				18A4B2301F4D832300C64978 /* ShareWechatView.m in Sources */,
 				180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */,
 				5071B4811F381366009FFF67 /* OrderCommentController.m in Sources */,
+				181440001FAA0A6300715E90 /* HotSecondDetailCollectionViewCell.m in Sources */,
 				181E93291F20B0510006511E /* SXScrPageView.m in Sources */,
 				5016724C1F2A020600384186 /* ScoreIntroController.m in Sources */,
 				18FBC5DA1F8F565000054561 /* CYCarInsertViewController.m in Sources */,

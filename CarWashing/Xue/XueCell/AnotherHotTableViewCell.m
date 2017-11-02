@@ -1,21 +1,23 @@
 //
-//  HotTableViewCell.m
+//  AnotherHotTableViewCell.m
 //  CarWashing
 //
 //  Created by Wuxinglin on 2017/11/1.
 //  Copyright © 2017年 DS. All rights reserved.
 //
 
-#import "HotTableViewCell.h"
+#import "AnotherHotTableViewCell.h"
+#import "HotSecondDetailCollectionViewCell.h"
 
-@implementation HotTableViewCell
+@implementation AnotherHotTableViewCell
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
+    if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
         [self setUP];
     }
     return self;
 }
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -40,37 +42,56 @@
     titleLable.textColor = [UIColor colorFromHex:@"#999999"];
     [self.contentView addSubview:titleLable];
     
-    UIImageView *largeImageViewOnly = [[UIImageView alloc]initWithFrame:CGRectMake(12, 75, Main_Screen_Width-24, 150)];
-    largeImageViewOnly.backgroundColor = [UIColor grayColor];
-    [self.contentView addSubview:largeImageViewOnly];
     
-    UILabel *timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(12, 235, 80, 30)];
+    UILabel *timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(12, 175, 80, 30)];
     timeLabel.text = @"15:40";
     timeLabel.font = [UIFont systemFontOfSize:14];
     titleLable.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     [self.contentView addSubview:timeLabel];
     
-    UILabel *amazingNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-64, 233, 50, 30)];
+    UILabel *amazingNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-64, 173, 50, 30)];
     amazingNumberLabel.text = @"2333";
     amazingNumberLabel.textAlignment = NSTextAlignmentRight;
     amazingNumberLabel.font = [UIFont systemFontOfSize:14];
     amazingNumberLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     [self.contentView addSubview:amazingNumberLabel];
     
-    UIButton *goodButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-80, 237, 20, 20)];
+    UIButton *goodButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-80, 177, 20, 20)];
     goodButton.backgroundColor = [UIColor orangeColor];
     
     [self.contentView addSubview:goodButton];
     
-    UILabel *commentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-130, 233, 50, 30)];
+    UILabel *commentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-130, 173, 50, 30)];
     commentNumLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     commentNumLabel.text = @"2333";
     commentNumLabel.font = [UIFont systemFontOfSize:14];
     [self.contentView addSubview:commentNumLabel];
     
-    UIButton *commButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-160, 237, 20, 20)];
+    UIButton *commButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-160, 177, 20, 20)];
     commButton.backgroundColor = [UIColor orangeColor];
     [self.contentView addSubview:commButton];
+    
+    UICollectionViewFlowLayout *layOut = [[UICollectionViewFlowLayout alloc]init];
+    layOut.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    layOut.itemSize = CGSizeMake(100, 100);
+    UICollectionView *imageCollection = [[UICollectionView alloc]initWithFrame:CGRectMake(12, 65, Main_Screen_Width, 100) collectionViewLayout:layOut];
+    imageCollection.backgroundColor = [UIColor whiteColor];
+    imageCollection.delegate = self;
+    imageCollection.dataSource = self;
+    [imageCollection registerClass:[HotSecondDetailCollectionViewCell class] forCellWithReuseIdentifier:@"second"];
+    [self.contentView addSubview:imageCollection];
+    
 }
+
+#pragma mark - CollectionView
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 20;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    HotSecondDetailCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
+    return cell;
+}
+
 
 @end

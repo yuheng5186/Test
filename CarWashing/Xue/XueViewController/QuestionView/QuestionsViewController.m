@@ -50,7 +50,7 @@
         _quesTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-106) style:(UITableViewStylePlain)];
         _quesTableView.delegate = self;
         _quesTableView.dataSource = self;
-        _quesTableView.backgroundColor = [UIColor orangeColor];
+        _quesTableView.backgroundColor = [UIColor whiteColor];
         _quesTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_quesTableView registerClass:[QuesTableViewCell class] forCellReuseIdentifier:@"question"];
     }
@@ -64,10 +64,10 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *tempArray = [[NSArray alloc]initWithArray:_dataArray[indexPath.section]];
     if(tempArray.count > 0){
-        return 350;
+        return 310;
     }
-    
-    return 200;
+    //没有图片
+    return 150;
 }
 
 //每组行数
@@ -89,6 +89,10 @@
         cell.largeImageView.hidden = YES;
     }
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 

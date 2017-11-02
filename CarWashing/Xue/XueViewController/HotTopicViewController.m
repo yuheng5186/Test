@@ -8,9 +8,11 @@
 
 #import "HotTopicViewController.h"
 #import "HotTableViewCell.h"
+#import "AnotherHotTableViewCell.h"
 
 @interface HotTopicViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *hotTable;
+@property(strong,nonatomic)NSMutableArray *dataArray;
 @end
 
 @implementation HotTopicViewController
@@ -19,6 +21,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor cyanColor];
+    [self getData];
     [self.view addSubview:self.hotTable];
 }
 
@@ -26,23 +29,39 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark - getData
+-(void)getData{
+    NSArray *oneData = [NSArray new];
+    NSArray *twoData = @[@"ershouchetu"];
+    NSArray *threeData = @[@"ershouchetu",@"ershouchetu"];
+    _dataArray = [[NSMutableArray alloc]init];
+    [_dataArray addObject:oneData];
+    [_dataArray addObject:twoData];
+    [_dataArray addObject:threeData];
+}
 
 
 
-#pragma mark - Navigation
+
+#pragma mark - TableView
 -(UITableView *)hotTable{
     if(_hotTable == nil){
-        _hotTable = [[UITableView alloc]initWithFrame:self.view.frame style:(UITableViewStylePlain)];
+        _hotTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-108) style:(UITableViewStylePlain)];
         _hotTable.delegate = self;
         _hotTable.dataSource = self;
-        
+        _hotTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_hotTable registerClass:[HotTableViewCell class] forCellReuseIdentifier:@"OneImage"];
+        [_hotTable registerClass:[AnotherHotTableViewCell class] forCellReuseIdentifier:@"collect"];
     }
     return _hotTable;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 250;
+    NSArray *tempArray = [[NSArray alloc]initWithArray:_dataArray[indexPath.section]];
+    if(tempArray.count == 1){
+        return 280;
+    }
+    return 210;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -51,12 +70,17 @@
 
 //动态格子数量
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return _dataArray.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    HotTableViewCell *oneImageCell = [tableView dequeueReusableCellWithIdentifier:@"OneImage" forIndexPath:indexPath];
-    return oneImageCell;
-    
+    NSArray *tempArray = [[NSArray alloc]initWithArray:_dataArray[indexPath.section]];
+    if(tempArray.count == 1){
+        HotTableViewCell *oneImageCell = [tableView dequeueReusableCellWithIdentifier:@"OneImage" forIndexPath:indexPath];
+        return oneImageCell;
+    }   //@end if
+    AnotherHotTableViewCell *collectionCell = [tableView dequeueReusableCellWithIdentifier:@"collect" forIndexPath:indexPath];
+
+    return collectionCell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
