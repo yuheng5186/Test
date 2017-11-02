@@ -74,10 +74,13 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *tempArray = [[NSArray alloc]initWithArray:_dataArray[indexPath.section]];
+    
     if(tempArray.count == 1){
+        
         HotTableViewCell *oneImageCell = [tableView dequeueReusableCellWithIdentifier:@"OneImage" forIndexPath:indexPath];
         return oneImageCell;
-    }   //@end if
+    }
+    //@end if
     AnotherHotTableViewCell *collectionCell = [tableView dequeueReusableCellWithIdentifier:@"collect" forIndexPath:indexPath];
 
     return collectionCell;

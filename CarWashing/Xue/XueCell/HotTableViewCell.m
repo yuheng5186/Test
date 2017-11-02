@@ -59,7 +59,7 @@
     
     UIButton *goodButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-80, 237, 20, 20)];
     goodButton.backgroundColor = [UIColor orangeColor];
-    
+    [goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
     [self.contentView addSubview:goodButton];
     
     UILabel *commentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-130, 233, 50, 30)];
