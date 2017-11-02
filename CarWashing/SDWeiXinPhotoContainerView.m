@@ -105,13 +105,11 @@
         //imageView.image = [UIImage imageNamed:obj];
         imageView.frame = CGRectMake(columnIndex * (itemW + margin), rowIndex * (itemH + margin), itemW, itemH);
     }];
-    
     CGFloat w = perRowItemCount * itemW + (perRowItemCount - 1) * margin;
     int columnCount = ceilf(_picPathStringsArray.count * 1.0 / perRowItemCount);
     CGFloat h = columnCount * itemH + (columnCount - 1) * margin;
     self.width = w;
     self.height = h;
-    
     self.fixedHeight = @(h);
     self.fixedWidth = @(w);
 }
