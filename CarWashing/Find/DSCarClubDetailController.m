@@ -69,7 +69,7 @@
 
 - (void) drawContent
 {
-    self.contentView.top                 = 44;
+    self.contentView.top                 = 64;
     self.contentView.height              = self.view.height;
     self.contentView.backgroundColor     = [UIColor whiteColor];
 }
@@ -91,14 +91,11 @@
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
-    
 }
-
-
 
 - (void) createSubView {
 
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height-Main_Screen_Height*60/667-44)];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height-Main_Screen_Height*60/667-64)];
     self.tableView.top              = 0;
 
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
@@ -378,7 +375,7 @@
     
     self.downView = [UIView new];
     self.downView .frame = CGRectMake(0, Main_Screen_Height -
-                                      Main_Screen_Height*60/667-44, Main_Screen_Width, Main_Screen_Height*60/667);
+                                      Main_Screen_Height*60/667-64, Main_Screen_Width, Main_Screen_Height*60/667);
     self.downView .backgroundColor  = [UIColor whiteColor];
     
     self.downView.layer.borderWidth=0.6;
