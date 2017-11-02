@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface HotTableViewCell : UITableViewCell
-
+@property(strong,nonatomic)UILabel *titleLable;
+@property(strong,nonatomic)UIImageView *largeImageViewOnly;
+@property(strong,nonatomic)UILabel *timeLabel;
+@property(strong,nonatomic)UILabel *amazingNumberLabel;
+@property(strong,nonatomic)UILabel *commentNumLabel;
 @end

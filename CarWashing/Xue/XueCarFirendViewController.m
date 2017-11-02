@@ -131,53 +131,55 @@
 
 //移动scrollView改变小灰条的位置
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    
 //    NSLog(@"%f",_baseView.contentOffset.x/((self.view.frame.size.width)*4));
-//    CGFloat f =[[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue];
+    CGFloat f =[[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue];
 //    NSLog(@"%.2f",f);
-//    NSInteger a;
-//    if ([[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue]==0.00) {
-//         a=1;
-//        UIButton * sender = self.btnArray[a];
-//        //每当点击按钮时取消上次选中的
-//        self.selectedBtn.selected = NO;
-//        self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
-//        sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
-//        //当前点击按钮选中
-//        sender.selected = YES;
-//        self.selectedBtn = sender;
-//    }else if ([[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue]==0.25){
-//         a=2;
-//        UIButton * sender = self.btnArray[a];
-//        //每当点击按钮时取消上次选中的
-//        self.selectedBtn.selected = NO;
-//        self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
-//        sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
-//        //当前点击按钮选中
-//        sender.selected = YES;
-//        self.selectedBtn = sender;
-//    }else if ([[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue]==0.50){
-//         a=3;
-//        UIButton * sender = self.btnArray[a];
-//        //每当点击按钮时取消上次选中的
-//        self.selectedBtn.selected = NO;
-//        self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
-//        sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
-//        //当前点击按钮选中
-//        sender.selected = YES;
-//        self.selectedBtn = sender;
-//    }else if ([[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue]==0.50){
-//         a=4;
-//        UIButton * sender = self.btnArray[a];
-//        //每当点击按钮时取消上次选中的
-//        self.selectedBtn.selected = NO;
-//        self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
-//        sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
-//        //当前点击按钮选中
-//        sender.selected = YES;
-//        self.selectedBtn = sender;
-//    }
-
-   
+    NSInteger a;
+    if ([[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue]==0.00) {
+         a=0;
+        UIButton * sender = self.btnArray[a];
+        //每当点击按钮时取消上次选中的
+        self.selectedBtn.selected = NO;
+        self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
+        sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
+        //当前点击按钮选中
+        sender.selected = YES;
+        self.selectedBtn = sender;
+    }else if ([[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue]==0.25){
+         a=1;
+        UIButton * sender = self.btnArray[a];
+        //每当点击按钮时取消上次选中的
+        self.selectedBtn.selected = NO;
+        self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
+        sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
+        //当前点击按钮选中
+        sender.selected = YES;
+        self.selectedBtn = sender;
+        
+    }else if ([[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue]==0.50){
+         a=2;
+        UIButton * sender = self.btnArray[a];
+        //每当点击按钮时取消上次选中的
+        self.selectedBtn.selected = NO;
+        self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
+        sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
+        //当前点击按钮选中
+        sender.selected = YES;
+        self.selectedBtn = sender;
+    }else if ([[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue]==0.75){
+         a=3;
+        UIButton * sender = self.btnArray[a];
+        //每当点击按钮时取消上次选中的
+        self.selectedBtn.selected = NO;
+        self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
+        sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
+        //当前点击按钮选中
+        sender.selected = YES;
+        self.selectedBtn = sender;
+    }
+    //动画效果
     [UIView animateWithDuration:0.1 animations:^{
         [_amnationView setFrame:CGRectMake(_baseView.contentOffset.x/((self.view.frame.size.width)*4)*(self.view.frame.size.width), 108, (self.view.frame.size.width)/4, 3)];
     }];
@@ -195,20 +197,13 @@
     [UIView animateWithDuration:1 animations:^{
         [_baseView setContentOffset:CGPointMake(sender.tag*(self.view.frame.size.width), 0) animated:YES];
     }];
-    //每当点击按钮时取消上次选中的
-    self.selectedBtn.selected = NO;
-    self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
-    sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
-    //当前点击按钮选中
-    sender.selected = YES;
-    self.selectedBtn = sender;
-    
 }
 
 //懒加载4个viewController
 -(UIView *)firstView{
     if(_firstView==nil){
         _firstView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-108)];
+        //添加子控制器
         QuestionsViewController * vc =[[QuestionsViewController alloc]init];
         [self addChildViewController:vc];
         [_firstView addSubview:vc.view];        
@@ -246,6 +241,7 @@
     }
     return _fourthView;
 }
+
 #pragma mark----弹簧按钮下相关
 - (void)clickAddButton:(UIButton *)sender{
     

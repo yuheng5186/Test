@@ -36,36 +36,36 @@
     grayLabel.backgroundColor = [UIColor colorFromHex:@"#f6f6f6"];
     [self.contentView addSubview:grayLabel];
     
-    UILabel *titleLable = [[UILabel alloc]initWithFrame:CGRectMake(12, 30, 200, 35)];
-    titleLable.text = @"我今天第一天上班";
-    titleLable.font = [UIFont systemFontOfSize:17];
-    titleLable.textColor = [UIColor colorFromHex:@"#999999"];
-    [self.contentView addSubview:titleLable];
+    _titleLable = [[UILabel alloc]initWithFrame:CGRectMake(12, 30, 200, 35)];
+    _titleLable.text = @"我今天第一天上班";
+    _titleLable.font = [UIFont systemFontOfSize:17];
+    _titleLable.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+    [self.contentView addSubview:_titleLable];
     
     
-    UILabel *timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(12, 175, 80, 30)];
-    timeLabel.text = @"15:40";
-    timeLabel.font = [UIFont systemFontOfSize:14];
-    titleLable.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-    [self.contentView addSubview:timeLabel];
+    _timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(12, 175, 80, 30)];
+    _timeLabel.text = @"15:40";
+    _timeLabel.font = [UIFont systemFontOfSize:14];
+    _timeLabel.textColor = [UIColor colorFromHex:@"#999999"];
+    [self.contentView addSubview:_timeLabel];
     
-    UILabel *amazingNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-64, 173, 50, 30)];
-    amazingNumberLabel.text = @"2333";
-    amazingNumberLabel.textAlignment = NSTextAlignmentRight;
-    amazingNumberLabel.font = [UIFont systemFontOfSize:14];
-    amazingNumberLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-    [self.contentView addSubview:amazingNumberLabel];
+    _amazingNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-64, 173, 50, 30)];
+    _amazingNumberLabel.text = @"2333";
+    _amazingNumberLabel.textAlignment = NSTextAlignmentRight;
+    _amazingNumberLabel.font = [UIFont systemFontOfSize:14];
+    _amazingNumberLabel.textColor = [UIColor colorFromHex:@"#999999"];
+    [self.contentView addSubview:_amazingNumberLabel];
     
     UIButton *goodButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-80, 177, 20, 20)];
     goodButton.backgroundColor = [UIColor orangeColor];
     
     [self.contentView addSubview:goodButton];
     
-    UILabel *commentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-130, 173, 50, 30)];
-    commentNumLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-    commentNumLabel.text = @"2333";
-    commentNumLabel.font = [UIFont systemFontOfSize:14];
-    [self.contentView addSubview:commentNumLabel];
+    _commentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-130, 173, 50, 30)];
+    _commentNumLabel.textColor = [UIColor colorFromHex:@"#999999"];
+    _commentNumLabel.text = @"2333";
+    _commentNumLabel.font = [UIFont systemFontOfSize:14];
+    [self.contentView addSubview:_commentNumLabel];
     
     UIButton *commButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-160, 177, 20, 20)];
     commButton.backgroundColor = [UIColor orangeColor];

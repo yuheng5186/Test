@@ -58,6 +58,8 @@
         self.timeLabel.font=[UIFont systemFontOfSize:14*Main_Screen_Height/667];
         self.timeLabel.text = @"15：30";
         [self.contentView addSubview:_timeLabel];
+        
+        //调整time位置
         [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.carImageView.mas_right).mas_offset(15*Main_Screen_Height/667);
             make.top.mas_equalTo(self.distancelabel.mas_bottom);
