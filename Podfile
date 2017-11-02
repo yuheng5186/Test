@@ -16,7 +16,5 @@ target 'CarWashing' do
   pod 'MJExtension', '~> 3.0.13'
   pod 'AliPay_SDK', '~> 3.0.0'
   pod 'OpenSSL-for-iOS', '~> 1.0.2.d.1'
-  pod 'TZImagePickerController', '~> 1.9.3'
-  pod 'MWPhotoBrowser'
-  pod 'ACAlertController'
+  
 end

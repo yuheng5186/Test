@@ -94,10 +94,8 @@
 }
 
 - (void) createSubView {
-
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height-Main_Screen_Height*60/667-64)];
     self.tableView.top              = 0;
-
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
 
     self.tableView.delegate         = self;
