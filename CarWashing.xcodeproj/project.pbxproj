@@ -241,7 +241,6 @@
 		18FB09C41FAAEFE100297E93 /* TZPhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FB09B81FAAEFE000297E93 /* TZPhotoPickerController.m */; };
 		18FB09C91FAAF05E00297E93 /* LxGridViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FB09C51FAAF05D00297E93 /* LxGridViewFlowLayout.m */; };
 		18FB09CA1FAAF05E00297E93 /* TZTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FB09C71FAAF05E00297E93 /* TZTestCell.m */; };
-		18FB09CC1FAAF32F00297E93 /* TZImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18FB09CB1FAAF32F00297E93 /* TZImagePickerController.bundle */; };
 		18FBC5BD1F8F007B00054561 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5BC1F8F007B00054561 /* MapView.m */; };
 		18FBC5C11F8F013600054561 /* BasicMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5C01F8F013600054561 /* BasicMapAnnotation.m */; };
 		18FBC5C41F8F01B400054561 /* CallOutAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5C31F8F01B400054561 /* CallOutAnnotationView.m */; };
@@ -500,6 +499,7 @@
 		181051A41FA9D9D800355F2F /* AnotherHotTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnotherHotTableViewCell.m; sourceTree = "<group>"; };
 		18143FFE1FAA0A6300715E90 /* HotSecondDetailCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotSecondDetailCollectionViewCell.h; sourceTree = "<group>"; };
 		18143FFF1FAA0A6300715E90 /* HotSecondDetailCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotSecondDetailCollectionViewCell.m; sourceTree = "<group>"; };
+		181440011FAB047000715E90 /* TZImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TZImagePickerController.bundle; path = ../../Downloads/TZImagePickerController.bundle; sourceTree = "<group>"; };
 		1816A4731F8DAE79004A6835 /* APIKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
 		1816A4741F8DB7A5004A6835 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		1816A4831F8E1AE1004A6835 /* CyMapModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyMapModel.h; sourceTree = "<group>"; };
@@ -820,7 +820,6 @@
 		18FB09C61FAAF05E00297E93 /* TZTestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZTestCell.h; sourceTree = "<group>"; };
 		18FB09C71FAAF05E00297E93 /* TZTestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZTestCell.m; sourceTree = "<group>"; };
 		18FB09C81FAAF05E00297E93 /* LxGridViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridViewFlowLayout.h; sourceTree = "<group>"; };
-		18FB09CB1FAAF32F00297E93 /* TZImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TZImagePickerController.bundle; path = "../../Desktop/相关/TZImagePickerController-master/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle"; sourceTree = "<group>"; };
 		18FBC5BB1F8F007B00054561 /* MapView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
 		18FBC5BC1F8F007B00054561 /* MapView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 		18FBC5BF1F8F013600054561 /* BasicMapAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicMapAnnotation.h; sourceTree = "<group>"; };
@@ -2010,7 +2009,7 @@
 		18F67E4F1FA3093C007D03B4 /* Chooseimage */ = {
 			isa = PBXGroup;
 			children = (
-				18FB09CB1FAAF32F00297E93 /* TZImagePickerController.bundle */,
+				181440011FAB047000715E90 /* TZImagePickerController.bundle */,
 				18FB09C81FAAF05E00297E93 /* LxGridViewFlowLayout.h */,
 				18FB09C51FAAF05D00297E93 /* LxGridViewFlowLayout.m */,
 				18FB09C61FAAF05E00297E93 /* TZTestCell.h */,
@@ -2576,7 +2575,6 @@
 				18FB09BD1FAAEFE100297E93 /* TZImagePickerController.bundle in Resources */,
 				188821511F6BD336002618F7 /* b6.gif in Resources */,
 				50E2EE871F1F4D3C00FAF130 /* YZSortCell.xib in Resources */,
-				18FB09CC1FAAF32F00297E93 /* TZImagePickerController.bundle in Resources */,
 				50E2EE7F1F1F4D3C00FAF130 /* YZAllCourseViewController.xib in Resources */,
 				18E702771F5503BC007A9777 /* KPIndicatorView.xib in Resources */,
 				180599C51FA1BCD9003EAD1E /* CYSecondcarViewController.xib in Resources */,
