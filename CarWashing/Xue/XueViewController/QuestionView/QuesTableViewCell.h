@@ -10,4 +10,9 @@
 
 @interface QuesTableViewCell : UITableViewCell
 @property(strong,nonatomic)UIImageView *largeImageView;
+@property(strong,nonatomic)UIImageView *headImageView;
+@property(strong,nonatomic)UILabel *nameLabel;
+@property(strong,nonatomic)UILabel *replyLabel;
+@property(strong,nonatomic)UILabel *timeLable;
+@property(strong,nonatomic)UILabel *mailLabel;
 @end

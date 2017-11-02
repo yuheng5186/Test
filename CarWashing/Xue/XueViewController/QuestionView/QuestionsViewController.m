@@ -11,8 +11,6 @@
 
 @interface QuestionsViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property(strong,nonatomic)UITableView *quesTableView;
-@property(strong,nonatomic)NSMutableArray *dataArray;
 @end
 
 @implementation QuestionsViewController
