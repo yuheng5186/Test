@@ -14,7 +14,6 @@
 
 
 @interface QuestionsViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic)SDWeiXinPhotoContainerView *picContainerView;
 
 @end
 
@@ -42,11 +41,11 @@
     NSArray *fourArray = @[URLStringJpg,URLStringJpg,URLStringJpg,URLStringJpg];
     NSArray *fiveArray = @[URLStringJpg];
     _dataArray = [[NSMutableArray alloc]init];
+    [_dataArray addObject:threeData];
     [_dataArray addObject:oneData];
     [_dataArray addObject:twoData];
-    [_dataArray addObject:threeData];
-    [_dataArray addObject:fourArray];
     [_dataArray addObject:fiveArray];
+    [_dataArray addObject:fourArray];
 
     
     _mainImfoArray = @[@"项目中我们有时会需要根据字符串来确定UILabel的宽度或高度，如我们经常遇到的单元格自适应问题。如果是要动态知道UILabel的高度，那么我们直接利用单元格自适应高度就可以",@"项目中我们有时会需要根据字符串来确定UILabel的宽度或高度，如果是要动态知道UILabel的高度，那么我们直接利用单元格自适应高度就可以",@"如我们经常遇到的单元格自适应问题。如果是要动态知道UILabel的高度，那么我们直接利用单元格自适应高度就可以",@"项目中我们有时以",@"项目中我们有时会需要根据字符串来确定UILabel的宽度或高度，如我们经常遇到的单元格自适应问题。如果是要动态知道UILabel的高。"];
@@ -103,6 +102,7 @@
     QuesTableViewCell *cell = [_quesTableView dequeueReusableCellWithIdentifier:quesCellID forIndexPath:indexPath];
     
     //////////////////////
+    //计算label高度
     NSDictionary *font123 = @{NSFontAttributeName:[UIFont systemFontOfSize:13]};
     CGSize maxSize = CGSizeMake(Main_Screen_Width-70, MAXFLOAT);
     CGSize labelSize = [_mainImfoArray[indexPath.section] boundingRectWithSize:maxSize options:(NSStringDrawingUsesLineFragmentOrigin) attributes:font123 context:nil].size;
@@ -110,9 +110,7 @@
     
     //九宫格图片
     cell.largeImageView.frame = CGRectMake(56, 80+labelSize.height, Main_Screen_Width-70, 240);
-    _picContainerView = [SDWeiXinPhotoContainerView new];
-    _picContainerView.frame=CGRectMake(0, 0,cell.largeImageView.frame.size.width, cell.largeImageView.frame.size.height);
-    [cell.largeImageView addSubview:_picContainerView];
+    cell.picContainerView.frame=CGRectMake(0, 0,cell.largeImageView.frame.size.width, cell.largeImageView.frame.size.height);
     
     
     //cell中逻辑判断
@@ -121,23 +119,26 @@
     if(tempArray.count == 0){
         cell.largeImageView.hidden = YES;
     }else if (tempArray.count == 1) {
+        [cell.picContainerView removeFromSuperview];
+        cell.picContainerView.hidden = YES;
         cell.largeImageView.height = 150;
         
         cell.realLargeImage.frame = CGRectMake(0, 0, Main_Screen_Width-70, 150);
-        NSURL *imageURL = [NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509604874541&di=5cfaf6d8a3ddb781ea369e1bd2e3e948&imgtype=0&src=http%3A%2F%2Fi1.ymfile.com%2Fuploads%2Fllc%2Fphb%2F06%2F27%2Fx2_1.1403838708_2048_1536_264311.jpg"];
-        [cell.realLargeImage sd_setImageWithURL: imageURL];
+        NSURL *imageURL = [NSURL URLWithString:@"http://img.hb.aicdn.com/374ecd8569411665ed6652277cd06d9752ca6baa11749-smWnwe_fw658"];
+        UIImage *placeHolderImage = [UIImage imageNamed:@"placeholder"];
+        [cell.realLargeImage sd_setImageWithURL:imageURL placeholderImage:placeHolderImage];
     }else if (tempArray.count <= 3 && tempArray.count > 1) {
         cell.largeImageView.hidden = NO;
         cell.largeImageView.height = 80;
-        _picContainerView.picPathStringsArray = tempArray;
+        cell.picContainerView.picPathStringsArray = tempArray;
     }else if (tempArray.count <= 6 && tempArray.count > 3){
         cell.largeImageView.hidden = NO;
         cell.largeImageView.height = 165;
-        _picContainerView.picPathStringsArray = tempArray;
+        cell.picContainerView.picPathStringsArray = tempArray;
     }else if (tempArray.count <= 9&& tempArray.count > 6){
         cell.largeImageView.hidden = NO;
         cell.largeImageView.height = 250;
-        _picContainerView.picPathStringsArray = tempArray;
+        cell.picContainerView.picPathStringsArray = tempArray;
     }
     
     cell.mailLabel.height = labelSize.height;

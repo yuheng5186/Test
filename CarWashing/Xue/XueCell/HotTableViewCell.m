@@ -41,7 +41,8 @@
     [self.contentView addSubview:_titleLable];
     
     _largeImageViewOnly = [[UIImageView alloc]initWithFrame:CGRectMake(12, 75, Main_Screen_Width-24, 150)];
-    _largeImageViewOnly.backgroundColor = [UIColor grayColor];
+//    _largeImageViewOnly.backgroundColor = [UIColor grayColor];
+    _largeImageViewOnly.image = [UIImage imageNamed:@"placeholder"];
     [self.contentView addSubview:_largeImageViewOnly];
     
     _timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(12, 235, 80, 30)];
@@ -58,7 +59,6 @@
     [self.contentView addSubview:_amazingNumberLabel];
     
     UIButton *goodButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-80, 237, 20, 20)];
-    goodButton.backgroundColor = [UIColor orangeColor];
     [goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
     [self.contentView addSubview:goodButton];
     

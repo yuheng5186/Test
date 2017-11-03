@@ -58,6 +58,9 @@
         [self addSubview:imageView];
         imageView.userInteractionEnabled = YES;
         imageView.tag = i;
+        //
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.clipsToBounds = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImageView:)];
         [imageView addGestureRecognizer:tap];
         [temp addObject:imageView];

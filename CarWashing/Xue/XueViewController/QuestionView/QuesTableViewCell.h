@@ -21,4 +21,6 @@
 @property(strong,nonatomic)UILabel *mailLabel;
 @property(strong,nonatomic)UIImageView *realLargeImage;
 
+@property(nonatomic)SDWeiXinPhotoContainerView *picContainerView;
+
 @end

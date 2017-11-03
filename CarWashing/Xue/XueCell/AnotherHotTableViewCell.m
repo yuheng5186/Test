@@ -57,8 +57,7 @@
     [self.contentView addSubview:_amazingNumberLabel];
     
     UIButton *goodButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-80, 177, 20, 20)];
-    goodButton.backgroundColor = [UIColor orangeColor];
-    
+    [goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
     [self.contentView addSubview:goodButton];
     
     _commentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-130, 173, 50, 30)];
