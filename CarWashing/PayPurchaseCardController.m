@@ -507,6 +507,8 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 #pragma mark-购卡支付
 -(void)lijizhifu
 {
@@ -514,6 +516,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         //卡编号ConfigCode
         NSDictionary *mulDic = @{
                                  @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"PayMethod":@(1),
                                  @"ConfigCode":[NSString stringWithFormat:@"%ld",self.choosecard.ConfigCode]
                                  };
         NSDictionary *params = @{
@@ -566,7 +569,34 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
             [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
         }];
     }else if ([payStyle isEqualToString:@"支付宝支付"]){
-          [self alipay];
+        //卡编号ConfigCode
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"PayMethod":@(2),
+                                 @"ConfigCode":[NSString stringWithFormat:@"%ld",self.choosecard.ConfigCode]
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/PurchasePayment",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            NSLog(@"---%@",dict);
+            NSString *appScheme = @"QiangWei";
+            [[AlipaySDK defaultService] payOrder:[NSString stringWithFormat:@"%@",dict[@"JsonData"][@"ordercode"]] fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+                NSLog(@"reslut = %@",resultDic);
+                /**        * 状态码        * 9000 订单支付成功        * 8000 正在处理中        * 4000 订单支付失败        * 6001 用户中途取消        * 6002 网络连接出错        */
+                //            if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+                ////                [self aliPayReslut];
+                //            }else if ([resultDic[@"resultStatus"]isEqualToString:@"4000"]){
+                //                [self.view showInfo:@"订单支付失败" autoHidden:YES interval:2];
+                //
+                //            }else if ([resultDic[@"resultStatus"]isEqualToString:@"6001"]){
+                //                 [self.view showInfo:@"订单支付已取消" autoHidden:YES interval:2];
+                //            }
+            }];
+        } fail:^(NSError *error) {
+            NSLog(@"---错误%@",error);
+        }];
     }
 
     

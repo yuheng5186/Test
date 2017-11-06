@@ -95,6 +95,8 @@
 	<string>App需要您的同意,才能访问运动与健身</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>需要你的同意才能访问相册</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>访问相册以保存</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

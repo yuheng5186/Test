@@ -104,6 +104,8 @@
     businessTabItem.tag     = 2;
     businessVC.tabBarItem   = businessTabItem;
     
+    
+    //洗车模块
     DSScanController *activityVC      = [[DSScanController alloc]init];
     UINavigationController *activityNav = [[UINavigationController alloc]initWithRootViewController:activityVC];
     activityNav.navigationController.navigationBarHidden = YES;
@@ -139,7 +141,7 @@
 -(void) addCenterButtonWithImage:(UIImage*)buttonImage highlightImage:(UIImage*)highlightImage
 {
     UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
+    //button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
     button.frame = CGRectMake(0.0, 0.0, 60, 60);
     [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
     [button setBackgroundImage:buttonImage forState:UIControlStateHighlighted];

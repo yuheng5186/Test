@@ -11,7 +11,6 @@
 #import "SDWeiXinPhotoContainerView.h"
 #import "UIImageView+WebCache.h"
 
-
 #import "SDPhotoBrowser.h"
 
 
@@ -37,12 +36,9 @@
 }
 
 -(void)setUp{
-    _headImageView = [[UIImageView alloc]initWithFrame:CGRectMake(12, 30, 36, 36)];
-    _headImageView.backgroundColor = [UIColor grayColor];
+    _headImageView = [[JackImageViewType alloc]initWithFrame:CGRectMake(12, 30, 36, 36)];
     _headImageView.clipsToBounds = YES;
     _headImageView.layer.cornerRadius = 18;
-    _headImageView.contentMode = UIViewContentModeScaleAspectFill;
-    _headImageView.clipsToBounds = YES;
     [self.contentView addSubview:_headImageView];
     
     _nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(58, 20, 250, 35)];
@@ -73,27 +69,16 @@
     [self.contentView addSubview:_mailLabel];
     
     _largeImageView = [[UIView alloc]init];
-//    _largeImageView.backgroundColor = [UIColor lightGrayColor];
     [self.contentView addSubview:_largeImageView];
     
-    _realLargeImage = [[UIImageView alloc]init];
-    _realLargeImage.contentMode = UIViewContentModeScaleAspectFill;
-    _realLargeImage.clipsToBounds = YES;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImageView)];
-    [_realLargeImage addGestureRecognizer:tap];
+    _realLargeImage = [[JackImageViewType alloc]init];
     _realLargeImage.userInteractionEnabled = YES;
     [_largeImageView addSubview:_realLargeImage];
     
     _picContainerView = [SDWeiXinPhotoContainerView new];
     [_largeImageView addSubview:_picContainerView];
 
-    
 }
-//////////////////////////////////////////////////////
-- (void)tapImageView
-{
-    
 
-}
 
 @end

@@ -192,7 +192,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 }
 
 
-//方法子
+//方法
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
     
     if (self.lastPath.row == 0) {
@@ -216,6 +216,11 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 //        [self.navigationController pushViewController:startVC animated:YES];
         NSDictionary *mulDic ;
         NSString * urlStr =@"";
+        
+        
+        
+/////////////////////payType == #    ->扫码洗车是会员，记次数
+        //
         if ([self.payType isEqualToString:@"#"]) {
             urlStr = @"MerScanPayment";
             mulDic = @{
@@ -225,13 +230,25 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
                                      @"MerName":self.SerMerChant
                                      };
         }else{
+            //自动扫码支付
+            if (self.lastPath.row == 0) {
+                //row == 0  --------》微信支付
+                urlStr = @"ScanPayment";
+                mulDic = @{
+                           //////////////////////////////////////
+                           //此处需要判断是哪一种支付方式
+                           //添加参数@"PayMethod":@(2)
+                           //////////////////////////////////////
+                           @"PayMethod":@(1),
+                           @"Account_Id":[UdStorage getObjectforKey:Userid],
+                           @"DeviceCode":self.DeviceCode
+                           };
+            }else{
+                //此处为支付宝支付
+                
+            }
             
-            urlStr = @"ScanPayment";
-            mulDic = @{
-                                     @"Account_Id":[UdStorage getObjectforKey:Userid],
-                                     @"DeviceCode":self.DeviceCode
-                                     };
-        }
+        }   //自动扫码支付@end
 #pragma mark-扫码洗车 3.37自动扫码支付
        
         NSDictionary *params = @{
@@ -318,7 +335,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     }
     else if(section == 2)
     {
-        return 1;
+        return 2;
     }
     
     return 2;

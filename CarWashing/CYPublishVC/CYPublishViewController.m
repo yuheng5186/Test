@@ -129,6 +129,8 @@
     }else{
         contentTextField.frame = CGRectMake(0, 0, Main_Screen_Width, 30 + contentTextField.contentSize.height);
     }
+    
+    
     //对字数进行限制
     NSString *comcatstr = [textView.text stringByReplacingCharactersInRange:range withString:text];
     NSInteger caninputlen = 400 - comcatstr.length;

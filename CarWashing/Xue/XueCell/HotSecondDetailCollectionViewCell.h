@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SDBrowserImageView.h"
 
 @interface HotSecondDetailCollectionViewCell : UICollectionViewCell
-
+//@property(strong,nonatomic)SDBrowserImageView *jackImageView;
 @end

@@ -10,16 +10,17 @@
 #import "UIView+SDAutoLayout.h"
 #import "SDWeiXinPhotoContainerView.h"
 #import "UIImageView+WebCache.h"
+#import "JackImageViewType.h"
 
 
 @interface QuesTableViewCell : UITableViewCell
 @property(strong,nonatomic)UIView *largeImageView;
-@property(strong,nonatomic)UIImageView *headImageView;
+@property(strong,nonatomic)JackImageViewType *headImageView;
 @property(strong,nonatomic)UILabel *nameLabel;
 @property(strong,nonatomic)UILabel *replyLabel;
 @property(strong,nonatomic)UILabel *timeLable;
 @property(strong,nonatomic)UILabel *mailLabel;
-@property(strong,nonatomic)UIImageView *realLargeImage;
+@property(strong,nonatomic)JackImageViewType *realLargeImage;
 
 @property(nonatomic)SDWeiXinPhotoContainerView *picContainerView;
 

@@ -109,6 +109,8 @@
 		18218FEB1F2B0C3C00F7207F /* DSCarClubDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18218FEA1F2B0C3C00F7207F /* DSCarClubDetailController.m */; };
 		182190061F301BA400F7207F /* DSUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 182190051F301BA400F7207F /* DSUserModel.m */; };
 		182190091F301BF600F7207F /* DSActivityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182190081F301BF600F7207F /* DSActivityDetailCell.m */; };
+		182216221FB04C00000BF80D /* JackImageViewType.m in Sources */ = {isa = PBXBuildFile; fileRef = 1822161E1FB04C00000BF80D /* JackImageViewType.m */; };
+		182216231FB04C00000BF80D /* JackPhotoBrower.m in Sources */ = {isa = PBXBuildFile; fileRef = 182216201FB04C00000BF80D /* JackPhotoBrower.m */; };
 		18322AAF1F4AD1C7003ABB7B /* Carcircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AAE1F4AD1C7003ABB7B /* Carcircle.m */; };
 		18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB21F4AD6DC003ABB7B /* MyCar.m */; };
 		18322AB71F4C2226003ABB7B /* CarClubNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB61F4C2226003ABB7B /* CarClubNews.m */; };
@@ -570,6 +572,10 @@
 		182190051F301BA400F7207F /* DSUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSUserModel.m; path = Find/CustomCell/DSUserModel.m; sourceTree = "<group>"; };
 		182190071F301BF600F7207F /* DSActivityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSActivityDetailCell.h; path = Find/CustomCell/DSActivityDetailCell.h; sourceTree = "<group>"; };
 		182190081F301BF600F7207F /* DSActivityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSActivityDetailCell.m; path = Find/CustomCell/DSActivityDetailCell.m; sourceTree = "<group>"; };
+		1822161E1FB04C00000BF80D /* JackImageViewType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JackImageViewType.m; sourceTree = "<group>"; };
+		1822161F1FB04C00000BF80D /* JackPhotoBrower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JackPhotoBrower.h; sourceTree = "<group>"; };
+		182216201FB04C00000BF80D /* JackPhotoBrower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JackPhotoBrower.m; sourceTree = "<group>"; };
+		182216211FB04C00000BF80D /* JackImageViewType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JackImageViewType.h; sourceTree = "<group>"; };
 		18322AAD1F4AD1C7003ABB7B /* Carcircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Carcircle.h; sourceTree = "<group>"; };
 		18322AAE1F4AD1C7003ABB7B /* Carcircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Carcircle.m; sourceTree = "<group>"; };
 		18322AB11F4AD6DC003ABB7B /* MyCar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCar.h; sourceTree = "<group>"; };
@@ -1227,6 +1233,7 @@
 		181051761FA96A5300355F2F /* Xue */ = {
 			isa = PBXGroup;
 			children = (
+				182215CC1FAFEB76000BF80D /* JackTool */,
 				1818511F1FA99860003A3A47 /* XueMode l */,
 				1818511E1FA9984D003A3A47 /* XueCell */,
 				1818511D1FA99727003A3A47 /* XueViewController */,
@@ -1560,6 +1567,17 @@
 				04443F4F1F5944450032BA5E /* DSScanPayController.m */,
 			);
 			name = Home;
+			sourceTree = "<group>";
+		};
+		182215CC1FAFEB76000BF80D /* JackTool */ = {
+			isa = PBXGroup;
+			children = (
+				182216211FB04C00000BF80D /* JackImageViewType.h */,
+				1822161E1FB04C00000BF80D /* JackImageViewType.m */,
+				1822161F1FB04C00000BF80D /* JackPhotoBrower.h */,
+				182216201FB04C00000BF80D /* JackPhotoBrower.m */,
+			);
+			path = JackTool;
 			sourceTree = "<group>";
 		};
 		18322AAC1F4AD181003ABB7B /* model */ = {
@@ -2817,6 +2835,7 @@
 				50B26E711F302E17009B3B9F /* DiscountCategoryView.m in Sources */,
 				181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */,
 				1839979F1F25E69100702071 /* DSPasswordController.m in Sources */,
+				182216231FB04C00000BF80D /* JackPhotoBrower.m in Sources */,
 				186175EA1FA6C3C100C6EFF3 /* MD5DataSigner.m in Sources */,
 				186175EB1FA6C3C100C6EFF3 /* RSADataVerifier.m in Sources */,
 				1853BA061F28475500B98C7F /* DSTextView.m in Sources */,
@@ -2890,6 +2909,7 @@
 				181E93071F208D560006511E /* DSRecommendController.m in Sources */,
 				1850904B1F4557E100795E0A /* UIView+TYAlertView.m in Sources */,
 				18A4B23D1F4E9F3600C64978 /* JXMapNavigationView.m in Sources */,
+				182216221FB04C00000BF80D /* JackImageViewType.m in Sources */,
 				041573A61F53C522004514E3 /* TFGridInputViewCellStyle.m in Sources */,
 				180E43041F3B471100013D2D /* UIView+BFSToastInfo.m in Sources */,
 				04DB28E61F6E184F009B4D9C /* WSDatePickerView.m in Sources */,

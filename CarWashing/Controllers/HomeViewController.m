@@ -53,6 +53,7 @@
 #import "DSStartWashingController.h"
 
 #import "HSUpdateApp.h"
+#import "DSScanPayController.h"
 
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
@@ -112,7 +113,24 @@
     [super viewDidAppear:animated];
     
     [self configLocationManager];
+    
+    UIButton *tempBut = [[UIButton alloc]initWithFrame:CGRectMake(200, 200, 200, 200)];
+    tempBut.backgroundColor = [UIColor orangeColor];
+    [tempBut addTarget:self action:@selector(act) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:tempBut];
 }
+
+-(void)act{
+    DSScanPayController *new = [[DSScanPayController alloc]init];
+    [self presentViewController:new animated:YES completion:nil];
+}
+
+
+
+
+
+
+
 
 -(void)hsUpdateApp{
     __weak __typeof(&*self)weakSelf = self;
