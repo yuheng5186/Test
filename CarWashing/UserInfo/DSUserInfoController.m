@@ -21,6 +21,7 @@
 #import "AFNetworkingTool.h"
 #import "UdStorage.h"
 #import "HTTPDefine.h"
+#import "RemindViewController.h"
 
 @interface DSUserInfoController ()<UITableViewDelegate,UITableViewDataSource,LKActionSheetDelegate,LKAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 

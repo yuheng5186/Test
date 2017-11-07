@@ -123,12 +123,6 @@
 -(void)rightbtnClick
 {
     NSLog(@"------图片--%@",_selectedPhotos);
-    UIImage *imageIn;
-    NSData *imageData;
-    for (imageIn in _selectedPhotos) {
-        imageData = [UIImageJPEGRepresentation(imageIn, 1)];
-        
-    }
     
     //先要文件流上传图片
     NSDictionary *mulDic = @{
