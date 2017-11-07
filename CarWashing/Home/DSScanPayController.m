@@ -18,6 +18,9 @@
 #import "AFNetworkingTool.h"
 #import "LCMD5Tool.h"
 
+#import "AlipayOrder.h"
+#import "RSADataSigner.h"
+#import <AlipaySDK/AlipaySDK.h>
 @interface DSScanPayController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) UITableView *payTableView;
@@ -211,24 +214,91 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-//        DSStartWashingController    *startVC    = [[DSStartWashingController alloc]init];
-//        startVC.hidesBottomBarWhenPushed        = YES;
-//        [self.navigationController pushViewController:startVC animated:YES];
+
         NSDictionary *mulDic ;
         NSString * urlStr =@"";
-        
-        
-        
-/////////////////////payType == #    ->扫码洗车是会员，记次数
+    
+/////////////////////payType == #    ->商家扫码支付
         //
         if ([self.payType isEqualToString:@"#"]) {
             urlStr = @"MerScanPayment";
-            mulDic = @{
-                                     @"Account_Id":[UdStorage getObjectforKey:Userid],
-                                     @"MerCode":self.DeviceCode,
-                                     @"SerCode":@(0),
-                                     @"MerName":self.SerMerChant
-                                     };
+            if (self.lastPath.row == 0) {
+                //商家-微信支付
+                mulDic = @{
+                           @"PayMethod":@(1),
+                           @"Account_Id":[UdStorage getObjectforKey:Userid],
+                           @"MerCode":self.DeviceCode,
+                           @"OrderCode":@""
+                           };
+                /////////////////////////
+                NSDictionary *params = @{
+                                         @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                         @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                         };
+                [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/%@",Khttp,urlStr] success:^(NSDictionary *dict, BOOL success) {
+                    if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]){
+                        NSDictionary *di = [NSDictionary dictionary];
+                        di = [dict objectForKey:@"JsonData"];
+                        
+                        NSMutableString *stamp = [di objectForKey:@"timestamp"];
+                        //调起微信支付
+                        PayReq *req= [[PayReq alloc] init];
+                        req.partnerId
+                        = [di objectForKey:@"partnerid"];
+                        req.prepayId
+                        = [di objectForKey:@"prepayid"];
+                        req.nonceStr
+                        = [di objectForKey:@"noncestr"];
+                        req.timeStamp
+                        = stamp.intValue;
+                        req.package
+                        = [di objectForKey:@"packag"];
+                        req.sign = [di objectForKey:@"sign"];
+                        BOOL result = [WXApi sendReq:req];
+                        
+                        NSLog(@"-=-=-=-=-%d", result);
+                        //日志输出
+                        NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[di
+                                                                                                                    objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign
+                              );
+                        //if @end
+                    }else{
+                        [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+                        //else @end
+                    }
+                } fail:^(NSError *error) {
+                    [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+                }];
+                
+                
+                /////////////////////////
+            }else{
+                //商家-支付宝支付
+                mulDic = @{
+                           @"PayMethod":@(2),
+                           @"Account_Id":[UdStorage getObjectforKey:Userid],
+                           @"MerCode":self.DeviceCode,
+                           @"OrderCode":@""
+                           };
+                /////////////////////////
+                NSDictionary *params = @{
+                                         @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                         @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                         };
+                [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/%@",Khttp,urlStr] success:^(NSDictionary *dict, BOOL success) {
+                    
+                    NSString *appScheme = @"QiangWei";
+                    [[AlipaySDK defaultService] payOrder:[NSString stringWithFormat:@"%@",dict[@"JsonData"][@"ordercode"]] fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+                        NSLog(@"reslut = %@",resultDic);
+                    }];
+                    
+                    
+                } fail:^(NSError *error) {
+                    [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+                }];
+                
+            }
+
         }else{
             //自动扫码支付
             if (self.lastPath.row == 0) {
@@ -243,84 +313,136 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
                            @"Account_Id":[UdStorage getObjectforKey:Userid],
                            @"DeviceCode":self.DeviceCode
                            };
+                
+                NSDictionary *params = @{
+                                         @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                         @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                         };
+                [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/%@",Khttp,urlStr] success:^(NSDictionary *dict, BOOL success) {
+                    if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]){
+                        NSDictionary *di = [NSDictionary dictionary];
+                        di = [dict objectForKey:@"JsonData"];
+                        
+                        NSMutableString *stamp = [di objectForKey:@"timestamp"];
+                        //调起微信支付
+                        PayReq *req= [[PayReq alloc] init];
+                        req.partnerId
+                        = [di objectForKey:@"partnerid"];
+                        req.prepayId
+                        = [di objectForKey:@"prepayid"];
+                        req.nonceStr
+                        = [di objectForKey:@"noncestr"];
+                        req.timeStamp
+                        = stamp.intValue;
+                        req.package
+                        = [di objectForKey:@"packag"];
+                        req.sign = [di objectForKey:@"sign"];
+                        BOOL result = [WXApi sendReq:req];
+                        
+                        NSLog(@"-=-=-=-=-%d", result);
+                        //日志输出
+                        NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[di
+                                                                                                                    objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign
+                              );
+                        //if @end
+                    }else{
+                        [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+                        //else @end
+                    }
+                } fail:^(NSError *error) {
+                    NSLog(@"%@",error);
+                    [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+
+                }];         //afnetworking @end
+//                [alertController addAction:OKAction];
+                
+//                [self presentViewController:alertController animated:YES completion:nil];
             }else{
                 //此处为支付宝支付
-                
-            }
+                //需要补全支付宝的流程
+                urlStr = @"ScanPayment";
+                mulDic = @{
+                           //////////////////////////////////////
+                           //此处需要判断是哪一种支付方式
+                           //添加参数@"PayMethod":@(2)
+                           //////////////////////////////////////
+                           @"PayMethod":@(2),
+                           @"Account_Id":[UdStorage getObjectforKey:Userid],
+                           @"DeviceCode":self.DeviceCode
+                           };
+                NSDictionary *params = @{
+                                         @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                         @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                         };
+                [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/%@",Khttp,urlStr] success:^(NSDictionary *dict, BOOL success) {
+                    
+                    NSString *appScheme = @"QiangWei";
+                    [[AlipaySDK defaultService] payOrder:[NSString stringWithFormat:@"%@",dict[@"JsonData"][@"ordercode"]] fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+                        NSLog(@"reslut = %@",resultDic);
+                    }];
+                    
+                    
+                } fail:^(NSError *error) {
+                    [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+                }];
+            }       //支付宝支付结束
             
         }   //自动扫码支付@end
 #pragma mark-扫码洗车 3.37自动扫码支付
        
-        NSDictionary *params = @{
-                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                                 };
-        NSLog(@"%@",params);
-        NSLog(@"--%@",[NSString stringWithFormat:@"%@Payment/%@",Khttp,urlStr]);
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/%@",Khttp,urlStr] success:^(NSDictionary *dict, BOOL success) {
-            NSLog(@"%@",dict);
-            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-            {
-                NSDictionary *di = [NSDictionary dictionary];
-                di = [dict objectForKey:@"JsonData"];
-                
-                NSMutableString *stamp = [di objectForKey:@"timestamp"];
-                //调起微信支付
-                PayReq *req= [[PayReq alloc] init];
-                req.partnerId
-                = [di objectForKey:@"partnerid"];
-                req.prepayId
-                = [di objectForKey:@"prepayid"];
-                req.nonceStr
-                = [di objectForKey:@"noncestr"];
-                req.timeStamp
-                = stamp.intValue;
-                req.package
-                = [di objectForKey:@"packag"];
-                req.sign = [di objectForKey:@"sign"];
-                BOOL result = [WXApi sendReq:req];
-                
-                NSLog(@"-=-=-=-=-%d", result);
-                //日志输出
-                NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[di
-                                                                                                            objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign
-                      );
-                
-            }
-            else
-            {
-                
-          
-                [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
-                
-            }
-            
-            
-            
-            
-        } fail:^(NSError *error) {
-            NSLog(@"%@",error);
-            [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
-        }];
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+//        NSLog(@"%@",params);
+//        NSLog(@"--%@",[NSString stringWithFormat:@"%@Payment/%@",Khttp,urlStr]);
+//
+//        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/%@",Khttp,urlStr] success:^(NSDictionary *dict, BOOL success) {
+//            NSLog(@"%@",dict);
+//            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+//            {
+//                NSDictionary *di = [NSDictionary dictionary];
+//                di = [dict objectForKey:@"JsonData"];
+//
+//                NSMutableString *stamp = [di objectForKey:@"timestamp"];
+//                //调起微信支付
+//                PayReq *req= [[PayReq alloc] init];
+//                req.partnerId
+//                = [di objectForKey:@"partnerid"];
+//                req.prepayId
+//                = [di objectForKey:@"prepayid"];
+//                req.nonceStr
+//                = [di objectForKey:@"noncestr"];
+//                req.timeStamp
+//                = stamp.intValue;
+//                req.package
+//                = [di objectForKey:@"packag"];
+//                req.sign = [di objectForKey:@"sign"];
+//                BOOL result = [WXApi sendReq:req];
+//
+//                NSLog(@"-=-=-=-=-%d", result);
+//                //日志输出
+//                NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[di
+//                                                                                        objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign
+//                      );
+//
+//            }
+//            else
+//            {
+//                [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+//            }
+//
+//        } fail:^(NSError *error) {
+//            NSLog(@"%@",error);
+//            [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+//        }];
+//
+//
     }];
     [alertController addAction:OKAction];
-    
+
     [self presentViewController:alertController animated:YES completion:nil];
     
 }
+
+                               
 
 
 

@@ -53,7 +53,7 @@
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateUserName:) name:@"updatenamesuccess" object:nil];
     [center addObserver:self selector:@selector(noticeupdateUserName:) name:@"updatephonesuccess" object:nil];
-    self.sexString = @"未填写";
+//    self.sexString = @"未填写";
     [self createSubView];
 
 }
@@ -164,17 +164,19 @@
         }
         else if (indexPath.row == 2) {
             cell.textLabel.text         = @"性别";
-            if([APPDELEGATE.currentUser.userSex isKindOfClass:[NSNull null]])
-            {
-                cell.detailTextLabel.text   = self.sexString;
-            }
-            else if([APPDELEGATE.currentUser.userSex isEqual:@"0"])
+            
+            if([APPDELEGATE.currentUser.userSex isEqual:@"0"])
             {
                 cell.detailTextLabel.text   = @"男";
+                
+            }
+            else if([APPDELEGATE.currentUser.userSex isEqual:@"1"])
+            {
+                cell.detailTextLabel.text   = @"女";
             }
             else
             {
-                cell.detailTextLabel.text   = @"女";
+                cell.detailTextLabel.text   = self.sexString;
             }
             
         }else {

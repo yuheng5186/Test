@@ -257,7 +257,6 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         
     }];
     [alertController addAction:OKAction];
-    
     [self presentViewController:alertController animated:YES completion:nil];
     
 }
@@ -603,26 +602,26 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
 
 }
 
--(void)alipay{
-    [AFNetworkingTool post:nil andurl:@"http://119.23.53.225:20000/WeixinPay.ashx?op=GetUnifiedorder" success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"---%@",dict);
-        NSString *appScheme = @"QiangWei";
-        [[AlipaySDK defaultService] payOrder:[NSString stringWithFormat:@"%@",dict[@"status"]] fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-            NSLog(@"reslut = %@",resultDic);
-            /**        * 状态码        * 9000 订单支付成功        * 8000 正在处理中        * 4000 订单支付失败        * 6001 用户中途取消        * 6002 网络连接出错        */
-            //            if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
-            ////                [self aliPayReslut];
-            //            }else if ([resultDic[@"resultStatus"]isEqualToString:@"4000"]){
-            //                [self.view showInfo:@"订单支付失败" autoHidden:YES interval:2];
-            //
-            //            }else if ([resultDic[@"resultStatus"]isEqualToString:@"6001"]){
-            //                 [self.view showInfo:@"订单支付已取消" autoHidden:YES interval:2];
-            //            }
-        }];
-    } fail:^(NSError *error) {
-        NSLog(@"---错误%@",error);
-    }];
-}
+//-(void)alipay{
+//    [AFNetworkingTool post:nil andurl:@"http://119.23.53.225:20000/WeixinPay.ashx?op=GetUnifiedorder" success:^(NSDictionary *dict, BOOL success) {
+//        NSLog(@"---%@",dict);
+//        NSString *appScheme = @"QiangWei";
+//        [[AlipaySDK defaultService] payOrder:[NSString stringWithFormat:@"%@",dict[@"status"]] fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+//            NSLog(@"reslut = %@",resultDic);
+//            /**        * 状态码        * 9000 订单支付成功        * 8000 正在处理中        * 4000 订单支付失败        * 6001 用户中途取消        * 6002 网络连接出错        */
+//            //            if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+//            ////                [self aliPayReslut];
+//            //            }else if ([resultDic[@"resultStatus"]isEqualToString:@"4000"]){
+//            //                [self.view showInfo:@"订单支付失败" autoHidden:YES interval:2];
+//            //
+//            //            }else if ([resultDic[@"resultStatus"]isEqualToString:@"6001"]){
+//            //                 [self.view showInfo:@"订单支付已取消" autoHidden:YES interval:2];
+//            //            }
+//        }];
+//    } fail:^(NSError *error) {
+//        NSLog(@"---错误%@",error);
+//    }];
+//}
 //- (void)doAlipayPay
 //{
 //    //重要说明

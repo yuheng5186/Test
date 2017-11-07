@@ -114,16 +114,16 @@
     
     [self configLocationManager];
     
-    UIButton *tempBut = [[UIButton alloc]initWithFrame:CGRectMake(200, 200, 200, 200)];
-    tempBut.backgroundColor = [UIColor orangeColor];
-    [tempBut addTarget:self action:@selector(act) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:tempBut];
+//    UIButton *tempBut = [[UIButton alloc]initWithFrame:CGRectMake(200, 200, 200, 200)];
+//    tempBut.backgroundColor = [UIColor orangeColor];
+//    [tempBut addTarget:self action:@selector(act) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:tempBut];
 }
 
--(void)act{
-    DSScanPayController *new = [[DSScanPayController alloc]init];
-    [self presentViewController:new animated:YES completion:nil];
-}
+//-(void)act{
+//    DSScanPayController *new = [[DSScanPayController alloc]init];
+//    [self presentViewController:new animated:YES completion:nil];
+//}
 
 
 

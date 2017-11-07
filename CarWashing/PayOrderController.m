@@ -55,6 +55,7 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(goBack) name:@"paysuccess" object:nil];
     self.payOrderView.delegate = self;
@@ -123,6 +124,7 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
 
 -(void)setData
 {
+    
         NSDictionary *mulDic = @{
                                  @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                                  @"PageIndex":@0,
@@ -179,6 +181,7 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
 
 -(void)setDataMore
 {
+    
         NSDictionary *mulDic = @{
                                  @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                                  @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],

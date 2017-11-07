@@ -240,6 +240,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
+        ////////////////////商家服务
         if ([payStyle isEqualToString:@"微信支付"]) {
             //商家编号:MerCode,SerCode 服务编号,
             NSLog(@"%@==%@==%@==%@",self.MCode,self.SCode,self.OrderCode,self.SerMerChant);
@@ -250,6 +251,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
                 uriStr = @"ServicePayment";
             }
             NSDictionary *mulDic = @{
+                                     @"PayMethod":@(1),
                                      @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                                      @"MerCode":self.MCode,
                                      @"SerCode":self.SCode,
@@ -552,10 +554,39 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 }
 */
 -(void)alipay{
-    [AFNetworkingTool post:nil andurl:@"http://119.23.53.225:20000/WeixinPay.ashx?op=GetUnifiedorder" success:^(NSDictionary *dict, BOOL success) {
+    
+    
+    NSString *uriStr = @"";
+    if ([self.SCode isEqualToString:@"0"]) {
+        uriStr = @"MerScanPayment";
+    }else{
+        uriStr = @"ServicePayment";
+    }
+    ////////////////////////////////////////
+    NSDictionary *mulDic = @{
+                             @"PayMethod":@(2),
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"MerCode":self.MCode,
+                             @"SerCode":self.SCode,
+                             @"OrderCode":self.OrderCode,
+                             @"MerName":self.SerMerChant
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    
+    ////////////////////////////////////////
+    
+    
+    
+    
+    ////////////////////////////////////////
+
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/%@",Khttp,uriStr] success:^(NSDictionary *dict, BOOL success) {
         NSLog(@"---%@",dict);
         NSString *appScheme = @"QiangWei";
-        [[AlipaySDK defaultService] payOrder:[NSString stringWithFormat:@"%@",dict[@"status"]] fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+        [[AlipaySDK defaultService] payOrder:[NSString stringWithFormat:@"%@",dict[@"JsonData"][@"ordercode"]] fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             NSLog(@"reslut = %@",resultDic);
             /**        * 状态码        * 9000 订单支付成功        * 8000 正在处理中        * 4000 订单支付失败        * 6001 用户中途取消        * 6002 网络连接出错        */
             //            if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
