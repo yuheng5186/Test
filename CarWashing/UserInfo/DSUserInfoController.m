@@ -27,6 +27,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSString *sexString;
 @property (nonatomic, strong) UIImageView *userImageView;
+@property(nonatomic,retain)NSString *sex;
 
 @end
 
@@ -46,6 +47,9 @@
     
 }
 
+
+#pragma mark - 生命周期
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -54,9 +58,39 @@
     [center addObserver:self selector:@selector(noticeupdateUserName:) name:@"updatenamesuccess" object:nil];
     [center addObserver:self selector:@selector(noticeupdateUserName:) name:@"updatephonesuccess" object:nil];
 //    self.sexString = @"未填写";
+    
     [self createSubView];
 
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self requestUserDataFromWeb];
+    
+}
+
+#pragma mark - 请求用户信息
+-(void)requestUserDataFromWeb{
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetUserInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSDictionary *json = dict[@"JsonData"];
+        self.sex = json[@"Sex"];
+        NSLog(@"请求用户信息的结果----------------------------%@",_sex);
+        
+        
+    } fail:^(NSError *error) {
+        
+    }];
+    
+}
+
+
 
 - (void) createSubView {
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStyleGrouped];
@@ -165,19 +199,20 @@
         else if (indexPath.row == 2) {
             cell.textLabel.text         = @"性别";
             
-            if([APPDELEGATE.currentUser.userSex isEqual:@"0"])
+            if([APPDELEGATE.currentUser.userSex isEqual:@"1"])
             {
                 cell.detailTextLabel.text   = @"男";
                 
             }
-            else if([APPDELEGATE.currentUser.userSex isEqual:@"1"])
+            else if([APPDELEGATE.currentUser.userSex isEqual:@"0"])
             {
                 cell.detailTextLabel.text   = @"女";
             }
-            else
-            {
-                cell.detailTextLabel.text   = self.sexString;
-            }
+//            else
+//            {
+//                cell.detailTextLabel.text   = self.sexString;
+//                cell.detailTextLabel.text = @"";
+//            }
             
         }else {
         
@@ -296,7 +331,7 @@
                 NSDictionary *mulDic = @{
                                          @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                                          @"ModifyType":@"4",
-                                         @"Sex":@"0"
+                                         @"Sex":@"1"
                                          };
                 NSDictionary *params = @{
                                          @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
@@ -306,7 +341,7 @@
                     
                     if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                     {
-                        APPDELEGATE.currentUser.userSex = @"0";
+                        APPDELEGATE.currentUser.userSex = @"1";
                         [self.tableView reloadData];
                         
                         
@@ -340,7 +375,7 @@
                 NSDictionary *mulDic = @{
                                          @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                                          @"ModifyType":@"4",
-                                         @"Sex":@"1"
+                                         @"Sex":@"0"
                                          };
                 NSDictionary *params = @{
                                          @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
@@ -350,7 +385,7 @@
                     
                     if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                     {
-                        APPDELEGATE.currentUser.userSex = @"1";
+                        APPDELEGATE.currentUser.userSex = @"0";
                         
                         [self.tableView reloadData];
                         

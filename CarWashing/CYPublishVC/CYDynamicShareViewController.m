@@ -180,11 +180,17 @@
     return _backScrollerView;
 }
 
-#pragma mark---选取的图片数组
+#pragma mark---上传的按钮
 -(void)rightbtnClick
 {
     NSLog(@"图片--%@",_selectedPhotos);
-
+    
+    
+    
+    
+    
+    
+    
 
 }
 #pragma mark---图片相关

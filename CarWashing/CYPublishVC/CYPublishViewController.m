@@ -17,6 +17,11 @@
 #import "LxGridViewFlowLayout.h"
 #import "TZImageManager.h"
 #import "TZVideoPlayerController.h"
+
+#import "UdStorage.h"
+#import "HTTPDefine.h"
+#import "AFNetworkingTool.h"
+#import "LCMD5Tool.h"
 @interface CYPublishViewController ()<TZImagePickerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UIAlertViewDelegate,UINavigationControllerDelegate,UITextViewDelegate>
 {
     UITextView * contentTextField;
@@ -114,10 +119,27 @@
     return _backScrollerView;
 }
 
-#pragma mark---选取的图片数组
+#pragma mark---上传按钮
 -(void)rightbtnClick
 {
-    NSLog(@"图片--%@",_selectedPhotos);
+    NSLog(@"------图片--%@",_selectedPhotos);
+    UIImage *imageIn;
+    NSData *imageData;
+    for (imageIn in _selectedPhotos) {
+        imageData = [UIImageJPEGRepresentation(imageIn, 1)];
+        
+    }
+    
+    //先要文件流上传图片
+    NSDictionary *mulDic = @{
+                             @"ActivityType":@(2),
+                             @"Account_Id":[UdStorage getObjectforKey:Userid],
+                             @"ActivityName":@"",
+                             @"Comment":@""
+                             };
+    //ActivityName->发布标题
+    //Comment->发布内容
+    
 }
 - (void)textViewDidBeginEditing:(UITextView *)textView{
      placeHoldLabel.text =nil;
