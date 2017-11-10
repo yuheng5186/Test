@@ -11,6 +11,7 @@
 @interface CYUserCarTableViewCell : UITableViewCell
 @property (nonatomic,strong) UIImageView * carImageView;
 @property (nonatomic,strong) UILabel * titlelabel;
+@property (nonatomic,strong) UILabel * detaillabel;
 @property (nonatomic,strong) UILabel * distancelabel;
 @property (nonatomic,strong) UILabel * timeLabel;
 -(void)configCell:(CYUserCarModel*)model;

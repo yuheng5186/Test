@@ -97,7 +97,7 @@
         if (jackButton.tag == 0) {
             //第一个按钮默认选中
             jackButton.selected = YES;
-            jackButton.titleLabel.font=[UIFont systemFontOfSize:17];
+            jackButton.titleLabel.font=[UIFont systemFontOfSize:15];
             //记录原按钮
             self.selectedBtn = jackButton;
         }
@@ -143,7 +143,7 @@
         //每当点击按钮时取消上次选中的
         self.selectedBtn.selected = NO;
         self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
-        sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
+        sender.titleLabel.font=[UIFont systemFontOfSize:15.0];
         //当前点击按钮选中
         sender.selected = YES;
         self.selectedBtn = sender;
@@ -153,7 +153,7 @@
         //每当点击按钮时取消上次选中的
         self.selectedBtn.selected = NO;
         self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
-        sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
+        sender.titleLabel.font=[UIFont systemFontOfSize:15.0];
         //当前点击按钮选中
         sender.selected = YES;
         self.selectedBtn = sender;
@@ -164,7 +164,7 @@
         //每当点击按钮时取消上次选中的
         self.selectedBtn.selected = NO;
         self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
-        sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
+        sender.titleLabel.font=[UIFont systemFontOfSize:15.0];
         //当前点击按钮选中
         sender.selected = YES;
         self.selectedBtn = sender;
@@ -174,7 +174,7 @@
         //每当点击按钮时取消上次选中的
         self.selectedBtn.selected = NO;
         self.selectedBtn.titleLabel.font=[UIFont systemFontOfSize:14.0];
-        sender.titleLabel.font=[UIFont systemFontOfSize:17.0];
+        sender.titleLabel.font=[UIFont systemFontOfSize:15.0];
         //当前点击按钮选中
         sender.selected = YES;
         self.selectedBtn = sender;

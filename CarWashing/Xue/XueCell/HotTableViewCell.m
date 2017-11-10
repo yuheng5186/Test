@@ -69,7 +69,7 @@
     [self.contentView addSubview:_commentNumLabel];
     
     UIButton *commButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-160, 237, 20, 20)];
-    commButton.backgroundColor = [UIColor orangeColor];
+    [commButton setImage:[UIImage imageNamed:@"faxianxiaoxi"] forState:UIControlStateNormal];
     [self.contentView addSubview:commButton];
 }
 -(void)configCell:(CYHotTopicModel*)model

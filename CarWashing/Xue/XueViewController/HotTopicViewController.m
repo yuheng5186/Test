@@ -14,7 +14,7 @@
 #import "HTTPDefine.h"
 #import "LCMD5Tool.h"
 #import "CYHotTopicModel.h"
-
+#import "DSCarClubDetailController.h"
 
 
 @interface HotTopicViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -125,6 +125,13 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CYHotTopicModel * model = self.modelArray[indexPath.row];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
+    detailController.hidesBottomBarWhenPushed       = YES;
+    detailController.ActivityCode                   = model.ActivityCode;
+    [self.navigationController pushViewController:detailController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

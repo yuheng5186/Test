@@ -14,4 +14,5 @@
 @property(nonatomic,copy)NSString *IndexImg;        //图片
 @property(nonatomic,copy)NSString *CommentCount;        //评论
 @property(nonatomic,copy)NSString *GiveCount;        //赞
+@property(nonatomic,assign)NSInteger ActivityCode;        //赞
 @end

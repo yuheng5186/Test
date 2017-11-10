@@ -24,7 +24,7 @@
 @interface DSCarClubDetailController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIScrollViewDelegate>
 {
     CarClubNews *newsDetail;
-    
+    UILabel * titleLabel;
     
 }
 
@@ -94,8 +94,19 @@
 }
 
 - (void) createSubView {
+   
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height-Main_Screen_Height*60/667-64)];
-    self.tableView.top              = 0;
+    if ([self.showType isEqualToString:@"二手车"]) {
+        self.tableView.top              = 50;
+        self.tableView.height =Main_Screen_Height-Main_Screen_Height*60/667-64-50;
+        titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, Main_Screen_Width, 50)];
+        titleLabel.backgroundColor=[UIColor whiteColor];
+        [self.contentView addSubview:titleLabel];
+    }else{
+        self.tableView.top              = 0;
+        Main_Screen_Height-Main_Screen_Height*60/667-64;
+    }
+    
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
 
     self.tableView.delegate         = self;
@@ -506,20 +517,32 @@
 
 -(void)requestActivityDetail
 {
-    NSDictionary *mulDic = @{
-                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                             @"ActivityCode":[NSString stringWithFormat:@"%ld",self.ActivityCode]
-                             };
+    NSDictionary *mulDic ;
+    NSString * urlStr =@"";
+    if ([self.showType isEqualToString:@"二手车"])
+    {
+        mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"CarCode":[NSString stringWithFormat:@"%ld",self.ActivityCode]
+                                 };
+        urlStr = @"Activity/SecondHandCarDetails";
+    }else{
+        mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"ActivityCode":[NSString stringWithFormat:@"%ld",self.ActivityCode]
+                                 };
+        urlStr = @"Activity/GetActivityInfo";
+    }
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     //
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/GetActivityInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@%@",Khttp,urlStr] success:^(NSDictionary *dict, BOOL success) {
         NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
-            
+            titleLabel.text=[NSString stringWithFormat:@"%@%@",dict[@"JsonData"][@"CarBrand"],dict[@"JsonData"][@"CarType"]];
 //            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
             
             NSDictionary *dic = [dict objectForKey:@"JsonData"];
@@ -529,16 +552,12 @@
             
             NSArray *arr = [NSArray array];
             arr = [dic objectForKey:@"actModelList"];
-            for(NSDictionary *dic in arr)
-            {
+            if (arr.count!=0) {
+                _modelsArray = (NSMutableArray*)[DSUserModel mj_objectArrayWithKeyValuesArray:dic[@"actModelList"]];
+                self.CommentCount=_modelsArray.count;
 
-                NSLog(@"%@",dic);
-                DSUserModel *model = [DSUserModel new];
-            
-                [model setValuesForKeysWithDictionary:dic];
-                [_modelsArray addObject:model];
             }
-            self.CommentCount=_modelsArray.count;
+            
        
 //            self.userName.text = newsDetail.FromusrName;
 //            self.sayTime.text = newsDetail.ActDate;
@@ -934,7 +953,6 @@
 
     if (sender.selected == NO) {
         
-        
         NSDictionary *mulDic = @{
                                  @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                                  @"SupTypeCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
@@ -965,7 +983,6 @@
                 {
                     self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount];
                 }
-                
                 
                 
                 [self.downGoodButton setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
@@ -1233,6 +1250,10 @@
             NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];
             [[NSNotificationCenter defaultCenter]postNotification:notice];
             [self.view showInfo:@"评论添加成功" autoHidden:YES interval:2];
+            if ([self.showType isEqualToString:@"二手车"])
+            {
+                self.showType = @"二手车";
+            }
             //            self.dic = [dict objectForKey:@"JsonData"];
             //        [self.MerchantDetailData addObjectsFromArray:arr];
             
@@ -1261,7 +1282,7 @@
     NSLog(@"%@",textField.text);
     if(textField.text.length == 0)
     {
-        
+        [self addCommentariesData];
     }else
     {
         [self addCommentariesData];

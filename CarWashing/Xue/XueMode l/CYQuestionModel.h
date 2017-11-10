@@ -17,7 +17,7 @@
 @property(nonatomic,copy)NSString *ActDate;         //时间
 @property(nonatomic,copy)NSString *ActivityName;
 @property(nonatomic,copy)NSString *IndexImg;
-
+@property(nonatomic,assign)NSInteger ActivityCode; 
 
 
 @end

@@ -9,6 +9,7 @@
 #import "UsedCarViewController.h"
 #import "CYUserCarTableViewCell.h"
 #import "CYUserCarModel.h"
+#import "DSCarClubDetailController.h"
 @interface UsedCarViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *CYUserCarTableView;
 @property(strong,nonatomic)NSMutableArray *UserArray;
@@ -38,7 +39,7 @@
                              };
     
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/SecondHandCarList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"--数据%@",dict);
+        NSLog(@"--二手车数据%@",dict);
         if ([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]) {
             //获取json数组
             self.UserArray = (NSMutableArray*)[CYUserCarModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
@@ -58,7 +59,6 @@
         _CYUserCarTableView.dataSource = self;
         _CYUserCarTableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
         _CYUserCarTableView.rowHeight = 145*Main_Screen_Height/667;
-        
     }
     return _CYUserCarTableView;
 }
@@ -79,6 +79,13 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    CYUserCarModel * model = self.UserArray[indexPath.row];
     [_CYUserCarTableView deselectRowAtIndexPath:indexPath animated:YES];
+    DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
+    detailController.hidesBottomBarWhenPushed       = YES;
+    detailController.ActivityCode                   = model.CarCode;
+    detailController.showType = @"二手车";
+    [self.navigationController pushViewController:detailController animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 @end

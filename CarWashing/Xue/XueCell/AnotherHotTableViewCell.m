@@ -68,7 +68,6 @@
     UIButton *goodButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-80, 177, 20, 20)];
     [goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
     [self.contentView addSubview:goodButton];
-    
     _commentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-130, 173, 50, 30)];
     _commentNumLabel.textColor = [UIColor colorFromHex:@"#999999"];
     _commentNumLabel.text = @"2333";
@@ -76,7 +75,7 @@
     [self.contentView addSubview:_commentNumLabel];
     
     UIButton *commButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-160, 177, 20, 20)];
-    commButton.backgroundColor = [UIColor orangeColor];
+    [commButton setImage:[UIImage imageNamed:@"faxianxiaoxi"] forState:UIControlStateNormal];
     [self.contentView addSubview:commButton];
     
     UICollectionViewFlowLayout *layOut = [[UICollectionViewFlowLayout alloc]init];
