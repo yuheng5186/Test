@@ -63,7 +63,7 @@
             //获取json数组
 
             self.modelArray = (NSMutableArray*)[CYQuestionModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
-
+  
         }
         [self.quesTableView reloadData];
     } fail:^(NSError *error) {
@@ -116,18 +116,26 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CYQuestionModel * model = self.modelArray[indexPath.section];
+//    //计算label高度
+//    NSDictionary *font123 = @{NSFontAttributeName:[UIFont systemFontOfSize:13]};
+//    CGSize maxSize = CGSizeMake(Main_Screen_Width-70, MAXFLOAT);
+//    CGSize labelSize = [model.ActivityName boundingRectWithSize:maxSize options:(NSStringDrawingUsesLineFragmentOrigin) attributes:font123 context:nil].size;
+    
+    if([model.IndexImg rangeOfString:@","].location !=NSNotFound)//_roaldSearchText
+    {
+        NSArray * arrImage = [model.IndexImg componentsSeparatedByString:@","];
+       if(arrImage.count > 1 && arrImage.count <= 3){
+            return 260;
+        }else if (arrImage.count <= 6 && arrImage.count > 3){
+            return 260;
+        }
+        return 340;
+    }
     if ([model.IndexImg isEqualToString:@""]) {
-         return 150;
+        return 100;
     }
-    NSArray * arrImage = [model.IndexImg componentsSeparatedByString:@","];
-    if(arrImage.count == 1){
-        return 300;
-    }else if(arrImage.count > 1 && arrImage.count <= 3){
-        return 230;
-    }else if (arrImage.count <= 6 && arrImage.count > 3){
-        return 315;
-    }
-        return 400;
+    return 250;
+    
 }
 
 //每组行数

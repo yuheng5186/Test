@@ -40,12 +40,12 @@
     _titleLable.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     [self.contentView addSubview:_titleLable];
     
-    _largeImageViewOnly = [[UIImageView alloc]initWithFrame:CGRectMake(12, 75, Main_Screen_Width-24, 150)];
+    _largeImageViewOnly = [[JackImageViewType alloc]initWithFrame:CGRectMake(12, 75, Main_Screen_Width-24, 150)];
 //    _largeImageViewOnly.backgroundColor = [UIColor grayColor];
     _largeImageViewOnly.image = [UIImage imageNamed:@"placeholder"];
     [self.contentView addSubview:_largeImageViewOnly];
     
-    _timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(12, 235, 80, 30)];
+    _timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(12, 235, 150, 30)];
     _timeLabel.text = @"15:40";
     _timeLabel.font = [UIFont systemFontOfSize:14];
     _timeLabel.textColor = [UIColor colorFromHex:@"#999999"];
@@ -72,5 +72,12 @@
     commButton.backgroundColor = [UIColor orangeColor];
     [self.contentView addSubview:commButton];
 }
-
+-(void)configCell:(CYHotTopicModel*)model
+{
+    [self.largeImageViewOnly sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,model.IndexImg]] placeholderImage:[UIImage imageNamed:@"photo"]];
+    self.titleLable.text= [NSString stringWithFormat:@"%@",model.ActivityName];
+    self.timeLabel.text= [NSString stringWithFormat:@"%@",model.ActDate];
+    self.amazingNumberLabel.text= [NSString stringWithFormat:@"%@",model.GiveCount];
+    self.commentNumLabel.text= [NSString stringWithFormat:@"%@",model.CommentCount];
+}
 @end

@@ -30,9 +30,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor cyanColor];
-    [self getData];
-    self.page = 0;
     [self.view addSubview:self.hotTable];
+    [self requestWeb];
+    self.page = 0;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -60,7 +60,6 @@
     NSDictionary *mulDic = @{
                              @"ActivityType":@(3),//咨询,2.车友提问,3.热门话题
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                             //                             @"Area":[UdStorage getObjectforKey:@"City"],
                              @"PageIndex":@(0),
                              @"PageSize":@10
                              };
@@ -99,36 +98,29 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSArray *tempArray = [[NSArray alloc]initWithArray:_dataArray[indexPath.section]];
-    if(tempArray.count == 1){
-        return 280;
+    CYHotTopicModel *model = self.modelArray[indexPath.row];
+    NSArray *imageArray = [model.IndexImg componentsSeparatedByString:@","];
+    if (imageArray.count==0||imageArray.count==1) {
+        return  280;
     }
     return 210;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return self.modelArray.count;
 }
 
-//动态格子数量
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
-}
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     CYHotTopicModel *singleModel = self.modelArray[indexPath.row];
     NSArray *imageArray = [singleModel.IndexImg componentsSeparatedByString:@","];
-    
-    if(indexPath.section == 1){
-        
+    if (imageArray.count==0||imageArray.count==1) {
         HotTableViewCell *oneImageCell = [tableView dequeueReusableCellWithIdentifier:@"OneImage" forIndexPath:indexPath];
-        NSLog(@"IndexImgIndexImgIndexImgIndexImgIndexImg%@",singleModel.ActivityName);
-        oneImageCell.titleLable.text = singleModel.ActivityName;
+        [oneImageCell configCell:singleModel];
         return oneImageCell;
-        
-    }//@end if
-    
+    }
     AnotherHotTableViewCell *collectionCell = [tableView dequeueReusableCellWithIdentifier:@"collect" forIndexPath:indexPath];
+    [collectionCell configCell:singleModel];
     return collectionCell;
 }
 
