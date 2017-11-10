@@ -7,7 +7,7 @@
 //
 
 #import "QuestionsViewController.h"
-#import "QuesTableViewCell.h"
+#import "CYQuestionTableViewCell.h"
 #import "UIView+SDAutoLayout.h"
 #import "SDWeiXinPhotoContainerView.h"
 #import "UIImageView+WebCache.h"
@@ -21,7 +21,13 @@
 #import "CYQuestionModel.h"
 #import "DSCarClubDetailController.h"
 
+#import "UIView+SDAutoLayout.h"
+#import "SDWeiXinPhotoContainerView.h"
 @interface QuestionsViewController ()<UITableViewDelegate,UITableViewDataSource>
+{
+    SDWeiXinPhotoContainerView *_picContainerView;
+    
+}
 @property(nonatomic)NSInteger page;
 @property(nonatomic,copy)NSMutableArray *modelArray;
 @end
@@ -30,21 +36,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _modelArray = [NSMutableArray array];
     self.view.backgroundColor = [UIColor whiteColor];
-//    [self getData];
-    [self requestData];
     [self.view addSubview:self.quesTableView];
     self.page = 0;
+    [self requestData];
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 -(void)requestData{
-    _modelArray = [NSMutableArray new];
+    
     NSDictionary *mulDic = @{
                              @"ActivityType":@(2),//咨询,2.车友提问,3.热门话题
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
@@ -73,27 +76,7 @@
 }
 
 #pragma mark - TableView
--(void)getData{
-    //获取数据
-    NSString *URLStringJpg = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509604874541&di=5cfaf6d8a3ddb781ea369e1bd2e3e948&imgtype=0&src=http%3A%2F%2Fi1.ymfile.com%2Fuploads%2Fllc%2Fphb%2F06%2F27%2Fx2_1.1403838708_2048_1536_264311.jpg";
-    NSArray *oneData = [NSArray new];
-    NSArray *twoData = @[URLStringJpg,URLStringJpg];
-    NSArray *threeData = @[URLStringJpg,URLStringJpg,URLStringJpg,URLStringJpg,URLStringJpg,URLStringJpg,URLStringJpg];
-    NSArray *fourArray = @[URLStringJpg,URLStringJpg,URLStringJpg,URLStringJpg];
-    NSArray *fiveArray = @[URLStringJpg];
-    _dataArray = [[NSMutableArray alloc]init];
-    [_dataArray addObject:threeData];
-    [_dataArray addObject:oneData];
-    [_dataArray addObject:twoData];
-    [_dataArray addObject:fiveArray];
-    [_dataArray addObject:fourArray];
 
-    
-    _mainImfoArray = @[@"项目中我们有时会需要根据字符串来确定UILabel的宽度或高度，如我们经常遇到的单元格自适应问题。如果是要动态知道UILabel的高度，那么我们直接利用单元格自适应高度就可以",@"项目中我们有时会需要根据字符串来确定UILabel的宽度或高度，如果是要动态知道UILabel的高度，那么我们直接利用单元格自适应高度就可以",@"如我们经常遇到的单元格自适应问题。如果是要动态知道UILabel的高度，那么我们直接利用单元格自适应高度就可以",@"项目中我们有时以",@"项目中我们有时会需要根据字符串来确定UILabel的宽度或高度，如我们经常遇到的单元格自适应问题。如果是要动态知道UILabel的高。"];
-
-    
-
-}
 
 
 #pragma mark - TableView
@@ -104,18 +87,18 @@
         _quesTableView.dataSource = self;
         _quesTableView.backgroundColor = [UIColor whiteColor];
         _quesTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_quesTableView registerClass:[QuesTableViewCell class] forCellReuseIdentifier:@"question"];
+//        [_quesTableView registerClass:[QuesTableViewCell class] forCellReuseIdentifier:@"question"];
 
     }
     return _quesTableView;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return _modelArray.count;
+    return 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CYQuestionModel * model = self.modelArray[indexPath.section];
+    CYQuestionModel * model = self.modelArray[indexPath.row];
 //    //计算label高度
 //    NSDictionary *font123 = @{NSFontAttributeName:[UIFont systemFontOfSize:13]};
 //    CGSize maxSize = CGSizeMake(Main_Screen_Width-70, MAXFLOAT);
@@ -132,15 +115,17 @@
         return 340;
     }
     if ([model.IndexImg isEqualToString:@""]) {
-        return 100;
+        return 90;
+    }else{
+        return 180;
     }
-    return 250;
+    return 240;
     
 }
 
 //每组行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return self.modelArray.count;
 }
 
 
@@ -150,9 +135,58 @@
     //取回数据
     //重用cell
     static NSString *quesCellID = @"question";
-    QuesTableViewCell *cell = [_quesTableView dequeueReusableCellWithIdentifier:quesCellID forIndexPath:indexPath];
-    [cell configModel:self.modelArray[indexPath.section]];
-
+    CYQuestionTableViewCell *cell = [_quesTableView dequeueReusableCellWithIdentifier:quesCellID];
+    if (cell==nil) {
+        cell = [[[NSBundle mainBundle]loadNibNamed:@"CYQuestionTableViewCell" owner:self options:nil]lastObject];
+        _picContainerView = [SDWeiXinPhotoContainerView new];
+        _picContainerView.frame=CGRectMake(0, 0, cell.backView.frame.size.width, cell.backView.frame.size.height);
+        [cell.backView addSubview:_picContainerView];
+        
+    }
+   
+    [cell configCell:self.modelArray[indexPath.row]];
+    CYQuestionModel * model = self.modelArray[indexPath.row];
+    
+    if([model.IndexImg rangeOfString:@","].location !=NSNotFound)//_roaldSearchText
+    {
+        NSArray * arrImage = [model.IndexImg componentsSeparatedByString:@","];
+        if(arrImage.count > 1 && arrImage.count <= 3){
+            NSMutableArray *containArr = [NSMutableArray array];
+            for (int i=0; i<arrImage.count; i++) {
+                NSString * str=[NSString stringWithFormat:@"%@%@",kHTTPImg,arrImage[i]];                [containArr addObject:str];
+            }
+            _picContainerView.picPathStringsArray = containArr;
+        }else if (arrImage.count <= 6 && arrImage.count > 3){
+            
+            NSMutableArray *containArr = [NSMutableArray array];
+            for (int i=0; i<arrImage.count; i++) {
+                NSString * str=[NSString stringWithFormat:@"%@%@",kHTTPImg,arrImage[i]];
+                [containArr addObject:str];
+            }
+            _picContainerView.picPathStringsArray = containArr;
+        }else{
+            
+            NSMutableArray *containArr = [NSMutableArray array];
+            for (int i=0; i<arrImage.count; i++) {
+                NSString * str=[NSString stringWithFormat:@"%@%@",kHTTPImg,arrImage[i]];
+                [containArr addObject:str];
+            }
+            _picContainerView.picPathStringsArray = containArr;
+        }
+        
+    }else{
+        if (![model.IndexImg isEqualToString:@""]) {
+            
+            NSArray * arr = @[[NSString stringWithFormat:@"%@",model.IndexImg],@""];
+            NSMutableArray *containArr = [NSMutableArray array];
+            for (int i=0; i<2; i++) {
+                NSString * str=[NSString stringWithFormat:@"%@%@",kHTTPImg,arr[i]];
+                [containArr addObject:str];
+            }
+            _picContainerView.picPathStringsArray = containArr;
+        }
+    }
+   
     
     return cell;
 }
