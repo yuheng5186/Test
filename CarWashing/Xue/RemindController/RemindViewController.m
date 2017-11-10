@@ -36,9 +36,9 @@
         _fakeNavigation = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 66)];
         _fakeNavigation.backgroundColor = [UIColor colorWithRed:13/255.0 green:98/255.0 blue:159/255.0 alpha:1];
         
-        UILabel *fakeTitle = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-100, 36, 200, 20)];
-        fakeTitle.backgroundColor = [UIColor grayColor];
+        UILabel *fakeTitle = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-100, 26, 200, 30)];
         fakeTitle.text = @"爱车提醒";
+        fakeTitle.font = [UIFont systemFontOfSize:18 weight:18];
         fakeTitle.textColor = [UIColor whiteColor];
         fakeTitle.textAlignment = NSTextAlignmentCenter;
         [_fakeNavigation addSubview:fakeTitle];

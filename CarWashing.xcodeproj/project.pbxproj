@@ -1593,8 +1593,16 @@
 				18C14F091FB1E4A5002F49B6 /* RemindViewCell */,
 				182216251FB1DC42000BF80D /* RemindViewController.h */,
 				182216261FB1DC42000BF80D /* RemindViewController.m */,
+				182BF4671FB312B800F79C68 /* FourParts */,
 			);
 			path = RemindController;
+			sourceTree = "<group>";
+		};
+		182BF4671FB312B800F79C68 /* FourParts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FourParts;
 			sourceTree = "<group>";
 		};
 		18322AAC1F4AD181003ABB7B /* model */ = {

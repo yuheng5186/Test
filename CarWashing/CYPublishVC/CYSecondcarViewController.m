@@ -36,7 +36,7 @@
 @property (nonatomic,strong)  UIScrollView   * backScrollerView;
 
 @property (nonatomic,strong)  NSMutableArray * imageArr;
-@property (strong, nonatomic) UIView         *photoImageView;
+@property (strong, nonatomic) UIView * photoImageView;
 @property (strong, nonatomic) NSMutableArray         *photoArray;
 @property (nonatomic, strong) UIImagePickerController *imagePickerVc;
 @property (nonatomic, strong) UICollectionView *collectionView;

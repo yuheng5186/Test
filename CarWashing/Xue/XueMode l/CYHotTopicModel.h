@@ -9,5 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface CYHotTopicModel : NSObject
-@property (nonatomic,copy) NSString * hh;
+@property(nonatomic,copy)NSString *ActivityName;    //title
+@property(nonatomic,copy)NSString *ActDate;         //时间
+@property(nonatomic,copy)NSString *IndexImg;        //图片
+
 @end

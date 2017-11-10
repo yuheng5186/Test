@@ -42,8 +42,9 @@
 -(void)requesetCarClubNews
 {
     NSDictionary *mulDic = @{
+                             @"ActivityType":@(1),//咨询,2.车友提问,3.热门话题
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                             @"Area":[UdStorage getObjectforKey:@"City"],
+//                             @"Area":[UdStorage getObjectforKey:@"City"],
                              @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
                              @"PageSize":@10
                              };

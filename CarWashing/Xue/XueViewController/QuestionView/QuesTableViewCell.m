@@ -55,7 +55,7 @@
     _replyLabel.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:_replyLabel];
     
-    _timeLable = [[UILabel alloc]initWithFrame:CGRectMake(58, 42, 70, 35)];
+    _timeLable = [[UILabel alloc]initWithFrame:CGRectMake(58, 42, 150, 35)];
     _timeLable.text = @"17:50";
     _timeLable.textColor = [UIColor colorFromHex:@"#909090"];
     _timeLable.font = [UIFont systemFontOfSize:12];

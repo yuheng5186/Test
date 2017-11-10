@@ -12,9 +12,18 @@
 #import "SDWeiXinPhotoContainerView.h"
 #import "UIImageView+WebCache.h"
 
+#import "HTTPDefine.h"
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "CarClubNews.h"
+#import "UdStorage.h"
+#import "MBProgressHUD.h"
+#import "CYQuestionModel.h"
+#import "DSCarClubDetailController.h"
 
 @interface QuestionsViewController ()<UITableViewDelegate,UITableViewDataSource>
-
+@property(nonatomic)NSInteger page;
+@property(nonatomic,copy)NSMutableArray *modelArray;
 @end
 
 @implementation QuestionsViewController
@@ -22,13 +31,44 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self getData];
+//    [self getData];
+    [self requestData];
     [self.view addSubview:self.quesTableView];
+    self.page = 0;
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)requestData{
+    _modelArray = [NSMutableArray new];
+    NSDictionary *mulDic = @{
+                             @"ActivityType":@(2),//咨询,2.车友提问,3.热门话题
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             //                             @"Area":[UdStorage getObjectforKey:@"City"],
+                             @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
+                             @"PageSize":@10
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/GetActivityList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        if ([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]) {
+            //获取json数组
+
+            self.modelArray = (NSMutableArray*)[CYQuestionModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
+
+        }
+        [self.quesTableView reloadData];
+    } fail:^(NSError *error) {
+        
+    }];
+    
 }
 
 #pragma mark - TableView
@@ -70,7 +110,7 @@
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return _dataArray.count;
+    return _modelArray.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -97,15 +137,31 @@
 //cell
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    //取回数据
+    CYQuestionModel *sinleMode = _modelArray[indexPath.section];
     //重用cell
     static NSString *quesCellID = @"question";
     QuesTableViewCell *cell = [_quesTableView dequeueReusableCellWithIdentifier:quesCellID forIndexPath:indexPath];
+    
+    //设置动态添加
+    UIImage *placeHolderImage = [UIImage imageNamed:@"photo"];
+    NSURL *headImageUrl = [NSURL URLWithString:[Khttp stringByAppendingString:sinleMode.FromusrImg]];
+    [cell.headImageView  sd_setImageWithURL:headImageUrl placeholderImage:placeHolderImage];
+//    NSLog(@"%@",[sinleMode.FromusrName stringByAppendingString:sinleMode.CarInfo]);
+    cell.nameLabel.text = [sinleMode.FromusrName stringByAppendingString:sinleMode.CarInfo];
+    cell.replyLabel.text = [NSString stringWithFormat:@"%ld个评论",(long)sinleMode.CommentCount];
+    cell.timeLable.text = sinleMode.ActDate;
+//    NSLog(@"%@",sinleMode.ActivityName);
+    cell.mailLabel.text = sinleMode.ActivityName;
+    
+    
+    
     
     //////////////////////
     //计算label高度
     NSDictionary *font123 = @{NSFontAttributeName:[UIFont systemFontOfSize:13]};
     CGSize maxSize = CGSizeMake(Main_Screen_Width-70, MAXFLOAT);
-    CGSize labelSize = [_mainImfoArray[indexPath.section] boundingRectWithSize:maxSize options:(NSStringDrawingUsesLineFragmentOrigin) attributes:font123 context:nil].size;
+    CGSize labelSize = [sinleMode.ActivityName boundingRectWithSize:maxSize options:(NSStringDrawingUsesLineFragmentOrigin) attributes:font123 context:nil].size;
     /////////////////////
     
     //九宫格图片
@@ -124,8 +180,7 @@
         cell.largeImageView.height = 150;
         
         cell.realLargeImage.frame = CGRectMake(0, 0, Main_Screen_Width-70, 150);
-        NSURL *imageURL = [NSURL URLWithString:@"http://img.hb.aicdn.com/374ecd8569411665ed6652277cd06d9752ca6baa11749-smWnwe_fw658"];
-        UIImage *placeHolderImage = [UIImage imageNamed:@"placeholder"];
+        NSURL *imageURL = [NSURL URLWithString:[Khttp stringByAppendingString:sinleMode.IndexImg]];
         [cell.realLargeImage sd_setImageWithURL:imageURL placeholderImage:placeHolderImage];
     }else if (tempArray.count <= 3 && tempArray.count > 1) {
         cell.largeImageView.hidden = NO;
@@ -142,13 +197,15 @@
     }
     
     cell.mailLabel.height = labelSize.height;
-    cell.mailLabel.text = _mainImfoArray[indexPath.section];
+//    cell.mailLabel.text = _mainImfoArray[indexPath.section];
     
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    DSCarClubDetailController *new = [[DSCarClubDetailController alloc]init];
+    [self.navigationController pushViewController:new animated:YES];
 }
 
 

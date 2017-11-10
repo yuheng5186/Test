@@ -9,10 +9,19 @@
 #import "HotTopicViewController.h"
 #import "HotTableViewCell.h"
 #import "AnotherHotTableViewCell.h"
+#import "AFNetworkingTool.h"
+#import "UdStorage.h"
+#import "HTTPDefine.h"
+#import "LCMD5Tool.h"
+#import "CYHotTopicModel.h"
+
+
 
 @interface HotTopicViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *hotTable;
 @property(strong,nonatomic)NSMutableArray *dataArray;
+@property(nonatomic,assign)NSInteger *page;
+@property(nonatomic,copy)NSMutableArray *modelArray;
 @end
 
 @implementation HotTopicViewController
@@ -22,7 +31,14 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor cyanColor];
     [self getData];
+    self.page = 0;
     [self.view addSubview:self.hotTable];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+//    [self requestWeb];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,6 +54,32 @@
     [_dataArray addObject:oneData];
     [_dataArray addObject:twoData];
     [_dataArray addObject:threeData];
+}
+
+-(void)requestWeb{
+    NSDictionary *mulDic = @{
+                             @"ActivityType":@(3),//咨询,2.车友提问,3.热门话题
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             //                             @"Area":[UdStorage getObjectforKey:@"City"],
+                             @"PageIndex":@(0),
+                             @"PageSize":@10
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/GetActivityList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        if ([[dict objectForKey:@"ResultCode" ]isEqualToString:@"F000000" ] ) {
+            NSLog(@"----------------%@----------------",dict);
+            self.modelArray = (NSMutableArray *)[CYHotTopicModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
+
+            
+        }
+        [_hotTable reloadData];
+    } fail:^(NSError *error) {
+        NSLog(@"----------------热门话题获取数据失败--------------------");
+    }];
+    
 }
 
 
@@ -70,19 +112,23 @@
 
 //动态格子数量
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return _dataArray.count;
+    return 3;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSArray *tempArray = [[NSArray alloc]initWithArray:_dataArray[indexPath.section]];
     
-    if(tempArray.count == 1){
+    CYHotTopicModel *singleModel = self.modelArray[indexPath.row];
+    NSArray *imageArray = [singleModel.IndexImg componentsSeparatedByString:@","];
+    
+    if(indexPath.section == 1){
         
         HotTableViewCell *oneImageCell = [tableView dequeueReusableCellWithIdentifier:@"OneImage" forIndexPath:indexPath];
+        NSLog(@"IndexImgIndexImgIndexImgIndexImgIndexImg%@",singleModel.ActivityName);
+        oneImageCell.titleLable.text = singleModel.ActivityName;
         return oneImageCell;
-    }
-    //@end if
+        
+    }//@end if
+    
     AnotherHotTableViewCell *collectionCell = [tableView dequeueReusableCellWithIdentifier:@"collect" forIndexPath:indexPath];
-
     return collectionCell;
 }
 
