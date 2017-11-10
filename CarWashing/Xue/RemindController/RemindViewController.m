@@ -8,6 +8,7 @@
 
 #import "RemindViewController.h"
 #import "RemindViewTableViewCell.h"
+#import "CareRemindViewController.h"
 
 @interface RemindViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UIView *fakeNavigation;
@@ -44,7 +45,7 @@
         [_fakeNavigation addSubview:fakeTitle];
         
         UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 66, 66)];
-        backButton.backgroundColor = [UIColor orangeColor];
+        backButton.backgroundColor = [UIColor clearColor];
         [backButton addTarget:self action:@selector(backAction) forControlEvents:(UIControlEventTouchUpInside)];
         [_fakeNavigation addSubview:backButton];
         
@@ -88,6 +89,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0) {
+        //保养提醒
+        CareRemindViewController *new = [[CareRemindViewController alloc]init];
+        [self.navigationController pushViewController:new animated:YES];
+    }
 }
 
 #pragma mark - backAction

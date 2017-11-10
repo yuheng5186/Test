@@ -17,6 +17,12 @@
 #import "LxGridViewFlowLayout.h"
 #import "TZImageManager.h"
 #import "TZVideoPlayerController.h"
+
+#import "UdStorage.h"
+#import "HTTPDefine.h"
+#import "AFNetworkingTool.h"
+#import "AFNetworkingTool+GetToken.h"
+#import "LCMD5Tool.h"
 @interface CYDynamicShareViewController ()<UITextViewDelegate,UITextFieldDelegate,TZImagePickerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UIAlertViewDelegate,UINavigationControllerDelegate>
 {
     UITextView * contentTextField;
@@ -185,7 +191,29 @@
 {
     NSLog(@"图片--%@",_selectedPhotos);
     
+    ///////////////////////////////////////////////////////////////////////////////
+    NSDictionary *mulDic = @{
+                             @"ActivityType":@(3),
+                             @"Account_Id":[UdStorage getObjectforKey:Userid],
+                             @"ActivityName":[NSString stringWithFormat:@"%@",titleTextField.text],
+                             @"Comment":[NSString stringWithFormat:@"%@",contentTextField.text]
+                             };
     
+    //ActivityName->发布标题
+    //Comment->发布内容
+    
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    NSLog(@"%@",mulDic);
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
+            NSLog(@"%@",dict);
+        }
+    } fail:^(NSError *error) {
+        NSLog(@"---------------------发布失败%@",error);
+    }];
     
     
     

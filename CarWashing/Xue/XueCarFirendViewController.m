@@ -273,6 +273,9 @@
         _blackView.backgroundColor=[UIColor blackColor];
         _blackView.alpha=0.3;
         
+        ////////////////////
+        
+        
     }
     return _blackView;
 }

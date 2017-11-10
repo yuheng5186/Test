@@ -133,7 +133,6 @@
                 self.picContainerView.picPathStringsArray = containArr;
     }
         
-<<<<<<< HEAD
         if(arrImage.count == 0){
             self.largeImageView.hidden = YES;
         }else if (arrImage.count == 1) {
@@ -157,9 +156,7 @@
             self.largeImageView.height = 250;
             self.picContainerView.picPathStringsArray = arrImage;
         }
-=======
     
->>>>>>> f70ff88fe4d82c6b3ad0a232db48c272370d134c
     }
     
 }

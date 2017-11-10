@@ -18,6 +18,13 @@
 #import "LxGridViewFlowLayout.h"
 #import "TZImageManager.h"
 #import "TZVideoPlayerController.h"
+
+#import "UdStorage.h"
+#import "HTTPDefine.h"
+#import "AFNetworkingTool.h"
+#import "AFNetworkingTool+GetToken.h"
+#import "LCMD5Tool.h"
+
 @interface CYSecondcarViewController ()<TZImagePickerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UIAlertViewDelegate,UINavigationControllerDelegate,UITextViewDelegate>
 {
     UITextView * contentTextField;
@@ -28,7 +35,7 @@
     NSMutableArray *_selectedPhotos;
     NSMutableArray *_selectedAssets;
     BOOL _isSelectOriginalPhoto;
-    
+    UITextField * distanceTextField;
     CGFloat _itemWH;
     CGFloat _margin;
     LxGridViewFlowLayout *_layout;
@@ -106,8 +113,9 @@
     UIView * line2 =[[UIView alloc]initWithFrame:CGRectMake(10, 99, Main_Screen_Width-10, 1)];
     line2.backgroundColor= [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
     [self.backScrollerView addSubview:line2];
+    
     //填写行驶里程
-    UITextField * distanceTextField = [[UITextField alloc]initWithFrame:CGRectMake(10,100 ,  Main_Screen_Width-20, 50)];
+    distanceTextField = [[UITextField alloc]initWithFrame:CGRectMake(10,100 ,  Main_Screen_Width-20, 50)];
     distanceTextField.placeholder = @"填写行驶里程";
     [self.backScrollerView addSubview:distanceTextField];
     UIView * line3 =[[UIView alloc]initWithFrame:CGRectMake(10, 149, Main_Screen_Width-10, 1)];
@@ -219,6 +227,27 @@
 -(void)rightbtnClick
 {
     NSLog(@"图片--%@",_selectedPhotos);
+    
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:Userid],
+                             @"CarBrand":@"一汽大众",
+                             @"CarType":@"Pasta",
+                             @"CarTitle":@"iOS暂时没用到",
+                             @"CarComment":[NSString stringWithFormat:@"%@",contentTextField.text],
+                             @"Mileage":[NSString stringWithFormat:@"%@",distanceTextField.text]
+                             };
+    
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddSecondHandCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"%@二手车发布成功",dict);
+    } fail:^(NSError *error) {
+        NSLog(@"%@二手车发布失败",error);
+    }];
+
 
     
 }

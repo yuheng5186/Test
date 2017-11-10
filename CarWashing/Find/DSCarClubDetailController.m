@@ -519,61 +519,20 @@
         NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
-            
-//            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
-            
             NSDictionary *dic = [dict objectForKey:@"JsonData"];
-            
             [newsDetail setValuesForKeysWithDictionary:dic];
-            
-            
             NSArray *arr = [NSArray array];
             arr = [dic objectForKey:@"actModelList"];
-            for(NSDictionary *dic in arr)
-            {
-
-                NSLog(@"%@",dic);
-                DSUserModel *model = [DSUserModel new];
-            
-                [model setValuesForKeysWithDictionary:dic];
-                [_modelsArray addObject:model];
-            }
-            self.CommentCount=_modelsArray.count;
+            //下面是薛注释的
+//            for(NSDictionary *dic in arr)
+//            {
+//                NSLog(@"---------------%@",dic);
+//                DSUserModel *model = [DSUserModel new];
+//                [model setValuesForKeysWithDictionary:dic];
+//                [_modelsArray addObject:model];
+//            }
+//            self.CommentCount=_modelsArray.count;
        
-//            self.userName.text = newsDetail.FromusrName;
-//            self.sayTime.text = newsDetail.ActDate;
-//            self.seeNumber.text = [NSString stringWithFormat:@"%ld",newsDetail.Readcount];
-//            self.textTitleLabel.text = newsDetail.ActivityName;
-//            self.textContentLabel.text = newsDetail.Comment;
-//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//                                                NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,newsDetail.IndexImg];
-//                                                NSURL *url=[NSURL URLWithString:ImageURL];
-//                                                NSData *data=[NSData dataWithContentsOfURL:url];
-//                                                UIImage *img=[UIImage imageWithData:data];
-//                                                dispatch_sync(dispatch_get_main_queue(), ^{
-//                                                    [self.textImageView setImage:img];
-//                                                });
-//                                            });
-//            self.goodNumberLabel.text = [NSString stringWithFormat:@"共有%ld人点赞过",newsDetail.GiveCount];
-//            self.sayNumberLab.text = [NSString stringWithFormat:@"评论(%ld)",newsDetail.CommentCount];
-//            if(newsDetail.IsGive == 1)
-//            {
-//                [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
-//                [self.downGoodButton setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
-//                self.goodButton.selected = YES;
-//                self.downGoodButton.selected = YES;
-//            }
-//            else
-//            {
-//                [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
-//                [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
-//                self.goodButton.selected = NO;
-//                self.downGoodButton.selected = NO;
-//            }
-//            self.sayShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.CommentCount];
-//            self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount];
-            
-//
            [self createHeaderView];
               self.userImageView.backgroundColor=[UIColor clearColor];
             [_tableView reloadData];

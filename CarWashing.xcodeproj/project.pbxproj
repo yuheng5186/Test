@@ -112,6 +112,7 @@
 		182190061F301BA400F7207F /* DSUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 182190051F301BA400F7207F /* DSUserModel.m */; };
 		182190091F301BF600F7207F /* DSActivityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182190081F301BF600F7207F /* DSActivityDetailCell.m */; };
 		182216271FB1DC42000BF80D /* RemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182216261FB1DC42000BF80D /* RemindViewController.m */; };
+		182BF4A91FB581F500F79C68 /* CareRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BF4A81FB581F500F79C68 /* CareRemindViewController.m */; };
 		18322AAF1F4AD1C7003ABB7B /* Carcircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AAE1F4AD1C7003ABB7B /* Carcircle.m */; };
 		18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB21F4AD6DC003ABB7B /* MyCar.m */; };
 		18322AB71F4C2226003ABB7B /* CarClubNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB61F4C2226003ABB7B /* CarClubNews.m */; };
@@ -580,6 +581,8 @@
 		182190081F301BF600F7207F /* DSActivityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSActivityDetailCell.m; path = Find/CustomCell/DSActivityDetailCell.m; sourceTree = "<group>"; };
 		182216251FB1DC42000BF80D /* RemindViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemindViewController.h; sourceTree = "<group>"; };
 		182216261FB1DC42000BF80D /* RemindViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RemindViewController.m; sourceTree = "<group>"; };
+		182BF4A71FB581F500F79C68 /* CareRemindViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CareRemindViewController.h; sourceTree = "<group>"; };
+		182BF4A81FB581F500F79C68 /* CareRemindViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CareRemindViewController.m; sourceTree = "<group>"; };
 		18322AAD1F4AD1C7003ABB7B /* Carcircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Carcircle.h; sourceTree = "<group>"; };
 		18322AAE1F4AD1C7003ABB7B /* Carcircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Carcircle.m; sourceTree = "<group>"; };
 		18322AB11F4AD6DC003ABB7B /* MyCar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCar.h; sourceTree = "<group>"; };
@@ -1593,16 +1596,10 @@
 				18C14F091FB1E4A5002F49B6 /* RemindViewCell */,
 				182216251FB1DC42000BF80D /* RemindViewController.h */,
 				182216261FB1DC42000BF80D /* RemindViewController.m */,
-				182BF4671FB312B800F79C68 /* FourParts */,
+				182BF4A71FB581F500F79C68 /* CareRemindViewController.h */,
+				182BF4A81FB581F500F79C68 /* CareRemindViewController.m */,
 			);
 			path = RemindController;
-			sourceTree = "<group>";
-		};
-		182BF4671FB312B800F79C68 /* FourParts */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FourParts;
 			sourceTree = "<group>";
 		};
 		18322AAC1F4AD181003ABB7B /* model */ = {
@@ -2867,6 +2864,7 @@
 				181E92CD1F1F39CC0006511E /* UIImage+BFS.m in Sources */,
 				1805AC831F38090D00FD0844 /* LoginViewController.m in Sources */,
 				50B26E711F302E17009B3B9F /* DiscountCategoryView.m in Sources */,
+				182BF4A91FB581F500F79C68 /* CareRemindViewController.m in Sources */,
 				181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */,
 				1839979F1F25E69100702071 /* DSPasswordController.m in Sources */,
 				186175EA1FA6C3C100C6EFF3 /* MD5DataSigner.m in Sources */,
