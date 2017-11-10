@@ -37,6 +37,7 @@
 
 -(void)setUp{
     _headImageView = [[JackImageViewType alloc]initWithFrame:CGRectMake(12, 30, 36, 36)];
+    
     _headImageView.clipsToBounds = YES;
     _headImageView.layer.cornerRadius = 18;
     [self.contentView addSubview:_headImageView];
@@ -79,6 +80,48 @@
     [_largeImageView addSubview:_picContainerView];
 
 }
-
+-(void)configModel:(CYQuestionModel*)model
+{
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,model.FromusrImg]] placeholderImage:[UIImage imageNamed:@"photo"]];
+    self.nameLabel.text=[NSString stringWithFormat:@"%@",model.FromusrName];
+    self.replyLabel.text=[NSString stringWithFormat:@"%ld个评论",model.CommentCount];
+    self.timeLable.text=[NSString stringWithFormat:@"%@",model.ActDate];
+    self.mailLabel.text=[NSString stringWithFormat:@"%@",model.ActivityName];
+    self.mailLabel.text=[NSString stringWithFormat:@"%@",model.ActivityName];
+        //计算label高度
+    NSDictionary *font123 = @{NSFontAttributeName:[UIFont systemFontOfSize:13]};
+    CGSize maxSize = CGSizeMake(Main_Screen_Width-70, MAXFLOAT);
+    CGSize labelSize = [model.ActivityName boundingRectWithSize:maxSize options:(NSStringDrawingUsesLineFragmentOrigin) attributes:font123 context:nil].size;
+        //九宫格图片
+    self.largeImageView.frame = CGRectMake(56, 80+labelSize.height, Main_Screen_Width-70, 240);
+    self.picContainerView.frame=CGRectMake(0, 0,self.largeImageView.frame.size.width, self.largeImageView.frame.size.height);
+      if (![model.IndexImg isEqualToString:@""]) {
+        NSArray * arrImage = [model.IndexImg componentsSeparatedByString:@","];
+        
+        if(arrImage.count == 0){
+            self.largeImageView.hidden = YES;
+        }else if (arrImage.count == 1) {
+            [self.picContainerView removeFromSuperview];
+            self.picContainerView.hidden = YES;
+            self.largeImageView.height = 150;
+            self.realLargeImage.frame = CGRectMake(0, 0, Main_Screen_Width-70, 150);
+            NSURL *imageURL = [NSURL URLWithString:[kHTTPImg stringByAppendingString:model.IndexImg]];
+            [self.realLargeImage sd_setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"photo"]];
+        }else if (arrImage.count <= 3 && arrImage.count > 1) {
+            self.largeImageView.hidden = NO;
+            self.largeImageView.height = 80;
+            self.picContainerView.picPathStringsArray = arrImage;
+        }else if (arrImage.count <= 6 && arrImage.count > 3){
+            self.largeImageView.hidden = NO;
+            self.largeImageView.height = 165;
+            self.picContainerView.picPathStringsArray = arrImage;
+        }else if (arrImage.count <= 9&& arrImage.count > 6){
+            self.largeImageView.hidden = NO;
+            self.largeImageView.height = 250;
+            self.picContainerView.picPathStringsArray = arrImage;
+        }
+    }
+    
+}
 
 @end

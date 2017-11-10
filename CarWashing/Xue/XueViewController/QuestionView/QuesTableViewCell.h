@@ -11,7 +11,7 @@
 #import "SDWeiXinPhotoContainerView.h"
 #import "UIImageView+WebCache.h"
 #import "JackImageViewType.h"
-
+#import "CYQuestionModel.h"
 
 @interface QuesTableViewCell : UITableViewCell
 @property(strong,nonatomic)UIView *largeImageView;
@@ -23,5 +23,5 @@
 @property(strong,nonatomic)JackImageViewType *realLargeImage;
 
 @property(nonatomic)SDWeiXinPhotoContainerView *picContainerView;
-
+-(void)configModel:(CYQuestionModel*)model;
 @end

@@ -58,6 +58,7 @@
                              };
     
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/GetActivityList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"--数据%@",dict);
         if ([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]) {
             //获取json数组
 
@@ -114,18 +115,19 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSArray *tempArray = [[NSArray alloc]initWithArray:_dataArray[indexPath.section]];
-    if(tempArray.count == 1){
-        return 300;
-    }else if(tempArray.count > 1 && tempArray.count <= 3){
-        return 230;
-    }else if (tempArray.count <= 6 && tempArray.count > 3){
-        return 315;
-    }else if (tempArray.count <= 9 && tempArray.count > 6){
-        return 400;
+    CYQuestionModel * model = self.modelArray[indexPath.section];
+    if ([model.IndexImg isEqualToString:@""]) {
+         return 150;
     }
-    //没有图片
-    return 150;
+    NSArray * arrImage = [model.IndexImg componentsSeparatedByString:@","];
+    if(arrImage.count == 1){
+        return 300;
+    }else if(arrImage.count > 1 && arrImage.count <= 3){
+        return 230;
+    }else if (arrImage.count <= 6 && arrImage.count > 3){
+        return 315;
+    }
+        return 400;
 }
 
 //每组行数
@@ -138,66 +140,11 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     //取回数据
-    CYQuestionModel *sinleMode = _modelArray[indexPath.section];
     //重用cell
     static NSString *quesCellID = @"question";
     QuesTableViewCell *cell = [_quesTableView dequeueReusableCellWithIdentifier:quesCellID forIndexPath:indexPath];
-    
-    //设置动态添加
-    UIImage *placeHolderImage = [UIImage imageNamed:@"photo"];
-    NSURL *headImageUrl = [NSURL URLWithString:[Khttp stringByAppendingString:sinleMode.FromusrImg]];
-    [cell.headImageView  sd_setImageWithURL:headImageUrl placeholderImage:placeHolderImage];
-//    NSLog(@"%@",[sinleMode.FromusrName stringByAppendingString:sinleMode.CarInfo]);
-    cell.nameLabel.text = [sinleMode.FromusrName stringByAppendingString:sinleMode.CarInfo];
-    cell.replyLabel.text = [NSString stringWithFormat:@"%ld个评论",(long)sinleMode.CommentCount];
-    cell.timeLable.text = sinleMode.ActDate;
-//    NSLog(@"%@",sinleMode.ActivityName);
-    cell.mailLabel.text = sinleMode.ActivityName;
-    
-    
-    
-    
-    //////////////////////
-    //计算label高度
-    NSDictionary *font123 = @{NSFontAttributeName:[UIFont systemFontOfSize:13]};
-    CGSize maxSize = CGSizeMake(Main_Screen_Width-70, MAXFLOAT);
-    CGSize labelSize = [sinleMode.ActivityName boundingRectWithSize:maxSize options:(NSStringDrawingUsesLineFragmentOrigin) attributes:font123 context:nil].size;
-    /////////////////////
-    
-    //九宫格图片
-    cell.largeImageView.frame = CGRectMake(56, 80+labelSize.height, Main_Screen_Width-70, 240);
-    cell.picContainerView.frame=CGRectMake(0, 0,cell.largeImageView.frame.size.width, cell.largeImageView.frame.size.height);
-    
-    
-    //cell中逻辑判断
-    NSArray *tempArray = [[NSArray alloc]initWithArray:_dataArray[indexPath.section]];
-    
-    if(tempArray.count == 0){
-        cell.largeImageView.hidden = YES;
-    }else if (tempArray.count == 1) {
-        [cell.picContainerView removeFromSuperview];
-        cell.picContainerView.hidden = YES;
-        cell.largeImageView.height = 150;
-        
-        cell.realLargeImage.frame = CGRectMake(0, 0, Main_Screen_Width-70, 150);
-        NSURL *imageURL = [NSURL URLWithString:[Khttp stringByAppendingString:sinleMode.IndexImg]];
-        [cell.realLargeImage sd_setImageWithURL:imageURL placeholderImage:placeHolderImage];
-    }else if (tempArray.count <= 3 && tempArray.count > 1) {
-        cell.largeImageView.hidden = NO;
-        cell.largeImageView.height = 80;
-        cell.picContainerView.picPathStringsArray = tempArray;
-    }else if (tempArray.count <= 6 && tempArray.count > 3){
-        cell.largeImageView.hidden = NO;
-        cell.largeImageView.height = 165;
-        cell.picContainerView.picPathStringsArray = tempArray;
-    }else if (tempArray.count <= 9&& tempArray.count > 6){
-        cell.largeImageView.hidden = NO;
-        cell.largeImageView.height = 250;
-        cell.picContainerView.picPathStringsArray = tempArray;
-    }
-    
-    cell.mailLabel.height = labelSize.height;
-//    cell.mailLabel.text = _mainImfoArray[indexPath.section];
+    [cell configModel:self.modelArray[indexPath.section]];
+
     
     return cell;
 }
