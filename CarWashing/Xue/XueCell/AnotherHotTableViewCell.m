@@ -29,7 +29,16 @@
 
     // Configure the view for the selected state
 }
-
+-(void)configCell:(CYHotTopicModel*)model
+{
+    NSArray *imageArray = [model.IndexImg componentsSeparatedByString:@","];
+    self.collectionArray = imageArray;
+    self.titleLable.text= [NSString stringWithFormat:@"%@",model.ActivityName];
+    self.timeLabel.text= [NSString stringWithFormat:@"%@",model.ActDate];
+    self.amazingNumberLabel.text= [NSString stringWithFormat:@"%@",model.GiveCount];
+    self.commentNumLabel.text= [NSString stringWithFormat:@"%@",model.CommentCount];
+    [self.imageCollection reloadData];
+}
 -(void)setUP{
     
     UILabel *grayLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Height, 15)];
@@ -43,7 +52,7 @@
     [self.contentView addSubview:_titleLable];
     
     
-    _timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(12, 175, 80, 30)];
+    _timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(12, 175, 150, 30)];
     _timeLabel.text = @"15:40";
     _timeLabel.font = [UIFont systemFontOfSize:14];
     _timeLabel.textColor = [UIColor colorFromHex:@"#999999"];
@@ -74,23 +83,24 @@
     layOut.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layOut.itemSize = CGSizeMake(100, 100);
     
-    UICollectionView *imageCollection = [[UICollectionView alloc]initWithFrame:CGRectMake(12, 65, Main_Screen_Width, 100) collectionViewLayout:layOut];
-    imageCollection.backgroundColor = [UIColor whiteColor];
-    imageCollection.delegate = self;
-    imageCollection.dataSource = self;
-    imageCollection.showsHorizontalScrollIndicator = NO;
-    [imageCollection registerClass:[HotSecondDetailCollectionViewCell class] forCellWithReuseIdentifier:@"second"];
-    [self.contentView addSubview:imageCollection];
+    _imageCollection = [[UICollectionView alloc]initWithFrame:CGRectMake(12, 65, Main_Screen_Width, 100) collectionViewLayout:layOut];
+    _imageCollection.backgroundColor = [UIColor whiteColor];
+    _imageCollection.delegate = self;
+    _imageCollection.dataSource = self;
+    _imageCollection.showsHorizontalScrollIndicator = NO;
+    [_imageCollection registerClass:[HotSecondDetailCollectionViewCell class] forCellWithReuseIdentifier:@"second"];
+    [self.contentView addSubview:_imageCollection];
     
 }
 
 #pragma mark - CollectionView
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 20;
+    return self.collectionArray.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     HotSecondDetailCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
+    [cell.jackImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,self.collectionArray[indexPath.item]]] placeholderImage:[UIImage imageNamed:@"photo"]];
     return cell;
 }
 

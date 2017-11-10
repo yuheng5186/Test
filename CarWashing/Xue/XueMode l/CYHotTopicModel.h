@@ -12,5 +12,6 @@
 @property(nonatomic,copy)NSString *ActivityName;    //title
 @property(nonatomic,copy)NSString *ActDate;         //时间
 @property(nonatomic,copy)NSString *IndexImg;        //图片
-
+@property(nonatomic,copy)NSString *CommentCount;        //评论
+@property(nonatomic,copy)NSString *GiveCount;        //赞
 @end

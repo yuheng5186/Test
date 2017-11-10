@@ -17,10 +17,10 @@
 }
 
 -(void)setUP{
-    UIImageView *jackImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
-    jackImageView.backgroundColor = [UIColor grayColor];
-    jackImageView.clipsToBounds = YES;
-    jackImageView.layer.cornerRadius = 3;
-    [self.contentView addSubview:jackImageView];
+    self.jackImageView = [[JackImageViewType alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+    self.jackImageView.backgroundColor = [UIColor grayColor];
+    self.jackImageView.clipsToBounds = YES;
+    self.jackImageView.layer.cornerRadius = 3;
+    [self.contentView addSubview:self.jackImageView];
 }
 @end

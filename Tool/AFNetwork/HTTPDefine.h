@@ -1,7 +1,10 @@
 #ifndef HTTPDefine_h
 #define HTTPDefine_h
 
-
+#import "LCMD5Tool.h"
+#import "AFNetworkingTool.h"
+#import "UdStorage.h"
+#import "UIImageView+WebCache.h"
 //#define Khttp @"http://192.168.3.80:8090/api/"
 //
 //#define kHTTPImg @"http://192.168.3.80:8090"
