@@ -110,6 +110,7 @@
         }else if (arrImage.count <= 3 && arrImage.count > 1) {
             self.largeImageView.hidden = NO;
             self.largeImageView.height = 80;
+            
             self.picContainerView.picPathStringsArray = arrImage;
         }else if (arrImage.count <= 6 && arrImage.count > 3){
             self.largeImageView.hidden = NO;
