@@ -38,7 +38,20 @@
             make.left.mas_equalTo(self.carImageView.mas_right).mas_offset(15*Main_Screen_Height/667);
             make.top.mas_equalTo(self.carImageView.mas_top);
             make.width.mas_equalTo(Main_Screen_Width -(157*Main_Screen_Height/667));
-            make.height.mas_equalTo(50*Main_Screen_Height/667);
+            make.height.mas_equalTo(20*Main_Screen_Height/667);
+        }];
+        //detaillabel
+        self.detaillabel =[[UILabel alloc]init];
+        self.detaillabel.textColor=[UIColor colorFromHex:@"#999999"];
+        self.detaillabel.font=[UIFont systemFontOfSize:17*Main_Screen_Height/667];
+        self.detaillabel.text = @"即撒谎的卡结算空间啊啥的空间啊说多了快仨活动";
+        self.detaillabel.numberOfLines=2;
+        [self.contentView addSubview:self.detaillabel];
+        [self.detaillabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.carImageView.mas_right).mas_offset(15*Main_Screen_Height/667);
+            make.top.mas_equalTo(self.titlelabel.mas_bottom);
+            make.width.mas_equalTo(Main_Screen_Width -(157*Main_Screen_Height/667));
+            make.height.mas_equalTo(30*Main_Screen_Height/667);
         }];
         //distance
         self.distancelabel =[[UILabel alloc]init];
@@ -48,7 +61,7 @@
         [self.contentView addSubview:_distancelabel];
         [self.distancelabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.carImageView.mas_right).mas_offset(15*Main_Screen_Height/667);
-            make.top.mas_equalTo(self.titlelabel.mas_bottom);
+            make.top.mas_equalTo(self.detaillabel.mas_bottom);
             make.width.mas_equalTo(Main_Screen_Width -(157*Main_Screen_Height/667));
             make.height.mas_equalTo(25*Main_Screen_Height/667);
         }];
@@ -75,6 +88,7 @@
     [self.carImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,model.Img]] placeholderImage:[UIImage imageNamed:@"photo"]];
     self.distancelabel.text= [NSString stringWithFormat:@"%@公里",model.Mileage];
     self.timeLabel.text= [NSString stringWithFormat:@"%@",model.Manufacture];
-    self.titlelabel.text= [NSString stringWithFormat:@"%@",model.CarComment];
+    self.titlelabel.text= [NSString stringWithFormat:@"%@%@",model.CarBrand,model.CarType];
+    self.detaillabel.text= [NSString stringWithFormat:@"%@",model.CarComment];
 }
 @end

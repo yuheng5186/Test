@@ -46,6 +46,8 @@
 		180959551FB536B1004CCD47 /* JackPhotoBrower.m in Sources */ = {isa = PBXBuildFile; fileRef = 180959541FB536B1004CCD47 /* JackPhotoBrower.m */; };
 		180959591FB5791C004CCD47 /* CYQuestionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180959571FB5791C004CCD47 /* CYQuestionTableViewCell.m */; };
 		1809595A1FB5791C004CCD47 /* CYQuestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180959581FB5791C004CCD47 /* CYQuestionTableViewCell.xib */; };
+		180959631FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180959611FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.m */; };
+		180959641FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180959621FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.xib */; };
 		180E42D21F39A89000013D2D /* DSAddMerchantController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42D11F39A89000013D2D /* DSAddMerchantController.m */; };
 		180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42D41F39B88900013D2D /* DSConsumerDetailController.m */; };
 		180E42D81F39B8C200013D2D /* DSUserRightDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42D71F39B8C200013D2D /* DSUserRightDetailController.m */; };
@@ -77,7 +79,6 @@
 		181051891FA97D1F00355F2F /* UsedCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181051881FA97D1F00355F2F /* UsedCarViewController.m */; };
 		1810518C1FA98E8700355F2F /* QuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810518B1FA98E8700355F2F /* QuestionsViewController.m */; };
 		1810518F1FA98E9A00355F2F /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810518E1FA98E9A00355F2F /* InfoViewController.m */; };
-		181051931FA9928A00355F2F /* QuesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181051921FA9928A00355F2F /* QuesTableViewCell.m */; };
 		1810519C1FA9AC2700355F2F /* HotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810519B1FA9AC2700355F2F /* HotTableViewCell.m */; };
 		181051A51FA9D9D800355F2F /* AnotherHotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181051A41FA9D9D800355F2F /* AnotherHotTableViewCell.m */; };
 		181440001FAA0A6300715E90 /* HotSecondDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18143FFF1FAA0A6300715E90 /* HotSecondDetailCollectionViewCell.m */; };
@@ -236,6 +237,8 @@
 		18ED28B41FB88FD800C0CC92 /* AddYearTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28B31FB88FD800C0CC92 /* AddYearTestViewController.m */; };
 		18ED28B81FB8924900C0CC92 /* InsurenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28B71FB8924900C0CC92 /* InsurenceViewController.m */; };
 		18ED28BB1FB8929300C0CC92 /* AddInSurenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28BA1FB8929300C0CC92 /* AddInSurenceViewController.m */; };
+		18ED28BE1FB976EA00C0CC92 /* ChooseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28BD1FB976EA00C0CC92 /* ChooseTableViewController.m */; };
+		18ED28C11FB98DD900C0CC92 /* ChooseInsurenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28C01FB98DD900C0CC92 /* ChooseInsurenceViewController.m */; };
 		18EDACC71F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EDACC61F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m */; };
 		18F7EAD01F90A5D80067AEEF /* CYCarRMListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F7EACF1F90A5D80067AEEF /* CYCarRMListModel.m */; };
 		18FB09971FAAC57800297E93 /* SDWeiXinPhotoContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FB09961FAAC57800297E93 /* SDWeiXinPhotoContainerView.m */; };
@@ -457,6 +460,9 @@
 		180959561FB5791C004CCD47 /* CYQuestionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYQuestionTableViewCell.h; sourceTree = "<group>"; };
 		180959571FB5791C004CCD47 /* CYQuestionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYQuestionTableViewCell.m; sourceTree = "<group>"; };
 		180959581FB5791C004CCD47 /* CYQuestionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CYQuestionTableViewCell.xib; sourceTree = "<group>"; };
+		180959601FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYQuestionTwoTableViewCell.h; sourceTree = "<group>"; };
+		180959611FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYQuestionTwoTableViewCell.m; sourceTree = "<group>"; };
+		180959621FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CYQuestionTwoTableViewCell.xib; sourceTree = "<group>"; };
 		180E42D01F39A89000013D2D /* DSAddMerchantController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAddMerchantController.h; path = Home/DSAddMerchantController.h; sourceTree = "<group>"; };
 		180E42D11F39A89000013D2D /* DSAddMerchantController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAddMerchantController.m; path = Home/DSAddMerchantController.m; sourceTree = "<group>"; };
 		180E42D31F39B88900013D2D /* DSConsumerDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSConsumerDetailController.h; path = Home/DSConsumerDetailController.h; sourceTree = "<group>"; };
@@ -517,8 +523,6 @@
 		1810518B1FA98E8700355F2F /* QuestionsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuestionsViewController.m; sourceTree = "<group>"; };
 		1810518D1FA98E9A00355F2F /* InfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		1810518E1FA98E9A00355F2F /* InfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
-		181051911FA9928A00355F2F /* QuesTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuesTableViewCell.h; sourceTree = "<group>"; };
-		181051921FA9928A00355F2F /* QuesTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuesTableViewCell.m; sourceTree = "<group>"; };
 		1810519A1FA9AC2700355F2F /* HotTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotTableViewCell.h; sourceTree = "<group>"; };
 		1810519B1FA9AC2700355F2F /* HotTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotTableViewCell.m; sourceTree = "<group>"; };
 		181051A31FA9D9D800355F2F /* AnotherHotTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnotherHotTableViewCell.h; sourceTree = "<group>"; };
@@ -828,6 +832,10 @@
 		18ED28B71FB8924900C0CC92 /* InsurenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InsurenceViewController.m; sourceTree = "<group>"; };
 		18ED28B91FB8929300C0CC92 /* AddInSurenceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddInSurenceViewController.h; sourceTree = "<group>"; };
 		18ED28BA1FB8929300C0CC92 /* AddInSurenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInSurenceViewController.m; sourceTree = "<group>"; };
+		18ED28BC1FB976EA00C0CC92 /* ChooseTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseTableViewController.h; sourceTree = "<group>"; };
+		18ED28BD1FB976EA00C0CC92 /* ChooseTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseTableViewController.m; sourceTree = "<group>"; };
+		18ED28BF1FB98DD900C0CC92 /* ChooseInsurenceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseInsurenceViewController.h; sourceTree = "<group>"; };
+		18ED28C01FB98DD900C0CC92 /* ChooseInsurenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseInsurenceViewController.m; sourceTree = "<group>"; };
 		18EDACC51F7B50C6008D59D7 /* ForgetPasswordLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordLoginViewController.h; sourceTree = "<group>"; };
 		18EDACC61F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordLoginViewController.m; sourceTree = "<group>"; };
 		18F7EACE1F90A5D80067AEEF /* CYCarRMListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYCarRMListModel.h; sourceTree = "<group>"; };
@@ -1301,8 +1309,9 @@
 				180959561FB5791C004CCD47 /* CYQuestionTableViewCell.h */,
 				180959571FB5791C004CCD47 /* CYQuestionTableViewCell.m */,
 				180959581FB5791C004CCD47 /* CYQuestionTableViewCell.xib */,
-				181051911FA9928A00355F2F /* QuesTableViewCell.h */,
-				181051921FA9928A00355F2F /* QuesTableViewCell.m */,
+				180959601FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.h */,
+				180959611FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.m */,
+				180959621FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.xib */,
 			);
 			path = QuestionView;
 			sourceTree = "<group>";
@@ -2120,6 +2129,8 @@
 				18ED28A71FB8858600C0CC92 /* DriverLicenseViewController.m */,
 				18ED28AB1FB886C900C0CC92 /* AddDriverLicenseViewController.h */,
 				18ED28AC1FB886C900C0CC92 /* AddDriverLicenseViewController.m */,
+				18ED28BC1FB976EA00C0CC92 /* ChooseTableViewController.h */,
+				18ED28BD1FB976EA00C0CC92 /* ChooseTableViewController.m */,
 			);
 			path = DriverLicense;
 			sourceTree = "<group>";
@@ -2142,6 +2153,8 @@
 				18ED28B71FB8924900C0CC92 /* InsurenceViewController.m */,
 				18ED28B91FB8929300C0CC92 /* AddInSurenceViewController.h */,
 				18ED28BA1FB8929300C0CC92 /* AddInSurenceViewController.m */,
+				18ED28BF1FB98DD900C0CC92 /* ChooseInsurenceViewController.h */,
+				18ED28C01FB98DD900C0CC92 /* ChooseInsurenceViewController.m */,
 			);
 			path = Inserince;
 			sourceTree = "<group>";
@@ -2735,6 +2748,7 @@
 				18B803821F1DA2A300B52432 /* Assets.xcassets in Resources */,
 				501672321F297FF000384186 /* problemCenter.plist in Resources */,
 				5094A6301F346E4200407808 /* SuccessPayCell.xib in Resources */,
+				180959641FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.xib in Resources */,
 				501672431F29D26C00384186 /* MemberView.xib in Resources */,
 				188821501F6BD336002618F7 /* b5.gif in Resources */,
 				1888214D1F6BD336002618F7 /* b2.gif in Resources */,
@@ -2971,6 +2985,7 @@
 				1853BA0F1F28854D00B98C7F /* DSChangePhoneController.m in Sources */,
 				50E2EE861F1F4D3C00FAF130 /* YZSortCell.m in Sources */,
 				18FB09C21FAAEFE100297E93 /* NSBundle+TZImagePicker.m in Sources */,
+				18ED28BE1FB976EA00C0CC92 /* ChooseTableViewController.m in Sources */,
 				186175E61FA6C3C100C6EFF3 /* DataSigner.m in Sources */,
 				501672331F297FF000384186 /* ProblemTitleModel.m in Sources */,
 				180E42EB1F3AB37D00013D2D /* YzdHUDLabel.m in Sources */,
@@ -3041,6 +3056,7 @@
 				182190061F301BA400F7207F /* DSUserModel.m in Sources */,
 				1853BA0C1F28774400B98C7F /* LKActionSheet.m in Sources */,
 				188907161F283184009E20B0 /* DSGetScoreController.m in Sources */,
+				180959631FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.m in Sources */,
 				1853BA471F28A04100B98C7F /* JFCityCollectionViewCell.m in Sources */,
 				180E432C1F417E3500013D2D /* DSAddShopController.m in Sources */,
 				501672021F29797600384186 /* BusinessDetailViewController.m in Sources */,
@@ -3059,7 +3075,6 @@
 				18E7027B1F5537B3007A9777 /* Record.m in Sources */,
 				507FECF71F2AC8D7009CC505 /* BusinessPayController.m in Sources */,
 				5016722A1F297FDD00384186 /* HeadView.m in Sources */,
-				181051931FA9928A00355F2F /* QuesTableViewCell.m in Sources */,
 				180E42FA1F3AD7EB00013D2D /* LewPopupBackgroundView.m in Sources */,
 				5016720E1F297A3500384186 /* ShopIntroController.m in Sources */,
 				18218FEB1F2B0C3C00F7207F /* DSCarClubDetailController.m in Sources */,
@@ -3100,6 +3115,7 @@
 				180959591FB5791C004CCD47 /* CYQuestionTableViewCell.m in Sources */,
 				041573A41F53C522004514E3 /* TFGridInputView.m in Sources */,
 				180959511FB53694004CCD47 /* JackImageViewType.m in Sources */,
+				18ED28C11FB98DD900C0CC92 /* ChooseInsurenceViewController.m in Sources */,
 				181E92FB1F2086ED0006511E /* DSServiceController.m in Sources */,
 				50769F521F3D52C500DDFCC7 /* ProvinceShortController.m in Sources */,
 				1853BA4B1F28A04100B98C7F /* JFSearchView.m in Sources */,

@@ -14,7 +14,7 @@
 #import "HTTPDefine.h"
 #import "LCMD5Tool.h"
 #import "CYHotTopicModel.h"
-
+#import "DSCarClubDetailController.h"
 
 
 @interface HotTopicViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -31,14 +31,12 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor cyanColor];
     [self.view addSubview:self.hotTable];
-    [self requestWeb];
     self.page = 0;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    [self requestWeb];
-
+    [self requestWeb];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,16 +44,6 @@
     // Dispose of any resources that can be recreated.
 }
 #pragma mark - getData
--(void)getData{
-    NSArray *oneData = [NSArray new];
-    NSArray *twoData = @[@"ershouchetu"];
-    NSArray *threeData = @[@"ershouchetu",@"ershouchetu"];
-    _dataArray = [[NSMutableArray alloc]init];
-    [_dataArray addObject:oneData];
-    [_dataArray addObject:twoData];
-    [_dataArray addObject:threeData];
-}
-
 -(void)requestWeb{
     NSDictionary *mulDic = @{
                              @"ActivityType":@(3),//咨询,2.车友提问,3.热门话题
@@ -125,6 +113,13 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CYHotTopicModel * model = self.modelArray[indexPath.row];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
+    detailController.hidesBottomBarWhenPushed       = YES;
+    detailController.ActivityCode                   = model.ActivityCode;
+    [self.navigationController pushViewController:detailController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

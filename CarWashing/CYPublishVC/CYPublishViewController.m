@@ -123,14 +123,35 @@
 #pragma mark---上传按钮
 -(void)rightbtnClick
 {
-    /*
-    NSLog(@"------图片--%@",_selectedPhotos);
+    
+    //开始菊花
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:_collectionView animated:YES];
+    hud.mode = MBProgressHUDModeDeterminate;
+    hud.labelText = @"发布中";
+    
+    
+    
+//    NSLog(@"------图片--%@",_selectedPhotos);
+//    NSMutableArray *base64ImageArray = [[NSMutableArray alloc]init];
+//    for (int i = 0; i<_selectedPhotos.count; i++) {
+//        UIImage *tempImage = _selectedPhotos[i];
+//        NSData *imageData = UIImageJPEGRepresentation(tempImage, 0.7);
+//        NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
+//        [base64ImageArray addObject:encodeImage];
+//    }
+//    NSString *sendString = [base64ImageArray componentsJoinedByString:@","];
+//    NSLog(@"%@",sendString);
+    
+    UIImage *testImage = [UIImage imageNamed:@"try"];
+    NSData *imageData = UIImageJPEGRepresentation(testImage, 0.7);
+    NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
     
     NSDictionary *mulDic = @{
                                  @"ActivityType":@(2),
                                  @"Account_Id":[UdStorage getObjectforKey:Userid],
-                                 @"ActivityName":@"测试输入提问",
-                                 @"Comment":@"12345"
+                                 @"ActivityName":[NSString stringWithFormat:@"%@",contentTextField.text],
+                                 @"Comment":@"12345",
+                                 @"Picture":[NSString stringWithFormat:@"%@",encodeImage]
                                  };
     
     
@@ -139,66 +160,19 @@
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer.timeoutInterval = 20;
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", @"multipart/form-data", @"application/json", @"text/html", @"image/jpeg", @"image/png", @"application/octet-stream", @"text/json", nil];
-    
-    NSLog(@"%lu",_selectedPhotos.count);
-    [manager POST:@"http://192.168.3.131:8010/user/upavatar" parameters:mulDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        for (NSInteger i = 0; i < _selectedPhotos.count; i++) {
-            UIImage *imageJack = _selectedPhotos[i];
-            NSData *imageData;
-            
-            if (UIImagePNGRepresentation(imageJack) != nil) {
-                imageData = UIImagePNGRepresentation(imageJack);
-                
-            }else{
-                imageData = UIImageJPEGRepresentation(imageJack, 1.0);
-            }
-
-            [formData appendPartWithFormData:imageData name:@"upload"];
-            //[formData appendPartWithFileData:imageData name:@"upload" fileName:@"" mimeType:@"image/jpeg"];
-        }
-    
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityInfoIOS",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"可算成功了%@",dict);
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"成功!";
+        [hud hide:YES afterDelay:0.5];
         
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-        NSLog(@"---上传进度--- %@",uploadProgress);
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"成功%@",responseObject);
-
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"失败%@",error);
+        [self.navigationController popViewControllerAnimated:YES];
+    } fail:^(NSError *error) {
+        NSLog(@"你失败了%@",error);
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"上传失败，请重新上传!";
+        [hud hide:YES afterDelay:0.5];
     }];
-    */
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    // 原本需要拼接get访问URL ? & =
-    NSDictionary *parameters = @{@"username": @"wangwu", @"password" : @"wang"};
- 
-    [manager POST:@"http://192.168.3.131:8010/user/upavatar" parameters:nil  constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        
-        for (NSInteger i = 0; i < _selectedPhotos.count; i++) {
-            UIImage *imageJack = _selectedPhotos[i];
-            NSData *imageData;
-            
-            if (UIImagePNGRepresentation(imageJack) != nil) {
-                imageData = UIImagePNGRepresentation(imageJack);
-                
-            }else{
-                imageData = UIImageJPEGRepresentation(imageJack, 1.0);
-            }
-            
-            
-            [formData appendPartWithFileData:imageData name:@"upload" fileName:@"" mimeType:@"image/jpeg"];
-        }
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-    
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-    }];
-    
     
 }
 

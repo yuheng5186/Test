@@ -58,8 +58,14 @@
         fakeTitle.textAlignment = NSTextAlignmentCenter;
         [_fakeNavigation addSubview:fakeTitle];
         
+        UIImageView *backImageView = [[UIImageView alloc]initWithFrame:CGRectMake(20, 32, 19, 19)];
+        backImageView.image = [UIImage imageNamed:@"icon_titlebar_arrow"];
+        backImageView.contentMode = UIViewContentModeScaleAspectFit;
+        [_fakeNavigation addSubview:backImageView];
+        
         UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 66, 66)];
         backButton.backgroundColor = [UIColor clearColor];
+//        [backButton setImage:[UIImage imageNamed:@"icon_titlebar_arrow"] forState:(UIControlStateNormal)];
         [backButton addTarget:self action:@selector(backAction) forControlEvents:(UIControlEventTouchUpInside)];
         [_fakeNavigation addSubview:backButton];
         

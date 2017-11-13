@@ -230,6 +230,7 @@
 -(void)rightbtnClick
 {
 //    NSLog(@"图片--%@",_selectedPhotos);
+    /*
     NSString *imageString=@"";
     UIImage *tempImage = [[UIImage alloc]init];
     _base64ImagesArray = [[NSMutableArray alloc]init];
@@ -242,9 +243,20 @@
     }
     NSLog(@"薛智文%@",_base64ImagesArray);
     for (int i=0; i<_base64ImagesArray.count; i++) {
-        imageString = [imageString stringByAppendingFormat:@"%@,,,,,,,",_base64ImagesArray[i]];
+        imageString = [imageString stringByAppendingFormat:@"%@,",_base64ImagesArray[i]];
     }
     NSLog(@"星期五%@",imageString);
+     */
+    
+    NSMutableArray *base64ImageArray = [[NSMutableArray alloc]init];
+    for (int i = 0; i<_selectedPhotos.count; i++) {
+        UIImage *tempImage = _selectedPhotos[i];
+        NSData *imageData = UIImageJPEGRepresentation(tempImage, 0.7);
+        NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
+        [base64ImageArray addObject:encodeImage];
+    }
+    NSString *sendString = [base64ImageArray componentsJoinedByString:@","];
+    NSLog(@"%@",sendString);
     
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:Userid],
@@ -252,20 +264,20 @@
                              @"CarType":@"Pasta",
                              @"CarTitle":@"iOS暂时没用到",
                              @"CarComment":[NSString stringWithFormat:@"%@",contentTextField.text],
-                             @"Mileage":[NSString stringWithFormat:@"%@",distanceTextField.text],
-                             @"Picture":[NSString stringWithFormat:@"%@",imageString]
+                             @"Mileage":@(3333333),
+                             @"Img":[NSString stringWithFormat:@"%@",sendString]
                              };
     
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
-    
-//    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddSecondHandCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
-//        NSLog(@"%@二手车发布成功",dict);
-//    } fail:^(NSError *error) {
-//        NSLog(@"%@二手车发布失败",error);
-//    }];
+    NSLog(@"%@",params);
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddSecondHandCarInfoIOS",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"%@二手车发布成功",dict);
+    } fail:^(NSError *error) {
+        NSLog(@"%@二手车发布失败",error);
+    }];
 
 
     

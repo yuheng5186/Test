@@ -12,7 +12,7 @@
 @property(nonatomic,copy)NSString *Account_Id;
 @property(nonatomic,copy)NSString *ActDate;
 @property(nonatomic,copy)NSString *CarBrand;
-@property(nonatomic,copy)NSString *CarCode;
+@property(nonatomic,assign)NSInteger CarCode;
 @property(nonatomic,copy)NSString *CarComment;
 @property(nonatomic,copy)NSString *CarTitle;
 @property(nonatomic,copy)NSString *CarType;

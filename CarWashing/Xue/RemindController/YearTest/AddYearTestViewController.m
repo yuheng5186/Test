@@ -9,10 +9,19 @@
 #import "AddYearTestViewController.h"
 #import "AddCareTableViewCell.h"
 
+//时间选择
+#import "WSDatePickerView.h"
+
+//选择车
+#import "CYCarInsertViewController.h"
+
 @interface AddYearTestViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *careTableView;
 @property(strong)NSArray *mainTitleArray;
-@property(strong)NSArray *subTitleArray;
+@property(copy,nonatomic)NSString *dateMuSting;         //上次年检时间
+@property(copy,nonatomic)NSString *yearsMuSting;         //车龄
+
+
 
 
 @end
@@ -23,7 +32,9 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     _mainTitleArray = @[@"车牌号",@"品牌车系",@"选择车辆年限",@"上次年检时间"];
-    _subTitleArray = @[@"车牌号",@"请选择",@"请选择",@"请选择"];
+    _dateMuSting = @"请选择";
+    _yearsMuSting = @"请选择";
+    self.navigationController.navigationBarHidden = YES;
     [self.view addSubview:self.fakeNavigation];
     [self.view addSubview:self.careTableView];
     [self setUI];
@@ -41,7 +52,7 @@
         _fakeNavigation.backgroundColor = [UIColor colorWithRed:13/255.0 green:98/255.0 blue:159/255.0 alpha:1];
         
         UILabel *fakeTitle = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-100, 26, 200, 30)];
-        fakeTitle.text = @"添加保养提醒";
+        fakeTitle.text = @"添加年检提醒";
         fakeTitle.font = [UIFont systemFontOfSize:18 weight:18];
         fakeTitle.textColor = [UIColor whiteColor];
         fakeTitle.textAlignment = NSTextAlignmentCenter;
@@ -99,19 +110,75 @@
 //设置cell
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     AddCareTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    if (indexPath.row == 1) {
-        cell.accessoryType = UITableViewCellAccessoryDetailButton;
-    }else{
+    if (indexPath.row == 1) {   //品牌车系
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }else if(indexPath.row == 0){       //牌照
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }else if (indexPath.row == 2){      //自选段时间
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.subTitleLabel.text = self.yearsMuSting;
+    }else if (indexPath.row == 3){      //上次时间
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.subTitleLabel.text = self.dateMuSting;
     }
     cell.mainTitleLabel.text = self.mainTitleArray[indexPath.row];
-    cell.subTitleLabel.text = self.subTitleArray[indexPath.row];
     return cell;
 }
 
 //点击cell
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0) {
+        
+    }else if (indexPath.row == 1){
+        //选择车的品牌
+        CYCarInsertViewController * increaseVC = [[CYCarInsertViewController alloc]init];
+        increaseVC.hidesBottomBarWhenPushed = YES;
+        increaseVC.CyTYpe = @"编辑车辆信息";
+        [self.navigationController pushViewController:increaseVC animated:YES];
+        
+    }else if (indexPath.row == 2){
+        //选择车龄
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"选择车辆年限" preferredStyle:(UIAlertControllerStyleActionSheet)];
+        UIAlertAction *quarter = [UIAlertAction actionWithTitle:@"不足六年" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            //三个月一次操作
+            self.yearsMuSting = @"不足六年";
+            [tableView reloadData];
+        }];
+        UIAlertAction *half = [UIAlertAction actionWithTitle:@"六年至十五年" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            //六个月一次操作
+            self.yearsMuSting = @"六年至十五年";
+            [tableView reloadData];
+        }];
+        UIAlertAction *oneYear = [UIAlertAction actionWithTitle:@"大于十五年" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            //每年一次
+            self.yearsMuSting = @"大于十五年";
+            [tableView reloadData];
+        }];
+        
+        UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:nil];
+        
+        //添加三个
+        [alert addAction:quarter];
+        [alert addAction:half];
+        [alert addAction:oneYear];
+        [alert addAction:cancle];
+        
+        //present出来
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }else if (indexPath.row == 3){
+        //年检时间选择
+        WSDatePickerView *datePicker = [[WSDatePickerView alloc]initWithDateStyle:(DateStyleShowYearMonthDay) CompleteBlock:^(NSDate *selectDate) {
+            //获得结果位date
+            NSString *date = [selectDate stringWithFormat:@"yyyy-MM-dd"];
+            self.dateMuSting = date;
+            [tableView reloadData];
+        }];
+        datePicker.doneButtonColor = [UIColor colorFromHex:@"#0161a1"];
+        [datePicker show];
+    }   //@end “if”
 }
 
 

@@ -9,11 +9,15 @@
 #import "AddCareRemindViewController.h"
 #import "AddCareTableViewCell.h"
 
+//时间选择器
+#import "WSDatePickerView.h"
+
 @interface AddCareRemindViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *careTableView;
-@property(strong)NSArray *mainTitleArray;
-@property(strong)NSArray *subTitleArray;
-
+@property(strong,nonatomic)NSArray *mainTitleArray;
+@property(strong,nonatomic)NSMutableArray *subTitleArray;
+@property(copy,nonatomic)NSString *subMuSting;
+@property(copy,nonatomic)NSString *dateMuSting;
 
 @end
 
@@ -23,7 +27,9 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     _mainTitleArray = @[@"保养频率",@"上次保养时间"];
-    _subTitleArray = @[@"请选择",@"请选择"];
+//    _subTitleArray = @[@"请选择",@"请选择"];
+    self.subMuSting = @"请选择";
+    self.dateMuSting = @"请选择";
     [self.view addSubview:self.fakeNavigation];
     [self.view addSubview:self.careTableView];
     [self setUI];
@@ -46,6 +52,9 @@
         fakeTitle.textColor = [UIColor whiteColor];
         fakeTitle.textAlignment = NSTextAlignmentCenter;
         [_fakeNavigation addSubview:fakeTitle];
+        
+        
+        
         
         //取消按钮
         UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 26, 66, 30)];
@@ -101,13 +110,62 @@
     AddCareTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.mainTitleLabel.text = self.mainTitleArray[indexPath.row];
-    cell.subTitleLabel.text = self.subTitleArray[indexPath.row];
+    if (indexPath.row == 0) {
+        cell.subTitleLabel.text = self.subMuSting;
+    }else if (indexPath.row == 1){
+        cell.subTitleLabel.text = self.dateMuSting;
+    }
     return cell;
 }
 
 //点击cell
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+    if (indexPath.row == 0) {
+        //选择保养时间间隔
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"选择保养间隔" preferredStyle:(UIAlertControllerStyleActionSheet)];
+        UIAlertAction *quarter = [UIAlertAction actionWithTitle:@"三个月一次" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            //三个月一次操作
+            self.subMuSting = @"三个月保养一次";
+            [tableView reloadData];
+        }];
+        UIAlertAction *half = [UIAlertAction actionWithTitle:@"六个月一次" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            //六个月一次操作
+            self.subMuSting = @"六个月保养一次";
+            [tableView reloadData];
+        }];
+        UIAlertAction *oneYear = [UIAlertAction actionWithTitle:@"每年一次" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            //每年一次
+            self.subMuSting = @"每年保养一次";
+            [tableView reloadData];
+        }];
+        
+        UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:nil];
+        
+        //添加三个
+        [alert addAction:quarter];
+        [alert addAction:half];
+        [alert addAction:oneYear];
+        [alert addAction:cancle];
+        
+        //present出来
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+
+    }else if (indexPath.row == 1){
+        //选择时间
+        WSDatePickerView *datePicker = [[WSDatePickerView alloc]initWithDateStyle:(DateStyleShowYearMonthDay) CompleteBlock:^(NSDate *selectDate) {
+            //获得结果位date
+            NSString *date = [selectDate stringWithFormat:@"yyyy-MM-dd"];
+            self.dateMuSting = date;
+            [tableView reloadData];
+        }];
+        datePicker.doneButtonColor = [UIColor colorFromHex:@"#0161a1"];
+        [datePicker show];
+    }//@end "else if"
 }
 
 
@@ -115,6 +173,7 @@
 //保存按钮动作,在这里开始上传数据
 -(void)addButtonAction{
     [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 //取消按钮动作

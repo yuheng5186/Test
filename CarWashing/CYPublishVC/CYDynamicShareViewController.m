@@ -189,14 +189,31 @@
 #pragma mark---上传的按钮
 -(void)rightbtnClick
 {
+    //开始菊花
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:_collectionView animated:YES];
+    hud.mode = MBProgressHUDModeDeterminate;
+    hud.labelText = @"发布中";
+    
+    
     NSLog(@"图片--%@",_selectedPhotos);
+    
+    NSMutableArray *base64ImageArray = [[NSMutableArray alloc]init];
+    for (int i = 0; i<_selectedPhotos.count; i++) {
+        UIImage *tempImage = _selectedPhotos[i];
+        NSData *imageData = UIImageJPEGRepresentation(tempImage, 0.7);
+        NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
+        [base64ImageArray addObject:encodeImage];
+    }
+    NSString *sendString = [base64ImageArray componentsJoinedByString:@","];
+//    NSLog(@"%@",sendString);
     
     ///////////////////////////////////////////////////////////////////////////////
     NSDictionary *mulDic = @{
                              @"ActivityType":@(3),
                              @"Account_Id":[UdStorage getObjectforKey:Userid],
                              @"ActivityName":[NSString stringWithFormat:@"%@",titleTextField.text],
-                             @"Comment":[NSString stringWithFormat:@"%@",contentTextField.text]
+                             @"Comment":[NSString stringWithFormat:@"%@",contentTextField.text],
+                             @"Picture":[NSString stringWithFormat:@"%@",sendString]
                              };
     
     //ActivityName->发布标题
@@ -206,11 +223,15 @@
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
-    NSLog(@"%@",mulDic);
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
+//    NSLog(@"%@",mulDic);
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityInfo/AddActivityInfoIOS",Khttp] success:^(NSDictionary *dict, BOOL success) {
             NSLog(@"%@",dict);
-        }
+        
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"成功!";
+            [hud hide:YES afterDelay:0.5];
+        [self.navigationController popViewControllerAnimated:YES];
+        
     } fail:^(NSError *error) {
         NSLog(@"---------------------发布失败%@",error);
     }];
@@ -226,7 +247,6 @@
     if (_imagePickerVc == nil) {
         _imagePickerVc = [[UIImagePickerController alloc] init];
         _imagePickerVc.delegate = self;
-        // set appearance / 改变相册选择页的导航栏外观
         _imagePickerVc.navigationBar.barTintColor = self.navigationController.navigationBar.barTintColor;
         _imagePickerVc.navigationBar.tintColor = self.navigationController.navigationBar.tintColor;
         UIBarButtonItem *tzBarItem, *BarItem;

@@ -23,6 +23,9 @@
 
 #import "UIView+SDAutoLayout.h"
 #import "SDWeiXinPhotoContainerView.h"
+#import "CYQuestionTwoTableViewCell.h"
+
+
 @interface QuestionsViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     SDWeiXinPhotoContainerView *_picContainerView;
@@ -40,8 +43,13 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.quesTableView];
     self.page = 0;
-    [self requestData];
     
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self requestData];
+
 }
 
 
@@ -51,7 +59,6 @@
     NSDictionary *mulDic = @{
                              @"ActivityType":@(2),//咨询,2.车友提问,3.热门话题
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                             //                             @"Area":[UdStorage getObjectforKey:@"City"],
                              @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
                              @"PageSize":@10
                              };
@@ -120,35 +127,31 @@
         return 180;
     }
     return 240;
-    
 }
-
 //每组行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.modelArray.count;
 }
-
-
 //cell
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     //取回数据
-    //重用cell
-    static NSString *quesCellID = @"question";
-    CYQuestionTableViewCell *cell = [_quesTableView dequeueReusableCellWithIdentifier:quesCellID];
-    if (cell==nil) {
-        cell = [[[NSBundle mainBundle]loadNibNamed:@"CYQuestionTableViewCell" owner:self options:nil]lastObject];
-        _picContainerView = [SDWeiXinPhotoContainerView new];
-        _picContainerView.frame=CGRectMake(0, 0, cell.backView.frame.size.width, cell.backView.frame.size.height);
-        [cell.backView addSubview:_picContainerView];
-        
-    }
-   
-    [cell configCell:self.modelArray[indexPath.row]];
+    
     CYQuestionModel * model = self.modelArray[indexPath.row];
     
     if([model.IndexImg rangeOfString:@","].location !=NSNotFound)//_roaldSearchText
     {
+        //重用cell
+        static NSString *quesCellID = @"question";
+        CYQuestionTableViewCell *cell = [_quesTableView dequeueReusableCellWithIdentifier:quesCellID];
+        if (cell==nil) {
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"CYQuestionTableViewCell" owner:self options:nil]lastObject];
+            _picContainerView = [SDWeiXinPhotoContainerView new];
+            _picContainerView.frame=CGRectMake(0, 0, cell.backView.frame.size.width, cell.backView.frame.size.height);
+            [cell.backView addSubview:_picContainerView];
+            
+        }
+        [cell configCell:self.modelArray[indexPath.row]];
         NSArray * arrImage = [model.IndexImg componentsSeparatedByString:@","];
         if(arrImage.count > 1 && arrImage.count <= 3){
             NSMutableArray *containArr = [NSMutableArray array];
@@ -173,28 +176,26 @@
             }
             _picContainerView.picPathStringsArray = containArr;
         }
-        
-    }else{
-        if (![model.IndexImg isEqualToString:@""]) {
-            
-            NSArray * arr = @[[NSString stringWithFormat:@"%@",model.IndexImg],@""];
-            NSMutableArray *containArr = [NSMutableArray array];
-            for (int i=0; i<2; i++) {
-                NSString * str=[NSString stringWithFormat:@"%@%@",kHTTPImg,arr[i]];
-                [containArr addObject:str];
-            }
-            _picContainerView.picPathStringsArray = containArr;
-        }
+        return cell;
     }
-   
-    
-    return cell;
+    //重用cell
+    static NSString *quesCellTwoID = @"quesCellTwoID";
+    CYQuestionTwoTableViewCell *quesCellTwocell = [_quesTableView dequeueReusableCellWithIdentifier:quesCellTwoID];
+    if (quesCellTwocell==nil) {
+        quesCellTwocell = [[[NSBundle mainBundle]loadNibNamed:@"CYQuestionTwoTableViewCell" owner:self options:nil]lastObject];
+        
+    }
+    [quesCellTwocell configCell:self.modelArray[indexPath.row]];
+    return quesCellTwocell;
 }
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    DSCarClubDetailController *new = [[DSCarClubDetailController alloc]init];
-    [self.navigationController pushViewController:new animated:YES];
+    CYQuestionModel * model = self.modelArray[indexPath.row];
+    DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
+    detailController.hidesBottomBarWhenPushed       = YES;
+    detailController.ActivityCode                   = model.ActivityCode;
+    [self.navigationController pushViewController:detailController animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 

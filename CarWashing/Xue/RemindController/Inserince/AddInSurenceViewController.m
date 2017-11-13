@@ -8,20 +8,29 @@
 
 #import "AddInSurenceViewController.h"
 #import "AddCareTableViewCell.h"
+#import "ChooseInsurenceViewController.h"
+
+//时间选择
+#import "WSDatePickerView.h"
 
 @interface AddInSurenceViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *careTableView;
-@property(strong)NSArray *mainTitleArray;
-@property(strong)NSArray *subTitleArray;
+@property(strong,nonatomic)NSArray *mainTitleArray;
+@property(copy,nonatomic)NSString *dateMuSting;                 //上次年检时间
+@property(copy,nonatomic)NSString *companyNameMuString;         //保险公司名字
+
+
 @end
 
 @implementation AddInSurenceViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBarHidden = YES;
     self.view.backgroundColor = [UIColor whiteColor];
     _mainTitleArray = @[@"保险公司",@"到期时间"];
-    _subTitleArray = @[@"选择保险公司",@"选择日期"];
+    self.dateMuSting = @"请选择";
+    self.companyNameMuString = @"请选择保险公司";
     [self.view addSubview:self.fakeNavigation];
     [self.view addSubview:self.careTableView];
     [self setUI];
@@ -39,7 +48,7 @@
         _fakeNavigation.backgroundColor = [UIColor colorWithRed:13/255.0 green:98/255.0 blue:159/255.0 alpha:1];
         
         UILabel *fakeTitle = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-100, 26, 200, 30)];
-        fakeTitle.text = @"添加保养提醒";
+        fakeTitle.text = @"添加车险提醒";
         fakeTitle.font = [UIFont systemFontOfSize:18 weight:18];
         fakeTitle.textColor = [UIColor whiteColor];
         fakeTitle.textAlignment = NSTextAlignmentCenter;
@@ -99,13 +108,30 @@
     AddCareTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.mainTitleLabel.text = self.mainTitleArray[indexPath.row];
-    cell.subTitleLabel.text = self.subTitleArray[indexPath.row];
+    if (indexPath.row == 0) {
+        cell.subTitleLabel.text = self.companyNameMuString;
+    }else if (indexPath.row == 1){
+        cell.subTitleLabel.text = self.dateMuSting;
+    }
     return cell;
 }
 
 //点击cell
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0) {
+        ChooseInsurenceViewController *new = [[ChooseInsurenceViewController alloc]init];
+        [self.navigationController pushViewController:new animated:YES];
+    }else if (indexPath.row == 1){
+        WSDatePickerView *datePicker = [[WSDatePickerView alloc]initWithDateStyle:(DateStyleShowYearMonthDay) CompleteBlock:^(NSDate *selectDate) {
+            //获得结果位date
+            NSString *date = [selectDate stringWithFormat:@"yyyy-MM-dd"];
+            self.dateMuSting = date;
+            [tableView reloadData];
+        }];
+        datePicker.doneButtonColor = [UIColor colorFromHex:@"#0161a1"];
+        [datePicker show];
+    }
 }
 
 
