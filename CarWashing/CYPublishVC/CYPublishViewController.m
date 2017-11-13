@@ -123,154 +123,83 @@
 #pragma mark---上传按钮
 -(void)rightbtnClick
 {
+    /*
     NSLog(@"------图片--%@",_selectedPhotos);
     
-        NSDictionary *mulDic = @{
+    NSDictionary *mulDic = @{
                                  @"ActivityType":@(2),
                                  @"Account_Id":[UdStorage getObjectforKey:Userid],
                                  @"ActivityName":@"测试输入提问",
                                  @"Comment":@"12345"
                                  };
     
-        //ActivityName->发布标题
-        //Comment->发布内容
     
-        NSDictionary *params = @{
+    NSDictionary *params = @{
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
-//    NSLog(@"%@",params);
-    
-     //单独发送数据可以成功
-//    [AFNetworkingTool post:params andurl:@"http://192.168.2.152:8090/api/Activity/AddActivityInfo" success:^(NSDictionary *dict, BOOL success) {
-//
-//        NSLog(@"%@",dict);
-//        NSLog(@"AFNetworking%@",params);
-//    } fail:^(NSError *error) {
-//        NSLog(@"!!!!!!!!!!!!!!!!%@",error);
-//    }];
-    
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-//        manager.requestSerializer.timeoutInterval = 10;
+    manager.requestSerializer.timeoutInterval = 20;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", @"multipart/form-data", @"application/json", @"text/html", @"image/jpeg", @"image/png", @"application/octet-stream", @"text/json", nil];
     
+    NSLog(@"%lu",_selectedPhotos.count);
+    [manager POST:@"http://192.168.3.131:8010/user/upavatar" parameters:mulDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        for (NSInteger i = 0; i < _selectedPhotos.count; i++) {
+            UIImage *imageJack = _selectedPhotos[i];
+            NSData *imageData;
+            
+            if (UIImagePNGRepresentation(imageJack) != nil) {
+                imageData = UIImagePNGRepresentation(imageJack);
+                
+            }else{
+                imageData = UIImageJPEGRepresentation(imageJack, 1.0);
+            }
+
+            [formData appendPartWithFormData:imageData name:@"upload"];
+            //[formData appendPartWithFileData:imageData name:@"upload" fileName:@"" mimeType:@"image/jpeg"];
+        }
     
-    [manager POST:@"http://192.168.2.152:8090/api/Activity/Test" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        UIImage *imageJack = [UIImage imageNamed:@"dog"];
-        NSData *imageData =UIImagePNGRepresentation(imageJack);
-        NSLog(@"文件长度%lu",(unsigned long)imageData.length);
-        [formData appendPartWithFileData:imageData name:@"file" fileName:@"123456.png" mimeType:@"image/png"];
-        
-//        for (int i=0; i<_selectedPhotos.count; i++) {
-//                        NSData *imageData =UIImagePNGRepresentation(_selectedPhotos[i]);
-//            NSLog(@"文件长度%lu",(unsigned long)imageData.length);
-//                        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//                        formatter.dateFormat = @"yyyyMMddHHmmss";
-//                        NSString *str = [formatter stringFromDate:[NSDate date]];
-//                        NSString *fileName = [NSString stringWithFormat:@"%@%d.png", str,i];
-//            [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/png"];
-//
-//                    }
-        
-        
         
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-
+        NSLog(@"---上传进度--- %@",uploadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"成功%@",responseObject);
-        NSLog(@"%@",task.currentRequest.allHTTPHeaderFields);
+
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"失败%@",error);
-        NSLog(@"%@",task.currentRequest.allHTTPHeaderFields);
+    }];
+    */
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    // 原本需要拼接get访问URL ? & =
+    NSDictionary *parameters = @{@"username": @"wangwu", @"password" : @"wang"};
+ 
+    [manager POST:@"http://192.168.3.131:8010/user/upavatar" parameters:nil  constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        for (NSInteger i = 0; i < _selectedPhotos.count; i++) {
+            UIImage *imageJack = _selectedPhotos[i];
+            NSData *imageData;
+            
+            if (UIImagePNGRepresentation(imageJack) != nil) {
+                imageData = UIImagePNGRepresentation(imageJack);
+                
+            }else{
+                imageData = UIImageJPEGRepresentation(imageJack, 1.0);
+            }
+            
+            
+            [formData appendPartWithFileData:imageData name:@"upload" fileName:@"" mimeType:@"image/jpeg"];
+        }
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
     }];
     
     
-
-    //文件流上传图片
-//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html", nil];
-//    manager.requestSerializer.timeoutInterval = 15;
-//    /*[NSString stringWithFormat:@"%@Activity/AddActivityInfo",Khttp]*/
-//    /*@"http://192.168.2.152:8090/api/Activity/Test"*/
-//    [manager POST:@"http://115.159.67.77/file.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-//
-//
-//        //需要传的图片在这里
-////        for (NSInteger i = 0; i < _selectedPhotos.count; i++) {
-//////            NSInteger i = 0;
-////            UIImage *getImage = _selectedPhotos[i];
-//////            NSData *imageData = UIImageJPEGRepresentation(getImage, 0.2);
-////            NSData *imageData = UIImagePNGRepresentation(getImage);
-////            NSLog(@"%@",imageData);
-////            NSString *Name = [NSString stringWithFormat:@"%ld",i];
-////            NSString *fileName = [NSString stringWithFormat:@"%@.png",Name];
-//////            [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/png"];
-////
-////        }
-//    } progress:^(NSProgress * _Nonnull uploadProgress) {
-//
-//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSLog(@"%@",responseObject);
-//        NSLog(@"%@",task.currentRequest.allHTTPHeaderFields);
-//        NSLog(@"文件上传成功");
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        NSLog(@"文件上传失败");
-//        NSLog(@"%@",error);
-//        NSLog(@"%@",task.currentRequest.allHTTPHeaderFields);
-//
-//    }];
-//  /////////////////////////////
-//    AFSecurityPolicy *securityPolicy = [[AFSecurityPolicy alloc] init];
-//    [securityPolicy setAllowInvalidCertificates:YES];
-//    /////////////////////////////
-//
-//
-//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/html",@"application/json",@"image/jpeg",@"image/png",@"application/octet-stream",@"text/json", nil];
-//
-//
-//
-//    [manager POST:@"http://115.159.67.77/file.php" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-////        for (int i=0; i<_selectedPhotos.count; i++) {
-////            NSData *imageData =UIImagePNGRepresentation(_selectedPhotos[i]);
-////            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-////            formatter.dateFormat = @"yyyyMMddHHmmss";
-////            NSString *str = [formatter stringFromDate:[NSDate date]];
-////            NSString *fileName = [NSString stringWithFormat:@"%@%d.png", str,i];
-////            [formData appendPartWithFileData:imageData name:@"pictures" fileName:fileName mimeType:@"image/png"];
-////        }
-//    } progress:^(NSProgress * _Nonnull uploadProgress) {
-//        //上传进度
-//        // @property int64_t totalUnitCount;     需要下载文件的总大小
-//        // @property int64_t completedUnitCount; 当前已经下载的大小
-//        //
-//        // 给Progress添加监听 KVO
-//        NSLog(@"%f",1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
-//        // 回到主队列刷新UI,用户自定义的进度条
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//        });
-//
-//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSLog(@"上传成功 %@", responseObject);
-////        [[tool alloc]reminderViewWithString:@"提交成功"];
-//        [self.navigationController popViewControllerAnimated:YES];
-//
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        [MBProgressHUD hideHUDForView:self.view animated:YES];
-//        NSLog(@"上传失败 %@", error);
-//    }];
-//
-//    [AFNetworkingTool post:params andurl:@"http://115.159.67.77/file.php" success:^(NSDictionary *dict, BOOL success) {
-//        NSLog(@"~~~~~~~~~~~~%@",dict);
-//    } fail:^(NSError *error) {
-//        NSLog(@"!!!!!!!!!!!!!%@",error);
-//    }];
-  
 }
 
 

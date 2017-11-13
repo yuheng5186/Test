@@ -162,8 +162,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-   
 //    [self startLocation];
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];

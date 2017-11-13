@@ -9,6 +9,11 @@
 #import "RemindViewController.h"
 #import "RemindViewTableViewCell.h"
 #import "CareRemindViewController.h"
+#import "DriverLicenseViewController.h"
+#import "YearTestViewController.h"
+#import "InsurenceViewController.h"
+
+//四个模块的入口
 
 @interface RemindViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UIView *fakeNavigation;
@@ -92,6 +97,15 @@
     if (indexPath.row == 0) {
         //保养提醒
         CareRemindViewController *new = [[CareRemindViewController alloc]init];
+        [self.navigationController pushViewController:new animated:YES];
+    }else if (indexPath.row == 1){
+        DriverLicenseViewController *new = [[DriverLicenseViewController alloc]init];
+        [self.navigationController pushViewController:new animated:YES];
+    }else if (indexPath.row == 2){
+        YearTestViewController *new = [[YearTestViewController alloc]init];
+        [self.navigationController pushViewController:new animated:YES];
+    }else if (indexPath.row == 3){
+        InsurenceViewController *new = [[InsurenceViewController alloc]init];
         [self.navigationController pushViewController:new animated:YES];
     }
 }

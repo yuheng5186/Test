@@ -135,29 +135,7 @@
         }
     }
     
-        if(arrImage.count == 0){
-            self.largeImageView.hidden = YES;
-        }else if (arrImage.count == 1) {
-            [self.picContainerView removeFromSuperview];
-            self.picContainerView.hidden = YES;
-            self.largeImageView.height = 150;
-            self.realLargeImage.frame = CGRectMake(0, 0, Main_Screen_Width-70, 150);
-            NSURL *imageURL = [NSURL URLWithString:[kHTTPImg stringByAppendingString:model.IndexImg]];
-            [self.realLargeImage sd_setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"photo"]];
-        }else if (arrImage.count <= 3 && arrImage.count > 1) {
-            self.largeImageView.hidden = NO;
-            self.largeImageView.height = 80;
-            
-            self.picContainerView.picPathStringsArray = arrImage;
-        }else if (arrImage.count <= 6 && arrImage.count > 3){
-            self.largeImageView.hidden = NO;
-            self.largeImageView.height = 165;
-            self.picContainerView.picPathStringsArray = arrImage;
-        }else if (arrImage.count <= 9&& arrImage.count > 6){
-            self.largeImageView.hidden = NO;
-            self.largeImageView.height = 250;
-            self.picContainerView.picPathStringsArray = arrImage;
-        }
+    
     
     
 }

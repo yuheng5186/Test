@@ -115,6 +115,7 @@
 		182190091F301BF600F7207F /* DSActivityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182190081F301BF600F7207F /* DSActivityDetailCell.m */; };
 		182216271FB1DC42000BF80D /* RemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182216261FB1DC42000BF80D /* RemindViewController.m */; };
 		182BF4A91FB581F500F79C68 /* CareRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BF4A81FB581F500F79C68 /* CareRemindViewController.m */; };
+		182BF4AC1FB58F2700F79C68 /* AddCareRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BF4AB1FB58F2700F79C68 /* AddCareRemindViewController.m */; };
 		18322AAF1F4AD1C7003ABB7B /* Carcircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AAE1F4AD1C7003ABB7B /* Carcircle.m */; };
 		18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB21F4AD6DC003ABB7B /* MyCar.m */; };
 		18322AB71F4C2226003ABB7B /* CarClubNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB61F4C2226003ABB7B /* CarClubNews.m */; };
@@ -228,6 +229,13 @@
 		18E7027B1F5537B3007A9777 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E7027A1F5537B3007A9777 /* Record.m */; };
 		18E7028D1F5E3443007A9777 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E7028C1F5E3443007A9777 /* Order.m */; };
 		18E702931F614010007A9777 /* ScanCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E702921F614010007A9777 /* ScanCode.m */; };
+		18ED28A51FB8436F00C0CC92 /* AddCareTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28A41FB8436F00C0CC92 /* AddCareTableViewCell.m */; };
+		18ED28A81FB8858600C0CC92 /* DriverLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28A71FB8858600C0CC92 /* DriverLicenseViewController.m */; };
+		18ED28AD1FB886C900C0CC92 /* AddDriverLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28AC1FB886C900C0CC92 /* AddDriverLicenseViewController.m */; };
+		18ED28B11FB88F7F00C0CC92 /* YearTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28B01FB88F7F00C0CC92 /* YearTestViewController.m */; };
+		18ED28B41FB88FD800C0CC92 /* AddYearTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28B31FB88FD800C0CC92 /* AddYearTestViewController.m */; };
+		18ED28B81FB8924900C0CC92 /* InsurenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28B71FB8924900C0CC92 /* InsurenceViewController.m */; };
+		18ED28BB1FB8929300C0CC92 /* AddInSurenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28BA1FB8929300C0CC92 /* AddInSurenceViewController.m */; };
 		18EDACC71F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EDACC61F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m */; };
 		18F7EAD01F90A5D80067AEEF /* CYCarRMListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F7EACF1F90A5D80067AEEF /* CYCarRMListModel.m */; };
 		18FB09971FAAC57800297E93 /* SDWeiXinPhotoContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FB09961FAAC57800297E93 /* SDWeiXinPhotoContainerView.m */; };
@@ -588,6 +596,8 @@
 		182216261FB1DC42000BF80D /* RemindViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RemindViewController.m; sourceTree = "<group>"; };
 		182BF4A71FB581F500F79C68 /* CareRemindViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CareRemindViewController.h; sourceTree = "<group>"; };
 		182BF4A81FB581F500F79C68 /* CareRemindViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CareRemindViewController.m; sourceTree = "<group>"; };
+		182BF4AA1FB58F2700F79C68 /* AddCareRemindViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCareRemindViewController.h; sourceTree = "<group>"; };
+		182BF4AB1FB58F2700F79C68 /* AddCareRemindViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCareRemindViewController.m; sourceTree = "<group>"; };
 		18322AAD1F4AD1C7003ABB7B /* Carcircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Carcircle.h; sourceTree = "<group>"; };
 		18322AAE1F4AD1C7003ABB7B /* Carcircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Carcircle.m; sourceTree = "<group>"; };
 		18322AB11F4AD6DC003ABB7B /* MyCar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCar.h; sourceTree = "<group>"; };
@@ -804,6 +814,20 @@
 		18E7028C1F5E3443007A9777 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		18E702911F614010007A9777 /* ScanCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCode.h; sourceTree = "<group>"; };
 		18E702921F614010007A9777 /* ScanCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCode.m; sourceTree = "<group>"; };
+		18ED28A31FB8436F00C0CC92 /* AddCareTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCareTableViewCell.h; sourceTree = "<group>"; };
+		18ED28A41FB8436F00C0CC92 /* AddCareTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCareTableViewCell.m; sourceTree = "<group>"; };
+		18ED28A61FB8858600C0CC92 /* DriverLicenseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DriverLicenseViewController.h; sourceTree = "<group>"; };
+		18ED28A71FB8858600C0CC92 /* DriverLicenseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DriverLicenseViewController.m; sourceTree = "<group>"; };
+		18ED28AB1FB886C900C0CC92 /* AddDriverLicenseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDriverLicenseViewController.h; sourceTree = "<group>"; };
+		18ED28AC1FB886C900C0CC92 /* AddDriverLicenseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDriverLicenseViewController.m; sourceTree = "<group>"; };
+		18ED28AF1FB88F7F00C0CC92 /* YearTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YearTestViewController.h; sourceTree = "<group>"; };
+		18ED28B01FB88F7F00C0CC92 /* YearTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YearTestViewController.m; sourceTree = "<group>"; };
+		18ED28B21FB88FD800C0CC92 /* AddYearTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddYearTestViewController.h; sourceTree = "<group>"; };
+		18ED28B31FB88FD800C0CC92 /* AddYearTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddYearTestViewController.m; sourceTree = "<group>"; };
+		18ED28B61FB8924900C0CC92 /* InsurenceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InsurenceViewController.h; sourceTree = "<group>"; };
+		18ED28B71FB8924900C0CC92 /* InsurenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InsurenceViewController.m; sourceTree = "<group>"; };
+		18ED28B91FB8929300C0CC92 /* AddInSurenceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddInSurenceViewController.h; sourceTree = "<group>"; };
+		18ED28BA1FB8929300C0CC92 /* AddInSurenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInSurenceViewController.m; sourceTree = "<group>"; };
 		18EDACC51F7B50C6008D59D7 /* ForgetPasswordLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordLoginViewController.h; sourceTree = "<group>"; };
 		18EDACC61F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordLoginViewController.m; sourceTree = "<group>"; };
 		18F7EACE1F90A5D80067AEEF /* CYCarRMListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYCarRMListModel.h; sourceTree = "<group>"; };
@@ -1604,8 +1628,10 @@
 				18C14F091FB1E4A5002F49B6 /* RemindViewCell */,
 				182216251FB1DC42000BF80D /* RemindViewController.h */,
 				182216261FB1DC42000BF80D /* RemindViewController.m */,
-				182BF4A71FB581F500F79C68 /* CareRemindViewController.h */,
-				182BF4A81FB581F500F79C68 /* CareRemindViewController.m */,
+				18ED28A21FB8419500C0CC92 /* CareRemind */,
+				18ED28AA1FB8859D00C0CC92 /* DriverLicense */,
+				18ED28AE1FB88EF800C0CC92 /* YearTest */,
+				18ED28B51FB8921500C0CC92 /* Inserince */,
 			);
 			path = RemindController;
 			sourceTree = "<group>";
@@ -2027,6 +2053,8 @@
 			children = (
 				18C14F0A1FB1E4C3002F49B6 /* RemindViewTableViewCell.h */,
 				18C14F0B1FB1E4C3002F49B6 /* RemindViewTableViewCell.m */,
+				18ED28A31FB8436F00C0CC92 /* AddCareTableViewCell.h */,
+				18ED28A41FB8436F00C0CC92 /* AddCareTableViewCell.m */,
 			);
 			path = RemindViewCell;
 			sourceTree = "<group>";
@@ -2072,6 +2100,50 @@
 			);
 			name = KPIndicatorView;
 			path = Tool/KPIndicatorView;
+			sourceTree = "<group>";
+		};
+		18ED28A21FB8419500C0CC92 /* CareRemind */ = {
+			isa = PBXGroup;
+			children = (
+				182BF4A71FB581F500F79C68 /* CareRemindViewController.h */,
+				182BF4A81FB581F500F79C68 /* CareRemindViewController.m */,
+				182BF4AA1FB58F2700F79C68 /* AddCareRemindViewController.h */,
+				182BF4AB1FB58F2700F79C68 /* AddCareRemindViewController.m */,
+			);
+			path = CareRemind;
+			sourceTree = "<group>";
+		};
+		18ED28AA1FB8859D00C0CC92 /* DriverLicense */ = {
+			isa = PBXGroup;
+			children = (
+				18ED28A61FB8858600C0CC92 /* DriverLicenseViewController.h */,
+				18ED28A71FB8858600C0CC92 /* DriverLicenseViewController.m */,
+				18ED28AB1FB886C900C0CC92 /* AddDriverLicenseViewController.h */,
+				18ED28AC1FB886C900C0CC92 /* AddDriverLicenseViewController.m */,
+			);
+			path = DriverLicense;
+			sourceTree = "<group>";
+		};
+		18ED28AE1FB88EF800C0CC92 /* YearTest */ = {
+			isa = PBXGroup;
+			children = (
+				18ED28AF1FB88F7F00C0CC92 /* YearTestViewController.h */,
+				18ED28B01FB88F7F00C0CC92 /* YearTestViewController.m */,
+				18ED28B21FB88FD800C0CC92 /* AddYearTestViewController.h */,
+				18ED28B31FB88FD800C0CC92 /* AddYearTestViewController.m */,
+			);
+			path = YearTest;
+			sourceTree = "<group>";
+		};
+		18ED28B51FB8921500C0CC92 /* Inserince */ = {
+			isa = PBXGroup;
+			children = (
+				18ED28B61FB8924900C0CC92 /* InsurenceViewController.h */,
+				18ED28B71FB8924900C0CC92 /* InsurenceViewController.m */,
+				18ED28B91FB8929300C0CC92 /* AddInSurenceViewController.h */,
+				18ED28BA1FB8929300C0CC92 /* AddInSurenceViewController.m */,
+			);
+			path = Inserince;
 			sourceTree = "<group>";
 		};
 		18EDACC41F7B50C6008D59D7 /* ForgetPasswordLogin */ = {
@@ -2848,8 +2920,10 @@
 				1853BA121F288D9800B98C7F /* DSChangeNameController.m in Sources */,
 				181E92BB1F1F36710006511E /* BaseController.m in Sources */,
 				186175F31FA6C48100C6EFF3 /* AlipayOrder.m in Sources */,
+				182BF4AC1FB58F2700F79C68 /* AddCareRemindViewController.m in Sources */,
 				181E932C1F20B0EB0006511E /* DSAdDetailController.m in Sources */,
 				501672131F297AD000384186 /* BusinessDetailHeaderView.m in Sources */,
+				18ED28A51FB8436F00C0CC92 /* AddCareTableViewCell.m in Sources */,
 				50B26E681F301B29009B3B9F /* DiscountCell.m in Sources */,
 				18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */,
 				181E92CE1F1F39CC0006511E /* UIUtil.m in Sources */,
@@ -2862,6 +2936,7 @@
 				50B26EC11F319D7F009B3B9F /* WashCarTicketController.m in Sources */,
 				1853BA4A1F28A04100B98C7F /* JFCityViewController.m in Sources */,
 				18A4B1B41F4AAB7800C64978 /* WayToUpGradeCell.m in Sources */,
+				18ED28BB1FB8929300C0CC92 /* AddInSurenceViewController.m in Sources */,
 				50B26E851F306E0A009B3B9F /* DiscountDetailController.m in Sources */,
 				18FBC5D01F8F05D500054561 /* TestMapCell.m in Sources */,
 				180599BF1FA18DBE003EAD1E /* CYPublishViewController.m in Sources */,
@@ -2980,6 +3055,7 @@
 				50B26EC41F31A048009B3B9F /* CarTicketView.m in Sources */,
 				1810518C1FA98E8700355F2F /* QuestionsViewController.m in Sources */,
 				5042E3521F33165600CD140F /* PGIndexBannerSubiew.m in Sources */,
+				18ED28B41FB88FD800C0CC92 /* AddYearTestViewController.m in Sources */,
 				18E7027B1F5537B3007A9777 /* Record.m in Sources */,
 				507FECF71F2AC8D7009CC505 /* BusinessPayController.m in Sources */,
 				5016722A1F297FDD00384186 /* HeadView.m in Sources */,
@@ -2988,8 +3064,10 @@
 				5016720E1F297A3500384186 /* ShopIntroController.m in Sources */,
 				18218FEB1F2B0C3C00F7207F /* DSCarClubDetailController.m in Sources */,
 				18B697AC1F21DAB3009FF73A /* DSSaleActivityController.m in Sources */,
+				18ED28A81FB8858600C0CC92 /* DriverLicenseViewController.m in Sources */,
 				5071B4771F37F702009FFF67 /* OrderDetailController.m in Sources */,
 				1805AC921F386FA800FD0844 /* TPKeyboardAvoidingTableView.m in Sources */,
+				18ED28AD1FB886C900C0CC92 /* AddDriverLicenseViewController.m in Sources */,
 				5042E3561F33165C00CD140F /* NewPagedFlowView.m in Sources */,
 				180599B91FA17899003EAD1E /* TLMenuButtonView.m in Sources */,
 				5097FDFC1F2ECE0B002EF8F8 /* TicketCashView.m in Sources */,
@@ -3000,6 +3078,7 @@
 				18B69EA31F32CB48007DA0E4 /* UIImage+Zirkfied.m in Sources */,
 				18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */,
 				18FBC5CA1F8F054500054561 /* Item.m in Sources */,
+				18ED28B11FB88F7F00C0CC92 /* YearTestViewController.m in Sources */,
 				186CE5FC1F7E5A540001F920 /* CYModel.m in Sources */,
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
 				18E702761F5503BC007A9777 /* KPIndicatorView.m in Sources */,
@@ -3016,6 +3095,7 @@
 				50CAA69E1F41A7D700138CEF /* GoodsExchangeCell.m in Sources */,
 				50B26E931F307AE5009B3B9F /* DiscountController.m in Sources */,
 				5097FE161F2F42F0002EF8F8 /* MyCarPortController.m in Sources */,
+				18ED28B81FB8924900C0CC92 /* InsurenceViewController.m in Sources */,
 				180E43211F3D836F00013D2D /* HYActivityView.m in Sources */,
 				180959591FB5791C004CCD47 /* CYQuestionTableViewCell.m in Sources */,
 				041573A41F53C522004514E3 /* TFGridInputView.m in Sources */,
