@@ -62,11 +62,13 @@
         [weakSelf clickAddButton:self.addbtn];
         NSLog(@"=====%ld",tag);
         if (tag==5) {//发布问题
-            CYPublishViewController *findController      = [[CYPublishViewController alloc]init];
+            
+            CYDynamicShareViewController *findController      = [[CYDynamicShareViewController alloc]init];
             findController.hidesBottomBarWhenPushed = YES;
             [weakSelf.navigationController pushViewController:findController animated:YES];
+            
         }else if (tag==3){//动态分享
-            CYDynamicShareViewController *findController      = [[CYDynamicShareViewController alloc]init];
+            CYPublishViewController *findController      = [[CYPublishViewController alloc]init];
             findController.hidesBottomBarWhenPushed = YES;
             [weakSelf.navigationController pushViewController:findController animated:YES];
         }else if (tag==1){//二手车信息

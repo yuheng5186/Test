@@ -18,12 +18,17 @@
 #import "AFNetworkingTool+GetToken.h"
 #import "LCMD5Tool.h"
 
+//菊花
+#import "MBProgressHUD.h"
+
 @interface AddCareRemindViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *careTableView;
 @property(strong,nonatomic)NSArray *mainTitleArray;
 @property(strong,nonatomic)NSMutableArray *subTitleArray;
 @property(copy,nonatomic)NSString *subMuSting;
 @property(copy,nonatomic)NSString *dateMuSting;
+
+@property(copy,nonatomic)NSString *sendSerHowLongStr;
 
 @end
 
@@ -33,9 +38,9 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     _mainTitleArray = @[@"保养频率",@"上次保养时间"];
-//    _subTitleArray = @[@"请选择",@"请选择"];
     self.subMuSting = @"请选择";
     self.dateMuSting = @"请选择";
+    self.sendSerHowLongStr = [NSString string];
     [self.view addSubview:self.fakeNavigation];
     [self.view addSubview:self.careTableView];
     [self setUI];
@@ -135,16 +140,19 @@
         UIAlertAction *quarter = [UIAlertAction actionWithTitle:@"三个月一次" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             //三个月一次操作
             self.subMuSting = @"三个月保养一次";
+            self.sendSerHowLongStr = @"1";
             [tableView reloadData];
         }];
         UIAlertAction *half = [UIAlertAction actionWithTitle:@"六个月一次" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             //六个月一次操作
             self.subMuSting = @"六个月保养一次";
+            self.sendSerHowLongStr = @"2";
             [tableView reloadData];
         }];
         UIAlertAction *oneYear = [UIAlertAction actionWithTitle:@"每年一次" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             //每年一次
             self.subMuSting = @"每年保养一次";
+            self.sendSerHowLongStr = @"3";
             [tableView reloadData];
         }];
         
@@ -189,21 +197,29 @@
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:Userid],
                              @"ReminderType":@(1),
-                             @"MaintenanceFrequency":@"保养时长",
-                             @"TimeDate":@"时间",
-                             @"QuasiDriveType":@"驾照类型",
-                             @"IDNumber":@"证件号",
-                             @"Province":@"省",
-                             @"PlateNumber":@"牌照号",
-                             @"CarBrand":@"大众XX",
-                             @"VehicleYears":@"1years"
-                             @"InsuranceCompany"@"保险公司"
+                             @"MaintenanceFrequency":[NSString stringWithFormat:@"%@",self.sendSerHowLongStr],
+                             @"TimeDate":[NSString stringWithFormat:@"%@",self.dateMuSting],
+                             @"QuasiDriveType":@"-",
+                             @"IDNumber":@"-41272774564646",
+                             @"Province":@"-省",
+                             @"PlateNumber":@"-牌照号",
+                             @"CarBrand":@"-大众XX",
+                             @"VehicleYears":@"-1years",
+                             @"InsuranceCompany":@"-保险公司"
                              };
     
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/AddVehicleReminder",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"AF初步成功%@",dict);
+        if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
+            NSLog(@"大成功！");
+        }
+    } fail:^(NSError *error) {
+        NSLog(@"AF失败%@",error);
+    }];
     
 }
 

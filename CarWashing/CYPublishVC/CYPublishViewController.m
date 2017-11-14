@@ -71,7 +71,7 @@
     _imageArr=[NSMutableArray array];
     UILabel * navlabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 20, Main_Screen_Width-160, 44)];
     navlabel.textColor=[UIColor whiteColor];
-    navlabel.text=@"发布问题";
+    navlabel.text=@"动态分享";
     navlabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:navlabel];
     
@@ -168,7 +168,7 @@
     hud.labelText = @"发布中";
     
     NSDictionary *mulDic = @{
-                                 @"ActivityType":@(2),
+                                 @"ActivityType":@(3),
                                  @"Account_Id":[UdStorage getObjectforKey:Userid],
                                  @"ActivityName":[NSString stringWithFormat:@"%@",contentTextField.text],
                                  @"Comment":@"12345",

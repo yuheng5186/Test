@@ -10,8 +10,19 @@
 #import "RemindViewController.h"
 #import "AddCareRemindViewController.h"
 
-@interface CareRemindViewController ()
+#import "UdStorage.h"
+#import "HTTPDefine.h"
+#import "AFNetworkingTool.h"
+#import "AFNetworkingTool+GetToken.h"
+#import "LCMD5Tool.h"
 
+#import "MBProgressHUD.h"
+
+@interface CareRemindViewController ()
+@property(copy,nonatomic)NSString *mainPlateText;
+@property(copy,nonatomic)NSString *provenceText;
+@property(copy,nonatomic)NSString *munText;
+@property(copy,nonatomic)NSString *dateText;
 @end
 
 @implementation CareRemindViewController
@@ -19,6 +30,10 @@
 #pragma mark - 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.mainPlateText = @"";
+    self.provenceText = @"";
+    self.munText = @"";
+    self.dateText = @"";
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.fakeNavigation];
     [self.view addSubview:self.afterView];
@@ -37,6 +52,7 @@
 //需要判断是否已经添加保养提醒
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self requestFromWeb];
     //创建userDefault
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *setAlready = [userDefaults objectForKey:@"CareRemide"];
@@ -120,7 +136,7 @@
         _carNoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 20, Main_Screen_Width, 35)];
         _carNoLabel.textColor = [UIColor whiteColor];
         _carNoLabel.font = [UIFont systemFontOfSize:15];
-        _carNoLabel.text = @"沪A-A6549 保养时间";
+        _carNoLabel.text = self.mainPlateText;
         _carNoLabel.textAlignment = NSTextAlignmentCenter;
         [_afterView addSubview:_carNoLabel];
         
@@ -135,6 +151,8 @@
     }
     return _afterView;
 }
+
+#pragma mark - 函数
 //返回按钮动作
 -(void)backAction{
     [self.navigationController popViewControllerAnimated:YES];
@@ -152,6 +170,30 @@
     [self presentViewController:new animated:YES completion:^{
         self.addView.hidden = YES;
     }];
+}
+
+-(void)requestFromWeb{
+    
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:Userid]
+                             };
+    NSLog(@"%@",mulDic);
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/VehicleReminderList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"AF初步成功%@",dict);
+        if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
+            NSLog(@"大成功！");
+            self.provenceText = dict[@"Province"];
+            self.munText = dict[@"PlateNumber"];
+            self.mainPlateText = [NSString stringWithFormat:@"%@-%@ 保养时间",self.provenceText,self.munText];
+        }
+    } fail:^(NSError *error) {
+        NSLog(@"%@失败",error);
+    }];
+    
 }
 
 
