@@ -22,6 +22,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.fakeNavigation];
     [self.view addSubview:self.afterView];
+
     //需要判断是否已经添加保养提醒,目前直接写在这里,点击“添加”按钮时隐藏添加View
     [self.view addSubview:self.addView];
     
@@ -35,7 +36,15 @@
 
 //需要判断是否已经添加保养提醒
 -(void)viewWillAppear:(BOOL)animated{
-    
+    [super viewWillAppear:animated];
+    //创建userDefault
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *setAlready = [userDefaults objectForKey:@"CareRemide"];
+    if ([setAlready isEqualToString:@"1"]) {
+        self.addView.hidden = YES;
+    }else{
+        self.addView.hidden = NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -141,7 +150,7 @@
 -(void)callNewViewController{
     AddCareRemindViewController *new = [[AddCareRemindViewController alloc]init];
     [self presentViewController:new animated:YES completion:^{
-        [self.addView removeFromSuperview];
+        self.addView.hidden = YES;
     }];
 }
 

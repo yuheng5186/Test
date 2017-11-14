@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ChooseTableViewController : UIViewController
-
+//1.声明闭包传string
+@property(nonatomic,copy)void (^deliverBlock)(NSString * blockLicenseTypeString);
 @end

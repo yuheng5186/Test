@@ -28,7 +28,15 @@
 
 //需要判断是否已经添加保养提醒
 -(void)viewWillAppear:(BOOL)animated{
-    
+    [super viewWillAppear:animated];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *setAlready = [userDefaults objectForKey:@"Year"];
+    if ([setAlready isEqualToString:@"1"]) {
+        self.addView.hidden = YES;
+    }else{
+        self.addView.hidden = NO;
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -141,7 +149,7 @@
     AddYearTestViewController *new = [[AddYearTestViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:new];
     [self presentViewController:nav animated:YES completion:^{
-        [self.addView removeFromSuperview];
+        self.addView.hidden=YES;
     }];
 }
 

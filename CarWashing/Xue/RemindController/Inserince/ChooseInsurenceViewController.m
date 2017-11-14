@@ -99,6 +99,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSString *sendString = self.licenseTypeArray[indexPath.row];
+    self.deliverBlock(sendString);
     [self.navigationController popViewControllerAnimated:YES];
 }
 @end

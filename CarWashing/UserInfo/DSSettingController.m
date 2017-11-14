@@ -254,6 +254,12 @@
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 [defaults removeObjectForKey:@"Account_Id"];
                 [defaults setValue:@NO forKey:@"firstRun"];
+            
+                //车辆提醒
+                [defaults removeObjectForKey:@"CareRemide"];
+                [defaults removeObjectForKey:@"License"];
+                [defaults removeObjectForKey:@"Year"];
+                [defaults removeObjectForKey:@"Insure"];
                 [defaults synchronize];
             
         

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ChooseInsurenceViewController : UIViewController
-
+@property(nonatomic,copy)void (^deliverBlock)(NSString * sendInsurenceTypeString);
 @end

@@ -20,6 +20,8 @@
 @property(strong)NSArray *mainTitleArray;
 @property(copy,nonatomic)NSString *dateMuSting;         //上次年检时间
 @property(copy,nonatomic)NSString *yearsMuSting;         //车龄
+@property(copy,nonatomic)NSString *carMuSting;         //品牌车系
+
 
 
 
@@ -30,10 +32,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //老杨的通知
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(editCarInformation:) name:@"editCarIndorMation" object:nil];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     _mainTitleArray = @[@"车牌号",@"品牌车系",@"选择车辆年限",@"上次年检时间"];
     _dateMuSting = @"请选择";
     _yearsMuSting = @"请选择";
+    _carMuSting = @"请选择";
     self.navigationController.navigationBarHidden = YES;
     [self.view addSubview:self.fakeNavigation];
     [self.view addSubview:self.careTableView];
@@ -112,6 +118,7 @@
     AddCareTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     if (indexPath.row == 1) {   //品牌车系
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.subTitleLabel.text = self.carMuSting;
     }else if(indexPath.row == 0){       //牌照
         cell.accessoryType = UITableViewCellAccessoryNone;
     }else if (indexPath.row == 2){      //自选段时间
@@ -185,11 +192,22 @@
 
 //保存按钮动作,在这里开始上传数据
 -(void)addButtonAction{
+    //本地userDefault
+    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"Year"];
+    // 保存到本地
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 //取消按钮动作
 -(void)cancleAction{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+//通知的另一部分
+-(void)editCarInformation:(NSNotification *)notification{
+    self.carMuSting = [NSString stringWithFormat:@"%@-%@",notification.userInfo[@"CYCarname"],notification.userInfo[@"CYCarType"]] ;
+    [self.careTableView reloadData];
 }
 @end

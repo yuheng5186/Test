@@ -98,6 +98,10 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *typeString = self.licenseTypeArray[indexPath.row];
+//    NSLog(@"传回%@",typeString);
+    //2.调用闭包传回值
+    self.deliverBlock(typeString);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }

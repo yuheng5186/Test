@@ -12,6 +12,12 @@
 //时间选择器
 #import "WSDatePickerView.h"
 
+#import "UdStorage.h"
+#import "HTTPDefine.h"
+#import "AFNetworkingTool.h"
+#import "AFNetworkingTool+GetToken.h"
+#import "LCMD5Tool.h"
+
 @interface AddCareRemindViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *careTableView;
 @property(strong,nonatomic)NSArray *mainTitleArray;
@@ -169,10 +175,35 @@
 }
 
 
-
+#pragma mark - 保存+上传
 //保存按钮动作,在这里开始上传数据
 -(void)addButtonAction{
+    //本地userDefault
+    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"CareRemide"];
+    // 保存到本地
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    //上传
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:Userid],
+                             @"ReminderType":@(1),
+                             @"MaintenanceFrequency":@"保养时长",
+                             @"TimeDate":@"时间",
+                             @"QuasiDriveType":@"驾照类型",
+                             @"IDNumber":@"证件号",
+                             @"Province":@"省",
+                             @"PlateNumber":@"牌照号",
+                             @"CarBrand":@"大众XX",
+                             @"VehicleYears":@"1years"
+                             @"InsuranceCompany"@"保险公司"
+                             };
+    
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
     
 }
 

@@ -16,7 +16,9 @@
 @interface AddDriverLicenseViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *careTableView;
 @property(strong,nonatomic)NSArray *mainTitleArray;
-@property(copy,nonatomic)NSString *dateMuSting;
+@property(copy,nonatomic)NSString *dateMuSting;             //到期时间
+@property(copy,nonatomic)NSString *licenseTypeString;       //驾照类型
+
 @end
 
 @implementation AddDriverLicenseViewController
@@ -26,6 +28,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     _mainTitleArray = @[@"准驾类型",@"证件号",@"到期时间"];
     self.dateMuSting = @"请选择";
+    self.licenseTypeString = @"";
     self.navigationController.navigationBarHidden = YES;
     [self.view addSubview:self.fakeNavigation];
     [self.view addSubview:self.careTableView];
@@ -107,7 +110,7 @@
         cell.subTitleLabel.text = @"请选择";
     }else if(indexPath.row == 0){
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
+        cell.subTitleLabel.text = self.licenseTypeString;
     }else if (indexPath.row == 2){
         //time
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -124,6 +127,10 @@
     if (indexPath.row == 0) {
         //选择驾照类型
         ChooseTableViewController *new = [[ChooseTableViewController alloc]init];
+        new.deliverBlock = ^(NSString *str){
+            self.licenseTypeString = str;
+            [tableView reloadData];
+        };
         [self.navigationController pushViewController:new animated:YES];
     }else if (indexPath.row == 1){
         //输入驾照号码
@@ -145,6 +152,12 @@
 
 //保存按钮动作,在这里开始上传数据
 -(void)addButtonAction{
+    
+    //本地userDefault
+    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"License"];
+    // 保存到本地
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

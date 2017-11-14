@@ -121,6 +121,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
         ChooseInsurenceViewController *new = [[ChooseInsurenceViewController alloc]init];
+        new.deliverBlock = ^(NSString *sendInsurenceTypeString) {
+            self.companyNameMuString = sendInsurenceTypeString;
+            [tableView reloadData];
+        };
         [self.navigationController pushViewController:new animated:YES];
     }else if (indexPath.row == 1){
         WSDatePickerView *datePicker = [[WSDatePickerView alloc]initWithDateStyle:(DateStyleShowYearMonthDay) CompleteBlock:^(NSDate *selectDate) {
@@ -138,6 +142,12 @@
 
 //保存按钮动作,在这里开始上传数据
 -(void)addButtonAction{
+    
+    //本地userDefault
+    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"Insure"];
+    // 保存到本地
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

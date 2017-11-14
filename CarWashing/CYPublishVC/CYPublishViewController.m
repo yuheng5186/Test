@@ -45,6 +45,8 @@
 @property (nonatomic, strong) UIImagePickerController *imagePickerVc;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UITextField *maxCountTF;///< 照片最大可选张数，设置为1即为单选模式
+
+@property(nonatomic,strong)UIImageView *jackImageView;
 @end
 
 @implementation CYPublishViewController
@@ -108,7 +110,43 @@
     _selectedAssets = [NSMutableArray array];
     [self configCollectionView];
     
+    
+    
+    ///////////////////////////////////
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(100, 100, 200, 200)];
+    button.backgroundColor = [UIColor orangeColor];
+    [button addTarget:self action:@selector(buttonAction) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:button];
+    
+    _jackImageView = [[UIImageView alloc]initWithFrame:CGRectMake(100, 300, 200, 200)];
+    _jackImageView.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:_jackImageView];
+    
+    UIButton *upLoadButton = [[UIButton alloc]initWithFrame:CGRectMake(100, 500, 200, 200)];
+    upLoadButton.backgroundColor = [UIColor greenColor];
+    [upLoadButton addTarget:self action:@selector(rightbtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:upLoadButton];
+    ///////////////////////////////////
+
+    
 }
+
+-(void)buttonAction{
+    UIImagePickerController *pick = [[UIImagePickerController alloc]init];
+    pick.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    pick.delegate = self;
+    [self presentViewController:pick animated:YES completion:nil];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    UIImage *getImage = info[UIImagePickerControllerOriginalImage];
+    self.jackImageView.image = getImage;
+    NSLog(@"我看看%@",info);
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+//////////////////////////////////////////////
 #pragma mark ----懒加载
 -(UIScrollView *)backScrollerView
 {
@@ -129,29 +167,11 @@
     hud.mode = MBProgressHUDModeDeterminate;
     hud.labelText = @"发布中";
     
-    
-    
-//    NSLog(@"------图片--%@",_selectedPhotos);
-//    NSMutableArray *base64ImageArray = [[NSMutableArray alloc]init];
-//    for (int i = 0; i<_selectedPhotos.count; i++) {
-//        UIImage *tempImage = _selectedPhotos[i];
-//        NSData *imageData = UIImageJPEGRepresentation(tempImage, 0.7);
-//        NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
-//        [base64ImageArray addObject:encodeImage];
-//    }
-//    NSString *sendString = [base64ImageArray componentsJoinedByString:@","];
-//    NSLog(@"%@",sendString);
-    
-    UIImage *testImage = [UIImage imageNamed:@"try"];
-    NSData *imageData = UIImageJPEGRepresentation(testImage, 0.7);
-    NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
-    
     NSDictionary *mulDic = @{
                                  @"ActivityType":@(2),
                                  @"Account_Id":[UdStorage getObjectforKey:Userid],
                                  @"ActivityName":[NSString stringWithFormat:@"%@",contentTextField.text],
                                  @"Comment":@"12345",
-                                 @"Picture":[NSString stringWithFormat:@"%@",encodeImage]
                                  };
     
     
@@ -160,19 +180,34 @@
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
     
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityInfoIOS",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"可算成功了%@",dict);
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"成功!";
-        [hud hide:YES afterDelay:0.5];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [manager POST:@"http://192.168.2.152:8090/api/Activity/AddActivityInfo" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        NSData *imageData = UIImageJPEGRepresentation(self.jackImageView.image, 0.7);
+        [formData appendPartWithFileData:imageData name:@"123" fileName:@"345.jpg" mimeType:@"image/jpeg"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
         
-        [self.navigationController popViewControllerAnimated:YES];
-    } fail:^(NSError *error) {
-        NSLog(@"你失败了%@",error);
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"上传失败，请重新上传!";
-        [hud hide:YES afterDelay:0.5];
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+
     }];
+    
+//    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityInfoIOS",Khttp] success:^(NSDictionary *dict, BOOL success) {
+//        NSLog(@"可算成功了%@",dict);
+//        hud.mode = MBProgressHUDModeText;
+//        hud.labelText = @"成功!";
+//        [hud hide:YES afterDelay:0.5];
+//
+//        [self.navigationController popViewControllerAnimated:YES];
+//    } fail:^(NSError *error) {
+//        NSLog(@"你失败了%@",error);
+//        hud.mode = MBProgressHUDModeText;
+//        hud.labelText = @"上传失败，请重新上传!";
+//        [hud hide:YES afterDelay:0.5];
+//    }];
     
 }
 
@@ -418,6 +453,8 @@
     }
 }
 
+
+/*
 - (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:YES completion:nil];
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
@@ -451,6 +488,8 @@
         }];
     }
 }
+
+*/
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     if ([picker isKindOfClass:[UIImagePickerController class]]) {
