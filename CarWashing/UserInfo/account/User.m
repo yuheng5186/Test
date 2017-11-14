@@ -66,12 +66,12 @@
     
     if([NSNull null] != [dic objectForKey:@"Sex"])
     {
-        u.userSex = [dic valueForKey:@"Sex"];
+        u.userSex = [NSString stringWithFormat:@"%@",dic[@"Sex"]];
     }
     else
     {
         
-        u.userSex = 0;
+        u.userSex = @"0";
     }
     
     if([NSNull null] != [dic objectForKey:@"Age"])

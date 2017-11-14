@@ -199,7 +199,7 @@
         }
         else if (indexPath.row == 2) {
             cell.textLabel.text         = @"性别";
-            
+            NSLog(@"性别--%@",APPDELEGATE.currentUser.userSex);
             if([APPDELEGATE.currentUser.userSex isEqual:@"1"])
             {
                 cell.detailTextLabel.text   = @"男";
@@ -209,11 +209,6 @@
             {
                 cell.detailTextLabel.text   = @"女";
             }
-//            else
-//            {
-//                cell.detailTextLabel.text   = self.sexString;
-//                cell.detailTextLabel.text = @"";
-//            }
             
         }else {
         
@@ -339,14 +334,14 @@
                                          @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                          };
                 [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/UserInfoEdit",Khttp] success:^(NSDictionary *dict, BOOL success) {
-                    
+                    NSLog( @"--%@",dict);
                     if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                     {
                         APPDELEGATE.currentUser.userSex = @"1";
                         [self.tableView reloadData];
                         
                         
-                        [UdStorage storageObject:APPDELEGATE.currentUser.userSex forKey:@"Sex"];
+                        [UdStorage storageObject:@"1" forKey:@"Sex"];
                     }else
                     {
                         [self.view showInfo:@"设置失败" autoHidden:YES interval:2];
@@ -390,7 +385,7 @@
                         
                         [self.tableView reloadData];
                         
-                        [UdStorage storageObject:APPDELEGATE.currentUser.userSex forKey:@"Sex"];
+                        [UdStorage storageObject:@"0" forKey:@"Sex"];
                     }
                     else
                     {

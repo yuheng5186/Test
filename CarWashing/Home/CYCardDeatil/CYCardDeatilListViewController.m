@@ -284,7 +284,8 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 
     cell.backgroundColor=RGBAA(242, 242, 242, 1.0);
     CardBag *card = (CardBag *)[_CardbagData objectAtIndex:indexPath.section];
-        if ([card.CardName isEqualToString:@"年卡"]) {
+    NSLog(@"卡名--%@",card.CardName);
+        if ([card.CardName isEqualToString:@"炫年卡"]) {
             if (card.CardUseState ==1) {//使用中
                 cell.backgroundImgV.image = [UIImage imageNamed:@"qw_nianka"];
             }else  if (card.CardUseState ==2) {//已使用
@@ -292,7 +293,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
             }else  if (card.CardUseState ==3) {//已过期
                 cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_nianka"];
             }
-        }else if ([card.CardName isEqualToString:@"次卡"]){
+        }else if ([card.CardName isEqualToString:@"乐享卡"]){
             if (card.CardUseState ==1) {//使用中
                 cell.backgroundImgV.image = [UIImage imageNamed:@"qw_cika"];
             }else  if (card.CardUseState ==2) {//已使用
@@ -308,7 +309,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
             }else  if (card.CardUseState ==3) {//已过期
                 cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_tiyanka"];
             }
-        }else if ([card.CardName isEqualToString:@"月卡"]){
+        }else if ([card.CardName isEqualToString:@"悦洗卡"]){
             if (card.CardUseState ==1) {//使用中
                 cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yueka"];
             }else  if (card.CardUseState ==2) {//已使用
