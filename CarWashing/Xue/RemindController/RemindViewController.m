@@ -36,6 +36,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self requestFromWeb];
+}
+
 #pragma mark - 懒加载
 -(UIView *)fakeNavigation{
     if (!_fakeNavigation) {
@@ -121,14 +126,19 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)requestFromWeb{
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:Userid]
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/VehicleReminderList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"总舵主%@",dict);
+    } fail:^(NSError *error) {
+        
+    }];
 }
-*/
 
 @end

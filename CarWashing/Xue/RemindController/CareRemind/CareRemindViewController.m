@@ -232,11 +232,21 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeDeterminate;
     hud.labelText = @"正在加载";
-    
+    NSDictionary *mulDic = [NSDictionary new];
+    if ([self.wayGetHere isEqualToString:@"1"]) {
+        mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:Userid],
+                                 @"ReminderType":[NSString stringWithFormat:@"%@",self.getRemindType],
+                                 @"Id":[NSString stringWithFormat:@"%@",self.getID]
+                                 };
+    }else{
+        mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:Userid]
+                                 };
+        
+    }
     /*[UdStorage getObjectforKey:Userid]*/
-    NSDictionary *mulDic = @{
-                             @"Account_Id":[UdStorage getObjectforKey:Userid]
-                             };
+
     NSLog(@"%@",mulDic);
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],

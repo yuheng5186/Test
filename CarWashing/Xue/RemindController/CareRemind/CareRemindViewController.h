@@ -15,4 +15,11 @@
 //afterView中的属性
 @property(strong,nonatomic)UILabel *carNoLabel;
 @property(strong,nonatomic)UILabel *carCareTimeLabel;
+
+//首页进来
+@property(copy,nonatomic)NSString *getRemindType;
+@property(copy,nonatomic)NSString *getID;
+
+@property(copy,nonatomic)NSString *wayGetHere;
+
 @end

@@ -58,6 +58,14 @@
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
 #import "XueCarFirendViewController.h"
+
+//车辆提醒
+#import "CareRemindViewController.h"
+#import "DriverLicenseViewController.h"
+#import "YearTestViewController.h"
+#import "InsurenceViewController.h"
+
+
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UIScrollViewDelegate,GCCycleScrollViewDelegate,AMapLocationManagerDelegate>
 {
     UIImageView     *logoImageView;
@@ -913,8 +921,7 @@
 
     if (self.newrc.recList.count>0)
     {
-        
-   
+ 
     Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil];
 //    NSLog(@"%@==%@",record,[self.newrc.recList objectAtIndex:indexPath.section]);
     NSString *imageString;
@@ -976,6 +983,19 @@
         contentShowString   = record.MiddleDes;
         remindShowString    = record.BottomDes;
         getString           = @"立即查看";
+        if (record.ConsumptionType == 1) {
+            //保养
+            
+        }else if (record.ConsumptionType == 2){
+            //驾驶证
+            
+        }else if (record.ConsumptionType == 3){
+            //年检
+            
+        }else if (record.ConsumptionType == 4){
+            //车险
+            
+        }
     }
     
     
@@ -1062,7 +1082,44 @@
         detaleController.titlename = @"活动赠送";
         detaleController.record                         = record;
         [self.navigationController pushViewController:detaleController animated:YES];
-    }
+    }else if (record.ShowType == 4){
+        //车辆提醒
+//        Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil] ;
+        
+        if (record.ConsumptionType == 1) {
+            //保养
+            CareRemindViewController *new = [[CareRemindViewController alloc]init];
+            new.getRemindType = @"1";
+            new.wayGetHere = @"1";
+            new.getID = record.UniqueNumber;
+            new.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:new animated:YES];
+        }else if (record.ConsumptionType == 2){
+            //驾驶证
+            DriverLicenseViewController *new = [[DriverLicenseViewController alloc]init];
+            new.getRemindType = @"1";
+            new.wayGetHere = @"1";
+            new.getID = record.UniqueNumber;
+            new.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:new animated:YES];
+        }else if (record.ConsumptionType == 3){
+            //年检
+            YearTestViewController *new = [[YearTestViewController alloc]init];
+            new.getRemindType = @"1";
+            new.wayGetHere = @"1";
+            new.getID = record.UniqueNumber;
+            new.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:new animated:YES];
+        }else if (record.ConsumptionType == 4){
+            //车险
+            InsurenceViewController *new = [[InsurenceViewController alloc]init];
+            new.getRemindType = @"1";
+            new.wayGetHere = @"1";
+            new.getID = record.UniqueNumber;
+            new.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:new animated:YES];
+        }
+    }//@end     车辆提醒
     
 }
 

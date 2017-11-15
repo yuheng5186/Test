@@ -214,6 +214,9 @@
     // 保存到本地
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+    if ([self.licenseNumTextField.text isEqualToString:@""]) {
+        self.licenseNumTextField.text = self.placeHolderString;
+    }
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeDeterminate;

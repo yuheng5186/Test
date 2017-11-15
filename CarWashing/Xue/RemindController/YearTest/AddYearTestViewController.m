@@ -298,6 +298,10 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeDeterminate;
     hud.labelText = @"正在上传";
+    
+    if ([self.licenseNumTextField.text isEqualToString:@""]) {
+        self.licenseNumTextField.text = self.placeholderString;
+    }
     //上传
     NSDictionary *mulDic = @{
                              @"Id":[NSString stringWithFormat:@"%@",self.getID],

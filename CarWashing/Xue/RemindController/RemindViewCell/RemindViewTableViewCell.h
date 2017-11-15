@@ -13,4 +13,6 @@
 @property(strong,nonatomic)UILabel *bigLabel;
 @property(strong,nonatomic)UILabel *shortLabel;
 
+@property(copy,nonatomic)NSString *settenString;
+
 @end
