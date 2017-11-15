@@ -13,11 +13,22 @@
 //时间选择
 #import "WSDatePickerView.h"
 
+#import "UdStorage.h"
+#import "HTTPDefine.h"
+#import "AFNetworkingTool.h"
+#import "AFNetworkingTool+GetToken.h"
+#import "LCMD5Tool.h"
+
+//菊花
+#import "MBProgressHUD.h"
+
 @interface AddDriverLicenseViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *careTableView;
 @property(strong,nonatomic)NSArray *mainTitleArray;
-@property(copy,nonatomic)NSString *dateMuSting;             //到期时间
-@property(copy,nonatomic)NSString *licenseTypeString;       //驾照类型
+
+@property(strong,nonatomic)UITextField *licenseNumTextField;
+
+@property(strong,nonatomic)UIView *jerkLicenseView;         //驾照示例
 
 @end
 
@@ -27,11 +38,17 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     _mainTitleArray = @[@"准驾类型",@"证件号",@"到期时间"];
-    self.dateMuSting = @"请选择";
-    self.licenseTypeString = @"";
     self.navigationController.navigationBarHidden = YES;
     [self.view addSubview:self.fakeNavigation];
     [self.view addSubview:self.careTableView];
+    
+    self.licenseNumTextField = [[UITextField alloc]initWithFrame:CGRectMake(120, 126, 200, 35)];
+    _licenseNumTextField.placeholder = self.placeHolderString;
+    _licenseNumTextField.borderStyle = UITextBorderStyleNone;
+    _licenseNumTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    _licenseNumTextField.font = [UIFont systemFontOfSize:16];
+    [self.view addSubview:self.licenseNumTextField];
+    
     [self setUI];
 }
 
@@ -77,7 +94,32 @@
     [saveButton addTarget:self action:@selector(addButtonAction) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:saveButton];
     
+    UIButton *jerkButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-50, 116, 50, 50)];
+    [jerkButton setImage:[UIImage imageNamed:@"_"] forState:(UIControlStateNormal)];
+    [jerkButton addTarget:self action:@selector(jerkButtonAction) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:jerkButton];
     
+}
+
+-(UIView *)jerkLicenseView{
+    if (!_jerkLicenseView) {
+        _jerkLicenseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
+        _jerkLicenseView.backgroundColor = [UIColor blackColor];
+        _jerkLicenseView.alpha = 0;
+        
+        UIImageView *licenseImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height/2-100, Main_Screen_Width, 200)];
+//        NSString *imageString = [[NSBundle mainBundle] pathForResource:@"jiashizheng123" ofType:@"png"];
+//        licenseImageView.image = [[UIImage alloc]initWithContentsOfFile:imageString];
+        licenseImageView.image = [UIImage imageNamed:@"jiashizheng123"];
+        [_jerkLicenseView addSubview:licenseImageView];
+        
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(jerkViewDismissAction)];
+        _jerkLicenseView.userInteractionEnabled = YES;
+        [_jerkLicenseView addGestureRecognizer:tap];
+        
+    }
+    return _jerkLicenseView;
 }
 
 #pragma mark - 懒加载careTableView
@@ -106,10 +148,11 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     AddCareTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     if (indexPath.row == 1) {
-        cell.accessoryType = UITableViewCellAccessoryDetailButton;
-        cell.subTitleLabel.text = @"请选择";
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.subTitleLabel.text = @"";
     }else if(indexPath.row == 0){
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        //这里self.licenseTypeString没有值
         cell.subTitleLabel.text = self.licenseTypeString;
     }else if (indexPath.row == 2){
         //time
@@ -148,7 +191,20 @@
     }
 }
 
+-(void)jerkButtonAction{
+    [self.view addSubview:self.jerkLicenseView];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.jerkLicenseView.alpha = 1;
+    }];
+}
 
+-(void)jerkViewDismissAction{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.jerkLicenseView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.jerkLicenseView removeFromSuperview];
+    }];
+}
 
 //保存按钮动作,在这里开始上传数据
 -(void)addButtonAction{
@@ -157,6 +213,40 @@
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"License"];
     // 保存到本地
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeDeterminate;
+    hud.labelText = @"正在上传";
+    //上传
+    NSDictionary *mulDic = @{
+                             @"Id":[NSString stringWithFormat:@"%@",self.getID],
+                             @"Account_Id":[UdStorage getObjectforKey:Userid],
+                             @"ReminderType":@(2),
+                             @"QuasiDriveType":[NSString stringWithFormat:@"%@",self.licenseTypeString],
+                             @"TimeDate":[NSString stringWithFormat:@"%@",self.dateMuSting],
+                             @"IDNumber":[NSString stringWithFormat:@"%@",self.licenseNumTextField.text]
+                             };
+    NSLog(@"驾照类型------>%@",self.licenseTypeString);
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@%@",Khttp,self.webTypeString] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"驾照上传结果%@",dict);
+        if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
+            NSLog(@"驾照上传成功！");
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"成功!";
+            [hud hide:YES afterDelay:0.5];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    } fail:^(NSError *error) {
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"失败!";
+        [hud hide:YES afterDelay:0.5];
+        NSLog(@"AF失败%@",error);
+    }];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

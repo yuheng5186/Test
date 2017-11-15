@@ -543,7 +543,7 @@
             cell.imageView.image        = [UIImage imageNamed:@"kefu_wode"];
             cell.textLabel.text         = @"客服咨询";
         }else{
-            cell.imageView.image        = [UIImage imageNamed:@"kefu_wode"];
+            cell.imageView.image        = [UIImage imageNamed:@"cheliagtixing"];
             cell.textLabel.text         = @"车辆提醒";
         }
     }else{

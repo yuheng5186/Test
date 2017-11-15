@@ -13,11 +13,19 @@
 //时间选择
 #import "WSDatePickerView.h"
 
+#import "UdStorage.h"
+#import "HTTPDefine.h"
+#import "AFNetworkingTool.h"
+#import "AFNetworkingTool+GetToken.h"
+#import "LCMD5Tool.h"
+
+//菊花
+#import "MBProgressHUD.h"
+
 @interface AddInSurenceViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *careTableView;
 @property(strong,nonatomic)NSArray *mainTitleArray;
-@property(copy,nonatomic)NSString *dateMuSting;                 //上次年检时间
-@property(copy,nonatomic)NSString *companyNameMuString;         //保险公司名字
+
 
 
 @end
@@ -29,8 +37,6 @@
     self.navigationController.navigationBarHidden = YES;
     self.view.backgroundColor = [UIColor whiteColor];
     _mainTitleArray = @[@"保险公司",@"到期时间"];
-    self.dateMuSting = @"请选择";
-    self.companyNameMuString = @"请选择保险公司";
     [self.view addSubview:self.fakeNavigation];
     [self.view addSubview:self.careTableView];
     [self setUI];
@@ -139,7 +145,7 @@
 }
 
 
-
+#pragma mark - 上传
 //保存按钮动作,在这里开始上传数据
 -(void)addButtonAction{
     
@@ -149,6 +155,40 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeDeterminate;
+    hud.labelText = @"正在上传";
+    //上传
+    NSDictionary *mulDic = @{
+                             @"Id":@"f6f6f7eb-e7c8-e711-95c2-58fb84d873e4",
+                             @"Account_Id":[UdStorage getObjectforKey:Userid],
+                             @"ReminderType":@(4),
+                             @"TimeDate":[NSString stringWithFormat:@"%@",self.dateMuSting],
+                             @"InsuranceCompany":[NSString stringWithFormat:@"%@",self.companyNameMuString]
+                             };
+    
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@%@",Khttp,self.webTypeString] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"车险上传结果%@",dict);
+        if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
+            NSLog(@"车辆限上传成功！");
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"成功!";
+            [hud hide:YES afterDelay:0.5];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    } fail:^(NSError *error) {
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"失败!";
+        [hud hide:YES afterDelay:0.5];
+    }];
+    
+    
 }
 
 //取消按钮动作

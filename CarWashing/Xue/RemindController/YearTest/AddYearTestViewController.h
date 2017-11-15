@@ -10,5 +10,13 @@
 
 @interface AddYearTestViewController : UIViewController
 @property(strong,nonatomic)UIView * fakeNavigation;
+@property(copy,nonatomic)NSString *webTypeString;           //修改或者新加入
+@property(copy,nonatomic)NSString *getID;
+
+@property(copy,nonatomic)NSString *sendButtonTitleString;       //传回button名字
+@property(copy,nonatomic)NSString *placeholderString;
+@property(copy,nonatomic)NSString *dateMuSting;         //上次年检时间
+@property(copy,nonatomic)NSString *yearsMuSting;         //车龄
+@property(copy,nonatomic)NSString *carMuSting;         //品牌车系
 
 @end

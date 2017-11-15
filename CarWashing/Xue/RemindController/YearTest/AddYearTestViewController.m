@@ -15,13 +15,25 @@
 //选择车
 #import "CYCarInsertViewController.h"
 
+#import "UdStorage.h"
+#import "HTTPDefine.h"
+#import "AFNetworkingTool.h"
+#import "AFNetworkingTool+GetToken.h"
+#import "LCMD5Tool.h"
+
+//菊花
+#import "MBProgressHUD.h"
+
 @interface AddYearTestViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *careTableView;
 @property(strong)NSArray *mainTitleArray;
-@property(copy,nonatomic)NSString *dateMuSting;         //上次年检时间
-@property(copy,nonatomic)NSString *yearsMuSting;         //车龄
-@property(copy,nonatomic)NSString *carMuSting;         //品牌车系
+@property(copy,nonatomic)NSString *sendSerString;         //给后台
+@property(strong,nonatomic)UITextField *licenseNumTextField;
 
+@property(strong,nonatomic)UIView *popView;
+@property(strong,nonatomic)UIView *backView;
+@property(strong,nonatomic)NSArray *proArray;
+@property(strong,nonatomic)UIButton *button;
 
 
 
@@ -37,14 +49,92 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     _mainTitleArray = @[@"车牌号",@"品牌车系",@"选择车辆年限",@"上次年检时间"];
-    _dateMuSting = @"请选择";
-    _yearsMuSting = @"请选择";
-    _carMuSting = @"请选择";
+
     self.navigationController.navigationBarHidden = YES;
     [self.view addSubview:self.fakeNavigation];
     [self.view addSubview:self.careTableView];
+    
+    self.licenseNumTextField = [[UITextField alloc]initWithFrame:CGRectMake(120, 76, 200, 35)];
+    _licenseNumTextField.placeholder = self.placeholderString;
+    _licenseNumTextField.borderStyle = UITextBorderStyleNone;
+    _licenseNumTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    _licenseNumTextField.font = [UIFont systemFontOfSize:16];
+    [self.view addSubview:self.licenseNumTextField];
     [self setUI];
+    
+    self.proArray = @[@"京",@"津",@"冀",@"晋",@"蒙",@"辽",@"吉",@"黑",@"沪",@"苏",@"浙",@"皖",@"闽",@"赣",@"鲁",@"豫",@"鄂",@"湘",@"粤",@"桂",@"琼",@"渝",@"川",@"贵",@"云",@"藏",@"陕",@"甘",@"青",@"宁",@"新"];
+    
+    self.button = [[UIButton alloc]initWithFrame:CGRectMake(70, 66, 50, 50)];
+    self.button.backgroundColor = [UIColor clearColor];
+    [self.button setTitleColor:[UIColor lightGrayColor] forState:(UIControlStateNormal)];
+    self.button.titleLabel.font = [UIFont systemFontOfSize:16];
+    [self.button setTitle:self.sendButtonTitleString forState:(UIControlStateNormal)];
+    [self.button addTarget:self action:@selector(buttonAction) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview: self.button];
 }
+
+///////////////////////////////////////////
+//点击省市
+-(void)buttonAction{
+    [self.view addSubview:self.backView];
+    [self.view addSubview:self.popView];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.backView.alpha = 0.7;
+        self.backView.hidden = NO;
+        self.popView.frame = CGRectMake(0, Main_Screen_Height-300, Main_Screen_Width, 300);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+-(void)backActionJack{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.backView.alpha = 0;
+        self.popView.frame = CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 300);
+    } completion:^(BOOL finished) {
+        [self.backView removeFromSuperview];
+        [self.popView removeFromSuperview];
+    }];
+}
+
+-(void)chooseProAction:(UIButton *)sender{
+    self.sendButtonTitleString = self.proArray[sender.tag-100];
+    [self.button setTitle:self.sendButtonTitleString forState:(UIControlStateNormal)];
+    [self backActionJack];
+}
+
+-(UIView *)popView{
+    if (!_popView) {
+        _popView = [[UIView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 300)];
+        _popView.backgroundColor = [UIColor whiteColor];
+        
+        for (int i = 0; i < self.proArray.count; i++) {
+            UIButton *provenButton = [[UIButton alloc]initWithFrame:CGRectMake(15+(i%5)*(71.0/375*Main_Screen_Width), 10+(i/5)*(35.0/667*Main_Screen_Height), (61.0/375*Main_Screen_Width), (30.0/667*Main_Screen_Height))];
+            provenButton.layer.borderWidth = 0.5;
+            [provenButton setTitle:self.proArray[i] forState:(UIControlStateNormal)];
+            provenButton.tag = 100+i;
+            [provenButton setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+            [provenButton addTarget:self action:@selector(chooseProAction:) forControlEvents:(UIControlEventTouchUpInside)];
+            [_popView addSubview:provenButton];
+        }
+    }
+    return _popView;
+}
+
+
+-(UIView *)backView{
+    if (!_backView) {
+        _backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
+        _backView.backgroundColor = [UIColor blackColor];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backActionJack)];
+        _backView.userInteractionEnabled = YES;
+        [_backView addGestureRecognizer:tap];
+        _backView.alpha = 0;
+        _backView.hidden = YES;
+    }
+    return _backView;
+}
+///////////////////////////////////////////
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -121,6 +211,7 @@
         cell.subTitleLabel.text = self.carMuSting;
     }else if(indexPath.row == 0){       //牌照
         cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.subTitleLabel.text = @"";
     }else if (indexPath.row == 2){      //自选段时间
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.subTitleLabel.text = self.yearsMuSting;
@@ -150,16 +241,21 @@
         UIAlertAction *quarter = [UIAlertAction actionWithTitle:@"不足六年" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             //三个月一次操作
             self.yearsMuSting = @"不足六年";
+            self.sendSerString = @"1";
             [tableView reloadData];
         }];
         UIAlertAction *half = [UIAlertAction actionWithTitle:@"六年至十五年" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             //六个月一次操作
             self.yearsMuSting = @"六年至十五年";
+            self.sendSerString = @"2";
+
             [tableView reloadData];
         }];
         UIAlertAction *oneYear = [UIAlertAction actionWithTitle:@"大于十五年" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             //每年一次
             self.yearsMuSting = @"大于十五年";
+            self.sendSerString = @"3";
+
             [tableView reloadData];
         }];
         
@@ -189,15 +285,52 @@
 }
 
 
-
+#pragma mark - 上传
 //保存按钮动作,在这里开始上传数据
 -(void)addButtonAction{
     //本地userDefault
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"Year"];
     // 保存到本地
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeDeterminate;
+    hud.labelText = @"正在上传";
+    //上传
+    NSDictionary *mulDic = @{
+                             @"Id":[NSString stringWithFormat:@"%@",self.getID],
+                             @"Account_Id":[UdStorage getObjectforKey:Userid],
+                             @"ReminderType":@(3),
+                             @"Province":[NSString stringWithFormat:@"%@",self.sendButtonTitleString],
+                             @"TimeDate":[NSString stringWithFormat:@"%@",self.dateMuSting],
+                             @"PlateNumber":[NSString stringWithFormat:@"%@",self.licenseNumTextField.text],
+                             @"CarBrand":[NSString stringWithFormat:@"%@",self.carMuSting],
+                             @"VehicleYears":[NSString stringWithFormat:@"%@",self.sendSerString]
+                             };
+    
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    NSLog(@"年检参数%@",mulDic);
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@%@",Khttp,self.webTypeString] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"年检上传结果%@",dict);
+        if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
+            NSLog(@"年检上传成功！");
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"成功!";
+            [hud hide:YES afterDelay:0.5];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    } fail:^(NSError *error) {
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"失败!";
+        [hud hide:YES afterDelay:0.5];
+    }];
 
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 //取消按钮动作

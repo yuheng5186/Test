@@ -55,6 +55,7 @@
 
 @property (nonatomic,strong) NSString *areastr;
 @property (nonatomic,strong) NSString *citystr;
+
 //@property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) AMapLocationManager* locationManager;
 @end
@@ -150,11 +151,27 @@ static NSString *id_salerListCell = @"salerListViewCell";
         
     }];
     
-    
+//    UILabel *buttonBackgroundLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, Main_Screen_Height-49, Main_Screen_Height, 49)];
+//    buttonBackgroundLabel.backgroundColor = [UIColor colorWithRed:13/255.0 green:98/255.0 blue:159/255.0 alpha:1];
+//    buttonBackgroundLabel.text = @"取消";
+//    buttonBackgroundLabel.textAlignment = NSTextAlignmentCenter;
+//    buttonBackgroundLabel.textColor = [UIColor whiteColor];
+//    [self.view addSubview:buttonBackgroundLabel];
+//
+//    UIButton *cancleButton = [[UIButton alloc]initWithFrame:CGRectMake(0, Main_Screen_Height-49, Main_Screen_Height, 49)];
+////    cancleButton.backgroundColor = [UIColor colorWithRed:13/255.0 green:98/255.0 blue:159/255.0 alpha:1];
+////    [cancleButton setTitle:@"取消" forState:(UIControlStateNormal)];
+//    [cancleButton addTarget:self action:@selector(cancleAction) forControlEvents:(UIControlEventTouchUpInside)];
+//    [self.view addSubview:cancleButton];
     [self setupUI];
     
 
 }
+//-(void)cancleAction{
+//    [self dismissViewControllerAnimated:YES completion:^{
+//
+//    }];
+//}
 
 - (void)setupUI {
     

@@ -9,6 +9,8 @@
 #import "CareRemindViewController.h"
 #import "RemindViewController.h"
 #import "AddCareRemindViewController.h"
+#import "MBProgressHUD.h"
+#import "OldDriverViewController.h"
 
 #import "UdStorage.h"
 #import "HTTPDefine.h"
@@ -18,11 +20,24 @@
 
 #import "MBProgressHUD.h"
 
+#import "CareModel.h"
+#import "BusinessViewController.h"
+
+
 @interface CareRemindViewController ()
 @property(copy,nonatomic)NSString *mainPlateText;
 @property(copy,nonatomic)NSString *provenceText;
 @property(copy,nonatomic)NSString *munText;
 @property(copy,nonatomic)NSString *dateText;
+@property(copy,nonatomic)NSString *showOrNot;
+@property(copy,nonatomic)NSMutableArray *modelDict;
+@property(nonatomic)CareModel *modelJack;
+@property(strong,nonatomic)UIButton *nearByButton;
+@property(copy,nonatomic)NSString *sendToNewString;
+
+//给下次进入传值
+@property(nonatomic,copy)NSString *sendFrequency;
+@property(nonatomic,copy)NSString *sendTimeData;
 @end
 
 @implementation CareRemindViewController
@@ -33,20 +48,14 @@
     self.mainPlateText = @"";
     self.provenceText = @"";
     self.munText = @"";
-    self.dateText = @"";
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.fakeNavigation];
-    [self.view addSubview:self.afterView];
 
     //需要判断是否已经添加保养提醒,目前直接写在这里,点击“添加”按钮时隐藏添加View
     [self.view addSubview:self.addView];
     
-    //底部按钮
-    UIButton *nearByButton = [[UIButton alloc]initWithFrame:CGRectMake(0, Main_Screen_Height-50, Main_Screen_Width, 50)];
-    [nearByButton setTitle:@"查看附近保养商户" forState:(UIControlStateNormal)];
-    nearByButton.backgroundColor = [UIColor colorWithRed:13/255.0 green:98/255.0 blue:159/255.0 alpha:1];
-    nearByButton.titleLabel.font = [UIFont systemFontOfSize:18];
-    [self.view addSubview:nearByButton];
+
+    
 }
 
 //需要判断是否已经添加保养提醒
@@ -58,8 +67,7 @@
     NSString *setAlready = [userDefaults objectForKey:@"CareRemide"];
     if ([setAlready isEqualToString:@"1"]) {
         self.addView.hidden = YES;
-    }else{
-        self.addView.hidden = NO;
+        self.afterView.hidden = NO;
     }
 }
 
@@ -90,7 +98,6 @@
         
         UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 66, 66)];
         backButton.backgroundColor = [UIColor clearColor];
-//        [backButton setImage:[UIImage imageNamed:@"icon_titlebar_arrow"] forState:(UIControlStateNormal)];
         [backButton addTarget:self action:@selector(backAction) forControlEvents:(UIControlEventTouchUpInside)];
         [_fakeNavigation addSubview:backButton];
         
@@ -143,10 +150,29 @@
         _carCareTimeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 50, Main_Screen_Width, 40)];
         _carCareTimeLabel.textColor = [UIColor whiteColor];
         _carCareTimeLabel.font = [UIFont systemFontOfSize:20];
-        _carCareTimeLabel.text = @"2018-11-11";
+        _carCareTimeLabel.text = self.dateText;
         _carCareTimeLabel.textAlignment = NSTextAlignmentCenter;
         [_afterView addSubview:_carCareTimeLabel];
         
+        UIImageView *imageViewHere = [[UIImageView alloc]initWithFrame:CGRectMake(0, 120, Main_Screen_Width, 432*Main_Screen_Height/667)];
+        imageViewHere.image = [UIImage imageNamed:@"保养小知识"];
+        imageViewHere.contentMode = UIViewContentModeScaleAspectFit;
+        imageViewHere.userInteractionEnabled = YES;
+        [_afterView addSubview:imageViewHere];
+        
+        //老司机button
+        UIButton *oldDriverButton = [[UIButton alloc]initWithFrame:CGRectMake(200, 100, 100, 100)];
+        [oldDriverButton addTarget:self action:@selector(oldBoyAction) forControlEvents:(UIControlEventTouchUpInside)];
+        oldDriverButton.backgroundColor = [UIColor clearColor];
+        [imageViewHere addSubview:oldDriverButton];
+        
+        //底部按钮
+        _nearByButton = [[UIButton alloc]initWithFrame:CGRectMake(0, Main_Screen_Height-116, Main_Screen_Width, 50)];
+        [_nearByButton setTitle:@"查看附近保养商户" forState:(UIControlStateNormal)];
+        _nearByButton.backgroundColor = [UIColor colorWithRed:13/255.0 green:98/255.0 blue:159/255.0 alpha:1];
+        _nearByButton.titleLabel.font = [UIFont systemFontOfSize:18];
+        [_nearByButton addTarget:self action:@selector(nearByAction) forControlEvents:(UIControlEventTouchUpInside)];
+        [_afterView addSubview:_nearByButton];
         
     }
     return _afterView;
@@ -158,22 +184,56 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)oldBoyAction{
+    OldDriverViewController *new = [[OldDriverViewController alloc]init];
+    [self.navigationController pushViewController:new animated:YES];
+}
+
 -(void)editingAction{
     AddCareRemindViewController *new = [[AddCareRemindViewController alloc]init];
+    new.typeString = @"MyCar/ModifyVehicleReminder";
+    new.getID = self.sendToNewString;
+    new.dateMuSting = self.sendTimeData;
+    if ([self.sendFrequency isEqualToString:@"1"]) {
+        //三个月
+        new.subMuSting = @"三个月保养一次";
+    }else if ([self.sendFrequency isEqualToString:@"2"]){
+        //六个月
+        new.subMuSting = @"六个月保养一次";
+    }else if ([self.sendFrequency isEqualToString:@"3"]){
+        //一年
+        new.subMuSting = @"每年保养一次";
+    }
     [self presentViewController:new animated:YES completion:^{
+//        [self.afterView removeFromSuperview];
     }];
 }
 
 //addView上present新控制器
 -(void)callNewViewController{
     AddCareRemindViewController *new = [[AddCareRemindViewController alloc]init];
+    new.typeString = @"MyCar/AddVehicleReminder";
+    new.dateMuSting = @"请选择";
+    new.subMuSting = @"请选择";
     [self presentViewController:new animated:YES completion:^{
         self.addView.hidden = YES;
+//        [self.afterView removeFromSuperview];
+
     }];
+}
+
+//附近的洗车点
+-(void)nearByAction{
+    self.tabBarController.selectedIndex = 1;
 }
 
 -(void)requestFromWeb{
     
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeDeterminate;
+    hud.labelText = @"正在加载";
+    
+    /*[UdStorage getObjectforKey:Userid]*/
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:Userid]
                              };
@@ -183,15 +243,40 @@
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/VehicleReminderList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"AF初步成功%@",dict);
+        
+        [hud hide:YES afterDelay:0.5];
+        
         if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
-            NSLog(@"大成功！");
-            self.provenceText = dict[@"Province"];
-            self.munText = dict[@"PlateNumber"];
-            self.mainPlateText = [NSString stringWithFormat:@"%@-%@ 保养时间",self.provenceText,self.munText];
+            NSLog(@"第一块%@",dict[@"JsonData"]);
+            //判断逻辑在这里
+            self.modelDict = (NSMutableArray *)[CareModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
+            self.modelJack = self.modelDict[0];
+            
+            self.dateText = self.modelJack.ExpirationDate;
+            self.sendToNewString = self.modelJack.Id;
+            _carCareTimeLabel.text = self.dateText;
+            self.mainPlateText = [NSString stringWithFormat:@"%@-%@ 保养时间",self.modelJack.Province,self.modelJack.PlateNumber];
+            _carNoLabel.text = self.mainPlateText;
+            self.showOrNot = self.modelJack.IsSetUp;
+            
+            //给再次打开传值
+            self.sendFrequency = self.modelJack.MaintenanceFrequency;
+            self.sendTimeData = self.modelJack.TimeDate;
+            
+            NSLog(@"是否有时间%@",self.dateText);
+            if ([self.showOrNot isEqualToString:@"1"]) {
+                self.addView.hidden = YES;
+                self.afterView.hidden = NO;
+            }else{
+                self.addView.hidden = NO;
+                self.afterView.hidden = YES;
+            }
+            [self.view addSubview:self.afterView];
+
         }
     } fail:^(NSError *error) {
         NSLog(@"%@失败",error);
+        [hud hide:YES afterDelay:0.5];
     }];
     
 }

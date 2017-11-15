@@ -749,7 +749,7 @@
             arr = [dict objectForKey:@"JsonData"];
             if(arr.count == 0)
             {
-                //                [self.view showInfo:@"暂无更多数据" autoHidden:YES interval:2];
+                //没有更多信息
                 [self.tableView.mj_header endRefreshing];
             }
             else
@@ -764,8 +764,6 @@
                 [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%@",dict[@"JsonData"][@"adverList"][0][@"Url"]] forKey:@"homeUrl"];
                 [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%@",dict[@"JsonData"][@"adverList"][0][@"InviteUrl"]] forKey:@"homeInviteUrl"];
                 
-//                    [self.GetUserRecordData addObject:newrc];
-//                }
                  [self createHeaderView];
                 
                 if (self.newrc.recList.count==0) {
@@ -927,6 +925,7 @@
     NSString *getString;
     
     if(record.ShowType == 2){
+        //消费记录
         imageString               = @"xiaofeijilu";
         titleString               = @"消费记录";
         vipString                 = @"";
@@ -952,42 +951,17 @@
             contentShowString         = [NSString stringWithFormat:@"您购买%@",record.MiddleDes];
             remindShowString          = [NSString stringWithFormat:@"支付金额: %@元",record.BottomDes];
         }
-        
-        
-        
-        
-        
         getString                 = @"查看详情";
     }else if(record.ShowType == 3){
+        //活动赠送
         imageString               = @"zensong";
         titleString               = @"活动赠送";
         vipString                 = @"";
         contentShowString         = [NSString stringWithFormat:@"%@",record.MiddleDes];
         remindShowString          = record.ConsumerDescrip;
-        
-//        if(record.ConsumptionType == 1)
-//        {
-//            contentShowString         = [NSString stringWithFormat:@"￥%@",record.MiddleDes];
-//            remindShowString          = record.BottomDes;
-//        }
-//        else if(record.ConsumptionType == 2)
-//        {
-//            contentShowString         = record.MiddleDes;
-//            remindShowString          = [NSString stringWithFormat:@"剩余%@次免费洗车",record.BottomDes];
-//        }
-//        else if(record.ConsumptionType == 3)
-//        {
-//            contentShowString         = record.MiddleDes;
-//            remindShowString          = [NSString stringWithFormat:@"支付金额: %@元",record.BottomDes];
-//        }
-//        else if(record.ConsumptionType == 4)
-//        {
-//            contentShowString         = [NSString stringWithFormat:@"您购买%@",record.MiddleDes];
-//            remindShowString          = [NSString stringWithFormat:@"支付金额: %@元",record.BottomDes];
-//        }
         getString                 = @"查看详情";
     }else if(record.ShowType == 1){
-        
+        //优惠活动
         imageString         = @"quanyi";
         titleString         = @"优惠活动";
         vipString           = @"zhuanxiang";
@@ -995,6 +969,13 @@
         remindShowString    = record.BottomDes;
         getString           = @"立即领取";
 //        vipString   = @"huiyuanzhuanxiang";
+    }else if (record.ShowType == 4){
+        imageString         = @"quanyi";
+        titleString         = @"消息提醒";
+        vipString           = @"zhuanxiang";
+        contentShowString   = record.MiddleDes;
+        remindShowString    = record.BottomDes;
+        getString           = @"立即查看";
     }
     
     

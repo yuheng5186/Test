@@ -17,3 +17,7 @@
 #define Main_Screen_Height [UIScreen mainScreen].bounds.size.height
 //定义屏幕宽度
 #define Main_Screen_Width [UIScreen mainScreen].bounds.size.width
+
+//比例
+#define screenX 667*[UIScreen mainScreen].bounds.size.width
+#define screenY 667*[UIScreen mainScreen].bounds.size.height

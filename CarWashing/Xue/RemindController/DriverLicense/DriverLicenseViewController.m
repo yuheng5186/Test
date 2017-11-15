@@ -9,7 +9,17 @@
 #import "DriverLicenseViewController.h"
 #import "RemindViewController.h"
 #import "AddDriverLicenseViewController.h"
+#import "MBProgressHUD.h"
+
+#import "LicenseModel.h"
 @interface DriverLicenseViewController ()
+@property(copy,nonatomic)NSString *timeString;                  //到期时间
+@property(copy,nonatomic)NSString *sendIDString;
+@property(copy,nonatomic)NSString *mainPlateText;       //车牌号
+
+@property(copy,nonatomic)NSString *sendTypeString;              //ok
+@property(copy,nonatomic)NSString *sendPlaceHolderString;       //ok
+
 
 @end
 
@@ -20,7 +30,6 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.fakeNavigation];
-    [self.view addSubview:self.afterView];
     //需要判断是否已经添加保养提醒,目前直接写在这里,点击“添加”按钮时隐藏添加View
     [self.view addSubview:self.addView];
     
@@ -29,12 +38,12 @@
 //需要判断是否已经添加保养提醒
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self requestFromWeb];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *setAlready = [userDefaults objectForKey:@"License"];
     if ([setAlready isEqualToString:@"1"]) {
         self.addView.hidden = YES;
-    }else{
-        self.addView.hidden = NO;
+        self.afterView.hidden = NO;
     }
 }
 
@@ -110,16 +119,21 @@
         _carNoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 20, Main_Screen_Width, 35)];
         _carNoLabel.textColor = [UIColor whiteColor];
         _carNoLabel.font = [UIFont systemFontOfSize:15];
-        _carNoLabel.text = @"沪A-A6549 保养时间";
+        _carNoLabel.text = @"驾驶证到期提醒";
         _carNoLabel.textAlignment = NSTextAlignmentCenter;
         [_afterView addSubview:_carNoLabel];
         
         _carCareTimeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 50, Main_Screen_Width, 40)];
         _carCareTimeLabel.textColor = [UIColor whiteColor];
         _carCareTimeLabel.font = [UIFont systemFontOfSize:20];
-        _carCareTimeLabel.text = @"2018-11-11";
+        _carCareTimeLabel.text = self.timeString;
         _carCareTimeLabel.textAlignment = NSTextAlignmentCenter;
         [_afterView addSubview:_carCareTimeLabel];
+        
+        UIImageView *imageViewHere = [[UIImageView alloc]initWithFrame:CGRectMake(0, 120, Main_Screen_Width, 432*Main_Screen_Height/667)];
+        imageViewHere.image = [UIImage imageNamed:@"具体步骤"];
+        imageViewHere.contentMode = UIViewContentModeScaleAspectFit;
+        [_afterView addSubview:imageViewHere];
         
         
     }
@@ -132,16 +146,74 @@
 
 -(void)editingAction{
     AddDriverLicenseViewController *new = [[AddDriverLicenseViewController alloc]init];
-    [self presentViewController:new animated:YES completion:nil];
+    new.webTypeString = @"MyCar/ModifyVehicleReminder";
+    new.getID = self.sendIDString;
+    new.placeHolderString = self.sendPlaceHolderString;
+    new.licenseTypeString = self.sendTypeString;
+    new.dateMuSting = self.timeString;
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:new];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 //addView上present新控制器
 -(void)callNewViewController{
     AddDriverLicenseViewController *new = [[AddDriverLicenseViewController alloc]init];
+    new.webTypeString = @"MyCar/AddVehicleReminder";
+    new.placeHolderString = @"请输入证件号";
+    new.licenseTypeString = @"请选择";
+    new.dateMuSting = @"请选择";
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:new];
     [self presentViewController:nav animated:YES completion:^{
         self.addView.hidden = YES;
     }];
+}
+
+
+-(void)requestFromWeb{
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeDeterminate;
+    hud.labelText = @"正在加载";
+    
+    
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:Userid]
+                             };
+    NSLog(@"%@",mulDic);
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/VehicleReminderList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
+            
+            [hud hide:YES afterDelay:0.5];
+            
+            NSLog(@"驾驶证提醒%@",dict[@"JsonData"]);
+            
+            NSMutableArray *modelArray = (NSMutableArray *)[LicenseModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
+            LicenseModel *modelJack = modelArray[1];
+            self.timeString = modelJack.ExpirationDate;
+            _carCareTimeLabel.text = self.timeString;
+            self.sendIDString = modelJack.Id;
+            self.sendPlaceHolderString = modelJack.IDNumber;
+            self.sendTypeString = modelJack.QuasiDriveType;
+            if ([modelJack.IsSetUp isEqualToString:@"1"]) {
+                self.addView.hidden = YES;
+                self.afterView.hidden = NO;
+            }else{
+                self.addView.hidden = NO;
+                self.afterView.hidden = YES;
+            }
+            [self.view addSubview:self.afterView];
+            
+        }
+    } fail:^(NSError *error) {
+        NSLog(@"%@失败",error);
+        [hud hide:YES afterDelay:0.5];
+    }];
+    
 }
 
 

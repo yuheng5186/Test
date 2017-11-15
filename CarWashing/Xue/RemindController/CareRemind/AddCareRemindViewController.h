@@ -10,4 +10,10 @@
 
 @interface AddCareRemindViewController : UIViewController
 @property(strong,nonatomic)UIView * fakeNavigation;
+@property(copy,nonatomic)NSString *typeString;
+@property(copy,nonatomic)NSString *getID;
+
+@property(copy,nonatomic)NSString *subMuSting;
+@property(copy,nonatomic)NSString *dateMuSting;
+
 @end

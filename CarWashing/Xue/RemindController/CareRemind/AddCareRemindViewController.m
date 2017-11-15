@@ -25,8 +25,8 @@
 @property(strong,nonatomic)UITableView *careTableView;
 @property(strong,nonatomic)NSArray *mainTitleArray;
 @property(strong,nonatomic)NSMutableArray *subTitleArray;
-@property(copy,nonatomic)NSString *subMuSting;
-@property(copy,nonatomic)NSString *dateMuSting;
+
+
 
 @property(copy,nonatomic)NSString *sendSerHowLongStr;
 
@@ -38,8 +38,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     _mainTitleArray = @[@"保养频率",@"上次保养时间"];
-    self.subMuSting = @"请选择";
-    self.dateMuSting = @"请选择";
+//    self.subMuSting = @"请选择";
+//    self.dateMuSting = @"请选择";
     self.sendSerHowLongStr = [NSString string];
     [self.view addSubview:self.fakeNavigation];
     [self.view addSubview:self.careTableView];
@@ -191,33 +191,38 @@
     // 保存到本地
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeDeterminate;
+    hud.labelText = @"正在上传";
     
     //上传
     NSDictionary *mulDic = @{
+                             @"Id":[NSString stringWithFormat:@"%@",self.getID],
                              @"Account_Id":[UdStorage getObjectforKey:Userid],
                              @"ReminderType":@(1),
                              @"MaintenanceFrequency":[NSString stringWithFormat:@"%@",self.sendSerHowLongStr],
-                             @"TimeDate":[NSString stringWithFormat:@"%@",self.dateMuSting],
-                             @"QuasiDriveType":@"-",
-                             @"IDNumber":@"-41272774564646",
-                             @"Province":@"-省",
-                             @"PlateNumber":@"-牌照号",
-                             @"CarBrand":@"-大众XX",
-                             @"VehicleYears":@"-1years",
-                             @"InsuranceCompany":@"-保险公司"
+                             @"TimeDate":[NSString stringWithFormat:@"%@",self.dateMuSting]
                              };
     
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/AddVehicleReminder",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"AF初步成功%@",dict);
+    NSLog(@"参数是否在变%@",mulDic);
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@%@",Khttp,self.typeString] success:^(NSDictionary *dict, BOOL success) {
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"成功!";
+        [hud hide:YES afterDelay:0.5];
+        NSLog(@"上传结果%@",dict);
         if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
-            NSLog(@"大成功！");
+            NSLog(@"上传成功！");
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     } fail:^(NSError *error) {
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"失败!";
+        [hud hide:YES afterDelay:0.5];
         NSLog(@"AF失败%@",error);
     }];
     

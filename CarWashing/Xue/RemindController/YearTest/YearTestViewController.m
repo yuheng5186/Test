@@ -9,8 +9,20 @@
 #import "YearTestViewController.h"
 #import "RemindViewController.h"
 #import "AddYearTestViewController.h"
+#import "MBProgressHUD.h"
 
+#import "YearModel.h"
 @interface YearTestViewController ()
+@property(copy,nonatomic)NSString *timeString;
+@property(copy,nonatomic)NSString *sendIDString;
+@property(copy,nonatomic)NSString *mainPlateText;       //拼车牌号
+
+@property(copy,nonatomic)NSString *sendPlaceholderString;
+@property(copy,nonatomic)NSString *sendButtonNameString;
+@property(copy,nonatomic)NSString *sendDateString;      //日期
+@property(copy,nonatomic)NSString *sendYearString;      //年限
+@property(copy,nonatomic)NSString *sendCarTypeString;
+
 
 @end
 
@@ -20,21 +32,26 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.fakeNavigation];
-    [self.view addSubview:self.afterView];
     //需要判断是否已经添加保养提醒,目前直接写在这里,点击“添加”按钮时隐藏添加View
     [self.view addSubview:self.addView];
     
+
+    
+    
+    
 }
+
+
 
 //需要判断是否已经添加保养提醒
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self requestFormWeb];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *setAlready = [userDefaults objectForKey:@"Year"];
     if ([setAlready isEqualToString:@"1"]) {
         self.addView.hidden = YES;
-    }else{
-        self.addView.hidden = NO;
+        self.afterView.hidden = NO;
     }
 
 }
@@ -111,14 +128,14 @@
         _carNoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, Main_Screen_Width, 35)];
         _carNoLabel.textColor = [UIColor whiteColor];
         _carNoLabel.font = [UIFont systemFontOfSize:15];
-        _carNoLabel.text = @"沪A-A6549 保养时间";
+        _carNoLabel.text = self.mainPlateText;
         _carNoLabel.textAlignment = NSTextAlignmentCenter;
         [_afterView addSubview:_carNoLabel];
         
         _carCareTimeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 40, Main_Screen_Width, 40)];
         _carCareTimeLabel.textColor = [UIColor whiteColor];
         _carCareTimeLabel.font = [UIFont systemFontOfSize:20];
-        _carCareTimeLabel.text = @"2018-11-11";
+        _carCareTimeLabel.text = self.timeString;
         _carCareTimeLabel.textAlignment = NSTextAlignmentCenter;
         [_afterView addSubview:_carCareTimeLabel];
         
@@ -128,6 +145,11 @@
         day30Label.text = @"请提前30天进行车辆年检";
         day30Label.textAlignment = NSTextAlignmentCenter;
         [_afterView addSubview:day30Label];
+        
+        UIImageView *imageViewHere = [[UIImageView alloc]initWithFrame:CGRectMake(0, 120, Main_Screen_Width, 432*Main_Screen_Height/667)];
+        imageViewHere.image = [UIImage imageNamed:@"车辆年检须知"];
+        imageViewHere.contentMode = UIViewContentModeScaleAspectFit;
+        [_afterView addSubview:imageViewHere];
 
         
         
@@ -141,15 +163,87 @@
 
 -(void)editingAction{
     AddYearTestViewController *new = [[AddYearTestViewController alloc]init];
-    [self presentViewController:new animated:YES completion:nil];
+    new.webTypeString = @"MyCar/ModifyVehicleReminder";
+    new.getID = self.sendIDString;
+    new.placeholderString = self.sendPlaceholderString;
+    new.sendButtonTitleString = self.sendButtonNameString;
+    new.dateMuSting = self.sendDateString;
+    
+    if ([self.sendYearString isEqualToString:@"1"]) {
+        new.yearsMuSting = @"不足六年";
+    }else if ([self.sendYearString isEqualToString:@"2"]){
+        new.yearsMuSting = @"六年至十五年";
+    }else if ([self.sendYearString isEqualToString:@"3"]){
+        new.yearsMuSting = @"大于十五年";
+    }
+    new.carMuSting = self.sendCarTypeString;
+    
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:new];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 //addView上present新控制器
 -(void)callNewViewController{
     AddYearTestViewController *new = [[AddYearTestViewController alloc]init];
+    new.webTypeString = @"MyCar/AddVehicleReminder";
+    new.placeholderString = @"请输入车牌号";
+    new.sendButtonTitleString = @"沪";
+    new.dateMuSting = @"请选择";
+    new.yearsMuSting = @"请选择";
+    new.carMuSting = @"请选择";
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:new];
     [self presentViewController:nav animated:YES completion:^{
         self.addView.hidden=YES;
+    }];
+}
+
+-(void)requestFormWeb{
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeDeterminate;
+    hud.labelText = @"正在加载";
+    
+    
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:Userid]
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/VehicleReminderList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
+            [hud hide:YES afterDelay:0.5];
+            
+            NSArray *newArr = dict[@"JsonData"];
+            NSLog(@"年检提醒%@",newArr[2]);
+            
+            NSMutableArray *modelArray = (NSMutableArray *)[YearModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
+            YearModel *modelJack = modelArray[2];
+            
+            self.timeString = modelJack.ExpirationDate;
+            _carCareTimeLabel.text = self.timeString;
+            self.mainPlateText = [NSString stringWithFormat:@"%@-%@ 保养时间",modelJack.Province,modelJack.PlateNumber];
+            _carNoLabel.text = self.mainPlateText;
+            self.sendIDString = modelJack.Id;
+            ///////////传值到add////////////////////
+            self.sendPlaceholderString = modelJack.PlateNumber;
+            self.sendButtonNameString = modelJack.Province;
+            self.sendDateString = modelJack.TimeDate;
+            self.sendYearString = modelJack.VehicleYears;
+            self.sendCarTypeString = modelJack.CarBrand;
+            if ([modelJack.IsSetUp isEqualToString:@"1"]) {
+                self.addView.hidden = YES;
+                self.afterView.hidden = NO;
+            }else{
+                self.addView.hidden = NO;
+                self.afterView.hidden = YES;
+            }
+            [self.view addSubview:self.afterView];
+            
+        }
+    } fail:^(NSError *error) {
+        [hud hide:YES afterDelay:0.5];
     }];
 }
 
