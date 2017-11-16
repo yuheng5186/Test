@@ -35,12 +35,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CarWashing/CYPublishVC/CYSecondcarViewController.m"
-            timestampString = "532491296.828077"
+            filePath = "CarWashing/CYPublishVC/CYDynamicShareViewController.m"
+            timestampString = "532497288.554093"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
             landmarkName = "-rightbtnClick"
             landmarkType = "7">
          </BreakpointContent>

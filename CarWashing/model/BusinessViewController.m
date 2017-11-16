@@ -429,7 +429,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 -(void)setData
 {
-    
+    if([self.areastr isEqualToString:@"全部"]){
+        self.areastr = @"";
+    }
    NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"全部",@"车身外部清洗维护",@"车内清洁-5座轿车",@"车内清洁SUV或7座", nil];
    NSInteger index;
    
@@ -466,6 +468,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
         index = [[NSString stringWithFormat:@"10%ld",index]integerValue];
     }
 //    [[self.pramsDic objectForKey:@"0"] objectAtIndex:0]
+    
     NSDictionary *mulDic = @{
                              @"City":self.citystr,
                              @"Area":self.areastr,

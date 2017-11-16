@@ -190,21 +190,21 @@
 -(void)rightbtnClick
 {
     //开始菊花
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:_collectionView animated:YES];
-    hud.mode = MBProgressHUDModeDeterminate;
-    hud.labelText = @"发布中";
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:_collectionView animated:YES];
+//    hud.mode = MBProgressHUDModeDeterminate;
+//    hud.labelText = @"发布中";
     
     
     NSLog(@"图片--%@",_selectedPhotos);
     
-    NSMutableArray *base64ImageArray = [[NSMutableArray alloc]init];
-    for (int i = 0; i<_selectedPhotos.count; i++) {
-        UIImage *tempImage = _selectedPhotos[i];
-        NSData *imageData = UIImageJPEGRepresentation(tempImage, 0.7);
-        NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
-        [base64ImageArray addObject:encodeImage];
-    }
-    NSString *sendString = [base64ImageArray componentsJoinedByString:@","];
+//    NSMutableArray *base64ImageArray = [[NSMutableArray alloc]init];
+//    for (int i = 0; i<_selectedPhotos.count; i++) {
+//        UIImage *tempImage = _selectedPhotos[i];
+//        NSData *imageData = UIImageJPEGRepresentation(tempImage, 0.7);
+//        NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
+//        [base64ImageArray addObject:encodeImage];
+//    }
+//    NSString *sendString = [base64ImageArray componentsJoinedByString:@","];
 //    NSLog(@"%@",sendString);
     
     ///////////////////////////////////////////////////////////////////////////////
@@ -212,8 +212,7 @@
                              @"ActivityType":@(2),
                              @"Account_Id":[UdStorage getObjectforKey:Userid],
                              @"ActivityName":[NSString stringWithFormat:@"%@",titleTextField.text],
-                             @"Comment":[NSString stringWithFormat:@"%@",contentTextField.text],
-                             @"Picture":[NSString stringWithFormat:@"%@",sendString]
+                             @"Comment":[NSString stringWithFormat:@"%@",contentTextField.text]
                              };
     
     //ActivityName->发布标题
@@ -224,12 +223,12 @@
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
 //    NSLog(@"%@",mulDic);
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityInfo/AddActivityInfoIOS",Khttp] success:^(NSDictionary *dict, BOOL success) {
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
             NSLog(@"%@",dict);
-        
-            hud.mode = MBProgressHUDModeText;
-            hud.labelText = @"成功!";
-            [hud hide:YES afterDelay:0.5];
+           NSLog(@"%@",dict[@"ResultMessage"]);
+//            hud.mode = MBProgressHUDModeText;
+//            hud.labelText = @"成功!";
+//            [hud hide:YES afterDelay:0.5];
         [self.navigationController popViewControllerAnimated:YES];
         
     } fail:^(NSError *error) {

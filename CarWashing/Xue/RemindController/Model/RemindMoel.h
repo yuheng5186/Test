@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface RemindMoel : NSObject
-@property(copy,nonatomic)NSString *ExpirationDate;
-@property(copy,nonatomic)NSString *TimeDate;
+@property(copy,nonatomic)NSString *IsSetUp;
+@property(copy,nonatomic)NSString *TimeSpans;
 
 @end

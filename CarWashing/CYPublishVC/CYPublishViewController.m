@@ -134,40 +134,37 @@
 {
     
     //开始菊花
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:_collectionView animated:YES];
-    hud.mode = MBProgressHUDModeDeterminate;
-    hud.labelText = @"发布中";
+
     
-    NSMutableArray *base64ImageArray = [[NSMutableArray alloc]init];
-    for (int i = 0; i<_selectedPhotos.count; i++) {
-        UIImage *tempImage = _selectedPhotos[i];
-        NSData *imageData = UIImageJPEGRepresentation(tempImage, 0.7);
-        NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
-        [base64ImageArray addObject:encodeImage];
-    }
-    NSString *sendString = [base64ImageArray componentsJoinedByString:@","];
-    NSLog(@"%@",sendString);
+//    NSMutableArray *base64ImageArray = [[NSMutableArray alloc]init];
+//    for (int i = 0; i<_selectedPhotos.count; i++) {
+//        UIImage *tempImage = _selectedPhotos[i];
+//        NSData *imageData = UIImageJPEGRepresentation(tempImage, 0.7);
+//        NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
+//        [base64ImageArray addObject:encodeImage];
+//    }
+//    NSString *sendString = [base64ImageArray componentsJoinedByString:@","];
+//    NSLog(@"%@",sendString);
     
-    NSDictionary *mulDic = @{
-                                 @"ActivityType":@(3),
-                                 @"Account_Id":[UdStorage getObjectforKey:Userid],
-                                 @"ActivityName":[NSString stringWithFormat:@"%@",contentTextField.text],
-                                 @"Comment":@"12345",
-                                 @"Picture":sendString
-                                 };
-    
-    
-    NSDictionary *params = @{
-                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                                 };
-    
+//    NSDictionary *mulDic = @{
+//                             @"ActivityType":@(3),
+//                             @"Account_Id":[UdStorage getObjectforKey:Userid],
+//                             @"ActivityName":@"123",
+//                             @"Comment":@"456"
+//                             };
+//    
+//    
+//    NSDictionary *params = @{
+//                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+//                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+//                                 };
+//    
 //    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
 //    manager.responseSerializer = [AFJSONResponseSerializer serializer];
 //
 //    [manager POST:@"http://192.168.2.152:8090/api/Activity/AddActivityInfo" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-//        NSData *imageData = UIImageJPEGRepresentation(self.jackImageView.image, 0.7);
-//        [formData appendPartWithFileData:imageData name:@"123" fileName:@"345.jpg" mimeType:@"image/jpeg"];
+//
+//        
 //    } progress:^(NSProgress * _Nonnull uploadProgress) {
 //
 //    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -177,19 +174,34 @@
 //
 //    }];
     
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityInfoIOS",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"可算成功了%@",dict);
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"成功!";
-        [hud hide:YES afterDelay:0.5];
-
+    NSDictionary *mulDic = @{
+                             @"ActivityType":@(3),
+                             @"Account_Id":[UdStorage getObjectforKey:Userid],
+                             @"ActivityName":[NSString stringWithFormat:@"%@",contentTextField.text],
+                             @"Comment":@"666"
+                             };
+    
+    //ActivityName->发布标题
+    //Comment->发布内容
+    
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    //    NSLog(@"%@",mulDic);
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"%@",dict);
+        NSLog(@"%@",dict[@"ResultMessage"]);
+        //            hud.mode = MBProgressHUDModeText;
+        //            hud.labelText = @"成功!";
+        //            [hud hide:YES afterDelay:0.5];
         [self.navigationController popViewControllerAnimated:YES];
+        
     } fail:^(NSError *error) {
-        NSLog(@"你失败了%@",error);
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"上传失败，请重新上传!";
-        [hud hide:YES afterDelay:0.5];
+        NSLog(@"---------------------发布失败%@",error);
     }];
+    
+
     
 }
 
