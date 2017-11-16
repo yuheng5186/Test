@@ -32,7 +32,6 @@
     [self.view addSubview:self.fakeNavigation];
     //需要判断是否已经添加保养提醒,目前直接写在这里,点击“添加”按钮时隐藏添加View
     [self.view addSubview:self.addView];
-    
 }
 
 //需要判断是否已经添加保养提醒

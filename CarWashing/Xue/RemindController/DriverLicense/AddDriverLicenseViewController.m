@@ -242,7 +242,8 @@
             hud.mode = MBProgressHUDModeText;
             hud.labelText = @"成功!";
             [hud hide:YES afterDelay:0.5];
-            [self dismissViewControllerAnimated:YES completion:nil];
+             [self dismissViewControllerAnimated:YES completion:nil];
+            
         }
     } fail:^(NSError *error) {
         hud.mode = MBProgressHUDModeText;
