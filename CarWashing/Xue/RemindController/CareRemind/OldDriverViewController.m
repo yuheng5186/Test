@@ -11,7 +11,7 @@
 
 @interface OldDriverViewController ()
 @property(strong,nonatomic)UIView *fakeNavigation;
-@property(strong,nonatomic)WKWebView *showWebView;
+@property(strong,nonatomic)UIScrollView *showWebView;
 @end
 
 @implementation OldDriverViewController
@@ -57,18 +57,15 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(WKWebView *)showWebView{
+-(UIScrollView *)showWebView{
     if (!_showWebView) {
-        _showWebView = [[WKWebView alloc]initWithFrame:CGRectMake(12, 66, Main_Screen_Width-24, Main_Screen_Height-66)];
-        NSString *path = [[NSBundle mainBundle] bundlePath];
-        NSURL *baseURL = [NSURL fileURLWithPath:path];
-        NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"remain"
-                                                              ofType:@"html"];
-        NSString * htmlCont = [NSString stringWithContentsOfFile:htmlPath                                                        encoding:NSUTF8StringEncoding                                                       error:nil];
-        [_showWebView loadHTMLString:htmlCont baseURL:baseURL];
-        
+        _showWebView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 66, Main_Screen_Width, Main_Screen_Height-66)];
 
-        
+        _showWebView.contentSize = CGSizeMake(Main_Screen_Width, 1000);
+        UIImageView *imageViewInSide = [[UIImageView alloc]initWithFrame:CGRectMake(0, 66, Main_Screen_Width, Main_Screen_Height)];
+        imageViewInSide.image = [UIImage imageNamed:@"保养小知识轻轻松松做保养"];
+        imageViewInSide.contentMode = UIViewContentModeScaleAspectFill;
+        [_showWebView addSubview:imageViewInSide];
     }
     return _showWebView;
 }
