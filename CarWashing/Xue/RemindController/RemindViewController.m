@@ -27,6 +27,9 @@
 @property(strong,nonatomic)UITableView *jackTableView;
 @property(strong,nonatomic)NSArray *titleArray;
 @property(strong,nonatomic)NSArray *imageArray;
+
+@property(strong,nonatomic)NSMutableArray *modelArray;
+@property(copy,nonatomic)NSString *oneString;
 @end
 
 @implementation RemindViewController
@@ -107,6 +110,9 @@
     _imageArray = @[@"baoyang",@"jiashizheng",@"nianjian",@"chexian"];
     cell.bigLabel.text = _titleArray[indexPath.row];
     cell.smallImageView.image = [UIImage imageNamed:_imageArray[indexPath.row]];
+    if (indexPath.row == 0) {
+        cell.shortLabel.text = self.oneString;
+    }
     return cell;
 }
 
@@ -142,7 +148,17 @@
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/VehicleReminderList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"总舵主%@",dict);
+//        NSLog(@"总舵主%@",dict);
+        if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
+            self.modelArray = (NSMutableArray *)[RemindMoel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
+            RemindMoel * oneModel = self.modelArray[0];
+            NSString *getOneString = oneModel.ExpirationDate;
+            self.oneString = [NSString stringWithFormat:@"请于%@前保养",getOneString];
+            NSLog(@"标题是%@",self.oneString);
+//            NSArray *twoModel = self.modelArray[1];
+            
+            [self.jackTableView reloadData];
+        }
     } fail:^(NSError *error) {
         
     }];

@@ -60,7 +60,7 @@
     
     _shortLabel = [[UILabel alloc]initWithFrame:CGRectMake(69, 44, 200, 18)];
 //    _shortLabel.backgroundColor = [UIColor grayColor];
-    _shortLabel.text = self.settenString;
+//    _shortLabel.text = self.settenString;
     _shortLabel.font = [UIFont systemFontOfSize:15];
     _shortLabel.textColor = [UIColor colorFromHex:@"909090"];
     [baseView addSubview:_shortLabel];

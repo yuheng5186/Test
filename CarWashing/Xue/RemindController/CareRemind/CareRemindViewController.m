@@ -273,7 +273,6 @@
             self.sendFrequency = self.modelJack.MaintenanceFrequency;
             self.sendTimeData = self.modelJack.TimeDate;
             
-            NSLog(@"是否有时间%@",self.dateText);
             if ([self.showOrNot isEqualToString:@"1"]) {
                 self.addView.hidden = YES;
                 self.afterView.hidden = NO;

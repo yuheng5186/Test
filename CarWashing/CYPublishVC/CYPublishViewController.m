@@ -113,38 +113,38 @@
     
     
     ///////////////////////////////////
-    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(100, 100, 200, 200)];
-    button.backgroundColor = [UIColor orangeColor];
-    [button addTarget:self action:@selector(buttonAction) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.view addSubview:button];
-    
-    _jackImageView = [[UIImageView alloc]initWithFrame:CGRectMake(100, 300, 200, 200)];
-    _jackImageView.backgroundColor = [UIColor grayColor];
-    [self.view addSubview:_jackImageView];
-    
-    UIButton *upLoadButton = [[UIButton alloc]initWithFrame:CGRectMake(100, 500, 200, 200)];
-    upLoadButton.backgroundColor = [UIColor greenColor];
-    [upLoadButton addTarget:self action:@selector(rightbtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.view addSubview:upLoadButton];
+//    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(100, 100, 200, 200)];
+//    button.backgroundColor = [UIColor orangeColor];
+//    [button addTarget:self action:@selector(buttonAction) forControlEvents:(UIControlEventTouchUpInside)];
+//    [self.view addSubview:button];
+//
+//    _jackImageView = [[UIImageView alloc]initWithFrame:CGRectMake(100, 300, 200, 200)];
+//    _jackImageView.backgroundColor = [UIColor grayColor];
+//    [self.view addSubview:_jackImageView];
+//
+//    UIButton *upLoadButton = [[UIButton alloc]initWithFrame:CGRectMake(100, 500, 200, 200)];
+//    upLoadButton.backgroundColor = [UIColor greenColor];
+//    [upLoadButton addTarget:self action:@selector(rightbtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+//    [self.view addSubview:upLoadButton];
     ///////////////////////////////////
 
     
 }
 
--(void)buttonAction{
-    UIImagePickerController *pick = [[UIImagePickerController alloc]init];
-    pick.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    pick.delegate = self;
-    [self presentViewController:pick animated:YES completion:nil];
-}
-
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-    UIImage *getImage = info[UIImagePickerControllerOriginalImage];
-    self.jackImageView.image = getImage;
-    NSLog(@"我看看%@",info);
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-}
+//-(void)buttonAction{
+//    UIImagePickerController *pick = [[UIImagePickerController alloc]init];
+//    pick.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//    pick.delegate = self;
+//    [self presentViewController:pick animated:YES completion:nil];
+//}
+//
+//-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+//    UIImage *getImage = info[UIImagePickerControllerOriginalImage];
+//    self.jackImageView.image = getImage;
+//    NSLog(@"我看看%@",info);
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//
+//}
 
 //////////////////////////////////////////////
 #pragma mark ----懒加载
@@ -454,7 +454,7 @@
 }
 
 
-/*
+
 - (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:YES completion:nil];
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
@@ -489,7 +489,7 @@
     }
 }
 
-*/
+
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     if ([picker isKindOfClass:[UIImagePickerController class]]) {
