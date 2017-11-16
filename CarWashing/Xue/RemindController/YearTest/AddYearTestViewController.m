@@ -27,7 +27,6 @@
 @interface AddYearTestViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *careTableView;
 @property(strong)NSArray *mainTitleArray;
-@property(copy,nonatomic)NSString *sendSerString;         //给后台
 @property(strong,nonatomic)UITextField *licenseNumTextField;
 
 @property(strong,nonatomic)UIView *popView;

@@ -252,7 +252,7 @@
         NSLog(@"AF失败%@",error);
     }];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 //取消按钮动作

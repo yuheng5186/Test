@@ -153,21 +153,19 @@
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"Insure"];
     // 保存到本地
     [[NSUserDefaults standardUserDefaults] synchronize];
-
-    [self dismissViewControllerAnimated:YES completion:nil];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeDeterminate;
     hud.labelText = @"正在上传";
     //上传
     NSDictionary *mulDic = @{
-                             @"Id":@"f6f6f7eb-e7c8-e711-95c2-58fb84d873e4",
+                             @"Id":[NSString stringWithFormat:@"%@",self.getID],
                              @"Account_Id":[UdStorage getObjectforKey:Userid],
                              @"ReminderType":@(4),
                              @"TimeDate":[NSString stringWithFormat:@"%@",self.dateMuSting],
                              @"InsuranceCompany":[NSString stringWithFormat:@"%@",self.companyNameMuString]
                              };
-    
+    NSLog(@"查看参数%@",mulDic);
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]

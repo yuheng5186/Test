@@ -45,12 +45,12 @@
 #pragma mark - 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.mainPlateText = @"";
-    self.provenceText = @"";
-    self.munText = @"";
+//    self.mainPlateText = @"";
+//    self.provenceText = @"";
+//    self.munText = @"";
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.fakeNavigation];
-
+    [self.view addSubview:self.afterView];
     //需要判断是否已经添加保养提醒,目前直接写在这里,点击“添加”按钮时隐藏添加View
     [self.view addSubview:self.addView];
     
@@ -197,12 +197,15 @@
     if ([self.sendFrequency isEqualToString:@"1"]) {
         //三个月
         new.subMuSting = @"三个月保养一次";
+        new.sendSerHowLongStr = @"1";
     }else if ([self.sendFrequency isEqualToString:@"2"]){
         //六个月
         new.subMuSting = @"六个月保养一次";
+        new.sendSerHowLongStr = @"2";
     }else if ([self.sendFrequency isEqualToString:@"3"]){
         //一年
         new.subMuSting = @"每年保养一次";
+        new.sendSerHowLongStr = @"3";
     }
     [self presentViewController:new animated:YES completion:^{
 //        [self.afterView removeFromSuperview];
@@ -229,9 +232,9 @@
 
 -(void)requestFromWeb{
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeDeterminate;
-    hud.labelText = @"正在加载";
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    hud.mode = MBProgressHUDModeDeterminate;
+//    hud.labelText = @"正在加载";
     NSDictionary *mulDic = [NSDictionary new];
     if ([self.wayGetHere isEqualToString:@"1"]) {
         mulDic = @{
@@ -254,10 +257,13 @@
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/VehicleReminderList",Khttp] success:^(NSDictionary *dict, BOOL success) {
         
-        [hud hide:YES afterDelay:0.5];
+//        [hud hide:YES afterDelay:0.5];
         
         if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
-            NSLog(@"第一块%@",dict[@"JsonData"]);
+
+            NSArray *newArr = dict[@"JsonData"];
+            NSLog(@"保养提醒%@",newArr[0]);
+            
             //判断逻辑在这里
             self.modelDict = (NSMutableArray *)[CareModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
             self.modelJack = self.modelDict[0];
@@ -280,12 +286,12 @@
                 self.addView.hidden = NO;
                 self.afterView.hidden = YES;
             }
-            [self.view addSubview:self.afterView];
+            
 
         }
     } fail:^(NSError *error) {
         NSLog(@"%@失败",error);
-        [hud hide:YES afterDelay:0.5];
+//        [hud hide:YES afterDelay:0.5];
     }];
     
 }

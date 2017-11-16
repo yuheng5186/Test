@@ -15,5 +15,6 @@
 
 @property(copy,nonatomic)NSString *subMuSting;
 @property(copy,nonatomic)NSString *dateMuSting;
+@property(copy,nonatomic)NSString *sendSerHowLongStr;
 
 @end

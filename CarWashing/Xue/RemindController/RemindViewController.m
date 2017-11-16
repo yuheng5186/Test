@@ -159,7 +159,8 @@
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/VehicleReminderList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-//        NSLog(@"总舵主%@",dict);
+//        NSArray *newArr = dict[@"JsonData"];
+//        NSLog(@"车票提醒%@",newArr[1]);
         if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
             self.modelArray = (NSMutableArray *)[RemindMoel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
             
@@ -167,10 +168,12 @@
             RemindMoel * oneModel = self.modelArray[0];
             NSString *getOneString = oneModel.TimeSpans;
             if([oneModel.IsSetUp isEqualToString:@"1"]){
-                if([getOneString isEqualToString:@"0"]){
+                if([getOneString isEqualToString:@"0"] || [getOneString containsString:@"-"]){
                     self.oneString = @"请开始保养";
+                }else if ([getOneString containsString:@"-"]){
+                    self.twoString = @"请更换驾驶证";
                 }else{
-                    self.oneString = [NSString stringWithFormat:@"据下次保养还有%@天",getOneString];
+                    self.oneString = [NSString stringWithFormat:@"距下次保养还有%@天",getOneString];
                 }
             }else{
                 self.oneString = @"尚未设置提醒";
@@ -181,10 +184,13 @@
             RemindMoel * twoModel = self.modelArray[1];
             NSString *getTwoString = twoModel.TimeSpans;
             if([twoModel.IsSetUp isEqualToString:@"1"]){
+                NSLog(@"=====================%@",getTwoString);
                 if([getTwoString isEqualToString:@"0"]){
                     self.twoString = @"请更换驾驶证";
+                }else if ([getTwoString containsString:@"-"]){
+                    self.twoString = @"请更换驾驶证";
                 }else{
-                    self.twoString = [NSString stringWithFormat:@"据下次换证还有%@天",getTwoString];
+                    self.twoString = [NSString stringWithFormat:@"距下次换证还有%@天",getTwoString];
                 }
             }else{
                 self.twoString = @"尚未设置提醒";
@@ -197,8 +203,10 @@
             if([threeModel.IsSetUp isEqualToString:@"1"]){
                 if([getThreeString isEqualToString:@"0"]){
                     self.threeString = @"请开始年检";
+                }else if ([getThreeString containsString:@"-"]){
+                    self.threeString = @"请开始年检";
                 }else{
-                    self.threeString = [NSString stringWithFormat:@"据下次换证还有%@天",getThreeString];
+                    self.threeString = [NSString stringWithFormat:@"距下次换证还有%@天",getThreeString];
                 }
             }else{
                 self.threeString = @"尚未设置提醒";
@@ -209,10 +217,12 @@
             RemindMoel * fourModel = self.modelArray[3];
             NSString *getFourString = fourModel.TimeSpans;
             if([fourModel.IsSetUp isEqualToString:@"1"]){
-                if([getFourString isEqualToString:@"0"]){
+                if([getFourString isEqualToString:@"0"] || [getOneString containsString:@"-"]){
                     self.fourString = @"请重新购买保险";
+                }else if ([getFourString containsString:@"-"]){
+                    self.threeString = @"请开始年检";
                 }else{
-                    self.fourString = [NSString stringWithFormat:@"据下次换证还有%@天",getFourString];
+                    self.fourString = [NSString stringWithFormat:@"距下次换证还有%@天",getFourString];
                 }
             }else{
                 self.fourString = @"尚未设置提醒";

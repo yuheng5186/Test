@@ -977,7 +977,8 @@
         getString           = @"立即领取";
 //        vipString   = @"huiyuanzhuanxiang";
     }else if (record.ShowType == 4){
-        imageString         = @"quanyi";
+        
+        imageString         = @"xiaoxitongzhi";
         titleString         = @"消息提醒";
         vipString           = @"zhuanxiang";
         contentShowString   = record.MiddleDes;

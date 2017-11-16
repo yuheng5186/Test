@@ -18,5 +18,7 @@
 @property(copy,nonatomic)NSString *dateMuSting;         //上次年检时间
 @property(copy,nonatomic)NSString *yearsMuSting;         //车龄
 @property(copy,nonatomic)NSString *carMuSting;         //品牌车系
+@property(copy,nonatomic)NSString *sendSerString;         //给后台
+
 
 @end

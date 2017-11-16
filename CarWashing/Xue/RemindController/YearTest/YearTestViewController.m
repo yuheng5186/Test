@@ -33,6 +33,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.fakeNavigation];
     //需要判断是否已经添加保养提醒,目前直接写在这里,点击“添加”按钮时隐藏添加View
+    [self.view addSubview:self.afterView];
     [self.view addSubview:self.addView];
     
 
@@ -171,10 +172,13 @@
     
     if ([self.sendYearString isEqualToString:@"1"]) {
         new.yearsMuSting = @"不足六年";
+        new.sendSerString = @"1";
     }else if ([self.sendYearString isEqualToString:@"2"]){
         new.yearsMuSting = @"六年至十五年";
+        new.sendSerString = @"2";
     }else if ([self.sendYearString isEqualToString:@"3"]){
         new.yearsMuSting = @"大于十五年";
+        new.sendSerString = @"3";
     }
     new.carMuSting = self.sendCarTypeString;
     
@@ -199,9 +203,9 @@
 
 -(void)requestFormWeb{
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeDeterminate;
-    hud.labelText = @"正在加载";
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    hud.mode = MBProgressHUDModeDeterminate;
+//    hud.labelText = @"正在加载";
     
     
     NSDictionary *mulDic = [NSDictionary new];
@@ -223,7 +227,7 @@
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/VehicleReminderList",Khttp] success:^(NSDictionary *dict, BOOL success) {
         if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
-            [hud hide:YES afterDelay:0.5];
+//            [hud hide:YES afterDelay:0.5];
             
             NSArray *newArr = dict[@"JsonData"];
             NSLog(@"年检提醒%@",newArr[2]);
@@ -233,7 +237,7 @@
             
             self.timeString = modelJack.ExpirationDate;
             _carCareTimeLabel.text = self.timeString;
-            self.mainPlateText = [NSString stringWithFormat:@"%@-%@ 保养时间",modelJack.Province,modelJack.PlateNumber];
+            self.mainPlateText = [NSString stringWithFormat:@"%@-%@ 年检到期日",modelJack.Province,modelJack.PlateNumber];
             _carNoLabel.text = self.mainPlateText;
             self.sendIDString = modelJack.Id;
             ///////////传值到add////////////////////
@@ -249,11 +253,11 @@
                 self.addView.hidden = NO;
                 self.afterView.hidden = YES;
             }
-            [self.view addSubview:self.afterView];
+            
             
         }
     } fail:^(NSError *error) {
-        [hud hide:YES afterDelay:0.5];
+//        [hud hide:YES afterDelay:0.5];
     }];
 }
 

@@ -31,6 +31,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.fakeNavigation];
     //需要判断是否已经添加保养提醒,目前直接写在这里,点击“添加”按钮时隐藏添加View
+    [self.view addSubview:self.afterView];
     [self.view addSubview:self.addView];
 }
 
@@ -170,9 +171,9 @@
 
 -(void)requestFromWeb{
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeDeterminate;
-    hud.labelText = @"正在加载";
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    hud.mode = MBProgressHUDModeDeterminate;
+//    hud.labelText = @"正在加载";
     
     
     NSDictionary *mulDic = [NSDictionary new];
@@ -197,9 +198,10 @@
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/VehicleReminderList",Khttp] success:^(NSDictionary *dict, BOOL success) {
         if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
             
-            [hud hide:YES afterDelay:0.5];
+//            NSArray *newArr = dict[@"JsonData"];
+//            NSLog(@"车票提醒%@",newArr[1]);
             
-            NSLog(@"驾驶证提醒%@",dict[@"JsonData"]);
+//            [hud hide:YES afterDelay:0.5];
             
             NSMutableArray *modelArray = (NSMutableArray *)[LicenseModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
             LicenseModel *modelJack = modelArray[1];
@@ -215,12 +217,12 @@
                 self.addView.hidden = NO;
                 self.afterView.hidden = YES;
             }
-            [self.view addSubview:self.afterView];
+            
             
         }
     } fail:^(NSError *error) {
         NSLog(@"%@失败",error);
-        [hud hide:YES afterDelay:0.5];
+//        [hud hide:YES afterDelay:0.5];
     }];
     
 }

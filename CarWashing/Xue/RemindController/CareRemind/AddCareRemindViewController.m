@@ -28,7 +28,7 @@
 
 
 
-@property(copy,nonatomic)NSString *sendSerHowLongStr;
+
 
 @end
 
@@ -40,7 +40,7 @@
     _mainTitleArray = @[@"保养频率",@"上次保养时间"];
 //    self.subMuSting = @"请选择";
 //    self.dateMuSting = @"请选择";
-    self.sendSerHowLongStr = [NSString string];
+//    self.sendSerHowLongStr = [NSString string];
     [self.view addSubview:self.fakeNavigation];
     [self.view addSubview:self.careTableView];
     [self setUI];
@@ -218,6 +218,7 @@
             NSLog(@"上传成功！");
             
             [self dismissViewControllerAnimated:YES completion:nil];
+            
         }
     } fail:^(NSError *error) {
         hud.mode = MBProgressHUDModeText;

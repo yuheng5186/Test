@@ -244,7 +244,6 @@
 		18ED28EE1FBAE9E400C0CC92 /* YearModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28ED1FBAE9E400C0CC92 /* YearModel.m */; };
 		18ED28F11FBAEC0100C0CC92 /* InsureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28F01FBAEC0100C0CC92 /* InsureModel.m */; };
 		18ED28F91FBC0BB500C0CC92 /* OldDriverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28F81FBC0BB500C0CC92 /* OldDriverViewController.m */; };
-		18ED28FB1FBC0F6700C0CC92 /* remain.html in Resources */ = {isa = PBXBuildFile; fileRef = 18ED28FA1FBC0F6700C0CC92 /* remain.html */; };
 		18ED28FE1FBC4E3100C0CC92 /* RemindMoel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28FD1FBC4E3100C0CC92 /* RemindMoel.m */; };
 		18EDACC71F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EDACC61F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m */; };
 		18F7EAD01F90A5D80067AEEF /* CYCarRMListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F7EACF1F90A5D80067AEEF /* CYCarRMListModel.m */; };
@@ -853,7 +852,6 @@
 		18ED28F01FBAEC0100C0CC92 /* InsureModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InsureModel.m; sourceTree = "<group>"; };
 		18ED28F71FBC0BB500C0CC92 /* OldDriverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OldDriverViewController.h; sourceTree = "<group>"; };
 		18ED28F81FBC0BB500C0CC92 /* OldDriverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OldDriverViewController.m; sourceTree = "<group>"; };
-		18ED28FA1FBC0F6700C0CC92 /* remain.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = remain.html; sourceTree = "<group>"; };
 		18ED28FC1FBC4E3100C0CC92 /* RemindMoel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemindMoel.h; sourceTree = "<group>"; };
 		18ED28FD1FBC4E3100C0CC92 /* RemindMoel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RemindMoel.m; sourceTree = "<group>"; };
 		18EDACC51F7B50C6008D59D7 /* ForgetPasswordLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordLoginViewController.h; sourceTree = "<group>"; };
@@ -2140,7 +2138,6 @@
 				182BF4A81FB581F500F79C68 /* CareRemindViewController.m */,
 				18ED28F71FBC0BB500C0CC92 /* OldDriverViewController.h */,
 				18ED28F81FBC0BB500C0CC92 /* OldDriverViewController.m */,
-				18ED28FA1FBC0F6700C0CC92 /* remain.html */,
 				182BF4AA1FB58F2700F79C68 /* AddCareRemindViewController.h */,
 				182BF4AB1FB58F2700F79C68 /* AddCareRemindViewController.m */,
 			);
@@ -2797,7 +2794,6 @@
 				18B803821F1DA2A300B52432 /* Assets.xcassets in Resources */,
 				501672321F297FF000384186 /* problemCenter.plist in Resources */,
 				5094A6301F346E4200407808 /* SuccessPayCell.xib in Resources */,
-				18ED28FB1FBC0F6700C0CC92 /* remain.html in Resources */,
 				180959641FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.xib in Resources */,
 				501672431F29D26C00384186 /* MemberView.xib in Resources */,
 				188821501F6BD336002618F7 /* b5.gif in Resources */,
