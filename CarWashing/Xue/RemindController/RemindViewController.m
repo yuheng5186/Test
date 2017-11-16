@@ -13,6 +13,13 @@
 #import "YearTestViewController.h"
 #import "InsurenceViewController.h"
 
+#import "RemindMoel.h"
+
+#import "UdStorage.h"
+#import "HTTPDefine.h"
+#import "AFNetworkingTool.h"
+#import "AFNetworkingTool+GetToken.h"
+#import "LCMD5Tool.h"
 //四个模块的入口
 
 @interface RemindViewController ()<UITableViewDelegate,UITableViewDataSource>
