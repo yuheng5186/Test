@@ -260,12 +260,12 @@
     
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:Userid],
-                             @"CarBrand":@"一汽大众",
-                             @"CarType":@"Pasta",
+                             @"CarBrand":@"大众",
+                             @"CarType":@"上海大众",
                              @"CarTitle":@"iOS暂时没用到",
                              @"CarComment":[NSString stringWithFormat:@"%@",contentTextField.text],
                              @"Mileage":@(3333333),
-                             @"Img":[NSString stringWithFormat:@"%@",sendString]
+                             @"Img":sendString
                              };
     
     NSDictionary *params = @{
@@ -275,6 +275,7 @@
     NSLog(@"%@",params);
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddSecondHandCarInfoIOS",Khttp] success:^(NSDictionary *dict, BOOL success) {
         NSLog(@"%@二手车发布成功",dict);
+        NSLog(@"%@二手车发布成功",dict[@"ResultMessage"]);
     } fail:^(NSError *error) {
         NSLog(@"%@二手车发布失败",error);
     }];
