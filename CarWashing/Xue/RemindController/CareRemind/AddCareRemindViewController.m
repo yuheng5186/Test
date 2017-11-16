@@ -218,6 +218,7 @@
             NSLog(@"上传成功！");
             
             [self dismissViewControllerAnimated:YES completion:nil];
+            
         }
     } fail:^(NSError *error) {
         hud.mode = MBProgressHUDModeText;
