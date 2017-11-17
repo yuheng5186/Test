@@ -269,13 +269,27 @@
     }
     _ISShowMenuButton = !_ISShowMenuButton;
 }
+-(void)tapClick
+{
+    _ISShowMenuButton = NO;
+    [UIView animateWithDuration:0.2 animations:^{
+        //            CGAffineTransform rotate = CGAffineTransformMakeRotation( 0 );
+        //            [sender setTransform:rotate];
+        [_addbtn setImage:[UIImage imageNamed:@"fabuanniu"] forState:UIControlStateNormal];
+        
+    }];
+    [_blackView removeFromSuperview];
+    [_tlMenuView dismiss];
+}
 -(UIView *)blackView{
     if (_blackView==nil) {
         _blackView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
         _blackView.backgroundColor=[UIColor blackColor];
         _blackView.alpha=0.3;
+        _blackView.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tapGes=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick)];
+        [_blackView addGestureRecognizer:tapGes];
         
-        ////////////////////
         
         
     }
