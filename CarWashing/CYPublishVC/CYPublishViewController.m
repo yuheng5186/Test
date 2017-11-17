@@ -134,7 +134,10 @@
 {
     
     //开始菊花
-
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:_collectionView animated:YES];
+    hud.mode = MBProgressHUDModeDeterminate;
+    hud.labelText = @"发布中";
+    
     
     NSMutableArray *base64ImageArray = [[NSMutableArray alloc]init];
     for (int i = 0; i<_selectedPhotos.count; i++) {
@@ -143,35 +146,8 @@
         [base64ImageArray addObject:encodeImage];
     }
     NSString *sendString = [base64ImageArray componentsJoinedByString:@","];
-    NSLog(@"%@",sendString);
+
     
-//    NSDictionary *mulDic = @{
-//                             @"ActivityType":@(3),
-//                             @"Account_Id":[UdStorage getObjectforKey:Userid],
-//                             @"ActivityName":@"123",
-//                             @"Comment":@"456"
-//                             };
-//    
-//    
-//    NSDictionary *params = @{
-//                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-//                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-//                                 };
-//    
-//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-//
-//    [manager POST:@"http://192.168.2.152:8090/api/Activity/AddActivityInfo" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-//
-//        
-//    } progress:^(NSProgress * _Nonnull uploadProgress) {
-//
-//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSLog(@"%@",responseObject);
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        NSLog(@"%@",error);
-//
-//    }];
     
     NSDictionary *mulDic = @{
                              @"ActivityType":@(3),

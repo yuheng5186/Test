@@ -47,7 +47,6 @@
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UITextField *maxCountTF;///< 照片最大可选张数，设置为1即为单选模式
 
-@property(nonatomic,strong)UIImageView *showImageView;
 
 @end
 
@@ -129,35 +128,8 @@
     _selectedAssets = [NSMutableArray array];
     [self configCollectionView];
     
-    UIButton *sendButton = [[UIButton alloc]initWithFrame:CGRectMake(50, 50, 100, 100)];
-    sendButton.backgroundColor = [UIColor orangeColor];
-    [sendButton addTarget:self action:@selector(trySendAction) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.view addSubview:sendButton];
-    [self.view addSubview:self.showImageView];
 }
 
--(void)trySendAction{
-    UIImagePickerController *pick = [[UIImagePickerController alloc]init];
-    pick.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    pick.delegate = self;
-    [self presentViewController:pick animated:YES completion:nil];
-}
-
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-    UIImage *getImage = info[UIImagePickerControllerOriginalImage];
-    self.showImageView.image = getImage;
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-}
-
--(UIImageView *)showImageView{
-    if (!_showImageView) {
-        _showImageView = [[UIImageView alloc]initWithFrame:CGRectMake(150, 50, 100, 100)];
-        _showImageView.backgroundColor = [UIColor blueColor];
-        
-    }
-    return _showImageView;
-}
 
 
 
@@ -267,30 +239,6 @@
 //    } fail:^(NSError *error) {
 //        NSLog(@"---------------------发布失败%@",error);
 //    }];
-    
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]init];
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"application/json",@"text/html", nil];
-    NSLog(@"打印参数%@",params);
-    [manager POST:[NSString stringWithFormat:@"%@Activity/AddActivityInfo",Khttp] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        
-        NSData *imageData = UIImageJPEGRepresentation(self.showImageView.image, 0.7);
-        
-        [formData appendPartWithFileData:imageData name:@"123" fileName:@"456.jpg" mimeType:@"image/png"];
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject);
-        NSLog(@"%@",task.currentRequest.allHTTPHeaderFields);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
-    }];
-    
-    
-    
     
 
 }

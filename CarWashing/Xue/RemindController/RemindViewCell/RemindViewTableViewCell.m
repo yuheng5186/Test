@@ -35,10 +35,12 @@
     
     self.contentView.backgroundColor = [UIColor clearColor];
     
+    //小灰条
     UIView *speatorView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-24, 90)];
     speatorView.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
     [self.contentView addSubview:speatorView];
     
+    //大白条
     UIView *baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-24, 75)];
     baseView.backgroundColor = [UIColor whiteColor];
     baseView.clipsToBounds = YES;
@@ -64,6 +66,11 @@
     _shortLabel.font = [UIFont systemFontOfSize:15];
     _shortLabel.textColor = [UIColor colorFromHex:@"909090"];
     [baseView addSubview:_shortLabel];
+    
+    UIImageView *leftImage = [[UIImageView alloc]initWithFrame:CGRectMake(Main_Screen_Width-50, 30, 7, 13)];
+    leftImage.image = [UIImage imageNamed:@"jiantou"];
+    [baseView addSubview:leftImage];
+    
 }
 
 @end

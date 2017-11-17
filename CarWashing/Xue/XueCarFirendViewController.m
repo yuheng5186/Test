@@ -136,7 +136,7 @@
     
     
 //    NSLog(@"%f",_baseView.contentOffset.x/((self.view.frame.size.width)*4));
-    CGFloat f =[[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue];
+//    CGFloat f =[[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue];
 //    NSLog(@"%.2f",f);
     NSInteger a;
     if ([[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue]==0.00) {

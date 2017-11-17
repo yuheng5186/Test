@@ -25,6 +25,7 @@
 #import "AFNetworkingTool+GetToken.h"
 #import "LCMD5Tool.h"
 
+
 @interface CYSecondcarViewController ()<TZImagePickerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UIAlertViewDelegate,UINavigationControllerDelegate,UITextViewDelegate>
 {
     UITextView * contentTextField;
@@ -51,6 +52,7 @@
 @property (nonatomic, strong) UIImagePickerController *imagePickerVc;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UITextField *maxCountTF;///< 照片最大可选张数，设置为1即为单选模式
+@property(copy,nonatomic)NSString *bandString;
 @end
 
 @implementation CYSecondcarViewController
@@ -120,6 +122,7 @@
     //填写行驶里程
     distanceTextField = [[UITextField alloc]initWithFrame:CGRectMake(10,100 ,  Main_Screen_Width-20, 50)];
     distanceTextField.placeholder = @"填写行驶里程";
+    distanceTextField.keyboardType = UIKeyboardTypeNumberPad;
     [self.backScrollerView addSubview:distanceTextField];
     UIView * line3 =[[UIView alloc]initWithFrame:CGRectMake(10, 149, Main_Screen_Width-10, 1)];
     line3.backgroundColor= [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
@@ -223,6 +226,7 @@
     }
 }
 -(void)editCarInformation:(NSNotification *)notification{
+    self.bandString = [NSString stringWithFormat:@"%@-%@",notification.userInfo[@"CYCarname"],notification.userInfo[@"CYCarType"]];
     BrandLabel.text = [NSString stringWithFormat:@"%@-%@",notification.userInfo[@"CYCarname"],notification.userInfo[@"CYCarType"]] ;
 }
 
@@ -256,15 +260,18 @@
         [base64ImageArray addObject:encodeImage];
     }
     NSString *sendString = [base64ImageArray componentsJoinedByString:@","];
-    NSLog(@"%@",sendString);
+//    NSLog(@"%@",sendString);
     
+    //里程转换
+    int intString = [distanceTextField.text intValue];
+//    NSLog(@"打印数字%d",intString);
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:Userid],
-                             @"CarBrand":@"大众",
-                             @"CarType":@"上海大众",
+                             @"CarBrand":[NSString stringWithFormat:@"%@",self.bandString],
+                             @"CarType":@" ",
                              @"CarTitle":@"iOS暂时没用到",
                              @"CarComment":[NSString stringWithFormat:@"%@",contentTextField.text],
-                             @"Mileage":@(3333333),
+                             @"Mileage":@(intString),
                              @"Img":sendString
                              };
     
@@ -274,9 +281,14 @@
                              };
     NSLog(@"%@",params);
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddSecondHandCarInfoIOS",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"%@二手车发布成功",dict);
-        NSLog(@"%@二手车发布成功",dict[@"ResultMessage"]);
-        [self.navigationController popViewControllerAnimated:YES];
+        if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
+//            NSLog(@"%@二手车发布成功",dict);
+//            NSLog(@"%@二手车发布成功",dict[@"ResultMessage"]);
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            
+        }
+        
     } fail:^(NSError *error) {
         NSLog(@"%@二手车发布失败",error);
     }];

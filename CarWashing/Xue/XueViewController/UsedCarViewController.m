@@ -24,8 +24,16 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.CYUserCarTableView];
     self.page=0;
+//    [self requestData];
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self requestData];
 }
+
+
 -(void)requestData{
     NSDictionary *mulDic = @{
                              
