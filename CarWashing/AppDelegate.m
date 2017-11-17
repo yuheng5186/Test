@@ -288,7 +288,6 @@
     
 }
 - (void)onResp:(BaseResp *)resp
-
 {
     NSString *payResoult = [NSString stringWithFormat:@"%d", resp.errCode];
     if([resp isKindOfClass:[PayResp class]]){

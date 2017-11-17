@@ -89,7 +89,7 @@
     CYHotTopicModel *model = self.modelArray[indexPath.row];
     NSArray *imageArray = [model.IndexImg componentsSeparatedByString:@","];
     if (imageArray.count==0||imageArray.count==1) {
-        return  280;
+        return  270;
     }
     return 210;
 }
