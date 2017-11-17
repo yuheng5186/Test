@@ -150,7 +150,8 @@
             add.typeString = @"MyCar/AddVehicleReminder";
             add.dateMuSting = @"请选择";
             add.subMuSting = @"请选择";
-            [self presentViewController:add animated:YES completion:nil];
+            add.whereString = @"1";
+            [self.navigationController pushViewController:add animated:YES];
         }
     }else if (indexPath.row == 1){
         if ([self.twoIsNot isEqualToString:@"1"]) {
@@ -162,8 +163,9 @@
             add.placeHolderString = @"请输入证件号";
             add.licenseTypeString = @"请选择";
             add.dateMuSting = @"请选择";
-            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:add];
-            [self presentViewController:nav animated:YES completion:nil];
+            add.whereString = @"1";
+            [self.navigationController pushViewController:add animated:YES];
+
             
         }
         
@@ -179,8 +181,8 @@
             add.dateMuSting = @"请选择";
             add.yearsMuSting = @"请选择";
             add.carMuSting = @"请选择";
-            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:add];
-            [self presentViewController:nav animated:YES completion:nil];
+            add.whereString = @"1";
+            [self.navigationController pushViewController:add animated:YES];
         }
         
     }else if (indexPath.row == 3){
@@ -192,8 +194,8 @@
             add.webTypeString = @"MyCar/AddVehicleReminder";
             add.companyNameMuString = @"请选择保险公司";
             add.dateMuSting = @"请选择";
-            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:add];
-            [self presentViewController:nav animated:YES completion:nil];
+            add.whereString = @"1";
+            [self.navigationController pushViewController:add animated:YES];
             
         }
         

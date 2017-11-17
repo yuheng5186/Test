@@ -141,7 +141,12 @@
 }
 //返回按钮动作
 -(void)backAction{
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[RemindViewController class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
 }
 
 -(void)editingAction{
@@ -152,6 +157,7 @@
     new.licenseTypeString = self.sendTypeString;
     new.dateMuSting = self.timeString;
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:new];
+    
     [self presentViewController:nav animated:YES completion:nil];
 }
 

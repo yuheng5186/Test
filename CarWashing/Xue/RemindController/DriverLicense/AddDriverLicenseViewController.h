@@ -17,4 +17,7 @@
 @property(copy,nonatomic)NSString *licenseTypeString;       //驾照类型
 @property(copy,nonatomic)NSString *placeHolderString;       //占位符string
 
+//判断从哪里进来
+@property(copy,nonatomic)NSString *whereString;
+
 @end

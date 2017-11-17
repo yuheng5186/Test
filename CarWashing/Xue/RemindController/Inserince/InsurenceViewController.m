@@ -144,7 +144,11 @@
 }
 //返回按钮动作
 -(void)backAction{
-    [self.navigationController popViewControllerAnimated:YES];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[RemindViewController class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
 }
 
 -(void)editingAction{
@@ -204,7 +208,7 @@
             
             self.timeString = modelJack.ExpirationDate;
 //            _carCareTimeLabel.text = self.timeString;
-            self.mainPlateText = [NSString stringWithFormat:@"%@-%@ 车险到期日",modelJack.Province,modelJack.PlateNumber];
+            self.mainPlateText = [NSString stringWithFormat:@"%@ %@ 车险到期日",modelJack.Province,modelJack.PlateNumber];
             _carNoLabel.text = self.mainPlateText;
             self.sendIDString = modelJack.Id;
             self.sendComString = modelJack.InsuranceCompany;

@@ -18,6 +18,7 @@
 #import "AFNetworkingTool.h"
 #import "AFNetworkingTool+GetToken.h"
 #import "LCMD5Tool.h"
+#import "DriverLicenseViewController.h"
 
 //菊花
 #import "MBProgressHUD.h"
@@ -241,10 +242,16 @@
         NSLog(@"驾照上传结果%@",dict);
         if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
             NSLog(@"驾照上传成功！");
+            if ([self.whereString isEqualToString:@"1"]) {
+                DriverLicenseViewController *new = [[DriverLicenseViewController alloc]init];
+                [self.navigationController pushViewController:new animated:YES];
+            }else{
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
             hud.mode = MBProgressHUDModeText;
             hud.labelText = @"成功!";
             [hud hide:YES afterDelay:0.5];
-             [self dismissViewControllerAnimated:YES completion:nil];
+//             [self dismissViewControllerAnimated:YES completion:nil];
             
         }
     } fail:^(NSError *error) {
