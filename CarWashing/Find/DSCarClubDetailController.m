@@ -25,7 +25,6 @@
 {
     CarClubNews *newsDetail;
     UILabel * titleLabel;
-    
 }
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -54,6 +53,7 @@
 @property (nonatomic, strong) UILabel           *goodShowLabel;
 @property (nonatomic, strong)UIView *downView;
 @property (nonatomic)NSInteger page;
+@property (nonatomic, strong)NSDictionary *dicData;
 
 @property (nonatomic, strong) TPKeyboardAvoidingScrollView *scrollView;
 
@@ -264,8 +264,18 @@
     .autoHeightRatio(0);
     
     UIImageView *textImageView  = [UIImageView new];
+    NSString * urlStr  = @"";
+    if ([[self.dicData[@"JsonData"]allKeys]containsObject:@"IndexImg"] ) {
+        NSArray *urlArray = [newsDetail.IndexImg componentsSeparatedByString:@","];
+        urlStr =[NSString stringWithFormat:@"%@",urlArray[0]];
+    }else{
+        urlStr =newsDetail.Img;
+    }
+    
+   
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,newsDetail.IndexImg];
+       
+        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,urlStr];
         NSURL *url=[NSURL URLWithString:ImageURL];
         NSData *data=[NSData dataWithContentsOfURL:url];
         UIImage *img=[UIImage imageWithData:data];
@@ -540,6 +550,7 @@
     //
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@%@",Khttp,urlStr] success:^(NSDictionary *dict, BOOL success) {
         NSLog(@"%@",dict);
+        self.dicData = dict;
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
 
