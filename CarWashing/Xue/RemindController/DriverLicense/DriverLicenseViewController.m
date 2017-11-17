@@ -232,6 +232,9 @@
     }];
     
 }
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
 
 
 
