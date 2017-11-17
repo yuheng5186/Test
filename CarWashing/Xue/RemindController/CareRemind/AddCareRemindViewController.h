@@ -17,4 +17,7 @@
 @property(copy,nonatomic)NSString *dateMuSting;
 @property(copy,nonatomic)NSString *sendSerHowLongStr;
 
+//判断从哪里进来
+@property(copy,nonatomic)NSString *whereString;
+
 @end

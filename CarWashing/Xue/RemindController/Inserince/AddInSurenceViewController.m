@@ -9,7 +9,7 @@
 #import "AddInSurenceViewController.h"
 #import "AddCareTableViewCell.h"
 #import "ChooseInsurenceViewController.h"
-
+#import "InsurenceViewController.h"
 //时间选择
 #import "WSDatePickerView.h"
 
@@ -175,6 +175,12 @@
         NSLog(@"车险上传结果%@",dict);
         if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
             NSLog(@"车辆限上传成功！");
+            if ([self.whereString isEqualToString:@"1"]) {
+                InsurenceViewController *new = [[InsurenceViewController alloc]init];
+                [self.navigationController pushViewController:new animated:YES];
+            }else{
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
             hud.mode = MBProgressHUDModeText;
             hud.labelText = @"成功!";
             [hud hide:YES afterDelay:0.5];

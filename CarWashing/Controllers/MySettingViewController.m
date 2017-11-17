@@ -570,6 +570,10 @@
         }else{
             //Jack Created Here.
             RemindViewController *new = [[RemindViewController alloc]init];
+            
+            //root
+//            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:new];
+            
             new.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:new animated:YES];
         }

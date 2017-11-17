@@ -181,7 +181,15 @@
 #pragma mark - 函数
 //返回按钮动作
 -(void)backAction{
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+//    RemindViewController *back = [[RemindViewController alloc]init];
+//    [self.navigationController popToViewController:back animated:YES];
+    
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[RemindViewController class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
 }
 
 -(void)oldBoyAction{

@@ -20,5 +20,8 @@
 @property(copy,nonatomic)NSString *carMuSting;         //品牌车系
 @property(copy,nonatomic)NSString *sendSerString;         //给后台
 
+//判断从哪里进来
+@property(copy,nonatomic)NSString *whereString;
+
 
 @end

@@ -16,4 +16,7 @@
 @property(copy,nonatomic)NSString *dateMuSting;                 //上次年检时间
 @property(copy,nonatomic)NSString *companyNameMuString;         //保险公司名字
 
+//判断从哪里进来
+@property(copy,nonatomic)NSString *whereString;
+
 @end

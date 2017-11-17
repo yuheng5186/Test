@@ -17,6 +17,7 @@
 #import "AFNetworkingTool.h"
 #import "AFNetworkingTool+GetToken.h"
 #import "LCMD5Tool.h"
+#import "CareRemindViewController.h"
 
 //菊花
 #import "MBProgressHUD.h"
@@ -44,6 +45,11 @@
     [self.view addSubview:self.fakeNavigation];
     [self.view addSubview:self.careTableView];
     [self setUI];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -216,9 +222,13 @@
         NSLog(@"上传结果%@",dict);
         if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
             NSLog(@"上传成功！");
-            
-            [self dismissViewControllerAnimated:YES completion:nil];
-            
+//            [self dismissViewControllerAnimated:YES completion:nil];
+            if ([self.whereString isEqualToString:@"1"]) {
+                CareRemindViewController *new = [[CareRemindViewController alloc]init];
+                [self.navigationController pushViewController:new animated:YES];
+            }else{
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
         }
     } fail:^(NSError *error) {
         hud.mode = MBProgressHUDModeText;
