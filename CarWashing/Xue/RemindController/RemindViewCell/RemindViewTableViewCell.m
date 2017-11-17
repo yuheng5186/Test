@@ -41,7 +41,7 @@
     [self.contentView addSubview:speatorView];
     
     //大白条
-    UIView *baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-24, 75)];
+    UIView *baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 15, Main_Screen_Width-24, 75)];
     baseView.backgroundColor = [UIColor whiteColor];
     baseView.clipsToBounds = YES;
     baseView.layer.cornerRadius = 7;

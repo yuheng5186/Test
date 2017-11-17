@@ -98,7 +98,7 @@
 #pragma mark - tableView
 -(UITableView *)jackTableView{
     if (!_jackTableView) {
-        _jackTableView = [[UITableView alloc]initWithFrame:CGRectMake(12, 91, Main_Screen_Width-24, Main_Screen_Height-91) style:(UITableViewStylePlain)];
+        _jackTableView = [[UITableView alloc]initWithFrame:CGRectMake(12, 66, Main_Screen_Width-24, Main_Screen_Height-91) style:(UITableViewStylePlain)];
         _jackTableView.delegate = self;
         _jackTableView.dataSource = self;
         _jackTableView.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
