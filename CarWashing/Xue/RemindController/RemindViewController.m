@@ -206,7 +206,7 @@
                 }else if ([getThreeString containsString:@"-"]){
                     self.threeString = @"请开始年检";
                 }else{
-                    self.threeString = [NSString stringWithFormat:@"距下次换证还有%@天",getThreeString];
+                    self.threeString = [NSString stringWithFormat:@"距下次年检还有%@天",getThreeString];
                 }
             }else{
                 self.threeString = @"尚未设置提醒";
@@ -222,7 +222,7 @@
                 }else if ([getFourString containsString:@"-"]){
                     self.threeString = @"请开始年检";
                 }else{
-                    self.fourString = [NSString stringWithFormat:@"距下次换证还有%@天",getFourString];
+                    self.fourString = [NSString stringWithFormat:@"距保险到期还有%@天",getFourString];
                 }
             }else{
                 self.fourString = @"尚未设置提醒";

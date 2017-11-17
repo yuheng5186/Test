@@ -42,7 +42,7 @@
     [self.view addSubview:self.fakeNavigation];
     [self.view addSubview:self.careTableView];
     
-    self.licenseNumTextField = [[UITextField alloc]initWithFrame:CGRectMake(120, 126, 200, 35)];
+    self.licenseNumTextField = [[UITextField alloc]initWithFrame:CGRectMake(120, 126, 150.0/375.0*Main_Screen_Width, 35)];
     _licenseNumTextField.placeholder = self.placeHolderString;
     _licenseNumTextField.borderStyle = UITextBorderStyleNone;
     _licenseNumTextField.clearButtonMode = UITextFieldViewModeWhileEditing;

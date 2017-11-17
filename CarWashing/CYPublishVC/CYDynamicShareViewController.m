@@ -47,6 +47,8 @@
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UITextField *maxCountTF;///< 照片最大可选张数，设置为1即为单选模式
 
+@property(nonatomic,strong)UIImageView *showImageView;
+
 @end
 
 @implementation CYDynamicShareViewController
@@ -84,7 +86,7 @@
     _imageArr=[NSMutableArray array];
     //选择车辆品牌
     UILabel * BrandLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, Main_Screen_Width-20, 50)];
-    BrandLabel.text = @"你问题是什么？（必填，限40字）";
+    BrandLabel.text = @"你的问题是什么？（必填，限40字）";
     BrandLabel.textAlignment = NSTextAlignmentLeft;
     [self.backScrollerView addSubview:BrandLabel];
    
@@ -126,7 +128,39 @@
     _selectedPhotos = [NSMutableArray array];
     _selectedAssets = [NSMutableArray array];
     [self configCollectionView];
+    
+    UIButton *sendButton = [[UIButton alloc]initWithFrame:CGRectMake(50, 50, 100, 100)];
+    sendButton.backgroundColor = [UIColor orangeColor];
+    [sendButton addTarget:self action:@selector(trySendAction) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:sendButton];
+    [self.view addSubview:self.showImageView];
 }
+
+-(void)trySendAction{
+    UIImagePickerController *pick = [[UIImagePickerController alloc]init];
+    pick.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    pick.delegate = self;
+    [self presentViewController:pick animated:YES completion:nil];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    UIImage *getImage = info[UIImagePickerControllerOriginalImage];
+    self.showImageView.image = getImage;
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+-(UIImageView *)showImageView{
+    if (!_showImageView) {
+        _showImageView = [[UIImageView alloc]initWithFrame:CGRectMake(150, 50, 100, 100)];
+        _showImageView.backgroundColor = [UIColor blueColor];
+        
+    }
+    return _showImageView;
+}
+
+
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSString *comcatstr = [textField.text stringByReplacingCharactersInRange:range withString:string];
@@ -223,18 +257,37 @@
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
 //    NSLog(@"%@",mulDic);
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
-            NSLog(@"%@",dict);
-           NSLog(@"%@",dict[@"ResultMessage"]);
-//            hud.mode = MBProgressHUDModeText;
-//            hud.labelText = @"成功!";
-//            [hud hide:YES afterDelay:0.5];
-        [self.navigationController popViewControllerAnimated:YES];
-        
-    } fail:^(NSError *error) {
-        NSLog(@"---------------------发布失败%@",error);
-    }];
+//    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+//            NSLog(@"%@",dict);
+//           NSLog(@"%@",dict[@"ResultMessage"]);
+//
+//
+//        [self.navigationController popViewControllerAnimated:YES];
+//
+//    } fail:^(NSError *error) {
+//        NSLog(@"---------------------发布失败%@",error);
+//    }];
     
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]init];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"application/json",@"text/html", nil];
+    NSLog(@"打印参数%@",params);
+    [manager POST:[NSString stringWithFormat:@"%@Activity/AddActivityInfo",Khttp] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        NSData *imageData = UIImageJPEGRepresentation(self.showImageView.image, 0.7);
+        
+        [formData appendPartWithFileData:imageData name:@"123" fileName:@"456.jpg" mimeType:@"image/png"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+        NSLog(@"%@",task.currentRequest.allHTTPHeaderFields);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
     
     
     
@@ -439,6 +492,7 @@
     }
 }
 
+/*
 - (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:YES completion:nil];
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
@@ -472,7 +526,7 @@
         }];
     }
 }
-
+*/
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     if ([picker isKindOfClass:[UIImagePickerController class]]) {
         [picker dismissViewControllerAnimated:YES completion:nil];
