@@ -17,8 +17,8 @@
 }
 
 -(void)configCell:(CYQuestionModel*)model{
-    [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,model.FromusrImg]] placeholderImage:[UIImage imageNamed:@"photo"]];
-    [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,model.IndexImg]] placeholderImage:[UIImage imageNamed:@"photo"]];
+    [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,model.FromusrImg]] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
+    [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,model.IndexImg]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     self.namelabel.text=[NSString stringWithFormat:@"%@",model.FromusrName];
     self.commendLabel.text=[NSString stringWithFormat:@"%ld个评论",model.CommentCount];
     self.timeLabel.text=[NSString stringWithFormat:@"%@",model.ActDate];

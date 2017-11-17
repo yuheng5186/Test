@@ -85,7 +85,7 @@
 }
 -(void)configCell:(CYUserCarModel*)model
 {
-    [self.carImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,model.Img]] placeholderImage:[UIImage imageNamed:@"photo"]];
+    [self.carImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,model.Img]] placeholderImage:[UIImage imageNamed:@"矩形23拷贝"]];
     self.distancelabel.text= [NSString stringWithFormat:@"%@公里",model.Mileage];
     self.timeLabel.text= [NSString stringWithFormat:@"%@",model.ActDate];
     self.titlelabel.text= [NSString stringWithFormat:@"%@%@",model.CarBrand,model.CarType];

@@ -256,16 +256,16 @@
                 [defaults setValue:@NO forKey:@"firstRun"];
             
                 //车辆提醒
-                [defaults removeObjectForKey:@"CareRemide"];
-                [defaults removeObjectForKey:@"License"];
-                [defaults removeObjectForKey:@"Year"];
-                [defaults removeObjectForKey:@"Insure"];
+//                [defaults removeObjectForKey:@"CareRemide"];
+//                [defaults removeObjectForKey:@"License"];
+//                [defaults removeObjectForKey:@"Year"];
+//                [defaults removeObjectForKey:@"Insure"];
                 [defaults synchronize];
             
                 LoginViewController *loginControl = [[LoginViewController alloc]init];
                 UINavigationController *nav         = [[UINavigationController alloc]initWithRootViewController:loginControl];
                 nav.navigationBar.hidden      = YES;
-                self.view.window.rootViewController      = nav;
+                self.view.window.rootViewController = nav;
 
             
         }
