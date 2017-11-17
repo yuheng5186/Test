@@ -37,6 +37,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldEditChanged:)
+                                                name:@"UITextFieldTextDidChangeNotification" object:self.licenseNumTextField];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     _mainTitleArray = @[@"准驾类型",@"证件号",@"到期时间"];
     self.navigationController.navigationBarHidden = YES;
@@ -50,6 +53,7 @@
     _licenseNumTextField.borderStyle = UITextBorderStyleNone;
     _licenseNumTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     _licenseNumTextField.font = [UIFont systemFontOfSize:16];
+//    [_licenseNumTextField addTarget:self action:@selector(textDidChange:) forControlEvents:(UIControlEventEditingChanged)];
     [self.view addSubview:self.licenseNumTextField];
     
     [self setUI];
@@ -182,6 +186,7 @@
         //输入驾照号码
         
     }else if (indexPath.row == 2){
+        [self.licenseNumTextField resignFirstResponder];
         //选择时间
         WSDatePickerView *datePicker = [[WSDatePickerView alloc]initWithDateStyle:(DateStyleShowYearMonthDay) CompleteBlock:^(NSDate *selectDate) {
             //获得结果位date
@@ -268,7 +273,11 @@
 
 //取消按钮动作
 -(void)cancleAction{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([self.whereString isEqualToString:@"1"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 //退出编辑
@@ -277,9 +286,69 @@
     return  YES;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.text.length<19) {
+        return YES;
+    }
+    return NO;
+}
+
+
 //点击别处推出编辑
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
+-(void)textFieldEditChanged:(NSNotification *)obj
+{
+    UITextField *textField = (UITextField *)obj.object;
+    NSString *toBeString = textField.text;
+    NSString *lang = [textField.textInputMode primaryLanguage];
+    if ([lang isEqualToString:@"zh-Hans"])// 简体中文输入
+    {
+        //获取高亮部分
+        UITextRange *selectedRange = [textField markedTextRange];
+        UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+        
+        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+        if (!position)
+        {
+            if (toBeString.length > 18)
+            {
+                textField.text = [toBeString substringToIndex:7];
+            }
+        }
+        
+    }
+    // 中文输入法以外的直接对其统计限制即可，不考虑其他语种情况
+    else
+    {
+        if (toBeString.length > 18)
+        {
+            NSRange rangeIndex = [toBeString rangeOfComposedCharacterSequenceAtIndex:18];
+            if (rangeIndex.length == 1)
+            {
+                textField.text = [toBeString substringToIndex:18];
+            }
+            else
+            {
+                NSRange rangeRange = [toBeString rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, 18)];
+                textField.text = [toBeString substringWithRange:rangeRange];
+            }
+        }
+    }
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:@"UITextFieldTextDidChangeNotification"];
+}
+
+
 
 @end

@@ -211,16 +211,21 @@
     
     
     NSLog(@"图片--%@",_selectedPhotos);
-    
-    NSMutableArray *base64ImageArray = [[NSMutableArray alloc]init];
-    for (int i = 0; i<_selectedPhotos.count; i++) {
-        UIImage *tempImage = _selectedPhotos[i];
-        NSData *imageData = UIImageJPEGRepresentation(tempImage, 0.7);
-        NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
-        [base64ImageArray addObject:encodeImage];
+    NSString *sendString =  @"";
+    if (_selectedPhotos.count == 0) {
+        sendString = @"";
+    }else{
+        NSMutableArray *base64ImageArray = [[NSMutableArray alloc]init];
+        for (int i = 0; i<_selectedPhotos.count; i++) {
+            UIImage *tempImage = _selectedPhotos[i];
+            NSData *imageData = UIImageJPEGRepresentation(tempImage, 0.7);
+            NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
+            [base64ImageArray addObject:encodeImage];
+        }
+        sendString = [base64ImageArray componentsJoinedByString:@","];
     }
-    NSString *sendString = [base64ImageArray componentsJoinedByString:@","];
-    NSLog(@"%@",sendString);
+    
+    NSLog(@"图片%@",sendString);
     
     ///////////////////////////////////////////////////////////////////////////////
     NSDictionary *mulDic = @{
@@ -237,7 +242,7 @@
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool base64convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool base64convertToJsonData:mulDic]]]
                              };
-//    NSLog(@"%@",mulDic);
+    NSLog(@"看参数%@",mulDic);
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityInfoIOS",Khttp] success:^(NSDictionary *dict, BOOL success) {
             NSLog(@"%@",dict);
            NSLog(@"%@",dict[@"ResultMessage"]);

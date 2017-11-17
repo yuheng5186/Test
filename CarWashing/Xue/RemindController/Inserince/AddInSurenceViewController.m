@@ -197,7 +197,15 @@
 
 //取消按钮动作
 -(void)cancleAction{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([self.whereString isEqualToString:@"1"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 
