@@ -220,7 +220,7 @@
                              @"ActivityName":[NSString stringWithFormat:@"%@",titleTextField.text],
                              @"Comment":[NSString stringWithFormat:@"%@",contentTextField.text]
                              };
-    
+    ///
     //ActivityName->发布标题
     //Comment->发布内容
     
