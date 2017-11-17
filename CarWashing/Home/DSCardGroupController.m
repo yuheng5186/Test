@@ -133,25 +133,25 @@ static NSString *CyrechargeCell = @"CyrechargeCell";
 }
 
 - (void) backButtonClick:(id)sender {
-    
-    self.tabBarController.selectedIndex = 0;
-    
-    NSArray     *array  = self.navigationController.viewControllers;
-    NSArray *a = [NSArray arrayWithObject:array[0]];
-    
-    
-    
-    if(array.count == 4)
-    {
-        
-        self.navigationController.viewControllers = a;
-        
-    }
-    else
-    {
-        NSArray     *array1 = [NSArray arrayWithObject:array[0]];
-        self.navigationController.viewControllers = array1;
-    }
+    [self.navigationController popViewControllerAnimated:YES];
+//    self.tabBarController.selectedIndex = 0;
+//
+//    NSArray     *array  = self.navigationController.viewControllers;
+//    NSArray *a = [NSArray arrayWithObject:array[0]];
+//
+//
+//
+//    if(array.count == 4)
+//    {
+//
+//        self.navigationController.viewControllers = a;
+//
+//    }
+//    else
+//    {
+//        NSArray     *array1 = [NSArray arrayWithObject:array[0]];
+//        self.navigationController.viewControllers = array1;
+//    }
     
 }
 //-(void)setupRefresh

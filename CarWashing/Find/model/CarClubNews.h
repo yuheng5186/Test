@@ -20,6 +20,7 @@
 @property (copy, nonatomic)NSString *FromusrName;//文章作者
 @property (copy, nonatomic)NSString *FromusrImg;//文章作者
 @property (copy, nonatomic)NSString *IndexImg;//首页图片
+@property (copy, nonatomic)NSString *Img;//首页图片
 @property (copy, nonatomic)NSString *ActDate;//创建时间
 @property (nonatomic)NSInteger IsGive;//是否点赞
 @property (nonatomic)NSInteger PageIndex;
