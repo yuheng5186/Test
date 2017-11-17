@@ -22,7 +22,7 @@
 //菊花
 #import "MBProgressHUD.h"
 
-@interface AddDriverLicenseViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface AddDriverLicenseViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property(strong,nonatomic)UITableView *careTableView;
 @property(strong,nonatomic)NSArray *mainTitleArray;
 
@@ -43,6 +43,8 @@
     [self.view addSubview:self.careTableView];
     
     self.licenseNumTextField = [[UITextField alloc]initWithFrame:CGRectMake(120, 126, 150.0/375.0*Main_Screen_Width, 35)];
+    _licenseNumTextField.delegate = self;
+    _licenseNumTextField.keyboardType = UIKeyboardTypeNumberPad;
     _licenseNumTextField.placeholder = self.placeHolderString;
     _licenseNumTextField.borderStyle = UITextBorderStyleNone;
     _licenseNumTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -209,10 +211,10 @@
 //保存按钮动作,在这里开始上传数据
 -(void)addButtonAction{
     
-    //本地userDefault
-    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"License"];
-    // 保存到本地
-    [[NSUserDefaults standardUserDefaults] synchronize];
+//    //本地userDefault
+//    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"License"];
+//    // 保存到本地
+//    [[NSUserDefaults standardUserDefaults] synchronize];
     
     if ([self.licenseNumTextField.text isEqualToString:@""]) {
         self.licenseNumTextField.text = self.placeHolderString;
@@ -255,8 +257,22 @@
     
 }
 
+
+
 //取消按钮动作
 -(void)cancleAction{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+//退出编辑
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return  YES;
+}
+
+//点击别处推出编辑
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
 @end

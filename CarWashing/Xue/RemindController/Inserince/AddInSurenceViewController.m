@@ -149,10 +149,10 @@
 //保存按钮动作,在这里开始上传数据
 -(void)addButtonAction{
     
-    //本地userDefault
-    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"Insure"];
-    // 保存到本地
-    [[NSUserDefaults standardUserDefaults] synchronize];
+//    //本地userDefault
+//    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"Insure"];
+//    // 保存到本地
+//    [[NSUserDefaults standardUserDefaults] synchronize];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeDeterminate;

@@ -60,7 +60,7 @@
 -(UIScrollView *)showWebView{
     if (!_showWebView) {
         _showWebView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 66, Main_Screen_Width, Main_Screen_Height-66)];
-
+        _showWebView.showsVerticalScrollIndicator = NO;
         _showWebView.contentSize = CGSizeMake(Main_Screen_Width, 1000);
         UIImageView *imageViewInSide = [[UIImageView alloc]initWithFrame:CGRectMake(0, 66, Main_Screen_Width, Main_Screen_Height)];
         imageViewInSide.image = [UIImage imageNamed:@"保养小知识轻轻松松做保养"];

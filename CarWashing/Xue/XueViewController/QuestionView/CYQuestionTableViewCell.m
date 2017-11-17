@@ -19,7 +19,7 @@
 //问答
 -(void)configCell:(CYQuestionModel*)model
 {
-    [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,model.FromusrImg]] placeholderImage:[UIImage imageNamed:@"photo"]];
+    [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,model.FromusrImg]] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
     self.nameLabel.text=[NSString stringWithFormat:@"%@",model.FromusrName];
     self.CommendLabel.text=[NSString stringWithFormat:@"%ld个评论",model.CommentCount];
     self.timelabel.text=[NSString stringWithFormat:@"%@",model.ActDate];

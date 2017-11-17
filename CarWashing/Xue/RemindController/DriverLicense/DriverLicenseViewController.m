@@ -32,19 +32,19 @@
     [self.view addSubview:self.fakeNavigation];
     //需要判断是否已经添加保养提醒,目前直接写在这里,点击“添加”按钮时隐藏添加View
     [self.view addSubview:self.afterView];
-    [self.view addSubview:self.addView];
+//    [self.view addSubview:self.addView];
 }
 
 //需要判断是否已经添加保养提醒
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self requestFromWeb];
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *setAlready = [userDefaults objectForKey:@"License"];
-    if ([setAlready isEqualToString:@"1"]) {
-        self.addView.hidden = YES;
-        self.afterView.hidden = NO;
-    }
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//    NSString *setAlready = [userDefaults objectForKey:@"License"];
+//    if ([setAlready isEqualToString:@"1"]) {
+//        self.addView.hidden = YES;
+//        self.afterView.hidden = NO;
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,22 +88,22 @@
 }
 
 //提示添加的View，添加按钮时隐藏
--(UIView *)addView{
-    if (!_addView) {
-        _addView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
-        _addView.backgroundColor = [UIColor whiteColor];
-        
-        //提示信息
-        
-        UIButton *addButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Width)];
-        addButton.backgroundColor = [UIColor colorWithRed:13/255.0 green:98/255.0 blue:159/255.0 alpha:1];
-        [addButton setTitle:@"尚未添加驾驶证信息，点击添加" forState:(UIControlStateNormal)];
-        addButton.titleLabel.font = [UIFont systemFontOfSize:18 weight:18];
-        [addButton addTarget:self action:@selector(callNewViewController) forControlEvents:(UIControlEventTouchUpInside)];
-        [_addView addSubview:addButton];
-    }
-    return _addView;
-}
+//-(UIView *)addView{
+//    if (!_addView) {
+//        _addView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
+//        _addView.backgroundColor = [UIColor whiteColor];
+//
+//        //提示信息
+//
+//        UIButton *addButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Width)];
+//        addButton.backgroundColor = [UIColor colorWithRed:13/255.0 green:98/255.0 blue:159/255.0 alpha:1];
+//        [addButton setTitle:@"尚未添加驾驶证信息，点击添加" forState:(UIControlStateNormal)];
+//        addButton.titleLabel.font = [UIFont systemFontOfSize:18 weight:18];
+//        [addButton addTarget:self action:@selector(callNewViewController) forControlEvents:(UIControlEventTouchUpInside)];
+//        [_addView addSubview:addButton];
+//    }
+//    return _addView;
+//}
 
 //添加成功后的View
 -(UIView *)afterView{
@@ -156,17 +156,17 @@
 }
 
 //addView上present新控制器
--(void)callNewViewController{
-    AddDriverLicenseViewController *new = [[AddDriverLicenseViewController alloc]init];
-    new.webTypeString = @"MyCar/AddVehicleReminder";
-    new.placeHolderString = @"请输入证件号";
-    new.licenseTypeString = @"请选择";
-    new.dateMuSting = @"请选择";
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:new];
-    [self presentViewController:nav animated:YES completion:^{
-        self.addView.hidden = YES;
-    }];
-}
+//-(void)callNewViewController{
+//    AddDriverLicenseViewController *new = [[AddDriverLicenseViewController alloc]init];
+//    new.webTypeString = @"MyCar/AddVehicleReminder";
+//    new.placeHolderString = @"请输入证件号";
+//    new.licenseTypeString = @"请选择";
+//    new.dateMuSting = @"请选择";
+//    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:new];
+//    [self presentViewController:nav animated:YES completion:^{
+//        self.addView.hidden = YES;
+//    }];
+//}
 
 
 -(void)requestFromWeb{
@@ -210,13 +210,13 @@
             self.sendIDString = modelJack.Id;
             self.sendPlaceHolderString = modelJack.IDNumber;
             self.sendTypeString = modelJack.QuasiDriveType;
-            if ([modelJack.IsSetUp isEqualToString:@"1"]) {
-                self.addView.hidden = YES;
-                self.afterView.hidden = NO;
-            }else{
-                self.addView.hidden = NO;
-                self.afterView.hidden = YES;
-            }
+//            if ([modelJack.IsSetUp isEqualToString:@"1"]) {
+//                self.addView.hidden = YES;
+//                self.afterView.hidden = NO;
+//            }else{
+//                self.addView.hidden = NO;
+//                self.afterView.hidden = YES;
+//            }
             
             
         }

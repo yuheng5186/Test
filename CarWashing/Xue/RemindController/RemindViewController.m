@@ -12,7 +12,10 @@
 #import "DriverLicenseViewController.h"
 #import "YearTestViewController.h"
 #import "InsurenceViewController.h"
-
+#import "AddCareRemindViewController.h"
+#import "AddDriverLicenseViewController.h"
+#import "AddYearTestViewController.h"
+#import "AddInSurenceViewController.h"
 #import "RemindMoel.h"
 
 #import "UdStorage.h"
@@ -33,6 +36,13 @@
 @property(copy,nonatomic)NSString *twoString;
 @property(copy,nonatomic)NSString *threeString;
 @property(copy,nonatomic)NSString *fourString;
+
+//判断是否已经设定，用来控制跳转页面
+@property(copy,nonatomic)NSString *oneIsNot;
+@property(copy,nonatomic)NSString *twoIsNot;
+@property(copy,nonatomic)NSString *threeIsNot;
+@property(copy,nonatomic)NSString *fourIsNot;
+
 
 
 @end
@@ -131,17 +141,62 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
         //保养提醒
-        CareRemindViewController *new = [[CareRemindViewController alloc]init];
-        [self.navigationController pushViewController:new animated:YES];
+        if ([self.oneIsNot isEqualToString: @"1"]) {
+            //“1”已经设置
+            CareRemindViewController *new = [[CareRemindViewController alloc]init];
+            [self.navigationController pushViewController:new animated:YES];
+        }else{
+            AddCareRemindViewController *add = [[AddCareRemindViewController alloc]init];
+            add.typeString = @"MyCar/AddVehicleReminder";
+            add.dateMuSting = @"请选择";
+            add.subMuSting = @"请选择";
+            [self presentViewController:add animated:YES completion:nil];
+        }
     }else if (indexPath.row == 1){
-        DriverLicenseViewController *new = [[DriverLicenseViewController alloc]init];
-        [self.navigationController pushViewController:new animated:YES];
+        if ([self.twoIsNot isEqualToString:@"1"]) {
+            DriverLicenseViewController *new = [[DriverLicenseViewController alloc]init];
+            [self.navigationController pushViewController:new animated:YES];
+        }else{
+            AddDriverLicenseViewController *add = [[AddDriverLicenseViewController alloc]init];
+            add.webTypeString = @"MyCar/AddVehicleReminder";
+            add.placeHolderString = @"请输入证件号";
+            add.licenseTypeString = @"请选择";
+            add.dateMuSting = @"请选择";
+            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:add];
+            [self presentViewController:nav animated:YES completion:nil];
+            
+        }
+        
     }else if (indexPath.row == 2){
-        YearTestViewController *new = [[YearTestViewController alloc]init];
-        [self.navigationController pushViewController:new animated:YES];
+        if ([self.threeIsNot isEqualToString:@"1"]) {
+            YearTestViewController *new = [[YearTestViewController alloc]init];
+            [self.navigationController pushViewController:new animated:YES];
+        }else{
+            AddYearTestViewController *add = [[AddYearTestViewController alloc]init];
+            add.webTypeString = @"MyCar/AddVehicleReminder";
+            add.placeholderString = @"请输入车牌号";
+            add.sendButtonTitleString = @"沪";
+            add.dateMuSting = @"请选择";
+            add.yearsMuSting = @"请选择";
+            add.carMuSting = @"请选择";
+            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:add];
+            [self presentViewController:nav animated:YES completion:nil];
+        }
+        
     }else if (indexPath.row == 3){
-        InsurenceViewController *new = [[InsurenceViewController alloc]init];
-        [self.navigationController pushViewController:new animated:YES];
+        if ([self.fourIsNot isEqualToString:@"1"]) {
+            InsurenceViewController *new = [[InsurenceViewController alloc]init];
+            [self.navigationController pushViewController:new animated:YES];
+        }else{
+            AddInSurenceViewController *add = [[AddInSurenceViewController alloc]init];
+            add.webTypeString = @"MyCar/AddVehicleReminder";
+            add.companyNameMuString = @"请选择保险公司";
+            add.dateMuSting = @"请选择";
+            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:add];
+            [self presentViewController:nav animated:YES completion:nil];
+            
+        }
+        
     }
 }
 
@@ -166,6 +221,7 @@
             
             ////////////////////////////////////////////////////////////////////////////
             RemindMoel * oneModel = self.modelArray[0];
+            self.oneIsNot = oneModel.IsSetUp;
             NSString *getOneString = oneModel.TimeSpans;
             if([oneModel.IsSetUp isEqualToString:@"1"]){
                 if([getOneString isEqualToString:@"0"] || [getOneString containsString:@"-"]){
@@ -182,6 +238,7 @@
 
             ////////////////////////////////////////////////////////////////////////////
             RemindMoel * twoModel = self.modelArray[1];
+            self.twoIsNot = twoModel.IsSetUp;
             NSString *getTwoString = twoModel.TimeSpans;
             if([twoModel.IsSetUp isEqualToString:@"1"]){
                 NSLog(@"=====================%@",getTwoString);
@@ -199,6 +256,7 @@
             
             ////////////////////////////////////////////////////////////////////////////
             RemindMoel * threeModel = self.modelArray[2];
+            self.threeIsNot = threeModel.IsSetUp;
             NSString *getThreeString = threeModel.TimeSpans;
             if([threeModel.IsSetUp isEqualToString:@"1"]){
                 if([getThreeString isEqualToString:@"0"]){
@@ -215,6 +273,7 @@
             
             ////////////////////////////////////////////////////////////////////////////
             RemindMoel * fourModel = self.modelArray[3];
+            self.fourIsNot = fourModel.IsSetUp;
             NSString *getFourString = fourModel.TimeSpans;
             if([fourModel.IsSetUp isEqualToString:@"1"]){
                 if([getFourString isEqualToString:@"0"] || [getOneString containsString:@"-"]){
