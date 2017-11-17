@@ -269,13 +269,14 @@
                              };
     
     NSDictionary *params = @{
-                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool base64convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool base64convertToJsonData:mulDic]]]
                              };
     NSLog(@"%@",params);
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddSecondHandCarInfoIOS",Khttp] success:^(NSDictionary *dict, BOOL success) {
         NSLog(@"%@二手车发布成功",dict);
         NSLog(@"%@二手车发布成功",dict[@"ResultMessage"]);
+        [self.navigationController popViewControllerAnimated:YES];
     } fail:^(NSError *error) {
         NSLog(@"%@二手车发布失败",error);
     }];

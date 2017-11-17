@@ -33,7 +33,6 @@
     NSMutableArray *_selectedPhotos;
     NSMutableArray *_selectedAssets;
     BOOL _isSelectOriginalPhoto;
-    
     CGFloat _itemWH;
     CGFloat _margin;
     LxGridViewFlowLayout *_layout;
@@ -197,33 +196,34 @@
     
     NSLog(@"图片--%@",_selectedPhotos);
     
-//    NSMutableArray *base64ImageArray = [[NSMutableArray alloc]init];
-//    for (int i = 0; i<_selectedPhotos.count; i++) {
-//        UIImage *tempImage = _selectedPhotos[i];
-//        NSData *imageData = UIImageJPEGRepresentation(tempImage, 0.7);
-//        NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
-//        [base64ImageArray addObject:encodeImage];
-//    }
-//    NSString *sendString = [base64ImageArray componentsJoinedByString:@","];
-//    NSLog(@"%@",sendString);
+    NSMutableArray *base64ImageArray = [[NSMutableArray alloc]init];
+    for (int i = 0; i<_selectedPhotos.count; i++) {
+        UIImage *tempImage = _selectedPhotos[i];
+        NSData *imageData = UIImageJPEGRepresentation(tempImage, 0.7);
+        NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
+        [base64ImageArray addObject:encodeImage];
+    }
+    NSString *sendString = [base64ImageArray componentsJoinedByString:@","];
+    NSLog(@"%@",sendString);
     
     ///////////////////////////////////////////////////////////////////////////////
     NSDictionary *mulDic = @{
                              @"ActivityType":@(2),
                              @"Account_Id":[UdStorage getObjectforKey:Userid],
                              @"ActivityName":[NSString stringWithFormat:@"%@",titleTextField.text],
-                             @"Comment":[NSString stringWithFormat:@"%@",contentTextField.text]
+                             @"Comment":[NSString stringWithFormat:@"%@",contentTextField.text],
+                             @"Picture":sendString
                              };
     
     //ActivityName->发布标题
     //Comment->发布内容
     
     NSDictionary *params = @{
-                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool base64convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool base64convertToJsonData:mulDic]]]
                              };
 //    NSLog(@"%@",mulDic);
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityInfoIOS",Khttp] success:^(NSDictionary *dict, BOOL success) {
             NSLog(@"%@",dict);
            NSLog(@"%@",dict[@"ResultMessage"]);
 //            hud.mode = MBProgressHUDModeText;
