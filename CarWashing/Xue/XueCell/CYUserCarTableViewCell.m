@@ -87,7 +87,7 @@
 {
     [self.carImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,model.Img]] placeholderImage:[UIImage imageNamed:@"photo"]];
     self.distancelabel.text= [NSString stringWithFormat:@"%@公里",model.Mileage];
-    self.timeLabel.text= [NSString stringWithFormat:@"%@",model.Manufacture];
+    self.timeLabel.text= [NSString stringWithFormat:@"%@",model.ActDate];
     self.titlelabel.text= [NSString stringWithFormat:@"%@%@",model.CarBrand,model.CarType];
     self.detaillabel.text= [NSString stringWithFormat:@"%@",model.CarComment];
 }
