@@ -201,14 +201,6 @@
     
 }
 
-//- (JFAreaDataManager *)manager {
-//    if (!_manager) {
-//        _manager = [JFAreaDataManager shareManager];
-//        [_manager areaSqliteDBData];
-//    }
-//    return _manager;
-//}
-
 
 - (void) createSubView {
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];

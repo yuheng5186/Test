@@ -26,7 +26,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.2</string>
+	<string>1.0.15</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -51,7 +51,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>10</string>
+	<string>11</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
@@ -93,10 +93,10 @@
 	<string>App需要您的同意,才能访问麦克风</string>
 	<key>NSMotionUsageDescription</key>
 	<string>App需要您的同意,才能访问运动与健身</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>需要你的同意才能访问相册</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>访问相册以保存</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>需要你的同意才能访问相册</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

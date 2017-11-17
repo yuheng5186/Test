@@ -77,8 +77,11 @@
         [backButton addTarget:self action:@selector(backAction) forControlEvents:(UIControlEventTouchUpInside)];
         [_fakeNavigation addSubview:backButton];
         
-        UIButton *editButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-31,30, 19, 19)];
-        [editButton setImage:[UIImage imageNamed:@"bianji"] forState:(UIControlStateNormal)];
+        UIImageView *buttonImage = [[UIImageView alloc]initWithFrame:CGRectMake(Main_Screen_Width-31,30, 19, 19)];
+        buttonImage.image = [UIImage imageNamed:@"bianji"];
+        [_fakeNavigation addSubview:buttonImage];
+        
+        UIButton *editButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-66,0, 66, 66)];
         [editButton addTarget:self action:@selector(editingAction) forControlEvents:(UIControlEventTouchUpInside)];
         [_fakeNavigation addSubview:editButton];
         

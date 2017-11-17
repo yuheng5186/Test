@@ -130,7 +130,7 @@
     UIImageView *userImageView  = [UIImageView new];
 //    userImageView.image         = [UIImage imageNamed:@"pingluntouxiang.jpg"];
      NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,newsDetail.FromusrImg];
-     [userImageView sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@"pingluntouxiang"]];
+     [userImageView sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
 //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,newsDetail.FromusrImg];
 //        NSURL *url=[NSURL URLWithString:ImageURL];
