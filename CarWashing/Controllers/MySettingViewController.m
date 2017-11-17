@@ -196,6 +196,7 @@
     NSString *membershipString      = @"个人信息";
     UIFont *membershipFont          = [UIFont boldSystemFontOfSize:Main_Screen_Height*15/667];
     UIButton *membershipButton      = [UIUtil drawButtonInView:upView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*25/667) text:membershipString font:membershipFont color:[UIColor whiteColor] target:self action:@selector(menbershipButtonClick:)];
+    
     membershipButton.backgroundColor= [UIColor colorFromHex:@"#FDBB2C"];
     membershipButton.layer.cornerRadius = membershipButton.height/2;
     membershipButton.centerX        = self.editButton.centerX-Main_Screen_Width*50/375;
@@ -208,7 +209,6 @@
     signButton.layer.cornerRadius = signButton.height/2;
     signButton.centerX        = self.editButton.centerX +Main_Screen_Width*50/375;
     signButton.top            = self.userNameLabel.bottom +Main_Screen_Height*10/667;
-    
     UIView *backgroudView                  = [UIUtil drawLineInView:upView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*100/667) color:[UIColor whiteColor]];
     backgroudView.bottom                = upView.bottom;
     backgroudView.left                  = upView.left;
@@ -216,7 +216,6 @@
     UIView *orderView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     orderView.centerX                   = Main_Screen_Width/4 -Main_Screen_Width*20/375;
     orderView.top                       = Main_Screen_Height*10/667;
-    
     UITapGestureRecognizer  *tapOrderGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapOrderButtonClick:)];
     [orderView addGestureRecognizer:tapOrderGesture];
     
@@ -231,14 +230,11 @@
     orderNameLabel.textColor         = [UIColor blackColor];
     orderNameLabel.centerX           = orderImageView.centerX;
     orderNameLabel.top               = orderImageView.bottom +Main_Screen_Height*10/667;
-    
     UIView *favoritesView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     favoritesView.centerX                   = Main_Screen_Width/2;
     favoritesView.top                       = Main_Screen_Height*10/667;
-    
     UITapGestureRecognizer  *favoritesTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapFavoritesButtonClick:)];
     [favoritesView addGestureRecognizer:favoritesTapGesture];
-    
     UIImage     *favoritesImage          = [UIImage imageNamed:@"wode_shoucang"];
     UIImageView *favoritesImageView      = [UIUtil drawCustomImgViewInView:favoritesView frame:CGRectMake(0, 0, favoritesImage.size.width,favoritesImage.size.height) imageName:@"wode_shoucang"];
     favoritesImageView.centerX           = favoritesView.width/2;
@@ -250,7 +246,6 @@
     favoritesNameLabel.textColor         = [UIColor blackColor];
     favoritesNameLabel.centerX           = favoritesImageView.centerX;
     favoritesNameLabel.top               = favoritesImageView.bottom +Main_Screen_Height*10/667;
-    
     
     UIView *exchangeView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     exchangeView.centerX                   = Main_Screen_Width*3/4 +Main_Screen_Width*20/375;
@@ -290,11 +285,9 @@
 
 #pragma mark -------button click------
 - (void) editButtonClick:(id)sender {
-    
     DSUserInfoController *userInfoController    = [[DSUserInfoController alloc]init];
     userInfoController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:userInfoController animated:YES];
-
 }
 
 - (void) settingButtonClick:(id)sender {
@@ -313,9 +306,7 @@
     DSUserInfoController *userInfoController    = [[DSUserInfoController alloc]init];
     userInfoController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:userInfoController animated:YES];
-    
 }
-
 - (void) signButtonClick:(id)sender {
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -334,12 +325,9 @@
                                      @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                      @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                      };
-            
             [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/AddUserSign",Khttp] success:^(NSDictionary *dict, BOOL success) {
-                
                 if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                 {
-                    
                     NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
                     [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
                     [inputFormatter setDateFormat:@"yyyy/MM/dd"];
@@ -350,12 +338,8 @@
                     NSString *targetTime = [outputFormatter stringFromDate:inputDate];
                     
                     [UdStorage storageObject:targetTime forKey:@"SignTime"];
-                    
                     APPDELEGATE.currentUser.UserScore = APPDELEGATE.currentUser.UserScore + 10;
-                    
                     [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
-                    
-                    
                     PopupView *view = [PopupView defaultPopupView];
                     view.parentVC = self;
                     
