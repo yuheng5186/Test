@@ -214,7 +214,7 @@
                              @"Comment":[NSString stringWithFormat:@"%@",contentTextField.text],
                              @"Picture":sendString
                              };
-    
+    ///
     //ActivityName->发布标题
     //Comment->发布内容
     
