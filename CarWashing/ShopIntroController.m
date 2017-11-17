@@ -58,7 +58,7 @@ static NSString *id_infoCell = @"id_infoCell";
 }
 
 - (void)setupUI {
-    
+    NSLog(@"--%@",self.dic);
     self.infoHeadView.frame = CGRectMake(0, 0, Main_Screen_Width, 280*Main_Screen_Height/667);
     
     self.infoHeadView.namelabel.text = self.dic[@"MerName"];
@@ -139,23 +139,15 @@ static NSString *id_infoCell = @"id_infoCell";
     infoImageView.frame = CGRectMake(0, 0, Main_Screen_Width, 200*Main_Screen_Height/667);
     [cell.contentView addSubview:infoImageView];
     
-
-    
     return cell;
 }
 
 - (IBAction)skipToMapView:(id)sender {
     
-//    BusinessMapController *mapVC = [[BusinessMapController alloc] init];
-//    mapVC.hidesBottomBarWhenPushed = YES;
-//    
-//    [self.navigationController pushViewController:mapVC animated:YES];
-    
-    [self.mapNavigationView showMapNavigationViewWithtargetLatitude:22.488260 targetLongitute:113.915049 toName:@"中海油华英加油站"];
+    [self.mapNavigationView showMapNavigationViewWithtargetLatitude:[self.dic[@"Ym"] doubleValue] targetLongitute:[self.dic[@"Xm"] doubleValue] toName:[NSString stringWithFormat:@"%@",self.dic[@"MerAddress"]]];
     [self.view addSubview:_mapNavigationView];
     
 }
-
 
 
 - (IBAction)didClickShopPhone:(id)sender {

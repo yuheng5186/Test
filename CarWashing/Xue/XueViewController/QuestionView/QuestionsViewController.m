@@ -114,9 +114,9 @@
     if([model.IndexImg rangeOfString:@","].location !=NSNotFound)//_roaldSearchText
     {
         NSArray * arrImage = [model.IndexImg componentsSeparatedByString:@","];
-       if(arrImage.count > 1 && arrImage.count <= 3){
-            return 260;
-        }else if (arrImage.count <= 6 && arrImage.count > 3){
+       if(arrImage.count > 1 && arrImage.count < 3){
+            return 180;
+        }else if (arrImage.count <= 6 && arrImage.count >= 3){
             return 260;
         }
         return 340;
@@ -124,7 +124,7 @@
     if ([model.IndexImg isEqualToString:@""]) {
         return 90;
     }else{
-        return 180;
+        return 240;
     }
     return 240;
 }

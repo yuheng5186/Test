@@ -283,7 +283,7 @@
 }
 -(UIButton*)addbtn{
     if (_addbtn==nil) {
-        _addbtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-(80*Main_Screen_Height/667), self.view.bounds.size.height-(180*Main_Screen_Height/667), 80*Main_Screen_Height/667, 80*Main_Screen_Height/667)];
+        _addbtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-(90*Main_Screen_Height/667), self.view.bounds.size.height-(180*Main_Screen_Height/667), 80*Main_Screen_Height/667, 80*Main_Screen_Height/667)];
         //        _addbtn.layer.cornerRadius = 27.5;
         //        _addbtn.backgroundColor = [UIColor grayColor];
         [_addbtn addTarget:self action:@selector(clickAddButton:) forControlEvents:UIControlEventTouchUpInside];

@@ -195,6 +195,15 @@
 #pragma mark---上传的按钮
 -(void)rightbtnClick
 {
+    
+    if (titleTextField.text==nil) {
+        [self.view showInfo:@"请输入您的问题" autoHidden:YES];
+        return;
+    }
+    if (contentTextField.text==nil) {
+        [self.view showInfo:@"请详细描述您的问题" autoHidden:YES];
+        return;
+    }
     //开始菊花
 //    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:_collectionView animated:YES];
 //    hud.mode = MBProgressHUDModeDeterminate;
