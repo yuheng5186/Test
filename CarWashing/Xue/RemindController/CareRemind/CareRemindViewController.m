@@ -52,7 +52,7 @@
     [self.view addSubview:self.fakeNavigation];
     [self.view addSubview:self.afterView];
     //需要判断是否已经添加保养提醒,目前直接写在这里,点击“添加”按钮时隐藏添加View
-    [self.view addSubview:self.addView];
+//    [self.view addSubview:self.addView];
     
 
     
@@ -63,12 +63,12 @@
     [super viewWillAppear:animated];
     [self requestFromWeb];
     //创建userDefault
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *setAlready = [userDefaults objectForKey:@"CareRemide"];
-    if ([setAlready isEqualToString:@"1"]) {
-        self.addView.hidden = YES;
-        self.afterView.hidden = NO;
-    }
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//    NSString *setAlready = [userDefaults objectForKey:@"CareRemide"];
+//    if ([setAlready isEqualToString:@"1"]) {
+//        self.addView.hidden = YES;
+//        self.afterView.hidden = NO;
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -112,22 +112,22 @@
 }
 
 //提示添加的View，添加按钮时隐藏
--(UIView *)addView{
-    if (!_addView) {
-        _addView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
-        _addView.backgroundColor = [UIColor whiteColor];
-        
-        //提示信息
-        
-        UIButton *addButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Width)];
-        addButton.backgroundColor = [UIColor colorWithRed:13/255.0 green:98/255.0 blue:159/255.0 alpha:1];
-        [addButton setTitle:@"尚未添加保养信息，点击添加" forState:(UIControlStateNormal)];
-        addButton.titleLabel.font = [UIFont systemFontOfSize:18 weight:18];
-        [addButton addTarget:self action:@selector(callNewViewController) forControlEvents:(UIControlEventTouchUpInside)];
-        [_addView addSubview:addButton];
-    }
-    return _addView;
-}
+//-(UIView *)addView{
+//    if (!_addView) {
+//        _addView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
+//        _addView.backgroundColor = [UIColor whiteColor];
+//
+//        //提示信息
+//
+//        UIButton *addButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Width)];
+//        addButton.backgroundColor = [UIColor colorWithRed:13/255.0 green:98/255.0 blue:159/255.0 alpha:1];
+//        [addButton setTitle:@"尚未添加保养信息，点击添加" forState:(UIControlStateNormal)];
+//        addButton.titleLabel.font = [UIFont systemFontOfSize:18 weight:18];
+//        [addButton addTarget:self action:@selector(callNewViewController) forControlEvents:(UIControlEventTouchUpInside)];
+//        [_addView addSubview:addButton];
+//    }
+//    return _addView;
+//}
 
 //添加成功后的View
 -(UIView *)afterView{
@@ -212,18 +212,18 @@
     }];
 }
 
-//addView上present新控制器
--(void)callNewViewController{
-    AddCareRemindViewController *new = [[AddCareRemindViewController alloc]init];
-    new.typeString = @"MyCar/AddVehicleReminder";
-    new.dateMuSting = @"请选择";
-    new.subMuSting = @"请选择";
-    [self presentViewController:new animated:YES completion:^{
-        self.addView.hidden = YES;
-//        [self.afterView removeFromSuperview];
-
-    }];
-}
+////addView上present新控制器
+//-(void)callNewViewController{
+//    AddCareRemindViewController *new = [[AddCareRemindViewController alloc]init];
+//    new.typeString = @"MyCar/AddVehicleReminder";
+//    new.dateMuSting = @"请选择";
+//    new.subMuSting = @"请选择";
+//    [self presentViewController:new animated:YES completion:^{
+//        self.addView.hidden = YES;
+////        [self.afterView removeFromSuperview];
+//
+//    }];
+//}
 
 //附近的洗车点
 -(void)nearByAction{
@@ -271,7 +271,7 @@
             self.dateText = self.modelJack.ExpirationDate;
             self.sendToNewString = self.modelJack.Id;
             _carCareTimeLabel.text = self.dateText;
-            self.mainPlateText = [NSString stringWithFormat:@"%@-%@ 保养时间",self.modelJack.Province,self.modelJack.PlateNumber];
+            self.mainPlateText = [NSString stringWithFormat:@"%@ %@ 下次保养时间",self.modelJack.Province,self.modelJack.PlateNumber];
             _carNoLabel.text = self.mainPlateText;
             self.showOrNot = self.modelJack.IsSetUp;
             
@@ -279,13 +279,13 @@
             self.sendFrequency = self.modelJack.MaintenanceFrequency;
             self.sendTimeData = self.modelJack.TimeDate;
             
-            if ([self.showOrNot isEqualToString:@"1"]) {
-                self.addView.hidden = YES;
-                self.afterView.hidden = NO;
-            }else{
-                self.addView.hidden = NO;
-                self.afterView.hidden = YES;
-            }
+//            if ([self.showOrNot isEqualToString:@"1"]) {
+//                self.addView.hidden = YES;
+//                self.afterView.hidden = NO;
+//            }else{
+//                self.addView.hidden = NO;
+//                self.afterView.hidden = YES;
+//            }
             
 
         }

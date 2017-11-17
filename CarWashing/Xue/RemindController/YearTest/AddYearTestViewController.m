@@ -24,7 +24,7 @@
 //菊花
 #import "MBProgressHUD.h"
 
-@interface AddYearTestViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface AddYearTestViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property(strong,nonatomic)UITableView *careTableView;
 @property(strong)NSArray *mainTitleArray;
 @property(strong,nonatomic)UITextField *licenseNumTextField;
@@ -56,6 +56,7 @@
     self.licenseNumTextField = [[UITextField alloc]initWithFrame:CGRectMake(120, 76, 200, 35)];
     _licenseNumTextField.placeholder = self.placeholderString;
     _licenseNumTextField.borderStyle = UITextBorderStyleNone;
+    _licenseNumTextField.delegate = self;
     _licenseNumTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     _licenseNumTextField.font = [UIFont systemFontOfSize:16];
     [self.view addSubview:self.licenseNumTextField];
@@ -345,5 +346,16 @@
 -(void)editCarInformation:(NSNotification *)notification{
     self.carMuSting = [NSString stringWithFormat:@"%@-%@",notification.userInfo[@"CYCarname"],notification.userInfo[@"CYCarType"]] ;
     [self.careTableView reloadData];
+}
+
+//退出编辑
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return  YES;
+}
+
+//点击别处推出编辑
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
 }
 @end
