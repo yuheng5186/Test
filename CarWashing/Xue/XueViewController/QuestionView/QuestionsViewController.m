@@ -89,7 +89,7 @@
 #pragma mark - TableView
 -(UITableView *)quesTableView{
     if(_quesTableView == nil){
-        _quesTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-106) style:(UITableViewStylePlain)];
+        _quesTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-110) style:(UITableViewStylePlain)];
         _quesTableView.delegate = self;
         _quesTableView.dataSource = self;
         _quesTableView.backgroundColor = [UIColor whiteColor];
@@ -124,9 +124,9 @@
     if ([model.IndexImg isEqualToString:@""]) {
         return 90;
     }else{
-        return 240;
+        return 250;
     }
-    return 240;
+   
 }
 //每组行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
