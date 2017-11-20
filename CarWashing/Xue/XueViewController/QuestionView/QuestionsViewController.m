@@ -43,13 +43,11 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.quesTableView];
     self.page = 0;
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self requestData];
-
 }
 
 
@@ -95,7 +93,6 @@
         _quesTableView.backgroundColor = [UIColor whiteColor];
         _quesTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 //        [_quesTableView registerClass:[QuesTableViewCell class] forCellReuseIdentifier:@"question"];
-
     }
     return _quesTableView;
 }
@@ -106,10 +103,6 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CYQuestionModel * model = self.modelArray[indexPath.row];
-//    //计算label高度
-//    NSDictionary *font123 = @{NSFontAttributeName:[UIFont systemFontOfSize:13]};
-//    CGSize maxSize = CGSizeMake(Main_Screen_Width-70, MAXFLOAT);
-//    CGSize labelSize = [model.ActivityName boundingRectWithSize:maxSize options:(NSStringDrawingUsesLineFragmentOrigin) attributes:font123 context:nil].size;
     
     if([model.IndexImg rangeOfString:@","].location !=NSNotFound)//_roaldSearchText
     {

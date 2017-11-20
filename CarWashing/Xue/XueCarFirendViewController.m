@@ -37,7 +37,6 @@
 @implementation XueCarFirendViewController
 
 - (void) drawNavigation {
-    
     [self drawTitle:@"发现"];
 }
 //- (void) drawContent {
@@ -60,7 +59,7 @@
         weakSelf.view.backgroundColor = color;
         _ISShowMenuButton = YES;
         [weakSelf clickAddButton:self.addbtn];
-        NSLog(@"=====%ld",tag);
+//        NSLog(@"=====%ld",tag);
         if (tag==5) {//发布问题
             
             CYDynamicShareViewController *findController      = [[CYDynamicShareViewController alloc]init];
@@ -130,14 +129,9 @@
 }
 
 #pragma mark - 动画
-
 //移动scrollView改变小灰条的位置
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    
-//    NSLog(@"%f",_baseView.contentOffset.x/((self.view.frame.size.width)*4));
-//    CGFloat f =[[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue];
-//    NSLog(@"%.2f",f);
     NSInteger a;
     if ([[NSString stringWithFormat:@"%.2f",_baseView.contentOffset.x/((self.view.frame.size.width)*4)]floatValue]==0.00) {
          a=0;
