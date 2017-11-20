@@ -26,7 +26,18 @@
 @end
 
 @implementation DSOrderController
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"DSOrderController"];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+        
+    [MobClick endLogPageView:@"DSOrderController"];
+        
+}
 - (void)drawNavigation {
     
     [self drawTitle:@"全部订单"];

@@ -430,6 +430,8 @@
     DSOrderController *orderVC              = [[DSOrderController alloc]init];
     orderVC.hidesBottomBarWhenPushed        = YES;
     [self.navigationController pushViewController:orderVC animated:YES];
+    //统计广告访问量
+    
 }
 
 - (void) tapFavoritesButtonClick:(id)sender {

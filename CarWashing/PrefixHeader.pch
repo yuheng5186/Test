@@ -36,6 +36,7 @@
 #import "CYAlertView.h"
 #import "HTTPDefine.h"
 #import "GCCycleScrollView.h"//广告无限滚动
+#import "UMMobClick/MobClick.h"
 //NSUserDefaults 保存数据
 #define IsNotFirstOpen   @"isNotFirstOpen"       //不是第一次打开
 #define Userid           @"Account_Id"           //用户id

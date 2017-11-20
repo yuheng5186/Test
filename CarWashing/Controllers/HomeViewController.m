@@ -116,6 +116,8 @@
 {
     [super viewWillAppear:animated];
     [self setData];
+    [MobClick event:@"addHomeClickID"];
+    
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];

@@ -151,7 +151,16 @@
 
      [self configureAPIKey];
 
-
+//友盟统计
+    [MobClick setLogEnabled:YES];
+    
+    UMConfigInstance.appKey = @"5a123310f43e486e5b0001c7";
+    
+    UMConfigInstance.channelId = @"App Store";
+    
+    [MobClick startWithConfigure:UMConfigInstance];
+    
+    
     return YES;
 }
 
