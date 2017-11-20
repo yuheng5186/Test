@@ -47,6 +47,7 @@ static NSString *id_carListCell = @"id_carListCell";
     if (_carListView == nil) {
         
         UITableView *carListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 64 - (48+25+25)*Main_Screen_Height/667)];
+        carListView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _carListView = carListView;
         [self.view addSubview:_carListView];
     }

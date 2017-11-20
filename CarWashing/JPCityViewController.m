@@ -34,6 +34,7 @@ static NSString * const DetailID_cell = @"Detailcell";
     
     
 //    _titleArray = @[@"青岛市",@"苏州市",@"北京市"];
+    
     _titleArray = @[@"青岛市"];
     NSArray *arr = @[@"全部",@"市南区",@"市北区",@"李沧区",@"崂山区",@"黄岛区",@"城阳区",@"即墨区",@"胶州市",@"平度市", @"莱西市",@"红岛经济区"];
 //    NSArray *arr1 = @[@"工业园区",@"高新区",@"相城区"];

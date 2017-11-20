@@ -33,6 +33,7 @@
 }
 @property(nonatomic)NSInteger page;
 @property(nonatomic,copy)NSMutableArray *modelArray;
+@property(nonatomic,strong)UILabel *noneLabel;
 @end
 
 @implementation QuestionsViewController
@@ -42,7 +43,10 @@
     _modelArray = [NSMutableArray array];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.quesTableView];
+    
     self.page = 0;
+    
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -71,6 +75,13 @@
             //获取json数组
 
             self.modelArray = (NSMutableArray*)[CYQuestionModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
+            
+            //没有数据的情况下显示
+            if (self.modelArray.count == 0) {
+                self.noneLabel.hidden = NO;
+            }else{
+                self.noneLabel.hidden = YES;
+            }
   
         }
         [self.quesTableView reloadData];
@@ -92,7 +103,16 @@
         _quesTableView.dataSource = self;
         _quesTableView.backgroundColor = [UIColor whiteColor];
         _quesTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        [_quesTableView registerClass:[QuesTableViewCell class] forCellReuseIdentifier:@"question"];
+
+        self.noneLabel = [[UILabel alloc]init];
+        self.noneLabel.frame = CGRectMake(Main_Screen_Width/2-100, Main_Screen_Height/2-200, 200, 100);
+        self.noneLabel.backgroundColor = [UIColor grayColor];
+        self.noneLabel.text = @"目前无提问";
+        self.noneLabel.textColor = [UIColor whiteColor];
+        self.noneLabel.textAlignment = NSTextAlignmentCenter;
+        self.noneLabel.hidden = YES;
+        [_quesTableView addSubview:self.noneLabel];
+        
     }
     return _quesTableView;
 }

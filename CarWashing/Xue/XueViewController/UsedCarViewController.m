@@ -14,6 +14,8 @@
 @property(strong,nonatomic)UITableView *CYUserCarTableView;
 @property(strong,nonatomic)NSMutableArray *UserArray;
 @property(assign,nonatomic)NSInteger page;
+@property(nonatomic,strong)UILabel *noneLabel;
+
 @end
 
 @implementation UsedCarViewController
@@ -51,6 +53,12 @@
         if ([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]) {
             //获取json数组
             self.UserArray = (NSMutableArray*)[CYUserCarModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
+            //没有数据的情况下显示
+            if (self.UserArray.count == 0) {
+                self.noneLabel.hidden = NO;
+            }else{
+                self.noneLabel.hidden = YES;
+            }
             
         }
         [self.CYUserCarTableView reloadData];
@@ -67,6 +75,15 @@
         _CYUserCarTableView.dataSource = self;
         _CYUserCarTableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
         _CYUserCarTableView.rowHeight = 145*Main_Screen_Height/667;
+        
+        self.noneLabel = [[UILabel alloc]init];
+        self.noneLabel.frame = CGRectMake(Main_Screen_Width/2-100, Main_Screen_Height/2-200, 200, 100);
+        self.noneLabel.backgroundColor = [UIColor grayColor];
+        self.noneLabel.text = @"目前无二手车";
+        self.noneLabel.textColor = [UIColor whiteColor];
+        self.noneLabel.textAlignment = NSTextAlignmentCenter;
+        self.noneLabel.hidden = YES;
+        [_CYUserCarTableView addSubview:self.noneLabel];
     }
     return _CYUserCarTableView;
 }

@@ -23,6 +23,7 @@
 
 @property (nonatomic,strong) NSMutableArray *otherArray;
 @property (nonatomic)NSInteger page;
+
 @end
 
 @implementation InfoViewController
