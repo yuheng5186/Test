@@ -160,7 +160,6 @@
     
     [MobClick startWithConfigure:UMConfigInstance];
     
-    
     return YES;
 }
 

@@ -117,6 +117,9 @@
 		182216271FB1DC42000BF80D /* RemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182216261FB1DC42000BF80D /* RemindViewController.m */; };
 		182BF4A91FB581F500F79C68 /* CareRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BF4A81FB581F500F79C68 /* CareRemindViewController.m */; };
 		182BF4AC1FB58F2700F79C68 /* AddCareRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BF4AB1FB58F2700F79C68 /* AddCareRemindViewController.m */; };
+		183203241FC2B26600DFDA78 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183203231FC2B26600DFDA78 /* MyViewController.m */; };
+		183203281FC2B7AB00DFDA78 /* MyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183203261FC2B7AB00DFDA78 /* MyTableViewCell.m */; };
+		183203291FC2B7AB00DFDA78 /* MyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183203271FC2B7AB00DFDA78 /* MyTableViewCell.xib */; };
 		18322AAF1F4AD1C7003ABB7B /* Carcircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AAE1F4AD1C7003ABB7B /* Carcircle.m */; };
 		18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB21F4AD6DC003ABB7B /* MyCar.m */; };
 		18322AB71F4C2226003ABB7B /* CarClubNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB61F4C2226003ABB7B /* CarClubNews.m */; };
@@ -608,6 +611,11 @@
 		182BF4A81FB581F500F79C68 /* CareRemindViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CareRemindViewController.m; sourceTree = "<group>"; };
 		182BF4AA1FB58F2700F79C68 /* AddCareRemindViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCareRemindViewController.h; sourceTree = "<group>"; };
 		182BF4AB1FB58F2700F79C68 /* AddCareRemindViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCareRemindViewController.m; sourceTree = "<group>"; };
+		183203221FC2B26600DFDA78 /* MyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
+		183203231FC2B26600DFDA78 /* MyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
+		183203251FC2B7AB00DFDA78 /* MyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTableViewCell.h; sourceTree = "<group>"; };
+		183203261FC2B7AB00DFDA78 /* MyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTableViewCell.m; sourceTree = "<group>"; };
+		183203271FC2B7AB00DFDA78 /* MyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyTableViewCell.xib; sourceTree = "<group>"; };
 		18322AAD1F4AD1C7003ABB7B /* Carcircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Carcircle.h; sourceTree = "<group>"; };
 		18322AAE1F4AD1C7003ABB7B /* Carcircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Carcircle.m; sourceTree = "<group>"; };
 		18322AB11F4AD6DC003ABB7B /* MyCar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCar.h; sourceTree = "<group>"; };
@@ -1465,6 +1473,11 @@
 				181E92D71F1F3BAE0006511E /* FindViewController.m */,
 				181E92DC1F1F3BE40006511E /* MySettingViewController.h */,
 				181E92DD1F1F3BE40006511E /* MySettingViewController.m */,
+				183203221FC2B26600DFDA78 /* MyViewController.h */,
+				183203231FC2B26600DFDA78 /* MyViewController.m */,
+				183203251FC2B7AB00DFDA78 /* MyTableViewCell.h */,
+				183203261FC2B7AB00DFDA78 /* MyTableViewCell.m */,
+				183203271FC2B7AB00DFDA78 /* MyTableViewCell.xib */,
 				181E92E01F20532B0006511E /* UserInfo */,
 			);
 			name = Controllers;
@@ -2781,6 +2794,7 @@
 				50D30E821F20988A0086D3ED /* BusinessDetailCell.xib in Resources */,
 				045E1BB11F69151B00F37230 /* ProblemUse.plist in Resources */,
 				180E43291F414A7900013D2D /* PopHelpView.xib in Resources */,
+				183203291FC2B7AB00DFDA78 /* MyTableViewCell.xib in Resources */,
 				18FB09BD1FAAEFE100297E93 /* TZImagePickerController.bundle in Resources */,
 				188821511F6BD336002618F7 /* b6.gif in Resources */,
 				50E2EE871F1F4D3C00FAF130 /* YZSortCell.xib in Resources */,
@@ -3110,6 +3124,7 @@
 				180959631FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.m in Sources */,
 				1853BA471F28A04100B98C7F /* JFCityCollectionViewCell.m in Sources */,
 				180E432C1F417E3500013D2D /* DSAddShopController.m in Sources */,
+				183203281FC2B7AB00DFDA78 /* MyTableViewCell.m in Sources */,
 				501672021F29797600384186 /* BusinessDetailViewController.m in Sources */,
 				181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */,
 				5094A63D1F34850300407808 /* ShopInfoHeadView.m in Sources */,
@@ -3164,6 +3179,7 @@
 				5097FE161F2F42F0002EF8F8 /* MyCarPortController.m in Sources */,
 				18ED28B81FB8924900C0CC92 /* InsurenceViewController.m in Sources */,
 				180E43211F3D836F00013D2D /* HYActivityView.m in Sources */,
+				183203241FC2B26600DFDA78 /* MyViewController.m in Sources */,
 				180959591FB5791C004CCD47 /* CYQuestionTableViewCell.m in Sources */,
 				041573A41F53C522004514E3 /* TFGridInputView.m in Sources */,
 				180959511FB53694004CCD47 /* JackImageViewType.m in Sources */,
