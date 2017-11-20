@@ -18,6 +18,8 @@
 #import "DSScanController.h"
 #import "UdStorage.h"
 #import "DSStartWashingController.h"
+
+#import "MyViewController.h"
 @interface MenuTabBarController ()
 
 @property (nonatomic, strong)     UIImageView *imageView;
@@ -120,7 +122,7 @@
     purchaseTabItem.tag     = 4;
     purchaseVC.tabBarItem   = purchaseTabItem;
     
-    MySettingViewController *mySettingVC      = [[MySettingViewController alloc]init];
+    MyViewController *mySettingVC      = [[MyViewController alloc]init];
     UINavigationController *mySettingNav = [[UINavigationController alloc]initWithRootViewController:mySettingVC];
     mySettingNav.navigationController.navigationBarHidden = YES;
 //    mySettingNav.navigationBar.hidden    = YES;
