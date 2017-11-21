@@ -22,6 +22,8 @@
 @property(strong,nonatomic)NSMutableArray *dataArray;
 @property(nonatomic,assign)NSInteger *page;
 @property(nonatomic,copy)NSMutableArray *modelArray;
+@property(nonatomic,strong)UILabel *noneLabel;
+
 @end
 
 @implementation HotTopicViewController
@@ -59,7 +61,12 @@
         if ([[dict objectForKey:@"ResultCode" ]isEqualToString:@"F000000" ] ) {
             NSLog(@"----------------%@----------------",dict);
             self.modelArray = (NSMutableArray *)[CYHotTopicModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
-
+            //没有数据的情况下显示
+            if (self.modelArray.count == 0) {
+                self.noneLabel.hidden = NO;
+            }else{
+                self.noneLabel.hidden = YES;
+            }
             
         }
         [_hotTable reloadData];
@@ -81,6 +88,15 @@
         _hotTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_hotTable registerClass:[HotTableViewCell class] forCellReuseIdentifier:@"OneImage"];
         [_hotTable registerClass:[AnotherHotTableViewCell class] forCellReuseIdentifier:@"collect"];
+        
+        self.noneLabel = [[UILabel alloc]init];
+        self.noneLabel.frame = CGRectMake(Main_Screen_Width/2-100, Main_Screen_Height/2-200, 200, 100);
+        self.noneLabel.backgroundColor = [UIColor grayColor];
+        self.noneLabel.text = @"目前无热门话题";
+        self.noneLabel.textColor = [UIColor whiteColor];
+        self.noneLabel.textAlignment = NSTextAlignmentCenter;
+        self.noneLabel.hidden = YES;
+        [_hotTable addSubview:self.noneLabel];
     }
     return _hotTable;
 }
@@ -115,7 +131,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     CYHotTopicModel * model = self.modelArray[indexPath.row];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
     detailController.hidesBottomBarWhenPushed       = YES;
     detailController.ActivityCode                   = model.ActivityCode;

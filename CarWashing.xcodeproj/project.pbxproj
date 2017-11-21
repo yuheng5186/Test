@@ -1251,7 +1251,6 @@
 		1809594C1FB5366D004CCD47 /* JackTool */ = {
 			isa = PBXGroup;
 			children = (
-				18ED28F21FBBDE8500C0CC92 /* JackImage */,
 				180959531FB536A3004CCD47 /* JackPhotoBrower.h */,
 				180959541FB536B1004CCD47 /* JackPhotoBrower.m */,
 				180959521FB5369A004CCD47 /* JackImageViewType.h */,
@@ -2230,13 +2229,6 @@
 				18ED28FD1FBC4E3100C0CC92 /* RemindMoel.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		18ED28F21FBBDE8500C0CC92 /* JackImage */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = JackImage;
 			sourceTree = "<group>";
 		};
 		18EDACC41F7B50C6008D59D7 /* ForgetPasswordLogin */ = {

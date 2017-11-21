@@ -1060,5 +1060,9 @@ static NSString * HeaderId = @"header";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
 
 @end
