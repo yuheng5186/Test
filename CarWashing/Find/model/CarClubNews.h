@@ -27,6 +27,10 @@
 @property (nonatomic)NSInteger PageSize;
 @property (nonatomic)NSInteger Readcount;//阅读次数
 @property (copy, nonatomic)NSMutableArray *actModelList;//评论集合
+@property (nonatomic)NSInteger Manufacture; //年分
+@property (nonatomic)NSInteger Mileage; //年分
+@property (copy, nonatomic)NSString *CarComment;
+
 
 
 - (instancetype)initWithDictionary:(NSDictionary*)dic;

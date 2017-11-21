@@ -109,7 +109,10 @@
     DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
     detailController.hidesBottomBarWhenPushed       = YES;
     detailController.ActivityCode                   = model.CarCode;
+    detailController.CarCode = model.CarCode;
     detailController.showType = @"二手车";
+    detailController.loopNum = model.Mileage;
+    detailController.carBrithYear = model.Manufacture;
     [self.navigationController pushViewController:detailController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

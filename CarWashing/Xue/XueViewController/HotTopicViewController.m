@@ -132,6 +132,8 @@
     
     CYHotTopicModel * model = self.modelArray[indexPath.row];
     DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
+    detailController.comeTypeString = @"2";
+    detailController.showType = @"高兴";
     detailController.hidesBottomBarWhenPushed       = YES;
     detailController.ActivityCode                   = model.ActivityCode;
     [self.navigationController pushViewController:detailController animated:YES];
