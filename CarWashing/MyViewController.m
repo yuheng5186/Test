@@ -152,17 +152,21 @@
         UIButton * FourBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         FourBtn.frame =CGRectMake(i*Main_Screen_Width/4, 17, Main_Screen_Width/4, 22);
         [FourBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",bottomImage[i]]] forState:UIControlStateNormal];
-        FourBtn.tag=i+1;
-        [FourBtn addTarget:self action:@selector(FourBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [bottpmVIew addSubview:FourBtn];
         
-        //手机号
+        //四个
         UILabel * FourLabel = [[UILabel alloc]initWithFrame:CGRectMake(i*Main_Screen_Width/4, 45, Main_Screen_Width/4, 30)];
         FourLabel.textAlignment = NSTextAlignmentCenter;
         FourLabel.textColor=[UIColor colorFromHex:@"#3f3f3f"];
         FourLabel.font=[UIFont systemFontOfSize:13.0];
         FourLabel.text =[NSString stringWithFormat:@"%@",titleArray[i]];
         [bottpmVIew addSubview:FourLabel];
+        
+        UIButton * clickBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        clickBtn.frame =CGRectMake(i*Main_Screen_Width/4, 0, Main_Screen_Width/4, 80);
+        clickBtn.tag=i+1;
+        [clickBtn addTarget:self action:@selector(FourBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [bottpmVIew addSubview:clickBtn];
         
     }
     //通知
