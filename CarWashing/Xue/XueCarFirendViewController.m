@@ -18,6 +18,8 @@
 #import "CYPublishViewController.h"
 #import "CYSecondcarViewController.h"
 #import "CYDynamicShareViewController.h"
+//个人信息
+#import "CyShowMessageViewController.h"
 @interface XueCarFirendViewController ()<UITableViewDelegate>
 {
     BOOL _ISShowMenuButton;
@@ -39,11 +41,19 @@
 - (void) drawNavigation {
     
     [self drawTitle:@"发现"];
+    [self drawRightImageButton:[NSString stringWithFormat:@"bojin"] action:@selector(rightBtnClick)];
 }
 //- (void) drawContent {
 //    self.contentView.top        = 0;
 //    self.contentView.height     = self.view.height;
 //}
+-(void)rightBtnClick
+{
+    NSLog(@"123");
+    CyShowMessageViewController * CyshowVc=[[CyShowMessageViewController alloc]init];
+    CyshowVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:CyshowVc animated:YES];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];

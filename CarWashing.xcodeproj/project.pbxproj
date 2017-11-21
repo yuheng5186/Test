@@ -48,6 +48,9 @@
 		1809595A1FB5791C004CCD47 /* CYQuestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180959581FB5791C004CCD47 /* CYQuestionTableViewCell.xib */; };
 		180959631FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180959611FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.m */; };
 		180959641FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180959621FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.xib */; };
+		180D41B11FC3BE81007D5D34 /* CyShowMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D41B01FC3BE81007D5D34 /* CyShowMessageViewController.m */; };
+		180D41B51FC3CCF6007D5D34 /* CyShowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D41B31FC3CCF6007D5D34 /* CyShowTableViewCell.m */; };
+		180D41B61FC3CCF6007D5D34 /* CyShowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180D41B41FC3CCF6007D5D34 /* CyShowTableViewCell.xib */; };
 		180E42D21F39A89000013D2D /* DSAddMerchantController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42D11F39A89000013D2D /* DSAddMerchantController.m */; };
 		180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42D41F39B88900013D2D /* DSConsumerDetailController.m */; };
 		180E42D81F39B8C200013D2D /* DSUserRightDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42D71F39B8C200013D2D /* DSUserRightDetailController.m */; };
@@ -472,6 +475,11 @@
 		180959601FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYQuestionTwoTableViewCell.h; sourceTree = "<group>"; };
 		180959611FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYQuestionTwoTableViewCell.m; sourceTree = "<group>"; };
 		180959621FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CYQuestionTwoTableViewCell.xib; sourceTree = "<group>"; };
+		180D41AF1FC3BE81007D5D34 /* CyShowMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyShowMessageViewController.h; sourceTree = "<group>"; };
+		180D41B01FC3BE81007D5D34 /* CyShowMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyShowMessageViewController.m; sourceTree = "<group>"; };
+		180D41B21FC3CCF6007D5D34 /* CyShowTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyShowTableViewCell.h; sourceTree = "<group>"; };
+		180D41B31FC3CCF6007D5D34 /* CyShowTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyShowTableViewCell.m; sourceTree = "<group>"; };
+		180D41B41FC3CCF6007D5D34 /* CyShowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CyShowTableViewCell.xib; sourceTree = "<group>"; };
 		180E42D01F39A89000013D2D /* DSAddMerchantController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAddMerchantController.h; path = Home/DSAddMerchantController.h; sourceTree = "<group>"; };
 		180E42D11F39A89000013D2D /* DSAddMerchantController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAddMerchantController.m; path = Home/DSAddMerchantController.m; sourceTree = "<group>"; };
 		180E42D31F39B88900013D2D /* DSConsumerDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSConsumerDetailController.h; path = Home/DSConsumerDetailController.h; sourceTree = "<group>"; };
@@ -1252,6 +1260,18 @@
 			path = JackTool;
 			sourceTree = "<group>";
 		};
+		180D41AE1FC3BE18007D5D34 /* CYShow(个人发布相关) */ = {
+			isa = PBXGroup;
+			children = (
+				180D41AF1FC3BE81007D5D34 /* CyShowMessageViewController.h */,
+				180D41B01FC3BE81007D5D34 /* CyShowMessageViewController.m */,
+				180D41B21FC3CCF6007D5D34 /* CyShowTableViewCell.h */,
+				180D41B31FC3CCF6007D5D34 /* CyShowTableViewCell.m */,
+				180D41B41FC3CCF6007D5D34 /* CyShowTableViewCell.xib */,
+			);
+			path = "CYShow(个人发布相关)";
+			sourceTree = "<group>";
+		};
 		180E42DC1F3AB36A00013D2D /* Toast */ = {
 			isa = PBXGroup;
 			children = (
@@ -1317,6 +1337,7 @@
 		181051761FA96A5300355F2F /* Xue */ = {
 			isa = PBXGroup;
 			children = (
+				180D41AE1FC3BE18007D5D34 /* CYShow(个人发布相关) */,
 				1809594C1FB5366D004CCD47 /* JackTool */,
 				182216241FB1DC23000BF80D /* RemindController */,
 				1818511F1FA99860003A3A47 /* XueMode l */,
@@ -2739,6 +2760,9 @@
 						DevelopmentTeam = GS9E29E926;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
@@ -2786,6 +2810,7 @@
 				50B26E6E1F301B60009B3B9F /* RechargeCell.xib in Resources */,
 				1850902E1F45573F00795E0A /* ShareView.xib in Resources */,
 				180599C01FA18DBE003EAD1E /* CYPublishViewController.xib in Resources */,
+				180D41B61FC3CCF6007D5D34 /* CyShowTableViewCell.xib in Resources */,
 				5097FDFE1F2ECE2F002EF8F8 /* TicketCashView.xib in Resources */,
 				5094A63A1F346E7000407808 /* CancelPayCell.xib in Resources */,
 				50E2EE5A1F1F4A9000FAF130 /* SalerListViewCell.xib in Resources */,
@@ -3006,6 +3031,7 @@
 				18FB09C31FAAEFE100297E93 /* TZAssetCell.m in Sources */,
 				18A4B1B71F4BF9C800C64978 /* MemberRightsDetailController.m in Sources */,
 				501672161F297D8200384186 /* PurchaseCardViewCell.m in Sources */,
+				180D41B11FC3BE81007D5D34 /* CyShowMessageViewController.m in Sources */,
 				50B26EA91F315EB8009B3B9F /* PayOrderController.m in Sources */,
 				181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */,
 				18B697AF1F21DAE7009FF73A /* DSCarClubController.m in Sources */,
@@ -3054,6 +3080,7 @@
 				501672331F297FF000384186 /* ProblemTitleModel.m in Sources */,
 				180E42EB1F3AB37D00013D2D /* YzdHUDLabel.m in Sources */,
 				18322AB71F4C2226003ABB7B /* CarClubNews.m in Sources */,
+				180D41B51FC3CCF6007D5D34 /* CyShowTableViewCell.m in Sources */,
 				5094A6341F346E5800407808 /* DelayPayCell.m in Sources */,
 				18B803771F1DA2A300B52432 /* main.m in Sources */,
 				1887A2251F66E0870042B062 /* QWMerchantModel.m in Sources */,

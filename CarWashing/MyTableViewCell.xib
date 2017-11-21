@@ -93,7 +93,7 @@
                 <outlet property="typeImageView" destination="PSf-gL-NIt" id="NHF-JD-ctq"/>
                 <outlet property="typeiamgeWidth" destination="B8l-ky-biE" id="2HK-rh-13M"/>
             </connections>
-            <point key="canvasLocation" x="237" y="9"/>
+            <point key="canvasLocation" x="49" y="-8"/>
         </tableViewCell>
     </objects>
     <resources>
