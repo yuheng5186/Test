@@ -127,6 +127,8 @@
     
     
     UIImageView *userImageView  = [UIImageView new];
+    
+    #pragma mark-头像
      NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,newsDetail.FromusrImg];
      [userImageView sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
 
@@ -218,7 +220,14 @@
     
     UILabel *textTitleLabel                 = [UILabel new];
     textTitleLabel.textColor                = [UIColor colorFromHex:@"#4a4a4a"];
-    textTitleLabel.text                     = newsDetail.ActivityName;
+    ////////////////////////////////////////////////////////////
+    if ([self.showType isEqualToString:@"二手车"]) {
+        textTitleLabel.text = [NSString stringWithFormat:@"%@年生产   行驶%@万公里",self.carBrithYear,self.loopNum];
+    }else{
+        textTitleLabel.text                     = newsDetail.ActivityName;
+    }
+    ////////////////////////////////////////////////////////////
+    
     textTitleLabel.font                     = [UIFont systemFontOfSize:14];
     self.textTitleLabel                     = textTitleLabel;
     [backgroudView addSubview:textTitleLabel];
@@ -234,14 +243,27 @@
     textContentLabel.textColor                = [UIColor colorFromHex:@"#999999"];
     
     textContentLabel.font                     = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
-    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[[NSString stringWithFormat:@"<html><body>%@</html></body>",newsDetail.Comment] dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-    NSLog(@"%@",attrStr);
-    NSMutableAttributedString *string = [[NSMutableAttributedString alloc]initWithAttributedString:attrStr];
     
-    [string removeAttribute:NSParagraphStyleAttributeName range: NSMakeRange(0, string.length)];
-    textContentLabel.attributedText = string;
-//    textContentLabel.text                     = newsDetail.Comment;
-//    textContentLabel.adjustsFontSizeToFitWidth = YES;
+    NSString *tempStringJack = [[NSString alloc]init];
+    
+    ////////////////////////////////////////////////////////////
+    if ([self.showType isEqualToString:@"二手车"]) {
+        tempStringJack = [NSString stringWithFormat:@"%@",newsDetail.CarComment];
+        textContentLabel.text = tempStringJack;
+    }else if([self.showType isEqualToString:@"开心"]){
+        tempStringJack = [NSString stringWithFormat:@"%@",newsDetail.Comment];
+        textContentLabel.text = tempStringJack;
+    }else{
+        NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[[NSString stringWithFormat:@"<html><body>%@</html></body>",newsDetail.Comment] dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+        NSLog(@"%@",attrStr);
+        NSMutableAttributedString *string = [[NSMutableAttributedString alloc]initWithAttributedString:attrStr];
+        
+        [string removeAttribute:NSParagraphStyleAttributeName range: NSMakeRange(0, string.length)];
+        textContentLabel.attributedText = string;
+    }
+    ////////////////////////////////////////////////////////////
+    
+
     textContentLabel.numberOfLines            = 0;
     self.textContentLabel                     = textContentLabel;
     [backgroudView addSubview:textContentLabel];
@@ -525,26 +547,46 @@
     {
         mulDic = @{
                                  @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                 @"CarCode":[NSString stringWithFormat:@"%ld",self.ActivityCode]
+                                 @"CarCode":[NSString stringWithFormat:@"%ld",self.CarCode]
                                  };
         urlStr = @"Activity/SecondHandCarDetails";
+    }else if([self.showType isEqualToString:@"高兴"]){
+        if ([self.comeTypeString isEqualToString:@"1"]) {
+            //车友提问
+            mulDic = @{
+                       @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                       @"ActivityCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
+                       @"ActivityType":@(2)
+                       };
+        }else if ([self.comeTypeString isEqualToString:@"2"]){
+            mulDic = @{
+                       @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                       @"ActivityCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
+                       @"ActivityType":@(3)
+                       };
+        }
+        urlStr = @"Activity/GetActivityInfo";
     }else{
+        //资讯
         mulDic = @{
-                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                 @"ActivityCode":[NSString stringWithFormat:@"%ld",self.ActivityCode]
-                                 };
+                   @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                   @"ActivityCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
+                   @"ActivityType":@(1)
+                   };
         urlStr = @"Activity/GetActivityInfo";
     }
+    
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
-    //
+    
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@%@",Khttp,urlStr] success:^(NSDictionary *dict, BOOL success) {
         self.dicData = dict;
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
-            NSLog(@"详情数据%@",dict[@"JsonData"]);
+            NSLog(@"查看详情数据　%@",dict);
+//            NSLog(@"详情数据%@",dict[@"JsonData"]);
             //是什么车
             titleLabel.text=[NSString stringWithFormat:@"%@%@",dict[@"JsonData"][@"CarBrand"],dict[@"JsonData"][@"CarType"]];
             
@@ -600,6 +642,7 @@
         }
         
     } fail:^(NSError *error) {
+        NSLog(@"AF失败%@",error);
         [self.view showInfo:@"获取数据失败" autoHidden:YES interval:2];
         [self.tableView.mj_header endRefreshing];
     }];
