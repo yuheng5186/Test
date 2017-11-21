@@ -530,7 +530,9 @@
         exchangeVC.hidesBottomBarWhenPushed     = YES;
         [self.navigationController pushViewController:exchangeVC animated:YES];
     }else if (btn.tag==4){//我的资料
-        
+        DSUserInfoController *userInfoController    = [[DSUserInfoController alloc]init];
+        userInfoController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:userInfoController animated:YES];
     }
 }
 -(void)tapInformationClick
