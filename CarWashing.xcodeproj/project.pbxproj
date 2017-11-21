@@ -51,6 +51,8 @@
 		180D41B11FC3BE81007D5D34 /* CyShowMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D41B01FC3BE81007D5D34 /* CyShowMessageViewController.m */; };
 		180D41B51FC3CCF6007D5D34 /* CyShowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D41B31FC3CCF6007D5D34 /* CyShowTableViewCell.m */; };
 		180D41B61FC3CCF6007D5D34 /* CyShowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180D41B41FC3CCF6007D5D34 /* CyShowTableViewCell.xib */; };
+		180D41BA1FC3F3BE007D5D34 /* MyExploitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D41B91FC3F3BE007D5D34 /* MyExploitViewController.m */; };
+		180D41BD1FC4099A007D5D34 /* CyCommentHtmlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D41BC1FC4099A007D5D34 /* CyCommentHtmlViewController.m */; };
 		180E42D21F39A89000013D2D /* DSAddMerchantController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42D11F39A89000013D2D /* DSAddMerchantController.m */; };
 		180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42D41F39B88900013D2D /* DSConsumerDetailController.m */; };
 		180E42D81F39B8C200013D2D /* DSUserRightDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E42D71F39B8C200013D2D /* DSUserRightDetailController.m */; };
@@ -480,6 +482,10 @@
 		180D41B21FC3CCF6007D5D34 /* CyShowTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyShowTableViewCell.h; sourceTree = "<group>"; };
 		180D41B31FC3CCF6007D5D34 /* CyShowTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyShowTableViewCell.m; sourceTree = "<group>"; };
 		180D41B41FC3CCF6007D5D34 /* CyShowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CyShowTableViewCell.xib; sourceTree = "<group>"; };
+		180D41B81FC3F3BE007D5D34 /* MyExploitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyExploitViewController.h; sourceTree = "<group>"; };
+		180D41B91FC3F3BE007D5D34 /* MyExploitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyExploitViewController.m; sourceTree = "<group>"; };
+		180D41BB1FC4099A007D5D34 /* CyCommentHtmlViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyCommentHtmlViewController.h; sourceTree = "<group>"; };
+		180D41BC1FC4099A007D5D34 /* CyCommentHtmlViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyCommentHtmlViewController.m; sourceTree = "<group>"; };
 		180E42D01F39A89000013D2D /* DSAddMerchantController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAddMerchantController.h; path = Home/DSAddMerchantController.h; sourceTree = "<group>"; };
 		180E42D11F39A89000013D2D /* DSAddMerchantController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAddMerchantController.m; path = Home/DSAddMerchantController.m; sourceTree = "<group>"; };
 		180E42D31F39B88900013D2D /* DSConsumerDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSConsumerDetailController.h; path = Home/DSConsumerDetailController.h; sourceTree = "<group>"; };
@@ -1271,6 +1277,15 @@
 			path = "CYShow(个人发布相关)";
 			sourceTree = "<group>";
 		};
+		180D41B71FC3F35A007D5D34 /* CyMyExploit(我的功勋) */ = {
+			isa = PBXGroup;
+			children = (
+				180D41B81FC3F3BE007D5D34 /* MyExploitViewController.h */,
+				180D41B91FC3F3BE007D5D34 /* MyExploitViewController.m */,
+			);
+			path = "CyMyExploit(我的功勋)";
+			sourceTree = "<group>";
+		};
 		180E42DC1F3AB36A00013D2D /* Toast */ = {
 			isa = PBXGroup;
 			children = (
@@ -1336,6 +1351,7 @@
 		181051761FA96A5300355F2F /* Xue */ = {
 			isa = PBXGroup;
 			children = (
+				180D41B71FC3F35A007D5D34 /* CyMyExploit(我的功勋) */,
 				180D41AE1FC3BE18007D5D34 /* CYShow(个人发布相关) */,
 				1809594C1FB5366D004CCD47 /* JackTool */,
 				182216241FB1DC23000BF80D /* RemindController */,
@@ -1493,6 +1509,8 @@
 				181E92D71F1F3BAE0006511E /* FindViewController.m */,
 				181E92DC1F1F3BE40006511E /* MySettingViewController.h */,
 				181E92DD1F1F3BE40006511E /* MySettingViewController.m */,
+				180D41BB1FC4099A007D5D34 /* CyCommentHtmlViewController.h */,
+				180D41BC1FC4099A007D5D34 /* CyCommentHtmlViewController.m */,
 				183203221FC2B26600DFDA78 /* MyViewController.h */,
 				183203231FC2B26600DFDA78 /* MyViewController.m */,
 				183203251FC2B7AB00DFDA78 /* MyTableViewCell.h */,
@@ -3171,6 +3189,7 @@
 				5042E3561F33165C00CD140F /* NewPagedFlowView.m in Sources */,
 				180599B91FA17899003EAD1E /* TLMenuButtonView.m in Sources */,
 				5097FDFC1F2ECE0B002EF8F8 /* TicketCashView.m in Sources */,
+				180D41BA1FC3F3BE007D5D34 /* MyExploitViewController.m in Sources */,
 				1853BA451F28A04100B98C7F /* JFButton.m in Sources */,
 				1810518F1FA98E9A00355F2F /* InfoViewController.m in Sources */,
 				041573A51F53C522004514E3 /* TFGridInputViewCell.m in Sources */,
@@ -3228,6 +3247,7 @@
 				18FB09C91FAAF05E00297E93 /* LxGridViewFlowLayout.m in Sources */,
 				181051A51FA9D9D800355F2F /* AnotherHotTableViewCell.m in Sources */,
 				501672461F29DA6C00384186 /* MemberRegualrController.m in Sources */,
+				180D41BD1FC4099A007D5D34 /* CyCommentHtmlViewController.m in Sources */,
 				18D815841F79ECA800A1FA04 /* CYCardTableViewCell.m in Sources */,
 				18322AC01F4D950C003ABB7B /* Card.m in Sources */,
 				185090271F441BFA00795E0A /* UdStorage.m in Sources */,

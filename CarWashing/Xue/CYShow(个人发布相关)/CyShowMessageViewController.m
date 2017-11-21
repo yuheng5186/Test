@@ -14,6 +14,7 @@
 #import "UdStorage.h"
 #import "AFNetworkingTool.h"
 #import "LCMD5Tool.h"
+#import "MyExploitViewController.h"
 @interface CyShowMessageViewController () <UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView * tableView;
 @end
@@ -33,6 +34,9 @@
     [self.view addSubview:leftButton];
     UIView * headerView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 200*Main_Screen_Height/667)];
     headerView.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
+    headerView.userInteractionEnabled  = YES;
+    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGestureClick)];
+    [headerView addGestureRecognizer:tapGesture];
     self.tableView.tableHeaderView = headerView;
     //头像
     UIImageView * headerImageView = [[UIImageView alloc]init];
@@ -156,6 +160,12 @@
 //            [self.navigationController pushViewController:serviceVC animated:YES];
         }
     }
+}
+-(void)tapGestureClick
+{
+    MyExploitViewController * ExploitVc =[[MyExploitViewController alloc]init];
+    ExploitVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:ExploitVc animated:YES];
 }
 -(UITableView *)tableView
 {

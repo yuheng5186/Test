@@ -18,10 +18,12 @@
 
 {
     enum WXScene scene;
+    UIImageView * adVertist;
     
 }
 @property (nonatomic, strong) HYActivityView *activityView;
 @property (nonatomic, strong) UIImageView *bigImageView;
+@property (nonatomic, strong) NSDictionary *dicData;
 @end
 
 @implementation DSDownloadController
@@ -31,7 +33,22 @@
     [self drawTitle:@"下载蔷薇爱车"];
     [self drawRightImageButton:@"fenxiang" action:@selector(shareButtonClick:)];
 }
-
+-(void)geData{
+    NSDictionary *mulDic = @{
+                             @"AdvertisModule":@(2)
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Advertising/GetAdvertisList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"---%@",dict);
+        self.dicData= dict;
+        [adVertist sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,dict[@"JsonData"][0][@"AdvertisImg"]]]];
+    } fail:^(NSError *error) {
+        NSLog(@"---%@",error);
+    }];
+}
 - (void) shareButtonClick:(id)sender {
 
     if (!self.activityView) {
@@ -165,6 +182,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self createSubView];
+    adVertist = [[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height-100, Main_Screen_Width, 100)];
+    adVertist.backgroundColor=[UIColor redColor];
+    [self.contentView addSubview:adVertist];
+    [self geData];
 }
 
 - (void) createSubView {
@@ -202,6 +223,7 @@
     showLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
     showLabel.top               = self.bigImageView.bottom +Main_Screen_Height*22/667;
     showLabel.centerX           = self.bigImageView.centerX;
+    
     
 }
 - (void) tapbigImageViewGesture:(UILongPressGestureRecognizer *)gesture {
@@ -266,19 +288,6 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

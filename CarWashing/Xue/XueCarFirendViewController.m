@@ -40,12 +40,9 @@
 
 - (void) drawNavigation {
     [self drawTitle:@"发现"];
-    [self drawRightImageButton:[NSString stringWithFormat:@"bojin"] action:@selector(rightBtnClick)];
+    [self drawRightImageButton:[NSString stringWithFormat:@"gerenzhongxin"] action:@selector(rightBtnClick)];
 }
-//- (void) drawContent {
-//    self.contentView.top        = 0;
-//    self.contentView.height     = self.view.height;
-//}
+
 -(void)rightBtnClick
 {
     NSLog(@"123");
