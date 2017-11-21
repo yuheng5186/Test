@@ -46,7 +46,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-
+    
     myDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 
     
@@ -153,13 +153,10 @@
 
 //友盟统计
     [MobClick setLogEnabled:YES];
-    
     UMConfigInstance.appKey = @"5a123310f43e486e5b0001c7";
-    
     UMConfigInstance.channelId = @"App Store";
-    
     [MobClick startWithConfigure:UMConfigInstance];
-    
+    [MobClick event:@"addHomeClickID"];
     return YES;
 }
 

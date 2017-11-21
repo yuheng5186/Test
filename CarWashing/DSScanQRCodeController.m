@@ -295,7 +295,7 @@
                         start.IntegralNum = [NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum];
                         start.CardType = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
                         start.CardName = weakSelf.scan.CardName;
-                        
+                        start.adverUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ];
                         [weakSelf.navigationController pushViewController:start animated:YES];
                     }
                 };

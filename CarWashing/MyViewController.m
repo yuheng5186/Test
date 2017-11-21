@@ -43,6 +43,8 @@
     NSURL *url;
     enum WXScene scene;
     NSArray *activity;
+    UIButton * signBtn;
+    NSString *currentTimeString;
 }
 @property (nonatomic, strong) HYActivityView *activityView;
 @property (nonatomic, strong) UITableView *MyListView;
@@ -67,6 +69,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden = YES;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYYMMdd"];
+    NSDate *datenow = [NSDate date];
+    currentTimeString = [formatter stringFromDate:datenow];
+    
     [self setupUI];
     [self.contentView addSubview:self.MyListView];
     UIView * headerView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 190)];
@@ -124,8 +131,13 @@
        typeIamegView.image = [UIImage imageNamed:@"churujianghu"];
     }
     //签到button
-    UIButton * signBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    signBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [signBtn setImage:[UIImage imageNamed:@"qiandaoMy"] forState:UIControlStateNormal];
+//    if([[UdStorage getObjectforKey:@"SignTime"] intValue]<[currentTimeString intValue]){
+//       [signBtn setImage:[UIImage imageNamed:@"qiandaoMy"] forState:UIControlStateNormal];
+//    }else{
+//        [signBtn setImage:[UIImage imageNamed:@"yiqiandao"] forState:UIControlStateNormal];
+//    }
     [signBtn addTarget:self action:@selector(signButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [topVIew addSubview:signBtn];
     [signBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -383,7 +395,6 @@
                 }];
                 [self.activityView addButtonView:bv];
                 
-                
             }
             self.tabBarController.tabBar.hidden = YES;
             
@@ -398,12 +409,7 @@
 }
 #pragma mark--签到
 - (void) signButtonClick:(id)sender {
-        
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"YYYYMMdd"];
-    NSDate *datenow = [NSDate date];
-    NSString *currentTimeString = [formatter stringFromDate:datenow];
-        
+    
     if([UdStorage getObjectforKey:@"SignTime"])
     {
         if([[UdStorage getObjectforKey:@"SignTime"] intValue]<[currentTimeString intValue])
@@ -418,6 +424,7 @@
             [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/AddUserSign",Khttp] success:^(NSDictionary *dict, BOOL success) {
                 if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                 {
+                    [signBtn setImage:[UIImage imageNamed:@"yiqiandao"] forState:UIControlStateNormal];
                     NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
                     [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
                     [inputFormatter setDateFormat:@"yyyy/MM/dd"];
@@ -426,7 +433,6 @@
                     [outputFormatter setLocale:[NSLocale currentLocale]];
                     [outputFormatter setDateFormat:@"yyyyMMdd"];
                     NSString *targetTime = [outputFormatter stringFromDate:inputDate];
-                        
                     [UdStorage storageObject:targetTime forKey:@"SignTime"];
                     APPDELEGATE.currentUser.UserScore = APPDELEGATE.currentUser.UserScore + 10;
                     [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
@@ -454,6 +460,7 @@
         }
         else
         {
+            [signBtn setImage:[UIImage imageNamed:@"yiqiandao"] forState:UIControlStateNormal];
             [self.view showInfo:@"今天已经签过到了" autoHidden:YES interval:2];
         }
     }
@@ -466,7 +473,6 @@
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
-            
         [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/AddUserSign",Khttp] success:^(NSDictionary *dict, BOOL success) {
                 
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
@@ -488,30 +494,19 @@
                 [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
                     
                 [self.MyListView reloadData];
-                    
                 PopupView *view = [PopupView defaultPopupView];
                 view.parentVC = self;
-                    
                 [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{
-                        
                 }];
             }
-                
             else
             {
                 [self.view showInfo:@"签到失败" autoHidden:YES interval:2];
             }
-                
-                
-                
         } fail:^(NSError *error) {
             [self.view showInfo:@"签到失败" autoHidden:YES interval:2];
         }];
-            
     }
-        
-        
-        
 }
 #pragma mark-----的哥按钮点击时间
 -(void)FourBtnClick:(UIButton*)btn

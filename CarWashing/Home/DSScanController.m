@@ -375,7 +375,7 @@
                             start.CardName      = weakSelf.scan.CardName;
                             start.paynum=[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt];
                             start.second        = 240;
-                            
+                            start.adverUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ];
                             [weakSelf.navigationController pushViewController:start animated:YES];
                             
                             

@@ -327,6 +327,7 @@
                         [UdStorage storageObject:weakSelf.scan.CardName forKey:@"CardName"];
 
                         DSStartWashingController *start = [[DSStartWashingController alloc]init];
+                        start.adverUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ];
                         start.hidesBottomBarWhenPushed            = YES;
                         [weakSelf.navigationController pushViewController:start animated:YES];
                     }
