@@ -112,9 +112,9 @@
     [self.backScrollerView addSubview:placeHoldLabel];
     numLabel = [[UILabel alloc]init];
     numLabel.text =@"最多输入400字";
+    numLabel.textColor = [UIColor grayColor];
     numLabel.textAlignment = NSTextAlignmentRight;
     numLabel.font=[UIFont systemFontOfSize:13.0];
-    numLabel.textColor=[UIColor blackColor];
     [self.backScrollerView addSubview:numLabel];
     [numLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(contentTextField.mas_right).mas_offset(-10);
