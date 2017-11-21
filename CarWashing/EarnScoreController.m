@@ -30,7 +30,7 @@
 @property (nonatomic, weak) UITableView *earnWayView;
 
 @property (nonatomic, strong) NSMutableArray *ScoreData;
-
+@property (nonatomic, strong) NSDictionary *dicData;
 @end
 
 static NSString *id_earnViewCell = @"id_earnViewCell";
@@ -59,6 +59,9 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
         
         UITableView *earnWayView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + 100*Main_Screen_Height/667, Main_Screen_Width, Main_Screen_Height - 64 - 100*Main_Screen_Height/667) style:UITableViewStyleGrouped];
         _earnWayView = earnWayView;
+        earnWayView.estimatedRowHeight = 0;
+        earnWayView.estimatedSectionFooterHeight = 0;
+        earnWayView.estimatedSectionHeaderHeight = 0;
         [self.view addSubview:_earnWayView];
     }
     return _earnWayView;
@@ -74,7 +77,7 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.adverView.image = [UIImage imageNamed:@"zhuanjifen_banner"];
+    
     
     self.earnWayView.delegate = self;
     self.earnWayView.dataSource = self;
@@ -106,14 +109,16 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Integral/EarnIntegral",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Integral/EarnIntegralAdvertis",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"%@",dict);
+        self.dicData = dict;
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
+            [self.adverView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,dict[@"JsonData"][@"advList"][0][@"AdvertisImg"]]]];
             self.ScoreData = [[NSMutableArray alloc]init];
             
             NSArray *arr = [NSArray array];
-            arr = [dict objectForKey:@"JsonData"];
+            arr = [dict objectForKey:@"JsonData"][@"earList"];
             if(arr.count == 0)
             {
                 [HUD setHidden:YES];

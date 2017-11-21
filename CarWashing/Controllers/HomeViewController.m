@@ -74,6 +74,7 @@
     UIView          *titleView;
     UIImageView *newManImageView;
     MBProgressHUD *HUD;
+    UIImageView * advertistView;
 
 }
 
@@ -97,6 +98,7 @@
 @property (strong, nonatomic)NSString *LocCity;
 @property (strong, nonatomic)Record *newrc;
 
+@property (strong, nonatomic)NSDictionary *dicData;
 @end
 
 @implementation HomeViewController
@@ -233,6 +235,19 @@
     }
     [self.contentView addSubview:self.tableView];
     
+    //tableViewFootView
+    UIView * CyFootView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 150*Main_Screen_Height/667)];
+    
+    self.tableView.tableFooterView = CyFootView;
+    //*****//
+    advertistView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 100*Main_Screen_Height/667)];
+    [CyFootView addSubview:advertistView];
+    UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, 100*Main_Screen_Height/667, Main_Screen_Width, 50*Main_Screen_Height/667)];
+    footerview.backgroundColor = [UIColor colorFromHex:@"#f6f6f6"];
+    footerview.textColor         = [UIColor colorFromHex:@"#999999"];
+    footerview.textAlignment=NSTextAlignmentCenter;
+    footerview.text=@"没有更多啦";
+    [CyFootView addSubview:footerview];
      [self setupRefresh];
     [self createHeaderView];
     
@@ -743,10 +758,11 @@
     NSLog(@"---%@",params);
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetUserRecord",Khttp] success:^(NSDictionary *dict, BOOL success) {
         NSLog(@"---%@",dict);
+        self.dicData = dict;
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             
-            
+            [advertistView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,dict[@"JsonData"][@"gGList"][0][@"AdvertisImg"]]]];
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
             if(arr.count == 0)
@@ -876,17 +892,19 @@
     }else{
         if (section==0) {
             return backView;
-        }else if (section==self.newrc.recList.count-1){
-            UIView * sectionn =[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
-            
-            UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
-            footerview.backgroundColor = [UIColor colorFromHex:@"#f6f6f6"];
-            footerview.textColor         = [UIColor colorFromHex:@"#999999"];
-            footerview.textAlignment=NSTextAlignmentCenter;
-            footerview.text=@"没有更多啦";
-            [sectionn addSubview:footerview];
-            return sectionn;
-        }else{
+        }
+//        else if (section==self.newrc.recList.count-1){
+//            UIView * sectionn =[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
+//
+//            UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
+//            footerview.backgroundColor = [UIColor colorFromHex:@"#f6f6f6"];
+//            footerview.textColor         = [UIColor colorFromHex:@"#999999"];
+//            footerview.textAlignment=NSTextAlignmentCenter;
+//            footerview.text=@"没有更多啦";
+//            [sectionn addSubview:footerview];
+//            return sectionn;
+//        }
+        else{
             return [UILabel new];
         }
         

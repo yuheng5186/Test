@@ -182,6 +182,7 @@
         _MyListView.dataSource = self;
         _MyListView.backgroundColor=RGBAA(242, 242, 242, 1.0);
         _MyListView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _MyListView.showsVerticalScrollIndicator = NO;
     }
     return _MyListView;
 }
