@@ -72,7 +72,7 @@
     
     UIButton * rightBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     rightBtn.frame =CGRectMake(Main_Screen_Width-80, 20, 80, 44);
-    [rightBtn setTitle:@"发送" forState:UIControlStateNormal];
+    [rightBtn setTitle:@"发布" forState:UIControlStateNormal];
     [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(rightbtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:rightBtn];
@@ -107,7 +107,7 @@
     placeHoldLabel=[[UILabel alloc]initWithFrame:CGRectMake(10, 100, Main_Screen_Width-20, 40)];
     placeHoldLabel.text=@"请详细描述您的问题";
     placeHoldLabel.numberOfLines = 2;
-    placeHoldLabel.font=[UIFont systemFontOfSize:13.0];
+    placeHoldLabel.font=[UIFont systemFontOfSize:15.0];
     placeHoldLabel.textColor =[UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0];
     [self.backScrollerView addSubview:placeHoldLabel];
     numLabel = [[UILabel alloc]init];
@@ -281,7 +281,7 @@
 }
 - (void)configCollectionView {
     _layout = [[LxGridViewFlowLayout alloc] init];
-    _margin = 4;
+    _margin = 20;
     if (Main_Screen_Width==320) {
         _itemWH = 80;
     }else{
@@ -294,7 +294,10 @@
     
     _collectionView.alwaysBounceVertical = YES;
     _collectionView.backgroundColor = [UIColor whiteColor];
-    _collectionView.contentInset = UIEdgeInsetsMake(4, 4, 4, 4);
+    
+    //上左下右
+    _collectionView.contentInset = UIEdgeInsetsMake(8, 0, 6, 0);
+    
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     _collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
@@ -303,7 +306,7 @@
         make.top.mas_equalTo(contentTextField.mas_bottom);
         make.left.mas_equalTo(contentTextField.mas_left);
         make.right.mas_equalTo(contentTextField.mas_right);
-        make.height.mas_equalTo(500);
+        make.height.mas_equalTo(600);
     }];
     [_collectionView registerClass:[TZTestCell class] forCellWithReuseIdentifier:@"TZTestCell"];
 }

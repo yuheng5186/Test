@@ -288,6 +288,7 @@
             [tableView reloadData];
         }];
         datePicker.doneButtonColor = [UIColor colorFromHex:@"#0161a1"];
+        datePicker.maxLimitDate = [NSDate dateWithTimeIntervalSinceNow:0];
         [datePicker show];
     }   //@end “if”
 }

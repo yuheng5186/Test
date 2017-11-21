@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -85,8 +85,11 @@
                             <constraint firstItem="bzv-6L-GMP" firstAttribute="top" secondItem="g5u-ad-N9v" secondAttribute="bottom" constant="5" id="ry3-7G-ugb"/>
                         </constraints>
                     </view>
-                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f7A-NV-KgB" customClass="JackImageViewType">
+                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f7A-NV-KgB" customClass="JackImageViewType">
                         <rect key="frame" x="60" y="90" width="250" height="149"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="149" id="U9i-8c-tDe"/>
+                        </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VrD-IO-ksz">
                         <rect key="frame" x="0.0" y="238" width="320" height="1"/>
@@ -98,7 +101,6 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="VrD-IO-ksz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="CeI-ei-JCa"/>
-                    <constraint firstAttribute="bottom" secondItem="f7A-NV-KgB" secondAttribute="bottom" id="EfC-9d-hah"/>
                     <constraint firstAttribute="trailing" secondItem="f7A-NV-KgB" secondAttribute="trailing" constant="10" id="Hlb-XB-tnb"/>
                     <constraint firstItem="pxK-yH-sMF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Lnl-QE-eHX"/>
                     <constraint firstAttribute="bottom" secondItem="VrD-IO-ksz" secondAttribute="bottom" id="QWY-Ba-88x"/>

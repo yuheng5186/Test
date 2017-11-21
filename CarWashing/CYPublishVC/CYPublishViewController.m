@@ -83,7 +83,7 @@
     [self.view addSubview:rightBtn];
     [self.view addSubview:self.backScrollerView];
     
-    contentTextField = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
+    contentTextField = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 150)];
     contentTextField.backgroundColor=[UIColor colorFromHex:@"#f6f6f6"];
     contentTextField.delegate=self;
     [self.backScrollerView addSubview:contentTextField];
@@ -249,7 +249,7 @@
 }
 - (void)configCollectionView {
     _layout = [[LxGridViewFlowLayout alloc] init];
-    _margin = 4;
+    _margin = 20;
     if (Main_Screen_Width==320) {
         _itemWH = 80;
     }else{
@@ -263,7 +263,7 @@
 //    CGFloat rgb = 244 / 255.0;
     _collectionView.alwaysBounceVertical = YES;
     _collectionView.backgroundColor = [UIColor whiteColor];
-    _collectionView.contentInset = UIEdgeInsetsMake(4, 4, 4, 4);
+    _collectionView.contentInset = UIEdgeInsetsMake(8, 5, 6, 0);
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     _collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;

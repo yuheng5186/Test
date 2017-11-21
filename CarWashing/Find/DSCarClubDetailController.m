@@ -79,18 +79,17 @@
     [super viewDidLoad];
     
     //是否显示键盘上的工具条
-     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
-//     Do any additional setup after loading the view.
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     
     newsDetail = [[CarClubNews alloc]init];
     self.page = 0;
     
-
-    
-     [self createSubView];
+    [self createSubView];
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
+    
+    
 }
 
 - (void) createSubView {
@@ -128,18 +127,9 @@
     
     
     UIImageView *userImageView  = [UIImageView new];
-//    userImageView.image         = [UIImage imageNamed:@"pingluntouxiang.jpg"];
      NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,newsDetail.FromusrImg];
      [userImageView sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,newsDetail.FromusrImg];
-//        NSURL *url=[NSURL URLWithString:ImageURL];
-//        NSData *data=[NSData dataWithContentsOfURL:url];
-//        UIImage *img=[UIImage imageWithData:data];
-//        dispatch_sync(dispatch_get_main_queue(), ^{
-//            [userImageView setImage:img];
-//        });
-//    });
+
     self.userImageView          = userImageView;
     [header addSubview:userImageView];
   
@@ -264,6 +254,8 @@
     .autoHeightRatio(0);
     
     UIImageView *textImageView  = [UIImageView new];
+    textImageView.contentMode = UIViewContentModeScaleAspectFill;
+    textImageView.clipsToBounds = YES;
     NSString * urlStr  = @"";
     if ([[self.dicData[@"JsonData"]allKeys]containsObject:@"IndexImg"] ) {
         NSArray *urlArray = [newsDetail.IndexImg componentsSeparatedByString:@","];
@@ -549,13 +541,12 @@
                              };
     //
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@%@",Khttp,urlStr] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"%@",dict);
         self.dicData = dict;
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
-
+            NSLog(@"详情数据%@",dict[@"JsonData"]);
+            //是什么车
             titleLabel.text=[NSString stringWithFormat:@"%@%@",dict[@"JsonData"][@"CarBrand"],dict[@"JsonData"][@"CarType"]];
-//            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
             
             NSDictionary *dic = [dict objectForKey:@"JsonData"];
             [newsDetail setValuesForKeysWithDictionary:dic];

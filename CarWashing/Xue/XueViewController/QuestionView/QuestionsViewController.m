@@ -128,14 +128,14 @@
     {
         NSArray * arrImage = [model.IndexImg componentsSeparatedByString:@","];
        if(arrImage.count > 1 && arrImage.count < 3){
-            return 180;
+            return 190;
         }else if (arrImage.count <= 6 && arrImage.count >= 3){
-            return 260;
+            return 270;
         }
-        return 340;
+        return 350;
     }
     if ([model.IndexImg isEqualToString:@""]) {
-        return 90;
+        return 100;
     }else{
         return 250;
     }
@@ -201,6 +201,8 @@
     [quesCellTwocell configCell:self.modelArray[indexPath.row]];
     return quesCellTwocell;
 }
+
+//详情
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     CYQuestionModel * model = self.modelArray[indexPath.row];

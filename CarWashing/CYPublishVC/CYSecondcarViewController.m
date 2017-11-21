@@ -78,7 +78,7 @@
     
     UIButton * rightBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     rightBtn.frame =CGRectMake(Main_Screen_Width-80, 20, 80, 44);
-    [rightBtn setTitle:@"发送" forState:UIControlStateNormal];
+    [rightBtn setTitle:@"发布" forState:UIControlStateNormal];
     [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(rightbtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:rightBtn];
@@ -222,6 +222,7 @@
         datepicker.dateLabelColor = [UIColor colorFromHex:@"#0161a1"];//年-月-日-时-分 颜色
         datepicker.datePickerColor = [UIColor blackColor];//滚轮日期颜色
         datepicker.doneButtonColor = [UIColor colorFromHex:@"#0161a1"];//确定按钮的颜色
+        datepicker.maxLimitDate = [NSDate dateWithTimeIntervalSinceNow:0];
         [datepicker show];
     }
 }
@@ -264,12 +265,16 @@
     
     //里程转换
     int intString = [distanceTextField.text intValue];
-//    NSLog(@"打印数字%d",intString);
+
+    //年份转换
+    NSString *tempString = [yearLabel.text substringToIndex:4];
+    int intYearString = [tempString intValue];
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:Userid],
                              @"CarBrand":[NSString stringWithFormat:@"%@",self.bandString],
                              @"CarType":@" ",
                              @"CarTitle":@"iOS暂时没用到",
+                             @"Manufacture":@(intYearString),
                              @"CarComment":[NSString stringWithFormat:@"%@",contentTextField.text],
                              @"Mileage":@(intString),
                              @"Img":sendString
