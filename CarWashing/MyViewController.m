@@ -560,4 +560,9 @@
     
     self.tabBarController.tabBar.hidden = NO;
 }
+
+#pragma mark - 变白
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
 @end

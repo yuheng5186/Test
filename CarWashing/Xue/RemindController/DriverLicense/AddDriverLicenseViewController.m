@@ -194,6 +194,7 @@
             self.dateMuSting = date;
             [tableView reloadData];
         }];
+        datePicker.minLimitDate = [NSDate dateWithTimeIntervalSinceNow:0];
         datePicker.doneButtonColor = [UIColor colorFromHex:@"#0161a1"];
         [datePicker show];
     }
