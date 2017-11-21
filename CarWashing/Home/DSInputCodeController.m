@@ -267,7 +267,7 @@
                         start.CardType = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
                         start.CardName = weakSelf.scan.CardName;
                         start.second        = 240;
-
+                        start.adverUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ];
                         [weakSelf.navigationController pushViewController:start animated:YES];
                     }
                 };

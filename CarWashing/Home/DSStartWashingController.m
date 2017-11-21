@@ -18,6 +18,7 @@
 @interface DSStartWashingController ()<UIScrollViewDelegate>
 {
     SXScrPageView *cycleScroll;
+    UIImageView   * adVertist;
 }
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic, strong) UILabel *timeNumLabel;
@@ -27,6 +28,7 @@
 @property (strong, nonatomic) NSMutableArray *imageArray;//存放图片的数组
 @property (strong, nonatomic) UIScrollView *ADScroll;//广告栏的底层ScrollView
 
+@property (nonatomic, strong) NSDictionary *dicData;
 @end
 
 @implementation DSStartWashingController
@@ -103,9 +105,16 @@
 //    self.second = 24;
     [self createSubView];
      [self startTimer];
+    adVertist = [[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height-100, Main_Screen_Width, 100)];
+    adVertist.backgroundColor=[UIColor redColor];
+//    [adVertist sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,dict[@"JsonData"][0][@"AdvertisImg"]]]];
+    [adVertist sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.adverUrl]]];
+    [self.contentView addSubview:adVertist];
+    
     
     
 }
+
 - (void)startTimer
 {
     if (self.timer) {
