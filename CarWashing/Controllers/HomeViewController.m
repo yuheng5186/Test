@@ -853,9 +853,11 @@
        
             if (section==0) {
                 return Main_Screen_Height*110/667;
-            }else if (section==self.newrc.recList.count-1){
-                return 50;
-            }else{
+            }
+//            else if (section==self.newrc.recList.count-1){
+//                return 50;
+//            }
+            else{
                 return 0.01;
                 
             }
