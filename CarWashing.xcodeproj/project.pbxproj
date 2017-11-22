@@ -125,6 +125,8 @@
 		18277E361FC5123400610CC3 /* MyDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18277E351FC5123400610CC3 /* MyDynamicViewController.m */; };
 		18277E391FC5125100610CC3 /* MyPublishUserCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18277E381FC5125100610CC3 /* MyPublishUserCarViewController.m */; };
 		18277E3C1FC5129000610CC3 /* MyInteractMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18277E3B1FC5129000610CC3 /* MyInteractMessageViewController.m */; };
+		18277E411FC5480B00610CC3 /* MyInteractMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18277E3F1FC5480B00610CC3 /* MyInteractMessageCell.m */; };
+		18277E421FC5480B00610CC3 /* MyInteractMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18277E401FC5480B00610CC3 /* MyInteractMessageCell.xib */; };
 		182BF4A91FB581F500F79C68 /* CareRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BF4A81FB581F500F79C68 /* CareRemindViewController.m */; };
 		182BF4AC1FB58F2700F79C68 /* AddCareRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BF4AB1FB58F2700F79C68 /* AddCareRemindViewController.m */; };
 		183203241FC2B26600DFDA78 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183203231FC2B26600DFDA78 /* MyViewController.m */; };
@@ -636,6 +638,9 @@
 		18277E381FC5125100610CC3 /* MyPublishUserCarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPublishUserCarViewController.m; sourceTree = "<group>"; };
 		18277E3A1FC5129000610CC3 /* MyInteractMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyInteractMessageViewController.h; sourceTree = "<group>"; };
 		18277E3B1FC5129000610CC3 /* MyInteractMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyInteractMessageViewController.m; sourceTree = "<group>"; };
+		18277E3E1FC5480B00610CC3 /* MyInteractMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyInteractMessageCell.h; sourceTree = "<group>"; };
+		18277E3F1FC5480B00610CC3 /* MyInteractMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyInteractMessageCell.m; sourceTree = "<group>"; };
+		18277E401FC5480B00610CC3 /* MyInteractMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyInteractMessageCell.xib; sourceTree = "<group>"; };
 		182BF4A71FB581F500F79C68 /* CareRemindViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CareRemindViewController.h; sourceTree = "<group>"; };
 		182BF4A81FB581F500F79C68 /* CareRemindViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CareRemindViewController.m; sourceTree = "<group>"; };
 		182BF4AA1FB58F2700F79C68 /* AddCareRemindViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCareRemindViewController.h; sourceTree = "<group>"; };
@@ -1737,6 +1742,7 @@
 		18277E301FC5119F00610CC3 /* MyCategoryVC(四个模块) */ = {
 			isa = PBXGroup;
 			children = (
+				18277E3D1FC547D600610CC3 /* MyInteractMessageCell */,
 				18277E311FC5120800610CC3 /* MyQuestionViewController.h */,
 				18277E321FC5120800610CC3 /* MyQuestionViewController.m */,
 				18277E341FC5123400610CC3 /* MyDynamicViewController.h */,
@@ -1747,6 +1753,16 @@
 				18277E3B1FC5129000610CC3 /* MyInteractMessageViewController.m */,
 			);
 			path = "MyCategoryVC(四个模块)";
+			sourceTree = "<group>";
+		};
+		18277E3D1FC547D600610CC3 /* MyInteractMessageCell */ = {
+			isa = PBXGroup;
+			children = (
+				18277E3E1FC5480B00610CC3 /* MyInteractMessageCell.h */,
+				18277E3F1FC5480B00610CC3 /* MyInteractMessageCell.m */,
+				18277E401FC5480B00610CC3 /* MyInteractMessageCell.xib */,
+			);
+			path = MyInteractMessageCell;
 			sourceTree = "<group>";
 		};
 		18322AAC1F4AD181003ABB7B /* model */ = {
@@ -2873,6 +2889,7 @@
 				18B803851F1DA2A300B52432 /* LaunchScreen.storyboard in Resources */,
 				1888214E1F6BD336002618F7 /* b3.gif in Resources */,
 				5094A63F1F34852600407808 /* ShopInfoHeadView.xib in Resources */,
+				18277E421FC5480B00610CC3 /* MyInteractMessageCell.xib in Resources */,
 				18B803821F1DA2A300B52432 /* Assets.xcassets in Resources */,
 				501672321F297FF000384186 /* problemCenter.plist in Resources */,
 				5094A6301F346E4200407808 /* SuccessPayCell.xib in Resources */,
@@ -3098,6 +3115,7 @@
 				50B26E711F302E17009B3B9F /* DiscountCategoryView.m in Sources */,
 				182BF4A91FB581F500F79C68 /* CareRemindViewController.m in Sources */,
 				181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */,
+				18277E411FC5480B00610CC3 /* MyInteractMessageCell.m in Sources */,
 				1839979F1F25E69100702071 /* DSPasswordController.m in Sources */,
 				186175EA1FA6C3C100C6EFF3 /* MD5DataSigner.m in Sources */,
 				18ED28EE1FBAE9E400C0CC92 /* YearModel.m in Sources */,

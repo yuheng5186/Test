@@ -133,11 +133,12 @@
             return 270;
         }
         return 350;
-    }
-    if ([model.IndexImg isEqualToString:@""]) {
-        return 100;
     }else{
-        return 250;
+        if ([model.IndexImg isEqualToString:@""]) {
+            return 100;
+        }else{
+            return 250;
+        }
     }
    
 }
