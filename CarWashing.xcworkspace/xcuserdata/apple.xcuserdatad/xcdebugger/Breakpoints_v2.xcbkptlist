@@ -45,33 +45,5 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
-<<<<<<< HEAD
-=======
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CarWashing/Find/DSCarClubDetailController.m"
-            timestampString = "533013983.866364"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "641"
-            endingLineNumber = "641"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CarWashing/Find/DSCarClubDetailController.m"
-            timestampString = "533006265.178655"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "554"
-            endingLineNumber = "554"
-            landmarkName = "-requestActivityDetail"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
->>>>>>> 423cda7285a436f485eadf82012c81f194ba2fba
    </Breakpoints>
 </Bucket>

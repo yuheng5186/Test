@@ -69,9 +69,10 @@
             }
             
         }
-        [_hotTable reloadData];
+        [self.hotTable.mj_header endRefreshing];
+        [self.hotTable reloadData];
     } fail:^(NSError *error) {
-        NSLog(@"----------------热门话题获取数据失败--------------------");
+        [self.hotTable.mj_header endRefreshing];
     }];
     
 }
@@ -86,6 +87,7 @@
         _hotTable.delegate = self;
         _hotTable.dataSource = self;
         _hotTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _hotTable.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestWeb)];
         [_hotTable registerClass:[HotTableViewCell class] forCellReuseIdentifier:@"OneImage"];
         [_hotTable registerClass:[AnotherHotTableViewCell class] forCellReuseIdentifier:@"collect"];
         
