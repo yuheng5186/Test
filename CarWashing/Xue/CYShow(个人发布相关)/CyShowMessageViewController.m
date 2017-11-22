@@ -15,6 +15,11 @@
 #import "AFNetworkingTool.h"
 #import "LCMD5Tool.h"
 #import "MyExploitViewController.h"
+//四个模块
+#import "MyQuestionViewController.h"
+#import "MyDynamicViewController.h"
+#import "MyPublishUserCarViewController.h"
+#import "MyInteractMessageViewController.h"
 @interface CyShowMessageViewController () <UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView * tableView;
 @end
@@ -143,23 +148,26 @@
     
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section==1){//我的互动
-        
-    }else if (indexPath.section==0){
+    if (indexPath.section==0) {
         if (indexPath.row==0){//我的提问
-//            DSMyCarController *myCarController                  = [[DSMyCarController alloc]init];
-//            myCarController.hidesBottomBarWhenPushed            = YES;
-//            [self.navigationController pushViewController:myCarController animated:YES];
+            MyQuestionViewController *myCarController                  = [[MyQuestionViewController alloc]init];
+            myCarController.hidesBottomBarWhenPushed            = YES;
+            [self.navigationController pushViewController:myCarController animated:YES];
         }else if (indexPath.row==1){//我的动态
-//            DSCardGroupController *cardGroupController      = [[DSCardGroupController alloc]init];
-//            cardGroupController.hidesBottomBarWhenPushed    = YES;
-//            [self.navigationController pushViewController:cardGroupController animated:YES];
+            MyDynamicViewController *cardGroupController      = [[MyDynamicViewController alloc]init];
+            cardGroupController.hidesBottomBarWhenPushed    = YES;
+            [self.navigationController pushViewController:cardGroupController animated:YES];
         }else if (indexPath.row==2){//发布二手车
-//            DSServiceController *serviceVC          = [[DSServiceController alloc]init];
-//            serviceVC.hidesBottomBarWhenPushed      = YES;
-//            [self.navigationController pushViewController:serviceVC animated:YES];
+            MyPublishUserCarViewController *serviceVC          = [[MyPublishUserCarViewController alloc]init];
+            serviceVC.hidesBottomBarWhenPushed      = YES;
+            [self.navigationController pushViewController:serviceVC animated:YES];
         }
+    }else{
+        MyInteractMessageViewController * vc = [[MyInteractMessageViewController alloc]init];
+        vc.hidesBottomBarWhenPushed      = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
+    
 }
 -(void)tapGestureClick
 {
