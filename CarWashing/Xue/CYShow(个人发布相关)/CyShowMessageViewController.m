@@ -21,11 +21,35 @@
 #import "MyPublishUserCarViewController.h"
 #import "MyInteractMessageViewController.h"
 @interface CyShowMessageViewController () <UITableViewDelegate,UITableViewDataSource>
+{
+    UILabel * experienceLabel;
+}
 @property (nonatomic,strong) UITableView * tableView;
+@property (nonatomic,strong) NSDictionary * dicData;
 @end
 
 @implementation CyShowMessageViewController
-
+-(void)getData
+{
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/MyBicycleCircle",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"我的车友圈%@",dict);
+        self.dicData = dict;
+        if ([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]) {
+            experienceLabel.text = [NSString stringWithFormat:@"经验值:%@",dict[@"JsonData"][@"EmpiricalValueCount"]];
+        }
+        [self.tableView reloadData];
+        
+    } fail:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor redColor];
@@ -70,9 +94,9 @@
         make.size.mas_equalTo(CGSizeMake(200*Main_Screen_Height/667, 20*Main_Screen_Height/667));
     }];
     //经验值
-    UILabel * experienceLabel = [[UILabel alloc]init];
+    experienceLabel = [[UILabel alloc]init];
     experienceLabel.textColor=[UIColor whiteColor];
-    experienceLabel.text = @"经验值:300";
+    
     experienceLabel.textAlignment = NSTextAlignmentCenter;
     experienceLabel.font=[UIFont systemFontOfSize:13.0*Main_Screen_Height/667];
     [headerView addSubview:experienceLabel];
@@ -90,6 +114,7 @@
         make.left.mas_equalTo(experienceLabel.mas_right);
         make.size.mas_equalTo(CGSizeMake(10*Main_Screen_Height/667, 13*Main_Screen_Height/667));
     }];
+    [self getData];
 }
 -(void)leftBtnClick
 {
@@ -116,18 +141,22 @@
         cell.typeLabel.text= @"互动消息";
         cell.widthCons.constant = 16;
         cell.heightCons.constant =16;
+        cell.numLabel.text = [NSString stringWithFormat:@"%@",self.dicData[@"JsonData"][@"InteractMessageCount"]];
     }else if (indexPath.section==0){
         cell.leftShowImage.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@",imageArr[indexPath.row]]];
         cell.typeLabel.text=[NSString stringWithFormat:@"%@",LabelArr[indexPath.row]];
         if (indexPath.row==0) {
             cell.widthCons.constant = 16;
             cell.heightCons.constant = 16;
+            cell.numLabel.text = [NSString stringWithFormat:@"%@",self.dicData[@"JsonData"][@"MyQuestionCount"]];
         }else if (indexPath.row==1){
             cell.widthCons.constant = 16;
             cell.heightCons.constant = 16;
+            cell.numLabel.text = [NSString stringWithFormat:@"%@",self.dicData[@"JsonData"][@"MyDynamicCount"]];
         }else if (indexPath.row==2){
             cell.widthCons.constant = 18;
             cell.heightCons.constant = 15;
+             cell.numLabel.text = [NSString stringWithFormat:@"%@",self.dicData[@"JsonData"][@"MyUsedCarCount"]];
         }
     }
     return cell;

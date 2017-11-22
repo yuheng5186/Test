@@ -140,7 +140,11 @@
     if ([model.IndexImg isEqualToString:@""]) {
         return 90;
     }else{
-        return 250;
+        if ([model.IndexImg isEqualToString:@""]) {
+            return 100;
+        }else{
+            return 250;
+        }
     }
    
 }

@@ -7,12 +7,17 @@
 //
 
 #import "MyInteractMessageViewController.h"
-
-@interface MyInteractMessageViewController ()
+#import "MyInteractMessageCell.h"
+#import "MyinteractModel.h"
+@interface MyInteractMessageViewController ()<UITableViewDelegate,UITableViewDataSource,MyInteractMessageCelldelegate>
 {
     UIButton * selectButton;
+    NSArray * arr1;
+    NSInteger show;
 }
 @property (nonatomic,weak)UIButton *selectedBtn;
+@property (nonatomic,strong) UITableView * tableView;
+@property (nonatomic,strong) NSMutableArray * dataArray;
 @end
 
 @implementation MyInteractMessageViewController
@@ -26,13 +31,14 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _dataArray = [NSMutableArray array];
     self.contentView.backgroundColor=[UIColor whiteColor];
     UIView * topView = [[UIView alloc]init];
     topView.backgroundColor=RGBAA(242, 242, 242, 1.0);
     [self.contentView addSubview:topView];
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.contentView.mas_centerX);
-        make.top.mas_equalTo(self.contentView.mas_top).mas_offset(84);
+        make.top.mas_equalTo(self.contentView.mas_top).mas_offset(74);
         make.width.mas_equalTo(Main_Screen_Width-160);
         make.height.mas_equalTo(50);
     }];
@@ -59,12 +65,13 @@
         [TwoButton addTarget:self action:@selector(buttonBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [topView addSubview:TwoButton];
     }
-    
+    show = 0;
+    [self.contentView addSubview:self.tableView];
+    arr1 = @[@"我是你大爷",@"我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷1",@"我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷我是你大爷"];
+    [self getData];
 }
 -(void)buttonBtnClick:(UIButton*)btn
 {
-//    [self.recommendView removeFromSuperview];
-//    [self.AttentionView removeFromSuperview];
     //每当点击按钮时取消上次选中的
     self.selectedBtn.selected = NO;
     [btn setBackgroundColor:[UIColor whiteColor]];
@@ -72,28 +79,92 @@
     //当前点击按钮选中
     btn.selected = YES;
     self.selectedBtn = btn;
-//    if (btn.tag==1) {
-//        [self.view addSubview:self.recommendView];
-//        RecommendViewController*vc=[[RecommendViewController alloc]init];
-//        self.recommendVc = vc;
-//        [self addChildViewController:vc];
-//        [self.recommendView addSubview:vc.view];
-//    }else if (btn.tag==2){
-//        [self.view addSubview:self.AttentionView];
-//        AttentionViewController*vc=[[AttentionViewController alloc]init];
-//        [self addChildViewController:vc];
-//        self.AttentionVc=vc;
-//        [self.AttentionView addSubview:vc.view];
-//    }else if (btn.tag==3){
-//        [self.view addSubview:self.NearbyView];
-//        NearbyViewController*vc=[[NearbyViewController alloc]init];
-//        [self addChildViewController:vc];
-//        self.NearbyVc=vc;
-//        [self.NearbyView addSubview:vc.view];
-//    }
-    
+    if (btn.tag==1) {
+        show = 0;
+    }else if (btn.tag==2){
+        show = 0;
+    }
+    [self getData];
     
 }
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.dataArray.count;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    MyinteractModel * model = self.dataArray[indexPath.row];
+    NSString * str = [NSString stringWithFormat:@" %@: %@",model.actModelList[0][@"CommentUserName"],model.actModelList[0][@"Comment"]];
+//    NSString * str=[NSString stringWithFormat:@"%@",arr1[indexPath.row]];
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:15]};
+    CGSize size = [str boundingRectWithSize:CGSizeMake(Main_Screen_Width-72, 0) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+    return 109+size.height;
+//    return 107;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString * cellID =@"cellID";
+    MyInteractMessageCell * cell = [_tableView dequeueReusableCellWithIdentifier:cellID];
+    if (cell ==nil) {
+        cell = [[[NSBundle mainBundle]loadNibNamed:@"MyInteractMessageCell" owner:self options:nil]lastObject];
+        cell.delegate=self;
+    }
+    
+//    cell.commentLabel.text=[NSString stringWithFormat:@"%@",arr1[indexPath.row]];
+    [cell configCell:self.dataArray[indexPath.row]];
+    return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+#pragma mark---cell的代理方法
+-(void)cell:(UITableViewCell*)cell button:(NSInteger)btn
+{
+    NSIndexPath * cellIndex = [_tableView indexPathForCell:cell];
+    NSLog(@"---%ld",cellIndex.row);
+}
+-(UITableView*)tableView{
+    if (_tableView ==nil) {
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 134, Main_Screen_Width, Main_Screen_Height-134) style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    return _tableView;
+}
+-(void)getData
+{
+    NSString * url =@"";
+    if (show==0) {
+        url = @"Activity/MyBicycleCircleComment";
+    }else{
+        url = @"Activity/MyBicycleCircleGive";
+    }
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@%@",Khttp,url] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"%@",dict);
+        if ([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]) {
+            //获取json数组
 
+            self.dataArray = (NSMutableArray*)[MyinteractModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
 
+//            //没有数据的情况下显示
+//            if (self.modelArray.count == 0) {
+//                self.noneLabel.hidden = NO;
+//            }else{
+//                self.noneLabel.hidden = YES;
+//            }
+            
+            
+        }
+        [self.tableView reloadData];
+    } fail:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
 @end
