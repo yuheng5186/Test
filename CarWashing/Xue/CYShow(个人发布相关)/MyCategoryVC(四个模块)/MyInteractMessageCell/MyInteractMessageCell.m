@@ -12,13 +12,28 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.dateLabel.hidden=YES;
+}
+- (IBAction)praiseBtnClick:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(cell:button:)]) {
+        [self.delegate cell:self button:sender.tag-1];
+    }
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+-(void)configCell:(MyinteractModel*)model
+{
+    [self.headerimageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,model.FromusrImg]]];
+    if ([model.ActivityType isEqualToString:@"2"]) {//车友提问
+        self.nameLabel.text= model.FromusrName;
+    }else if ([model.ActivityType isEqualToString:@"3"]){//热门话题
+        self.nameLabel.text= model.FromusrName;
+    }else if ([model.ActivityType isEqualToString:@"5"]){//二手车
+        self.nameLabel.text= model.CarInfo;
+    }
+    self.timeLabel.text = model.ActDate;
+    self.dateLabel.text = model.ActDate;
+    self.titleLabel.text = model.ActivityName;
+    self.commentLabel.text=[NSString stringWithFormat:@" %@:  %@",model.actModelList[0][@"CommentUserName"],model.actModelList[0][@"Comment"]];
 }
 
 @end

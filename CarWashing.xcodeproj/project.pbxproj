@@ -127,6 +127,7 @@
 		18277E3C1FC5129000610CC3 /* MyInteractMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18277E3B1FC5129000610CC3 /* MyInteractMessageViewController.m */; };
 		18277E411FC5480B00610CC3 /* MyInteractMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18277E3F1FC5480B00610CC3 /* MyInteractMessageCell.m */; };
 		18277E421FC5480B00610CC3 /* MyInteractMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18277E401FC5480B00610CC3 /* MyInteractMessageCell.xib */; };
+		18277E451FC5761100610CC3 /* MyinteractModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18277E441FC5761100610CC3 /* MyinteractModel.m */; };
 		182BF4A91FB581F500F79C68 /* CareRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BF4A81FB581F500F79C68 /* CareRemindViewController.m */; };
 		182BF4AC1FB58F2700F79C68 /* AddCareRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BF4AB1FB58F2700F79C68 /* AddCareRemindViewController.m */; };
 		183203241FC2B26600DFDA78 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183203231FC2B26600DFDA78 /* MyViewController.m */; };
@@ -641,6 +642,8 @@
 		18277E3E1FC5480B00610CC3 /* MyInteractMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyInteractMessageCell.h; sourceTree = "<group>"; };
 		18277E3F1FC5480B00610CC3 /* MyInteractMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyInteractMessageCell.m; sourceTree = "<group>"; };
 		18277E401FC5480B00610CC3 /* MyInteractMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyInteractMessageCell.xib; sourceTree = "<group>"; };
+		18277E431FC5761100610CC3 /* MyinteractModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyinteractModel.h; sourceTree = "<group>"; };
+		18277E441FC5761100610CC3 /* MyinteractModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyinteractModel.m; sourceTree = "<group>"; };
 		182BF4A71FB581F500F79C68 /* CareRemindViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CareRemindViewController.h; sourceTree = "<group>"; };
 		182BF4A81FB581F500F79C68 /* CareRemindViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CareRemindViewController.m; sourceTree = "<group>"; };
 		182BF4AA1FB58F2700F79C68 /* AddCareRemindViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCareRemindViewController.h; sourceTree = "<group>"; };
@@ -1761,6 +1764,8 @@
 				18277E3E1FC5480B00610CC3 /* MyInteractMessageCell.h */,
 				18277E3F1FC5480B00610CC3 /* MyInteractMessageCell.m */,
 				18277E401FC5480B00610CC3 /* MyInteractMessageCell.xib */,
+				18277E431FC5761100610CC3 /* MyinteractModel.h */,
+				18277E441FC5761100610CC3 /* MyinteractModel.m */,
 			);
 			path = MyInteractMessageCell;
 			sourceTree = "<group>";
@@ -3134,6 +3139,7 @@
 				1810519C1FA9AC2700355F2F /* HotTableViewCell.m in Sources */,
 				180E432F1F41921E00013D2D /* PhoneHelper.m in Sources */,
 				18FB09A41FAAEF1400297E93 /* MBProgressHUD.m in Sources */,
+				18277E451FC5761100610CC3 /* MyinteractModel.m in Sources */,
 				180959551FB536B1004CCD47 /* JackPhotoBrower.m in Sources */,
 				1853BA0F1F28854D00B98C7F /* DSChangePhoneController.m in Sources */,
 				50E2EE861F1F4D3C00FAF130 /* YZSortCell.m in Sources */,

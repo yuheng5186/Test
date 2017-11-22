@@ -136,12 +136,9 @@
             return 270;
         }
         return 350;
-<<<<<<< HEAD
-=======
     }
     if ([model.IndexImg isEqualToString:@""]) {
         return 90;
->>>>>>> f9e50fe631f11d3f2124470dbe586cb8df06203b
     }else{
         if ([model.IndexImg isEqualToString:@""]) {
             return 100;
