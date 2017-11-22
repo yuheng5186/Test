@@ -330,7 +330,7 @@
     
     UILabel  *goodNumberLabel                = [UILabel new];
     goodNumberLabel.textColor                = [UIColor colorFromHex:@"#999999"];
-    goodNumberLabel.text                     = @"共有168人点赞过";
+//    goodNumberLabel.text                     = @"共有168人点赞过";
     goodNumberLabel.font                     = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     self.goodNumberLabel                     = goodNumberLabel;
     goodNumberLabel.textAlignment            = NSTextAlignmentCenter;
@@ -479,7 +479,7 @@
     UILabel *goodShowLabel                   = [UILabel new];
     goodShowLabel.textColor                  = [UIColor colorFromHex:@"#999999"];
     goodShowLabel.font                       = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
-    goodShowLabel.text                       = @"369";
+//    goodShowLabel.text                       = @"369";
 //    goodShowLabel.backgroundColor=[UIColor whiteColor];
     self.goodShowLabel                       = goodShowLabel;
     [self.downView  addSubview:goodShowLabel];
@@ -525,7 +525,8 @@
     }
     else
     {
-        self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount<0?0:self.GiveCount];
+//        self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount<0?0:self.GiveCount];
+        self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount];
     }
     
     
@@ -871,16 +872,32 @@
     [self.userSayTextField becomeFirstResponder];
     
 }
+
+#pragma mark-底部点赞
 - (void) downGoodButtonClick:(UIButton *)sender {
 
     if (sender.selected == NO) {
         
         
-        NSDictionary *mulDic = @{
-                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                 @"SupTypeCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
-                                 @"SupType": @1
-                                 };
+//        NSDictionary *mulDic = @{
+//                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+//                                 @"SupTypeCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
+//                                 @"SupType": @1
+//                                 };
+        NSDictionary *mulDic;
+        if ([self.showType isEqualToString:@"二手车"]) {
+            mulDic = @{
+                       @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                       @"SupTypeCode":@(self.CarCode),
+                       @"SupType":@(3)
+                       };
+        }else{
+            mulDic = @{
+                       @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                       @"SupTypeCode":@(self.ActivityCode),
+                       @"SupType":@(1)
+                       };
+        }
         NSDictionary *params = @{
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
@@ -929,11 +946,25 @@
     }else {
         
         
-        NSDictionary *mulDic = @{
-                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                 @"SupTypeCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
-                                 @"SupType": @1
-                                 };
+//        NSDictionary *mulDic = @{
+//                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+//                                 @"SupTypeCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
+//                                 @"SupType": @1
+//                                 };
+        NSDictionary *mulDic;
+        if ([self.showType isEqualToString:@"二手车"]) {
+            mulDic = @{
+                       @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                       @"SupTypeCode":@(self.CarCode),
+                       @"SupType":@(3)
+                       };
+        }else{
+            mulDic = @{
+                       @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                       @"SupTypeCode":@(self.ActivityCode),
+                       @"SupType":@(1)
+                       };
+        }
         NSDictionary *params = @{
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
@@ -953,7 +984,8 @@
                     self.goodShowLabel.text = @"99+";
                 }else
                 {
-                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount-1<0?0:self.GiveCount-1];
+//                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount-1<0?0:self.GiveCount-1];
+                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld"];
                 }
                 
                 
@@ -987,20 +1019,34 @@
     
     sender.selected = !sender.selected;
 }
+
+#pragma mark-我要点赞&取消点赞
 - (void) goodButtonClick:(UIButton *)sender {
 
     if (sender.selected == NO) {
         
-        NSDictionary *mulDic = @{
-                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                 @"SupTypeCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
-                                 @"SupType": @1
-                                 };
+        NSDictionary *mulDic;
+        if ([self.showType isEqualToString:@"二手车"]) {
+            mulDic = @{
+                       @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                       @"SupTypeCode":@(self.CarCode),
+                       @"SupType":@(3)
+                       };
+        }else{
+            mulDic = @{
+                       @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                       @"SupTypeCode":@(self.ActivityCode),
+                       @"SupType":@(1)
+                       };
+        }
+
         NSDictionary *params = @{
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
+        NSLog(@"点赞参数%@",mulDic);
         [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivitySupporInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            NSLog(@"点赞-%@",dict[@"ResultMessage"]);
             
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
@@ -1032,6 +1078,7 @@
             }
             else
             {
+                //参数失败
                 [self.view showInfo:@"点赞失败" autoHidden:YES interval:2];
                 [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
                 self.downGoodButton.selected = NO;
@@ -1046,13 +1093,27 @@
         
     
     }else {
+        //取消点赞
         
-        
-        NSDictionary *mulDic = @{
-                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                 @"SupTypeCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
-                                 @"SupType": @1
-                                 };
+//        NSDictionary *mulDic = @{
+//                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+//                                 @"SupTypeCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
+//                                 @"SupType": @1
+//                                 };
+        NSDictionary *mulDic;
+        if ([self.showType isEqualToString:@"二手车"]) {
+            mulDic = @{
+                       @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                       @"SupTypeCode":@(self.CarCode),
+                       @"SupType":@(3)
+                       };
+        }else{
+            mulDic = @{
+                       @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                       @"SupTypeCode":@(self.ActivityCode),
+                       @"SupType":@(1)
+                       };
+        }
         NSDictionary *params = @{
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
@@ -1084,6 +1145,7 @@
                 self.downGoodButton.selected = NO;
             }
             else
+                //参数问题
             {
                 [self.view showInfo:@"取消点赞失败" autoHidden:YES interval:2];
                 [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
@@ -1091,6 +1153,7 @@
             }
             
         } fail:^(NSError *error) {
+            //网络问题
             [self.view showInfo:@"取消点赞失败" autoHidden:YES interval:2];
             [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
             self.downGoodButton.selected = YES;
@@ -1267,13 +1330,25 @@
     //    "JsonData": {"ActivityCode": 1001,"Account_Id": "404832711505",
     //        "Comment": "第一条测试"}
     
-    NSLog(@"添加评论借口参数：%ld==%@",(long)self.ActivityCode,self.userSayTextField.text);
+//    NSLog(@"添加评论借口参数：%ld==%@",(long)self.ActivityCode,self.userSayTextField.text);
     //    ht://192.168.3.101:8090/api/Activity/AddActivityCommentInfo
-    NSDictionary *mulDic = @{
-                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                             @"ActivityCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
-                             @"Comment":self.userSayTextField.text
-                             };
+    NSDictionary *mulDic;
+    if ([self.showType isEqualToString:@"二手车"]) {
+        mulDic = @{
+                   @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                   @"ActivityCode":[NSString stringWithFormat:@"%ld",self.CarCode],
+                   @"Comment":self.userSayTextField.text,
+                   @"ActivityCommentType":@(2)
+                   };
+    }else{
+        mulDic = @{
+                   @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                   @"ActivityCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
+                   @"Comment":self.userSayTextField.text,
+                   @"ActivityCommentType":@(1)
+                   };
+    }
+
     NSLog(@"添加评论借口参数：%@",mulDic);
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
@@ -1321,11 +1396,9 @@
     if(textField.text.length == 0)
     {
         [self addCommentariesData];
-    }else
-    {
+    }else{
         [self addCommentariesData];
     }
-    
     textField.text = @"";
 }
 

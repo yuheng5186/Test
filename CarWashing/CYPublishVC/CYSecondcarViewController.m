@@ -337,7 +337,7 @@
 }
 - (void)configCollectionView {
     _layout = [[LxGridViewFlowLayout alloc] init];
-    _margin = 4;
+    _margin = 20;
     if (Main_Screen_Width==320) {
         _itemWH = 80;
     }else{
@@ -350,7 +350,7 @@
     
     _collectionView.alwaysBounceVertical = YES;
     _collectionView.backgroundColor = [UIColor whiteColor];
-    _collectionView.contentInset = UIEdgeInsetsMake(4, 4, 4, 4);
+    _collectionView.contentInset = UIEdgeInsetsMake(8, 2, 6, 0);
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     _collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
@@ -640,4 +640,9 @@
         [_collectionView reloadData];
     }];
 }
+
+-(BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath{
+    return NO;
+}
+
 @end

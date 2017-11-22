@@ -557,4 +557,8 @@
         [_collectionView reloadData];
     }];
 }
+
+-(BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath{
+    return NO;
+}
 @end
