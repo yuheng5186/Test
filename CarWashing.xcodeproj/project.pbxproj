@@ -120,6 +120,11 @@
 		182190061F301BA400F7207F /* DSUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 182190051F301BA400F7207F /* DSUserModel.m */; };
 		182190091F301BF600F7207F /* DSActivityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182190081F301BF600F7207F /* DSActivityDetailCell.m */; };
 		182216271FB1DC42000BF80D /* RemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182216261FB1DC42000BF80D /* RemindViewController.m */; };
+		18277E2F1FC50CD700610CC3 /* CyStrategyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18277E2E1FC50CD700610CC3 /* CyStrategyViewController.m */; };
+		18277E331FC5120800610CC3 /* MyQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18277E321FC5120800610CC3 /* MyQuestionViewController.m */; };
+		18277E361FC5123400610CC3 /* MyDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18277E351FC5123400610CC3 /* MyDynamicViewController.m */; };
+		18277E391FC5125100610CC3 /* MyPublishUserCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18277E381FC5125100610CC3 /* MyPublishUserCarViewController.m */; };
+		18277E3C1FC5129000610CC3 /* MyInteractMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18277E3B1FC5129000610CC3 /* MyInteractMessageViewController.m */; };
 		182BF4A91FB581F500F79C68 /* CareRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BF4A81FB581F500F79C68 /* CareRemindViewController.m */; };
 		182BF4AC1FB58F2700F79C68 /* AddCareRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BF4AB1FB58F2700F79C68 /* AddCareRemindViewController.m */; };
 		183203241FC2B26600DFDA78 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183203231FC2B26600DFDA78 /* MyViewController.m */; };
@@ -621,6 +626,16 @@
 		182190081F301BF600F7207F /* DSActivityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSActivityDetailCell.m; path = Find/CustomCell/DSActivityDetailCell.m; sourceTree = "<group>"; };
 		182216251FB1DC42000BF80D /* RemindViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemindViewController.h; sourceTree = "<group>"; };
 		182216261FB1DC42000BF80D /* RemindViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RemindViewController.m; sourceTree = "<group>"; };
+		18277E2D1FC50CD700610CC3 /* CyStrategyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyStrategyViewController.h; sourceTree = "<group>"; };
+		18277E2E1FC50CD700610CC3 /* CyStrategyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyStrategyViewController.m; sourceTree = "<group>"; };
+		18277E311FC5120800610CC3 /* MyQuestionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyQuestionViewController.h; sourceTree = "<group>"; };
+		18277E321FC5120800610CC3 /* MyQuestionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyQuestionViewController.m; sourceTree = "<group>"; };
+		18277E341FC5123400610CC3 /* MyDynamicViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyDynamicViewController.h; sourceTree = "<group>"; };
+		18277E351FC5123400610CC3 /* MyDynamicViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyDynamicViewController.m; sourceTree = "<group>"; };
+		18277E371FC5125100610CC3 /* MyPublishUserCarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyPublishUserCarViewController.h; sourceTree = "<group>"; };
+		18277E381FC5125100610CC3 /* MyPublishUserCarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPublishUserCarViewController.m; sourceTree = "<group>"; };
+		18277E3A1FC5129000610CC3 /* MyInteractMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyInteractMessageViewController.h; sourceTree = "<group>"; };
+		18277E3B1FC5129000610CC3 /* MyInteractMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyInteractMessageViewController.m; sourceTree = "<group>"; };
 		182BF4A71FB581F500F79C68 /* CareRemindViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CareRemindViewController.h; sourceTree = "<group>"; };
 		182BF4A81FB581F500F79C68 /* CareRemindViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CareRemindViewController.m; sourceTree = "<group>"; };
 		182BF4AA1FB58F2700F79C68 /* AddCareRemindViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCareRemindViewController.h; sourceTree = "<group>"; };
@@ -1273,6 +1288,7 @@
 				180D41B21FC3CCF6007D5D34 /* CyShowTableViewCell.h */,
 				180D41B31FC3CCF6007D5D34 /* CyShowTableViewCell.m */,
 				180D41B41FC3CCF6007D5D34 /* CyShowTableViewCell.xib */,
+				18277E301FC5119F00610CC3 /* MyCategoryVC(四个模块) */,
 			);
 			path = "CYShow(个人发布相关)";
 			sourceTree = "<group>";
@@ -1282,6 +1298,8 @@
 			children = (
 				180D41B81FC3F3BE007D5D34 /* MyExploitViewController.h */,
 				180D41B91FC3F3BE007D5D34 /* MyExploitViewController.m */,
+				18277E2D1FC50CD700610CC3 /* CyStrategyViewController.h */,
+				18277E2E1FC50CD700610CC3 /* CyStrategyViewController.m */,
 			);
 			path = "CyMyExploit(我的功勋)";
 			sourceTree = "<group>";
@@ -1714,6 +1732,21 @@
 				18ED28B51FB8921500C0CC92 /* Inserince */,
 			);
 			path = RemindController;
+			sourceTree = "<group>";
+		};
+		18277E301FC5119F00610CC3 /* MyCategoryVC(四个模块) */ = {
+			isa = PBXGroup;
+			children = (
+				18277E311FC5120800610CC3 /* MyQuestionViewController.h */,
+				18277E321FC5120800610CC3 /* MyQuestionViewController.m */,
+				18277E341FC5123400610CC3 /* MyDynamicViewController.h */,
+				18277E351FC5123400610CC3 /* MyDynamicViewController.m */,
+				18277E371FC5125100610CC3 /* MyPublishUserCarViewController.h */,
+				18277E381FC5125100610CC3 /* MyPublishUserCarViewController.m */,
+				18277E3A1FC5129000610CC3 /* MyInteractMessageViewController.h */,
+				18277E3B1FC5129000610CC3 /* MyInteractMessageViewController.m */,
+			);
+			path = "MyCategoryVC(四个模块)";
 			sourceTree = "<group>";
 		};
 		18322AAC1F4AD181003ABB7B /* model */ = {
@@ -2968,6 +3001,7 @@
 				50CAA6A11F41AB0300138CEF /* EarnScoreController.m in Sources */,
 				18FB099F1FAAC58200297E93 /* SDPhotoBrowser.m in Sources */,
 				18D8158E1F7A358A00A1FA04 /* PassWordLoginViewController.m in Sources */,
+				18277E331FC5120800610CC3 /* MyQuestionViewController.m in Sources */,
 				0401E8CA1F4E674700F0CA79 /* DSStartWashingController.m in Sources */,
 				5097FE131F2F4173002EF8F8 /* JPCityViewController.m in Sources */,
 				185090461F4557E100795E0A /* TYAlertFadeAnimation.m in Sources */,
@@ -3009,6 +3043,7 @@
 				1853BA341F28A02B00B98C7F /* JFAreaDataManager.m in Sources */,
 				501672101F297A3500384186 /* ShopViewController.m in Sources */,
 				181E93041F208C520006511E /* DSMyCardController.m in Sources */,
+				18277E391FC5125100610CC3 /* MyPublishUserCarViewController.m in Sources */,
 				18B69EA61F32CB52007DA0E4 /* ZFMaskView.m in Sources */,
 				18322AC31F4EC157003ABB7B /* CardBag.m in Sources */,
 				50B26E961F307B76009B3B9F /* RechargeController.m in Sources */,
@@ -3179,6 +3214,7 @@
 				507FECF71F2AC8D7009CC505 /* BusinessPayController.m in Sources */,
 				5016722A1F297FDD00384186 /* HeadView.m in Sources */,
 				180E42FA1F3AD7EB00013D2D /* LewPopupBackgroundView.m in Sources */,
+				18277E3C1FC5129000610CC3 /* MyInteractMessageViewController.m in Sources */,
 				5016720E1F297A3500384186 /* ShopIntroController.m in Sources */,
 				18218FEB1F2B0C3C00F7207F /* DSCarClubDetailController.m in Sources */,
 				18B697AC1F21DAB3009FF73A /* DSSaleActivityController.m in Sources */,
@@ -3201,6 +3237,7 @@
 				186CE5FC1F7E5A540001F920 /* CYModel.m in Sources */,
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
 				18E702761F5503BC007A9777 /* KPIndicatorView.m in Sources */,
+				18277E361FC5123400610CC3 /* MyDynamicViewController.m in Sources */,
 				18FB09D51FAB0C7A00297E93 /* CYInforModel.m in Sources */,
 				5071B47C1F380987009FFF67 /* OrderDetailView.m in Sources */,
 				180E430A1F3C741100013D2D /* DSShareGetMoneyController.m in Sources */,
@@ -3232,6 +3269,7 @@
 				18FB09971FAAC57800297E93 /* SDWeiXinPhotoContainerView.m in Sources */,
 				04DB28E41F6E184F009B4D9C /* NSDate+Extension.m in Sources */,
 				50B26EAC1F315EF0009B3B9F /* CommentOrderController.m in Sources */,
+				18277E2F1FC50CD700610CC3 /* CyStrategyViewController.m in Sources */,
 				183997A21F25F00700702071 /* DSAboutController.m in Sources */,
 				1853BA491F28A04100B98C7F /* JFCityTableViewCell.m in Sources */,
 				180E42D81F39B8C200013D2D /* DSUserRightDetailController.m in Sources */,
