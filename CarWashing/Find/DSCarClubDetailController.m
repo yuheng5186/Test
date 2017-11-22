@@ -490,7 +490,9 @@
     .widthIs(25*Main_Screen_Height/667)
     .heightIs(20*Main_Screen_Height/667);
     
+    NSLog(@"测试点赞数量---------%ld",self.GiveCount);
     self.goodNumberLabel.text = [NSString stringWithFormat:@"共有%ld人点赞过",self.GiveCount];
+    
     self.sayNumberLab.text = [NSString stringWithFormat:@"评论(%ld)",self.CommentCount];
     if(newsDetail.IsGive == 1)
     {
@@ -586,13 +588,14 @@
         self.dicData = dict;
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
-            NSLog(@"查看详情数据　%@",dict);
+//            NSLog(@"查看详情数据　%@",dict);
 //            NSLog(@"详情数据%@",dict[@"JsonData"]);
             //是什么车
             titleLabel.text=[NSString stringWithFormat:@"%@%@",dict[@"JsonData"][@"CarBrand"],dict[@"JsonData"][@"CarType"]];
             
             NSDictionary *dic = [dict objectForKey:@"JsonData"];
             [newsDetail setValuesForKeysWithDictionary:dic];
+            self.GiveCount = newsDetail.GiveCount;
             NSArray *arr = [NSArray array];
             arr = [dic objectForKey:@"actModelList"];
 
@@ -982,14 +985,11 @@
                 if(self.GiveCount>99)
                 {
                     self.goodShowLabel.text = @"99+";
-                }else
-                {
-//                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount-1<0?0:self.GiveCount-1];
-                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld"];
+                }else{
+                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount-1<0?0:self.GiveCount-1];
                 }
                 
                 
-//                self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount-1];
                 [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
                
                 self.GiveCount--;
