@@ -330,7 +330,7 @@
     
     UILabel  *goodNumberLabel                = [UILabel new];
     goodNumberLabel.textColor                = [UIColor colorFromHex:@"#999999"];
-    goodNumberLabel.text                     = @"共有168人点赞过";
+//    goodNumberLabel.text                     = @"共有168人点赞过";
     goodNumberLabel.font                     = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     self.goodNumberLabel                     = goodNumberLabel;
     goodNumberLabel.textAlignment            = NSTextAlignmentCenter;
@@ -479,7 +479,7 @@
     UILabel *goodShowLabel                   = [UILabel new];
     goodShowLabel.textColor                  = [UIColor colorFromHex:@"#999999"];
     goodShowLabel.font                       = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
-    goodShowLabel.text                       = @"369";
+//    goodShowLabel.text                       = @"369";
 //    goodShowLabel.backgroundColor=[UIColor whiteColor];
     self.goodShowLabel                       = goodShowLabel;
     [self.downView  addSubview:goodShowLabel];
@@ -525,7 +525,8 @@
     }
     else
     {
-        self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount<0?0:self.GiveCount];
+//        self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount<0?0:self.GiveCount];
+        self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount];
     }
     
     
@@ -871,16 +872,32 @@
     [self.userSayTextField becomeFirstResponder];
     
 }
+
+#pragma mark-底部点赞
 - (void) downGoodButtonClick:(UIButton *)sender {
 
     if (sender.selected == NO) {
         
         
-        NSDictionary *mulDic = @{
-                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                 @"SupTypeCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
-                                 @"SupType": @1
-                                 };
+//        NSDictionary *mulDic = @{
+//                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+//                                 @"SupTypeCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
+//                                 @"SupType": @1
+//                                 };
+        NSDictionary *mulDic;
+        if ([self.showType isEqualToString:@"二手车"]) {
+            mulDic = @{
+                       @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                       @"SupTypeCode":@(self.CarCode),
+                       @"SupType":@(3)
+                       };
+        }else{
+            mulDic = @{
+                       @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                       @"SupTypeCode":@(self.ActivityCode),
+                       @"SupType":@(1)
+                       };
+        }
         NSDictionary *params = @{
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
@@ -929,11 +946,25 @@
     }else {
         
         
-        NSDictionary *mulDic = @{
-                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                 @"SupTypeCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
-                                 @"SupType": @1
-                                 };
+//        NSDictionary *mulDic = @{
+//                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+//                                 @"SupTypeCode":[NSString stringWithFormat:@"%ld",self.ActivityCode],
+//                                 @"SupType": @1
+//                                 };
+        NSDictionary *mulDic;
+        if ([self.showType isEqualToString:@"二手车"]) {
+            mulDic = @{
+                       @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                       @"SupTypeCode":@(self.CarCode),
+                       @"SupType":@(3)
+                       };
+        }else{
+            mulDic = @{
+                       @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                       @"SupTypeCode":@(self.ActivityCode),
+                       @"SupType":@(1)
+                       };
+        }
         NSDictionary *params = @{
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
@@ -953,7 +984,8 @@
                     self.goodShowLabel.text = @"99+";
                 }else
                 {
-                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount-1<0?0:self.GiveCount-1];
+//                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld",self.GiveCount-1<0?0:self.GiveCount-1];
+                    self.goodShowLabel.text = [NSString stringWithFormat:@"%ld"];
                 }
                 
                 
