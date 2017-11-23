@@ -279,9 +279,10 @@
 
 - (void)handleScanData:(NSString *)outMessage {
     
-    
+    __weak typeof(self) weakSelf = self;
     #pragma mark-获取设备编码
     NSString *imei                          = outMessage;
+   
     if([imei rangeOfString:@":"].location !=NSNotFound)//_roaldSearchText
     {
         NSLog(@"yes");
@@ -298,7 +299,6 @@
             HUD.mode = MBProgressHUDModeIndeterminate;
             HUD.labelText = @"加载中";
             HUD.minSize = CGSizeMake(132.f, 108.0f);
-            
             NSDictionary *mulDic = @{
                                      @"DeviceCode":array[1],
                                      @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
@@ -307,116 +307,210 @@
                                      @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                      @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                      };
-            NSLog(@"====%@====",params);// DeviceScanCode
-            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@ScanCode/DeviceScanCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
-                NSLog(@"%@",dict);
-                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-                {
-                    [_session stopRunning];
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@ScanCode/DeviceScanCodeQuery",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                NSLog(@"查询---%@",dict);
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]){
+                NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+                NSString * str = [numberFormatter stringFromNumber:dict[@"JsonData"][@"ScanCodeState"]];
+                NSString * moneyStr = [numberFormatter stringFromNumber:dict[@"JsonData"][@"OriginalAmt"]];
+               
+            if ([str isEqualToString:@"1"]) {//需要支付
                     
-                    
-                    NSDictionary *arr = [NSDictionary dictionary];
-                    arr = [dict objectForKey:@"JsonData"];
-                    
-                    self.scan = [[ScanCode alloc]init];
-                    [self.scan mj_setKeyValues:arr];
-//                    [self.scan setValuesForKeysWithDictionary:arr];
-                    
-                    
-                    __weak typeof(self) weakSelf = self;
-                    HUD.completionBlock = ^(){
+               UIAlertController *sureController = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"当前用户无洗车卡，是否在线支付洗车,费用为￥%@",moneyStr] preferredStyle:(UIAlertControllerStyleAlert)];
+                    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"去支付" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        NSDictionary *mulDic = @{
+                                                 @"DeviceCode":array[1],
+                                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                                                 };
+                        NSDictionary *params1 = @{
+                                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                                 };
+                       
+                    [AFNetworkingTool post:params1 andurl:[NSString stringWithFormat:@"%@ScanCode/DeviceScanCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                       NSLog(@"%@",dict);
+                       if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                       {
+                       [HUD hide:YES];
+                        [_session stopRunning];
                         
-                        UIAlertController *sureController = [UIAlertController alertControllerWithTitle:@"" message:@"确认洗车" preferredStyle:(UIAlertControllerStyleAlert)];
-                        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                            //(1.需要支付状态,2.扫描成功)
-                            if(weakSelf.scan.ScanCodeState == 1)
+                         NSDictionary *arr = [NSDictionary dictionary];
+                        arr = [dict objectForKey:@"JsonData"];
+                        weakSelf.scan = [[ScanCode alloc]init];
+                        [weakSelf.scan mj_setKeyValues:arr];
+
+                          //(1.需要支付状态,2.扫描成功)
+                        NSLog(@"%ld",weakSelf.scan.ScanCodeState);
+                       if(weakSelf.scan.ScanCodeState == 1)
+                        {
+                       DSScanPayController *payVC           = [[DSScanPayController alloc]init];
+                        payVC.hidesBottomBarWhenPushed            = YES;
+
+                         payVC.SerMerChant = weakSelf.scan.DeviceName;
+                        payVC.SerProject = weakSelf.scan.ServiceItems;
+                        payVC.Jprice = [NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt];
+                         payVC.Xprice = [NSString stringWithFormat:@"￥%@",weakSelf.scan.Amt];
+                         payVC.DeviceCode = weakSelf.scan.DeviceCode;
+                         payVC.RemainCount = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.RemainCount];
+                        payVC.IntegralNum = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.IntegralNum];
+                         payVC.CardType = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.CardType];
+                         payVC.CardName = weakSelf.scan.CardName;
+                      [weakSelf.navigationController pushViewController:payVC animated:YES];
+                       }
+                        else
+                       {
+                          NSDate*date                     = [NSDate date];
+                        NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
+                        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                        NSString *dateString        = [dateFormatter stringFromDate:date];
+                        NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+                        [defaults setObject:dateString forKey:@"setTime"];
+                        [defaults synchronize];
+                         NSLog(@"setTime ==== %@",[defaults objectForKey:@"setTime"]);
+                        [UdStorage storageObject:[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt] forKey:@"Jprice"];
+                        [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount] forKey:@"RemainCount"];
+                        [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum] forKey:@"IntegralNum"];
+                        [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.CardType] forKey:@"CardType"];
+                        [UdStorage storageObject:weakSelf.scan.CardName forKey:@"CardName"];
+                       DSStartWashingController *start = [[DSStartWashingController alloc]init];
+                   start.hidesBottomBarWhenPushed            = YES;
+                       start.RemainCount   = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.RemainCount];
+                        start.IntegralNum   = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.IntegralNum];
+                        start.CardType      = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
+                       start.CardName      = weakSelf.scan.CardName;
+                       start.paynum=[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt];
+                       start.second        = 240;
+                       start.adverUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ];
+                       [weakSelf.navigationController pushViewController:start animated:YES];
+                           }
+
+                       }
+                       else
+                           {
+                       [HUD hide:YES];
+                       [_session stopRunning];
+                       [self.view showInfo:@"扫码失败" autoHidden:YES interval:2];
+                       [_session startRunning];
+                       [self.navigationController popViewControllerAnimated:YES];
+                       }
+                       } fail:^(NSError *error) {
+                       NSLog(@"%@",error);
+                        [HUD hide:YES];
+                        [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+                       [self.navigationController popViewControllerAnimated:YES];
+                       }];
+                    }];
+                    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action){
+                        [HUD hide:YES];
+                        [weakSelf.session stopRunning];
+                        [weakSelf.session startRunning];
+                            }];
+
+                    [sureController addAction:sureAction];
+                    [sureController addAction:cancleAction];
+                    [weakSelf presentViewController:sureController animated:YES completion:nil];
+                }else if ([dict[@"ScanCodeState"]isEqualToString:@"2"]){//直接扣卡
+                   UIAlertController *sureController = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否使用%@来支付洗车服务",dict[@"JsonData"][@"CardName"]] preferredStyle:(UIAlertControllerStyleAlert)];
+                    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"使用" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        NSDictionary *mulDic = @{
+                                                 @"DeviceCode":array[1],
+                                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                                                 };
+                        NSDictionary *params1 = @{
+                                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                                  };
+                        
+                        [AFNetworkingTool post:params1 andurl:[NSString stringWithFormat:@"%@ScanCode/DeviceScanCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                            NSLog(@"%@",dict);
+                            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                             {
-                                DSScanPayController *payVC           = [[DSScanPayController alloc]init];
-                                payVC.hidesBottomBarWhenPushed            = YES;
+                                [HUD hide:YES];
+                                [_session stopRunning];
                                 
-                                payVC.SerMerChant = weakSelf.scan.DeviceName;
-                                payVC.SerProject = weakSelf.scan.ServiceItems;
-                                payVC.Jprice = [NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt];
-                                payVC.Xprice = [NSString stringWithFormat:@"￥%@",weakSelf.scan.Amt];
+                                NSDictionary *arr = [NSDictionary dictionary];
+                                arr = [dict objectForKey:@"JsonData"];
+                                weakSelf.scan = [[ScanCode alloc]init];
+                                [weakSelf.scan mj_setKeyValues:arr];
                                 
-                                payVC.DeviceCode = weakSelf.scan.DeviceCode;
+                                //(1.需要支付状态,2.扫描成功)
+                                NSLog(@"%ld",weakSelf.scan.ScanCodeState);
+                                if(weakSelf.scan.ScanCodeState == 1)
+                                {
+                                    DSScanPayController *payVC           = [[DSScanPayController alloc]init];
+                                    payVC.hidesBottomBarWhenPushed            = YES;
+                                    
+                                    payVC.SerMerChant = weakSelf.scan.DeviceName;
+                                    payVC.SerProject = weakSelf.scan.ServiceItems;
+                                    payVC.Jprice = [NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt];
+                                    payVC.Xprice = [NSString stringWithFormat:@"￥%@",weakSelf.scan.Amt];
+                                    payVC.DeviceCode = weakSelf.scan.DeviceCode;
+                                    payVC.RemainCount = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.RemainCount];
+                                    payVC.IntegralNum = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.IntegralNum];
+                                    payVC.CardType = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.CardType];
+                                    payVC.CardName = weakSelf.scan.CardName;
+                                    [weakSelf.navigationController pushViewController:payVC animated:YES];
+                                }
+                                else
+                                {
+                                    NSDate*date                     = [NSDate date];
+                                    NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
+                                    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                                    NSString *dateString        = [dateFormatter stringFromDate:date];
+                                    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+                                    [defaults setObject:dateString forKey:@"setTime"];
+                                    [defaults synchronize];
+                                    NSLog(@"setTime ==== %@",[defaults objectForKey:@"setTime"]);
+                                    [UdStorage storageObject:[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt] forKey:@"Jprice"];
+                                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount] forKey:@"RemainCount"];
+                                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum] forKey:@"IntegralNum"];
+                                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.CardType] forKey:@"CardType"];
+                                    [UdStorage storageObject:weakSelf.scan.CardName forKey:@"CardName"];
+                                    DSStartWashingController *start = [[DSStartWashingController alloc]init];
+                                    start.hidesBottomBarWhenPushed            = YES;
+                                    start.RemainCount   = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.RemainCount];
+                                    start.IntegralNum   = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.IntegralNum];
+                                    start.CardType      = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
+                                    start.CardName      = weakSelf.scan.CardName;
+                                    start.paynum=[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt];
+                                    start.second        = 240;
+                                    start.adverUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ];
+                                    [weakSelf.navigationController pushViewController:start animated:YES];
+                                }
                                 
-                                payVC.RemainCount = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.RemainCount];
-                                payVC.IntegralNum = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.IntegralNum];
-                                payVC.CardType = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.CardType];
-                                
-                                payVC.CardName = weakSelf.scan.CardName;
-                                
-                                [weakSelf.navigationController pushViewController:payVC animated:YES];
                             }
                             else
                             {
-                                
-                                
-                                
-                                NSDate*date                     = [NSDate date];
-                                NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
-                                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-                                
-                                
-                                NSString *dateString        = [dateFormatter stringFromDate:date];
-                                NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
-                                [defaults setObject:dateString forKey:@"setTime"];
-                                [defaults synchronize];
-                                NSLog(@"setTime ==== %@",[defaults objectForKey:@"setTime"]);
-                                [UdStorage storageObject:[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt] forKey:@"Jprice"];
-                                [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount] forKey:@"RemainCount"];
-                                [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum] forKey:@"IntegralNum"];
-                                [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.CardType] forKey:@"CardType"];
-                                [UdStorage storageObject:weakSelf.scan.CardName forKey:@"CardName"];
-                                
-                                DSStartWashingController *start = [[DSStartWashingController alloc]init];
-                                start.hidesBottomBarWhenPushed            = YES;
-                                
-                                start.RemainCount   = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.RemainCount];
-                                start.IntegralNum   = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.IntegralNum];
-                                start.CardType      = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
-                                start.CardName      = weakSelf.scan.CardName;
-                                start.paynum=[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt];
-                                start.second        = 240;
-                                start.adverUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ];
-                                [weakSelf.navigationController pushViewController:start animated:YES];
-                                
-                                
+                                [HUD hide:YES];
+                                [_session stopRunning];
+                                [self.view showInfo:@"扫码失败" autoHidden:YES interval:2];
+                                [_session startRunning];
+                                [self.navigationController popViewControllerAnimated:YES];
                             }
+                        } fail:^(NSError *error) {
+                            NSLog(@"%@",error);
+                            [HUD hide:YES];
+                            [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
+                            [self.navigationController popViewControllerAnimated:YES];
                         }];
-                        
-                        UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action){
-                            
-                            [weakSelf.session stopRunning];
-                            [weakSelf.session startRunning];
-                        }];
-                        [sureController addAction:sureAction];
-                        [sureController addAction:cancleAction];
-                        [weakSelf presentViewController:sureController animated:YES completion:nil];
-                        
-                        
-                    };
+                    }];
+                    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action){
+                        [weakSelf.session stopRunning];
+                        [weakSelf.session startRunning];
+                    }];
+                    [sureController addAction:sureAction];
+                    [sureController addAction:cancleAction];
+                    [weakSelf presentViewController:sureController animated:YES completion:nil];
                     
-                    [HUD hide:YES afterDelay:1.f];
                 }
-                else
-                {
-                    [HUD hide:YES];
-                    [_session stopRunning];
-                    
-                    [self.view showInfo:@"扫码失败" autoHidden:YES interval:2];
-                    [_session startRunning];
-        
-                    //                [self.navigationController popViewControllerAnimated:YES];
-                }
-            } fail:^(NSError *error) {
-                NSLog(@"%@",error);
-                [HUD hide:YES];
-                [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
-                //            [self.navigationController popViewControllerAnimated:YES];
                 
+            }
+        } fail:^(NSError *error) {
+                NSLog(@"%@",error);
             }];
+            
+            
+
         }
     
     }else if ([imei rangeOfString:@"#"].location !=NSNotFound){

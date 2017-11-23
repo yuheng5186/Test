@@ -111,6 +111,7 @@
     detailController.showType = @"二手车";
     detailController.loopNum = model.Mileage;
     detailController.carBrithYear = model.Manufacture;
+    detailController.deleteStr = @"是";
     [self.navigationController pushViewController:detailController animated:YES];
 }
 

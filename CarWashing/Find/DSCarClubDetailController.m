@@ -24,7 +24,9 @@
 @interface DSCarClubDetailController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIScrollViewDelegate>
 {
     CarClubNews *newsDetail;
-    UILabel * titleLabel;
+    UILabel     * titleLabel;
+    UIView      * whiteView;
+    UIView      * backView;
 }
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -64,6 +66,10 @@
 - (void)drawNavigation {
     
     [self drawTitle:@"详情"];
+    if ([self.deleteStr isEqualToString:@"是"]) {
+         [self drawRightImageButton:[NSString stringWithFormat:@"dian-1"] action:@selector(deleteBtnClick)];
+    }
+   
     
 }
 
@@ -1436,20 +1442,56 @@
     }
     return width;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark----删除相关
+-(void)deleteBtnClick
+{
+    backView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
+    backView.backgroundColor=[UIColor  blackColor];
+    backView.userInteractionEnabled = YES;
+    backView.alpha = 0.5;
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick)];
+    [self.view addSubview:backView];
+    [backView addGestureRecognizer:tap];
+    whiteView=[[UIView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 50)];
+    whiteView.backgroundColor=[UIColor whiteColor];
+    [self.view addSubview:whiteView];
+    UITapGestureRecognizer * delatetap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(delatetapClick)];
+    [whiteView addGestureRecognizer:delatetap];
+    [UIView animateWithDuration:0.3 animations:^{
+        whiteView.center =CGPointMake(Main_Screen_Width/2, Main_Screen_Height-25);
+    }];
+    UIImageView * deleteImageView =[[UIImageView alloc]init];
+    deleteImageView.image=[UIImage imageNamed:@"shanchu"];
+    [whiteView addSubview:deleteImageView];
+    [deleteImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(whiteView.mas_centerY);
+        make.left.mas_equalTo(whiteView.mas_left).mas_offset(12);
+        make.size.mas_equalTo(CGSizeMake(20, 18));
+    }];
+    UILabel * deleteLabel = [[UILabel alloc]init];
+    deleteLabel.text = @"删除";
+    deleteLabel.font =[UIFont systemFontOfSize:17.0];
+    deleteLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+    [whiteView addSubview:deleteLabel];
+    [deleteLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(whiteView.mas_centerY);
+        make.left.mas_equalTo(deleteImageView.mas_right).mas_offset(15);
+        make.size.mas_equalTo(CGSizeMake(50, 30));
+    }];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)tapClick
+{
+    [backView removeFromSuperview];
+    [UIView animateWithDuration:0.1 animations:^{
+        whiteView.center =CGPointMake(Main_Screen_Width/2, Main_Screen_Height+25);
+    }];
 }
-*/
+#pragma mark----删除操作
+-(void)delatetapClick
+{
+    [backView removeFromSuperview];
+    [whiteView removeFromSuperview];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

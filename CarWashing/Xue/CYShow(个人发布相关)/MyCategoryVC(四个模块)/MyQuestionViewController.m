@@ -42,7 +42,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self getData];
+    [self downRefresh];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,15 +50,27 @@
     _modelArray = [NSMutableArray array];
     
     [self.contentView addSubview:self.quesTableView];
-    self.page = 0;
+    self.quesTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(downRefresh)];
+//    self.quesTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(upRefreshClick)];
 }
+-(void)downRefresh
+{
+     self.page = 0;
+    [self getData];
+    
+}
+//-(void)upRefreshClick
+//{
+//    self.page ++;
+//    [self getData];
+//}
 -(void)getData
 {
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                              @"ActivityType":@"2",
-                             @"PageIndex":@(0),
-                             @"PageSize":@(10),
+                             @"PageIndex":@(self.page),
+                             @"PageSize":@(20),
                              @"AcquisitionType":@(1)
                              };
     NSDictionary *params = @{
@@ -68,10 +80,16 @@
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/GetActivityList",Khttp] success:^(NSDictionary *dict, BOOL success) {
         NSLog(@"%@",dict);
         if ([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]) {
-            //获取json数组
-            
-            self.modelArray = (NSMutableArray*)[CYQuestionModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
-            
+            if (self.page==0) {
+                 self.modelArray = (NSMutableArray*)[CYQuestionModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
+                [self.quesTableView.mj_header endRefreshing ];
+            }else if (self.page != 0){
+                NSArray *currentArray = [CYQuestionModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
+                self.modelArray = (NSMutableArray*)[self.modelArray arrayByAddingObjectsFromArray:currentArray];
+                [self.quesTableView.mj_footer endRefreshing];
+               
+            }
+
             //没有数据的情况下显示
             if (self.modelArray.count == 0) {
                 self.noneLabel.hidden = NO;
@@ -84,6 +102,8 @@
         [self.quesTableView reloadData];
     } fail:^(NSError *error) {
         NSLog(@"%@",error);
+        [self.quesTableView.mj_header endRefreshing];
+        [self.quesTableView.mj_footer endRefreshing];
     }];
 }
 #pragma mark - TableView
@@ -141,9 +161,8 @@
 }
 //cell
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-            
-        //取回数据
-            
+    
+    //取回数据
     CYQuestionModel * model = self.modelArray[indexPath.row];
             
     if([model.IndexImg rangeOfString:@","].location !=NSNotFound)//_roaldSearchText
@@ -174,7 +193,6 @@
            }
             _picContainerView.picPathStringsArray = containArr;
         }else{
-                    
         NSMutableArray *containArr = [NSMutableArray array];
         for (int i=0; i<arrImage.count; i++) {
          NSString * str=[NSString stringWithFormat:@"%@%@",kHTTPImg,arrImage[i]];
@@ -189,11 +207,9 @@
             CYQuestionTwoTableViewCell *quesCellTwocell = [_quesTableView dequeueReusableCellWithIdentifier:quesCellTwoID];
             if (quesCellTwocell==nil) {
                 quesCellTwocell = [[[NSBundle mainBundle]loadNibNamed:@"CYQuestionTwoTableViewCell" owner:self options:nil]lastObject];
-                
             }
             [quesCellTwocell configCell:self.modelArray[indexPath.row]];
             return quesCellTwocell;
-       
 }
 //详情
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -205,6 +221,7 @@
     detailController.hidesBottomBarWhenPushed       = YES;
     detailController.ActivityCode                   = model.ActivityCode;
     NSLog(@"模型中文章号%ld",(long)model.ActivityCode);
+    detailController.deleteStr = @"是";
     [self.navigationController pushViewController:detailController animated:YES];
 }
 

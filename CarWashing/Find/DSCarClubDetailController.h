@@ -18,5 +18,5 @@
 @property(copy,nonatomic)NSString * comeTypeString;     //1->提问 2->热门
 @property (nonatomic,copy)NSString * carBrithYear;      //车辆生产年份
 @property (nonatomic,copy)NSString * loopNum;          //公里数
-
+@property (nonatomic,copy)NSString * deleteStr;//可以删除
 @end

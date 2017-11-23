@@ -126,6 +126,7 @@
     detailController.showType = @"高兴";
     detailController.hidesBottomBarWhenPushed       = YES;
     detailController.ActivityCode                   = model.ActivityCode;
+    detailController.deleteStr = @"是";
     [self.navigationController pushViewController:detailController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
