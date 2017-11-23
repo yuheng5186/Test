@@ -61,9 +61,10 @@
             }
             
         }
+        [self.CYUserCarTableView.mj_header endRefreshing];
         [self.CYUserCarTableView reloadData];
     } fail:^(NSError *error) {
-        
+        [self.CYUserCarTableView.mj_header endRefreshing];
     }];
     
 }
@@ -73,6 +74,7 @@
         _CYUserCarTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-108) style:(UITableViewStylePlain)];
         _CYUserCarTableView.delegate = self;
         _CYUserCarTableView.dataSource = self;
+        _CYUserCarTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
         _CYUserCarTableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
         _CYUserCarTableView.rowHeight = 145*Main_Screen_Height/667;
         

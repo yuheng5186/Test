@@ -214,7 +214,8 @@
                 arr = [dict objectForKey:@"JsonData"];
                 
                 self.scan = [[ScanCode alloc]init];
-                [self.scan setValuesForKeysWithDictionary:arr];
+                [self.scan mj_setKeyValues:arr];
+//                [self.scan setValuesForKeysWithDictionary:arr];
                 
                 
                 __weak typeof(self) weakSelf = self;
