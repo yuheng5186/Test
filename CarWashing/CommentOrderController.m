@@ -37,6 +37,9 @@ static NSString *id_successPayCell = @"id_successPayCell";
 - (UITableView *)commentOrderView {
     if (!_commentOrderView) {
         UITableView *commentOrderView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, self.view.bounds.size.height - 64 -44) style:UITableViewStyleGrouped];
+        commentOrderView.estimatedRowHeight = 0;
+        commentOrderView.estimatedSectionFooterHeight = 0;
+        commentOrderView.estimatedSectionHeaderHeight = 0;
         _commentOrderView = commentOrderView;
         [self.view addSubview:_commentOrderView];
     }

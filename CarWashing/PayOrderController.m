@@ -37,6 +37,9 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
 - (UITableView *)payOrderView {
     if (!_payOrderView) {
         UITableView *payOrderView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, self.view.bounds.size.height - 64 -44) style:UITableViewStyleGrouped];
+        payOrderView.estimatedRowHeight = 0;
+        payOrderView.estimatedSectionFooterHeight = 0;
+        payOrderView.estimatedSectionHeaderHeight = 0;
         _payOrderView = payOrderView;
         [self.view addSubview:_payOrderView];
     }

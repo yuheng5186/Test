@@ -39,6 +39,9 @@ static NSString *id_cancelCell = @"id_cancelCell";
     
     if (!_allOrderListView) {
         UITableView *allOrderListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height  - 64 - 44) style:UITableViewStyleGrouped];
+        allOrderListView.estimatedRowHeight = 0;
+        allOrderListView.estimatedSectionFooterHeight = 0;
+        allOrderListView.estimatedSectionHeaderHeight = 0;
         _allOrderListView = allOrderListView;
         [self.view addSubview:_allOrderListView];
     }
