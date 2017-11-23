@@ -10,7 +10,7 @@
 
 @interface MyinteractModel : NSObject
 @property (nonatomic,copy) NSString * ActDate;
-@property (nonatomic,copy) NSString * ActivityCode;
+@property (nonatomic,assign) NSInteger  ActivityCode;
 @property (nonatomic,copy) NSString * ActivityName;
 @property (nonatomic,copy) NSString * ActivityType;
 @property (nonatomic,copy) NSString * Comment;
@@ -20,6 +20,7 @@
 @property (nonatomic,copy) NSString * GiveCount;
 @property (nonatomic,copy) NSString * IndexImg;
 @property (nonatomic,copy) NSString * IsGive;
+@property (nonatomic,copy) NSString * Gives;
 @property (nonatomic,copy) NSString * CarInfo;
 @property (nonatomic,retain) NSArray * actModelList;
 

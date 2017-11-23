@@ -112,7 +112,6 @@
     detailController.loopNum = model.Mileage;
     detailController.carBrithYear = model.Manufacture;
     [self.navigationController pushViewController:detailController animated:YES];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

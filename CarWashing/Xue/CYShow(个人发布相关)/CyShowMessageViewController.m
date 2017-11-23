@@ -202,6 +202,7 @@
 {
     MyExploitViewController * ExploitVc =[[MyExploitViewController alloc]init];
     ExploitVc.hidesBottomBarWhenPushed = YES;
+    ExploitVc.num =[NSString stringWithFormat:@"%@",self.dicData[@"JsonData"][@"EmpiricalValueCount"]];
     [self.navigationController pushViewController:ExploitVc animated:YES];
 }
 -(UITableView *)tableView

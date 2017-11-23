@@ -206,7 +206,6 @@
     detailController.ActivityCode                   = model.ActivityCode;
     NSLog(@"模型中文章号%ld",(long)model.ActivityCode);
     [self.navigationController pushViewController:detailController animated:YES];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 

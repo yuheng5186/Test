@@ -9,6 +9,7 @@
 #import "MyInteractMessageViewController.h"
 #import "MyInteractMessageCell.h"
 #import "MyinteractModel.h"
+#import "DSCarClubDetailController.h"
 @interface MyInteractMessageViewController ()<UITableViewDelegate,UITableViewDataSource,MyInteractMessageCelldelegate>
 {
     UIButton * selectButton;
@@ -18,6 +19,8 @@
 @property (nonatomic,weak)UIButton *selectedBtn;
 @property (nonatomic,strong) UITableView * tableView;
 @property (nonatomic,strong) NSMutableArray * dataArray;
+@property (nonatomic,strong) UIView * CommentView;
+@property (nonatomic,strong) UIView * PraiseView;
 @end
 
 @implementation MyInteractMessageViewController
@@ -72,6 +75,7 @@
 }
 -(void)buttonBtnClick:(UIButton*)btn
 {
+    
     //每当点击按钮时取消上次选中的
     self.selectedBtn.selected = NO;
     [btn setBackgroundColor:[UIColor whiteColor]];
@@ -82,7 +86,7 @@
     if (btn.tag==1) {
         show = 0;
     }else if (btn.tag==2){
-        show = 0;
+        show = 1;
     }
     [self getData];
     
@@ -93,8 +97,13 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     MyinteractModel * model = self.dataArray[indexPath.row];
-    NSString * str = [NSString stringWithFormat:@" %@: %@",model.actModelList[0][@"CommentUserName"],model.actModelList[0][@"Comment"]];
-//    NSString * str=[NSString stringWithFormat:@"%@",arr1[indexPath.row]];
+    NSString * str =@"";
+    if (show==0) {
+        str  = [NSString stringWithFormat:@" %@:  %@ 等%@人评论了你",model.actModelList[0][@"CommentUserName"],model.actModelList[0][@"Comment"],model.CommentCount];
+    }else{
+        str  = [NSString stringWithFormat:@" %@等%@人赞了你",model.Gives,model.GiveCount];
+    }
+   
     NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:15]};
     CGSize size = [str boundingRectWithSize:CGSizeMake(Main_Screen_Width-72, 0) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
     return 109+size.height;
@@ -102,6 +111,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    MyinteractModel * model = self.dataArray[indexPath.row];
     static NSString * cellID =@"cellID";
     MyInteractMessageCell * cell = [_tableView dequeueReusableCellWithIdentifier:cellID];
     if (cell ==nil) {
@@ -109,19 +119,45 @@
         cell.delegate=self;
     }
     
-//    cell.commentLabel.text=[NSString stringWithFormat:@"%@",arr1[indexPath.row]];
     [cell configCell:self.dataArray[indexPath.row]];
+    if (show==0) {
+        cell.commentLabel.text=[NSString stringWithFormat:@" %@:  %@ 等%@人评论了你",model.actModelList[0][@"CommentUserName"],model.actModelList[0][@"Comment"],model.CommentCount];
+    }else{
+         cell.commentLabel.text=[NSString stringWithFormat:@"%@等%@人赞了你",model.Gives,model.GiveCount];
+    }
     return cell;
+    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+    MyinteractModel * model = self.dataArray[indexPath.row];
+    if ([model.ActivityType isEqualToString:@"2"]) {//车友提问
+        DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
+        detailController.comeTypeString = @"1";
+        detailController.showType = @"高兴";
+        detailController.hidesBottomBarWhenPushed       = YES;
+        detailController.ActivityCode                   = model.ActivityCode;
+        NSLog(@"模型中文章号%ld",(long)model.ActivityCode);
+        [self.navigationController pushViewController:detailController animated:YES];
+    }else if ([model.ActivityType isEqualToString:@"3"]){//热门话题
+        DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
+        detailController.comeTypeString = @"2";
+        detailController.showType = @"高兴";
+        detailController.hidesBottomBarWhenPushed       = YES;
+        detailController.ActivityCode                   = model.ActivityCode;
+        [self.navigationController pushViewController:detailController animated:YES];
+    }else if ([model.ActivityType isEqualToString:@"5"]){//二手车
+        DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
+        detailController.hidesBottomBarWhenPushed       = YES;
+        detailController.ActivityCode                   = model.ActivityCode;
+        detailController.CarCode = model.ActivityCode;
+        detailController.showType = @"二手车";
+        detailController.loopNum = @"66";
+        detailController.carBrithYear = @"2017";
+        [self.navigationController pushViewController:detailController animated:YES];
+    }
 }
-#pragma mark---cell的代理方法
--(void)cell:(UITableViewCell*)cell button:(NSInteger)btn
-{
-    NSIndexPath * cellIndex = [_tableView indexPathForCell:cell];
-    NSLog(@"---%ld",cellIndex.row);
-}
+
 -(UITableView*)tableView{
     if (_tableView ==nil) {
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 134, Main_Screen_Width, Main_Screen_Height-134) style:UITableViewStylePlain];
@@ -133,6 +169,8 @@
 }
 -(void)getData
 {
+    [self.dataArray removeAllObjects];
+    
     NSString * url =@"";
     if (show==0) {
         url = @"Activity/MyBicycleCircleComment";
@@ -147,24 +185,16 @@
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@%@",Khttp,url] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"%@",dict);
+        NSLog(@"--%@",dict);
         if ([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]) {
             //获取json数组
-
             self.dataArray = (NSMutableArray*)[MyinteractModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
 
-//            //没有数据的情况下显示
-//            if (self.modelArray.count == 0) {
-//                self.noneLabel.hidden = NO;
-//            }else{
-//                self.noneLabel.hidden = YES;
-//            }
-            
-            
         }
         [self.tableView reloadData];
     } fail:^(NSError *error) {
         NSLog(@"%@",error);
     }];
 }
+
 @end
