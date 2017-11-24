@@ -153,19 +153,18 @@
 
 //友盟统计
     [MobClick setLogEnabled:YES];
-    UMConfigInstance.appKey = @"5a123310f43e486e5b0001c7";
-    UMConfigInstance.channelId = @"App Store";
+    UMConfigInstance.appKey = @"5a17af22f29d98598500034a";
+    UMConfigInstance.channelId = @"AppStore";
     [MobClick startWithConfigure:UMConfigInstance];
     [MobClick event:@"addHomeClickID"];
+    
     return YES;
 }
 
 + (AppDelegate *)sharedInstance {
     return (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
-
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    
     
     return [WXApi handleOpenURL:url delegate:self];
 }

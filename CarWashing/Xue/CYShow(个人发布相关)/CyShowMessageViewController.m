@@ -114,6 +114,10 @@
         make.left.mas_equalTo(experienceLabel.mas_right);
         make.size.mas_equalTo(CGSizeMake(10*Main_Screen_Height/667, 13*Main_Screen_Height/667));
     }];
+    
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self getData];
 }
 -(void)leftBtnClick

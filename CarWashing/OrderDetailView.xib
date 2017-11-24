@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -290,13 +290,16 @@
                 <outlet property="MerChantService" destination="OGv-ij-WGZ" id="DHz-dn-LaT"/>
                 <outlet property="MerChantType" destination="qCj-lI-2gt" id="TcK-B2-cJs"/>
                 <outlet property="ShijiPrice" destination="mQh-2y-YoQ" id="ZWW-i5-UfO"/>
+                <outlet property="left1" destination="aRe-pg-4IT" id="BXg-Th-jKW"/>
+                <outlet property="left2" destination="PLB-qc-HpK" id="KQI-nY-aei"/>
+                <outlet property="left3" destination="NR1-Xl-vQD" id="CcG-cf-W56"/>
                 <outlet property="orderid" destination="xy8-MT-dAJ" id="bDF-rB-TkL"/>
                 <outlet property="ordertime" destination="Fab-R0-vJ4" id="f1b-1i-GBt"/>
                 <outlet property="paymethod" destination="tVw-gD-2Mf" id="ftm-EQ-PbI"/>
                 <outlet property="shijiPrice1" destination="788-Aa-FtQ" id="glw-6A-9Gi"/>
                 <outlet property="youhuiprice" destination="QrH-hf-H9a" id="phx-yo-Kd5"/>
             </connections>
-            <point key="canvasLocation" x="-31.5" y="4.5"/>
+            <point key="canvasLocation" x="-197" y="5"/>
         </view>
     </objects>
     <resources>

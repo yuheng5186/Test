@@ -27,6 +27,7 @@
     UILabel     * titleLabel;
     UIView      * whiteView;
     UIView      * backView;
+    NSInteger    DeleteType;
 }
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -1489,9 +1490,30 @@
 #pragma mark----删除操作
 -(void)delatetapClick
 {
-    [backView removeFromSuperview];
-    [whiteView removeFromSuperview];
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"ActivityCode":@(self.ActivityCode),
+                             @"DeleteType":@(self.DeleteType)
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/DeleteActiveInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"--%@",dict);
+        if ([dict[@"ResultCode"]isEqualToString:@"F000000"]) {
+            [self.view showInfo:@"删除成功" autoHidden:YES];
+            [backView removeFromSuperview];
+            [whiteView removeFromSuperview];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [self.view showInfo:@"删除失败，请重试" autoHidden:YES];
+        }
+    } fail:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+   
 }
 
 @end

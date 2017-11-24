@@ -409,7 +409,7 @@
                     [sureController addAction:sureAction];
                     [sureController addAction:cancleAction];
                     [weakSelf presentViewController:sureController animated:YES completion:nil];
-                }else if ([dict[@"ScanCodeState"]isEqualToString:@"2"]){//直接扣卡
+                }else if ([str isEqualToString:@"2"]){//直接扣卡
                    UIAlertController *sureController = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否使用%@来支付洗车服务",dict[@"JsonData"][@"CardName"]] preferredStyle:(UIAlertControllerStyleAlert)];
                     UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"使用" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                         NSDictionary *mulDic = @{
@@ -495,6 +495,7 @@
                         }];
                     }];
                     UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action){
+                        [HUD hide:YES];
                         [weakSelf.session stopRunning];
                         [weakSelf.session startRunning];
                     }];

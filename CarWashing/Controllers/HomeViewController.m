@@ -173,7 +173,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self getStatisticsData];
 //    [self startLocation];
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];
@@ -1737,5 +1737,21 @@
 -(void)cancelClick
 {
     [self.CYalerView removeFromSuperview];
+}
+-(void)getStatisticsData
+{
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/LandingTimes",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"--%@",dict);
+        
+    } fail:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
 }
 @end

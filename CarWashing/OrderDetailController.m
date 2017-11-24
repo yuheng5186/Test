@@ -55,8 +55,9 @@
     HUD.labelText = @"加载中";
     HUD.minSize = CGSizeMake(132.f, 108.0f);
     
-    
     [self setMerChantDetailData];
+    
+    
     
 }
 
@@ -72,7 +73,8 @@
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetStoreDetail",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        //        NSLog(@"%@",dict);
+                NSLog(@"%@",dict);
+        
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             
@@ -83,36 +85,64 @@
             detailView.frame = CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 64);
             [self.view addSubview:detailView];
             
-            
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,self.dic[@"Img"]];
-                NSURL *url=[NSURL URLWithString:ImageURL];
-                NSData *data=[NSData dataWithContentsOfURL:url];
-                UIImage *img=[UIImage imageWithData:data];
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    detailView.MerChantImgV.image = img;
+            if (self.MerCode==0 ) {
+                detailView.MerChantService.text = self.MerChantService;
+                detailView.ShijiPrice.text = @"x1";
+                detailView.Jprice.text = [NSString stringWithFormat:@"%@次",self.Jprice];
+                detailView.youhuiprice.text = [NSString stringWithFormat:@"%@次",self.youhuiprice];
+                detailView.left1.text = self.serName;
+                detailView.left2.text = @"已使用";
+                detailView.left3.text = @"剩余次数";
+                detailView.shijiPrice1.text = [NSString stringWithFormat:@"%@次",self.shijiPrice1];
+                detailView.orderid.text = [NSString stringWithFormat:@"订单编号 : %@",self.orderid];
+                detailView.ordertime.text = [NSString stringWithFormat:@"订单时间 : %@",self.ordertime];
+                detailView.paymethod.text = [NSString stringWithFormat:@"支付方式 : %@",self.paymethod];
+            }else{
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,self.dic[@"Img"]];
+                    NSURL *url=[NSURL URLWithString:ImageURL];
+                    NSData *data=[NSData dataWithContentsOfURL:url];
+                    UIImage *img=[UIImage imageWithData:data];
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        detailView.MerChantImgV.image = img;
+                    });
                 });
-            });
-            
-            if([self.dic[@"ShopType"] intValue] == 1)
-            {
-                detailView.MerChantType.text = @"洗车服务";
+                
+                if([self.dic[@"ShopType"] intValue] == 1)
+                {
+                    detailView.MerChantType.text = @"洗车服务";
+                }
+                
+                detailView.MerChantAdress.text = self.dic[@"MerAddress"];
+                
+                detailView.MerChantName.text = self.dic[@"MerName"];
+                
+                if ([self.showType isEqualToString:@"1"]) {
+                    detailView.MerChantService.text = self.MerChantService;
+                    detailView.ShijiPrice.text = @"x1";
+                    detailView.Jprice.text = [NSString stringWithFormat:@"%@次",self.Jprice];
+                    detailView.youhuiprice.text = [NSString stringWithFormat:@"%@次",self.youhuiprice];
+                    detailView.left1.text = self.serName;
+                    detailView.left2.text = @"已使用";
+                    detailView.left3.text = @"剩余次数";
+                    detailView.shijiPrice1.text = [NSString stringWithFormat:@"%@次",self.shijiPrice1];
+                    detailView.orderid.text = [NSString stringWithFormat:@"订单编号 : %@",self.orderid];
+                    detailView.ordertime.text = [NSString stringWithFormat:@"订单时间 : %@",self.ordertime];
+                    detailView.paymethod.text = [NSString stringWithFormat:@"支付方式 : %@",self.paymethod];
+                }else{
+                    detailView.MerChantService.text = self.MerChantService;
+                    detailView.ShijiPrice.text = [NSString stringWithFormat:@"￥%@",self.ShijiPrice];
+                    detailView.Jprice.text = [NSString stringWithFormat:@"￥%@",self.Jprice];
+                    detailView.youhuiprice.text = [NSString stringWithFormat:@"-￥%@",self.youhuiprice];
+                    detailView.shijiPrice1.text = [NSString stringWithFormat:@"￥%@",self.shijiPrice1];
+                    detailView.orderid.text = [NSString stringWithFormat:@"订单编号 : %@",self.orderid];
+                    detailView.ordertime.text = [NSString stringWithFormat:@"订单时间 : %@",self.ordertime];
+                    detailView.paymethod.text = [NSString stringWithFormat:@"支付方式 : %@",self.paymethod];
+                }
             }
             
-            detailView.MerChantAdress.text = self.dic[@"MerAddress"];
             
-            detailView.MerChantName.text = self.dic[@"MerName"];
             
-            detailView.MerChantService.text = self.MerChantService;
-            
-            detailView.MerChantService.text = self.MerChantService;
-            detailView.ShijiPrice.text = [NSString stringWithFormat:@"￥%@",self.ShijiPrice];
-            detailView.Jprice.text = [NSString stringWithFormat:@"￥%@",self.Jprice];
-            detailView.youhuiprice.text = [NSString stringWithFormat:@"-￥%@",self.youhuiprice];
-            detailView.shijiPrice1.text = [NSString stringWithFormat:@"￥%@",self.shijiPrice1];
-            detailView.orderid.text = [NSString stringWithFormat:@"订单编号 : %@",self.orderid];
-            detailView.ordertime.text = [NSString stringWithFormat:@"订单时间 : %@",self.ordertime];
-            detailView.paymethod.text = [NSString stringWithFormat:@"支付方式 : %@",self.paymethod];
             
         }
         else

@@ -31,7 +31,7 @@
 @property(nonatomic ,copy)NSString *SerMerCode;
 @property(nonatomic ,copy)NSString *SerCode;
 @property(nonatomic ,copy)NSString *orderid;
-
+@property(nonatomic ,assign)NSInteger OrderType;
 
 
 //代理

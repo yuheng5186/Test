@@ -42,7 +42,9 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self downRefresh];
+//    [self downRefresh];
+    self.page = 0;
+    [self getData];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,15 +52,15 @@
     _modelArray = [NSMutableArray array];
     
     [self.contentView addSubview:self.quesTableView];
-    self.quesTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(downRefresh)];
+//    self.quesTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(downRefresh)];
 //    self.quesTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(upRefreshClick)];
 }
--(void)downRefresh
-{
-     self.page = 0;
-    [self getData];
-    
-}
+//-(void)downRefresh
+//{
+//     self.page = 0;
+//    [self getData];
+//
+//}
 //-(void)upRefreshClick
 //{
 //    self.page ++;
@@ -86,7 +88,7 @@
             }else if (self.page != 0){
                 NSArray *currentArray = [CYQuestionModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
                 self.modelArray = (NSMutableArray*)[self.modelArray arrayByAddingObjectsFromArray:currentArray];
-                [self.quesTableView.mj_footer endRefreshing];
+//                [self.quesTableView.mj_footer endRefreshing];
                
             }
 
@@ -102,8 +104,8 @@
         [self.quesTableView reloadData];
     } fail:^(NSError *error) {
         NSLog(@"%@",error);
-        [self.quesTableView.mj_header endRefreshing];
-        [self.quesTableView.mj_footer endRefreshing];
+//        [self.quesTableView.mj_header endRefreshing];
+//        [self.quesTableView.mj_footer endRefreshing];
     }];
 }
 #pragma mark - TableView
@@ -112,6 +114,9 @@
         _quesTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-64) style:(UITableViewStylePlain)];
         _quesTableView.delegate = self;
         _quesTableView.dataSource = self;
+        _quesTableView.estimatedRowHeight = 0;
+        _quesTableView.estimatedSectionFooterHeight = 0;
+        _quesTableView.estimatedSectionHeaderHeight = 0;
         _quesTableView.backgroundColor = [UIColor whiteColor];
 //        _quesTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
         _quesTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -217,6 +222,7 @@
     CYQuestionModel * model = self.modelArray[indexPath.row];
     DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
     detailController.comeTypeString = @"1";
+    detailController.DeleteType = 2;
     detailController.showType = @"高兴";
     detailController.hidesBottomBarWhenPushed       = YES;
     detailController.ActivityCode                   = model.ActivityCode;

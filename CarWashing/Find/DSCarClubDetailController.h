@@ -19,4 +19,5 @@
 @property (nonatomic,copy)NSString * carBrithYear;      //车辆生产年份
 @property (nonatomic,copy)NSString * loopNum;          //公里数
 @property (nonatomic,copy)NSString * deleteStr;//可以删除
+@property (nonatomic,assign)NSInteger  DeleteType;//删除类型
 @end

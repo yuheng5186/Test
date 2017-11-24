@@ -22,6 +22,7 @@
     UITextView *commentTextView;
     NSInteger score;
     MBProgressHUD *HUD1;
+    NSInteger ComType;
 }
 
 //@property (nonatomic, strong) NSMutableArray <UIButton *> *buttonArray;
@@ -157,6 +158,15 @@
         make.height.mas_equalTo(48*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
     }];
+    
+    
+    if (self.ComType==2) {
+        ComType=2;
+    }else if (self.ComType==3){
+        ComType=1;
+    }else{
+        ComType=0;
+    }
 }
 
 - (void)clickSigninButton:(UIButton *)button {
@@ -175,7 +185,8 @@
                                  @"SerCode":self.SerCode,
                                  @"OrderId":self.orderid,
                                  @"CommentContent":commentTextView.text,
-                                 @"Score":[NSString stringWithFormat:@"%ld",score]
+                                 @"Score":[NSString stringWithFormat:@"%ld",score],
+                                 @"ComType":@(ComType)
                                  };
         
         NSDictionary *params = @{

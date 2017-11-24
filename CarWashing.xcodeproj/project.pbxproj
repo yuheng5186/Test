@@ -89,6 +89,8 @@
 		181440001FAA0A6300715E90 /* HotSecondDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18143FFF1FAA0A6300715E90 /* HotSecondDetailCollectionViewCell.m */; };
 		1816A4751F8DB7A5004A6835 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1816A4741F8DB7A5004A6835 /* MapKit.framework */; };
 		1816A4851F8E1AE1004A6835 /* CyMapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1816A4841F8E1AE1004A6835 /* CyMapModel.m */; };
+		1817468C1FC7EE3200135AFA /* MyLibListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1817468A1FC7EE3200135AFA /* MyLibListCollectionViewCell.m */; };
+		1817468D1FC7EE3200135AFA /* MyLibListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1817468B1FC7EE3200135AFA /* MyLibListCollectionViewCell.xib */; };
 		181851231FA99A10003A3A47 /* CYUserCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181851211FA99A10003A3A47 /* CYUserCarTableViewCell.m */; };
 		181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92B71F1F364A0006511E /* MenuTabBarController.m */; };
 		181E92BB1F1F36710006511E /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BA1F1F36710006511E /* BaseController.m */; };
@@ -565,6 +567,9 @@
 		1816A4741F8DB7A5004A6835 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		1816A4831F8E1AE1004A6835 /* CyMapModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyMapModel.h; sourceTree = "<group>"; };
 		1816A4841F8E1AE1004A6835 /* CyMapModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyMapModel.m; sourceTree = "<group>"; };
+		181746891FC7EE3200135AFA /* MyLibListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyLibListCollectionViewCell.h; sourceTree = "<group>"; };
+		1817468A1FC7EE3200135AFA /* MyLibListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyLibListCollectionViewCell.m; sourceTree = "<group>"; };
+		1817468B1FC7EE3200135AFA /* MyLibListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyLibListCollectionViewCell.xib; sourceTree = "<group>"; };
 		181851201FA99A10003A3A47 /* CYUserCarTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYUserCarTableViewCell.h; sourceTree = "<group>"; };
 		181851211FA99A10003A3A47 /* CYUserCarTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYUserCarTableViewCell.m; sourceTree = "<group>"; };
 		181E92B61F1F364A0006511E /* MenuTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTabBarController.h; sourceTree = "<group>"; };
@@ -1306,6 +1311,9 @@
 			children = (
 				180D41B81FC3F3BE007D5D34 /* MyExploitViewController.h */,
 				180D41B91FC3F3BE007D5D34 /* MyExploitViewController.m */,
+				181746891FC7EE3200135AFA /* MyLibListCollectionViewCell.h */,
+				1817468A1FC7EE3200135AFA /* MyLibListCollectionViewCell.m */,
+				1817468B1FC7EE3200135AFA /* MyLibListCollectionViewCell.xib */,
 				18277E2D1FC50CD700610CC3 /* CyStrategyViewController.h */,
 				18277E2E1FC50CD700610CC3 /* CyStrategyViewController.m */,
 			);
@@ -2897,6 +2905,7 @@
 				18277E421FC5480B00610CC3 /* MyInteractMessageCell.xib in Resources */,
 				18B803821F1DA2A300B52432 /* Assets.xcassets in Resources */,
 				501672321F297FF000384186 /* problemCenter.plist in Resources */,
+				1817468D1FC7EE3200135AFA /* MyLibListCollectionViewCell.xib in Resources */,
 				5094A6301F346E4200407808 /* SuccessPayCell.xib in Resources */,
 				180959641FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.xib in Resources */,
 				501672431F29D26C00384186 /* MemberView.xib in Resources */,
@@ -3247,6 +3256,7 @@
 				1805AC921F386FA800FD0844 /* TPKeyboardAvoidingTableView.m in Sources */,
 				18ED28AD1FB886C900C0CC92 /* AddDriverLicenseViewController.m in Sources */,
 				5042E3561F33165C00CD140F /* NewPagedFlowView.m in Sources */,
+				1817468C1FC7EE3200135AFA /* MyLibListCollectionViewCell.m in Sources */,
 				180599B91FA17899003EAD1E /* TLMenuButtonView.m in Sources */,
 				5097FDFC1F2ECE0B002EF8F8 /* TicketCashView.m in Sources */,
 				180D41BA1FC3F3BE007D5D34 /* MyExploitViewController.m in Sources */,

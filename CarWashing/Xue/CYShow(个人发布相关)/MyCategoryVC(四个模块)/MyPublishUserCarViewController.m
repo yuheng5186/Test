@@ -73,7 +73,9 @@
         _CYUserCarTableView.dataSource = self;
         _CYUserCarTableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
         _CYUserCarTableView.rowHeight = 145*Main_Screen_Height/667;
-        
+        _CYUserCarTableView.estimatedRowHeight = 0;
+        _CYUserCarTableView.estimatedSectionFooterHeight = 0;
+        _CYUserCarTableView.estimatedSectionHeaderHeight = 0;
         self.noneLabel = [[UILabel alloc]init];
         self.noneLabel.frame = CGRectMake(Main_Screen_Width/2-100, Main_Screen_Height/2-200, 200, 100);
         self.noneLabel.backgroundColor = [UIColor grayColor];
@@ -112,6 +114,7 @@
     detailController.loopNum = model.Mileage;
     detailController.carBrithYear = model.Manufacture;
     detailController.deleteStr = @"是";
+    detailController.DeleteType = 3;
     [self.navigationController pushViewController:detailController animated:YES];
 }
 
