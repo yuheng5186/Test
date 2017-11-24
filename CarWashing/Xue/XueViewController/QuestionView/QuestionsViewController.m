@@ -70,7 +70,7 @@
                              };
     
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/GetActivityList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"--数据%@",dict);
+        NSLog(@"--提问数据%@",dict[@"JsonData"]);
         if ([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]) {
             //获取json数组
 

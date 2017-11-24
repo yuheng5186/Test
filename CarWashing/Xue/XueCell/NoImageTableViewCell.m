@@ -41,29 +41,29 @@
     [self.contentView addSubview:_titleLable];
     
     
-    _timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(12, 170, 150, 30)];
+    _timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(12, 60, 150, 30)];
     _timeLabel.text = @"15:40";
     _timeLabel.font = [UIFont systemFontOfSize:14];
     _timeLabel.textColor = [UIColor colorFromHex:@"#999999"];
     [self.contentView addSubview:_timeLabel];
     
-    _amazingNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-60, 170, 30, 30)];
-    _amazingNumberLabel.text = @"2333";
+    _amazingNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-45, 60, 30, 30)];
+    _amazingNumberLabel.text = @"233";
     _amazingNumberLabel.textAlignment = NSTextAlignmentRight;
     _amazingNumberLabel.font = [UIFont systemFontOfSize:14];
     _amazingNumberLabel.textColor = [UIColor colorFromHex:@"#999999"];
     [self.contentView addSubview:_amazingNumberLabel];
     
-    UIButton *goodButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-65, 175, 20, 20)];
+    UIButton *goodButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-65, 65, 20, 20)];
     [goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
     [self.contentView addSubview:goodButton];
-    _commentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-105, 170, 30, 30)];
+    _commentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-105, 60, 30, 30)];
     _commentNumLabel.textColor = [UIColor colorFromHex:@"#999999"];
-    _commentNumLabel.text = @"2333";
+    _commentNumLabel.text = @"233";
     _commentNumLabel.font = [UIFont systemFontOfSize:14];
     [self.contentView addSubview:_commentNumLabel];
     
-    UIButton *commButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-130, 175, 20, 20)];
+    UIButton *commButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width-130, 65, 20, 20)];
     [commButton setImage:[UIImage imageNamed:@"faxianxiaoxi"] forState:UIControlStateNormal];
     [self.contentView addSubview:commButton];
     

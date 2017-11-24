@@ -13,6 +13,6 @@
 @property(strong,nonatomic)UILabel *timeLabel;
 @property(strong,nonatomic)UILabel *amazingNumberLabel;
 @property(strong,nonatomic)UILabel *commentNumLabel;
-
+//-(void)configCell:(CYHotTopicModel*)model;
 
 @end
