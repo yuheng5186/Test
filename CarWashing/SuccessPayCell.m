@@ -50,6 +50,7 @@
         starCommentVC.orderid = self.orderid;
         starCommentVC.SerMerCode = self.SerMerCode;
         starCommentVC.SerCode = self.SerCode;
+        starCommentVC.ComType = self.OrderType;
         
         [self.delegate pushController:starCommentVC animated:YES];
     }

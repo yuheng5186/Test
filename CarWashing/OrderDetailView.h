@@ -22,6 +22,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *orderid;
 @property (weak, nonatomic) IBOutlet UILabel *ordertime;
 @property (weak, nonatomic) IBOutlet UILabel *paymethod;
+@property (weak, nonatomic) IBOutlet UILabel *left1;
+@property (weak, nonatomic) IBOutlet UILabel *left2;
+@property (weak, nonatomic) IBOutlet UILabel *left3;
 
 + (instancetype)orderDetailView;
 

@@ -37,6 +37,9 @@ static NSString *id_successPayCell = @"id_successPayCell";
 - (UITableView *)commentOrderView {
     if (!_commentOrderView) {
         UITableView *commentOrderView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, self.view.bounds.size.height - 64 -44) style:UITableViewStyleGrouped];
+        commentOrderView.estimatedRowHeight = 0;
+        commentOrderView.estimatedSectionFooterHeight = 0;
+        commentOrderView.estimatedSectionHeaderHeight = 0;
         _commentOrderView = commentOrderView;
         [self.view addSubview:_commentOrderView];
     }
@@ -141,8 +144,8 @@ static NSString *id_successPayCell = @"id_successPayCell";
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
     
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/GetOrderRecordsList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-    
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/GetOrderRecordsWashList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            NSLog(@"%@",dict);
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
                 self.page = 0;
@@ -161,7 +164,8 @@ static NSString *id_successPayCell = @"id_successPayCell";
                     for(NSDictionary *dic in arr)
                     {
                         Order *order = [[Order alloc]init];
-                        [order setValuesForKeysWithDictionary:dic];
+                        [order mj_setKeyValues:dic];
+//                        [order setValuesForKeysWithDictionary:dic];
                         [self.DelayCommentDataArray addObject:order];
                     }
                     
@@ -196,7 +200,7 @@ static NSString *id_successPayCell = @"id_successPayCell";
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
     
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/GetOrderRecordsList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/GetOrderRecordsWashList",Khttp] success:^(NSDictionary *dict, BOOL success) {
     
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
@@ -256,12 +260,28 @@ static NSString *id_successPayCell = @"id_successPayCell";
     
     SuccessPayCell *commentCell = [tableView dequeueReusableCellWithIdentifier:id_successPayCell forIndexPath:indexPath];
     commentCell.delegate = self;
+    if (order.OrderType==3&&order.PayMethod==3) {
+        commentCell.washTypeLabel.text = [NSString stringWithFormat:@"%@",order.OrderDesc];
+        commentCell.priceLabel.text = [NSString stringWithFormat:@"%@",order.SerName];
+        commentCell.timesLabel.text = @"共1次";
+    }else{
+        commentCell.priceLabel.text = [NSString stringWithFormat:@"¥%@",order.PaypriceAmount];
+        commentCell.washTypeLabel.text = [NSString stringWithFormat:@"%@",order.OrderDesc];
+        commentCell.timesLabel.text = [NSString stringWithFormat:@"%@",order.SerName];;
+    }
     
+    
+    [commentCell.stateButton setTitle:@"去评价" forState:UIControlStateNormal];
+    [commentCell.stateButton setEnabled:YES];
+    [commentCell.stateButton setTitleColor:[UIColor colorFromHex:@"#0161a1"] forState:UIControlStateNormal];
+    commentCell.stateButton.layer.cornerRadius = 12.5*Main_Screen_Height/667;
+    commentCell.stateButton.layer.borderWidth = 1;
+    commentCell.stateButton.layer.borderColor = [UIColor colorFromHex:@"#0161a1"].CGColor;
     commentCell.orderLabel.text = [NSString stringWithFormat:@"订单号: %@",order.OrderCode];
-    commentCell.priceLabel.text = [NSString stringWithFormat:@"￥%@",order.PaypriceAmount];
-    commentCell.washTypeLabel.text = order.SerName;
+    
     
     commentCell.orderid = order.OrderCode;
+    commentCell.OrderType = order.OrderType;
     commentCell.SerMerCode = [NSString stringWithFormat:@"%ld",order.MerCode];
     commentCell.SerCode = [NSString stringWithFormat:@"%ld",order.SerCode];
     

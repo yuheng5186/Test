@@ -21,5 +21,6 @@
 @property (copy, nonatomic)  NSString *orderid;
 @property (copy, nonatomic)  NSString *ordertime;
 @property (copy, nonatomic)  NSString *paymethod;
-
+@property (copy, nonatomic)  NSString *showType;
+@property (copy, nonatomic)  NSString *serName;
 @end

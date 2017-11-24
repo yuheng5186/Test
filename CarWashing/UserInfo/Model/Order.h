@@ -25,6 +25,9 @@
 @property(nonatomic,copy)NSString *SerName;//服务名称
 @property(nonatomic,copy)NSString *OrderDesc;//订单描述
 
+@property(nonatomic)NSInteger OrderType;//
+
+
 @property(nonatomic)NSInteger PayMethod;//1.微信支付;2支付宝支付
 
 @property(nonatomic)id<Optional>PayableAmount;//应付金额

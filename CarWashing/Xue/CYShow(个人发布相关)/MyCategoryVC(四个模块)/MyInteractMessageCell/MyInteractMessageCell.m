@@ -13,6 +13,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.dateLabel.hidden=YES;
+    self.headerimageView.layer.cornerRadius = 35/2;
+    self.headerimageView.layer.masksToBounds = YES;
 }
 - (IBAction)praiseBtnClick:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(cell:button:)]) {
@@ -33,7 +35,6 @@
     self.timeLabel.text = model.ActDate;
     self.dateLabel.text = model.ActDate;
     self.titleLabel.text = model.ActivityName;
-    self.commentLabel.text=[NSString stringWithFormat:@" %@:  %@",model.actModelList[0][@"CommentUserName"],model.actModelList[0][@"Comment"]];
 }
 
 @end

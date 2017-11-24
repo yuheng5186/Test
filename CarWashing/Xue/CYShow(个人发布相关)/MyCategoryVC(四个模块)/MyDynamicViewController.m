@@ -31,13 +31,14 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.page = 0;
     [self getData];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
     [self.contentView addSubview:self.hotTable];
-    self.page = 0;
+    
 }
 -(void)getData
 {
@@ -76,6 +77,9 @@
         _hotTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-64) style:(UITableViewStylePlain)];
         _hotTable.delegate = self;
         _hotTable.dataSource = self;
+        _hotTable.estimatedRowHeight = 0;
+        _hotTable.estimatedSectionFooterHeight = 0;
+        _hotTable.estimatedSectionHeaderHeight = 0;
         _hotTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_hotTable registerClass:[HotTableViewCell class] forCellReuseIdentifier:@"OneImage"];
         [_hotTable registerClass:[AnotherHotTableViewCell class] forCellReuseIdentifier:@"collect"];
@@ -123,9 +127,11 @@
     CYHotTopicModel * model = self.modelArray[indexPath.row];
     DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
     detailController.comeTypeString = @"2";
+    detailController.DeleteType = 1;
     detailController.showType = @"高兴";
     detailController.hidesBottomBarWhenPushed       = YES;
     detailController.ActivityCode                   = model.ActivityCode;
+    detailController.deleteStr = @"是";
     [self.navigationController pushViewController:detailController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

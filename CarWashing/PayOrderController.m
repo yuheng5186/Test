@@ -37,6 +37,9 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
 - (UITableView *)payOrderView {
     if (!_payOrderView) {
         UITableView *payOrderView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, self.view.bounds.size.height - 64 -44) style:UITableViewStyleGrouped];
+        payOrderView.estimatedRowHeight = 0;
+        payOrderView.estimatedSectionFooterHeight = 0;
+        payOrderView.estimatedSectionHeaderHeight = 0;
         _payOrderView = payOrderView;
         [self.view addSubview:_payOrderView];
     }
@@ -136,7 +139,7 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
     
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/GetOrderRecordsList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/GetOrderRecordsWashList",Khttp] success:^(NSDictionary *dict, BOOL success) {
     
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
@@ -193,7 +196,7 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
     
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/GetOrderRecordsList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/GetOrderRecordsWashList",Khttp] success:^(NSDictionary *dict, BOOL success) {
     
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {

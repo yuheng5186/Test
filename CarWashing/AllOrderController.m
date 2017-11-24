@@ -39,6 +39,9 @@ static NSString *id_cancelCell = @"id_cancelCell";
     
     if (!_allOrderListView) {
         UITableView *allOrderListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height  - 64 - 44) style:UITableViewStyleGrouped];
+        allOrderListView.estimatedRowHeight = 0;
+        allOrderListView.estimatedSectionFooterHeight = 0;
+        allOrderListView.estimatedSectionHeaderHeight = 0;
         _allOrderListView = allOrderListView;
         [self.view addSubview:_allOrderListView];
     }
@@ -144,8 +147,8 @@ static NSString *id_cancelCell = @"id_cancelCell";
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/GetOrderRecordsList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/GetOrderRecordsWashList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+         NSLog(@"---所有订单%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
              //1未支付   2 待评价   3、完成订单、4.
@@ -201,8 +204,8 @@ static NSString *id_cancelCell = @"id_cancelCell";
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/GetOrderRecordsList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@OrderRecords/GetOrderRecordsWashList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"---加载更多订单%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             
@@ -305,8 +308,17 @@ else if(order.PayState == 4){
 }else{
         SuccessPayCell *successCell = [tableView dequeueReusableCellWithIdentifier:id_successPayCell forIndexPath:indexPath];
         successCell.delegate = self;
-        
+    
         if (order.PayState==3) {
+            if (order.OrderType==3&&order.PayMethod==3) {
+                successCell.priceLabel.text = [NSString stringWithFormat:@"%@",order.SerName];
+                successCell.washTypeLabel.text = [NSString stringWithFormat:@"%@",order.OrderDesc];
+                 successCell.timesLabel.text = @"洗车卡抵扣";
+                
+            }else{
+                successCell.priceLabel.text = [NSString stringWithFormat:@"¥%@",order.PaypriceAmount];
+                successCell.washTypeLabel.text = [NSString stringWithFormat:@"%@",order.SerName];
+            }
             successCell.stateLabel.text=@"交易成功";
             [successCell.stateButton setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
             [successCell.stateButton setTitle:@"已评价" forState:UIControlStateNormal];
@@ -315,6 +327,17 @@ else if(order.PayState == 4){
             successCell.stateButton.layer.borderWidth = 1;
             successCell.stateButton.layer.borderColor = [UIColor colorFromHex:@"#999999"].CGColor;
         }else{
+            if (order.OrderType==3&&order.PayMethod==3) {
+                successCell.washTypeLabel.text = [NSString stringWithFormat:@"%@",order.OrderDesc];
+                successCell.priceLabel.text = [NSString stringWithFormat:@"%@",order.SerName];
+                successCell.timesLabel.text = @"共1次";
+            }else{
+                successCell.priceLabel.text = [NSString stringWithFormat:@"¥%@",order.PaypriceAmount];
+                successCell.washTypeLabel.text = [NSString stringWithFormat:@"%@",order.OrderDesc];
+                successCell.timesLabel.text = @"共1次";
+            }
+            
+         
             [successCell.stateButton setTitle:@"去评价" forState:UIControlStateNormal];
             [successCell.stateButton setEnabled:YES];
             [successCell.stateButton setTitleColor:[UIColor colorFromHex:@"#0161a1"] forState:UIControlStateNormal];
@@ -325,11 +348,10 @@ else if(order.PayState == 4){
             
         }
         successCell.orderLabel.text = [NSString stringWithFormat:@"订单号: %@",order.OrderCode];
-        successCell.priceLabel.text = [NSString stringWithFormat:@"￥%@",order.PaypriceAmount];
-        successCell.washTypeLabel.text = order.SerName;
-        
-        
+//        successCell.priceLabel.text = [NSString stringWithFormat:@"￥%@",order.PaypriceAmount];
+    
         successCell.orderid = order.OrderCode;
+        successCell.OrderType = order.OrderType;
         successCell.SerMerCode = [NSString stringWithFormat:@"%ld",order.MerCode];
         successCell.SerCode = [NSString stringWithFormat:@"%ld",order.SerCode];
         return successCell;
@@ -339,10 +361,31 @@ else if(order.PayState == 4){
     Order *order = (Order *)[self.OrderDataArray objectAtIndex:indexPath.section];
 //    if(order.PayState == 3)
 //    {
+    if (order.OrderType==3&&order.PayMethod==3) {
+        OrderDetailController *orderDetailVC = [[OrderDetailController alloc] init];
+        orderDetailVC.showType = @"1";
+        orderDetailVC.hidesBottomBarWhenPushed = YES;
+        orderDetailVC.MerCode = order.MerCode;
+        orderDetailVC.MerChantService = order.OrderDesc;
+        orderDetailVC.ShijiPrice = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
+        orderDetailVC.Jprice = [NSString stringWithFormat:@"%@",order.PayableAmount];
+        orderDetailVC.youhuiprice = [NSString stringWithFormat:@"%@",order.DeductionAmount];
+        orderDetailVC.shijiPrice1 = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
+        orderDetailVC.orderid = order.OrderCode;
+        orderDetailVC.ordertime = order.PayTimes;
+        orderDetailVC.serName = [NSString stringWithFormat:@"%@",order.SerName];
+        orderDetailVC.paymethod = @"微信支付";
+        if(order.PayMethod == 2)
+        {
+            orderDetailVC.paymethod = @"支付宝支付";
+        }
+        [self.navigationController pushViewController:orderDetailVC animated:YES];
+        
+    }else{
         OrderDetailController *orderDetailVC = [[OrderDetailController alloc] init];
         orderDetailVC.hidesBottomBarWhenPushed = YES;
         orderDetailVC.MerCode = order.MerCode;
-        orderDetailVC.MerChantService = order.SerName;
+        orderDetailVC.MerChantService = order.OrderDesc;
         orderDetailVC.ShijiPrice = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
         orderDetailVC.Jprice = [NSString stringWithFormat:@"%@",order.PayableAmount];
         orderDetailVC.youhuiprice = [NSString stringWithFormat:@"%@",order.DeductionAmount];
@@ -355,7 +398,9 @@ else if(order.PayState == 4){
             orderDetailVC.paymethod = @"支付宝支付";
         }
         [self.navigationController pushViewController:orderDetailVC animated:YES];
-//    }
+    }
+    
+    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     Order *order = (Order *)[self.OrderDataArray objectAtIndex:indexPath.section];

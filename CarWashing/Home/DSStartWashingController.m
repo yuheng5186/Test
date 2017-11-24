@@ -109,7 +109,7 @@
     adVertist.backgroundColor=[UIColor redColor];
 //    [adVertist sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,dict[@"JsonData"][0][@"AdvertisImg"]]]];
     [adVertist sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.adverUrl]]];
-    [self.contentView addSubview:adVertist];
+    [self.view addSubview:adVertist];
     
     
     
@@ -550,19 +550,18 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark-----红包相关
+-(void)creatPacket{
+    UIView* backView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
+    backView.backgroundColor=[UIColor blackColor];
+    backView.alpha = 0.7;
+    [self.view addSubview:backView];
+    UIImageView * ExitimageView = [[UIImageView alloc]initWithFrame:CGRectMake(Main_Screen_Width-50, 10, 50, 50)];
+    ExitimageView.image =[UIImage imageNamed:@"shoucang"];
+    [self.view addSubview:ExitimageView];
+    UIButton * exitBtn =[UIButton buttonWithType:UIButtonTypeCustom];
+    [exitBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [self.view addSubview:exitBtn];
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
