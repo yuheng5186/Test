@@ -138,15 +138,35 @@
     hud.mode = MBProgressHUDModeDeterminate;
     hud.labelText = @"发布中";
     
+//    NSString *sendString = [NSString new];
     
-    NSMutableArray *base64ImageArray = [[NSMutableArray alloc]init];
-    for (int i = 0; i<_selectedPhotos.count; i++) {
-        NSData *imageData = UIImageJPEGRepresentation(_selectedPhotos[i], 1.0);
-        NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
-        [base64ImageArray addObject:encodeImage];
-    }
-    NSString *sendString = [base64ImageArray componentsJoinedByString:@","];
+//    if (_selectedPhotos.count == 1) {
+//        NSData *imageData = UIImageJPEGRepresentation(_selectedPhotos[0], 7.0);
+//        sendString = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
+//    }else{
+//        NSMutableArray *base64ImageArray = [[NSMutableArray alloc]init];
+//        for (int i = 0; i<_selectedPhotos.count; i++) {
+//            NSData *imageData = UIImageJPEGRepresentation(_selectedPhotos[i], 1.0);
+//            NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
+//            [base64ImageArray addObject:encodeImage];
+//        }
+//        sendString = [base64ImageArray componentsJoinedByString:@","];
+//    }
 
+    NSLog(@"图片--%@",_selectedPhotos);
+    NSString *sendString =  @"";
+    if (_selectedPhotos.count == 0) {
+        sendString = @"";
+    }else{
+        NSMutableArray *base64ImageArray = [[NSMutableArray alloc]init];
+        for (int i = 0; i<_selectedPhotos.count; i++) {
+            UIImage *tempImage = _selectedPhotos[i];
+            NSData *imageData = UIImageJPEGRepresentation(tempImage, 0.7);
+            NSString *encodeImage = [imageData base64EncodedStringWithOptions:(NSDataBase64Encoding64CharacterLineLength)];
+            [base64ImageArray addObject:encodeImage];
+        }
+        sendString = [base64ImageArray componentsJoinedByString:@","];
+    }
     
     
     NSDictionary *mulDic = @{
@@ -164,7 +184,7 @@
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool base64convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool base64convertToJsonData:mulDic]]]
                              };
-    //    NSLog(@"%@",mulDic);
+    NSLog(@"照片参数%@",mulDic);
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Activity/AddActivityInfoIOS",Khttp] success:^(NSDictionary *dict, BOOL success) {
         NSLog(@"%@",dict);
         NSLog(@"%@",dict[@"ResultMessage"]);
@@ -300,6 +320,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [contentTextField resignFirstResponder];
     if (indexPath.row == _selectedPhotos.count) {
         BOOL showSheet = YES;
         if (showSheet) {
@@ -425,39 +446,41 @@
 
 
 
-- (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
-    if ([type isEqualToString:@"public.image"]) {
-        TZImagePickerController *tzImagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:9 delegate:self];
-        tzImagePickerVc.sortAscendingByModificationDate = YES;
-        [tzImagePickerVc showProgressHUD];
-        UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        // save photo and get asset / 保存图片，获取到asset
-        [[TZImageManager manager] savePhotoWithImage:image completion:^(NSError *error){
-            if (error) { // 如果保存失败，基本是没有相册权限导致的...
-                [tzImagePickerVc hideProgressHUD];
-                NSLog(@"图片保存失败 %@",error);
-                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"无法保存图片" message:@"请在iPhone的""设置-隐私-相册""中允许访问相册" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"设置", nil];
-                alert.tag = 1;
-                [alert show];
-            } else {
-                [[TZImageManager manager] getCameraRollAlbum:NO allowPickingImage:YES completion:^(TZAlbumModel *model) {
-                    [[TZImageManager manager] getAssetsFromFetchResult:model.result allowPickingVideo:NO allowPickingImage:YES completion:^(NSArray<TZAssetModel *> *models) {
-                        [tzImagePickerVc hideProgressHUD];
-                        TZAssetModel *assetModel = [models firstObject];
-                        if (tzImagePickerVc.sortAscendingByModificationDate) {
-                            assetModel = [models lastObject];
-                        }
-                        [_selectedAssets addObject:assetModel.asset];
-                        [_selectedPhotos addObject:image];
-                        [_collectionView reloadData];
-                    }];
-                }];
-            }
-        }];
-    }
-}
+//- (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+//    [picker dismissViewControllerAnimated:YES completion:nil];
+//    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+//    if ([type isEqualToString:@"public.image"]) {
+//        TZImagePickerController *tzImagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:9 delegate:self];
+//        tzImagePickerVc.sortAscendingByModificationDate = YES;
+//        [tzImagePickerVc showProgressHUD];
+//        UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+//        // save photo and get asset / 保存图片，获取到asset
+//        [[TZImageManager manager] savePhotoWithImage:image completion:^(NSError *error){
+//            if (error) { // 如果保存失败，基本是没有相册权限导致的...
+//                [tzImagePickerVc hideProgressHUD];
+//                NSLog(@"图片保存失败 %@",error);
+//                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"无法保存图片" message:@"请在iPhone的""设置-隐私-相册""中允许访问相册" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"设置", nil];
+//                alert.tag = 1;
+//                [alert show];
+//            } else {
+//                [[TZImageManager manager] getCameraRollAlbum:NO allowPickingImage:YES completion:^(TZAlbumModel *model) {
+//                    [[TZImageManager manager] getAssetsFromFetchResult:model.result allowPickingVideo:NO allowPickingImage:YES completion:^(NSArray<TZAssetModel *> *models) {
+//                        [tzImagePickerVc hideProgressHUD];
+//                        TZAssetModel *assetModel = [models firstObject];
+//                        if (tzImagePickerVc.sortAscendingByModificationDate) {
+//                            assetModel = [models lastObject];
+//                        }
+//                        [_selectedAssets addObject:assetModel.asset];
+//                        [_selectedPhotos addObject:image];
+//                        [_collectionView reloadData];
+//                    }];
+//                }];
+//            }
+//        }];
+//    }
+//}
+
+
 
 
 
@@ -541,6 +564,40 @@
     // }];
     [_collectionView reloadData];
     // _collectionView.contentSize = CGSizeMake(0, ((_selectedPhotos.count + 2) / 3 ) * (_margin + _itemWH));
+}
+
+- (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    if ([type isEqualToString:@"public.image"]) {
+        TZImagePickerController *tzImagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:9 delegate:self];
+        tzImagePickerVc.sortAscendingByModificationDate = YES;
+        [tzImagePickerVc showProgressHUD];
+        UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+        // save photo and get asset / 保存图片，获取到asset
+        [[TZImageManager manager] savePhotoWithImage:image completion:^(NSError *error){
+            if (error) { // 如果保存失败，基本是没有相册权限导致的...
+                [tzImagePickerVc hideProgressHUD];
+                NSLog(@"图片保存失败 %@",error);
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"无法保存图片" message:@"请在iPhone的""设置-隐私-相册""中允许访问相册" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"设置", nil];
+                alert.tag = 1;
+                [alert show];
+            } else {
+                [[TZImageManager manager] getCameraRollAlbum:NO allowPickingImage:YES completion:^(TZAlbumModel *model) {
+                    [[TZImageManager manager] getAssetsFromFetchResult:model.result allowPickingVideo:NO allowPickingImage:YES completion:^(NSArray<TZAssetModel *> *models) {
+                        [tzImagePickerVc hideProgressHUD];
+                        TZAssetModel *assetModel = [models firstObject];
+                        if (tzImagePickerVc.sortAscendingByModificationDate) {
+                            assetModel = [models lastObject];
+                        }
+                        [_selectedAssets addObject:assetModel.asset];
+                        [_selectedPhotos addObject:image];
+                        [_collectionView reloadData];
+                    }];
+                }];
+            }
+        }];
+    }
 }
 
 #pragma mark Click Event

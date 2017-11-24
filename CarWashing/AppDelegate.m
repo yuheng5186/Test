@@ -169,6 +169,7 @@
     return [WXApi handleOpenURL:url delegate:self];
 }
 
+#pragma mark ----支付宝相关
 - (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
     if ([url.host isEqualToString:@"safepay"]) {
@@ -291,6 +292,8 @@
     
     
 }
+
+#pragma mark ----微信支付回调
 - (void)onResp:(BaseResp *)resp
 {
     NSString *payResoult = [NSString stringWithFormat:@"%d", resp.errCode];
