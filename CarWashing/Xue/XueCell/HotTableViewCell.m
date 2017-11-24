@@ -36,7 +36,7 @@
     
     _titleLable = [[UILabel alloc]initWithFrame:CGRectMake(12, 20, 200, 30)];
     _titleLable.text = @"我今天第1234天上班";
-    _titleLable.font = [UIFont systemFontOfSize:17.0];
+    _titleLable.font = [UIFont systemFontOfSize:18.0];
     _titleLable.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     [self.contentView addSubview:_titleLable];
     

@@ -153,7 +153,7 @@
     
     UILabel *userName                   = [UILabel new];
     userName.textColor                  = [UIColor blackColor];
-    userName.font                       = [UIFont systemFontOfSize:14];
+    userName.font                       = [UIFont systemFontOfSize:17];
     userName.textColor                  = [UIColor colorFromHex:@"#3a3a3a"];
     userName.text                       = newsDetail.FromusrName;
     self.userName                       = userName;
@@ -168,7 +168,7 @@
     
     UILabel *seeNumberLabel                   = [UILabel new];
     seeNumberLabel.textColor                  = [UIColor blackColor];
-    seeNumberLabel.font                       = [UIFont systemFontOfSize:12];
+    seeNumberLabel.font                       = [UIFont systemFontOfSize:16];
     seeNumberLabel.textColor                  = [UIColor colorFromHex:@"#868686"];
     seeNumberLabel.text                       = [NSString stringWithFormat:@"%ld",newsDetail.Readcount];
     self.seeNumber                            = seeNumberLabel;
@@ -199,7 +199,7 @@
     UILabel *sayTimeLab                 = [UILabel new];
     sayTimeLab.textColor                = [UIColor colorFromHex:@"#999999"];
     sayTimeLab.text                     = newsDetail.ActDate;
-    sayTimeLab.font                     = [UIFont systemFontOfSize:11*Main_Screen_Height/667];
+    sayTimeLab.font                     = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     self.sayTime                        = sayTimeLab;
     [header addSubview:sayTimeLab];
     
@@ -235,7 +235,7 @@
     }
     ////////////////////////////////////////////////////////////
     
-    textTitleLabel.font                     = [UIFont systemFontOfSize:14];
+    textTitleLabel.font                     = [UIFont systemFontOfSize:16];
     self.textTitleLabel                     = textTitleLabel;
     [backgroudView addSubview:textTitleLabel];
     
@@ -249,7 +249,7 @@
     UILabel *textContentLabel                 = [UILabel new];
     textContentLabel.textColor                = [UIColor colorFromHex:@"#999999"];
     
-    textContentLabel.font                     = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    textContentLabel.font                     = [UIFont systemFontOfSize:16];
     
     NSString *tempStringJack = [[NSString alloc]init];
     
@@ -273,6 +273,8 @@
 
     textContentLabel.numberOfLines            = 0;
     self.textContentLabel                     = textContentLabel;
+    self.textContentLabel.font = [UIFont systemFontOfSize:15];
+    self.textContentLabel.textColor = [UIColor grayColor];
     [backgroudView addSubview:textContentLabel];
     
     
@@ -425,7 +427,7 @@
     self.userSayTextField.delegate       = self;
     self.userSayTextField.returnKeyType  = UIReturnKeyDone;
     self.userSayTextField.textAlignment  = NSTextAlignmentLeft;
-    self.userSayTextField.font           = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+    self.userSayTextField.font           = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     self.userSayTextField.backgroundColor= [UIColor whiteColor];
     self.userSayTextField.layer.cornerRadius    = Main_Screen_Height*20/667;
     self.userSayTextField.layer.borderWidth     = 1;
@@ -458,7 +460,7 @@
     
     UILabel *sayShowLabel                   = [UILabel new];
     sayShowLabel.textColor                  = [UIColor colorFromHex:@"#999999"];
-    sayShowLabel.font                       = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+    sayShowLabel.font                       = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     sayShowLabel.text                       = @"369";
 //    sayShowLabel.backgroundColor=[UIColor whiteColor];
     self.sayShowLabel                       = sayShowLabel;
@@ -596,7 +598,7 @@
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
 //            NSLog(@"查看详情数据　%@",dict);
-//            NSLog(@"详情数据%@",dict[@"JsonData"]);
+            NSLog(@"详情数据%@",dict[@"JsonData"]);
             //是什么车
             titleLabel.text=[NSString stringWithFormat:@"%@%@",dict[@"JsonData"][@"CarBrand"],dict[@"JsonData"][@"CarType"]];
             

@@ -387,6 +387,8 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [contentTextField resignFirstResponder];
+    [distanceTextField resignFirstResponder];
     if (indexPath.row == _selectedPhotos.count) {
         BOOL showSheet = YES;
         if (showSheet) {

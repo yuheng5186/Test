@@ -133,7 +133,7 @@
        if(arrImage.count > 1 && arrImage.count < 3){
             return 190;
         }else if (arrImage.count <= 6 && arrImage.count >= 3){
-            return 270;
+            return 265;
         }
         return 350;
     }

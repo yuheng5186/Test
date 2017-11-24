@@ -37,26 +37,26 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="杨大爷" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ukh-XS-gsG">
-                                <rect key="frame" x="65" y="10" width="110" height="14.5"/>
+                                <rect key="frame" x="65" y="12" width="110" height="14.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="hlq-Fm-WQw"/>
                                     <constraint firstAttribute="width" constant="110" id="u4o-5G-piE"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="杨大爷" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rL-wR-1FR">
-                                <rect key="frame" x="65" y="32" width="110" height="14.5"/>
+                                <rect key="frame" x="65" y="34" width="110" height="14.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="hdi-GH-vJt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.58060358499999998" green="0.58060358499999998" blue="0.58060358499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="杨大爷" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gS9-SV-afv">
-                                <rect key="frame" x="230" y="10" width="80" height="14.5"/>
+                                <rect key="frame" x="230" y="12" width="80" height="14.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="cut-eh-8mm"/>
                                 </constraints>
@@ -78,14 +78,14 @@
                         <constraints>
                             <constraint firstItem="4b0-Pf-FRH" firstAttribute="leading" secondItem="aOn-oC-caW" secondAttribute="leading" constant="15" id="22x-Cr-nnt"/>
                             <constraint firstItem="gS9-SV-afv" firstAttribute="top" secondItem="Ukh-XS-gsG" secondAttribute="top" id="7Bj-vL-jOZ"/>
-                            <constraint firstItem="Ukh-XS-gsG" firstAttribute="top" secondItem="4b0-Pf-FRH" secondAttribute="top" id="7rC-4j-hnl"/>
+                            <constraint firstItem="Ukh-XS-gsG" firstAttribute="top" secondItem="4b0-Pf-FRH" secondAttribute="top" constant="2" id="7rC-4j-hnl"/>
                             <constraint firstItem="6rL-wR-1FR" firstAttribute="leading" secondItem="Ukh-XS-gsG" secondAttribute="leading" id="FC4-G3-1vs"/>
                             <constraint firstItem="4b0-Pf-FRH" firstAttribute="top" secondItem="aOn-oC-caW" secondAttribute="top" constant="10" id="Fwv-MN-oCS"/>
                             <constraint firstItem="6rL-wR-1FR" firstAttribute="top" secondItem="Ukh-XS-gsG" secondAttribute="bottom" constant="8" id="L0c-hx-qbw"/>
                             <constraint firstItem="gS9-SV-afv" firstAttribute="bottom" secondItem="Ukh-XS-gsG" secondAttribute="bottom" id="VnY-g9-Qmb"/>
                             <constraint firstItem="Ukh-XS-gsG" firstAttribute="leading" secondItem="4b0-Pf-FRH" secondAttribute="trailing" constant="10" id="bEh-7g-csy"/>
                             <constraint firstAttribute="trailing" secondItem="gS9-SV-afv" secondAttribute="trailing" constant="10" id="cKo-mB-aMn"/>
-                            <constraint firstItem="qnd-Xc-JgT" firstAttribute="top" secondItem="6rL-wR-1FR" secondAttribute="bottom" constant="10" id="gPq-rU-pKg"/>
+                            <constraint firstItem="qnd-Xc-JgT" firstAttribute="top" secondItem="6rL-wR-1FR" secondAttribute="bottom" constant="8" id="gPq-rU-pKg"/>
                             <constraint firstItem="qnd-Xc-JgT" firstAttribute="leading" secondItem="6rL-wR-1FR" secondAttribute="leading" id="iqZ-AE-K4Q"/>
                             <constraint firstItem="6rL-wR-1FR" firstAttribute="trailing" secondItem="Ukh-XS-gsG" secondAttribute="trailing" id="pcf-RA-elH"/>
                             <constraint firstAttribute="height" constant="90" id="qYw-wV-19z"/>
