@@ -114,21 +114,20 @@
     typeIamegView.image = [UIImage imageNamed:@"churujianghu"];
     [topVIew addSubview:typeIamegView];
     NSUInteger num = APPDELEGATE.currentUser.Level_id;
-    
     if (num == 1) {
-        typeIamegView.image = [UIImage imageNamed:@"churujianghu"];
+        typeIamegView.image = [UIImage imageNamed:@"putonghuiyuan"];
     }else if (num == 2){
-       typeIamegView.image = [UIImage imageNamed:@"churujianghu"];
+       typeIamegView.image = [UIImage imageNamed:@"baiyinhuiyuan"];
     }else if (num == 3){
-       typeIamegView.image = [UIImage imageNamed:@"churujianghu"];
+       typeIamegView.image = [UIImage imageNamed:@"huangjinhuiyuan"];
     }else if (num == 4){
-       typeIamegView.image = [UIImage imageNamed:@"churujianghu"];
+       typeIamegView.image = [UIImage imageNamed:@"bojinhuiyuan-1"];
     }else if (num == 5){
-       typeIamegView.image = [UIImage imageNamed:@"churujianghu"];
+       typeIamegView.image = [UIImage imageNamed:@"zuanshihuiyuan"];
     }else if (num == 6){
-       typeIamegView.image = [UIImage imageNamed:@"churujianghu"];
+       typeIamegView.image = [UIImage imageNamed:@"heizuanhuiyuan"];
     }else {
-       typeIamegView.image = [UIImage imageNamed:@"churujianghu"];
+       typeIamegView.image = [UIImage imageNamed:@"putonghuiyuan"];
     }
     //签到button
     signBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -287,7 +286,6 @@
                 self.activityView.delegate = self;
                 //横屏会变成一行6个, 竖屏无法一行同时显示6个, 会自动使用默认一行4个的设置.
                 self.activityView.numberOfButtonPerLine = 6;
-                
                 ButtonView *bv ;
                 
                 bv = [[ButtonView alloc]initWithText:@"微信" image:[UIImage imageNamed:@"btn_share_weixin"] handler:^(ButtonView *buttonView){
@@ -300,7 +298,6 @@
                                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                              };
-                    
                     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@InviteShare/UserShare",Khttp] success:^(NSDictionary *dict, BOOL success) {
                         NSLog(@"%@",dict);
                         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
@@ -315,11 +312,9 @@
                             urlMessage.title = [[dict objectForKey:@"JsonData"] objectForKey:@"ShareTitle"];//分享标题
                             urlMessage.description = [[dict objectForKey:@"JsonData"] objectForKey:@"ShareContent"];//分享描述
                             [urlMessage setThumbImage:[UIImage imageNamed:@"loginIcon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
-                            
                             //创建多媒体对象
                             WXWebpageObject *webObj = [WXWebpageObject object];
                             webObj.webpageUrl = [NSString stringWithFormat:@"%@",[[dict objectForKey:@"JsonData"] objectForKey:@"InviteShareUrl"]];//分享链接
-                            
                             //完成发送对象实例
                             urlMessage.mediaObject = webObj;
                             sendReq.message = urlMessage;

@@ -75,6 +75,9 @@
     UIImageView *newManImageView;
     MBProgressHUD *HUD;
     UIImageView * advertistView;
+    NSArray * gGListarr;
+    UIView * CyFootView;
+    UILabel *footerLabel;
 
 }
 
@@ -236,18 +239,18 @@
     [self.contentView addSubview:self.tableView];
     
     //tableViewFootView
-    UIView * CyFootView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 150*Main_Screen_Height/667)];
+    CyFootView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 150*Main_Screen_Height/667)];
     
     self.tableView.tableFooterView = CyFootView;
     //*****//
     advertistView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 100*Main_Screen_Height/667)];
     [CyFootView addSubview:advertistView];
-    UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, 100*Main_Screen_Height/667, Main_Screen_Width, 50*Main_Screen_Height/667)];
-    footerview.backgroundColor = [UIColor colorFromHex:@"#f6f6f6"];
-    footerview.textColor         = [UIColor colorFromHex:@"#999999"];
-    footerview.textAlignment=NSTextAlignmentCenter;
-    footerview.text=@"没有更多啦";
-    [CyFootView addSubview:footerview];
+    footerLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 100*Main_Screen_Height/667, Main_Screen_Width, 50*Main_Screen_Height/667)];
+    footerLabel.backgroundColor = [UIColor colorFromHex:@"#f6f6f6"];
+    footerLabel.textColor         = [UIColor colorFromHex:@"#999999"];
+    footerLabel.textAlignment=NSTextAlignmentCenter;
+    footerLabel.text=@"没有更多啦";
+    [CyFootView addSubview:footerLabel];
      [self setupRefresh];
     [self createHeaderView];
     
@@ -761,8 +764,13 @@
         self.dicData = dict;
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
-            
-            [advertistView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,dict[@"JsonData"][@"gGList"][0][@"AdvertisImg"]]]];
+            gGListarr = dict[@"JsonData"][@"gGList"];
+            if (gGListarr.count!=0) {
+                [advertistView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,dict[@"JsonData"][@"gGList"][0][@"AdvertisImg"]]]];
+            }else{
+                CyFootView.height = 50*Main_Screen_Height/667;
+                footerLabel.frame=CGRectMake(0, 0, Main_Screen_Width, 50*Main_Screen_Height/667);
+            }
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
             if(arr.count == 0)
