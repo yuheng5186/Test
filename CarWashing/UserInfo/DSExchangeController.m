@@ -62,9 +62,9 @@
 
 -(void)tapClick
 {
-    CyCommentHtmlViewController * htmlVc=[[CyCommentHtmlViewController alloc]init];
-    htmlVc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:htmlVc animated:YES];
+//    CyCommentHtmlViewController * htmlVc=[[CyCommentHtmlViewController alloc]init];
+//    htmlVc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:htmlVc animated:YES];
 }
 - (void)setupUI {
     
