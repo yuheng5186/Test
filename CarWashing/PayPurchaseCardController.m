@@ -76,6 +76,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     
     [self setupUI];
     payStyle = @"微信支付";
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickCancel) name:@"alipayresultCancel" object:nil];
      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickSuccess) name:@"alipayresultSuccess" object:nil];
      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickfail) name:@"alipayresultfail" object:nil];
