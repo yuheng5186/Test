@@ -1,4 +1,4 @@
-//
+
 //  HomeViewController.m
 //  CarWashing
 //
@@ -1753,5 +1753,9 @@
     } fail:^(NSError *error) {
         NSLog(@"%@",error);
     }];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 @end

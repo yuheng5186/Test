@@ -357,4 +357,8 @@
     }
     return _addbtn;
 }
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
 @end

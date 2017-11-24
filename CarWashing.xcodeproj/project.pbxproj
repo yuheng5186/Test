@@ -249,6 +249,7 @@
 		18E7027B1F5537B3007A9777 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E7027A1F5537B3007A9777 /* Record.m */; };
 		18E7028D1F5E3443007A9777 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E7028C1F5E3443007A9777 /* Order.m */; };
 		18E702931F614010007A9777 /* ScanCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E702921F614010007A9777 /* ScanCode.m */; };
+		18EA1ECC1FC82D8000FBCEC1 /* NoImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EA1ECB1FC82D8000FBCEC1 /* NoImageTableViewCell.m */; };
 		18ED28A51FB8436F00C0CC92 /* AddCareTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28A41FB8436F00C0CC92 /* AddCareTableViewCell.m */; };
 		18ED28A81FB8858600C0CC92 /* DriverLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28A71FB8858600C0CC92 /* DriverLicenseViewController.m */; };
 		18ED28AD1FB886C900C0CC92 /* AddDriverLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED28AC1FB886C900C0CC92 /* AddDriverLicenseViewController.m */; };
@@ -877,6 +878,8 @@
 		18E7028C1F5E3443007A9777 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		18E702911F614010007A9777 /* ScanCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCode.h; sourceTree = "<group>"; };
 		18E702921F614010007A9777 /* ScanCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCode.m; sourceTree = "<group>"; };
+		18EA1ECA1FC82D8000FBCEC1 /* NoImageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoImageTableViewCell.h; sourceTree = "<group>"; };
+		18EA1ECB1FC82D8000FBCEC1 /* NoImageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoImageTableViewCell.m; sourceTree = "<group>"; };
 		18ED28A31FB8436F00C0CC92 /* AddCareTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCareTableViewCell.h; sourceTree = "<group>"; };
 		18ED28A41FB8436F00C0CC92 /* AddCareTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCareTableViewCell.m; sourceTree = "<group>"; };
 		18ED28A61FB8858600C0CC92 /* DriverLicenseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DriverLicenseViewController.h; sourceTree = "<group>"; };
@@ -1455,6 +1458,8 @@
 				1810519B1FA9AC2700355F2F /* HotTableViewCell.m */,
 				181051A31FA9D9D800355F2F /* AnotherHotTableViewCell.h */,
 				181051A41FA9D9D800355F2F /* AnotherHotTableViewCell.m */,
+				18EA1ECA1FC82D8000FBCEC1 /* NoImageTableViewCell.h */,
+				18EA1ECB1FC82D8000FBCEC1 /* NoImageTableViewCell.m */,
 				18143FFE1FAA0A6300715E90 /* HotSecondDetailCollectionViewCell.h */,
 				18143FFF1FAA0A6300715E90 /* HotSecondDetailCollectionViewCell.m */,
 			);
@@ -3343,6 +3348,7 @@
 				181E92E91F207FF60006511E /* DSSettingController.m in Sources */,
 				18FB09D81FAB0C9200297E93 /* CYQuestionModel.m in Sources */,
 				1850902D1F45573F00795E0A /* ShareView.m in Sources */,
+				18EA1ECC1FC82D8000FBCEC1 /* NoImageTableViewCell.m in Sources */,
 				18FB09A11FAAC58200297E93 /* SDWaitingView.m in Sources */,
 				181E92F81F2086620006511E /* DSExchangeController.m in Sources */,
 				180E42EF1F3AC78800013D2D /* UIViewController+LewPopupViewController.m in Sources */,

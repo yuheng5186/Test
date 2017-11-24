@@ -15,7 +15,7 @@
 #import "LCMD5Tool.h"
 #import "CYHotTopicModel.h"
 #import "DSCarClubDetailController.h"
-
+#import "NoImageTableViewCell.h"
 
 @interface HotTopicViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *hotTable;
@@ -90,6 +90,7 @@
         _hotTable.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestWeb)];
         [_hotTable registerClass:[HotTableViewCell class] forCellReuseIdentifier:@"OneImage"];
         [_hotTable registerClass:[AnotherHotTableViewCell class] forCellReuseIdentifier:@"collect"];
+        [_hotTable registerClass:[NoImageTableViewCell class] forCellReuseIdentifier:@"noImage"];
         
         self.noneLabel = [[UILabel alloc]init];
         self.noneLabel.frame = CGRectMake(Main_Screen_Width/2-100, Main_Screen_Height/2-200, 200, 100);
@@ -105,10 +106,17 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CYHotTopicModel *model = self.modelArray[indexPath.row];
-    NSArray *imageArray = [model.IndexImg componentsSeparatedByString:@","];
-    if (imageArray.count==0||imageArray.count==1) {
-        return  270;
+    if ([model.IndexImg isEqualToString:@""]) {
+        return 150;
+    }else{
+        NSArray *imageArray = [model.IndexImg componentsSeparatedByString:@","];
+        if (imageArray.count==0) {
+            return  150;
+        }else if (imageArray.count==1){
+            return  270;
+        }
     }
+
     return 210;
 }
 
@@ -119,12 +127,23 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     CYHotTopicModel *singleModel = self.modelArray[indexPath.row];
-    NSArray *imageArray = [singleModel.IndexImg componentsSeparatedByString:@","];
-    if (imageArray.count==0||imageArray.count==1) {
-        HotTableViewCell *oneImageCell = [tableView dequeueReusableCellWithIdentifier:@"OneImage" forIndexPath:indexPath];
-        [oneImageCell configCell:singleModel];
-        return oneImageCell;
+    
+    if ([singleModel.IndexImg isEqualToString:@""]) {
+
+        NoImageTableViewCell *noImageCell = [tableView dequeueReusableCellWithIdentifier:@"noImage" forIndexPath:indexPath];
+        
+        return noImageCell;
+        
+    }else{
+        NSArray *imageArray = [singleModel.IndexImg componentsSeparatedByString:@","];
+        if (imageArray.count==0||imageArray.count==1) {
+            HotTableViewCell *oneImageCell = [tableView dequeueReusableCellWithIdentifier:@"OneImage" forIndexPath:indexPath];
+            [oneImageCell configCell:singleModel];
+            return oneImageCell;
+        }
     }
+    
+    
     AnotherHotTableViewCell *collectionCell = [tableView dequeueReusableCellWithIdentifier:@"collect" forIndexPath:indexPath];
     [collectionCell configCell:singleModel];
     return collectionCell;
