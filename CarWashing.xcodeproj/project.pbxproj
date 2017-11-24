@@ -242,6 +242,7 @@
 		18D815851F79ECA800A1FA04 /* CYCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D815831F79ECA800A1FA04 /* CYCardTableViewCell.xib */; };
 		18D8158A1F79FFE300A1FA04 /* CYCardDeatilListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D815891F79FFE300A1FA04 /* CYCardDeatilListViewController.m */; };
 		18D8158E1F7A358A00A1FA04 /* PassWordLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D8158D1F7A358A00A1FA04 /* PassWordLoginViewController.m */; };
+		18E4C1EA1FC8187B0052525B /* MyExploitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E4C1E91FC8187B0052525B /* MyExploitModel.m */; };
 		18E702761F5503BC007A9777 /* KPIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E702721F5503BC007A9777 /* KPIndicatorView.m */; };
 		18E702771F5503BC007A9777 /* KPIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E702731F5503BC007A9777 /* KPIndicatorView.xib */; };
 		18E702781F5503BC007A9777 /* RoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E702751F5503BC007A9777 /* RoundView.m */; };
@@ -863,6 +864,8 @@
 		18D815891F79FFE300A1FA04 /* CYCardDeatilListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYCardDeatilListViewController.m; sourceTree = "<group>"; };
 		18D8158C1F7A358A00A1FA04 /* PassWordLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassWordLoginViewController.h; sourceTree = "<group>"; };
 		18D8158D1F7A358A00A1FA04 /* PassWordLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassWordLoginViewController.m; sourceTree = "<group>"; };
+		18E4C1E81FC8187B0052525B /* MyExploitModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyExploitModel.h; sourceTree = "<group>"; };
+		18E4C1E91FC8187B0052525B /* MyExploitModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyExploitModel.m; sourceTree = "<group>"; };
 		18E702711F5503BC007A9777 /* KPIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPIndicatorView.h; sourceTree = "<group>"; };
 		18E702721F5503BC007A9777 /* KPIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPIndicatorView.m; sourceTree = "<group>"; };
 		18E702731F5503BC007A9777 /* KPIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KPIndicatorView.xib; sourceTree = "<group>"; };
@@ -1311,6 +1314,8 @@
 			children = (
 				180D41B81FC3F3BE007D5D34 /* MyExploitViewController.h */,
 				180D41B91FC3F3BE007D5D34 /* MyExploitViewController.m */,
+				18E4C1E81FC8187B0052525B /* MyExploitModel.h */,
+				18E4C1E91FC8187B0052525B /* MyExploitModel.m */,
 				181746891FC7EE3200135AFA /* MyLibListCollectionViewCell.h */,
 				1817468A1FC7EE3200135AFA /* MyLibListCollectionViewCell.m */,
 				1817468B1FC7EE3200135AFA /* MyLibListCollectionViewCell.xib */,
@@ -3040,6 +3045,7 @@
 				180E42E91F3AB37D00013D2D /* YzdHUDImageView.m in Sources */,
 				18322AC61F4FF077003ABB7B /* CardConfigGrade.m in Sources */,
 				18FB09C11FAAEFE100297E93 /* TZAssetModel.m in Sources */,
+				18E4C1EA1FC8187B0052525B /* MyExploitModel.m in Sources */,
 				181E92EF1F2081840006511E /* DSMembershipController.m in Sources */,
 				5094A6251F3447CD00407808 /* BusinessEstimateCell.m in Sources */,
 				186175ED1FA6C3C100C6EFF3 /* DataVerifier.m in Sources */,

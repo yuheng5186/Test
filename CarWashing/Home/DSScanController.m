@@ -475,6 +475,7 @@
                                     start.paynum=[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt];
                                     start.second        = 240;
                                     start.adverUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ];
+                                    start.ShareUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"redModel"][@"url"] ];
                                     [weakSelf.navigationController pushViewController:start animated:YES];
                                 }
                                 

@@ -17,6 +17,7 @@
 @property(nonatomic,copy)NSString *IntegralNum;//积分数
 @property(nonatomic,copy)NSString *paynum;//积分数
 @property(nonatomic,copy)NSString *adverUrl;//广告图
+@property(nonatomic,copy)NSString *ShareUrl;//分享链接
 @property (nonatomic,assign) int second;
 
 

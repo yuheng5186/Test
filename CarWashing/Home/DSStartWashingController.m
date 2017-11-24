@@ -15,10 +15,14 @@
 #import "HomeViewController.h"
 #import "DSScanController.h"
 #import "DSInputCodeController.h"
-@interface DSStartWashingController ()<UIScrollViewDelegate>
+
+#import "HYActivityView.h"
+@interface DSStartWashingController ()<UIScrollViewDelegate,SetTabBarDelegate>
 {
     SXScrPageView *cycleScroll;
     UIImageView   * adVertist;
+    UIView        * backView;
+    UIButton      * exitBtn;
 }
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic, strong) UILabel *timeNumLabel;
@@ -29,6 +33,8 @@
 @property (strong, nonatomic) UIScrollView *ADScroll;//广告栏的底层ScrollView
 
 @property (nonatomic, strong) NSDictionary *dicData;
+@property (nonatomic, strong) UIView       * packView;
+@property (nonatomic, strong) HYActivityView *activityView;
 @end
 
 @implementation DSStartWashingController
@@ -95,7 +101,10 @@
     self.contentView.height             = self.view.height;
     self.contentView.backgroundColor    = [UIColor colorFromHex:@"#fafafa"];
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -104,13 +113,12 @@
 
 //    self.second = 24;
     [self createSubView];
-     [self startTimer];
-    adVertist = [[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height-100, Main_Screen_Width, 100)];
-    adVertist.backgroundColor=[UIColor redColor];
-//    [adVertist sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,dict[@"JsonData"][0][@"AdvertisImg"]]]];
-    [adVertist sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.adverUrl]]];
-    [self.view addSubview:adVertist];
     
+     [self startTimer];
+   
+    
+    //假红包
+    [self creatPacket];
     
     
 }
@@ -513,6 +521,11 @@
     
 //    [self gifPlay6];
     
+    adVertist = [[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height-100, Main_Screen_Width, 100)];
+    //    [adVertist sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,dict[@"JsonData"][0][@"AdvertisImg"]]]];
+    [adVertist sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.adverUrl]]];
+    [self.contentView addSubview:adVertist];
+    
 }
 
 #pragma mark - SDWebImage内部解析gif数据
@@ -552,16 +565,144 @@
 
 #pragma mark-----红包相关
 -(void)creatPacket{
-    UIView* backView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
+    backView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
     backView.backgroundColor=[UIColor blackColor];
     backView.alpha = 0.7;
     [self.view addSubview:backView];
-    UIImageView * ExitimageView = [[UIImageView alloc]initWithFrame:CGRectMake(Main_Screen_Width-50, 10, 50, 50)];
-    ExitimageView.image =[UIImage imageNamed:@"shoucang"];
-    [self.view addSubview:ExitimageView];
-    UIButton * exitBtn =[UIButton buttonWithType:UIButtonTypeCustom];
-    [exitBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    [self.view addSubview:exitBtn];
+//    UIImageView * ExitimageView = [[UIImageView alloc]initWithFrame:CGRectMake(Main_Screen_Width-50, 10, 50, 50)];
+//    ExitimageView.image =[UIImage imageNamed:@"shoucang"];
+//    [self.view addSubview:ExitimageView];
+//    UIButton * exitBtn =[UIButton buttonWithType:UIButtonTypeCustom];
+//    exitBtn.frame =CGRectMake(Main_Screen_Width-100, 0, 100, 60);
+//    [exitBtn addTarget:self action:@selector(exitBtnClick) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:exitBtn];
+    
+    self.packView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 240, 545/2+75)];
+    self.packView.centerX = Main_Screen_Width/2;
+    self.packView.centerY = Main_Screen_Height/2;
+    [self.view addSubview:self.packView];
+    UIImageView * packimageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.packView.frame.size.width, self.packView.frame.size.height-75)];
+    packimageView.image =[UIImage imageNamed:@"hongbao"];
+    packimageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(SharebtnClick)];
+    [packimageView addGestureRecognizer:tap];
+    [self.packView addSubview:packimageView];
+    
+//    UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.packView.frame.size.width, 50)];
+//    titleLabel.text = @"恭喜您获得10张洗车卡";
+//    titleLabel.textAlignment = NSTextAlignmentCenter;
+//    titleLabel.textColor =[UIColor whiteColor];
+//    [self.packView addSubview:titleLabel];
+//    UILabel * titleLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 60, self.packView.frame.size.width, 30)];
+//    titleLabel1.text = @"马上分享给好友";
+//    titleLabel1.textAlignment = NSTextAlignmentCenter;
+//    titleLabel1.textColor =[UIColor whiteColor];
+//    [self.packView addSubview:titleLabel1];
+//    UILabel * titleLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, self.packView.frame.size.width, 30)];
+//    titleLabel2.text = @"一起免费洗车";
+//    titleLabel2.textAlignment = NSTextAlignmentCenter;
+//    titleLabel2.textColor =[UIColor whiteColor];
+//    [self.packView addSubview:titleLabel2];
+    
+    exitBtn =[UIButton buttonWithType:UIButtonTypeCustom];
+    exitBtn.frame =CGRectMake(self.packView.frame.size.width/2-(35/2), self.packView.frame.size.height-35, 35, 35);
+    [exitBtn setImage:[UIImage imageNamed:@"guanbi"] forState:UIControlStateNormal];
+    [exitBtn addTarget:self action:@selector(exitBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.packView addSubview:exitBtn];
+    
+//    //弹出动画
+//    [self.view addSubview:self.redImageView];
+    //设置初始帧
+    self.packView.transform = CGAffineTransformMakeScale(0, 0);
+    
 }
-
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    
+    [UIView animateWithDuration:1.0 delay:0 usingSpringWithDamping:1 initialSpringVelocity:1 options:(UIViewAnimationOptionLayoutSubviews) animations:^{
+        self.packView.transform = CGAffineTransformIdentity;
+    } completion:nil];
+}
+//退出按钮
+-(void)exitBtnClick
+{
+    [backView removeFromSuperview];
+    [exitBtn removeFromSuperview];
+    [self.packView removeFromSuperview];
+}
+//点击分享
+-(void)SharebtnClick
+{
+    if (!self.activityView)
+    {
+        self.activityView = [[HYActivityView alloc]initWithTitle:@"" referView:self.view];
+        self.activityView.delegate = self;
+        //横屏会变成一行6个, 竖屏无法一行同时显示6个, 会自动使用默认一行4个的设置.
+        self.activityView.numberOfButtonPerLine = 6;
+        
+        ButtonView *bv ;
+        
+        bv = [[ButtonView alloc]initWithText:@"微信" image:[UIImage imageNamed:@"btn_share_weixin"] handler:^(ButtonView *buttonView){
+            NSLog(@"点击微信");
+            //创建发送对象实例
+            SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc] init];
+            sendReq.bText = NO;//不使用文本信息
+            sendReq.scene = 0;//0 = 好友列表 1 = 朋友圈 2 = 收藏
+            
+            //创建分享内容对象
+            WXMediaMessage *urlMessage = [WXMediaMessage message];
+            urlMessage.title = @"【蔷薇爱车】洗车红包等你来拿!";//分享标题
+            urlMessage.description = @"手快者得，手慢者无";;//分享描述
+            [urlMessage setThumbImage:[UIImage imageNamed:@"loginIcon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
+            //创建多媒体对象
+            WXWebpageObject *webObj = [WXWebpageObject object];
+            webObj.webpageUrl = [NSString stringWithFormat:@"%@",self.ShareUrl];//分享链接
+            //完成发送对象实例
+            urlMessage.mediaObject = webObj;
+            sendReq.message = urlMessage;
+            
+            //发送分享信息
+            [WXApi sendReq:sendReq];
+            
+            
+            self.tabBarController.tabBar.hidden = NO;
+            
+        }];
+        [self.activityView addButtonView:bv];
+        
+        bv = [[ButtonView alloc]initWithText:@"微信朋友圈" image:[UIImage imageNamed:@"btn_share_pengyouquan"] handler:^(ButtonView *buttonView){
+            NSLog(@"点击微信朋友圈");
+            //创建发送对象实例
+            SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc] init];
+            sendReq.bText = NO;//不使用文本信息
+            sendReq.scene = 1;//0 = 好友列表 1 = 朋友圈 2 = 收藏
+            
+            //创建分享内容对象
+            WXMediaMessage *urlMessage = [WXMediaMessage message];
+            urlMessage.title = @"【蔷薇爱车】洗车红包等你来拿!";//分享标题
+            urlMessage.description = @"手快者得，手慢者无";;//分享描述
+            [urlMessage setThumbImage:[UIImage imageNamed:@"loginIcon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
+            
+            //创建多媒体对象
+            WXWebpageObject *webObj = [WXWebpageObject object];
+            webObj.webpageUrl = [NSString stringWithFormat:@"%@",self.ShareUrl];//分享链接
+            
+            //完成发送对象实例
+            urlMessage.mediaObject = webObj;
+            sendReq.message = urlMessage;
+            
+            //发送分享信息
+            [WXApi sendReq:sendReq];
+            
+            self.tabBarController.tabBar.hidden = NO;
+            
+        }];
+        [self.activityView addButtonView:bv];
+        
+    }
+    self.tabBarController.tabBar.hidden = YES;
+    
+    [self.activityView show];
+}
 @end
