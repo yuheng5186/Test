@@ -294,17 +294,17 @@
         urlStr =newsDetail.Img;
     }
     
-   
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-       
-        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,urlStr];
-        NSURL *url=[NSURL URLWithString:ImageURL];
-        NSData *data=[NSData dataWithContentsOfURL:url];
-        UIImage *img=[UIImage imageWithData:data];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [textImageView setImage:img];
-        });
-    });
+    [textImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,urlStr]]];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//
+//        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,urlStr];
+//        NSURL *url=[NSURL URLWithString:ImageURL];
+//        NSData *data=[NSData dataWithContentsOfURL:url];
+//        UIImage *img=[UIImage imageWithData:data];
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+//            [textImageView setImage:img];
+//        });
+//    });
     
     
     self.textImageView          = textImageView;
