@@ -107,7 +107,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CYHotTopicModel *model = self.modelArray[indexPath.row];
     if ([model.IndexImg isEqualToString:@""]) {
-        return 150;
+        return 95;
     }else{
         NSArray *imageArray = [model.IndexImg componentsSeparatedByString:@","];
         if (imageArray.count==0) {
@@ -131,7 +131,7 @@
     if ([singleModel.IndexImg isEqualToString:@""]) {
 
         NoImageTableViewCell *noImageCell = [tableView dequeueReusableCellWithIdentifier:@"noImage" forIndexPath:indexPath];
-        
+        [noImageCell configCell:singleModel];
         return noImageCell;
         
     }else{

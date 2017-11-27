@@ -229,7 +229,7 @@
     textTitleLabel.textColor                = [UIColor colorFromHex:@"#4a4a4a"];
     ////////////////////////////////////////////////////////////
     if ([self.showType isEqualToString:@"二手车"]) {
-        textTitleLabel.text = [NSString stringWithFormat:@"%@年生产   行驶%@万公里",self.carBrithYear,self.loopNum];
+        textTitleLabel.text = [NSString stringWithFormat:@"%@年生产   行驶%@公里",self.carBrithYear,self.loopNum];
     }else{
         textTitleLabel.text                     = newsDetail.ActivityName;
     }

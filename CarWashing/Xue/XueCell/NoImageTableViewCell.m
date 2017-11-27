@@ -47,9 +47,9 @@
     _timeLabel.textColor = [UIColor colorFromHex:@"#999999"];
     [self.contentView addSubview:_timeLabel];
     
-    _amazingNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-45, 60, 30, 30)];
+    _amazingNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-40, 60, 30, 30)];
     _amazingNumberLabel.text = @"233";
-    _amazingNumberLabel.textAlignment = NSTextAlignmentRight;
+    _amazingNumberLabel.textAlignment = NSTextAlignmentLeft;
     _amazingNumberLabel.font = [UIFont systemFontOfSize:14];
     _amazingNumberLabel.textColor = [UIColor colorFromHex:@"#999999"];
     [self.contentView addSubview:_amazingNumberLabel];
@@ -69,6 +69,16 @@
     
     
 }
+
+-(void)configCell:(CYHotTopicModel*)model
+{
+//    [self.largeImageViewOnly sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,model.IndexImg]] placeholderImage:[UIImage imageNamed:@"photo"]];
+    self.titleLable.text= [NSString stringWithFormat:@"%@",model.ActivityName];
+    self.timeLabel.text= [NSString stringWithFormat:@"%@",model.ActDate];
+    self.amazingNumberLabel.text= [NSString stringWithFormat:@"%@",model.GiveCount];
+    self.commentNumLabel.text= [NSString stringWithFormat:@"%@",model.CommentCount];
+}
+
 
 
 

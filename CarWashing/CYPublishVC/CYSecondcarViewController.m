@@ -84,6 +84,13 @@
     [self.view addSubview:rightBtn];
 
     _imageArr=[NSMutableArray array];
+    
+    //限制字数
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldEditChanged:)name:@"UITextFieldTextDidChangeNotification" object:distanceTextField];
+
+    
+    
+    
     //选择车辆品牌
     BrandLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, Main_Screen_Width-20, 50)];
     BrandLabel.text = @"选择车辆品牌";
@@ -291,7 +298,10 @@
 //            NSLog(@"%@二手车发布成功",dict[@"ResultMessage"]);
             [self.navigationController popViewControllerAnimated:YES];
         }else{
-            
+            UIAlertController *againAlert = [UIAlertController alertControllerWithTitle:nil message:@"请补全信息" preferredStyle:(UIAlertControllerStyleAlert)];
+            UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:nil];
+            [againAlert addAction:cancleAction];
+            [self presentViewController:againAlert animated:YES completion:nil];
         }
         
     } fail:^(NSError *error) {
@@ -646,5 +656,53 @@
 -(BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath{
     return NO;
 }
+
+
+
+-(void)textFieldEditChanged:(NSNotification *)obj
+{
+    UITextField *textField = (UITextField *)obj.object;
+    NSString *toBeString = textField.text;
+    NSString *lang = [textField.textInputMode primaryLanguage];
+    if ([lang isEqualToString:@"zh-Hans"])// 简体中文输入
+    {
+        //获取高亮部分
+        UITextRange *selectedRange = [textField markedTextRange];
+        UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+        
+        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+        if (!position)
+        {
+            if (toBeString.length > 10)
+            {
+                textField.text = [toBeString substringToIndex:9];
+            }
+        }
+        
+    }
+    // 中文输入法以外的直接对其统计限制即可，不考虑其他语种情况
+    else
+    {
+        if (toBeString.length > 10)
+        {
+            NSRange rangeIndex = [toBeString rangeOfComposedCharacterSequenceAtIndex:10];
+            if (rangeIndex.length == 1)
+            {
+                textField.text = [toBeString substringToIndex:10];
+            }
+            else
+            {
+                NSRange rangeRange = [toBeString rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, 10)];
+                textField.text = [toBeString substringWithRange:rangeRange];
+            }
+        }
+    }
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:@"UITextFieldTextDidChangeNotification"];
+}
+
 
 @end
