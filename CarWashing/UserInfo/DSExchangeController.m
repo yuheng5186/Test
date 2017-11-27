@@ -43,7 +43,11 @@
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Advertising/GetAdvertisList",Khttp] success:^(NSDictionary *dict, BOOL success) {
         NSLog(@"---%@",dict);
         self.dicData= dict;
-        [adVertist sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,dict[@"JsonData"][0][@"AdvertisImg"]]]];
+        NSArray * Adverarray = dict[@"JsonData"];
+        if (Adverarray.count!=0) {
+             [adVertist sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,dict[@"JsonData"][0][@"AdvertisImg"]]]];
+        }
+       
     } fail:^(NSError *error) {
         NSLog(@"---%@",error);
     }];
@@ -52,7 +56,6 @@
     [super viewDidLoad];
     [self setupUI];
     adVertist = [[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height-100, Main_Screen_Width, 100)];
-    adVertist.backgroundColor=[UIColor redColor];
     adVertist.userInteractionEnabled = YES;
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick)];
     [adVertist addGestureRecognizer:tap];

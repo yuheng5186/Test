@@ -116,9 +116,11 @@
     
      [self startTimer];
    
-    
-    //假红包
-    [self creatPacket];
+    if (![self.ShareUrl isEqualToString:@""]) {
+        //假红包
+        [self creatPacket];
+    }
+   
     
     
 }
@@ -520,11 +522,11 @@
 //    [self.contentView addSubview:adPageButton];
     
 //    [self gifPlay6];
-    
-    adVertist = [[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height-100, Main_Screen_Width, 100)];
-    //    [adVertist sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,dict[@"JsonData"][0][@"AdvertisImg"]]]];
-    [adVertist sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.adverUrl]]];
-    [self.contentView addSubview:adVertist];
+    if (![self.adverUrl isEqualToString:@""]) {
+        adVertist = [[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height-100, Main_Screen_Width, 100)];
+        [adVertist sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.adverUrl]]];
+        [self.contentView addSubview:adVertist];
+    }
     
 }
 
