@@ -86,7 +86,7 @@
     [super viewDidLoad];
     
     //是否显示键盘上的工具条
-    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     
     newsDetail = [[CarClubNews alloc]init];
     self.page = 0;
