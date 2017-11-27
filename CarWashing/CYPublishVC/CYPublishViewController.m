@@ -110,8 +110,9 @@
     _selectedAssets = [NSMutableArray array];
     [self configCollectionView];
     
-    
-    
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldEditChanged:)
+//                                                name:@"UITextFieldTextDidChangeNotification" object:contentTextField];
+   
 
 
     
@@ -207,21 +208,21 @@
      placeHoldLabel.text =nil;
 }
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    
+
     if (contentTextField.contentSize.height >= 500) {
         contentTextField.frame = CGRectMake(0,500- contentTextField.contentSize.height , 200, 30 + contentTextField.contentSize.height);
     }else{
         contentTextField.frame = CGRectMake(0, 0, Main_Screen_Width, 30 + contentTextField.contentSize.height);
     }
-    
-    
+
+
     //对字数进行限制
     NSString *comcatstr = [textView.text stringByReplacingCharactersInRange:range withString:text];
     NSInteger caninputlen = 400 - comcatstr.length;
-    
-    if (caninputlen >= 0&&caninputlen<=399)
+
+    if (caninputlen >= 0)
     {
-        
+
         numLabel.text = [NSString stringWithFormat:@"%lu/400",contentTextField.text.length+1];
         return YES;
     }
@@ -230,18 +231,18 @@
         NSInteger len = text.length + caninputlen;
         //防止当text.length + caninputlen < 0时，使得rg.length为一个非法最大正数出错
         NSRange rg = {0,MAX(len,0)};
-        
+
         if (rg.length > 0)
         {
             NSString *s = [text substringWithRange:rg];
-            
+
             [textView setText:[textView.text stringByReplacingCharactersInRange:range withString:s]];
         }
         return NO;
     }
-   
-    
-    
+
+
+
 }
 #pragma mark---图片相关
 - (UIImagePickerController *)imagePickerVc {
@@ -618,4 +619,47 @@
 -(BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath{
     return NO;
 }
+
+
+//-(void)textFieldEditChanged:(NSNotification *)obj
+//{
+//
+//    UITextField *textField = (UITextField *)obj.object;
+//    NSString *toBeString = textField.text;
+//    NSLog(@"--%lu",toBeString.length);
+//    NSString *lang = [textField.textInputMode primaryLanguage];
+//    if ([lang isEqualToString:@"zh-Hans"])// 简体中文输入
+//    {
+//        //获取高亮部分3123123
+//        UITextRange *selectedRange = [textField markedTextRange];
+//        UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+//
+//        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+//        if (!position)
+//        {
+//            if (toBeString.length > 10)
+//            {
+//                textField.text = [toBeString substringToIndex:10];
+//            }
+//        }
+//
+//    }
+//    // 中文输入法以外的直接对其统计限制即可，不考虑其他语种情况
+//    else
+//    {
+//        if (toBeString.length > 10)
+//        {
+//            NSRange rangeIndex = [toBeString rangeOfComposedCharacterSequenceAtIndex:10];
+//            if (rangeIndex.length == 1)
+//            {
+//                textField.text = [toBeString substringToIndex:10];
+//            }
+//            else
+//            {
+//                NSRange rangeRange = [toBeString rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, 130)];
+//                textField.text = [toBeString substringWithRange:rangeRange];
+//            }
+//        }
+//    }
+//}
 @end

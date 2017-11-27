@@ -116,7 +116,7 @@
     
      [self startTimer];
    
-    if (![self.ShareUrl isEqualToString:@""]) {
+    if (![self.ShareUrl isEqualToString:@""]&&![self.ShareUrl isEqualToString:@"<null>"]) {
         //假红包
         [self creatPacket];
     }

@@ -150,7 +150,6 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     CYHotTopicModel * model = self.modelArray[indexPath.row];
     DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
     detailController.comeTypeString = @"2";
