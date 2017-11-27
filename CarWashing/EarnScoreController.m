@@ -114,7 +114,10 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
         self.dicData = dict;
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
-            [self.adverView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,dict[@"JsonData"][@"advList"][0][@"AdvertisImg"]]]];
+            NSArray * adverArray = dict[@"JsonData"][@"advList"];
+            if (adverArray.count!=0) {
+                 [self.adverView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,dict[@"JsonData"][@"advList"][0][@"AdvertisImg"]]]];
+            }
             self.ScoreData = [[NSMutableArray alloc]init];
             
             NSArray *arr = [NSArray array];

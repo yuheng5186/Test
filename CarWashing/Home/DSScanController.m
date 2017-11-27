@@ -314,9 +314,9 @@
                 NSString * str = [numberFormatter stringFromNumber:dict[@"JsonData"][@"ScanCodeState"]];
                 NSString * moneyStr = [numberFormatter stringFromNumber:dict[@"JsonData"][@"OriginalAmt"]];
                
-            if ([str isEqualToString:@"1"]) {//需要支付
+                if ([str isEqualToString:@"1"]) {//需要支付
                     
-               UIAlertController *sureController = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"当前用户无洗车卡，是否在线支付洗车,费用为￥%@",moneyStr] preferredStyle:(UIAlertControllerStyleAlert)];
+                    UIAlertController *sureController = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"当前用户无洗车卡，是否在线支付洗车,费用为￥%@",moneyStr] preferredStyle:(UIAlertControllerStyleAlert)];
                     UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"去支付" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                         NSDictionary *mulDic = @{
                                                  @"DeviceCode":array[1],
@@ -373,14 +373,18 @@
                         [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.CardType] forKey:@"CardType"];
                         [UdStorage storageObject:weakSelf.scan.CardName forKey:@"CardName"];
                        DSStartWashingController *start = [[DSStartWashingController alloc]init];
-                   start.hidesBottomBarWhenPushed            = YES;
+                       start.hidesBottomBarWhenPushed            = YES;
                        start.RemainCount   = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.RemainCount];
                         start.IntegralNum   = [NSString stringWithFormat:@"%ld",(long)weakSelf.scan.IntegralNum];
                         start.CardType      = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
                        start.CardName      = weakSelf.scan.CardName;
                        start.paynum=[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt];
                        start.second        = 240;
-                       start.adverUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ];
+                       NSArray * adverArray = dict[@"JsonData"][@"advList"];
+                       if (adverArray.count!=0) {
+                           start.adverUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ];
+                       }
+                      
                        [weakSelf.navigationController pushViewController:start animated:YES];
                            }
 
@@ -392,7 +396,7 @@
                        [self.view showInfo:@"扫码失败" autoHidden:YES interval:2];
                        [_session startRunning];
                        [self.navigationController popViewControllerAnimated:YES];
-                       }
+                           }
                        } fail:^(NSError *error) {
                        NSLog(@"%@",error);
                         [HUD hide:YES];
@@ -474,7 +478,10 @@
                                     start.CardName      = weakSelf.scan.CardName;
                                     start.paynum=[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt];
                                     start.second        = 240;
-                                    start.adverUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ];
+                                    NSArray * adverArray = dict[@"JsonData"][@"advList"];
+                                    if (adverArray.count!=0) {
+                                        start.adverUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ];
+                                    }
                                     start.ShareUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"redModel"][@"url"] ];
                                     [weakSelf.navigationController pushViewController:start animated:YES];
                                 }
@@ -507,14 +514,17 @@
                 }
                 
             }
+                //查询的else
+            else{
+                [HUD hide:YES];
+                [self.view showInfo:@"扫码失败" autoHidden:YES interval:2];
+                [weakSelf.session stopRunning];
+                [weakSelf.session startRunning];
+            }
         } fail:^(NSError *error) {
                 NSLog(@"%@",error);
             }];
-            
-            
-
         }
-    
     }else if ([imei rangeOfString:@"#"].location !=NSNotFound){
         NSArray *array = [imei componentsSeparatedByString:@"#"]; //从字符：中分隔成2个元素的数组
         Cystr = [NSString stringWithFormat:@"%@",array[1]];
@@ -552,8 +562,7 @@
                     __weak typeof(self) weakSelf = self;
 //                    weakSelf.newrc = [[CYModel alloc]initWithDictionary:[dict objectForKey:@"JsonData"] error:nil];
                     HUD.completionBlock = ^(){
-                        
-                        UIAlertController *sureController = [UIAlertController alertControllerWithTitle:@"" message:@"确认洗车" preferredStyle:(UIAlertControllerStyleAlert)];
+                        UIAlertController *sureController = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"当前用户无洗车卡，是否在线支付洗车,费用为￥%@",dict[@"JsonData"][@"Amt"]] preferredStyle:(UIAlertControllerStyleAlert)];
                         UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
                             //(1.需要支付状态,2.扫描成功)
                             if(weakSelf.scan.ScanCodeState == 1)
