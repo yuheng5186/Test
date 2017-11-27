@@ -524,9 +524,7 @@
         } fail:^(NSError *error) {
                 NSLog(@"%@",error);
             }];
-            
         }
-    
     }else if ([imei rangeOfString:@"#"].location !=NSNotFound){
         NSArray *array = [imei componentsSeparatedByString:@"#"]; //从字符：中分隔成2个元素的数组
         Cystr = [NSString stringWithFormat:@"%@",array[1]];

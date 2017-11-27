@@ -86,7 +86,7 @@
     [super viewDidLoad];
     
     //是否显示键盘上的工具条
-    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
     
     newsDetail = [[CarClubNews alloc]init];
     self.page = 0;
@@ -95,7 +95,6 @@
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
-    
     
 }
 
@@ -1404,9 +1403,9 @@
     NSLog(@"%@",textField.text);
     if(textField.text.length == 0)
     {
-        [self addCommentariesData];
-    }else{
-        [self addCommentariesData];
+        [self.userSayTextField resignFirstResponder];
+    }else {
+         [self addCommentariesData];
     }
     textField.text = @"";
 }
@@ -1517,5 +1516,9 @@
     }];
    
 }
+
+
+
+
 
 @end
