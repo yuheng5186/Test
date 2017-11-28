@@ -55,7 +55,8 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(goBack) name:@"paysuccess" object:nil];
     
-    
+    NSNotificationCenter * center1 = [NSNotificationCenter defaultCenter];
+    [center1 addObserver:self selector:@selector(goBackAliapay) name:@"alipaysuccess" object:nil];
     
     
     
@@ -657,22 +658,42 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
-    
     NSString *dateString        = [dateFormatter stringFromDate:date];
     [UdStorage storageObject:dateString forKey:@"setTime"];
-    
-    
    
     start.paynum=[UdStorage getObjectforKey:@"Jprice"];
     start.RemainCount = [UdStorage getObjectforKey:@"RemainCount"];
     start.IntegralNum = [UdStorage getObjectforKey:@"IntegralNum"];
     start.CardType = [UdStorage getObjectforKey:@"CardType"];
-    start.CardName =[UdStorage getObjectforKey:@"CardName"];    start.second=240;
-    
+    start.CardName =[UdStorage getObjectforKey:@"CardName"];
+    start.second=240;
     
     [self.navigationController pushViewController:start animated:YES];
 }
-
+-(void)goBackAliapay
+{
+    DSStartWashingController *start = [[DSStartWashingController alloc]init];
+    
+    NSDate*date                     = [NSDate date];
+    NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    
+    NSString *dateString        = [dateFormatter stringFromDate:date];
+    [UdStorage storageObject:dateString forKey:@"setTime"];
+    
+    
+    
+    start.paynum=[UdStorage getObjectforKey:@"Jprice"];
+    start.RemainCount = [UdStorage getObjectforKey:@"RemainCount"];
+    start.IntegralNum = [UdStorage getObjectforKey:@"IntegralNum"];
+    start.CardType = [UdStorage getObjectforKey:@"CardType"];
+    start.CardName =[UdStorage getObjectforKey:@"CardName"];
+    start.second=240;
+    start.ShareUrl = [NSString stringWithFormat:@"%@",ShareURL];
+    start.adverUrl = [NSString stringWithFormat:@"%@",adverURL];
+    [self.navigationController pushViewController:start animated:YES];
+}
 /*
 #pragma mark - Navigation
 

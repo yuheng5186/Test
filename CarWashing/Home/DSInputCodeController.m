@@ -204,12 +204,10 @@
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
         NSLog(@"====%@====",params);
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@ScanCode/DeviceScanCode",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@ScanCode/DeviceScanCodeQuery",Khttp] success:^(NSDictionary *dict, BOOL success) {
             NSLog(@"%@",dict);
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
-                
-                
                 NSDictionary *arr = [NSDictionary dictionary];
                 arr = [dict objectForKey:@"JsonData"];
                 
@@ -223,6 +221,11 @@
                     //(1.需要支付状态,2.扫描成功)
                     if(weakSelf.scan.ScanCodeState == 1)
                     {
+                        NSArray * adverArray = dict[@"JsonData"][@"advList"];
+                        if (adverArray.count!=0) {
+                            [[NSUserDefaults standardUserDefaults]setValue:[NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ] forKey:@"adverUrl"];
+                        }
+                        [[NSUserDefaults standardUserDefaults]setValue:[NSString stringWithFormat:@"%@",dict[@"JsonData"][@"redModel"][@"url"] ] forKey:@"ShareUrl"];
                         DSScanPayController *payVC           = [[DSScanPayController alloc]init];
                         payVC.hidesBottomBarWhenPushed            = YES;
                         
@@ -242,34 +245,48 @@
                     }
                     else
                     {
-                        
-                        NSDate*date                     = [NSDate date];
-                        NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
-                        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-                        
-                        
-                        NSString *dateString        = [dateFormatter stringFromDate:date];
-                        NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
-                        [defaults setObject:dateString forKey:@"setTime"];
-                        [defaults synchronize];
-                        NSLog(@"setTime ==== %@",[defaults objectForKey:@"setTime"]);
-                        [UdStorage storageObject:[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt] forKey:@"Jprice"];
-                        [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount] forKey:@"RemainCount"];
-                        [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum] forKey:@"IntegralNum"];
-                        [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.CardType] forKey:@"CardType"];
-                        [UdStorage storageObject:weakSelf.scan.CardName forKey:@"CardName"];
-                        
-                        
-                        DSStartWashingController *start = [[DSStartWashingController alloc]init];
-                        start.hidesBottomBarWhenPushed            = YES;
-                        
-                        start.RemainCount = [NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount];
-                        start.IntegralNum = [NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum];
-                        start.CardType = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
-                        start.CardName = weakSelf.scan.CardName;
-                        start.second        = 240;
-                        start.adverUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ];
-                        [weakSelf.navigationController pushViewController:start animated:YES];
+
+                        NSLog(@"====%@====",params);
+                        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@ScanCode/DeviceScanCodeNew",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                            
+                            NSLog(@"---%@",dict);
+                            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                            {
+                                NSDate*date                     = [NSDate date];
+                                NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
+                                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                                
+                                
+                                NSString *dateString        = [dateFormatter stringFromDate:date];
+                                NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+                                [defaults setObject:dateString forKey:@"setTime"];
+                                [defaults synchronize];
+                                NSLog(@"setTime ==== %@",[defaults objectForKey:@"setTime"]);
+                                [UdStorage storageObject:[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt] forKey:@"Jprice"];
+                                [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount] forKey:@"RemainCount"];
+                                [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum] forKey:@"IntegralNum"];
+                                [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.CardType] forKey:@"CardType"];
+                                [UdStorage storageObject:weakSelf.scan.CardName forKey:@"CardName"];
+                                
+                                DSStartWashingController *start = [[DSStartWashingController alloc]init];
+                                start.hidesBottomBarWhenPushed            = YES;
+                                
+                                start.RemainCount = [NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount];
+                                start.IntegralNum = [NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum];
+                                start.CardType = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
+                                start.CardName = weakSelf.scan.CardName;
+                                start.second        = 240;
+                                NSArray * adverArray = dict[@"JsonData"][@"advList"];
+                                if (adverArray.count!=0) {
+                                    start.adverUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ];
+                                }
+                               [[NSUserDefaults standardUserDefaults]setValue:[NSString stringWithFormat:@"%@",dict[@"JsonData"][@"redModel"][@"url"] ] forKey:@"ShareUrl"];
+                                start.ShareUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"redModel"][@"url"] ];
+                                [weakSelf.navigationController pushViewController:start animated:YES];
+                            }
+                        } fail:^(NSError *error) {
+                            NSLog(@"%@",error);
+                        }];
                     }
                 };
                 

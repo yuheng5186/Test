@@ -7,6 +7,14 @@
 //
 
 #import "MyDynamicViewController.h"
+//#import "HotTableViewCell.h"
+//#import "AnotherHotTableViewCell.h"
+//#import "AFNetworkingTool.h"
+//#import "UdStorage.h"
+//#import "HTTPDefine.h"
+//#import "LCMD5Tool.h"
+//#import "CYHotTopicModel.h"
+//#import "DSCarClubDetailController.h"
 #import "HotTableViewCell.h"
 #import "AnotherHotTableViewCell.h"
 #import "AFNetworkingTool.h"
@@ -15,6 +23,8 @@
 #import "LCMD5Tool.h"
 #import "CYHotTopicModel.h"
 #import "DSCarClubDetailController.h"
+#import "NoImageTableViewCell.h"
+#import "CYDetailViewController.h"
 @interface MyDynamicViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *hotTable;
 @property(strong,nonatomic)NSMutableArray *dataArray;
@@ -83,6 +93,8 @@
         _hotTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_hotTable registerClass:[HotTableViewCell class] forCellReuseIdentifier:@"OneImage"];
         [_hotTable registerClass:[AnotherHotTableViewCell class] forCellReuseIdentifier:@"collect"];
+        [_hotTable registerClass:[NoImageTableViewCell class] forCellReuseIdentifier:@"noImage"];
+        
         
         self.noneLabel = [[UILabel alloc]init];
         self.noneLabel.frame = CGRectMake(Main_Screen_Width/2-100, Main_Screen_Height/2-200, 200, 100);
@@ -98,10 +110,17 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CYHotTopicModel *model = self.modelArray[indexPath.row];
-    NSArray *imageArray = [model.IndexImg componentsSeparatedByString:@","];
-    if (imageArray.count==0||imageArray.count==1) {
-        return  270;
+    if ([model.IndexImg isEqualToString:@""]) {
+        return 95;
+    }else{
+        NSArray *imageArray = [model.IndexImg componentsSeparatedByString:@","];
+        if (imageArray.count==0) {
+            return  150;
+        }else if (imageArray.count==1){
+            return  270;
+        }
     }
+    
     return 210;
 }
 
@@ -112,12 +131,23 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     CYHotTopicModel *singleModel = self.modelArray[indexPath.row];
-    NSArray *imageArray = [singleModel.IndexImg componentsSeparatedByString:@","];
-    if (imageArray.count==0||imageArray.count==1) {
-        HotTableViewCell *oneImageCell = [tableView dequeueReusableCellWithIdentifier:@"OneImage" forIndexPath:indexPath];
-        [oneImageCell configCell:singleModel];
-        return oneImageCell;
+    
+    if ([singleModel.IndexImg isEqualToString:@""]) {
+        
+        NoImageTableViewCell *noImageCell = [tableView dequeueReusableCellWithIdentifier:@"noImage" forIndexPath:indexPath];
+        [noImageCell configCell:singleModel];
+        return noImageCell;
+        
+    }else{
+        NSArray *imageArray = [singleModel.IndexImg componentsSeparatedByString:@","];
+        if (imageArray.count==0||imageArray.count==1) {
+            HotTableViewCell *oneImageCell = [tableView dequeueReusableCellWithIdentifier:@"OneImage" forIndexPath:indexPath];
+            [oneImageCell configCell:singleModel];
+            return oneImageCell;
+        }
     }
+    
+    
     AnotherHotTableViewCell *collectionCell = [tableView dequeueReusableCellWithIdentifier:@"collect" forIndexPath:indexPath];
     [collectionCell configCell:singleModel];
     return collectionCell;
@@ -125,7 +155,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     CYHotTopicModel * model = self.modelArray[indexPath.row];
-    DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
+    CYDetailViewController  *detailController    = [[CYDetailViewController alloc]init];
     detailController.comeTypeString = @"2";
     detailController.DeleteType = 1;
     detailController.showType = @"高兴";
@@ -134,6 +164,16 @@
     detailController.deleteStr = @"是";
     [self.navigationController pushViewController:detailController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    CYHotTopicModel * model = self.modelArray[indexPath.row];
+//    CYDetailViewController  *detailController    = [[CYDetailViewController alloc]init];
+//    detailController.comeTypeString = @"2";
+//    detailController.DeleteType = 1;
+//    detailController.showType = @"高兴";
+//
+//    detailController.hidesBottomBarWhenPushed       = YES;
+//    detailController.ActivityCode                   = model.ActivityCode;
+//    [self.navigationController pushViewController:detailController animated:YES];
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

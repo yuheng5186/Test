@@ -511,6 +511,7 @@
                                     if (adverArray.count!=0) {
                                         start.adverUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ];
                                     }
+                                    [[NSUserDefaults standardUserDefaults]setValue:[NSString stringWithFormat:@"%@",dict[@"JsonData"][@"redModel"][@"url"] ] forKey:@"ShareUrl"];
                                     start.ShareUrl = [NSString stringWithFormat:@"%@",dict[@"JsonData"][@"redModel"][@"url"] ];
                                     [weakSelf.navigationController pushViewController:start animated:YES];
                                 }

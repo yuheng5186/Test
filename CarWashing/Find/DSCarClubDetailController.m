@@ -695,7 +695,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _modelsArray = [NSMutableArray new];
         self.page = 0 ;
-        [self.downView removeFromSuperview];
+//        [self.downView removeFromSuperview];
         [self requestActivityDetail];
     });
 }

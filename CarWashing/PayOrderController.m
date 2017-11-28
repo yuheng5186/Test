@@ -274,34 +274,78 @@ static NSString *id_delayPayCell = @"id_delayPayCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    Order *order = (Order *)[self.DelayPayDataArray objectAtIndex:indexPath.section];
-    //
+    
+    Order *order = (Order *)[self.self.DelayPayDataArray objectAtIndex:indexPath.section];
     //    if(order.PayState == 3)
     //    {
-    OrderDetailController *orderDetailVC = [[OrderDetailController alloc] init];
-    orderDetailVC.hidesBottomBarWhenPushed = YES;
-    
-    
-    orderDetailVC.MerCode = order.MerCode;
-    
-    orderDetailVC.MerChantService = order.SerName;
-    
-    
-    orderDetailVC.ShijiPrice = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
-    orderDetailVC.Jprice = [NSString stringWithFormat:@"%@",order.PayableAmount];
-    orderDetailVC.youhuiprice = [NSString stringWithFormat:@"%@",order.DeductionAmount];
-    orderDetailVC.shijiPrice1 = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
-    orderDetailVC.orderid = order.OrderCode;
-    orderDetailVC.ordertime = order.PayTimes;
-    orderDetailVC.paymethod = @"微信支付";
-    if(order.PayMethod == 2)
-    {
-        orderDetailVC.paymethod = @"支付宝支付";
+    if (order.OrderType==3&&order.PayMethod==3) {
+        OrderDetailController *orderDetailVC = [[OrderDetailController alloc] init];
+        orderDetailVC.showType = @"1";
+        orderDetailVC.hidesBottomBarWhenPushed = YES;
+        orderDetailVC.MerCode = order.MerCode;
+        orderDetailVC.MerChantService = order.OrderDesc;
+        orderDetailVC.ShijiPrice = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
+        orderDetailVC.Jprice = [NSString stringWithFormat:@"%@",order.PayableAmount];
+        orderDetailVC.youhuiprice = [NSString stringWithFormat:@"%@",order.DeductionAmount];
+        orderDetailVC.shijiPrice1 = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
+        orderDetailVC.orderid = order.OrderCode;
+        orderDetailVC.ordertime = order.PayTimes;
+        orderDetailVC.serName = [NSString stringWithFormat:@"%@",order.SerName];
+        if(order.PayMethod == 2)
+        {
+            orderDetailVC.paymethod = @"支付宝支付";
+        }else{
+            orderDetailVC.paymethod = @"微信支付";
+        }
+        [self.navigationController pushViewController:orderDetailVC animated:YES];
+        
+    }else{
+        OrderDetailController *orderDetailVC = [[OrderDetailController alloc] init];
+        orderDetailVC.hidesBottomBarWhenPushed = YES;
+        orderDetailVC.MerCode = order.MerCode;
+        orderDetailVC.MerChantService = order.OrderDesc;
+        orderDetailVC.ShijiPrice = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
+        orderDetailVC.Jprice = [NSString stringWithFormat:@"%@",order.PayableAmount];
+        orderDetailVC.youhuiprice = [NSString stringWithFormat:@"%@",order.DeductionAmount];
+        orderDetailVC.shijiPrice1 = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
+        orderDetailVC.orderid = order.OrderCode;
+        orderDetailVC.ordertime = order.PayTimes;
+        if(order.PayMethod == 2)
+        {
+            orderDetailVC.paymethod = @"支付宝支付";
+        }else{
+            orderDetailVC.paymethod = @"微信支付";
+        }
+        [self.navigationController pushViewController:orderDetailVC animated:YES];
     }
-    
-    
-    
-    [self.navigationController pushViewController:orderDetailVC animated:YES];
+//    Order *order = (Order *)[self.DelayPayDataArray objectAtIndex:indexPath.section];
+//    //
+//    //    if(order.PayState == 3)
+//    //    {
+//    OrderDetailController *orderDetailVC = [[OrderDetailController alloc] init];
+//    orderDetailVC.hidesBottomBarWhenPushed = YES;
+//
+//
+//    orderDetailVC.MerCode = order.MerCode;
+//
+//    orderDetailVC.MerChantService = order.SerName;
+//
+//
+//    orderDetailVC.ShijiPrice = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
+//    orderDetailVC.Jprice = [NSString stringWithFormat:@"%@",order.PayableAmount];
+//    orderDetailVC.youhuiprice = [NSString stringWithFormat:@"%@",order.DeductionAmount];
+//    orderDetailVC.shijiPrice1 = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
+//    orderDetailVC.orderid = order.OrderCode;
+//    orderDetailVC.ordertime = order.PayTimes;
+//    orderDetailVC.paymethod = @"微信支付";
+//    if(order.PayMethod == 2)
+//    {
+//        orderDetailVC.paymethod = @"支付宝支付";
+//    }
+//
+//
+//
+//    [self.navigationController pushViewController:orderDetailVC animated:YES];
     //    }
     
     
