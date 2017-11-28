@@ -93,7 +93,7 @@
 -(void)setTopButton{
     
     //创建4个button
-    NSArray *buttonNames = @[@"车友提问",@"热门话题",@"二手车信息",@"资讯"];
+    NSArray *buttonNames = @[@"车友提问",@"热门动态",@"二手车信息",@"资讯"];
     for (int i = 0; i < buttonNames.count; i++) {
         UIButton *jackButton = [[UIButton alloc]initWithFrame:CGRectMake(i * (self.view.frame.size.width)/4, 64, (self.view.frame.size.width)/4, 44)];
         [jackButton setTitle:buttonNames[i] forState:(UIControlStateNormal)];
