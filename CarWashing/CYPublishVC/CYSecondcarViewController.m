@@ -136,13 +136,14 @@
     [self.backScrollerView addSubview:line3];
     //意见
     contentTextField = [[UITextView alloc]initWithFrame:CGRectMake(10, 150, Main_Screen_Width-20, 80)];
+    contentTextField.font=[UIFont systemFontOfSize:15.0];
     contentTextField.backgroundColor=[UIColor colorFromHex:@"#f6f6f6"];
     contentTextField.delegate=self;
     [self.backScrollerView addSubview:contentTextField];
     placeHoldLabel=[[UILabel alloc]initWithFrame:CGRectMake(10, 150, Main_Screen_Width-20, 40)];
     placeHoldLabel.text=@"描述您的车辆情况～(例如：车况怎么样？外观情况？保养情况等信息...)";
     placeHoldLabel.numberOfLines = 2;
-    placeHoldLabel.font=[UIFont systemFontOfSize:13.0];
+    placeHoldLabel.font=[UIFont systemFontOfSize:15.0];
     placeHoldLabel.textColor =[UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0];
     [self.backScrollerView addSubview:placeHoldLabel];
     numLabel = [[UILabel alloc]init];

@@ -328,9 +328,14 @@
                     
                     UIAlertController *sureController = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"当前用户无洗车卡，是否在线支付洗车,费用为￥%@",moneyStr] preferredStyle:(UIAlertControllerStyleAlert)];
                     UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"去支付" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        NSArray * adverArray = dict[@"JsonData"][@"advList"];
+                        if (adverArray.count!=0) {
+                            [[NSUserDefaults standardUserDefaults]setValue:[NSString stringWithFormat:@"%@",dict[@"JsonData"][@"advList"][0][@"AdvertisImg"] ] forKey:@"adverUrl"];
+                        }
+                        [[NSUserDefaults standardUserDefaults]setValue:[NSString stringWithFormat:@"%@",dict[@"JsonData"][@"redModel"][@"url"] ] forKey:@"ShareUrl"];
                         
                         DSScanPayController *payVC           = [[DSScanPayController alloc]init];
-                        payVC.payType =@"#";
+                        payVC.payType =@":";
                         payVC.hidesBottomBarWhenPushed            = YES;
                         
                         payVC.SerMerChant = weakSelf.scan.DeviceName;

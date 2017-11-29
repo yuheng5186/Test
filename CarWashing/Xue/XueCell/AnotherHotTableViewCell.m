@@ -33,7 +33,11 @@
 {
     NSArray *imageArray = [model.IndexImg componentsSeparatedByString:@","];
     self.collectionArray = imageArray;
-    self.titleLable.text= [NSString stringWithFormat:@"%@",model.ActivityName];
+    if ([model.ActivityName isEqualToString:@""]) {
+        self.titleLable.text= [NSString stringWithFormat:@"%@",model.Comment];
+    }else{
+        self.titleLable.text= [NSString stringWithFormat:@"%@",model.ActivityName];
+    }
     self.timeLabel.text= [NSString stringWithFormat:@"%@",model.ActDate];
     self.amazingNumberLabel.text= [NSString stringWithFormat:@"%@",model.GiveCount];
     self.commentNumLabel.text= [NSString stringWithFormat:@"%@",model.CommentCount];

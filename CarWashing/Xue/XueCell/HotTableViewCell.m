@@ -75,7 +75,11 @@
 -(void)configCell:(CYHotTopicModel*)model
 {
     [self.largeImageViewOnly sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,model.IndexImg]] placeholderImage:[UIImage imageNamed:@"photo"]];
-    self.titleLable.text= [NSString stringWithFormat:@"%@",model.ActivityName];
+    if ([model.ActivityName isEqualToString:@""]) {
+        self.titleLable.text= [NSString stringWithFormat:@"%@",model.Comment];
+    }else{
+        self.titleLable.text= [NSString stringWithFormat:@"%@",model.ActivityName];
+    }
     self.timeLabel.text= [NSString stringWithFormat:@"%@",model.ActDate];
     self.amazingNumberLabel.text= [NSString stringWithFormat:@"%@",model.GiveCount];
     self.commentNumLabel.text= [NSString stringWithFormat:@"%@",model.CommentCount];

@@ -104,6 +104,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -120,11 +121,14 @@
         //假红包
         [self creatPacket];
     }
-   
-    
+  
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(wechatShareSuccessClick) name:@"wechatShareSuccess" object:nil];
     
 }
-
+-(void)wechatShareSuccessClick
+{
+    self.tabBarController.tabBar.hidden = YES;
+}
 - (void)startTimer
 {
     if (self.timer) {

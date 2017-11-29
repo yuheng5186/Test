@@ -336,17 +336,18 @@
         
         if([payResoult isEqualToString:@"0"])
         {
-            
+             [[NSNotificationCenter defaultCenter]postNotificationName:@"wechatShareSuccess" object:nil];
             UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
             [alertview show];
         }else if([payResoult isEqualToString:@"-2"])
         {
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"wechatShareSuccess" object:nil];
             UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享已取消" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
             [alertview show];
         }
         else
         {
-            
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"wechatShareSuccess" object:nil];
             UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
             [alertview show];
             

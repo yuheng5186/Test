@@ -204,7 +204,7 @@
 //    self.locationManager = [[JFLocation alloc] init];
 //    _locationManager.delegate = self;
    
-    [[UIApplication sharedApplication].keyWindow addSubview:self.CYalerView];
+    [self.contentView addSubview:self.CYalerView];
     
 }
 

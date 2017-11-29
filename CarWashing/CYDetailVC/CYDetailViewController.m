@@ -1041,7 +1041,7 @@
                 NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];
                 [[NSNotificationCenter defaultCenter]postNotification:notice];
                 
-                [self.view showInfo:@"点赞成功" autoHidden:YES interval:2];
+                [self.view showInfo:@"点赞成功" autoHidden:YES interval:1];
                 
                 [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
                 self.goodNumberLabel.text                     = [NSString stringWithFormat:@"共有%ld人点赞过",self.GiveCount + 1];
@@ -1066,13 +1066,13 @@
             else
             {
                 //参数失败
-                [self.view showInfo:@"点赞失败" autoHidden:YES interval:2];
+                [self.view showInfo:@"点赞失败" autoHidden:YES interval:1];
                 [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
                 self.downGoodButton.selected = NO;
             }
             
         } fail:^(NSError *error) {
-            [self.view showInfo:@"点赞失败" autoHidden:YES interval:2];
+            [self.view showInfo:@"点赞失败" autoHidden:YES interval:1];
             [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
             self.downGoodButton.selected = NO;
         }];
@@ -1113,7 +1113,7 @@
                 NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];
                 [[NSNotificationCenter defaultCenter]postNotification:notice];
                 
-                [self.view showInfo:@"取消点赞成功" autoHidden:YES interval:2];
+                [self.view showInfo:@"取消点赞成功" autoHidden:YES interval:1];
                 
                 [self.goodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
                 self.goodNumberLabel.text                     = [NSString stringWithFormat:@"共有%ld人点赞过",self.GiveCount-1<0?0:self.GiveCount-1];
@@ -1134,14 +1134,14 @@
             else
                 //参数问题
             {
-                [self.view showInfo:@"取消点赞失败" autoHidden:YES interval:2];
+                [self.view showInfo:@"取消点赞失败" autoHidden:YES interval:1];
                 [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
                 self.downGoodButton.selected = YES;
             }
             
         } fail:^(NSError *error) {
             //网络问题
-            [self.view showInfo:@"取消点赞失败" autoHidden:YES interval:2];
+            [self.view showInfo:@"取消点赞失败" autoHidden:YES interval:1];
             [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan2"] forState:UIControlStateNormal];
             self.downGoodButton.selected = YES;
         }];
@@ -1191,7 +1191,7 @@
                 NSNotification * notice = [NSNotification notificationWithName:@"update" object:nil userInfo:nil];
                 [[NSNotificationCenter defaultCenter]postNotification:notice];
                 
-                [self.view showInfo:@"点赞成功" autoHidden:YES interval:2];
+                [self.view showInfo:@"点赞成功" autoHidden:YES interval:1];
                 
                 [self.downGoodButton setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
                 //                self.goodShowLabel.text                     = [NSString stringWithFormat:@"%ld",newsDetail.GiveCount+1];
@@ -1211,13 +1211,13 @@
             }
             else
             {
-                [self.view showInfo:@"点赞失败" autoHidden:YES interval:2];
+                [self.view showInfo:@"点赞失败" autoHidden:YES interval:1];
                 [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
                 self.downGoodButton.selected = NO;
             }
             
         } fail:^(NSError *error) {
-            [self.view showInfo:@"点赞失败" autoHidden:YES interval:2];
+            [self.view showInfo:@"点赞失败" autoHidden:YES interval:1];
             [self.downGoodButton setImage:[UIImage imageNamed:@"huodongxiangqingzan1"] forState:UIControlStateNormal];
             self.downGoodButton.selected = NO;
         }];

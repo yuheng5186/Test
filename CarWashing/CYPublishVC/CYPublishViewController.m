@@ -84,12 +84,13 @@
     [self.view addSubview:self.backScrollerView];
     
     contentTextField = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 150)];
+    contentTextField.font=[UIFont systemFontOfSize:15.0];
     contentTextField.backgroundColor=[UIColor colorFromHex:@"#f6f6f6"];
     contentTextField.delegate=self;
     [self.backScrollerView addSubview:contentTextField];
     placeHoldLabel=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, Main_Screen_Width, 20)];
     placeHoldLabel.text=@"一起来聊聊开车中发生有趣的事吧～";
-    placeHoldLabel.font=[UIFont systemFontOfSize:13.0];
+    placeHoldLabel.font=[UIFont systemFontOfSize:15.0];
     placeHoldLabel.textColor =[UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0];
     [self.backScrollerView addSubview:placeHoldLabel];
     numLabel = [[UILabel alloc]init];
