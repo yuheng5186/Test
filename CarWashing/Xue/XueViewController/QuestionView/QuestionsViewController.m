@@ -25,7 +25,8 @@
 #import "SDWeiXinPhotoContainerView.h"
 #import "CYQuestionTwoTableViewCell.h"
 
-
+//新的详情
+#import "CYDetailViewController.h"
 @interface QuestionsViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     SDWeiXinPhotoContainerView *_picContainerView;
@@ -213,7 +214,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     CYQuestionModel * model = self.modelArray[indexPath.row];
-    DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
+    CYDetailViewController  *detailController    = [[CYDetailViewController alloc]init];
     detailController.comeTypeString = @"1";
     detailController.showType = @"高兴";
     detailController.hidesBottomBarWhenPushed       = YES;

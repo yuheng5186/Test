@@ -123,7 +123,7 @@
     
     [self setupRefresh];
 }
-
+#pragma mark - - -- 创建头 --
 - (void) createHeaderView {
     UIView *header = [UIView new];
     header.width = [UIScreen mainScreen].bounds.size.width;
@@ -287,32 +287,36 @@
     textImageView.contentMode = UIViewContentModeScaleAspectFill;
     textImageView.clipsToBounds = YES;
     NSString * urlStr  = @"";
+    
     if ([[self.dicData[@"JsonData"]allKeys]containsObject:@"IndexImg"] ) {
-        NSArray *urlArray = [newsDetail.IndexImg componentsSeparatedByString:@","];
-        urlStr =[NSString stringWithFormat:@"%@",urlArray[0]];
+        if (![self.dicData[@"JsonData"][@"IndexImg"]isEqualToString:@""]) {
+            NSArray *urlArray = [newsDetail.IndexImg componentsSeparatedByString:@","];
+            urlStr =[NSString stringWithFormat:@"%@",urlArray[0]];
+            [textImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,urlStr]]];
+        }
     }else{
         urlStr =newsDetail.Img;
     }
     
-   
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-       
-        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,urlStr];
-        NSURL *url=[NSURL URLWithString:ImageURL];
-        NSData *data=[NSData dataWithContentsOfURL:url];
-        UIImage *img=[UIImage imageWithData:data];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [textImageView setImage:img];
-        });
-    });
+    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//       
+//        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,urlStr];
+//        NSURL *url=[NSURL URLWithString:ImageURL];
+//        NSData *data=[NSData dataWithContentsOfURL:url];
+//        UIImage *img=[UIImage imageWithData:data];
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+//            [textImageView setImage:img];
+//        });
+//    });
     
     
     self.textImageView          = textImageView;
     [backgroudView addSubview:self.textImageView ];
-    self.textImageView .top       = textTitleLabel.bottom;
-    self.textImageView .left      = textTitleLabel.left;
-    self.textImageView .right     = textTitleLabel.right;
-    self.textImageView .height    = Main_Screen_Height*200/667;
+//    self.textImageView .top       = textTitleLabel.bottom;
+//    self.textImageView .left      = textTitleLabel.left;
+//    self.textImageView .right     = textTitleLabel.right;
+//    self.textImageView .height    = Main_Screen_Height*200/667;
     textImageView.sd_layout
     .topSpaceToView(textContentLabel, 10*Main_Screen_Height/667)
     .leftEqualToView(textContentLabel)
@@ -409,9 +413,6 @@
     }else{
         self.tableView.tableFooterView.hidden=YES;
     }
-    
-
-    
     
     
     self.downView = [UIView new];
@@ -694,7 +695,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _modelsArray = [NSMutableArray new];
         self.page = 0 ;
-        [self.downView removeFromSuperview];
+//        [self.downView removeFromSuperview];
         [self requestActivityDetail];
     });
 }

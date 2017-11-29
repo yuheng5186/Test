@@ -41,6 +41,7 @@
 		1805AC911F386FA800FD0844 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC8B1F386FA800FD0844 /* TPKeyboardAvoidingScrollView.m */; };
 		1805AC921F386FA800FD0844 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC8D1F386FA800FD0844 /* TPKeyboardAvoidingTableView.m */; };
 		1805AC931F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1805AC8F1F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
+		1807656D1FCCF1A700087A85 /* CYDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807656C1FCCF1A700087A85 /* CYDetailViewController.m */; };
 		1807D94A1F4C23FC0080C4AB /* HYSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807D9491F4C23FC0080C4AB /* HYSlider.m */; };
 		180959511FB53694004CCD47 /* JackImageViewType.m in Sources */ = {isa = PBXBuildFile; fileRef = 180959501FB53694004CCD47 /* JackImageViewType.m */; };
 		180959551FB536B1004CCD47 /* JackPhotoBrower.m in Sources */ = {isa = PBXBuildFile; fileRef = 180959541FB536B1004CCD47 /* JackPhotoBrower.m */; };
@@ -477,6 +478,8 @@
 		1805AC8D1F386FA800FD0844 /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPKeyboardAvoidingTableView.m; path = Tool/TPKeyboardAvoid/TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
 		1805AC8E1F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+TPKeyboardAvoidingAdditions.h"; path = "Tool/TPKeyboardAvoid/UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		1805AC8F1F386FA800FD0844 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+TPKeyboardAvoidingAdditions.m"; path = "Tool/TPKeyboardAvoid/UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		1807656B1FCCF1A700087A85 /* CYDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYDetailViewController.h; sourceTree = "<group>"; };
+		1807656C1FCCF1A700087A85 /* CYDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYDetailViewController.m; sourceTree = "<group>"; };
 		1807D9481F4C23FC0080C4AB /* HYSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYSlider.h; sourceTree = "<group>"; };
 		1807D9491F4C23FC0080C4AB /* HYSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYSlider.m; sourceTree = "<group>"; };
 		180959501FB53694004CCD47 /* JackImageViewType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JackImageViewType.m; sourceTree = "<group>"; };
@@ -1288,6 +1291,15 @@
 			name = TPKeyboardAvoid;
 			sourceTree = "<group>";
 		};
+		1807656A1FCCF17600087A85 /* CYDetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				1807656B1FCCF1A700087A85 /* CYDetailViewController.h */,
+				1807656C1FCCF1A700087A85 /* CYDetailViewController.m */,
+			);
+			path = CYDetailVC;
+			sourceTree = "<group>";
+		};
 		1809594C1FB5366D004CCD47 /* JackTool */ = {
 			isa = PBXGroup;
 			children = (
@@ -1680,6 +1692,7 @@
 		181E93081F2094420006511E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				1807656A1FCCF17600087A85 /* CYDetailVC */,
 				181051761FA96A5300355F2F /* Xue */,
 				186175F41FA7051E00C6EFF3 /* CYAlertView */,
 				180599BB1FA18D1B003EAD1E /* CYPublishVC */,
@@ -3219,6 +3232,7 @@
 				18FB09C41FAAEFE100297E93 /* TZPhotoPickerController.m in Sources */,
 				5071B4841F39D3CC009FFF67 /* MyCarInfosHeaderView.m in Sources */,
 				50B26EA61F315E9B009B3B9F /* AllOrderController.m in Sources */,
+				1807656D1FCCF1A700087A85 /* CYDetailViewController.m in Sources */,
 				181E93071F208D560006511E /* DSRecommendController.m in Sources */,
 				1850904B1F4557E100795E0A /* UIView+TYAlertView.m in Sources */,
 				18A4B23D1F4E9F3600C64978 /* JXMapNavigationView.m in Sources */,

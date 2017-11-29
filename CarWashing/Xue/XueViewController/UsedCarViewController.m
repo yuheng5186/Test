@@ -10,6 +10,8 @@
 #import "CYUserCarTableViewCell.h"
 #import "CYUserCarModel.h"
 #import "DSCarClubDetailController.h"
+//新的详情
+#import "CYDetailViewController.h"
 @interface UsedCarViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *CYUserCarTableView;
 @property(strong,nonatomic)NSMutableArray *UserArray;
@@ -108,7 +110,7 @@
 {
     CYUserCarModel * model = self.UserArray[indexPath.row];
     [_CYUserCarTableView deselectRowAtIndexPath:indexPath animated:YES];
-    DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
+    CYDetailViewController  *detailController    = [[CYDetailViewController alloc]init];
     detailController.hidesBottomBarWhenPushed       = YES;
     detailController.ActivityCode                   = model.CarCode;
     detailController.CarCode = model.CarCode;

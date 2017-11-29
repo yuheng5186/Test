@@ -48,6 +48,8 @@
 #define UserSex          @"Sex"              //用户性别
 #define UserAge          @"Age"              //用户年龄
 #define HOMEURL [[NSUserDefaults standardUserDefaults]objectForKey:@"homeUrl"]
+#define ShareURL [[NSUserDefaults standardUserDefaults]objectForKey:@"ShareUrl"]
+#define adverURL [[NSUserDefaults standardUserDefaults]objectForKey:@"adverUrl"]
 #define HOMEINTURL [[NSUserDefaults standardUserDefaults]objectForKey:@"homeInviteUrl"]
 //空值判断
 #define IsNullIsNull(__String) (__String==nil || [__String isEqualToString:@""]|| [__String isEqualToString:@"null"])

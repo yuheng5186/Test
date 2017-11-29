@@ -374,10 +374,11 @@ else if(order.PayState == 4){
         orderDetailVC.orderid = order.OrderCode;
         orderDetailVC.ordertime = order.PayTimes;
         orderDetailVC.serName = [NSString stringWithFormat:@"%@",order.SerName];
-        orderDetailVC.paymethod = @"微信支付";
         if(order.PayMethod == 2)
         {
             orderDetailVC.paymethod = @"支付宝支付";
+        }else{
+            orderDetailVC.paymethod = @"微信支付";
         }
         [self.navigationController pushViewController:orderDetailVC animated:YES];
         
@@ -392,10 +393,11 @@ else if(order.PayState == 4){
         orderDetailVC.shijiPrice1 = [NSString stringWithFormat:@"%@",order.PaypriceAmount];
         orderDetailVC.orderid = order.OrderCode;
         orderDetailVC.ordertime = order.PayTimes;
-        orderDetailVC.paymethod = @"微信支付";
         if(order.PayMethod == 2)
         {
             orderDetailVC.paymethod = @"支付宝支付";
+        }else{
+            orderDetailVC.paymethod = @"微信支付";
         }
         [self.navigationController pushViewController:orderDetailVC animated:YES];
     }

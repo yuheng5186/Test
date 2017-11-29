@@ -10,6 +10,7 @@
 #import "MyInteractMessageCell.h"
 #import "MyinteractModel.h"
 #import "DSCarClubDetailController.h"
+#import "CYDetailViewController.h"
 @interface MyInteractMessageViewController ()<UITableViewDelegate,UITableViewDataSource,MyInteractMessageCelldelegate>
 {
     UIButton * selectButton;
@@ -132,7 +133,7 @@
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
     MyinteractModel * model = self.dataArray[indexPath.row];
     if ([model.ActivityType isEqualToString:@"2"]) {//车友提问
-        DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
+        CYDetailViewController  *detailController    = [[CYDetailViewController alloc]init];
         detailController.comeTypeString = @"1";
         detailController.showType = @"高兴";
         detailController.hidesBottomBarWhenPushed       = YES;
@@ -140,14 +141,14 @@
         NSLog(@"模型中文章号%ld",(long)model.ActivityCode);
         [self.navigationController pushViewController:detailController animated:YES];
     }else if ([model.ActivityType isEqualToString:@"3"]){//热门话题
-        DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
+        CYDetailViewController  *detailController    = [[CYDetailViewController alloc]init];
         detailController.comeTypeString = @"2";
         detailController.showType = @"高兴";
         detailController.hidesBottomBarWhenPushed       = YES;
         detailController.ActivityCode                   = model.ActivityCode;
         [self.navigationController pushViewController:detailController animated:YES];
     }else if ([model.ActivityType isEqualToString:@"5"]){//二手车
-        DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
+        CYDetailViewController  *detailController    = [[CYDetailViewController alloc]init];
         detailController.hidesBottomBarWhenPushed       = YES;
         detailController.ActivityCode                   = model.ActivityCode;
         detailController.CarCode = model.ActivityCode;

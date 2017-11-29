@@ -256,6 +256,8 @@
              /**        * 状态码        * 9000 订单支付成功        * 8000 正在处理中        * 4000 订单支付失败        * 6001 用户中途取消        * 6002 网络连接出错        */
             if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
                 //                [self aliPayReslut];
+                NSNotification * notice1 = [NSNotification notificationWithName:@"alipaysuccess" object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter]postNotification:notice1];
                  [[NSNotificationCenter defaultCenter]postNotificationName:@"alipayresultSuccess" object:nil];
             }else if ([resultDic[@"resultStatus"]isEqualToString:@"4000"]){
                 [[NSNotificationCenter defaultCenter]postNotificationName:@"alipayresultfail" object:nil];
@@ -303,6 +305,7 @@
         {
             NSNotification * notice = [NSNotification notificationWithName:@"paysuccess" object:nil userInfo:nil];
             [[NSNotificationCenter defaultCenter]postNotification:notice];
+            
 //            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"支付结果：成功！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
 //            
 //            [alertview show];
@@ -333,17 +336,18 @@
         
         if([payResoult isEqualToString:@"0"])
         {
-            
+             [[NSNotificationCenter defaultCenter]postNotificationName:@"wechatShareSuccess" object:nil];
             UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
             [alertview show];
         }else if([payResoult isEqualToString:@"-2"])
         {
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"wechatShareSuccess" object:nil];
             UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享已取消" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
             [alertview show];
         }
         else
         {
-            
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"wechatShareSuccess" object:nil];
             UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
             [alertview show];
             

@@ -101,6 +101,7 @@
     //内容
     //意见
     contentTextField = [[UITextView alloc]initWithFrame:CGRectMake(10, 100, Main_Screen_Width-20, 100)];
+    contentTextField.font=[UIFont systemFontOfSize:15.0];
     contentTextField.backgroundColor=[UIColor colorFromHex:@"#f6f6f6"];
     contentTextField.delegate=self;
     [self.backScrollerView addSubview:contentTextField];

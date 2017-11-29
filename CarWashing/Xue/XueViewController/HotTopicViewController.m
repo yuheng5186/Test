@@ -17,6 +17,8 @@
 #import "DSCarClubDetailController.h"
 #import "NoImageTableViewCell.h"
 
+//新的详情
+#import "CYDetailViewController.h"
 @interface HotTopicViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *hotTable;
 @property(strong,nonatomic)NSMutableArray *dataArray;
@@ -150,9 +152,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     CYHotTopicModel * model = self.modelArray[indexPath.row];
-    DSCarClubDetailController  *detailController    = [[DSCarClubDetailController alloc]init];
+    CYDetailViewController  *detailController    = [[CYDetailViewController alloc]init];
     detailController.comeTypeString = @"2";
     detailController.showType = @"高兴";
     detailController.hidesBottomBarWhenPushed       = YES;
