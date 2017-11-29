@@ -39,6 +39,8 @@
     self.contentView.backgroundColor=[UIColor whiteColor];
     UIView * topView = [[UIView alloc]init];
     topView.backgroundColor=RGBAA(242, 242, 242, 1.0);
+    topView.layer.cornerRadius = 5;
+    topView.layer.masksToBounds = YES;
     [self.contentView addSubview:topView];
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.contentView.mas_centerX);

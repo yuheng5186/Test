@@ -44,7 +44,7 @@
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
     self.cancelButton.frame=CGRectMake(20*Main_Screen_Height/667, self.whiteView.frame.size.height-(62*Main_Screen_Height/667), self.whiteView.frame.size.width-(40*Main_Screen_Height/667), 40*Main_Screen_Height/667);
     self.cancelButton.titleLabel.font=[UIFont systemFontOfSize:18.0*Main_Screen_Height/667];
-    [self.cancelButton setBackgroundColor:[UIColor redColor]];
+    [self.cancelButton setBackgroundColor:RGBAA(251, 44, 55, 1.0)];
 //    [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"shouye_tankuang_anniu"] forState:UIControlStateNormal];
     [self.cancelButton setTitle:@"我知道了" forState:UIControlStateNormal];
     [self.cancelButton setTitleColor:[UIColor colorFromHex:@"#ffffff"] forState:UIControlStateNormal];

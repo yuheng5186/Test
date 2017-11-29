@@ -124,6 +124,7 @@
 }
 #pragma mark - - -- 创建头 --
 - (void) createHeaderView {
+    
     UIView *header = [UIView new];
     header.width = [UIScreen mainScreen].bounds.size.width;
     header.backgroundColor  = [UIColor whiteColor];
@@ -134,7 +135,12 @@
         tempStringJack = [NSString stringWithFormat:@"%@",newsDetail.CarComment];
         
     }else{
-        tempStringJack = [NSString stringWithFormat:@"%@",newsDetail.Comment];
+        if (newsDetail.Comment.length==1&&[newsDetail.Comment isEqualToString:@"-"]) {
+            tempStringJack = @"";
+        }else{
+            tempStringJack = [NSString stringWithFormat:@"%@",newsDetail.Comment];
+        }
+        
     }
     NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:13]};
     CGSize size = [tempStringJack boundingRectWithSize:CGSizeMake(Main_Screen_Width-(20*Main_Screen_Height/667), 0) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;

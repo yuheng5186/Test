@@ -76,7 +76,7 @@
     
     [self setupUI];
     [self.contentView addSubview:self.MyListView];
-    UIView * headerView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 190)];
+    UIView * headerView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 200)];
     self.MyListView.tableHeaderView = headerView;
     UIView * footView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
     footView.backgroundColor=RGBAA(242, 242, 242, 1.0);
@@ -88,7 +88,7 @@
     UIView * leneIew=[[UIView alloc]initWithFrame:CGRectMake(0, 100, Main_Screen_Width, 10)];
     leneIew.backgroundColor=RGBAA(242, 242, 242, 1.0);
     [headerView addSubview:leneIew];
-    UIView * bottpmVIew=[[UIView alloc]initWithFrame:CGRectMake(0, 110, Main_Screen_Width, 80)];
+    UIView * bottpmVIew=[[UIView alloc]initWithFrame:CGRectMake(0, 110, Main_Screen_Width, 90)];
     bottpmVIew.backgroundColor=[UIColor whiteColor];
     [headerView addSubview:bottpmVIew];
     //头像
@@ -149,12 +149,12 @@
     NSArray * titleArray =@[@"订单",@"收藏",@"激活",@"我的资料"];
     for (int i=0;i<4;i++){
         UIButton * FourBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        FourBtn.frame =CGRectMake(i*Main_Screen_Width/4, 17, Main_Screen_Width/4, 22);
+        FourBtn.frame =CGRectMake(i*Main_Screen_Width/4, 20, Main_Screen_Width/4, 22);
         [FourBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",bottomImage[i]]] forState:UIControlStateNormal];
         [bottpmVIew addSubview:FourBtn];
         
         //四个
-        UILabel * FourLabel = [[UILabel alloc]initWithFrame:CGRectMake(i*Main_Screen_Width/4, 45, Main_Screen_Width/4, 30)];
+        UILabel * FourLabel = [[UILabel alloc]initWithFrame:CGRectMake(i*Main_Screen_Width/4, 48, Main_Screen_Width/4, 30)];
         FourLabel.textAlignment = NSTextAlignmentCenter;
         FourLabel.textColor=[UIColor colorFromHex:@"#3f3f3f"];
         FourLabel.font=[UIFont systemFontOfSize:13.0];
@@ -162,7 +162,7 @@
         [bottpmVIew addSubview:FourLabel];
         
         UIButton * clickBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        clickBtn.frame =CGRectMake(i*Main_Screen_Width/4, 0, Main_Screen_Width/4, 80);
+        clickBtn.frame =CGRectMake(i*Main_Screen_Width/4, 0, Main_Screen_Width/4, 90);
         clickBtn.tag=i+1;
         [clickBtn addTarget:self action:@selector(FourBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [bottpmVIew addSubview:clickBtn];

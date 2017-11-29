@@ -349,7 +349,12 @@ static NSString *id_carListCell = @"id_carListCell";
     
     return 0.1f;
 }
-
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView * lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 10*Main_Screen_Height/667)];
+    lineView.backgroundColor=RGBAA(242, 242, 242, 1.0);
+    return lineView;
+}
 
 
 - (IBAction)didClickDefaultButton:(UIButton *)button {
