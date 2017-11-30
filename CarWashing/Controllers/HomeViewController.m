@@ -189,9 +189,7 @@
     [UdStorage storageObject:@"市南区" forKey:@"Quyu"];
     [UdStorage storageObject:@"31.192272" forKey:@"Ym"];
     [UdStorage storageObject:@"121.523387"  forKey:@"Xm"];
-
     _IsSign = 0;
-    
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.removeFromSuperViewOnHide =YES;
     HUD.mode = MBProgressHUDModeIndeterminate;
@@ -203,8 +201,7 @@
     _GetUserRecordData = [NSMutableArray array];
 //    self.locationManager = [[JFLocation alloc] init];
 //    _locationManager.delegate = self;
-   
-    [self.contentView addSubview:self.CYalerView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.CYalerView];
     
 }
 

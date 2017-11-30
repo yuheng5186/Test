@@ -175,7 +175,7 @@
                              @"ActivityType":@(3),
                              @"Account_Id":[UdStorage getObjectforKey:Userid],
                              @"ActivityName":[NSString stringWithFormat:@"%@",contentTextField.text],
-                             @"Comment":@"666",
+                             @"Comment":@"-",
                              @"Picture":sendString
                              };
     
