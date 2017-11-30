@@ -377,8 +377,10 @@ else if(order.PayState == 4){
         if(order.PayMethod == 2)
         {
             orderDetailVC.paymethod = @"支付宝支付";
-        }else{
+        }else if(order.PayMethod == 1){
             orderDetailVC.paymethod = @"微信支付";
+        }else if(order.PayMethod == 3){
+            orderDetailVC.paymethod = @"洗车卡抵扣";
         }
         [self.navigationController pushViewController:orderDetailVC animated:YES];
         
@@ -396,8 +398,10 @@ else if(order.PayState == 4){
         if(order.PayMethod == 2)
         {
             orderDetailVC.paymethod = @"支付宝支付";
-        }else{
+        }else if(order.PayMethod == 1){
             orderDetailVC.paymethod = @"微信支付";
+        }else if(order.PayMethod == 3){
+            orderDetailVC.paymethod = @"洗车卡抵扣";
         }
         [self.navigationController pushViewController:orderDetailVC animated:YES];
     }

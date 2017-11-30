@@ -1,0 +1,130 @@
+//
+//  CYCardDetailViewController.m
+//  CarWashing
+//
+//  Created by apple on 2017/11/30.
+//  Copyright © 2017年 DS. All rights reserved.
+//
+
+#import "CYCardDetailViewController.h"
+#import "CYCardCommentView.h"
+@interface CYCardDetailViewController ()
+{
+    UIView * whiteVIew;
+}
+@property (nonatomic,strong) UIScrollView * bigScrollerView;
+@property (nonatomic,strong) CYCardCommentView * topView;
+
+
+
+@end
+
+@implementation CYCardDetailViewController
+- (void)drawNavigation {
+    
+    [self drawTitle:@"充值卡详情"];
+}
+
+
+- (void) drawContent
+{
+    self.contentView.backgroundColor = [UIColor whiteColor];
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    [self.view addSubview:self.bigScrollerView];
+    
+    UINib *nib = [UINib nibWithNibName:@"CYCardCommentView" bundle:nil];
+    CYCardCommentView *bookView = [[nib instantiateWithOwner:nil options:nil] firstObject];
+    bookView.frame=CGRectMake(0, 0, Main_Screen_Width, 150);
+    [self.bigScrollerView addSubview:bookView];
+    UIView * leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 170, Main_Screen_Width, 50)];
+    leftView.backgroundColor=[UIColor whiteColor];
+    [self.bigScrollerView addSubview:leftView];
+    
+    UILabel * leftLabel=[[UILabel alloc]initWithFrame:CGRectMake(25, 0, 200, 50)];
+    leftLabel.text = @"可分享好友免费洗车哦...";
+    leftLabel.textColor = [UIColor colorFromHex:@"#ffce46"];
+    leftLabel.font = [UIFont systemFontOfSize:18.0];
+    [leftView addSubview:leftLabel];
+    
+    UIButton * shareBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    shareBtn.frame = CGRectMake(leftView.frame.size.width-95, 10, 75, 30);
+    [shareBtn setBackgroundColor:[UIColor colorFromHex:@"#ffce46"]];
+    shareBtn.layer.cornerRadius = 5;
+    shareBtn.layer.masksToBounds = YES;
+    [shareBtn setTitle:@"分享" forState:UIControlStateNormal];
+    [shareBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [leftView addSubview:shareBtn];
+    ///////////////
+    whiteVIew=[[UIView alloc]initWithFrame:CGRectMake(0, 235, Main_Screen_Width, 300)];
+    whiteVIew.backgroundColor=[UIColor whiteColor];
+    [self.bigScrollerView addSubview:whiteVIew];
+    
+    
+    UILabel *noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, Main_Screen_Width, 50)];
+    noticeLabel.text = @"使用须知";
+    noticeLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+    noticeLabel.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
+    [whiteVIew addSubview:noticeLabel];
+    
+    UILabel *noticeLabelOne = [[UILabel alloc] initWithFrame:CGRectMake(10, 60, Main_Screen_Width-20, 30)];
+    noticeLabelOne.backgroundColor=[UIColor whiteColor];
+    noticeLabelOne.text = @"1、此卡仅限清洗汽车外观，不得购买其它服务项目";
+    noticeLabelOne.numberOfLines = 2;
+    noticeLabelOne.textColor = [UIColor colorFromHex:@"#999999"];
+    noticeLabelOne.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    [whiteVIew addSubview:noticeLabelOne];
+    
+    UILabel*noticeLabeTwo = [[UILabel alloc] initWithFrame:CGRectMake(10, 100, Main_Screen_Width-20, 30)];
+    noticeLabeTwo.text = @"2、洗车卡不能兑换现金和转赠与其他人使用";
+    noticeLabeTwo.textColor = [UIColor colorFromHex:@"#999999"];
+    noticeLabeTwo.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    [whiteVIew addSubview:noticeLabeTwo];
+    
+    UILabel *noticeLabelThree = [[UILabel alloc] initWithFrame:CGRectMake(10, 140, Main_Screen_Width-20, 40)];
+    noticeLabelThree.text = @"3、此卡一经售出，概不兑现。不记名，不挂失，不退卡，不补办";
+    noticeLabelThree.textColor = [UIColor colorFromHex:@"#999999"];
+    noticeLabelThree.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    noticeLabelThree.numberOfLines = 2;
+    [whiteVIew addSubview:noticeLabelThree];
+    
+    UILabel *noticeLabelFour =  [[UILabel alloc] initWithFrame:CGRectMake(10, 190, Main_Screen_Width-20, 40)];
+    noticeLabelFour.text = @"4、此卡可在蔷薇服务点享受会员优惠待遇，不得与其它优惠同时使用";
+    noticeLabelFour.textColor = [UIColor colorFromHex:@"#999999"];
+    noticeLabelFour.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    noticeLabelFour.numberOfLines = 2;
+    [whiteVIew addSubview:noticeLabelFour];
+    
+    UILabel *noticeLabelFive = [[UILabel alloc] initWithFrame:CGRectMake(10, 240, Main_Screen_Width-20, 40)];
+    noticeLabelFive.text = @"5、由青岛蔷薇汽车服务有限公司保留此卡法律范围内的最终解释权。VIP热线：4006979558";
+    noticeLabelFive.textColor = [UIColor colorFromHex:@"#999999"];
+    noticeLabelFive.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+    noticeLabelFive.numberOfLines = 2;
+    [whiteVIew addSubview:noticeLabelFive];
+
+
+    
+}
+-(UIScrollView*)bigScrollerView
+{
+    if (_bigScrollerView ==nil) {
+        _bigScrollerView =[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height-64)];
+        _bigScrollerView.contentSize = CGSizeMake(Main_Screen_Width, Main_Screen_Height+100);
+        _bigScrollerView.backgroundColor=RGBAA(242, 242, 242, 1.0);
+    }
+    return _bigScrollerView;
+}
+
+
+
+
+
+
+
+
+
+
+
+@end

@@ -20,6 +20,9 @@
 #import "UdStorage.h"
 #import "CardBag.h"
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
+
+// 新改的
+#import "CYCardDetailViewController.h"
 @interface CYCardDeatilListViewController ()<UITableViewDelegate, UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
     MBProgressHUD *HUD;
@@ -359,8 +362,13 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
+//    CardBag *card =_CardbagData [indexPath.section];
+//    RechargeDetailController *rechargeDetailVC = [[RechargeDetailController alloc] init];
+//    rechargeDetailVC.hidesBottomBarWhenPushed = YES;
+//    rechargeDetailVC.card = card;
+//    [self.navigationController pushViewController:rechargeDetailVC animated:YES];
     CardBag *card =_CardbagData [indexPath.section];
-    RechargeDetailController *rechargeDetailVC = [[RechargeDetailController alloc] init];
+    CYCardDetailViewController *rechargeDetailVC = [[CYCardDetailViewController alloc] init];
     rechargeDetailVC.hidesBottomBarWhenPushed = YES;
     rechargeDetailVC.card = card;
     [self.navigationController pushViewController:rechargeDetailVC animated:YES];

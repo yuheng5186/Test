@@ -31,4 +31,6 @@
 @property (nonatomic)NSInteger ConfigCode;
 @property (nonatomic)NSInteger ExpiredDay;
 
+@property (nonatomic ,retain)NSArray *GroupPurList;
+
 @end
