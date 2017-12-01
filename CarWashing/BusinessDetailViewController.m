@@ -703,17 +703,11 @@ static NSString *businessCommentCell = @"businessCommentCell";
             NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:textStr attributes:attribtDic];
             formerPriceLab.attributedText = attribtStr;
             
-            
             lblCarType.text = [[self.dic[@"MerSerList"] objectAtIndex:self.lastPath.row] objectForKey:@"SerName"];
-            
-            
 //            NSLog(@"%ld",self.lastPath.row);
-            
-            
         }
     }
 }
-
 
 #pragma mark - 设置组头视图
 
@@ -735,27 +729,6 @@ static NSString *businessCommentCell = @"businessCommentCell";
     return v;
 }
 
-
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-//    UILabel *textLab = [[UILabel alloc] init];
-//    
-//    //textLab.backgroundColor = [UIColor colorFromHex:@"#dfdfdf"];
-//    textLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-//    textLab.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
-//    
-//    if (section == 0) {
-//        textLab.text = @"服务活动";
-//    }else{
-//        textLab.text = [NSString stringWithFormat:@"评论 (%@)",self.dic[@"CommentCount"]];
-//    }
-//    
-//    return textLab.text;
-//}
-
-//- (NSString *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    
-//    
-//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.1;
@@ -954,18 +927,5 @@ static NSString *businessCommentCell = @"businessCommentCell";
 //        [_detailTableView.delegate tableView:_detailTableView didSelectRowAtIndexPath:indexPath];
 //    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @end

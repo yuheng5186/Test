@@ -98,7 +98,6 @@
                 bookView.leftImageView.image = [UIImage imageNamed:@"qw_guoqi_yueka"];
             }
         }
-       
     }else{
         UINib *nib = [UINib nibWithNibName:@"CYCardCommentView" bundle:nil];
         CYCardCommentView *bookView = [[nib instantiateWithOwner:nil options:nil] firstObject];
@@ -107,7 +106,6 @@
         bookView.timeLabel.text=[NSString stringWithFormat:@"即日起～%@",self.card.ExpEndDates];
         [self.bigScrollerView addSubview:bookView];
         
-        ///////////////
         whiteVIew=[[UIView alloc]initWithFrame:CGRectMake(0, 165, Main_Screen_Width, 300)];
         whiteVIew.backgroundColor=[UIColor whiteColor];
         [self.bigScrollerView addSubview:whiteVIew];
@@ -192,9 +190,6 @@
     noticeLabelFive.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     noticeLabelFive.numberOfLines = 2;
     [whiteVIew addSubview:noticeLabelFive];
-
-
-    
 }
 -(UIScrollView*)bigScrollerView
 {
@@ -205,15 +200,4 @@
     }
     return _bigScrollerView;
 }
-
-
-
-
-
-
-
-
-
-
-
 @end
