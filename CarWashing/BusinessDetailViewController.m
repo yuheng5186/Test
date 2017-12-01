@@ -612,7 +612,6 @@ static NSString *businessCommentCell = @"businessCommentCell";
     BusinessEstimateCell *estimateCell = [tableView dequeueReusableCellWithIdentifier:businessCommentCell forIndexPath:indexPath];
     
     
-    
     [estimateCell.headImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserImg"]]] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
     if([[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserName"] isKindOfClass:[NSNull class]])
     {

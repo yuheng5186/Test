@@ -131,7 +131,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
                 for(NSDictionary *dic in arr)
                 {
                     CardBag *model = [CardBag new];
-                    [model setValuesForKeysWithDictionary:dic];
+                    [model mj_setKeyValues:dic];
                     [_CardbagData addObject:model];
                 }
                 //                for(NSDictionary *dic in arr)
@@ -323,10 +323,13 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         }
         if (card.GetCardType ==11 ) {
             cell.CarddesLabel.text = [NSString stringWithFormat:@"团购卡"];
+            cell.CardTimeLabel.text = [NSString stringWithFormat:@"截止日期: 长期有效"];
+        }else{
+            cell.CardTimeLabel.text = [NSString stringWithFormat:@"截止日期: %@",[self DateZhuan:card.ExpEndDates]];
         }
         cell.CardnameLabel.text = [NSString stringWithFormat:@"免费洗车%ld次",card.CardCount];
     
-        cell.CardTimeLabel.text = [NSString stringWithFormat:@"截止日期: %@",[self DateZhuan:card.ExpEndDates]];
+    
     
 //        if(card.CardUseState == 2)
 //        {
