@@ -20,6 +20,9 @@
 #import "UdStorage.h"
 #import "CardBag.h"
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
+
+// 新改的
+#import "CYCardDetailViewController.h"
 @interface CYCardDeatilListViewController ()<UITableViewDelegate, UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
     MBProgressHUD *HUD;
@@ -128,7 +131,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
                 for(NSDictionary *dic in arr)
                 {
                     CardBag *model = [CardBag new];
-                    [model setValuesForKeysWithDictionary:dic];
+                    [model mj_setKeyValues:dic];
                     [_CardbagData addObject:model];
                 }
                 //                for(NSDictionary *dic in arr)
@@ -318,9 +321,15 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
                 cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_yueka"];
             }
         }
+        if (card.GetCardType ==11 ) {
+            cell.CarddesLabel.text = [NSString stringWithFormat:@"团购卡"];
+            cell.CardTimeLabel.text = [NSString stringWithFormat:@"截止日期: 长期有效"];
+        }else{
+            cell.CardTimeLabel.text = [NSString stringWithFormat:@"截止日期: %@",[self DateZhuan:card.ExpEndDates]];
+        }
         cell.CardnameLabel.text = [NSString stringWithFormat:@"免费洗车%ld次",card.CardCount];
     
-        cell.CardTimeLabel.text = [NSString stringWithFormat:@"截止日期: %@",[self DateZhuan:card.ExpEndDates]];
+    
     
 //        if(card.CardUseState == 2)
 //        {
@@ -359,8 +368,14 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
+//    CardBag *card =_CardbagData [indexPath.section];
+//    RechargeDetailController *rechargeDetailVC = [[RechargeDetailController alloc] init];
+//    rechargeDetailVC.hidesBottomBarWhenPushed = YES;
+//    rechargeDetailVC.card = card;
+//    [self.navigationController pushViewController:rechargeDetailVC animated:YES];
     CardBag *card =_CardbagData [indexPath.section];
-    RechargeDetailController *rechargeDetailVC = [[RechargeDetailController alloc] init];
+    
+    CYCardDetailViewController *rechargeDetailVC = [[CYCardDetailViewController alloc] init];
     rechargeDetailVC.hidesBottomBarWhenPushed = YES;
     rechargeDetailVC.card = card;
     [self.navigationController pushViewController:rechargeDetailVC animated:YES];

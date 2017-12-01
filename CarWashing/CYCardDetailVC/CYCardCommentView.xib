@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CYCardCommentView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3UN-XL-oX2">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zih-JO-f90">
+                            <rect key="frame" x="25" y="35" width="120" height="80"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="80" id="3NM-EW-peq"/>
+                                <constraint firstAttribute="width" constant="120" id="wqh-cy-AIZ"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="剩余扫码洗车1次" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hkq-Kk-daz">
+                            <rect key="frame" x="165" y="30" width="145" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="OPo-dv-Kmd"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有效期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkb-c2-CJ7">
+                            <rect key="frame" x="165" y="67" width="145" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="即日起～2017-08-20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tWV-Ox-7sL">
+                            <rect key="frame" x="165" y="99" width="145" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="tWV-Ox-7sL" firstAttribute="leading" secondItem="Hkq-Kk-daz" secondAttribute="leading" id="2Gn-Jf-QjA"/>
+                        <constraint firstItem="tWV-Ox-7sL" firstAttribute="trailing" secondItem="Hkq-Kk-daz" secondAttribute="trailing" id="3h6-9x-VQa"/>
+                        <constraint firstItem="pkb-c2-CJ7" firstAttribute="trailing" secondItem="Hkq-Kk-daz" secondAttribute="trailing" id="8uG-Ui-Ovt"/>
+                        <constraint firstItem="zih-JO-f90" firstAttribute="leading" secondItem="3UN-XL-oX2" secondAttribute="leading" constant="25" id="A3D-VF-ZNp"/>
+                        <constraint firstAttribute="trailing" secondItem="Hkq-Kk-daz" secondAttribute="trailing" constant="10" id="AVY-cX-r1d"/>
+                        <constraint firstItem="pkb-c2-CJ7" firstAttribute="leading" secondItem="Hkq-Kk-daz" secondAttribute="leading" id="KV5-bQ-MI4"/>
+                        <constraint firstItem="tWV-Ox-7sL" firstAttribute="bottom" secondItem="zih-JO-f90" secondAttribute="bottom" id="PES-86-vT9"/>
+                        <constraint firstItem="pkb-c2-CJ7" firstAttribute="centerY" secondItem="zih-JO-f90" secondAttribute="centerY" id="Uii-RV-YLa"/>
+                        <constraint firstItem="Hkq-Kk-daz" firstAttribute="leading" secondItem="zih-JO-f90" secondAttribute="trailing" constant="20" id="XYe-BA-3th"/>
+                        <constraint firstItem="Hkq-Kk-daz" firstAttribute="top" secondItem="3UN-XL-oX2" secondAttribute="top" constant="30" id="Xbg-ah-SBq"/>
+                        <constraint firstItem="zih-JO-f90" firstAttribute="centerY" secondItem="3UN-XL-oX2" secondAttribute="centerY" id="gGg-Bg-yPu"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="3UN-XL-oX2" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="CbG-fO-mIH"/>
+                <constraint firstItem="3UN-XL-oX2" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="R3G-V8-Za5"/>
+                <constraint firstItem="3UN-XL-oX2" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="UZE-0k-dbu"/>
+                <constraint firstItem="3UN-XL-oX2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="m9E-9K-Vor"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="carImageView" destination="zih-JO-f90" id="ssg-hC-8Ad"/>
+                <outlet property="timeLabel" destination="tWV-Ox-7sL" id="i62-ul-DM1"/>
+                <outlet property="titleLabel" destination="Hkq-Kk-daz" id="4DE-ap-0Fe"/>
+            </connections>
+            <point key="canvasLocation" x="-253" y="55"/>
+        </view>
+    </objects>
+</document>

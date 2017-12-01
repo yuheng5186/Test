@@ -24,6 +24,8 @@
 #import "Card.h"
 #import "MBProgressHUD.h"
 #import "DSCardShowDetailViewController.h"
+//新的界面
+#import "CYPurchaseCardViewController.h"
 
 #define KCURRENTCITYINFODEFAULTS [NSUserDefaults standardUserDefaults]
 @interface PurchaseViewController ()<JFLocationDelegate, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource, UIScrollViewDelegate>
@@ -146,7 +148,6 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 {
     
     NSDictionary *mulDic = @{
-                             @"GetCardType":@1,
                              @"Area":(self.locationButton.titleLabel.text.length==0?@"青岛市":self.locationButton.titleLabel.text)
                              };
     NSDictionary *params = @{
@@ -154,7 +155,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     NSLog(@"%@",params);
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardConfigList",Khttp] success:^(NSDictionary *dict, BOOL success) {
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetPurchaseCardList",Khttp] success:^(NSDictionary *dict, BOOL success) {
         NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
@@ -163,7 +164,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
             for(NSDictionary *dic in arr)
             {
                 Card *card = [[Card alloc]init];
-                [card setValuesForKeysWithDictionary:dic];
+                [card mj_setKeyValues:dic];
                 [_CardArray addObject:card];
             }
             
@@ -339,7 +340,11 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 - (void)didCickBuyButton {
 
     Card *card = (Card *)[_CardArray objectAtIndex:_Xuhao];
-    PayPurchaseCardController *payCardVC = [[PayPurchaseCardController alloc] init];
+//    PayPurchaseCardController *payCardVC = [[PayPurchaseCardController alloc] init];
+//    payCardVC.hidesBottomBarWhenPushed = YES;
+//    payCardVC.choosecard = card;
+//    [self.navigationController pushViewController:payCardVC animated:YES];
+    CYPurchaseCardViewController *payCardVC = [[CYPurchaseCardViewController alloc] init];
     payCardVC.hidesBottomBarWhenPushed = YES;
     payCardVC.choosecard = card;
     [self.navigationController pushViewController:payCardVC animated:YES];

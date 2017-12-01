@@ -23,18 +23,18 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-////    self.CardnameLabel.textColor = [UIColor blackColor];
-////    self.tagLabel.font = [UIFont systemFontOfSize:11*Main_Screen_Height/667];
-////    self.CardnameLabel.font = [UIFont boldSystemFontOfSize:20*Main_Screen_Height/667];
-////    self.CarddesLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
-////    self.CardTimeLabel.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
-////    self.CardTimeLabel.textColor = [UIColor colorFromHex:@"#999999"];
-//    
-//    
+    self.CarddesLabel.font = [UIFont boldSystemFontOfSize:24*Main_Screen_Height/667];
+    self.CarddesLabel.textColor = [UIColor colorFromHex:@"#fefefe"];
+//
     self.CardTimeLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
     self.CardnameLabel.textColor = [UIColor colorFromHex:@"#ffffff"];
     self.CardTimeLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     self.CardnameLabel.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+    
+    [self.CarddesLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.backgroundImgV).mas_offset(20*Main_Screen_Height/667);
+        make.top.equalTo(self.backgroundImgV).mas_offset(15*Main_Screen_Height/667);
+    }];
     
     [self.CardTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.backgroundImgV).mas_offset(-12*Main_Screen_Height/667);

@@ -27,6 +27,8 @@
 		04DB28E61F6E184F009B4D9C /* WSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DB28E21F6E184F009B4D9C /* WSDatePickerView.m */; };
 		04DB28E71F6E184F009B4D9C /* WSDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DB28E31F6E184F009B4D9C /* WSDatePickerView.xib */; };
 		1802AD991F5FC704009EB146 /* DSSalaActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1802AD981F5FC704009EB146 /* DSSalaActivityCell.m */; };
+		180427941FD0EEE000B50F65 /* CYCardComment1.m in Sources */ = {isa = PBXBuildFile; fileRef = 180427931FD0EEE000B50F65 /* CYCardComment1.m */; };
+		180427961FD0EEF700B50F65 /* CYCardComment1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180427951FD0EEF700B50F65 /* CYCardComment1.xib */; };
 		180599B91FA17899003EAD1E /* TLMenuButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180599B61FA17899003EAD1E /* TLMenuButtonView.m */; };
 		180599BA1FA17899003EAD1E /* TLMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 180599B71FA17899003EAD1E /* TLMenuButton.m */; };
 		180599BF1FA18DBE003EAD1E /* CYPublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180599BD1FA18DBE003EAD1E /* CYPublishViewController.m */; };
@@ -93,6 +95,15 @@
 		1817468C1FC7EE3200135AFA /* MyLibListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1817468A1FC7EE3200135AFA /* MyLibListCollectionViewCell.m */; };
 		1817468D1FC7EE3200135AFA /* MyLibListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1817468B1FC7EE3200135AFA /* MyLibListCollectionViewCell.xib */; };
 		181851231FA99A10003A3A47 /* CYUserCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181851211FA99A10003A3A47 /* CYUserCarTableViewCell.m */; };
+		1818E3011FCF9E8100AE1DEB /* CYPurchaseCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E3001FCF9E8100AE1DEB /* CYPurchaseCardViewController.m */; };
+		1818E3051FCFA1E600AE1DEB /* CYPurchaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E3031FCFA1E600AE1DEB /* CYPurchaseTableViewCell.m */; };
+		1818E3061FCFA1E600AE1DEB /* CYPurchaseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1818E3041FCFA1E600AE1DEB /* CYPurchaseTableViewCell.xib */; };
+		1818E30B1FCFA28E00AE1DEB /* CYPurchaseTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E3091FCFA28E00AE1DEB /* CYPurchaseTwoTableViewCell.m */; };
+		1818E30C1FCFA28E00AE1DEB /* CYPurchaseTwoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1818E30A1FCFA28E00AE1DEB /* CYPurchaseTwoTableViewCell.xib */; };
+		1818E30F1FCFD8CF00AE1DEB /* CYPurchaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E30E1FCFD8CF00AE1DEB /* CYPurchaseModel.m */; };
+		1818E3141FCFF0A400AE1DEB /* CYCardDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E3131FCFF0A400AE1DEB /* CYCardDetailViewController.m */; };
+		1818E3171FCFF0EF00AE1DEB /* CYCardCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818E3161FCFF0EF00AE1DEB /* CYCardCommentView.m */; };
+		1818E3191FCFF10000AE1DEB /* CYCardCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1818E3181FCFF10000AE1DEB /* CYCardCommentView.xib */; };
 		181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92B71F1F364A0006511E /* MenuTabBarController.m */; };
 		181E92BB1F1F36710006511E /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BA1F1F36710006511E /* BaseController.m */; };
 		181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E92BF1F1F39CC0006511E /* BlackLoadingView.m */; };
@@ -453,6 +464,9 @@
 		06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CarWashing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1802AD971F5FC704009EB146 /* DSSalaActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSalaActivityCell.h; sourceTree = "<group>"; };
 		1802AD981F5FC704009EB146 /* DSSalaActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSalaActivityCell.m; sourceTree = "<group>"; };
+		180427921FD0EEE000B50F65 /* CYCardComment1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYCardComment1.h; sourceTree = "<group>"; };
+		180427931FD0EEE000B50F65 /* CYCardComment1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYCardComment1.m; sourceTree = "<group>"; };
+		180427951FD0EEF700B50F65 /* CYCardComment1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CYCardComment1.xib; sourceTree = "<group>"; };
 		180599B51FA17899003EAD1E /* TLMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLMenuButton.h; sourceTree = "<group>"; };
 		180599B61FA17899003EAD1E /* TLMenuButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLMenuButtonView.m; sourceTree = "<group>"; };
 		180599B71FA17899003EAD1E /* TLMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLMenuButton.m; sourceTree = "<group>"; };
@@ -577,6 +591,21 @@
 		1817468B1FC7EE3200135AFA /* MyLibListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyLibListCollectionViewCell.xib; sourceTree = "<group>"; };
 		181851201FA99A10003A3A47 /* CYUserCarTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYUserCarTableViewCell.h; sourceTree = "<group>"; };
 		181851211FA99A10003A3A47 /* CYUserCarTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYUserCarTableViewCell.m; sourceTree = "<group>"; };
+		1818E2FF1FCF9E8100AE1DEB /* CYPurchaseCardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYPurchaseCardViewController.h; sourceTree = "<group>"; };
+		1818E3001FCF9E8100AE1DEB /* CYPurchaseCardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYPurchaseCardViewController.m; sourceTree = "<group>"; };
+		1818E3021FCFA1E600AE1DEB /* CYPurchaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYPurchaseTableViewCell.h; sourceTree = "<group>"; };
+		1818E3031FCFA1E600AE1DEB /* CYPurchaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYPurchaseTableViewCell.m; sourceTree = "<group>"; };
+		1818E3041FCFA1E600AE1DEB /* CYPurchaseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CYPurchaseTableViewCell.xib; sourceTree = "<group>"; };
+		1818E3081FCFA28E00AE1DEB /* CYPurchaseTwoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYPurchaseTwoTableViewCell.h; sourceTree = "<group>"; };
+		1818E3091FCFA28E00AE1DEB /* CYPurchaseTwoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYPurchaseTwoTableViewCell.m; sourceTree = "<group>"; };
+		1818E30A1FCFA28E00AE1DEB /* CYPurchaseTwoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CYPurchaseTwoTableViewCell.xib; sourceTree = "<group>"; };
+		1818E30D1FCFD8CF00AE1DEB /* CYPurchaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYPurchaseModel.h; sourceTree = "<group>"; };
+		1818E30E1FCFD8CF00AE1DEB /* CYPurchaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYPurchaseModel.m; sourceTree = "<group>"; };
+		1818E3121FCFF0A400AE1DEB /* CYCardDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYCardDetailViewController.h; sourceTree = "<group>"; };
+		1818E3131FCFF0A400AE1DEB /* CYCardDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYCardDetailViewController.m; sourceTree = "<group>"; };
+		1818E3151FCFF0EF00AE1DEB /* CYCardCommentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYCardCommentView.h; sourceTree = "<group>"; };
+		1818E3161FCFF0EF00AE1DEB /* CYCardCommentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYCardCommentView.m; sourceTree = "<group>"; };
+		1818E3181FCFF10000AE1DEB /* CYCardCommentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CYCardCommentView.xib; sourceTree = "<group>"; };
 		181E92B61F1F364A0006511E /* MenuTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTabBarController.h; sourceTree = "<group>"; };
 		181E92B71F1F364A0006511E /* MenuTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTabBarController.m; sourceTree = "<group>"; };
 		181E92B91F1F36710006511E /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
@@ -1493,6 +1522,36 @@
 			path = "XueMode l";
 			sourceTree = "<group>";
 		};
+		1818E3071FCFA26900AE1DEB /* CYCell */ = {
+			isa = PBXGroup;
+			children = (
+				1818E3021FCFA1E600AE1DEB /* CYPurchaseTableViewCell.h */,
+				1818E3031FCFA1E600AE1DEB /* CYPurchaseTableViewCell.m */,
+				1818E3041FCFA1E600AE1DEB /* CYPurchaseTableViewCell.xib */,
+				1818E3081FCFA28E00AE1DEB /* CYPurchaseTwoTableViewCell.h */,
+				1818E3091FCFA28E00AE1DEB /* CYPurchaseTwoTableViewCell.m */,
+				1818E30A1FCFA28E00AE1DEB /* CYPurchaseTwoTableViewCell.xib */,
+				1818E30D1FCFD8CF00AE1DEB /* CYPurchaseModel.h */,
+				1818E30E1FCFD8CF00AE1DEB /* CYPurchaseModel.m */,
+			);
+			name = CYCell;
+			sourceTree = "<group>";
+		};
+		1818E3101FCFF07300AE1DEB /* CYCardDetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				1818E3121FCFF0A400AE1DEB /* CYCardDetailViewController.h */,
+				1818E3131FCFF0A400AE1DEB /* CYCardDetailViewController.m */,
+				1818E3151FCFF0EF00AE1DEB /* CYCardCommentView.h */,
+				1818E3161FCFF0EF00AE1DEB /* CYCardCommentView.m */,
+				1818E3181FCFF10000AE1DEB /* CYCardCommentView.xib */,
+				180427921FD0EEE000B50F65 /* CYCardComment1.h */,
+				180427931FD0EEE000B50F65 /* CYCardComment1.m */,
+				180427951FD0EEF700B50F65 /* CYCardComment1.xib */,
+			);
+			path = CYCardDetailVC;
+			sourceTree = "<group>";
+		};
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
@@ -1692,6 +1751,7 @@
 		181E93081F2094420006511E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				1818E3101FCFF07300AE1DEB /* CYCardDetailVC */,
 				1807656A1FCCF17600087A85 /* CYDetailVC */,
 				181051761FA96A5300355F2F /* Xue */,
 				186175F41FA7051E00C6EFF3 /* CYAlertView */,
@@ -2537,8 +2597,11 @@
 		501671FF1F29786C00384186 /* Purchase */ = {
 			isa = PBXGroup;
 			children = (
+				1818E3071FCFA26900AE1DEB /* CYCell */,
 				181E92D91F1F3BC60006511E /* PurchaseViewController.h */,
 				181E92DA1F1F3BC60006511E /* PurchaseViewController.m */,
+				1818E2FF1FCF9E8100AE1DEB /* CYPurchaseCardViewController.h */,
+				1818E3001FCF9E8100AE1DEB /* CYPurchaseCardViewController.m */,
 				501672141F297D8200384186 /* PurchaseCardViewCell.h */,
 				501672151F297D8200384186 /* PurchaseCardViewCell.m */,
 				50B26E621F300D60009B3B9F /* PayPurchaseCardController.h */,
@@ -2902,6 +2965,7 @@
 			files = (
 				5071B47E1F38099C009FFF67 /* OrderDetailView.xib in Resources */,
 				50D30E7D1F2044C20086D3ED /* BusinessDetailHeaderView.xib in Resources */,
+				1818E3061FCFA1E600AE1DEB /* CYPurchaseTableViewCell.xib in Resources */,
 				50B26E6E1F301B60009B3B9F /* RechargeCell.xib in Resources */,
 				1850902E1F45573F00795E0A /* ShareView.xib in Resources */,
 				180599C01FA18DBE003EAD1E /* CYPublishViewController.xib in Resources */,
@@ -2925,12 +2989,15 @@
 				18B803851F1DA2A300B52432 /* LaunchScreen.storyboard in Resources */,
 				1888214E1F6BD336002618F7 /* b3.gif in Resources */,
 				5094A63F1F34852600407808 /* ShopInfoHeadView.xib in Resources */,
+				1818E3191FCFF10000AE1DEB /* CYCardCommentView.xib in Resources */,
 				18277E421FC5480B00610CC3 /* MyInteractMessageCell.xib in Resources */,
 				18B803821F1DA2A300B52432 /* Assets.xcassets in Resources */,
+				180427961FD0EEF700B50F65 /* CYCardComment1.xib in Resources */,
 				501672321F297FF000384186 /* problemCenter.plist in Resources */,
 				1817468D1FC7EE3200135AFA /* MyLibListCollectionViewCell.xib in Resources */,
 				5094A6301F346E4200407808 /* SuccessPayCell.xib in Resources */,
 				180959641FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.xib in Resources */,
+				1818E30C1FCFA28E00AE1DEB /* CYPurchaseTwoTableViewCell.xib in Resources */,
 				501672431F29D26C00384186 /* MemberView.xib in Resources */,
 				188821501F6BD336002618F7 /* b5.gif in Resources */,
 				1888214D1F6BD336002618F7 /* b2.gif in Resources */,
@@ -3072,6 +3139,7 @@
 				181051831FA9743B00355F2F /* XueCarFirendViewController.m in Sources */,
 				18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */,
 				18F7EAD01F90A5D80067AEEF /* CYCarRMListModel.m in Sources */,
+				1818E3171FCFF0EF00AE1DEB /* CYCardCommentView.m in Sources */,
 				18FB09D21FAB0C6100297E93 /* CYUserCarModel.m in Sources */,
 				18B7F9AF1F945B5900302F64 /* CYChooseCarTypeViewController.m in Sources */,
 				181E92F21F20848D0006511E /* DSOrderController.m in Sources */,
@@ -3126,6 +3194,7 @@
 				501672131F297AD000384186 /* BusinessDetailHeaderView.m in Sources */,
 				18ED28A51FB8436F00C0CC92 /* AddCareTableViewCell.m in Sources */,
 				50B26E681F301B29009B3B9F /* DiscountCell.m in Sources */,
+				1818E3051FCFA1E600AE1DEB /* CYPurchaseTableViewCell.m in Sources */,
 				18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */,
 				181E92CE1F1F39CC0006511E /* UIUtil.m in Sources */,
 				18FB09C31FAAEFE100297E93 /* TZAssetCell.m in Sources */,
@@ -3155,6 +3224,7 @@
 				181E92B81F1F364A0006511E /* MenuTabBarController.m in Sources */,
 				18277E411FC5480B00610CC3 /* MyInteractMessageCell.m in Sources */,
 				1839979F1F25E69100702071 /* DSPasswordController.m in Sources */,
+				1818E30B1FCFA28E00AE1DEB /* CYPurchaseTwoTableViewCell.m in Sources */,
 				186175EA1FA6C3C100C6EFF3 /* MD5DataSigner.m in Sources */,
 				18ED28EE1FBAE9E400C0CC92 /* YearModel.m in Sources */,
 				186175EB1FA6C3C100C6EFF3 /* RSADataVerifier.m in Sources */,
@@ -3237,8 +3307,10 @@
 				1850904B1F4557E100795E0A /* UIView+TYAlertView.m in Sources */,
 				18A4B23D1F4E9F3600C64978 /* JXMapNavigationView.m in Sources */,
 				041573A61F53C522004514E3 /* TFGridInputViewCellStyle.m in Sources */,
+				1818E30F1FCFD8CF00AE1DEB /* CYPurchaseModel.m in Sources */,
 				180E43041F3B471100013D2D /* UIView+BFSToastInfo.m in Sources */,
 				04DB28E61F6E184F009B4D9C /* WSDatePickerView.m in Sources */,
+				1818E3141FCFF0A400AE1DEB /* CYCardDetailViewController.m in Sources */,
 				500C6BF51F3B5B13007D34A1 /* BusinessMapController.m in Sources */,
 				18FBC5C41F8F01B400054561 /* CallOutAnnotationView.m in Sources */,
 				50B26EA01F30819D009B3B9F /* RechargeDetailController.m in Sources */,
@@ -3334,6 +3406,7 @@
 				180E42D81F39B8C200013D2D /* DSUserRightDetailController.m in Sources */,
 				185090531F4558AC00795E0A /* UIImage+ImageEffects.m in Sources */,
 				18322ACC1F502F9E003ABB7B /* DSCheckPhoneViewController.m in Sources */,
+				1818E3011FCF9E8100AE1DEB /* CYPurchaseCardViewController.m in Sources */,
 				181E92D81F1F3BAE0006511E /* FindViewController.m in Sources */,
 				18A4B22A1F4D6CAB00C64978 /* README.md in Sources */,
 				180599BA1FA17899003EAD1E /* TLMenuButton.m in Sources */,
@@ -3348,6 +3421,7 @@
 				18D815841F79ECA800A1FA04 /* CYCardTableViewCell.m in Sources */,
 				18322AC01F4D950C003ABB7B /* Card.m in Sources */,
 				185090271F441BFA00795E0A /* UdStorage.m in Sources */,
+				180427941FD0EEE000B50F65 /* CYCardComment1.m in Sources */,
 				1850901C1F43F19B00795E0A /* LCMD5Tool.m in Sources */,
 				18A4B2301F4D832300C64978 /* ShareWechatView.m in Sources */,
 				180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */,

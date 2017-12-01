@@ -11,5 +11,6 @@
 @interface BusinessPayCell : UITableViewCell
 
 @property (nonatomic, weak) UIButton *payWayBtn;
-
+@property (nonatomic, weak) UIImageView *chooseimageView;
+@property (nonatomic, weak) UILabel *showLabel;
 @end

@@ -21,6 +21,7 @@
 @property(nonatomic)NSInteger ConfigCode;
 @property(nonatomic,copy)NSString *Description;
 @property(nonatomic,copy)NSString *ExpStartDates;
+@property(nonatomic,copy)NSString *GroupPurchaseBatch;
 @property(nonatomic,copy)NSString *ExpEndDates;
 @property(nonatomic)NSInteger GetCardType;
 @property(nonatomic)NSInteger Integralnum;
