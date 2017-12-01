@@ -247,12 +247,12 @@
                     
                     //创建分享内容对象
                     WXMediaMessage *urlMessage = [WXMediaMessage message];
-                    urlMessage.title = [[dict objectForKey:@"JsonData"] objectForKey:@"ShareTitle"];//分享标题
-                    urlMessage.description = [[dict objectForKey:@"JsonData"] objectForKey:@"ShareContent"];//分享描述
+                    urlMessage.title = @"【蔷薇爱车】您的好友送您一个洗车红包";//分享标题
+                    urlMessage.description = @"立即领取，免费洗车";//分享描述
                     [urlMessage setThumbImage:[UIImage imageNamed:@"loginIcon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
                     //创建多媒体对象
                     WXWebpageObject *webObj = [WXWebpageObject object];
-                    webObj.webpageUrl = [NSString stringWithFormat:@"%@",[[dict objectForKey:@"JsonData"] objectForKey:@"InviteShareUrl"]];//分享链接
+                    webObj.webpageUrl = [NSString stringWithFormat:@"%@",[[dict objectForKey:@"JsonData"] objectForKey:@"Url"]];//分享链接
                     //完成发送对象实例
                     urlMessage.mediaObject = webObj;
                     sendReq.message = urlMessage;
@@ -300,13 +300,13 @@
                     
                     //创建分享内容对象
                     WXMediaMessage *urlMessage = [WXMediaMessage message];
-                    urlMessage.title = [[dict objectForKey:@"JsonData"] objectForKey:@"ShareTitle"];//分享标题
-                    urlMessage.description = [[dict objectForKey:@"JsonData"] objectForKey:@"ShareContent"];//分享描述
+                    urlMessage.title = @"【蔷薇爱车】您的好友送您一个洗车红包";//分享标题
+                    urlMessage.description = @"立即领取，免费洗车";//分享描述
                     [urlMessage setThumbImage:[UIImage imageNamed:@"loginIcon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
                     
                     //创建多媒体对象
                     WXWebpageObject *webObj = [WXWebpageObject object];
-                    webObj.webpageUrl = [NSString stringWithFormat:@"%@",[[dict objectForKey:@"JsonData"] objectForKey:@"InviteShareUrl"]];//分享链接
+                    webObj.webpageUrl = [NSString stringWithFormat:@"%@",[[dict objectForKey:@"JsonData"] objectForKey:@"Url"]];//分享链接
                     
                     //完成发送对象实例
                     urlMessage.mediaObject = webObj;
