@@ -27,6 +27,8 @@
 		04DB28E61F6E184F009B4D9C /* WSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DB28E21F6E184F009B4D9C /* WSDatePickerView.m */; };
 		04DB28E71F6E184F009B4D9C /* WSDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DB28E31F6E184F009B4D9C /* WSDatePickerView.xib */; };
 		1802AD991F5FC704009EB146 /* DSSalaActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1802AD981F5FC704009EB146 /* DSSalaActivityCell.m */; };
+		180427941FD0EEE000B50F65 /* CYCardComment1.m in Sources */ = {isa = PBXBuildFile; fileRef = 180427931FD0EEE000B50F65 /* CYCardComment1.m */; };
+		180427961FD0EEF700B50F65 /* CYCardComment1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180427951FD0EEF700B50F65 /* CYCardComment1.xib */; };
 		180599B91FA17899003EAD1E /* TLMenuButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180599B61FA17899003EAD1E /* TLMenuButtonView.m */; };
 		180599BA1FA17899003EAD1E /* TLMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 180599B71FA17899003EAD1E /* TLMenuButton.m */; };
 		180599BF1FA18DBE003EAD1E /* CYPublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180599BD1FA18DBE003EAD1E /* CYPublishViewController.m */; };
@@ -462,6 +464,9 @@
 		06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CarWashing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1802AD971F5FC704009EB146 /* DSSalaActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSalaActivityCell.h; sourceTree = "<group>"; };
 		1802AD981F5FC704009EB146 /* DSSalaActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSalaActivityCell.m; sourceTree = "<group>"; };
+		180427921FD0EEE000B50F65 /* CYCardComment1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYCardComment1.h; sourceTree = "<group>"; };
+		180427931FD0EEE000B50F65 /* CYCardComment1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYCardComment1.m; sourceTree = "<group>"; };
+		180427951FD0EEF700B50F65 /* CYCardComment1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CYCardComment1.xib; sourceTree = "<group>"; };
 		180599B51FA17899003EAD1E /* TLMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLMenuButton.h; sourceTree = "<group>"; };
 		180599B61FA17899003EAD1E /* TLMenuButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLMenuButtonView.m; sourceTree = "<group>"; };
 		180599B71FA17899003EAD1E /* TLMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLMenuButton.m; sourceTree = "<group>"; };
@@ -1540,6 +1545,9 @@
 				1818E3151FCFF0EF00AE1DEB /* CYCardCommentView.h */,
 				1818E3161FCFF0EF00AE1DEB /* CYCardCommentView.m */,
 				1818E3181FCFF10000AE1DEB /* CYCardCommentView.xib */,
+				180427921FD0EEE000B50F65 /* CYCardComment1.h */,
+				180427931FD0EEE000B50F65 /* CYCardComment1.m */,
+				180427951FD0EEF700B50F65 /* CYCardComment1.xib */,
 			);
 			path = CYCardDetailVC;
 			sourceTree = "<group>";
@@ -2984,6 +2992,7 @@
 				1818E3191FCFF10000AE1DEB /* CYCardCommentView.xib in Resources */,
 				18277E421FC5480B00610CC3 /* MyInteractMessageCell.xib in Resources */,
 				18B803821F1DA2A300B52432 /* Assets.xcassets in Resources */,
+				180427961FD0EEF700B50F65 /* CYCardComment1.xib in Resources */,
 				501672321F297FF000384186 /* problemCenter.plist in Resources */,
 				1817468D1FC7EE3200135AFA /* MyLibListCollectionViewCell.xib in Resources */,
 				5094A6301F346E4200407808 /* SuccessPayCell.xib in Resources */,
@@ -3412,6 +3421,7 @@
 				18D815841F79ECA800A1FA04 /* CYCardTableViewCell.m in Sources */,
 				18322AC01F4D950C003ABB7B /* Card.m in Sources */,
 				185090271F441BFA00795E0A /* UdStorage.m in Sources */,
+				180427941FD0EEE000B50F65 /* CYCardComment1.m in Sources */,
 				1850901C1F43F19B00795E0A /* LCMD5Tool.m in Sources */,
 				18A4B2301F4D832300C64978 /* ShareWechatView.m in Sources */,
 				180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */,

@@ -8,9 +8,11 @@
 
 #import "CYCardDetailViewController.h"
 #import "CYCardCommentView.h"
+#import "CYCardComment1.h"
 @interface CYCardDetailViewController ()
 {
     UIView * whiteVIew;
+    UIView * leftView;
 }
 @property (nonatomic,strong) UIScrollView * bigScrollerView;
 @property (nonatomic,strong) CYCardCommentView * topView;
@@ -34,33 +36,120 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view addSubview:self.bigScrollerView];
+    if (self.card.GetCardType ==11) {//团购卡
+        UINib *nib = [UINib nibWithNibName:@"CYCardComment1" bundle:nil];
+        CYCardComment1 *bookView = [[nib instantiateWithOwner:nil options:nil] firstObject];
+        bookView.frame=CGRectMake(0, 0, Main_Screen_Width, 150);
+        bookView.titleLabel.text=[NSString stringWithFormat:@"剩余%ld张",self.card.CardCount];
+        
+        
+        [self.bigScrollerView addSubview:bookView];
+        leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 170, Main_Screen_Width, 50)];
+        leftView.backgroundColor=[UIColor whiteColor];
+        [self.bigScrollerView addSubview:leftView];
+        UILabel * leftLabel=[[UILabel alloc]initWithFrame:CGRectMake(25, 0, 200, 50)];
+        leftLabel.text = @"可分享好友免费洗车哦...";
+        leftLabel.textColor = [UIColor colorFromHex:@"#ffce46"];
+        leftLabel.font = [UIFont systemFontOfSize:18.0];
+        [leftView addSubview:leftLabel];
+        
+        UIButton * shareBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        shareBtn.frame = CGRectMake(leftView.frame.size.width-95, 10, 75, 30);
+        [shareBtn setBackgroundColor:[UIColor colorFromHex:@"#ffce46"]];
+        shareBtn.layer.cornerRadius = 5;
+        shareBtn.layer.masksToBounds = YES;
+        [shareBtn setTitle:@"分享" forState:UIControlStateNormal];
+        [shareBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [leftView addSubview:shareBtn];
+        whiteVIew=[[UIView alloc]initWithFrame:CGRectMake(0, 235, Main_Screen_Width, 300)];
+        whiteVIew.backgroundColor=[UIColor whiteColor];
+        [self.bigScrollerView addSubview:whiteVIew];
+        if ([self.card.CardName isEqualToString:@"炫年卡"]) {
+            if (self.card.CardUseState ==1) {//使用中
+                bookView.leftImageView.image = [UIImage imageNamed:@"qw_nianka"];
+            }else  if (self.card.CardUseState ==2) {//已使用
+                bookView.leftImageView.image = [UIImage imageNamed:@"qw_yishiyong_nianka"];
+            }else  if (self.card.CardUseState ==3) {//已过期
+                bookView.leftImageView.image = [UIImage imageNamed:@"qw_guoqi_nianka"];
+            }
+        }else if ([self.card.CardName isEqualToString:@"乐享卡"]){
+            if (self.card.CardUseState ==1) {//使用中
+                bookView.leftImageView.image = [UIImage imageNamed:@"qw_cika"];
+            }else  if (self.card.CardUseState ==2) {//已使用
+                bookView.leftImageView.image = [UIImage imageNamed:@"qw_yishiyong_cika"];
+            }else  if (self.card.CardUseState ==3) {//已过期
+                bookView.leftImageView.image = [UIImage imageNamed:@"qw_guoqi_cika"];
+            }
+        }else if ([self.card.CardName isEqualToString:@"体验卡"]){
+            if (self.card.CardUseState ==1) {//使用中
+//                024575
+                bookView.leftImageView.image = [UIImage imageNamed:@"qw_tiyanka"];
+            }else  if (self.card.CardUseState ==2) {//已使用
+                bookView.leftImageView.image = [UIImage imageNamed:@"qw_yishiyong_tiyanka"];
+            }else  if (self.card.CardUseState ==3) {//已过期
+                bookView.leftImageView.image = [UIImage imageNamed:@"qw_guoqi_tiyanka"];
+            }
+        }else if ([self.card.CardName isEqualToString:@"悦洗卡"]){
+            if (self.card.CardUseState ==1) {//使用中
+                bookView.leftImageView.image = [UIImage imageNamed:@"qw_yueka"];
+            }else  if (self.card.CardUseState ==2) {//已使用
+                bookView.leftImageView.image = [UIImage imageNamed:@"qw_yishiyong_yueka"];
+            }else  if (self.card.CardUseState ==3) {//已过期
+                bookView.leftImageView.image = [UIImage imageNamed:@"qw_guoqi_yueka"];
+            }
+        }
+       
+    }else{
+        UINib *nib = [UINib nibWithNibName:@"CYCardCommentView" bundle:nil];
+        CYCardCommentView *bookView = [[nib instantiateWithOwner:nil options:nil] firstObject];
+        bookView.frame=CGRectMake(0, 0, Main_Screen_Width, 150);
+        bookView.titleLabel.text=[NSString stringWithFormat:@"剩余扫码洗车%ld次",self.card.CardCount];
+        bookView.timeLabel.text=[NSString stringWithFormat:@"即日起～%@",self.card.ExpEndDates];
+        [self.bigScrollerView addSubview:bookView];
+        
+        ///////////////
+        whiteVIew=[[UIView alloc]initWithFrame:CGRectMake(0, 165, Main_Screen_Width, 300)];
+        whiteVIew.backgroundColor=[UIColor whiteColor];
+        [self.bigScrollerView addSubview:whiteVIew];
+        
+        if ([self.card.CardName isEqualToString:@"炫年卡"]) {
+            if (self.card.CardUseState ==1) {//使用中
+                bookView.carImageView.image = [UIImage imageNamed:@"qw_nianka"];
+            }else  if (self.card.CardUseState ==2) {//已使用
+                bookView.carImageView.image = [UIImage imageNamed:@"qw_yishiyong_nianka"];
+            }else  if (self.card.CardUseState ==3) {//已过期
+                bookView.carImageView.image = [UIImage imageNamed:@"qw_guoqi_nianka"];
+            }
+        }else if ([self.card.CardName isEqualToString:@"乐享卡"]){
+            if (self.card.CardUseState ==1) {//使用中
+                bookView.carImageView.image = [UIImage imageNamed:@"qw_cika"];
+            }else  if (self.card.CardUseState ==2) {//已使用
+                bookView.carImageView.image = [UIImage imageNamed:@"qw_yishiyong_cika"];
+            }else  if (self.card.CardUseState ==3) {//已过期
+                bookView.carImageView.image = [UIImage imageNamed:@"qw_guoqi_cika"];
+            }
+        }else if ([self.card.CardName isEqualToString:@"体验卡"]){
+            if (self.card.CardUseState ==1) {//使用中
+                bookView.carImageView.image = [UIImage imageNamed:@"qw_tiyanka"];
+            }else  if (self.card.CardUseState ==2) {//已使用
+                bookView.carImageView.image = [UIImage imageNamed:@"qw_yishiyong_tiyanka"];
+            }else  if (self.card.CardUseState ==3) {//已过期
+                bookView.carImageView.image = [UIImage imageNamed:@"qw_guoqi_tiyanka"];
+            }
+        }else if ([self.card.CardName isEqualToString:@"悦洗卡"]){
+            if (self.card.CardUseState ==1) {//使用中
+                bookView.carImageView.image = [UIImage imageNamed:@"qw_yueka"];
+            }else  if (self.card.CardUseState ==2) {//已使用
+                bookView.carImageView.image = [UIImage imageNamed:@"qw_yishiyong_yueka"];
+            }else  if (self.card.CardUseState ==3) {//已过期
+                bookView.carImageView.image = [UIImage imageNamed:@"qw_guoqi_yueka"];
+            }
+        }
+    }
     
-    UINib *nib = [UINib nibWithNibName:@"CYCardCommentView" bundle:nil];
-    CYCardCommentView *bookView = [[nib instantiateWithOwner:nil options:nil] firstObject];
-    bookView.frame=CGRectMake(0, 0, Main_Screen_Width, 150);
-    [self.bigScrollerView addSubview:bookView];
-    UIView * leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 170, Main_Screen_Width, 50)];
-    leftView.backgroundColor=[UIColor whiteColor];
-    [self.bigScrollerView addSubview:leftView];
     
-    UILabel * leftLabel=[[UILabel alloc]initWithFrame:CGRectMake(25, 0, 200, 50)];
-    leftLabel.text = @"可分享好友免费洗车哦...";
-    leftLabel.textColor = [UIColor colorFromHex:@"#ffce46"];
-    leftLabel.font = [UIFont systemFontOfSize:18.0];
-    [leftView addSubview:leftLabel];
-    
-    UIButton * shareBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    shareBtn.frame = CGRectMake(leftView.frame.size.width-95, 10, 75, 30);
-    [shareBtn setBackgroundColor:[UIColor colorFromHex:@"#ffce46"]];
-    shareBtn.layer.cornerRadius = 5;
-    shareBtn.layer.masksToBounds = YES;
-    [shareBtn setTitle:@"分享" forState:UIControlStateNormal];
-    [shareBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [leftView addSubview:shareBtn];
-    ///////////////
-    whiteVIew=[[UIView alloc]initWithFrame:CGRectMake(0, 235, Main_Screen_Width, 300)];
-    whiteVIew.backgroundColor=[UIColor whiteColor];
-    [self.bigScrollerView addSubview:whiteVIew];
+   
+   
     
     
     UILabel *noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, Main_Screen_Width, 50)];

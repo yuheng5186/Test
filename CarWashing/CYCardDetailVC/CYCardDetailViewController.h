@@ -10,4 +10,5 @@
 #import "CardBag.h"
 @interface CYCardDetailViewController : BaseController
 @property(nonatomic,strong)CardBag *card;
+
 @end

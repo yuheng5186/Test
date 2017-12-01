@@ -321,6 +321,9 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
                 cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_yueka"];
             }
         }
+        if (card.GetCardType ==11 ) {
+            cell.CarddesLabel.text = [NSString stringWithFormat:@"团购卡"];
+        }
         cell.CardnameLabel.text = [NSString stringWithFormat:@"免费洗车%ld次",card.CardCount];
     
         cell.CardTimeLabel.text = [NSString stringWithFormat:@"截止日期: %@",[self DateZhuan:card.ExpEndDates]];
@@ -368,6 +371,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 //    rechargeDetailVC.card = card;
 //    [self.navigationController pushViewController:rechargeDetailVC animated:YES];
     CardBag *card =_CardbagData [indexPath.section];
+    
     CYCardDetailViewController *rechargeDetailVC = [[CYCardDetailViewController alloc] init];
     rechargeDetailVC.hidesBottomBarWhenPushed = YES;
     rechargeDetailVC.card = card;
