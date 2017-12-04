@@ -28,7 +28,7 @@
     [self createSubView];
 }
 - (void) createSubView {
-    self.scrollView                         = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-64)];
+    self.scrollView                         = [[UIScrollView alloc] initWithFrame:CGRectMake(0,-20, Main_Screen_Width, Main_Screen_Height-44)];
     self.scrollView.backgroundColor         = [UIColor whiteColor];
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.contentSize             = CGSizeMake(self.contentView.size.width, self.contentView.size.height+500);

@@ -213,9 +213,6 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     }];
     
 }
-
-
-
 - (void)setupUI {
     
     Card *card = (Card *)[_CardArray objectAtIndex:_Xuhao];

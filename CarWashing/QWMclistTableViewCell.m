@@ -164,10 +164,10 @@
     return UIGraphicsGetImageFromCurrentImageContext();
 }
 
--(void)setUpCellWithDic:(NSDictionary *)dic
+-(void)setUpCellWithDic:(CYBusinessModel *)dic
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,[dic objectForKey:@"Img"]];
+                NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,dic.Img];
                 NSURL *url=[NSURL URLWithString:ImageURL];
                 NSData *data=[NSData dataWithContentsOfURL:url];
                 UIImage *img=[UIImage imageWithData:data];
@@ -175,22 +175,22 @@
                     self.McImageView.image = img;
                 });
             });
-            self.Mcname.text = [dic objectForKey:@"MerName"];
-            self.Mcaddress.text = [dic objectForKey:@"MerAddress"];
+            self.Mcname.text = dic.MerName;
+            self.Mcaddress.text = dic.MerAddress;
     
         //    self.freeTestLabel.text = [dicobjectForKey:@"MerName"];
         //    self.qualityLabel.text = [dicobjectForKey:@"MerName"];
-            self.Mcrange.text = [NSString stringWithFormat:@"%.2fkm",[[dic objectForKey:@"Distance"] doubleValue]];
+            self.Mcrange.text = [NSString stringWithFormat:@"%.2ldkm",dic.Distance];
         
-            if([[dic objectForKey:@"ShopType"] intValue] == 1)
+            if(dic.ShopType  == 1)
             {
                 self.Mccat.text = @"洗车服务";
             }
-            self.Mcscore.text = [NSString stringWithFormat:@"%@分",[dic objectForKey:@"Score"]];
+            self.Mcscore.text = [NSString stringWithFormat:@"%ld分",dic.Score];
         
-            [self.Mcxingji setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",[dic objectForKey:@"Score"]] substringToIndex:1]]]];
+            [self.Mcxingji setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%ld",dic.Score] substringToIndex:1]]]];
         
-            NSArray *lab = [[dic objectForKey:@"MerFlag"] componentsSeparatedByString:@","];
+            NSArray *lab = [dic.MerFlag componentsSeparatedByString:@","];
         
             UILabel *MerflagsLabel = [UILabel new];
             for (int i = 0; i < [lab count]; i++) {

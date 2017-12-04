@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CYBusinessModel.h"
 @interface QWMclistTableViewCell : UITableViewCell
 
 @property(nonatomic,weak)UIImageView *McImageView;
@@ -25,6 +25,6 @@
 
 -(void)setlayoutCell;
 
--(void)setUpCellWithDic:(NSDictionary *)dic;
+-(void)setUpCellWithDic:(CYBusinessModel *)dic;
 
 @end

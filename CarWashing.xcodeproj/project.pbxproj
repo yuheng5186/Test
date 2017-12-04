@@ -161,6 +161,11 @@
 		183997661F2586D300702071 /* ActivityListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183997641F2586D300702071 /* ActivityListCell.xib */; };
 		1839979F1F25E69100702071 /* DSPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1839979E1F25E69100702071 /* DSPasswordController.m */; };
 		183997A21F25F00700702071 /* DSAboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183997A11F25F00700702071 /* DSAboutController.m */; };
+		183DCFA31FD5438300754068 /* CYBusinessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183DCFA21FD5438300754068 /* CYBusinessViewController.m */; };
+		183DCFA81FD543D100754068 /* JSDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 183DCFA51FD543D000754068 /* JSDropDownMenu.m */; };
+		183DCFA91FD543D100754068 /* ico_make.png in Resources */ = {isa = PBXBuildFile; fileRef = 183DCFA71FD543D000754068 /* ico_make.png */; };
+		183DCFAC1FD54FF900754068 /* CYBusinessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 183DCFAB1FD54FF900754068 /* CYBusinessModel.m */; };
+		183DCFAF1FD5519100754068 /* CYShoplistModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 183DCFAE1FD5519100754068 /* CYShoplistModel.m */; };
 		1850901C1F43F19B00795E0A /* LCMD5Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850901B1F43F19B00795E0A /* LCMD5Tool.m */; };
 		185090221F441AF500795E0A /* AFNetworkingTool+GetToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850901F1F441AF500795E0A /* AFNetworkingTool+GetToken.m */; };
 		185090231F441AF500795E0A /* AFNetworkingTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090211F441AF500795E0A /* AFNetworkingTool.m */; };
@@ -719,6 +724,15 @@
 		1839979E1F25E69100702071 /* DSPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSPasswordController.m; path = UserInfo/DSPasswordController.m; sourceTree = "<group>"; };
 		183997A01F25F00700702071 /* DSAboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAboutController.h; path = UserInfo/DSAboutController.h; sourceTree = "<group>"; };
 		183997A11F25F00700702071 /* DSAboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAboutController.m; path = UserInfo/DSAboutController.m; sourceTree = "<group>"; };
+		183DCFA11FD5438300754068 /* CYBusinessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYBusinessViewController.h; sourceTree = "<group>"; };
+		183DCFA21FD5438300754068 /* CYBusinessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYBusinessViewController.m; sourceTree = "<group>"; };
+		183DCFA51FD543D000754068 /* JSDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDropDownMenu.m; sourceTree = "<group>"; };
+		183DCFA61FD543D000754068 /* JSDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDropDownMenu.h; sourceTree = "<group>"; };
+		183DCFA71FD543D000754068 /* ico_make.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_make.png; sourceTree = "<group>"; };
+		183DCFAA1FD54FF900754068 /* CYBusinessModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYBusinessModel.h; sourceTree = "<group>"; };
+		183DCFAB1FD54FF900754068 /* CYBusinessModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYBusinessModel.m; sourceTree = "<group>"; };
+		183DCFAD1FD5519100754068 /* CYShoplistModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYShoplistModel.h; sourceTree = "<group>"; };
+		183DCFAE1FD5519100754068 /* CYShoplistModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYShoplistModel.m; sourceTree = "<group>"; };
 		1850901A1F43F19B00795E0A /* LCMD5Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCMD5Tool.h; sourceTree = "<group>"; };
 		1850901B1F43F19B00795E0A /* LCMD5Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMD5Tool.m; sourceTree = "<group>"; };
 		1850901E1F441AF500795E0A /* AFNetworkingTool+GetToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFNetworkingTool+GetToken.h"; sourceTree = "<group>"; };
@@ -1921,6 +1935,30 @@
 			name = CustomCell;
 			sourceTree = "<group>";
 		};
+		183DCFA01FD5433F00754068 /* CYBusinessVC(商家) */ = {
+			isa = PBXGroup;
+			children = (
+				183DCFA41FD543BB00754068 /* JSDropDownMenu */,
+				183DCFA11FD5438300754068 /* CYBusinessViewController.h */,
+				183DCFA21FD5438300754068 /* CYBusinessViewController.m */,
+			);
+			path = "CYBusinessVC(商家)";
+			sourceTree = "<group>";
+		};
+		183DCFA41FD543BB00754068 /* JSDropDownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				183DCFA71FD543D000754068 /* ico_make.png */,
+				183DCFA61FD543D000754068 /* JSDropDownMenu.h */,
+				183DCFA51FD543D000754068 /* JSDropDownMenu.m */,
+				183DCFAA1FD54FF900754068 /* CYBusinessModel.h */,
+				183DCFAB1FD54FF900754068 /* CYBusinessModel.m */,
+				183DCFAD1FD5519100754068 /* CYShoplistModel.h */,
+				183DCFAE1FD5519100754068 /* CYShoplistModel.m */,
+			);
+			path = JSDropDownMenu;
+			sourceTree = "<group>";
+		};
 		1850901D1F441AF500795E0A /* AFNetwork */ = {
 			isa = PBXGroup;
 			children = (
@@ -2546,6 +2584,7 @@
 		501671FE1F29781E00384186 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				183DCFA01FD5433F00754068 /* CYBusinessVC(商家) */,
 				18FF43151F8CC2E1006809CD /* MapControllerView */,
 				1887A21E1F66E0870042B062 /* model */,
 				185833DB1F6E0D71004EA905 /* BusinessViewController.h */,
@@ -2994,6 +3033,7 @@
 				18B803821F1DA2A300B52432 /* Assets.xcassets in Resources */,
 				180427961FD0EEF700B50F65 /* CYCardComment1.xib in Resources */,
 				501672321F297FF000384186 /* problemCenter.plist in Resources */,
+				183DCFA91FD543D100754068 /* ico_make.png in Resources */,
 				1817468D1FC7EE3200135AFA /* MyLibListCollectionViewCell.xib in Resources */,
 				5094A6301F346E4200407808 /* SuccessPayCell.xib in Resources */,
 				180959641FB5AC61004CCD47 /* CYQuestionTwoTableViewCell.xib in Resources */,
@@ -3194,6 +3234,7 @@
 				501672131F297AD000384186 /* BusinessDetailHeaderView.m in Sources */,
 				18ED28A51FB8436F00C0CC92 /* AddCareTableViewCell.m in Sources */,
 				50B26E681F301B29009B3B9F /* DiscountCell.m in Sources */,
+				183DCFA81FD543D100754068 /* JSDropDownMenu.m in Sources */,
 				1818E3051FCFA1E600AE1DEB /* CYPurchaseTableViewCell.m in Sources */,
 				18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */,
 				181E92CE1F1F39CC0006511E /* UIUtil.m in Sources */,
@@ -3266,6 +3307,7 @@
 				181051891FA97D1F00355F2F /* UsedCarViewController.m in Sources */,
 				185090221F441AF500795E0A /* AFNetworkingTool+GetToken.m in Sources */,
 				181E92CF1F1F39CC0006511E /* UIView+Frame.m in Sources */,
+				183DCFAF1FD5519100754068 /* CYShoplistModel.m in Sources */,
 				507FED011F2B3111009CC505 /* CashViewController.m in Sources */,
 				18B697B21F21DB3F009FF73A /* DSCarTravellingController.m in Sources */,
 				181051861FA97C5300355F2F /* HotTopicViewController.m in Sources */,
@@ -3395,6 +3437,7 @@
 				1853BA4B1F28A04100B98C7F /* JFSearchView.m in Sources */,
 				1816A4851F8E1AE1004A6835 /* CyMapModel.m in Sources */,
 				180E42EA1F3AB37D00013D2D /* YzdHUDIndicator.m in Sources */,
+				183DCFA31FD5438300754068 /* CYBusinessViewController.m in Sources */,
 				0401E9091F4ED95000F0CA79 /* DSGuideViewController.m in Sources */,
 				185090471F4557E100795E0A /* TYAlertScaleFadeAnimation.m in Sources */,
 				18FB09971FAAC57800297E93 /* SDWeiXinPhotoContainerView.m in Sources */,
@@ -3430,6 +3473,7 @@
 				181E93291F20B0510006511E /* SXScrPageView.m in Sources */,
 				5016724C1F2A020600384186 /* ScoreIntroController.m in Sources */,
 				18FBC5DA1F8F565000054561 /* CYCarInsertViewController.m in Sources */,
+				183DCFAC1FD54FF900754068 /* CYBusinessModel.m in Sources */,
 				18B69EA21F32CB48007DA0E4 /* UIColor+Zirkfied.m in Sources */,
 				185090521F4558AC00795E0A /* TYAlertController+BlurEffects.m in Sources */,
 				18A4B22D1F4D7D6E00C64978 /* ShareWeChatController.m in Sources */,

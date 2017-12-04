@@ -42,7 +42,7 @@
     backimageView.image = [UIImage imageNamed:@"jihuoye"];
     [self.view addSubview:backimageView];
     
-    UILabel *lbl = [UIUtil drawLabelInView:self.view frame:CGRectMake(Main_Screen_Width/5, 0, Main_Screen_Width*3/5, 84) font:[UIFont boldSystemFontOfSize:18] text:@"激活卡券" isCenter:YES color: [UIColor whiteColor]];
+    UILabel *lbl = [UIUtil drawLabelInView:self.view frame:CGRectMake(Main_Screen_Width/5, 0, Main_Screen_Width*3/5, 80*Main_Screen_Height/667) font:[UIFont boldSystemFontOfSize:18*Main_Screen_Height/667] text:@"激活卡券" isCenter:YES color: [UIColor whiteColor]];
     [self.view addSubview:lbl];
     
     UIImageView * backbutton = [[UIImageView alloc]init];
@@ -51,7 +51,7 @@
     [backbutton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(lbl);
         make.left.mas_equalTo(self.view.mas_left).mas_offset(15);
-        make.size.mas_equalTo(CGSizeMake(17, 23));
+        make.size.mas_equalTo(CGSizeMake(13*Main_Screen_Height/667, 17*Main_Screen_Height/667));
     }];
     UIButton * backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame=CGRectMake(0, 0, 100, 100);

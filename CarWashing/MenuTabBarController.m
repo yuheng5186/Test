@@ -20,6 +20,7 @@
 #import "DSStartWashingController.h"
 
 #import "MyViewController.h"
+#import "CYBusinessViewController.h"
 @interface MenuTabBarController ()
 
 @property (nonatomic, strong)     UIImageView *imageView;
@@ -99,7 +100,7 @@
     homeTabItem.tag     = 1;
     homeVC.tabBarItem   = homeTabItem;
     
-    BusinessViewController *businessVC      = [[BusinessViewController alloc]init];
+    CYBusinessViewController *businessVC      = [[CYBusinessViewController alloc]init];
     UINavigationController *businessNav = [[UINavigationController alloc]initWithRootViewController:businessVC];
     businessNav.navigationController.navigationBarHidden = YES;
     UITabBarItem *businessTabItem       = [[UITabBarItem alloc]initWithTitle:@"商家" image:[UIImage imageNamed:@"shangjia"] selectedImage:[UIImage imageNamed:@"shangjia1"]];

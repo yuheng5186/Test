@@ -29,13 +29,10 @@
 - (void)drawNavigation {
     
     [self drawTitle:@"设置"];
-    
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     [self createSubView];
 }
@@ -199,7 +196,6 @@
         DSAboutController *aboutController             = [[DSAboutController alloc]init];
         aboutController.hidesBottomBarWhenPushed        = YES;
         [self.navigationController pushViewController:aboutController animated:YES];
-
 
     }else {
     
