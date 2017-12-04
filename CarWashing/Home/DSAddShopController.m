@@ -30,32 +30,23 @@
 - (void) createSubView {
     self.scrollView                         = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-64)];
     self.scrollView.backgroundColor         = [UIColor whiteColor];
-    self.scrollView.contentSize             = CGSizeMake(self.contentView.size.width, 1217);
-//    [self.scrollView flashScrollIndicators];
-//    self.scrollView.contentInset     = UIEdgeInsetsMake(0, 0, 180, 0);
-//    self.scrollView.directionalLockEnabled  = YES;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.contentSize             = CGSizeMake(self.contentView.size.width, self.contentView.size.height+500);
+
     [self.contentView addSubview:self.scrollView];
-    UIImageView *adImageView  = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
-    adImageView.contentMode=UIViewContentModeScaleAspectFill;
+    UIImageView *adImageView  = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, self.contentView.size.height+500)];
     adImageView.image = [UIImage imageNamed:@"shangjiaruzhuhuodong"];
     [self.scrollView addSubview:adImageView];
-//    UIImageView *adImageView    = [UIUtil drawCustomImgViewInView:self.scrollView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height) imageName:@"shangjiaruzhuhuodong"];
-    
-    
-//    adImageView.centerX         = Main_Screen_Width/2;
-//    adImageView.top             = Main_Screen_Height*0/667;
     
     
     NSString *string                = @"马上入驻，立即赚钱";
     UIFont  *stringFont             = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     UIButton    *getMoneyButton     = [UIUtil drawButtonInView:self.scrollView frame:CGRectMake(0, 0, Main_Screen_Width -Main_Screen_Width*60/375, Main_Screen_Height*40/667) text:string font:stringFont color:[UIColor whiteColor] target:self action:@selector(getShopMoneyButtonClick:)];
-    getMoneyButton.backgroundColor  = [UIColor colorFromHex:@"#0161a1"];
+    getMoneyButton.backgroundColor  = [UIColor colorFromHex:@"#f5d953"];
     getMoneyButton.layer.cornerRadius   = 5*Main_Screen_Height/667;
-    getMoneyButton.top           = adImageView.bottom +Main_Screen_Height*10/667;
+    getMoneyButton.bottom           = adImageView.bottom -Main_Screen_Height*50/667;
     getMoneyButton.centerX          = self.contentView.centerX;
     
-//    self.scrollView.contentSize             = CGSizeMake(self.contentView.size.width, self.contentView.size.height +getMoneyButton.height*1.2);
-
 }
 - (void) getShopMoneyButtonClick:(id)sender {
     DSAddMerchantController *addMerchantController      = [[DSAddMerchantController alloc]init];

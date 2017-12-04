@@ -106,9 +106,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
     NSDictionary *dic = @{@"0":array1,@"1":@"全部",@"2":@"默认排序"};
     self.pramsDic  = [NSMutableDictionary dictionaryWithDictionary:dic];
     self.MerchantData = [[NSMutableArray alloc]init];
-     self.page = 0;
+    self.page = 0;
    
-   self.weiyi = 0;
+    self.weiyi = 0;
    
     self.otherArray = [[NSMutableArray alloc]init];
     

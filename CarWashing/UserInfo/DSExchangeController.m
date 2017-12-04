@@ -26,12 +26,43 @@
 
 @implementation DSExchangeController
 
-- (void)drawNavigation {
+- (void) drawContent {
     
-    [self drawTitle:@"激活卡券"];
+    self.statusView.hidden      = YES;
+    
+    self.navigationView.hidden  = YES;
+    self.contentView.top        = 0;
+    self.contentView.height     = self.view.height;
+    self.contentView.backgroundColor    = [UIColor colorFromHex:@"#0161a1"];
     
 }
 
+-(void)setNav{
+    UIImageView * backimageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
+    backimageView.image = [UIImage imageNamed:@"jihuoye"];
+    [self.view addSubview:backimageView];
+    
+    UILabel *lbl = [UIUtil drawLabelInView:self.view frame:CGRectMake(Main_Screen_Width/5, 0, Main_Screen_Width*3/5, 84) font:[UIFont boldSystemFontOfSize:18] text:@"激活卡券" isCenter:YES color: [UIColor whiteColor]];
+    [self.view addSubview:lbl];
+    
+    UIImageView * backbutton = [[UIImageView alloc]init];
+    backbutton.image = [UIImage imageNamed:@"icon_titlebar_arrow"];
+    [self.view addSubview:backbutton];
+    [backbutton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(lbl);
+        make.left.mas_equalTo(self.view.mas_left).mas_offset(15);
+        make.size.mas_equalTo(CGSizeMake(17, 23));
+    }];
+    UIButton * backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    backBtn.frame=CGRectMake(0, 0, 100, 100);
+    [backBtn addTarget:self action:@selector(leftBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:backBtn];
+    
+}
+-(void)leftBtnClick
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 -(void)geData{
     NSDictionary *mulDic = @{
                              @"AdvertisModule":@(4)
@@ -54,6 +85,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setNav];
     [self setupUI];
     adVertist = [[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height-100, Main_Screen_Width, 100)];
     adVertist.userInteractionEnabled = YES;
@@ -71,6 +103,9 @@
 }
 - (void)setupUI {
     
+   
+    
+    
     exchangeTF = [[UITextField alloc] init];
     exchangeTF.placeholder = @"请输入激活码(区分大小写)";
     exchangeTF.textAlignment = NSTextAlignmentCenter;
@@ -79,19 +114,26 @@
     exchangeTF.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:exchangeTF];
     
-    UIButton *exchangeBtn = [UIUtil drawDefaultButton:self.view title:@"激活" target:self action:@selector(didClickExchangeScoreBtn:)];
-    
+    UIButton *exchangeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [exchangeBtn addTarget:self action:@selector(didClickExchangeScoreBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [exchangeBtn setTitle:@"激活" forState:UIControlStateNormal];
+    [exchangeBtn setBackgroundColor:[UIColor colorFromHex:@"#ffe36f"]];
+    [exchangeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    exchangeBtn.titleLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
+    exchangeBtn.layer.cornerRadius =(Main_Screen_Height*45/667)/2;
+    exchangeBtn.layer.masksToBounds = YES;
+    [self.view addSubview:exchangeBtn];
     [exchangeTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).mas_offset(64 + Main_Screen_Height*23/667);
+        make.top.equalTo(self.view).mas_offset(233*Main_Screen_Height/667);
         make.centerX.equalTo(self.view);
         make.width.mas_equalTo(Main_Screen_Width*351/375);
-        make.height.mas_equalTo(Main_Screen_Height*48/667);
+        make.height.mas_equalTo(Main_Screen_Height*45/667);
     }];
     [exchangeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(exchangeTF.mas_bottom).mas_offset(Main_Screen_Height*60/667);
-        make.centerX.equalTo(self.view);
-        make.width.mas_equalTo(Main_Screen_Width*351/375);
-        make.height.mas_equalTo(Main_Screen_Height*48/667);
+     make.top.equalTo(exchangeTF.mas_bottom).mas_offset(Main_Screen_Height*30/667);
+     make.centerX.equalTo(self.view);
+     make.width.mas_equalTo(Main_Screen_Width*351/375);
+     make.height.mas_equalTo(Main_Screen_Height*45/667);
     }];
  }
                              
