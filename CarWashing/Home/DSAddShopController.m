@@ -28,21 +28,21 @@
     [self createSubView];
 }
 - (void) createSubView {
-    self.scrollView                         = [[UIScrollView alloc] initWithFrame:CGRectMake(self.contentView.frame.origin.x, self.contentView.frame.origin.y, self.contentView.size.width, self.contentView.size.height)];
+    self.scrollView                         = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height-64)];
     self.scrollView.backgroundColor         = [UIColor whiteColor];
-    self.scrollView.contentSize             = CGSizeMake(self.contentView.size.width, self.contentView.size.height*1.2);
-    [self.scrollView flashScrollIndicators];
-    self.scrollView.contentInset     = UIEdgeInsetsMake(0, 0, 180, 0);
-    self.scrollView.directionalLockEnabled  = YES;
-    [self.view addSubview:self.scrollView];
-    
-    
-    UIImage *adImage            = [UIImage imageNamed:@"shangjiaruzhuhuodong"];
-    UIImageView *adImageView    = [UIUtil drawCustomImgViewInView:self.scrollView frame:CGRectMake(0, self.navigationView.bottom, Main_Screen_Width, Main_Screen_Height) imageName:@"shangjiaruzhuhuodong"];
-    
+    self.scrollView.contentSize             = CGSizeMake(self.contentView.size.width, 1217);
+//    [self.scrollView flashScrollIndicators];
+//    self.scrollView.contentInset     = UIEdgeInsetsMake(0, 0, 180, 0);
+//    self.scrollView.directionalLockEnabled  = YES;
+    [self.contentView addSubview:self.scrollView];
+    UIImageView *adImageView  = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
     adImageView.contentMode=UIViewContentModeScaleAspectFill;
-    adImageView.image=adImage;
-    adImageView.centerX         = Main_Screen_Width/2;
+    adImageView.image = [UIImage imageNamed:@"shangjiaruzhuhuodong"];
+    [self.scrollView addSubview:adImageView];
+//    UIImageView *adImageView    = [UIUtil drawCustomImgViewInView:self.scrollView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height) imageName:@"shangjiaruzhuhuodong"];
+    
+    
+//    adImageView.centerX         = Main_Screen_Width/2;
 //    adImageView.top             = Main_Screen_Height*0/667;
     
     
@@ -54,7 +54,7 @@
     getMoneyButton.top           = adImageView.bottom +Main_Screen_Height*10/667;
     getMoneyButton.centerX          = self.contentView.centerX;
     
-    self.scrollView.contentSize             = CGSizeMake(self.contentView.size.width, self.contentView.size.height +getMoneyButton.height*1.2);
+//    self.scrollView.contentSize             = CGSizeMake(self.contentView.size.width, self.contentView.size.height +getMoneyButton.height*1.2);
 
 }
 - (void) getShopMoneyButtonClick:(id)sender {
@@ -63,19 +63,6 @@
     [self.navigationController pushViewController:addMerchantController animated:YES];
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
