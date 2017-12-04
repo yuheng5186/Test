@@ -40,11 +40,11 @@
     [self.contentView addSubview:imageV];
     self.McImageView = imageV;
     
-    UIImageView *imageV1 =[[UIImageView alloc]initWithFrame:CGRectMake1(0,0,30,30)];
-    imageV1.opaque = YES;
-    imageV1.image = [UIImage imageNamed:@"renzheng"];
-    [self.McImageView addSubview:imageV1];
-    self.McImagecheckView = imageV1;
+//    UIImageView *imageV1 =[[UIImageView alloc]initWithFrame:CGRectMake1(0,0,30,30)];
+//    imageV1.opaque = YES;
+//    imageV1.image = [UIImage imageNamed:@"renzheng"];
+//    [self.McImageView addSubview:imageV1];
+//    self.McImagecheckView = imageV1;
     
     UILabel *namelabel = [[UILabel alloc]initWithFrame:CGRectMake1(112,12, 100, 10)];
     [namelabel setFont:[UIFont fontWithName:@"Helvetica" size:18 * myDelegate.autoSizeScaleX]];
