@@ -56,6 +56,7 @@ static NSString * const ReuseIdentifierHeader = @"header";
     NSString *CYTitle;
     NSInteger CySerCode;
     NSInteger chooseType;//选中
+    NSInteger CYServerType;//没有服务
 }
 
 
@@ -585,18 +586,15 @@ static NSString *businessCommentCell = @"businessCommentCell";
             return [self.dic[@"MerComList"] count];
         }
     }
-   
         CYBusinessDetailModel * Cymodel = self.CYDetailArray[section];
         NSString *key = [NSString stringWithFormat:@"%@",Cymodel.Title];
         self.CYDetailArray1 = (NSMutableArray*)[CYBusinessDetailModel1 mj_objectArrayWithKeyValuesArray:Cymodel.serList];
-        
+    
         if ([self.expendArray containsObject:key]) {
             return self.CYDetailArray1.count;
         }else {
             return 0.5;
         }
-        
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -782,22 +780,26 @@ static NSString *businessCommentCell = @"businessCommentCell";
     return 0.1;
 }
 - (void)headerTap:(UITapGestureRecognizer *)tap {
-    HeaderView *view = (HeaderView *)tap.view;
-    NSString *key = view.nameLabel.text;
-    NSInteger index = [self.CYDetailArray indexOfObject:key];
-    
-    if ([self.expendArray containsObject:key]) {
-        [self.expendArray removeObject:key];
-        [UIView animateWithDuration:0.1 animations:^{
-            view.jiantouInageView.transform = CGAffineTransformIdentity;
-        }];
-    }else {
-        [self.expendArray addObject:key];
-        [UIView animateWithDuration:0.1 animations:^{
-            view.jiantouInageView.transform = CGAffineTransformMakeRotation(M_PI_2);
-        }];
-    }
-    [self.detailTableView reloadData];
+   
+   
+        HeaderView *view = (HeaderView *)tap.view;
+        NSString *key = view.nameLabel.text;
+        NSInteger index = [self.CYDetailArray indexOfObject:key];
+        
+        if ([self.expendArray containsObject:key]) {
+            [self.expendArray removeObject:key];
+            [UIView animateWithDuration:0.1 animations:^{
+                view.jiantouInageView.transform = CGAffineTransformIdentity;
+            }];
+        }else {
+            [self.expendArray addObject:key];
+            [UIView animateWithDuration:0.1 animations:^{
+                view.jiantouInageView.transform = CGAffineTransformMakeRotation(M_PI_2);
+            }];
+        }
+        [self.detailTableView reloadData];
+
+   
 //    [self.detailTableView reloadSections:[NSIndexSet indexSetWithIndex:index+1] withRowAnimation:UITableViewRowAnimationNone];
 }
 
