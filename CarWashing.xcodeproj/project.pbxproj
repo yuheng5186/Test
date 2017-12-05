@@ -315,6 +315,11 @@
 		18FBC5D41F8F06F500054561 /* TestMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FBC5D31F8F06F500054561 /* TestMapCell.xib */; };
 		18FBC5DA1F8F565000054561 /* CYCarInsertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5D91F8F565000054561 /* CYCarInsertViewController.m */; };
 		18FBC5DD1F8F641A00054561 /* CYSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBC5DC1F8F641A00054561 /* CYSlideViewController.m */; };
+		18FE87781FD635C3002D7312 /* CyShopList2MOdel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FE87771FD635C3002D7312 /* CyShopList2MOdel.m */; };
+		18FE877D1FD66BAC002D7312 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FE877B1FD66BAC002D7312 /* HeaderView.xib */; };
+		18FE877E1FD66BAC002D7312 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FE877C1FD66BAC002D7312 /* HeaderView.m */; };
+		18FE87811FD66D50002D7312 /* CYBusinessDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FE87801FD66D50002D7312 /* CYBusinessDetailModel.m */; };
+		18FE87841FD66DA3002D7312 /* CYBusinessDetailModel1.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FE87831FD66DA3002D7312 /* CYBusinessDetailModel1.m */; };
 		18FF43191F8CC320006809CD /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF43181F8CC320006809CD /* MapViewController.m */; };
 		374B966A10F9B5E6D74241BF /* libPods-CarWashing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */; };
 		500C6BA41F3AE619007D34A1 /* QFDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 500C6BA31F3AE619007D34A1 /* QFDatePickerView.m */; };
@@ -1021,6 +1026,15 @@
 		18FBC5D91F8F565000054561 /* CYCarInsertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYCarInsertViewController.m; sourceTree = "<group>"; };
 		18FBC5DB1F8F641A00054561 /* CYSlideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYSlideViewController.h; sourceTree = "<group>"; };
 		18FBC5DC1F8F641A00054561 /* CYSlideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYSlideViewController.m; sourceTree = "<group>"; };
+		18FE87761FD635C3002D7312 /* CyShopList2MOdel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyShopList2MOdel.h; sourceTree = "<group>"; };
+		18FE87771FD635C3002D7312 /* CyShopList2MOdel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyShopList2MOdel.m; sourceTree = "<group>"; };
+		18FE877A1FD66BAC002D7312 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
+		18FE877B1FD66BAC002D7312 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		18FE877C1FD66BAC002D7312 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
+		18FE877F1FD66D50002D7312 /* CYBusinessDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYBusinessDetailModel.h; sourceTree = "<group>"; };
+		18FE87801FD66D50002D7312 /* CYBusinessDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYBusinessDetailModel.m; sourceTree = "<group>"; };
+		18FE87821FD66DA3002D7312 /* CYBusinessDetailModel1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYBusinessDetailModel1.h; sourceTree = "<group>"; };
+		18FE87831FD66DA3002D7312 /* CYBusinessDetailModel1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYBusinessDetailModel1.m; sourceTree = "<group>"; };
 		18FF43171F8CC320006809CD /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		18FF43181F8CC320006809CD /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarWashing.release.xcconfig"; path = "Pods/Target Support Files/Pods-CarWashing/Pods-CarWashing.release.xcconfig"; sourceTree = "<group>"; };
@@ -1955,6 +1969,8 @@
 				183DCFAB1FD54FF900754068 /* CYBusinessModel.m */,
 				183DCFAD1FD5519100754068 /* CYShoplistModel.h */,
 				183DCFAE1FD5519100754068 /* CYShoplistModel.m */,
+				18FE87761FD635C3002D7312 /* CyShopList2MOdel.h */,
+				18FE87771FD635C3002D7312 /* CyShopList2MOdel.m */,
 			);
 			path = JSDropDownMenu;
 			sourceTree = "<group>";
@@ -2551,6 +2567,20 @@
 			path = CYModelAndCell;
 			sourceTree = "<group>";
 		};
+		18FE87791FD66B73002D7312 /* CYBusinessDetailCell(详情展开的header) */ = {
+			isa = PBXGroup;
+			children = (
+				18FE877A1FD66BAC002D7312 /* HeaderView.h */,
+				18FE877C1FD66BAC002D7312 /* HeaderView.m */,
+				18FE877B1FD66BAC002D7312 /* HeaderView.xib */,
+				18FE877F1FD66D50002D7312 /* CYBusinessDetailModel.h */,
+				18FE87801FD66D50002D7312 /* CYBusinessDetailModel.m */,
+				18FE87821FD66DA3002D7312 /* CYBusinessDetailModel1.h */,
+				18FE87831FD66DA3002D7312 /* CYBusinessDetailModel1.m */,
+			);
+			path = "CYBusinessDetailCell(详情展开的header)";
+			sourceTree = "<group>";
+		};
 		18FF43151F8CC2E1006809CD /* MapControllerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2584,6 +2614,7 @@
 		501671FE1F29781E00384186 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				18FE87791FD66B73002D7312 /* CYBusinessDetailCell(详情展开的header) */,
 				183DCFA01FD5433F00754068 /* CYBusinessVC(商家) */,
 				18FF43151F8CC2E1006809CD /* MapControllerView */,
 				1887A21E1F66E0870042B062 /* model */,
@@ -3032,6 +3063,7 @@
 				18277E421FC5480B00610CC3 /* MyInteractMessageCell.xib in Resources */,
 				18B803821F1DA2A300B52432 /* Assets.xcassets in Resources */,
 				180427961FD0EEF700B50F65 /* CYCardComment1.xib in Resources */,
+				18FE877D1FD66BAC002D7312 /* HeaderView.xib in Resources */,
 				501672321F297FF000384186 /* problemCenter.plist in Resources */,
 				183DCFA91FD543D100754068 /* ico_make.png in Resources */,
 				1817468D1FC7EE3200135AFA /* MyLibListCollectionViewCell.xib in Resources */,
@@ -3172,6 +3204,7 @@
 				18FB09C11FAAEFE100297E93 /* TZAssetModel.m in Sources */,
 				18E4C1EA1FC8187B0052525B /* MyExploitModel.m in Sources */,
 				181E92EF1F2081840006511E /* DSMembershipController.m in Sources */,
+				18FE87841FD66DA3002D7312 /* CYBusinessDetailModel1.m in Sources */,
 				5094A6251F3447CD00407808 /* BusinessEstimateCell.m in Sources */,
 				186175ED1FA6C3C100C6EFF3 /* DataVerifier.m in Sources */,
 				180599C41FA1BCD9003EAD1E /* CYSecondcarViewController.m in Sources */,
@@ -3327,6 +3360,7 @@
 				1805AC911F386FA800FD0844 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				18A4B23A1F4E9F2200C64978 /* CLLocation+YCLocation.m in Sources */,
 				18EDACC71F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m in Sources */,
+				18FE87811FD66D50002D7312 /* CYBusinessDetailModel.m in Sources */,
 				18C14F0C1FB1E4C3002F49B6 /* RemindViewTableViewCell.m in Sources */,
 				1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */,
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
@@ -3337,6 +3371,7 @@
 				5094A62F1F346E4200407808 /* SuccessPayCell.m in Sources */,
 				185090451F4557E100795E0A /* TYAlertDropDownAnimation.m in Sources */,
 				1853BA481F28A04100B98C7F /* JFCityHeaderView.m in Sources */,
+				18FE877E1FD66BAC002D7312 /* HeaderView.m in Sources */,
 				50769F4F1F3C549300DDFCC7 /* BusinessPayCell.m in Sources */,
 				18D8158A1F79FFE300A1FA04 /* CYCardDeatilListViewController.m in Sources */,
 				50E2EE801F1F4D3C00FAF130 /* YZMoreMenuViewController.m in Sources */,
@@ -3371,6 +3406,7 @@
 				183203281FC2B7AB00DFDA78 /* MyTableViewCell.m in Sources */,
 				501672021F29797600384186 /* BusinessDetailViewController.m in Sources */,
 				181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */,
+				18FE87781FD635C3002D7312 /* CyShopList2MOdel.m in Sources */,
 				5094A63D1F34850300407808 /* ShopInfoHeadView.m in Sources */,
 				18FBC5BD1F8F007B00054561 /* MapView.m in Sources */,
 				18E702931F614010007A9777 /* ScanCode.m in Sources */,

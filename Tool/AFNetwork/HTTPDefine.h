@@ -6,11 +6,11 @@
 #import "UdStorage.h"
 #import "UIImageView+WebCache.h"
 
-//#pragma mark-服务器
-//#define Khttp @"http://api.qiangweilovecar.com/api/"
-//
-//#define kHTTPImg @"http://api.qiangweilovecar.com"
-//#pragma mark-本地
+#pragma mark-服务器
+#define Khttp @"http://api.qiangweilovecar.com/api/"
+
+#define kHTTPImg @"http://api.qiangweilovecar.com"
+#pragma mark-本地
 #define Khttp @"http://192.168.2.152:8090/api/"
 
 #define kHTTPImg @"http://192.168.2.152:8090"

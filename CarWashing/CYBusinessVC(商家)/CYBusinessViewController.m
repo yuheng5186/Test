@@ -26,11 +26,14 @@
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
+
+#import "BusinessDetailViewController.h"
 //地图
 #import "MapViewController.h"
 //model
 #import "CYBusinessModel.h"
 #import "CYShoplistModel.h"
+#import "CyShopList2MOdel.h"
 @interface CYBusinessViewController ()<UITableViewDelegate, UITableViewDataSource,CLLocationManagerDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,AMapLocationManagerDelegate,JSDropDownMenuDataSource,JSDropDownMenuDelegate>
 {
     
@@ -43,6 +46,8 @@
     NSInteger      _currentData1Index;
     NSInteger      _currentData2Index;
     NSInteger      _currentData3Index;
+    NSMutableArray * titleArray;
+    NSMutableArray * valueArray;
     
     NSString * lau;
     NSString * lon;
@@ -57,6 +62,7 @@
 @property (strong, nonatomic) AMapLocationManager* locationManager;
 @property (nonatomic, strong) NSMutableArray *MerchantData;
 @property (nonatomic, strong) NSMutableArray *shopListArray;
+@property (nonatomic, strong) NSDictionary *dicData;
 @end
 
 static NSString *id_salerListCell = @"salerListViewCell";
@@ -93,12 +99,14 @@ static NSString *id_salerListCell = @"salerListViewCell";
     NSLog(@"商家数据请求-%@",params);
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Merchant/GetStoreNewList",Khttp] success:^(NSDictionary *dict, BOOL success) {
         NSLog(@"商家数据请求-%@",dict);
+        self.dicData = dict;
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             [self.MerchantData removeAllObjects];
             
             self.MerchantData = (NSMutableArray*)[CYBusinessModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"][@"merList"]];
             self.shopListArray = (NSMutableArray*)[CYShoplistModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"][@"shopList"]];
+    
             if (self.MerchantData.count==0) {
                 [self.view showInfo:@"暂无数据" autoHidden:YES interval:2];
                 [self.salerListView reloadData];
@@ -128,13 +136,16 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.DefaultSort=@"1";
     self.page = 0;
     self.weiyi = 0;
+    self.ServiceCode =0;
     _MerchantData = [NSMutableArray array];
     _shopListArray = [NSMutableArray array];
+    titleArray = [NSMutableArray array];
+    valueArray = [NSMutableArray array];
     food = @[@"全部", @"普洗-5座轿车", @"精洗-5座轿车", @"普洗-7座轿车", @"全车打蜡-5座轿车", @"全车打蜡-7座轿车", @"内饰清洗-5座轿车", @"内饰清洗-7座轿车"];
     addressArr = @[@"全部",@"市南区",@"市北区",@"李沧区",@"崂山区",@"黄岛区",@"城阳区",@"即墨区",@"胶州市",@"平度市", @"莱西市",@"红岛经济区"];
     
     _data1 = [NSMutableArray arrayWithObjects:@{@"title":@"汽车服务", @"data":food}, @{@"title":@"汽车美容", @"data":food},@{@"title":@"维修服务", @"data":food},@{@"title":@"保养服务", @"data":food},@{@"title":@"安装服务", @"data":addressArr}, nil];
-    _data2 = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
+    _data2 = [NSMutableArray arrayWithObjects:@"默认排序", @"附近优先", @"评分最高", @"服务最多", nil];
     
     _data3 = [NSMutableArray arrayWithObjects:@{@"title":@"青岛市", @"data":addressArr},nil];
     
@@ -215,13 +226,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    static NSString *CellIdentifier=@"Cell";
-//    UITableViewCell * cell = [_salerListView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    if (cell==nil) {
-//        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//        cell.backgroundColor=[UIColor redColor];
-//    }
-//    return cell;
+
     static NSString *CellIdentifier=@"Cell";
     [tableView registerClass:[QWMclistTableViewCell class] forCellReuseIdentifier:CellIdentifier];
     QWMclistTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
@@ -240,9 +245,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     }
     [cell setlayoutCell];
     cell.contentView.backgroundColor = [UIColor whiteColor];
-
-    NSDictionary *dic=[self.MerchantData objectAtIndex:indexPath.row];
-    [cell setUpCellWithDic:dic];
+    [cell setUpCellWithDic:self.MerchantData[indexPath.row]];
     [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     [cell setBackgroundColor:[UIColor clearColor]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -253,12 +256,13 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-//    //跳转商家详情
-//    BusinessDetailViewController *detailController = [[BusinessDetailViewController alloc] init];
-//    detailController.hidesBottomBarWhenPushed      = YES;
-//    detailController.MerCode                       = [[[self.MerchantData objectAtIndex:indexPath.row] objectForKey:@"MerCode"] integerValue];
-//    detailController.distance                      = [[self.MerchantData objectAtIndex:indexPath.row] objectForKey:@"Distance"];
-//    [self.navigationController pushViewController:detailController animated:YES];
+    CYBusinessModel * model = self.MerchantData[indexPath.row];
+    //跳转商家详情
+    BusinessDetailViewController *detailController = [[BusinessDetailViewController alloc] init];
+    detailController.hidesBottomBarWhenPushed      = YES;
+    detailController.MerCode                       = model.MerCode;
+    detailController.distance                      = [NSString stringWithFormat:@"%ld",model.Distance];
+    [self.navigationController pushViewController:detailController animated:YES];
 }
 
 #pragma mark -----定位跳转
@@ -321,16 +325,20 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 - (NSInteger)menu:(JSDropDownMenu *)menu numberOfRowsInColumn:(NSInteger)column leftOrRight:(NSInteger)leftOrRight leftRow:(NSInteger)leftRow{
     
-    CYShoplistModel * model = self.shopListArray[leftRow];
+    
     if (column==1) {
+        CYShoplistModel * model = self.shopListArray[leftRow];
         if (leftOrRight==0) {
-            
             return self.shopListArray.count;
         } else{
             if (model.serList.count!=0) {
+                NSLog(@"-==-=%ld",model.serList.count);
+                for (int i=0;i<model.serList.count; i++) {
+                    [titleArray addObject:[NSString stringWithFormat:@"%@",model.serList[i][@"Title"]]];
+                    [valueArray addObject:[NSString stringWithFormat:@"%@",model.serList[i][@"Value"]]];
+                }
                 return model.serList.count;
             }
-            
             return 0;
         }
     } else if (column==0){
@@ -367,13 +375,13 @@ static NSString *id_salerListCell = @"salerListViewCell";
 }
 
 - (NSString *)menu:(JSDropDownMenu *)menu titleForRowAtIndexPath:(JSIndexPath *)indexPath {
-    CYShoplistModel * model = self.shopListArray[indexPath.row];
+   
     if (indexPath.column==1) {
         if (indexPath.leftOrRight==0) {
+            CYShoplistModel * model = self.shopListArray[indexPath.row];
             return [NSString stringWithFormat:@"%@",model.Title];
-        } else{
-            NSInteger leftRow = indexPath.leftRow;
-            return [NSString stringWithFormat:@"%@",model.serList[indexPath.row]];
+        } else{//点击第一列
+             return [NSString stringWithFormat:@"%@",titleArray[indexPath.row]];
         }
     } else if (indexPath.column==0) {
         if (indexPath.leftOrRight==0) {
@@ -384,9 +392,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
             NSDictionary *menuDic = [_data3 objectAtIndex:leftRow];
             return [[menuDic objectForKey:@"data"] objectAtIndex:indexPath.row];
         }
-        
     } else {
-        
         return _data2[indexPath.row];
     }
 }
@@ -403,6 +409,8 @@ static NSString *id_salerListCell = @"salerListViewCell";
         }
         if (indexPath.leftOrRight==1)
         {
+            NSString * valueStr =[NSString stringWithFormat:@"%@",valueArray[indexPath.row]];
+            self.ServiceCode = [[NSString stringWithFormat:@"%@",valueStr]integerValue];
             NSLog(@"服务品牌--%@", food[indexPath.row]);
 //            return;
         }
@@ -431,7 +439,16 @@ static NSString *id_salerListCell = @"salerListViewCell";
         
     } else{
         _currentData3Index = indexPath.row;
-        NSLog(@"距离--%@",_data2[_currentData3Index]);
+        if (indexPath.row==0) {
+            self.DefaultSort = @"1";
+        }else if (indexPath.row==1){
+            self.DefaultSort = @"2";
+        }else if (indexPath.row==2){
+            self.DefaultSort = @"3";
+        }else{
+            self.DefaultSort = @"4";
+        }
+         NSLog(@"距离--%@",self.DefaultSort);
     }
     [self getData];
     

@@ -166,15 +166,16 @@
 
 -(void)setUpCellWithDic:(CYBusinessModel *)dic
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,dic.Img];
-                NSURL *url=[NSURL URLWithString:ImageURL];
-                NSData *data=[NSData dataWithContentsOfURL:url];
-                UIImage *img=[UIImage imageWithData:data];
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    self.McImageView.image = img;
-                });
-            });
+    [self.McImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,dic.Img]]];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//                NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,dic.Img];
+//                NSURL *url=[NSURL URLWithString:ImageURL];
+//                NSData *data=[NSData dataWithContentsOfURL:url];
+//                UIImage *img=[UIImage imageWithData:data];
+//                dispatch_sync(dispatch_get_main_queue(), ^{
+//                    self.McImageView.image = img;
+//                });
+//            });
             self.Mcname.text = dic.MerName;
             self.Mcaddress.text = dic.MerAddress;
     

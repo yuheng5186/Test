@@ -31,6 +31,13 @@
 
 #import "UIImageView+WebCache.h"
 #import "QWMerchantModel.h"
+
+//新加的可展开的cell
+#import "HeaderView.h"
+
+#import "CYBusinessDetailModel.h"
+#import "CYBusinessDetailModel1.h"
+static NSString * const ReuseIdentifierHeader = @"header";
 @interface BusinessDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, CLLocationManagerDelegate>
 {
     MBProgressHUD *HUD;
@@ -44,6 +51,11 @@
     enum WXScene scene;
     
     NSArray *activity;
+    NSInteger CyPrice;
+    NSInteger CYOriginalPrice;
+    NSString *CYTitle;
+    NSInteger CySerCode;
+    NSInteger chooseType;//选中
 }
 
 
@@ -65,8 +77,12 @@
 @property(nonatomic,strong)QWMerSerListModel *MerSerListmodel;
 #pragma mark - map
 @property (nonatomic, strong)JXMapNavigationView *mapNavigationView;
-
-
+//****8//
+@property (nonatomic, strong) NSMutableArray      *CYDetailArray;//朝阳数据数组
+@property (nonatomic, strong) NSMutableArray      *CYDetailArray1;//
+@property (nonatomic, strong) NSMutableArray      *expendArray;//记录打开的分组
+@property (nonatomic, strong) NSMutableArray      *selectArray;//记录选择的所有选项
+@property (nonatomic, strong) NSIndexPath         * selectStr;
 @end
 
 static NSString *detailTableViewCell = @"detailTableViewCell";
@@ -99,7 +115,8 @@ static NSString *businessCommentCell = @"businessCommentCell";
     //self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     self.dic = [[NSMutableDictionary alloc]init];
-    
+    _CYDetailArray = [NSMutableArray array];
+    _CYDetailArray1 = [NSMutableArray array];
     self.MerchantDetailData = [[NSMutableArray alloc]init];
     
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -109,6 +126,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     HUD.minSize = CGSizeMake(132.f, 108.0f);
     
     [self setMerChantDetailData];
+   
     
     
 }
@@ -125,6 +143,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
+    NSLog(@"--传过来的id%@",params);
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetStoreDetail",Khttp] success:^(NSDictionary *dict, BOOL success) {
         NSLog(@"--%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
@@ -133,7 +152,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
                self.MerChantmodel=[[QWMerchantModel alloc]initWithDictionary:[dict objectForKey:@"JsonData"] error:nil];
             NSLog(@"%@",self.dic);
             //        [self.MerchantDetailData addObjectsFromArray:arr];
-            
+            self.CYDetailArray = (NSMutableArray*)[CYBusinessDetailModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"][@"ShopSerList"]];
             [self setupUI];
             [HUD setHidden:YES];
         }
@@ -154,7 +173,8 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 - (void)setupUI {
     
-    UIView *containHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Width/2 + 196*Main_Screen_Height/667)];
+    UIView *containHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Width/2 + 196*Main_Screen_Height/667+10*Main_Screen_Height/667)];
+    containHeadView.backgroundColor=RGBAA(242, 242, 242, 1.0);
     [self.view addSubview:containHeadView];
     
     UIImageView *detaiImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Width/2)];
@@ -164,15 +184,6 @@ static NSString *businessCommentCell = @"businessCommentCell";
         NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,self.MerChantmodel.Img];
         [detaiImgView sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@"shangjiadingwei"]];
     }
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,self.dic[@"Img"]];
-//        NSURL *url=[NSURL URLWithString:ImageURL];
-//        NSData *data=[NSData dataWithContentsOfURL:url];
-//        UIImage *img=[UIImage imageWithData:data];
-//        dispatch_sync(dispatch_get_main_queue(), ^{
-//            detaiImgView.image = img;
-//        });
-//    });
 
     
     [containHeadView addSubview:detaiImgView];
@@ -274,7 +285,8 @@ static NSString *businessCommentCell = @"businessCommentCell";
     [headerView addTarget:self action:@selector(clickDetailView) forControlEvents:UIControlEventTouchUpInside];
     
     
-    UITableView *detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 64 - 60*Main_Screen_Height/667) style:UITableViewStyleGrouped];
+    UITableView *detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 64 - 60*Main_Screen_Height/667) style:UITableViewStylePlain];
+    detailTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     detailTableView.contentInset = UIEdgeInsetsMake(0, 0, 5, 0);
     self.detailTableView = detailTableView;
     
@@ -293,6 +305,11 @@ static NSString *businessCommentCell = @"businessCommentCell";
     detailTableView.tableHeaderView = containHeadView;
     
     [self.view addSubview:detailTableView];
+    
+    detailTableView.tableFooterView = [UIView new];
+    [detailTableView registerNib:[UINib nibWithNibName:NSStringFromClass([HeaderView class]) bundle:nil] forHeaderFooterViewReuseIdentifier:ReuseIdentifierHeader];
+    
+    [detailTableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     
     //表尾
     UIButton *commentBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50*Main_Screen_Height/667)];
@@ -499,12 +516,6 @@ static NSString *businessCommentCell = @"businessCommentCell";
             [self.view showInfo:@"收藏失败" autoHidden:YES interval:2];
         }];
 
-        
-//    }
-//    else
-//    {
-//        NSLog(@"no");
-//    }
     
 }
 
@@ -548,7 +559,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     payController.Xprice = lblPrice.text;
     
     payController.MCode = self.dic[@"MerCode"];
-    payController.SCode = [NSString stringWithFormat:@"%@",[[self.dic[@"MerSerList"] objectAtIndex:self.lastPath.row] objectForKey:@"SerCode"]];
+    payController.SCode = [NSString stringWithFormat:@"%ld",CySerCode];
     
     payController.OrderCode = @"";
     
@@ -559,11 +570,11 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 #pragma mark - tableView代理数据源
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return self.CYDetailArray.count+1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(section == 1)
+    if(section == self.CYDetailArray.count)
     {
         if([self.dic[@"MerComList"] count]>5)
         {
@@ -574,165 +585,221 @@ static NSString *businessCommentCell = @"businessCommentCell";
             return [self.dic[@"MerComList"] count];
         }
     }
-    else
-    {
-        return [self.dic[@"MerSerList"] count];
-    }
+   
+        CYBusinessDetailModel * Cymodel = self.CYDetailArray[section];
+        NSString *key = [NSString stringWithFormat:@"%@",Cymodel.Title];
+        self.CYDetailArray1 = (NSMutableArray*)[CYBusinessDetailModel1 mj_objectArrayWithKeyValuesArray:Cymodel.serList];
+        
+        if ([self.expendArray containsObject:key]) {
+            return self.CYDetailArray1.count;
+        }else {
+            return 0.5;
+        }
+        
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-//    if (businessDetailCell == nil) {
-//        businessDetailCell = [BusinessDetailCell businessDetailCell];
-//    }
-    if (indexPath.section == 0) {
-        BusinessDetailCell *businessDetailCell = [tableView dequeueReusableCellWithIdentifier:detailTableViewCell forIndexPath:indexPath];
-        businessDetailCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        _detailCell = businessDetailCell;
+
+    if (indexPath.section==self.CYDetailArray.count) {//评论的
+        BusinessEstimateCell *estimateCell = [tableView dequeueReusableCellWithIdentifier:businessCommentCell forIndexPath:indexPath];
         
-        businessDetailCell.carLabel.text = [[self.dic[@"MerSerList"] objectAtIndex:indexPath.row] objectForKey:@"SerName"];
-        businessDetailCell.clearLabel.text = [[self.dic[@"MerSerList"] objectAtIndex:indexPath.row] objectForKey:@"SerComment"];
-        businessDetailCell.priceLabel.text = [NSString stringWithFormat:@"¥%@",[[self.dic[@"MerSerList"] objectAtIndex:indexPath.row] objectForKey:@"CurrentPrice"]];
-        businessDetailCell.originPriceLabel.text = [NSString stringWithFormat:@"¥%@",[[self.dic[@"MerSerList"] objectAtIndex:indexPath.row] objectForKey:@"OriginalPrice"]];
         
-        //单选状态
-        NSInteger row = [indexPath row];
-        NSInteger oldRow = [self.lastPath row];
-        
-        if (row == oldRow && self.lastPath != nil) {
-            [businessDetailCell.stateButton setBackgroundImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateNormal];
-        }else{
+        [estimateCell.headImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserImg"]]] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
+        if([[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserName"] isKindOfClass:[NSNull class]])
+        {
+            estimateCell.phoneLabel.text = @"";
+        }else
+        {
             
-            [businessDetailCell.stateButton setBackgroundImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
+            estimateCell.phoneLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserName"];
+        }
+        //    [estimateCell.userScoreLabel setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",self.dic[@"Score"]] substringToIndex:1]]]];
+        if([[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"Score"] isKindOfClass:[NSNull class]])
+        {
+            
+        }else
+        {
+            [estimateCell.userScoreLabel setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"Score"]] substringToIndex:1]]]];
         }
         
-        return businessDetailCell;
-    }
-    
-    BusinessEstimateCell *estimateCell = [tableView dequeueReusableCellWithIdentifier:businessCommentCell forIndexPath:indexPath];
-    
-    
-    [estimateCell.headImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserImg"]]] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
-    if([[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserName"] isKindOfClass:[NSNull class]])
-    {
-        estimateCell.phoneLabel.text = @"";
-    }else
-    {
+        //    estimateCell.commentLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentContent"];
+        if([[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentContent"] isKindOfClass:[NSNull class]])
+        {
+            estimateCell.commentLabel.text = @"";
+        }else
+        {
+            estimateCell.commentLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentContent"];
+        }
         
-    estimateCell.phoneLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"FromuserName"];
-    }
-//    [estimateCell.userScoreLabel setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",self.dic[@"Score"]] substringToIndex:1]]]];
-    if([[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"Score"] isKindOfClass:[NSNull class]])
-    {
+        //    estimateCell.dateLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentDate"];
+        if([[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentDate"] isKindOfClass:[NSNull class]])
+        {
+            estimateCell.dateLabel.text = @"";
+        }else
+        {
+            estimateCell.dateLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentDate"];
+        }
+        estimateCell.timeLabel.hidden = YES;
         
-    }else
-    {
-        [estimateCell.userScoreLabel setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"Score"]] substringToIndex:1]]]];
+        estimateCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return estimateCell;
     }
-
-//    estimateCell.commentLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentContent"];
-    if([[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentContent"] isKindOfClass:[NSNull class]])
-    {
-        estimateCell.commentLabel.text = @"";
-    }else
-    {
-        estimateCell.commentLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentContent"];
+    
+    CYBusinessDetailModel * Cymodel = self.CYDetailArray[indexPath.section];
+    self.CYDetailArray1 = (NSMutableArray*)[CYBusinessDetailModel1 mj_objectArrayWithKeyValuesArray:Cymodel.serList];
+    
+   
+    CYBusinessDetailModel1 * Cymodel1 = self.CYDetailArray1[indexPath.row];
+//    NSString *name = Cymodel1.SerName;
+    
+    BusinessDetailCell *businessDetailCell = [tableView dequeueReusableCellWithIdentifier:detailTableViewCell forIndexPath:indexPath];
+    businessDetailCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    _detailCell = businessDetailCell;
+    
+    NSInteger row = [indexPath row];
+    NSInteger oldRow1= [self.selectStr row];
+    if (row == oldRow1 && self.selectStr != nil) {
+        businessDetailCell.stateButton.selected = YES;
+    }else{
+       businessDetailCell.stateButton.selected = NO;
     }
-
-//    estimateCell.dateLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentDate"];
-    if([[[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentDate"] isKindOfClass:[NSNull class]])
-    {
-        estimateCell.dateLabel.text = @"";
-    }else
-    {
-        estimateCell.dateLabel.text = [[self.dic[@"MerComList"] objectAtIndex:indexPath.row] objectForKey:@"CommentDate"];
-    }
-    estimateCell.timeLabel.hidden = YES;
     
-    estimateCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    return estimateCell;
-    
-}
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//    if (indexPath.section == 0) {
-//        return 100*Main_Screen_Height/667;
+   
+//    if ([self.selectArray containsObject:name]) {
+//        businessDetailCell.stateButton.selected = YES;
+//    }else {
+//        businessDetailCell.stateButton.selected = NO;
 //    }
-//    
-//    return 110*Main_Screen_Height/667;
-//}
+    businessDetailCell.carLabel.text = Cymodel1.SerName;
+    businessDetailCell.clearLabel.text = Cymodel1.SerComment;
+    businessDetailCell.priceLabel.text = [NSString stringWithFormat:@"¥%ld",Cymodel1.CurrentPrice];
+    businessDetailCell.originPriceLabel.text = [NSString stringWithFormat:@"¥%ld",Cymodel1.OriginalPrice];
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    return businessDetailCell;
+    
+   
+    
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 40*Main_Screen_Height/667;
+    return 50*Main_Screen_Height/667;
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
+    if (indexPath.section>=0&&indexPath.section<self.CYDetailArray.count) {
+        CYBusinessDetailModel * Cymodel = self.CYDetailArray[indexPath.section];
+        //    NSString *key = [NSString stringWithFormat:@"%@",Cymodel.Title];
+        self.CYDetailArray1 = (NSMutableArray*)[CYBusinessDetailModel1 mj_objectArrayWithKeyValuesArray:Cymodel.serList];
+        CYBusinessDetailModel1 * Cymodel1 = self.CYDetailArray1[indexPath.row];
+        CySerCode = Cymodel1.SerCode;
+//        NSString *name = Cymodel1.SerName;
+        NSInteger CurrentPrice = Cymodel1.CurrentPrice;
+        NSInteger OriginalPrice = Cymodel1.OriginalPrice;
+//        if ([self.selectArray containsObject:name]) {
+//            [self.selectArray removeObject:name];
+//            CyPrice = CyPrice-CurrentPrice;
+//            CYOriginalPrice = CYOriginalPrice-OriginalPrice;
+//        }else {
+//            [self.selectArray addObject:name];
+//            CyPrice = CyPrice+CurrentPrice;
+//            CYOriginalPrice = CYOriginalPrice+OriginalPrice;
+//        }
+        lblPrice.text = [NSString stringWithFormat:@"¥%ld",CurrentPrice];
         
-        NSInteger newRow = [indexPath row];
-        NSInteger oldRow = (self.lastPath != nil)?[self.lastPath row]:-1;
+        formerPriceLab.text = [NSString stringWithFormat:@"¥%ld",OriginalPrice];
+        NSString *textStr = formerPriceLab.text;
+        NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+        NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:textStr attributes:attribtDic];
+        formerPriceLab.attributedText = attribtStr;
         
-        if (newRow != oldRow) {
-            self.detailCell = [tableView cellForRowAtIndexPath:indexPath];
-            
-            [self.detailCell.stateButton setBackgroundImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateNormal];
-            
-            self.detailCell = [tableView cellForRowAtIndexPath:self.lastPath];
-            
-            [self.detailCell.stateButton setBackgroundImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
-            
-            self.lastPath = indexPath;
-            
-            lblPrice.text = [NSString stringWithFormat:@"¥%@",[[self.dic[@"MerSerList"] objectAtIndex:self.lastPath.row] objectForKey:@"CurrentPrice"]];
-            formerPriceLab.text = [NSString stringWithFormat:@"¥%@",[[self.dic[@"MerSerList"] objectAtIndex:self.lastPath.row] objectForKey:@"OriginalPrice"]];
-            
-            NSString *textStr = formerPriceLab.text;
-            NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
-            NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:textStr attributes:attribtDic];
-            formerPriceLab.attributedText = attribtStr;
-            
-            lblCarType.text = [[self.dic[@"MerSerList"] objectAtIndex:self.lastPath.row] objectForKey:@"SerName"];
-//            NSLog(@"%ld",self.lastPath.row);
-        }
+        lblCarType.text = [NSString stringWithFormat:@"%@",Cymodel1.SerName];
+        // 选中类型
+        self.selectStr = indexPath;
+        [self.detailTableView reloadData];
+        NSLog(@"-00--%ld",CySerCode);
+
     }
+
 }
 
 #pragma mark - 设置组头视图
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *v = [[UIView alloc]initWithFrame:CGRectMake(12*Main_Screen_Width/667, 0, Main_Screen_Width, 40*Main_Screen_Height/667)];
-
-    UILabel *textLab = [[UILabel alloc] initWithFrame:CGRectMake(12*Main_Screen_Width/667, 0, Main_Screen_Width, 40*Main_Screen_Height/667)];
-    textLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
-    textLab.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
-    
-    if (section == 0) {
-        textLab.text = @"服务类别";
-    }else{
-        
+    if (section==self.CYDetailArray.count) {
+        UIView *v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50*Main_Screen_Height/667)];
+        v.backgroundColor=RGBAA(242, 242, 242, 1.0);
+        UIView * whiteView=[[UIView alloc]initWithFrame:CGRectMake(0, 10*Main_Screen_Height/667, Main_Screen_Width, 40*Main_Screen_Height/667)];
+        whiteView.backgroundColor=[UIColor whiteColor];
+        [v addSubview:whiteView];
+        UILabel *textLab = [[UILabel alloc] initWithFrame:CGRectMake(12, 0, Main_Screen_Width, 40*Main_Screen_Height/667)];
+        textLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+        textLab.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
         textLab.text = [NSString stringWithFormat:@"评论 (%ld)",((NSArray *)self.dic[@"MerComList"]).count];
+        [whiteView addSubview:textLab];
+        UIView * lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 39*Main_Screen_Height/667, Main_Screen_Width, 1*Main_Screen_Height/667)];
+        lineView.backgroundColor=RGBAA(242, 242, 242, 1.0);
+        [whiteView addSubview:lineView];
+        return v;
     }
-    [v addSubview:textLab];
-    return v;
+    CYBusinessDetailModel * Cymodel = self.CYDetailArray[section];
+    NSString *key = [NSString stringWithFormat:@"%@",Cymodel.Title];
+    self.CYDetailArray1 = (NSMutableArray*)[CYBusinessDetailModel1 mj_objectArrayWithKeyValuesArray:Cymodel.serList];
+   
+    HeaderView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:ReuseIdentifierHeader];
+    view.nameLabel.text = key;
+    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, -2, self.view.bounds.size.width, 0.3)];
+    lab.backgroundColor = [UIColor whiteColor];
+    lab.alpha = 0.2;
+    [view addSubview:lab];
+    
+    BOOL selectAll = YES;
+    for (id object in self.CYDetailArray1) {
+        if (![self.selectArray containsObject:object]) {
+            selectAll = NO;
+        }
+    }
+    [view.tap addTarget:self action:@selector(headerTap:)];
+    
+    if ([self.expendArray containsObject:key]) {
+        view.jiantouInageView.transform = CGAffineTransformMakeRotation(M_PI_2);
+    }else {
+        view.jiantouInageView.transform = CGAffineTransformIdentity;
+    }
+    return view;
+    
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.1;
 }
-
+- (void)headerTap:(UITapGestureRecognizer *)tap {
+    HeaderView *view = (HeaderView *)tap.view;
+    NSString *key = view.nameLabel.text;
+    NSInteger index = [self.CYDetailArray indexOfObject:key];
+    
+    if ([self.expendArray containsObject:key]) {
+        [self.expendArray removeObject:key];
+        [UIView animateWithDuration:0.1 animations:^{
+            view.jiantouInageView.transform = CGAffineTransformIdentity;
+        }];
+    }else {
+        [self.expendArray addObject:key];
+        [UIView animateWithDuration:0.1 animations:^{
+            view.jiantouInageView.transform = CGAffineTransformMakeRotation(M_PI_2);
+        }];
+    }
+    [self.detailTableView reloadData];
+//    [self.detailTableView reloadSections:[NSIndexSet indexSetWithIndex:index+1] withRowAnimation:UITableViewRowAnimationNone];
+}
 
 #pragma mark - 点击分享按钮
 - (void)didClickShareButton:(UIButton *)button {
@@ -926,5 +993,18 @@ static NSString *businessCommentCell = @"businessCommentCell";
 //        [_detailTableView.delegate tableView:_detailTableView didSelectRowAtIndexPath:indexPath];
 //    }
 }
+#pragma mark---懒加载
+- (NSMutableArray *)expendArray {
+    if (!_expendArray) {
+        _expendArray = [NSMutableArray arrayWithCapacity:0];
+    }
+    return _expendArray;
+}
 
+- (NSMutableArray *)selectArray {
+    if (!_selectArray) {
+        _selectArray = [NSMutableArray arrayWithCapacity:0];
+    }
+    return _selectArray;
+}
 @end

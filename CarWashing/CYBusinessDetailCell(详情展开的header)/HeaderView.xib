@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="358" height="77"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uIE-9O-2Re">
+                    <rect key="frame" x="0.0" y="0.0" width="358" height="77"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jiantou" translatesAutoresizingMaskIntoConstraints="NO" id="mih-5U-dEY">
+                    <rect key="frame" x="333" y="30.5" width="10" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="10" id="c5v-tP-CZa"/>
+                        <constraint firstAttribute="height" constant="13" id="jNo-Go-Ybk"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4Q-ZT-gBy">
+                    <rect key="frame" x="12" y="28" width="220" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="220" id="dXn-sC-lYp"/>
+                        <constraint firstAttribute="height" constant="21" id="zjL-y6-LpU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D1T-Zj-8b2">
+                    <rect key="frame" x="0.0" y="76" width="358" height="1"/>
+                    <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="LWo-Fw-4Az"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="uIE-9O-2Re" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5wl-h8-0TI"/>
+                <constraint firstAttribute="trailing" secondItem="D1T-Zj-8b2" secondAttribute="trailing" id="AJY-mW-Rms"/>
+                <constraint firstItem="uIE-9O-2Re" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="AMM-tA-Di0"/>
+                <constraint firstAttribute="bottom" secondItem="D1T-Zj-8b2" secondAttribute="bottom" id="KAB-pm-ZFs"/>
+                <constraint firstItem="D1T-Zj-8b2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ccL-6Z-o2b"/>
+                <constraint firstAttribute="trailing" secondItem="uIE-9O-2Re" secondAttribute="trailing" id="f2k-le-Xgl"/>
+                <constraint firstAttribute="bottom" secondItem="uIE-9O-2Re" secondAttribute="bottom" id="hs3-qq-4wU"/>
+                <constraint firstAttribute="centerY" secondItem="mih-5U-dEY" secondAttribute="centerY" constant="1" id="r6Z-86-y2R"/>
+                <constraint firstItem="b4Q-ZT-gBy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="rTd-GJ-mao"/>
+                <constraint firstItem="b4Q-ZT-gBy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ufQ-BM-1mg"/>
+                <constraint firstAttribute="trailing" secondItem="mih-5U-dEY" secondAttribute="trailing" constant="15" id="v2X-60-dj9"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="jiantouInageView" destination="mih-5U-dEY" id="6vy-4r-vO0"/>
+                <outlet property="nameLabel" destination="b4Q-ZT-gBy" id="pph-N5-4WK"/>
+            </connections>
+            <point key="canvasLocation" x="80" y="132.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="jiantou" width="7" height="13"/>
+    </resources>
+</document>

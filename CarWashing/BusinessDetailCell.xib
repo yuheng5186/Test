@@ -66,6 +66,8 @@
                             <constraint firstAttribute="height" constant="21" id="5sG-AZ-CSq"/>
                             <constraint firstAttribute="width" constant="21" id="sdq-Xd-WF2"/>
                         </constraints>
+                        <state key="normal" image="weixuanzhong"/>
+                        <state key="selected" image="xaunzhong"/>
                         <connections>
                             <action selector="didClickStateButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bEZ-mN-qi0"/>
                         </connections>
@@ -97,4 +99,8 @@
             <point key="canvasLocation" x="-763" y="-213"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="weixuanzhong" width="21" height="21"/>
+        <image name="xaunzhong" width="21" height="21"/>
+    </resources>
 </document>
