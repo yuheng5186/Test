@@ -9,7 +9,7 @@
 #import "DSCardShowDetailViewController.h"
 #import "PayPurchaseCardController.h"
 #import <Masonry.h>
-
+#import "CYPurchaseCardViewController.h"
 @interface DSCardShowDetailViewController ()
 
 @property (strong, nonatomic) UIScrollView *scrollView;
@@ -272,7 +272,7 @@
 - (void) buyButtonClick:(id)sender {
 
 //    Card *card = (Card *)[_CardArray objectAtIndex:_Xuhao];
-    PayPurchaseCardController *payCardVC = [[PayPurchaseCardController alloc] init];
+    CYPurchaseCardViewController *payCardVC = [[CYPurchaseCardViewController alloc] init];
     payCardVC.hidesBottomBarWhenPushed = YES;
     payCardVC.choosecard = self.choosecard;
     [self.navigationController pushViewController:payCardVC animated:YES];

@@ -107,7 +107,7 @@
     
     
     exchangeTF = [[UITextField alloc] init];
-    exchangeTF.placeholder = @"请输入激活码(区分大小写)";
+    exchangeTF.placeholder = @"请输入激活码";
     exchangeTF.textAlignment = NSTextAlignmentCenter;
     exchangeTF.layer.cornerRadius = Main_Screen_Height*24/667;
     exchangeTF.keyboardType = UIKeyboardTypeASCIICapable;

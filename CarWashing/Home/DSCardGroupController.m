@@ -52,7 +52,7 @@ static NSString *CyrechargeCell = @"CyrechargeCell";
         
         UITextField *activateTF = [[UITextField alloc] init];
         activateTF.backgroundColor = [UIColor whiteColor];
-        activateTF.placeholder = @"  请输入激活码(区分大小写)";
+        activateTF.placeholder = @"  请输入激活码";
         activateTF.font = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
         activateTF.textColor = [UIColor colorFromHex:@"#c8c8c8"];
         activateTF.layer.cornerRadius = Main_Screen_Height*20/667;
