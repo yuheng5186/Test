@@ -857,7 +857,7 @@
     } else {
         _leftSelectedRow = indexPath.row;
     }
-    ///
+    ///／／／
     if (self.delegate || [self.delegate respondsToSelector:@selector(menu:didSelectRowAtIndexPath:)]) {
         
         BOOL haveRightTableView = [_dataSource haveRightTableViewInColumn:_currentSelectedMenudIndex];
