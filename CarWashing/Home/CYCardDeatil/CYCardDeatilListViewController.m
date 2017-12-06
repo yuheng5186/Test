@@ -37,7 +37,8 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 @implementation CYCardDeatilListViewController
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self setupRefresh];
+    self.page = 0 ;
+    [self GetCardbagList];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,8 +48,6 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     HUD.mode = MBProgressHUDModeIndeterminate;
     HUD.labelText = @"加载中";
     HUD.minSize = CGSizeMake(132.f, 108.0f);
-    
-    
     
     [self drawBackButtonWithAction:@selector(backButtonClick:)];
 }
