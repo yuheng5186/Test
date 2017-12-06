@@ -45,6 +45,7 @@
     
     NSInteger      _currentData1Index;
     NSInteger      _currentData2Index;
+    NSInteger      showType;
     NSInteger      _currentData3Index;
     NSMutableArray * titleArray;
     NSMutableArray * valueArray;
@@ -84,7 +85,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     NSDictionary *mulDic = @{
                              @"City":self.citystr,
                              @"Area":self.areastr,
-                             @"ShopType":@1,
+                             @"ShopType":@(showType),
                              @"ServiceCode":@(self.ServiceCode),
                              @"DefaultSort":self.DefaultSort,
                              @"Ym":[UdStorage getObjectforKey:@"Ym"],
@@ -137,6 +138,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.page = 0;
     self.weiyi = 0;
     self.ServiceCode =0;
+    showType = 0;
     _MerchantData = [NSMutableArray array];
     _shopListArray = [NSMutableArray array];
     titleArray = [NSMutableArray array];
@@ -331,6 +333,8 @@ static NSString *id_salerListCell = @"salerListViewCell";
         if (leftOrRight==0) {
             return self.shopListArray.count;
         } else{
+            [titleArray removeAllObjects];
+            [valueArray removeAllObjects];
             if (model.serList.count!=0) {
                 NSLog(@"-==-=%ld",model.serList.count);
                 for (int i=0;i<model.serList.count; i++) {
@@ -401,18 +405,17 @@ static NSString *id_salerListCell = @"salerListViewCell";
     if (indexPath.column == 1) {
         
         if(indexPath.leftOrRight==0){
-            
+            CYShoplistModel * model = self.shopListArray[indexPath.row];
             _currentData1Index = indexPath.row;
-            NSLog(@"服务类型--%@", _data1[_currentData1Index][@"title"]);
-            
-//            return;
+            NSLog(@"服务左边--%ld", model.Value);
+            showType = model.Value;
         }
         if (indexPath.leftOrRight==1)
         {
             NSString * valueStr =[NSString stringWithFormat:@"%@",valueArray[indexPath.row]];
             self.ServiceCode = [[NSString stringWithFormat:@"%@",valueStr]integerValue];
-            NSLog(@"服务品牌--%@", food[indexPath.row]);
-//            return;
+            NSLog(@"服务右边--%ld", self.ServiceCode);
+            [self getData];
         }
         
     } else if(indexPath.column == 0){
@@ -422,7 +425,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
             _currentData2Index = indexPath.row;
             NSLog(@"服务类型--%@", _data3[_currentData2Index][@"title"]);
             self.citystr=@"青岛市";
-//            return;
+            
         }
         if (indexPath.leftOrRight==1)
         {
@@ -432,8 +435,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
             }else{
                 self.areastr=[NSString stringWithFormat:@"%@",addressArr[indexPath.row]];
             }
-            
-//            return;
+            [self getData];
         }
         NSLog(@"地区--%@",_data3[_currentData2Index]);
         
@@ -449,8 +451,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
             self.DefaultSort = @"4";
         }
          NSLog(@"距离--%@",self.DefaultSort);
+        [self getData];
     }
-    [self getData];
+    
     
 }
 #pragma mark---懒加载
