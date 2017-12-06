@@ -9,7 +9,7 @@
 #import "CYCardDetailViewController.h"
 #import "CYCardCommentView.h"
 #import "CYCardComment1.h"
-
+#import "CYCardDeatilListViewController.h"
 
 #import "PopupView.h"
 #import "LewPopupViewAnimationDrop.h"
@@ -49,6 +49,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view addSubview:self.bigScrollerView];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(wechatShareSuccessClick) name:@"wechatShareSuccess" object:nil];
+    
     if (self.card.GetCardType ==11) {//团购卡
         UINib *nib = [UINib nibWithNibName:@"CYCardComment1" bundle:nil];
         CYCardComment1 *bookView = [[nib instantiateWithOwner:nil options:nil] firstObject];
@@ -218,28 +220,28 @@
 }
 
 -(void)ShareClick{
-    if (!self.activityView)
-    {
-        self.activityView = [[HYActivityView alloc]initWithTitle:@"" referView:self.view];
-        self.activityView.delegate = self;
-        //横屏会变成一行6个, 竖屏无法一行同时显示6个, 会自动使用默认一行4个的设置.
-        self.activityView.numberOfButtonPerLine = 6;
-        ButtonView *bv ;
-        
-        bv = [[ButtonView alloc]initWithText:@"微信" image:[UIImage imageNamed:@"btn_share_weixin"] handler:^(ButtonView *buttonView){
-            NSLog(@"点击微信");
-            NSDictionary *mulDic = @{
-                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                     @"GroupPurchaseBatch":self.card.GroupPurchaseBatch
-                                     };
-            NSDictionary *params = @{
-                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                                     };
-            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/ShareWashCard",Khttp] success:^(NSDictionary *dict, BOOL success) {
-                NSLog(@"%@",dict);
-                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-                {
+    NSDictionary *mulDic = @{
+                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                             @"GroupPurchaseBatch":self.card.GroupPurchaseBatch
+                             };
+    NSDictionary *params = @{
+                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                             };
+    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/ShareWashCard",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"%@",dict);
+        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+        {
+            if (!self.activityView)
+            {
+                self.activityView = [[HYActivityView alloc]initWithTitle:@"" referView:self.view];
+                self.activityView.delegate = self;
+                //横屏会变成一行6个, 竖屏无法一行同时显示6个, 会自动使用默认一行4个的设置.
+                self.activityView.numberOfButtonPerLine = 6;
+                ButtonView *bv ;
+                
+                bv = [[ButtonView alloc]initWithText:@"微信" image:[UIImage imageNamed:@"btn_share_weixin"] handler:^(ButtonView *buttonView){
+                    NSLog(@"点击微信");
                     //创建发送对象实例
                     SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc] init];
                     sendReq.bText = NO;//不使用文本信息
@@ -260,39 +262,14 @@
                     //发送分享信息
                     [WXApi sendReq:sendReq];
                     
-                }
-                else
-                {
-                    [self.view showInfo:@"分享失败，请重试" autoHidden:YES interval:2];
                     
-                }
+                    self.tabBarController.tabBar.hidden = YES;
+                    
+                }];
+                [self.activityView addButtonView:bv];
                 
-            } fail:^(NSError *error) {
-                [self.view showInfo:@"分享失败，请重试" autoHidden:YES interval:2];
-                
-            }];
-            
-            
-            self.tabBarController.tabBar.hidden = YES;
-            
-        }];
-        [self.activityView addButtonView:bv];
-        
-        bv = [[ButtonView alloc]initWithText:@"微信朋友圈" image:[UIImage imageNamed:@"btn_share_pengyouquan"] handler:^(ButtonView *buttonView){
-            NSLog(@"点击微信朋友圈");
-            NSDictionary *mulDic = @{
-                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                     @"GroupPurchaseBatch":self.card.GroupPurchaseBatch
-                                     };
-            NSDictionary *params = @{
-                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                                     };
-            
-            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/ShareWashCard",Khttp] success:^(NSDictionary *dict, BOOL success) {
-                
-                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-                {
+                bv = [[ButtonView alloc]initWithText:@"微信朋友圈" image:[UIImage imageNamed:@"btn_share_pengyouquan"] handler:^(ButtonView *buttonView){
+                    NSLog(@"点击微信朋友圈");
                     //创建发送对象实例
                     SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc] init];
                     sendReq.bText = NO;//不使用文本信息
@@ -315,25 +292,35 @@
                     //发送分享信息
                     [WXApi sendReq:sendReq];
                     
-                }
-                else
-                {
-                    [self.view showInfo:@"分享失败，请重试" autoHidden:YES interval:2];
+                    self.tabBarController.tabBar.hidden = YES;
                     
-                }
+                }];
+                [self.activityView addButtonView:bv];
                 
-            } fail:^(NSError *error) {
-                [self.view showInfo:@"分享失败，请重试" autoHidden:YES interval:2];
-                
-            }];
+            }
             
-            self.tabBarController.tabBar.hidden = YES;
+            [self.activityView show];
             
-        }];
-        [self.activityView addButtonView:bv];
+        }
+        else
+        {
+            [self.view showInfo:@"分享失败，请重试" autoHidden:YES interval:2];
+            
+        }
         
-    }
+    } fail:^(NSError *error) {
+        [self.view showInfo:@"分享失败，请重试" autoHidden:YES interval:2];
+        
+    }];
     
-    [self.activityView show];
+    
+}
+-(void)wechatShareSuccessClick
+{
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[CYCardDeatilListViewController class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
 }
 @end

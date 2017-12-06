@@ -35,7 +35,10 @@
 
 static NSString *id_rechargeCell = @"id_rechargeCell";
 @implementation CYCardDeatilListViewController
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self setupRefresh];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
@@ -46,7 +49,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
     HUD.minSize = CGSizeMake(132.f, 108.0f);
     
     
-    [self setupRefresh];
+    
     [self drawBackButtonWithAction:@selector(backButtonClick:)];
 }
 -(void)setupRefresh
