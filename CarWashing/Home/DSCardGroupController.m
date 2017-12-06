@@ -114,7 +114,11 @@ static NSString *CyrechargeCell = @"CyrechargeCell";
     [self drawTitle:@"我的卡包"];
     
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self GetCardbagList];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -128,7 +132,7 @@ static NSString *CyrechargeCell = @"CyrechargeCell";
     
     
 //    [self setupRefresh];
-    [self GetCardbagList];
+    
     [self drawBackButtonWithAction:@selector(backButtonClick:)];
 }
 
