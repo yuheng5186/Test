@@ -322,12 +322,14 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
             }
         }
         if (card.GetCardType ==11 ) {
+            cell.CardnameLabel.text = [NSString stringWithFormat:@"团购卡 剩余%ld张",card.Integralnum];
             cell.CarddesLabel.text = [NSString stringWithFormat:@"团购卡"];
             cell.CardTimeLabel.text = [NSString stringWithFormat:@"截止日期: 长期有效"];
         }else{
             cell.CardTimeLabel.text = [NSString stringWithFormat:@"截止日期: %@",[self DateZhuan:card.ExpEndDates]];
+            cell.CardnameLabel.text = [NSString stringWithFormat:@"免费洗车%ld次",card.CardCount];
         }
-        cell.CardnameLabel.text = [NSString stringWithFormat:@"免费洗车%ld次",card.CardCount];
+    
     
     
     

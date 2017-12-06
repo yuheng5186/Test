@@ -53,7 +53,7 @@
         UINib *nib = [UINib nibWithNibName:@"CYCardComment1" bundle:nil];
         CYCardComment1 *bookView = [[nib instantiateWithOwner:nil options:nil] firstObject];
         bookView.frame=CGRectMake(0, 0, Main_Screen_Width, 150);
-        bookView.titleLabel.text=[NSString stringWithFormat:@"剩余%ld张",self.card.CardCount];
+        bookView.titleLabel.text=[NSString stringWithFormat:@"剩余%ld张",self.card.Integralnum];
         bookView.timeLabel.text=@"即日起～长期有效";
         
         
